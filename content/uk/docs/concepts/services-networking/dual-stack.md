@@ -5,7 +5,7 @@ description: >-
 feature:
   title: Подвійний стек IPv4/IPv6
   description: >
-    Виділення адрес IPv4 та IPv6 для Подів та Сервісів
+    Виділення адрес IPv4 та IPv6 для Podʼів та Serviceʼів
 content_type: concept
 reviewers:
   - lachie83
@@ -19,152 +19,116 @@ weight: 90
 
 {{< feature-state for_k8s_version="v1.23" state="stable" >}}
 
-IPv4/IPv6 dual-stack networking enables the allocation of both IPv4 and IPv6 addresses to
-{{< glossary_tooltip text="Pods" term_id="pod" >}} and {{< glossary_tooltip text="Services" term_id="service" >}}.
+Двостекова мережа IPv4/IPv6 дозволяє виділяти як адреси IPv4, так і IPv6 для
+{{< glossary_tooltip text="Podʼів" term_id="pod" >}} та {{< glossary_tooltip text="Serviceʼів" term_id="service" >}}.
 
-IPv4/IPv6 dual-stack networking is enabled by default for your Kubernetes cluster starting in
-1.21, allowing the simultaneous assignment of both IPv4 and IPv6 addresses.
+Двостекова мережа IPv4/IPv6 є стандартно увімкненою у вашому кластері Kubernetes починаючи з версії 1.21, що дозволяє одночасно призначати адреси як IPv4, так і IPv6.
 
 <!-- body -->
 
-## Supported Features
+## Підтримувані функції {#supported-features}
 
-IPv4/IPv6 dual-stack on your Kubernetes cluster provides the following features:
+Двостекова мережа IPv4/IPv6 у вашому кластері Kubernetes надає наступні можливості:
 
-* Dual-stack Pod networking (a single IPv4 and IPv6 address assignment per Pod)
-* IPv4 and IPv6 enabled Services
-* Pod off-cluster egress routing (eg. the Internet) via both IPv4 and IPv6 interfaces
+* Мережа Pod із двома стеками (призначення адреси IPv4 і IPv6 на один Pod)
+* Serviceʼи з підтримкою IPv4 і IPv6
+* Маршрутизація egress Pod за межі кластера (наприклад, в Інтернет) через інтерфейси IPv4 та IPv6
 
-## Prerequisites
+## Передумови {#prerequisites}
 
-The following prerequisites are needed in order to utilize IPv4/IPv6 dual-stack Kubernetes clusters:
+Для використання двостекових кластерів Kubernetes IPv4/IPv6 потрібні наступні передумови:
 
-* Kubernetes 1.20 or later
+* Kubernetes 1.20 або новіше
 
-  For information about using dual-stack services with earlier
-  Kubernetes versions, refer to the documentation for that version
-  of Kubernetes.
+  Для отримання інформації щодо використання двостекових Serviceʼів із попередніми версіями Kubernetes, дивіться документацію для відповідної версії Kubernetes.
 
-* Provider support for dual-stack networking (Cloud provider or otherwise must be able to provide
-  Kubernetes nodes with routable IPv4/IPv6 network interfaces)
-* A [network plugin](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) that
-  supports dual-stack networking.
+* Підтримка постачальником двостекової мережі (постачальник хмари або інший повинен забезпечити вузлам Kubernetes маршрутизовані мережеві інтерфейси IPv4/IPv6)
+* [Мережевий втулок](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/), який підтримує двостекову мережу.
 
-## Configure IPv4/IPv6 dual-stack
+## Налаштування двостекової мережі IPv4/IPv6 {#configure-ipv4-ipv6-dual-stack}
 
-To configure IPv4/IPv6 dual-stack, set dual-stack cluster network assignments:
+Щоб налаштувати подвійний стек IPv4/IPv6, встановіть призначення мережі кластера з подвійним стеком:
 
 * kube-apiserver:
-  * `--service-cluster-ip-range=<IPv4 CIDR>,<IPv6 CIDR>`
+  * `--service-cluster-ip-range=<CIDR IPv4>,<CIDR IPv6>`
 * kube-controller-manager:
-  * `--cluster-cidr=<IPv4 CIDR>,<IPv6 CIDR>`
-  * `--service-cluster-ip-range=<IPv4 CIDR>,<IPv6 CIDR>`
-  * `--node-cidr-mask-size-ipv4|--node-cidr-mask-size-ipv6` defaults to /24 for IPv4 and /64 for IPv6
+  * `--cluster-cidr=<CIDR IPv4>,<CIDR IPv6>`
+  * `--service-cluster-ip-range=<CIDR IPv4>,<CIDR IPv6>`
+  * `--node-cidr-mask-size-ipv4|--node-cidr-mask-size-ipv6` типово /24 для IPv4 та /64 для IPv6
 * kube-proxy:
-  * `--cluster-cidr=<IPv4 CIDR>,<IPv6 CIDR>`
+  * `--cluster-cidr=<CIDR IPv4>,<CIDR IPv6>`
 * kubelet:
-  * `--node-ip=<IPv4 IP>,<IPv6 IP>`
-    * This option is required for bare metal dual-stack nodes (nodes that do not define a
-      cloud provider with the `--cloud-provider` flag). If you are using a cloud provider
-      and choose to override the node IPs chosen by the cloud provider, set the
-      `--node-ip` option.
-    * (The legacy built-in cloud providers do not support dual-stack `--node-ip`.)
+  * `--node-ip=<IP IPv4>,<IP IPv6>`
+    * Ця опція є обовʼязковою для bare metal двостекових вузлів (вузлів, які не визначають постачальника хмари прапорцем `--cloud-provider`). Якщо ви використовуєте постачальника хмари та вирішили перевизначити IP-адреси вузлів, визначені постачальником хмари, встановіть опцію `--node-ip`.
+    * (Вбудовані застарілі постачальники хмари не підтримують двостековий параметр `--node-ip`.)
 
 {{< note >}}
-An example of an IPv4 CIDR: `10.244.0.0/16` (though you would supply your own address range)
+Приклад CIDR IPv4: `10.244.0.0/16` (хоча ви повинні вказати свій власний діапазон адрес)
 
-An example of an IPv6 CIDR: `fdXY:IJKL:MNOP:15::/64` (this shows the format but is not a valid
-address - see [RFC 4193](https://tools.ietf.org/html/rfc4193))
+Приклад CIDR IPv6: `fdXY:IJKL:MNOP:15::/64` (це показує формат, але не є дійсною адресою — дивіться [RFC 4193](https://tools.ietf.org/html/rfc4193))
 {{< /note >}}
 
-## Services
+## Serviceʼи {#services}
 
-You can create {{< glossary_tooltip text="Services" term_id="service" >}} which can use IPv4, IPv6, or both.
+Ви можете створювати {{< glossary_tooltip text="Serviceʼи" term_id="service" >}}, які можуть використовувати адреси IPv4, IPv6 або обидві.
 
-The address family of a Service defaults to the address family of the first service cluster IP
-range (configured via the `--service-cluster-ip-range` flag to the kube-apiserver).
+Сімейство адрес Service типово відповідає сімейству адрес першого діапазону IP Service кластера (налаштованого через прапорець `--service-cluster-ip-range` у kube-apiserver).
 
-When you define a Service you can optionally configure it as dual stack. To specify the behavior you want, you
-set the `.spec.ipFamilyPolicy` field to one of the following values:
+При визначенні Service ви можете конфігурувати його як двостековий за власним бажанням. Щоб вказати потрібну поведінку, ви встановлюєте в поле `.spec.ipFamilyPolicy` одне з наступних значень:
 
-* `SingleStack`: Single-stack service. The control plane allocates a cluster IP for the Service,
-  using the first configured service cluster IP range.
+* `SingleStack`: Service з одним стеком. Панель управління виділяє IP кластера для Service, використовуючи перший налаштований діапазон IP кластера для Service.
 * `PreferDualStack`:
-  * Allocates IPv4 and IPv6 cluster IPs for the Service.
-* `RequireDualStack`: Allocates Service `.spec.ClusterIPs` from both IPv4 and IPv6 address ranges.
-  * Selects the `.spec.ClusterIP` from the list of `.spec.ClusterIPs` based on the address family
-    of the first element in the `.spec.ipFamilies` array.
+  * Виділяє кластерні IP-адреси IPv4 та IPv6 для Service.
+* `RequireDualStack`: Виділяє `.spec.ClusterIPs` Service з діапазонів адрес IPv4 та IPv6.
+  * Вибирає `.spec.ClusterIP` зі списку `.spec.ClusterIPs` на основі сімейства адрес першого елемента у масиві `.spec.ipFamilies`.
 
-If you would like to define which IP family to use for single stack or define the order of IP
-families for dual-stack, you can choose the address families by setting an optional field,
-`.spec.ipFamilies`, on the Service.
+Якщо ви хочете визначити, яке сімейство IP використовувати для одностекової конфігурації або визначити порядок IP для двостекової, ви можете вибрати сімейства адрес, встановивши необовʼязкове поле `.spec.ipFamilies` в Service.
 
 {{< note >}}
-The `.spec.ipFamilies` field is conditionally mutable: you can add or remove a secondary
-IP address family, but you cannot change the primary IP address family of an existing Service.
+Поле `.spec.ipFamilies` умовно змінюване: ви можете додавати або видаляти вторинне
+сімейство IP-адрес, але не можете змінювати основне сімейство IP-адрес наявного Service.
 {{< /note >}}
 
-You can set `.spec.ipFamilies` to any of the following array values:
+Ви можете встановити `.spec.ipFamilies` в будь-яке з наступних значень масиву:
 
-- `["IPv4"]`
-- `["IPv6"]`
-- `["IPv4","IPv6"]` (dual stack)
-- `["IPv6","IPv4"]` (dual stack)
+* `["IPv4"]`
+* `["IPv6"]`
+* `["IPv4","IPv6"]` (двостекова)
+* `["IPv6","IPv4"]` (двостекова)
 
-The first family you list is used for the legacy `.spec.ClusterIP` field.
+Перше сімейство, яке ви перераховуєте, використовується для легасі-поля `.spec.ClusterIP`.
 
-### Dual-stack Service configuration scenarios
+### Сценарії конфігурації двостекового Service {#dual-stack-service-configuration-scenarios}
 
-These examples demonstrate the behavior of various dual-stack Service configuration scenarios.
+Ці приклади демонструють поведінку різних сценаріїв конфігурації двостекового Service.
 
-#### Dual-stack options on new Services
+#### Параметри подвійного стеку в нових Service {#dual-stack-options-on-new-services}
 
-1. This Service specification does not explicitly define `.spec.ipFamilyPolicy`. When you create
-   this Service, Kubernetes assigns a cluster IP for the Service from the first configured
-   `service-cluster-ip-range` and sets the `.spec.ipFamilyPolicy` to `SingleStack`. ([Services
-   without selectors](/docs/concepts/services-networking/service/#services-without-selectors) and
-   [headless Services](/docs/concepts/services-networking/service/#headless-services) with selectors
-   will behave in this same way.)
+1. Специфікація цього Service явно не визначає `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service, Kubernetes виділяє кластерний IP для Service з першого налаштованого `service-cluster-ip-range` та встановлює значення `.spec.ipFamilyPolicy` на `SingleStack`. ([Service без селекторів](/docs/concepts/services-networking/service/#services-without-selectors) та [headless Services](/docs/concepts/services-networking/service/#headless-services) із селекторами будуть працювати так само.)
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
-1. This Service specification explicitly defines `PreferDualStack` in `.spec.ipFamilyPolicy`. When
-   you create this Service on a dual-stack cluster, Kubernetes assigns both IPv4 and IPv6
-   addresses for the service. The control plane updates the `.spec` for the Service to record the IP
-   address assignments. The field `.spec.ClusterIPs` is the primary field, and contains both assigned
-   IP addresses; `.spec.ClusterIP` is a secondary field with its value calculated from
-   `.spec.ClusterIPs`.
+2. Специфікація цього Service явно визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service в двостековому кластері, Kubernetes призначає як IPv4, так і IPv6 адреси для Service. Панель управління оновлює `.spec` для Service, щоб зафіксувати адреси IP. Поле `.spec.ClusterIPs` є основним полем і містить обидві призначені адреси IP; `.spec.ClusterIP` є вторинним полем зі значенням, обчисленим з `.spec.ClusterIPs`.
 
-   * For the `.spec.ClusterIP` field, the control plane records the IP address that is from the
-     same address family as the first service cluster IP range.
-   * On a single-stack cluster, the `.spec.ClusterIPs` and `.spec.ClusterIP` fields both only list
-     one address.
-   * On a cluster with dual-stack enabled, specifying `RequireDualStack` in `.spec.ipFamilyPolicy`
-     behaves the same as `PreferDualStack`.
+   * Для поля `.spec.ClusterIP` панель управління записує IP-адресу, яка є з того ж самого сімейства адрес, що й перший діапазон кластерних IP Service.
+   * На одностековому кластері поля `.spec.ClusterIPs` та `.spec.ClusterIP` містять лише одну адресу.
+   * На кластері з увімкненими двома стеками вказання `RequireDualStack` в `.spec.ipFamilyPolicy` працює так само як і `PreferDualStack`.
 
    {{% code_sample file="service/networking/dual-stack-preferred-svc.yaml" %}}
 
-1. This Service specification explicitly defines `IPv6` and `IPv4` in `.spec.ipFamilies` as well
-   as defining `PreferDualStack` in `.spec.ipFamilyPolicy`. When Kubernetes assigns an IPv6 and
-   IPv4 address in `.spec.ClusterIPs`, `.spec.ClusterIP` is set to the IPv6 address because that is
-   the first element in the `.spec.ClusterIPs` array, overriding the default.
+3. Специфікація цього Service явно визначає `IPv6` та `IPv4` в `.spec.ipFamilies`, а також визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли Kubernetes призначає IPv6 та IPv4 адреси в `.spec.ClusterIPs`, `.spec.ClusterIP` встановлюється на IPv6 адресу, оскільки це перший елемент у масиві `.spec.ClusterIPs`, що перевизначає типові значення.
 
    {{% code_sample file="service/networking/dual-stack-preferred-ipfamilies-svc.yaml" %}}
 
-#### Dual-stack defaults on existing Services
+#### Параметри подвійного стека в наявних Service {#dual-stack-details-on-existing-services}
 
-These examples demonstrate the default behavior when dual-stack is newly enabled on a cluster
-where Services already exist. (Upgrading an existing cluster to 1.21 or beyond will enable
-dual-stack.)
+Ці приклади демонструють типову поведінку при увімкненні двостековості в кластері, де вже існують Service. (Оновлення наявного кластера до версії 1.21 або новіше вмикає двостековість.)
 
-1. When dual-stack is enabled on a cluster, existing Services (whether `IPv4` or `IPv6`) are
-   configured by the control plane to set `.spec.ipFamilyPolicy` to `SingleStack` and set
-   `.spec.ipFamilies` to the address family of the existing Service. The existing Service cluster IP
-   will be stored in `.spec.ClusterIPs`.
+1. Коли двостековість увімкнена в кластері, наявні Service (безперебійно `IPv4` або `IPv6`) конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес наявного Service. Кластерний IP наявного Service буде збережено в `.spec.ClusterIPs`.
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
-   You can validate this behavior by using kubectl to inspect an existing service.
+   Ви можете перевірити цю поведінку за допомогою kubectl, щоб переглянути наявний Service.
 
    ```shell
    kubectl get svc my-service -o yaml
@@ -195,16 +159,11 @@ dual-stack.)
      loadBalancer: {}
    ```
 
-1. When dual-stack is enabled on a cluster, existing
-   [headless Services](/docs/concepts/services-networking/service/#headless-services) with selectors are
-   configured by the control plane to set `.spec.ipFamilyPolicy` to `SingleStack` and set
-   `.spec.ipFamilies` to the address family of the first service cluster IP range (configured via the
-   `--service-cluster-ip-range` flag to the kube-apiserver) even though `.spec.ClusterIP` is set to
-   `None`.
+2. Коли двостековість увімкнена в кластері, наявні [headless Services](/docs/concepts/services-networking/service/#headless-services) з селекторами конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес першого діапазону кластерних IP Service (налаштованого за допомогою прапорця `--service-cluster-ip-range` для kube-apiserver), навіть якщо `.spec.ClusterIP` встановлено в `None`.
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
-   You can validate this behavior by using kubectl to inspect an existing headless service with selectors.
+   Ви можете перевірити цю поведінку за допомогою kubectl, щоб переглянути наявний headless Service з селекторами.
 
    ```shell
    kubectl get svc my-service -o yaml
@@ -232,84 +191,67 @@ dual-stack.)
        app.kubernetes.io/name: MyApp
    ```
 
-#### Switching Services between single-stack and dual-stack
+#### Перемикання Service між одностековим та двостековим режимами {#switching-services-between-single-stack-and-dual-stack}
 
-Services can be changed from single-stack to dual-stack and from dual-stack to single-stack.
+Service можна перемикати з одностекового режиму на двостековий та навпаки.
 
-1. To change a Service from single-stack to dual-stack, change `.spec.ipFamilyPolicy` from
-   `SingleStack` to `PreferDualStack` or `RequireDualStack` as desired. When you change this
-   Service from single-stack to dual-stack, Kubernetes assigns the missing address family so that the
-   Service now has IPv4 and IPv6 addresses.
+1. Для того щоби перемикнути Service з одностекового режиму на двостековий, змініть `.spec.ipFamilyPolicy` з `SingleStack` на `PreferDualStack` або `RequireDualStack` за необхідності. Коли ви змінюєте цей Service з одностекового режиму на двостековий, Kubernetes призначає відсутнє адресне сімейство, так що тепер Service має адреси IPv4 та IPv6.
 
-   Edit the Service specification updating the `.spec.ipFamilyPolicy` from `SingleStack` to `PreferDualStack`.
+   Відредагуйте специфікацію Service, оновивши `.spec.ipFamilyPolicy` з `SingleStack` на `PreferDualStack`.
 
-   Before:
+   До:
 
    ```yaml
    spec:
      ipFamilyPolicy: SingleStack
    ```
 
-   After:
+   Після:
 
    ```yaml
    spec:
      ipFamilyPolicy: PreferDualStack
    ```
 
-1. To change a Service from dual-stack to single-stack, change `.spec.ipFamilyPolicy` from
-   `PreferDualStack` or `RequireDualStack` to `SingleStack`. When you change this Service from
-   dual-stack to single-stack, Kubernetes retains only the first element in the `.spec.ClusterIPs`
-   array, and sets `.spec.ClusterIP` to that IP address and sets `.spec.ipFamilies` to the address
-   family of `.spec.ClusterIPs`.
+2. Для того щоби змінити Service з двостекового режиму на одностековий, змініть `.spec.ipFamilyPolicy` з `PreferDualStack` або `RequireDualStack` на `SingleStack`. Коли ви змінюєте цей Service з двостекового режиму на одностековий, Kubernetes залишає лише перший елемент у масиві `.spec.ClusterIPs`, і встановлює `.spec.ClusterIP` на цю IP-адресу і встановлює `.spec.ipFamilies` на адресне сімейство `.spec.ClusterIPs`.
 
-### Headless Services without selector
+### Headless Services без селекторів {#headless-services-without-selectors}
 
-For [Headless Services without selectors](/docs/concepts/services-networking/service/#without-selectors)
-and without `.spec.ipFamilyPolicy` explicitly set, the `.spec.ipFamilyPolicy` field defaults to
-`RequireDualStack`.
+Для [Headless Services без селекторів](/docs/concepts/services-networking/service/#without-selectors) і без явно вказаного `.spec.ipFamilyPolicy`, поле `.spec.ipFamilyPolicy` має типове значення `RequireDualStack`.
 
-### Service type LoadBalancer
+### Тип Service — LoadBalancer {#service-type-loadbalancer}
 
-To provision a dual-stack load balancer for your Service:
+Щоб налаштувати двостековий балансувальник навантаження для вашого Service:
 
-* Set the `.spec.type` field to `LoadBalancer`
-* Set `.spec.ipFamilyPolicy` field to `PreferDualStack` or `RequireDualStack`
+* Встановіть значення поля `.spec.type` в `LoadBalancer`
+* Встановіть значення поля `.spec.ipFamilyPolicy` в `PreferDualStack` або `RequireDualStack`
 
 {{< note >}}
-To use a dual-stack `LoadBalancer` type Service, your cloud provider must support IPv4 and IPv6
-load balancers.
+Для використання двостекового Service типу `LoadBalancer`, ваш постачальник хмари повинен підтримувати балансувальники навантаження IPv4 та IPv6.
 {{< /note >}}
 
-## Egress traffic
+## Трафік Egress {#egress-traffic}
 
-If you want to enable egress traffic in order to reach off-cluster destinations (eg. the public
-Internet) from a Pod that uses non-publicly routable IPv6 addresses, you need to enable the Pod to
-use a publicly routed IPv6 address via a mechanism such as transparent proxying or IP
-masquerading. The [ip-masq-agent](https://github.com/kubernetes-sigs/ip-masq-agent) project
-supports IP masquerading on dual-stack clusters.
+Якщо ви хочете увімкнути трафік Egress, щоб досягти призначення за межами кластера (наприклад, публічний Інтернет) з Podʼа, який використовує непублічно марковані адреси IPv6, вам потрібно увімкнути Pod для використання публічно-маршрутизованих адрес IPv6 за допомогою механізму, такого як прозорий проксі або IP маскування. Проєкт [ip-masq-agent](https://github.com/kubernetes-sigs/ip-masq-agent) підтримує IP-маскування у двохстекових кластерах.
 
 {{< note >}}
-Ensure your {{< glossary_tooltip text="CNI" term_id="cni" >}} provider supports IPv6.
+Переконайтеся, що ваш постачальник {{< glossary_tooltip text="CNI" term_id="cni" >}} підтримує IPv6.
 {{< /note >}}
 
-## Windows support
+## Підтримка Windows {#windows-support}
 
-Kubernetes on Windows does not support single-stack "IPv6-only" networking. However,
-dual-stack IPv4/IPv6 networking for pods and nodes with single-family services
-is supported.
+Kubernetes на Windows не підтримує одностекову мережу "лише IPv6". Однак
+підтримується двохстекова мережа IPv4/IPv6 для Podʼів та вузлів з одностековими Service.
 
-You can use IPv4/IPv6 dual-stack networking with `l2bridge` networks.
+Ви можете використовувати двохстекову мережу IPv4/IPv6 з мережами `l2bridge`.
 
 {{< note >}}
-Overlay (VXLAN) networks on Windows **do not** support dual-stack networking.
+Мережі VXLAN на Windows **не** підтримують двохстекову мережу.
 {{< /note >}}
 
-You can read more about the different network modes for Windows within the
-[Networking on Windows](/docs/concepts/services-networking/windows-networking#network-modes) topic.
+Ви можете дізнатися більше про різні режими мережі для Windows в розділі [Мережа у Windows](/docs/concepts/services-networking/windows-networking#network-modes).
 
 ## {{% heading "whatsnext" %}}
 
-* [Validate IPv4/IPv6 dual-stack](/docs/tasks/network/validate-dual-stack) networking
-* [Enable dual-stack networking using kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/)
-
+* [Перевірте двохстекову мережу IPv4/IPv6](/docs/tasks/network/validate-dual-stack)
+* [Увімкніть двохстекову мережу за допомогою kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/)

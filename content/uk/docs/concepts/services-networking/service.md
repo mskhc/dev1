@@ -1,106 +1,66 @@
 ---
 reviewers:
 - bprashanth
-title: Сервіси
+title: Service
 feature:
-  title: Виявлення сервісів та балансування навантаження
+  title: Виявлення Service та балансування навантаження
   description: >
-    Не потрібно змінювати свій застосунок, щоб використовувати незнайомий механізм виявлення сервісів. Kubernetes надає Podʼам власні IP-адреси та єдине DNS-імʼя для набору Podʼів, а також може балансувати навантаження між ними.
+    Не потрібно змінювати свій застосунок, щоб використовувати незнайомий механізм виявлення Service. Kubernetes надає Podʼам власні IP-адреси та єдине DNS-імʼя для набору Podʼів, а також може балансувати навантаження між ними.
 description: >-
   Надайте доступ до застосунку, що працює в кластері, за допомогою однієї точки доступу, навіть якщо робота розподілена між декількома бекендами.
 content_type: concept
 weight: 10
 ---
 
-
 <!-- overview -->
 
-{{< glossary_definition term_id="service" length="short" prepend="In Kubernetes, a Service is" >}}
+{{< glossary_definition term_id="service" length="short" prepend="В Kubernetes, Service — це" >}}
 
-A key aim of Services in Kubernetes is that you don't need to modify your existing
-application to use an unfamiliar service discovery mechanism.
-You can run code in Pods, whether this is a code designed for a cloud-native world, or
-an older app you've containerized. You use a Service to make that set of Pods available
-on the network so that clients can interact with it.
+Ключова мета Service в Kubernetes — це те, що вам не потрібно модифікувати ваш поточний застосунок для використання незнайомого механізму виявлення Service. Ви можете виконувати код в Podʼах, чи це буде код, призначений для світу, орієнтованого на хмари, або старий застосунок, який ви контейнеризували. Ви використовуєте Service, щоб зробити цей набір Podʼіів доступним в мережі, так щоб клієнти могли взаємодіяти з ним.
 
-If you use a {{< glossary_tooltip term_id="deployment" >}} to run your app,
-that Deployment can create and destroy Pods dynamically. From one moment to the next,
-you don't know how many of those Pods are working and healthy; you might not even know
-what those healthy Pods are named.
-Kubernetes {{< glossary_tooltip term_id="pod" text="Pods" >}} are created and destroyed
-to match the desired state of your cluster. Pods are ephemeral resources (you should not
-expect that an individual Pod is reliable and durable).
+Якщо ви використовуєте {{< glossary_tooltip term_id="deployment" >}} для запуску вашого застосунку, цей Deployment може динамічно створювати та знищувати Podʼи. З одного моменту і до наступного, ви не знаєте, скільки з цих Podʼів працюють і є справними; ви навіть не можете знати,
+як називаються ці справні Podʼи. {{< glossary_tooltip term_id="pod" text="Podʼи" >}} Kubernetes створюються та знищуються для відповідності бажаному стану вашого кластера. Podʼи є ефемерними ресурсами (ви не повинні очікувати, що індивідуальний Pod є надійним та довговічним).
 
-Each Pod gets its own IP address (Kubernetes expects network plugins to ensure this).
-For a given Deployment in your cluster, the set of Pods running in one moment in
-time could be different from the set of Pods running that application a moment later.
+Кожен Pod отримує свою власну IP-адресу (Kubernetes очікує, що мережеві втулки гарантують це). Для даного Deployment у вашому кластері набір Podʼів, який працює в один момент часу, може відрізнятися від набору Pod, який працює для цього застосунку наступний момент часу.
 
-This leads to a problem: if some set of Pods (call them "backends") provides
-functionality to other Pods (call them "frontends") inside your cluster,
-how do the frontends find out and keep track of which IP address to connect
-to, so that the frontend can use the backend part of the workload?
+Це призводить до проблеми: якщо певний набір Podʼів (назвемо їх "backend") надає функціонал іншим Podʼам (назвемо їх "frontend") всередині вашого кластера, як фронтенд дізнається та відстежує, яку IP-адресу підключати, щоб він міг використовувати частину робочого навантаження?
 
-Enter _Services_.
+Познайомтесь з _Service_.
 
 <!-- body -->
 
-## Services in Kubernetes
+## Service в Kubernetes {#servics-in-kubernetes}
 
-The Service API, part of Kubernetes, is an abstraction to help you expose groups of
-Pods over a network. Each Service object defines a logical set of endpoints (usually
-these endpoints are Pods) along with a policy about how to make those pods accessible.
+API Service, що є частиною Kubernetes, є абстракцією, яка допомагає вам давати групі Podʼів доступ в мережі. Кожен об'єкт Service визначає логічний набір endpoint (зазвичай endpoint — Pod) разом із політикою того, як робити ці Podʼи доступними.
 
-For example, consider a stateless image-processing backend which is running with
-3 replicas.  Those replicas are fungible&mdash;frontends do not care which backend
-they use.  While the actual Pods that compose the backend set may change, the
-frontend clients should not need to be aware of that, nor should they need to keep
-track of the set of backends themselves.
+Наприклад, розгляньте stateless бекенд для обробки зображень, який працює з 3 репліками. Ці репліки замінюються одна одною — фронтендам не важливо, який бекенд вони використовують. Хоча конкретні Podʼи, що складають бекенд, можуть змінюватися,
+клієнти фронтенду не мають на це звертати уваги, і вони не повинні вести облік набору елементів бекендів самі.
 
-The Service abstraction enables this decoupling.
+Абстракція Service дозволяє таке відокремлення.
 
-The set of Pods targeted by a Service is usually determined
-by a {{< glossary_tooltip text="selector" term_id="selector" >}} that you
-define.
-To learn about other ways to define Service endpoints,
-see [Services _without_ selectors](#services-without-selectors).
+Набір Podʼів, яким призначається Service, зазвичай визначається
+{{< glossary_tooltip text="селектором" term_id="selector" >}}, який ви визначаєте. Щоб дізнатися про інші способи визначення endpointʼів сервісу, дивіться [Сервіси _без_ селекторів](#services-without-selectors).
 
-If your workload speaks HTTP, you might choose to use an
-[Ingress](/docs/concepts/services-networking/ingress/) to control how web traffic
-reaches that workload.
-Ingress is not a Service type, but it acts as the entry point for your
-cluster. An Ingress lets you consolidate your routing rules into a single resource, so
-that you can expose multiple components of your workload, running separately in your
-cluster, behind a single listener.
+Якщо ваше навантаження використовує HTTP, ви можете  викорисовувати [Ingress](/docs/concepts/services-networking/ingress/) для контролю над тим, як вебтрафік досягає цього навантаження. Ingress не є типом сервісу, але він діє як точка входу до вашого кластера. Ingress дозволяє обʼєднати ваші правила маршрутизації в один ресурс, щоб ви могли
+експонувати кілька компонентів вашого навантаження, що працюють окремо в вашому кластері, під одним зовнішнім URL.
 
-The [Gateway](https://gateway-api.sigs.k8s.io/#what-is-the-gateway-api) API for Kubernetes
-provides extra capabilities beyond Ingress and Service. You can add Gateway to your cluster -
-it is a family of extension APIs, implemented using
-{{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}} -
-and then use these to configure access to network services that are running in your cluster.
+API [Gateway](https://gateway-api.sigs.k8s.io/#what-is-the-gateway-api) для Kubernetes надає додаткові можливості, які виходять за межі Ingress і Service. Ви можете додати Gateway до вашого кластера — це родина розширених API, реалізованих за допомогою {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}} — і потім використовувати їх для налаштування доступу до мережевих сервісів, що працюють у вашому кластері.
 
-### Cloud-native service discovery
+### Хмарно-нативне виявлення сервісів {#cloud-native-service-discovery}
 
-If you're able to use Kubernetes APIs for service discovery in your application,
-you can query the {{< glossary_tooltip text="API server" term_id="kube-apiserver" >}}
-for matching EndpointSlices. Kubernetes updates the EndpointSlices for a Service
-whenever the set of Pods in a Service changes.
+Якщо ви можете використовувати API Kubernetes для виявлення сервісів у вашому застосунку, ви можете звертатись до {{< glossary_tooltip text="сервера API" term_id="kube-apiserver" >}}
+по відповідні EndpointSlices. Kubernetes оновлює EndpointSlices для сервісу кожного разу, коли набір Podʼів у сервісі змінюється.
 
-For non-native applications, Kubernetes offers ways to place a network port or load
-balancer in between your application and the backend Pods.
+Для не-нативних застосунків Kubernetes пропонує способи розміщення мережевого порту чи балансувальника між вашим застосунком та Podʼами бекенду.
 
-Either way, your workload can use these [service discovery](#discovering-services)
-mechanisms to find the target it wants to connect to.
+В будь-якому випадку ваше навантаження може використовувати ці [засоби виявлення сервісів](#discovering-services) для пошуку цільового сервісу, до якого воно хоче підʼєднатися.
 
-## Defining a Service
+## Визначення Сервісу {#defining-a-service}
 
-A Service is an {{< glossary_tooltip text="object" term_id="object" >}}
-(the same way that a Pod or a ConfigMap is an object). You can create,
-view or modify Service definitions using the Kubernetes API. Usually
-you use a tool such as `kubectl` to make those API calls for you.
+Service — це {{< glossary_tooltip text="обʼєкт" term_id="object" >}} (так само як Pod чи ConfigMap є обʼєктами). Ви можете створювати, переглядати або змінювати визначення Service, використовуючи API Kubernetes. Зазвичай для цього ви використовуєте інструмент, такий як `kubectl`, який звертається до API.
 
-For example, suppose you have a set of Pods that each listen on TCP port 9376
-and are labelled as `app.kubernetes.io/name=MyApp`. You can define a Service to
-publish that TCP listener:
+Наприклад, припустимо, у вас є набір Podʼів, які слухають TCP-порт 9376 і мають мітку `app.kubernetes.io/name=MyApp`. Ви можете визначити Сервіс, щоб
+опублікувати цього TCP-слухача:
 
 ```yaml
 apiVersion: v1
@@ -116,33 +76,21 @@ spec:
       targetPort: 9376
 ```
 
-Applying this manifest creates a new Service named "my-service" with the default
-ClusterIP [service type](#publishing-services-service-types). The Service
-targets TCP port 9376 on any Pod with the `app.kubernetes.io/name: MyApp` label.
+Застосування цього маніфесту створює новий Сервіс з назвою "my-service" зі стандартним [типом служби](#publishing-services-service-types) ClusterIP. Сервіс обслуговує TCP-порт 9376 на будь-якому Podʼі з міткою `app.kubernetes.io/name: MyApp`.
 
-Kubernetes assigns this Service an IP address (the _cluster IP_),
-that is used by the virtual IP address mechanism. For more details on that mechanism,
-read [Virtual IPs and Service Proxies](/docs/reference/networking/virtual-ips/).
+Kubernetes призначає цьому Сервісу IP-адресу (так званий _кластерний IP_), що використовується механізмом віртуалізації IP-адрес. Для отримання докладнішої інформації про цей механізм, читайте [Віртуальні IP та Проксі-сервіси](/docs/reference/networking/virtual-ips/).
 
-The controller for that Service continuously scans for Pods that
-match its selector, and then makes any necessary updates to the set of
-EndpointSlices for the Service.
+Контролер для цього Сервісу постійно сканує Podʼи, які відповідають його селектору, а потім вносить будь-які необхідні оновлення до набору EndpointSlices для Сервісу.
 
-The name of a Service object must be a valid
-[RFC 1035 label name](/docs/concepts/overview/working-with-objects/names#rfc-1035-label-names).
-
+Назва обʼєкта Сервісу повинна бути дійсним [іменем мітки за стандартом RFC 1035](/docs/concepts/overview/working-with-objects/names#rfc-1035-label-names).
 
 {{< note >}}
-A Service can map _any_ incoming `port` to a `targetPort`. By default and
-for convenience, the `targetPort` is set to the same value as the `port`
-field.
+Сервіс може повʼязувати _будь-який_ вхідний `port` з `targetPort`. Типово та для зручності, `targetPort` встановлено на те ж саме значення, що й поле `port`.
 {{< /note >}}
 
-### Port definitions {#field-spec-ports}
+### Визначення портів {#field-spec-ports}
 
-Port definitions in Pods have names, and you can reference these names in the
-`targetPort` attribute of a Service. For example, we can bind the `targetPort`
-of the Service to the Pod port in the following way:
+Визначення портів в Podʼах мають назви, і ви можете посилатися на ці назви в атрибуті `targetPort` Сервісу. Наприклад, ми можемо привʼязати `targetPort` Сервісу до порту Podʼа таким чином:
 
 ```yaml
 apiVersion: v1
@@ -174,39 +122,23 @@ spec:
     targetPort: http-web-svc
 ```
 
-This works even if there is a mixture of Pods in the Service using a single
-configured name, with the same network protocol available via different
-port numbers. This offers a lot of flexibility for deploying and evolving
-your Services. For example, you can change the port numbers that Pods expose
-in the next version of your backend software, without breaking clients.
+Це працює навіть у випадку, якщо у Сервісу є суміш Podʼів з використанням одного налаштованого імені, з однаковим мережевим протоколом, доступним через різні номери портів. Це надає багато гнучкості для розгортання та розвитку вашого Сервісу. Наприклад, ви можете змінити номери портів, які Podʼи прослуховують в наступній версії вашого програмного забезпечення бекенду, без руйнівних наслідків для клієнтів.
 
-The default protocol for Services is
-[TCP](/docs/reference/networking/service-protocols/#protocol-tcp); you can also
-use any other [supported protocol](/docs/reference/networking/service-protocols/).
+Станадртним протоколом для Service є [TCP](/docs/reference/networking/service-protocols/#protocol-tcp); ви також можете використовувати будь-який інший [підтримуваний протокол](/docs/reference/networking/service-protocols/).
 
-Because many Services need to expose more than one port, Kubernetes supports
-[multiple port definitions](#multi-port-services) for a single Service.
-Each port definition can have the same `protocol`, or a different one.
+Оскільки багато Сервісів повинні працювати більше ніж з одним портом, Kubernetes підтримує [визначення кількох портів](#multi-port-services) для одного Сервісу. Кожне визначення порту може мати той же `протокол` або різні.
 
-### Services without selectors
+### Сервіси без селекторів {#services-without-selectors}
 
-Services most commonly abstract access to Kubernetes Pods thanks to the selector,
-but when used with a corresponding set of
-{{<glossary_tooltip term_id="endpoint-slice" text="EndpointSlices">}}
-objects and without a selector, the Service can abstract other kinds of backends,
-including ones that run outside the cluster.
+Сервіси найчастіше абстрагують доступ до Podʼів Kubernetes завдяки селектору, але коли вони використовуються разом із відповідним набором {{<glossary_tooltip term_id="endpoint-slice" text="EndpointSlices">}} обʼєктів та без селектора, Сервіс може абстрагувати інші типи бекендів, включаючи ті, які працюють поза кластером.
 
-For example:
+Наприклад:
 
-* You want to have an external database cluster in production, but in your
-  test environment you use your own databases.
-* You want to point your Service to a Service in a different
-  {{< glossary_tooltip term_id="namespace" >}} or on another cluster.
-* You are migrating a workload to Kubernetes. While evaluating the approach,
-  you run only a portion of your backends in Kubernetes.
+* Ви хочете мати зовнішній кластер баз даних у вашому експлуатаційному оточенні, але у своєму тестовому середовищі ви використовуєте свої власні бази даних.
+* Ви хочете спрямувати ваш Сервіс на Сервіс в іншому {{< glossary_tooltip term_id="namespace" >}} чи в іншому кластері.
+* Ви мігруєте робоче навантаження в Kubernetes. Під час оцінки цього підходу, ви запускаєте лише частину своїх бекендів в Kubernetes.
 
-In any of these scenarios you can define a Service _without_ specifying a
-selector to match Pods. For example:
+У будь-якому з цих сценаріїв ви можете визначити Сервіс _без_ вказівки селектора для відповідності Podʼам. Наприклад:
 
 ```yaml
 apiVersion: v1
@@ -220,25 +152,22 @@ spec:
       targetPort: 9376
 ```
 
-Because this Service has no selector, the corresponding EndpointSlice (and
-legacy Endpoints) objects are not created automatically. You can map the Service
-to the network address and port where it's running, by adding an EndpointSlice
-object manually. For example:
+Оскільки у цього Сервісу немає селектора, відповідні обʼєкти EndpointSlice (та застарілі Endpoints) не створюються автоматично. Ви можете повʼязувати Сервіс з мережевою адресою та портом, де він працює, додавши обʼєкт EndpointSlice вручну. Наприклад:
 
 ```yaml
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
-  name: my-service-1 # by convention, use the name of the Service
-                     # as a prefix for the name of the EndpointSlice
+  name: my-service-1 # за звичай, використовуйте назву Сервісу
+                     # як префікс для назви EndpointSlice
   labels:
-    # You should set the "kubernetes.io/service-name" label.
-    # Set its value to match the name of the Service
+    # Ви повинні встановити мітку "kubernetes.io/service-name".
+    # Встановіть її значення, щоб відповідати назві Сервісу
     kubernetes.io/service-name: my-service
 addressType: IPv4
 ports:
-  - name: '' # empty because port 9376 is not assigned as a well-known
-             # port (by IANA)
+  - name: '' # порожній, оскільки порт 9376 не призначено як відомий
+             # порт (за IANA)
     appProtocol: http
     protocol: TCP
     port: 9376
@@ -249,129 +178,81 @@ endpoints:
       - "10.1.2.3"
 ```
 
-#### Custom EndpointSlices
+#### Власні EndpointSlices {#custom-endpointslices}
 
-When you create an [EndpointSlice](#endpointslices) object for a Service, you can
-use any name for the EndpointSlice. Each EndpointSlice in a namespace must have a
-unique name. You link an EndpointSlice to a Service by setting the
-`kubernetes.io/service-name` {{< glossary_tooltip text="label" term_id="label" >}}
-on that EndpointSlice.
+Коли ви створюєте обʼєкт [EndpointSlice](#endpointslices) для Сервісу, ви можете
+використовувати будь-яку назву для EndpointSlice. Кожен EndpointSlice в просторі імен повинен мати унікальну назву. Ви поєднуєте EndpointSlice із Сервісом, встановлюючи {{< glossary_tooltip text="label" term_id="label" >}} `kubernetes.io/service-name` на цьому EndpointSlice.
 
 {{< note >}}
-The endpoint IPs _must not_ be: loopback (127.0.0.0/8 for IPv4, ::1/128 for IPv6), or
-link-local (169.254.0.0/16 and 224.0.0.0/24 for IPv4, fe80::/64 for IPv6).
+IP-адреси endpoint _не повинні бути_: локальними (127.0.0.0/8 для IPv4, ::1/128 для IPv6), або (169.254.0.0/16 та 224.0.0.0/24 для IPv4, fe80::/64 для IPv6).
 
-The endpoint IP addresses cannot be the cluster IPs of other Kubernetes Services,
-because {{< glossary_tooltip term_id="kube-proxy" >}} doesn't support virtual IPs
-as a destination.
+IP-адреси endpoint не можуть бути кластерними IP-адресами інших Сервісів Kubernetes, оскільки {{< glossary_tooltip term_id="kube-proxy" >}} не підтримує віртуальні IP-адреси як призначення.
 {{< /note >}}
 
-For an EndpointSlice that you create yourself, or in your own code,
-you should also pick a value to use for the label
-[`endpointslice.kubernetes.io/managed-by`](/docs/reference/labels-annotations-taints/#endpointslicekubernetesiomanaged-by).
-If you create your own controller code to manage EndpointSlices, consider using a
-value similar to `"my-domain.example/name-of-controller"`. If you are using a third
-party tool, use the name of the tool in all-lowercase and change spaces and other
-punctuation to dashes (`-`).
-If people are directly using a tool such as `kubectl` to manage EndpointSlices,
-use a name that describes this manual management, such as `"staff"` or
-`"cluster-admins"`. You should
-avoid using the reserved value `"controller"`, which identifies EndpointSlices
-managed by Kubernetes' own control plane.
+Для EndpointSlice, який ви створюєте самостійно або у своєму власному коді,
+вам також слід вибрати значення для мітки [`endpointslice.kubernetes.io/managed-by`](/docs/reference/labels-annotations-taints/#endpointslicekubernetesiomanaged-by). Якщо ви створюєте свій власний код контролера для управління EndpointSlice, розгляньте можливість використання значення, схожого на `"my-domain.example/name-of-controller"`. Якщо ви використовуєте інструмент від стороннього постачальника, використовуйте назву інструменту в нижньому регістрі та замініть пробіли та інші знаки пунктуації на дефіси (`-`). Якщо ви безпосередньо використовуєте інструмент, такий як `kubectl`, для управління EndpointSlice, використовуйте назву, яка описує це ручне управління, таку як `"staff"` або `"cluster-admins"`. Ви повинні уникати використання захищеного значення `"controller"`, яке ідентифікує EndpointSlices, які керуються власною панеллю управління Kubernetes.
 
-#### Accessing a Service without a selector {#service-no-selector-access}
+#### Доступ до Сервісу без селектора {#service-no-selector-access}
 
-Accessing a Service without a selector works the same as if it had a selector.
-In the [example](#services-without-selectors) for a Service without a selector,
-traffic is routed to one of the two endpoints defined in
-the EndpointSlice manifest: a TCP connection to 10.1.2.3 or 10.4.5.6, on port 9376.
+Доступ до Сервісу без селектора працює так само, якби він мав селектор. У [прикладі](#services-without-selectors) Сервісу без селектора, трафік маршрутизується до одного з двох endpoint, визначених у маніфесті EndpointSlice: TCP-зʼєднання до 10.1.2.3 або 10.4.5.6, на порт 9376.
 
 {{< note >}}
-The Kubernetes API server does not allow proxying to endpoints that are not mapped to
-pods. Actions such as `kubectl proxy <service-name>` where the service has no
-selector will fail due to this constraint. This prevents the Kubernetes API server
-from being used as a proxy to endpoints the caller may not be authorized to access.
+Сервер API Kubernetes не дозволяє проксіювання до endpoint, які не повʼязані з Podʼами. Дії, такі як `kubectl proxy <service-name>`, де сервіс не має селектора, зазнають збою через це обмеження. Це запобігає використанню сервера API Kubernetes як проксі до endpoint, до яких викликач може не мати авторизації на доступ.
 {{< /note >}}
 
-An `ExternalName` Service is a special case of Service that does not have
-selectors and uses DNS names instead. For more information, see the
-[ExternalName](#externalname) section.
+`ExternalName` Сервіс — це особливий випадок Сервісу, який не має селекторів і використовує DNS-імена замість них. Для отримання доклдадної інформації, див. розділ
+[ExternalName](#externalname).
 
 ### EndpointSlices
 
 {{< feature-state for_k8s_version="v1.21" state="stable" >}}
 
-[EndpointSlices](/docs/concepts/services-networking/endpoint-slices/) are objects that
-represent a subset (a _slice_) of the backing network endpoints for a Service.
+[EndpointSlices](/docs/concepts/services-networking/endpoint-slices/) — це обʼєкти, які представляють підмножину (зріз) мережевих endpoint, які підтримують Сервіс.
 
-Your Kubernetes cluster tracks how many endpoints each EndpointSlice represents.
-If there are so many endpoints for a Service that a threshold is reached, then
-Kubernetes adds another empty EndpointSlice and stores new endpoint information
-there.
-By default, Kubernetes makes a new EndpointSlice once the existing EndpointSlices
-all contain at least 100 endpoints. Kubernetes does not make the new EndpointSlice
-until an extra endpoint needs to be added.
+Ваш кластер Kubernetes відстежує кількість endpointʼів, які представляє кожен EndpointSlice. Якщо для Сервісу є настільки багато endpointʼів, що досягається порогове значення, тоді Kubernetes додає ще один порожній EndpointSlice і зберігає там нову інформацію про endpoint. Типово Kubernetes створює новий EndpointSlice, як тільки наявні EndpointSlice всі містять принаймні 100 endpoint. Kubernetes не створює новий EndpointSlice, поки не буде потрібно додати додатковий endpoint.
 
-See [EndpointSlices](/docs/concepts/services-networking/endpoint-slices/) for more
-information about this API.
+Див. [EndpointSlices](/docs/concepts/services-networking/endpoint-slices/) для отримання додаткової інформації про цей API.
 
-### Endpoints
+### Endpoint {#endpoints}
 
-In the Kubernetes API, an
-[Endpoints](/docs/reference/kubernetes-api/service-resources/endpoints-v1/)
-(the resource kind is plural) defines a list of network endpoints, typically
-referenced by a Service to define which Pods the traffic can be sent to.
+В API Kubernetes, [Endpoints](/docs/reference/kubernetes-api/service-resources/endpoints-v1/) (тип ресурсу у множині) визначають список мережевих endpointʼів, зазвичай використовується Сервісом для визначення того, до яких Podʼів можна направляти трафік.
 
-The EndpointSlice API is the recommended replacement for Endpoints.
+API EndpointSlice — це рекомендована заміна для Endpoints.
 
-#### Over-capacity endpoints
+#### Endpoints з перевищеним обсягом {#over-capacity-endpoints}
 
-Kubernetes limits the number of endpoints that can fit in a single Endpoints
-object. When there are over 1000 backing endpoints for a Service, Kubernetes
-truncates the data in the Endpoints object. Because a Service can be linked
-with more than one EndpointSlice, the 1000 backing endpoint limit only
-affects the legacy Endpoints API.
+Kubernetes обмежує кількість endpointʼів, які можуть поміститися в один обʼєкт Endpoints. Коли є понад 1000 endpointʼів, які підтримують Сервіс, Kubernetes розмішує дані в обʼєкті Endpoints. Оскільки Сервіс може бути повʼязаним
+з більше ніж одним EndpointSlice, обмеження в 1000 endpointʼів впливає лише
+на застарілий API Endpoints.
 
-In that case, Kubernetes selects at most 1000 possible backend endpoints to store
-into the Endpoints object, and sets an
-{{< glossary_tooltip text="annotation" term_id="annotation" >}} on the Endpoints:
-[`endpoints.kubernetes.io/over-capacity: truncated`](/docs/reference/labels-annotations-taints/#endpoints-kubernetes-io-over-capacity).
-The control plane also removes that annotation if the number of backend Pods drops below 1000.
+У цьому випадку Kubernetes вибирає не більше 1000 можливих endpointʼів, які слід зберегти в обʼєкті Endpoints, і встановлює {{< glossary_tooltip text="анотацію" term_id="annotation" >}} на Endpoints: [`endpoints.kubernetes.io/over-capacity: truncated`](/docs/reference/labels-annotations-taints/#endpoints-kubernetes-io-over-capacity). Панель управління також видаляє цю анотацію, якщо кількість бекенд-Podʼів впадає нижче 1000.
 
-Traffic is still sent to backends, but any load balancing mechanism that relies on the
-legacy Endpoints API only sends traffic to at most 1000 of the available backing endpoints.
+Трафік все ще відсилається на бекенди, але будь-який механізм балансування навантаження, який покладається на застарілий API Endpoints, відсилає трафік не більше, ніж до 1000 доступних бекенд-endpointʼів.
 
-The same API limit means that you cannot manually update an Endpoints to have more than 1000 endpoints.
+Той самий ліміт API означає, що ви не можете вручну оновлювати Endpoints так, щоб у них було понад 1000 endpointʼів.
 
-### Application protocol
+### Протокол застосунку {#application-protocol}
 
 {{< feature-state for_k8s_version="v1.20" state="stable" >}}
 
-The `appProtocol` field provides a way to specify an application protocol for
-each Service port. This is used as a hint for implementations to offer
-richer behavior for protocols that they understand.
-The value of this field is mirrored by the corresponding
-Endpoints and EndpointSlice objects.
+Поле `appProtocol` надає можливість вказати протокол застосунку для кожного порту Сервісу. Це використовується як підказка для реалізацій для надання розширеної поведінки для протоколів, які вони розуміють. Значення цього поля відображається відповідними обʼєктами Endpoints та EndpointSlice.
 
-This field follows standard Kubernetes label syntax. Valid values are one of:
+Це поле відповідає стандартному синтаксису міток Kubernetes. Дійсні значення — це одне з:
 
-* [IANA standard service names](https://www.iana.org/assignments/service-names).
+* [стандартні назви служб IANA](https://www.iana.org/assignments/service-names).
 
-* Implementation-defined prefixed names such as `mycompany.com/my-custom-protocol`.
+* Імплементаційно-визначені префіксовані імена, такі як `mycompany.com/my-custom-protocol`.
 
-* Kubernetes-defined prefixed names:
+* Імена з префіксом, визначені Kubernetes:
 
-| Protocol | Description |
+| Протокол | Опис        |
 |----------|-------------|
-| `kubernetes.io/h2c` | HTTP/2 over cleartext as described in [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540) |
+| `kubernetes.io/h2c` | HTTP/2 поверх чіткого тексту, як описано в [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540) |
 
-### Multi-port Services
+### Сервіси з кількома портами {#multi-port-services}
 
-For some Services, you need to expose more than one port.
-Kubernetes lets you configure multiple port definitions on a Service object.
-When using multiple ports for a Service, you must give all of your ports names
-so that these are unambiguous.
-For example:
+Для деяких Сервісів вам може знадобитися використовувати більше одного порту. Kubernetes дозволяє конфігурувати кілька визначень портів в обʼєкті Service. При використанні кількох портів для Сервісу, вам слід надавати всім портам імена,
+щоб вони були однозначними. Наприклад:
 
 ```yaml
 apiVersion: v1
@@ -393,109 +274,64 @@ spec:
 ```
 
 {{< note >}}
-As with Kubernetes {{< glossary_tooltip term_id="name" text="names">}} in general, names for ports
-must only contain lowercase alphanumeric characters and `-`. Port names must
-also start and end with an alphanumeric character.
+Так само як і з {{< glossary_tooltip term_id="name" text="іменами" >}} в Kubernetes взагалі, імена портів мають містити лише буквено-цифрові символи в нижньому регістрі та `-`. Імена портів також повинні починатися та закінчуватися буквено-цифровим символом.
 
-For example, the names `123-abc` and `web` are valid, but `123_abc` and `-web` are not.
+Наприклад, імена `123-abc` та `web` є допустимими, але `123_abc` та `-web` - ні.
 {{< /note >}}
 
-## Service type  {#publishing-services-service-types}
+## Тип Сервісу {#publishing-services-service-types}
 
-For some parts of your application (for example, frontends) you may want to expose a
-Service onto an external IP address, one that's accessible from outside of your
-cluster.
+Для деяких частин вашого застосунку (наприклад, фронтенду) ви можете знадобитись звʼязати Сервіс з зовнішньою IP-адресою, доступну з-поза вашого кластера.
 
-Kubernetes Service types allow you to specify what kind of Service you want.
+Типи Сервісів Kubernetes дозволяють вам вказати, який тип Сервісу ви потрібен.
 
-The available `type` values and their behaviors are:
+Доступні значення `type` та їхні поведінки:
 
 [`ClusterIP`](#type-clusterip)
-: Exposes the Service on a cluster-internal IP. Choosing this value
-  makes the Service only reachable from within the cluster. This is the
-  default that is used if you don't explicitly specify a `type` for a Service.
-  You can expose the Service to the public internet using an
-  [Ingress](/docs/concepts/services-networking/ingress/) or a
-  [Gateway](https://gateway-api.sigs.k8s.io/).
+: Повʼязує Сервіс з внутрішньою IP-адресою кластера. Вибір цього значення робить Сервіс доступним лише зсередини кластера. Це значення використовується стандартно, якщо ви не вказали явно `type` для Сервісу. Ви можете дати Сервісу доступ в Інтернет за допомогою [Ingress](/docs/concepts/services-networking/ingress/) або [Gateway](https://gateway-api.sigs.k8s.io/).
 
 [`NodePort`](#type-nodeport)
-: Exposes the Service on each Node's IP at a static port (the `NodePort`).
-  To make the node port available, Kubernetes sets up a cluster IP address,
-  the same as if you had requested a Service of `type: ClusterIP`.
+: Повʼязує Сервіс на кожному IP-адресі вузла зі статичним портом (`NodePort`). Щоб зробити порт вузла доступним, Kubernetes налаштовує IP-адресу кластера, так само якби ви запросили Сервіс з `type: ClusterIP`.
 
 [`LoadBalancer`](#loadbalancer)
-: Exposes the Service externally using an external load balancer. Kubernetes
-  does not directly offer a load balancing component; you must provide one, or
-  you can integrate your Kubernetes cluster with a cloud provider.
+: Повʼязує Сервіс із зовнішніми споживачами за допомогою зовнішнього балансувальника навантаження. Kubernetes не надає безпосередньо компонент балансування навантаження; вам слід надати його, або ви можете інтегрувати свій кластер Kubernetes з постачальником хмарних послуг.
 
 [`ExternalName`](#externalname)
-: Maps the Service to the contents of the `externalName` field (for example,
-  to the hostname `api.foo.bar.example`). The mapping configures your cluster's
-  DNS server to return a `CNAME` record with that external hostname value.
-  No proxying of any kind is set up.
+: Повʼязує Сервіс зі змістом поля `externalName` (наприклад, на імʼя хоста `api.foo.bar.example`). Це конфігурує сервер DNS вашого кластера повертати запис `CNAME` з вказаною зовнішньою назвою хосту. Ніякого проксінгу не налаштовується.
 
-The `type` field in the Service API is designed as nested functionality - each level
-adds to the previous. However there is an exception to this nested design. You can
-define a `LoadBalancer` Service by
-[disabling the load balancer `NodePort` allocation](/docs/concepts/services-networking/service/#load-balancer-nodeport-allocation).
+Поле `type` в API Сервісу розроблене як вкладена функціональність — кожен рівень додається до попереднього. Однак існує виняток з цього вкладеного дизайну. Ви можете визначити Сервіс `LoadBalancer`, відключивши [використання порту вузла для балансування навантаження](/docs/concepts/services-networking/service/#load-balancer-nodeport-allocation).
 
 ### `type: ClusterIP` {#type-clusterip}
 
-This default Service type assigns an IP address from a pool of IP addresses that
-your cluster has reserved for that purpose.
+Цей тип Сервісу типово призначає IP-адресу з пулу IP-адрес, який ваш кластер зарезервував для цієї мети.
 
-Several of the other types for Service build on the `ClusterIP` type as a
-foundation.
+Кілька інших типів Сервісу базуються на типі `ClusterIP`.
 
-If you define a Service that has the `.spec.clusterIP` set to `"None"` then
-Kubernetes does not assign an IP address. See [headless Services](#headless-services)
-for more information.
+Якщо ви визначаєте Сервіс, у якому `.spec.clusterIP` встановлено в `"None"`, тоді Kubernetes не призначає IP-адресу. Див. [сервіси headless](#headless-services) для отримання додаткової інформації.
 
-#### Choosing your own IP address
+#### Вибір власної IP-адреси {#choosing-your-own-ip-address}
 
-You can specify your own cluster IP address as part of a `Service` creation
-request.  To do this, set the `.spec.clusterIP` field. For example, if you
-already have an existing DNS entry that you wish to reuse, or legacy systems
-that are configured for a specific IP address and difficult to re-configure.
+Ви можете вказати власну IP-адресу кластера як частину запиту на створення `Service`. Для цього встановіть поле `.spec.clusterIP`. Наприклад, якщо у вас вже є наявний запис DNS, який ви хочете повторно використовувати, або старі системи, які налаштовані на певну IP-адресу і важко переналаштовуються.
 
-The IP address that you choose must be a valid IPv4 or IPv6 address from within the
-`service-cluster-ip-range` CIDR range that is configured for the API server.
-If you try to create a Service with an invalid `clusterIP` address value, the API
-server will return a 422 HTTP status code to indicate that there's a problem.
+IP-адреса, яку ви вибираєте, повинна бути дійсною IPv4 або IPv6 адресою з діапазону CIDR, який налаштований для сервера API за допомогою `service-cluster-ip-range`. Якщо ви намагаєтеся створити Сервіс із недійсною IP-адресою `clusterIP`, сервер API поверне HTTP-відповідь зі статус-кодом 422 для позначення проблеми.
 
-Read [avoiding collisions](/docs/reference/networking/virtual-ips/#avoiding-collisions)
-to learn how Kubernetes helps reduce the risk and impact of two different Services
-both trying to use the same IP address.
+Читайте [уникнення конфліктів](/docs/reference/networking/virtual-ips/#avoiding-collisions), щоб дізнатися, як Kubernetes допомагає зменшити ризик та вплив двох різних Сервісів, що намагаються використовувати однакову IP-адресу.
 
 ### `type: NodePort` {#type-nodeport}
 
-If you set the `type` field to `NodePort`, the Kubernetes control plane
-allocates a port from a range specified by `--service-node-port-range` flag (default: 30000-32767).
-Each node proxies that port (the same port number on every Node) into your Service.
-Your Service reports the allocated port in its `.spec.ports[*].nodePort` field.
+Якщо ви встановлюєте поле `type` в `NodePort`, панель управління Kubernetes виділяє порт з діапазону, вказаного прапорцем `--service-node-port-range` (типово: 30000-32767). Кожен вузол проксіює цей порт (той самий номер порту на кожному вузлі) у ваш Сервіс. Ваш Сервіс повідомляє виділений порт у полі `.spec.ports[*].nodePort`.
 
-Using a NodePort gives you the freedom to set up your own load balancing solution,
-to configure environments that are not fully supported by Kubernetes, or even
-to expose one or more nodes' IP addresses directly.
+Використання NodePort дає вам свободу налаштувати власне рішення з балансування навантаження, конфігурувати середовища, які не повністю підтримуються Kubernetes, або навіть експонувати один або кілька IP-адрес вузлів безпосередньо.
 
-For a node port Service, Kubernetes additionally allocates a port (TCP, UDP or
-SCTP to match the protocol of the Service). Every node in the cluster configures
-itself to listen on that assigned port and to forward traffic to one of the ready
-endpoints associated with that Service. You'll be able to contact the `type: NodePort`
-Service, from outside the cluster, by connecting to any node using the appropriate
-protocol (for example: TCP), and the appropriate port (as assigned to that Service).
+Для Сервісу з портом вузла Kubernetes додатково виділяє порт (TCP, UDP або SCTP для відповідності протоколу Сервісу). Кожен вузол у кластері конфігурується на прослуховування цього призначеного порту і пересилання трафіку на одну з готових
+кінцевих точок, повʼязаних із цим Сервісом. Ви зможете звертатися до Сервісу з `type: NodePort`, ззовні кластера, підключаючись до будь-якого вузла за відповідним
+протоколом (наприклад: TCP) та відповідним портом (який призначено цьому Сервісу).
 
-#### Choosing your own port {#nodeport-custom-port}
+#### Вибір власного порту {#nodeport-custom-port}
 
-If you want a specific port number, you can specify a value in the `nodePort`
-field. The control plane will either allocate you that port or report that
-the API transaction failed.
-This means that you need to take care of possible port collisions yourself.
-You also have to use a valid port number, one that's inside the range configured
-for NodePort use.
+Якщо вам потрібен певний номер порту, ви можете вказати значення у полі `nodePort`.Панель управління вибере для вас цей порт або повідомить, що транзакція API не вдалася. Це означає, що вам потрібно самостійно дбати про можливі конфлікти портів. Вам також слід використовувати дійсний номер порту, який знаходиться в межах налаштованого діапазону для використання NodePort.
 
-Here is an example manifest for a Service of `type: NodePort` that specifies
-a NodePort value (30007, in this example):
+Ось приклад маніфесту для Сервісу з `type: NodePort`, який вказує значення `NodePort` (30007 у цьому прикладі):
 
 ```yaml
 apiVersion: v1
@@ -508,62 +344,40 @@ spec:
     app.kubernetes.io/name: MyApp
   ports:
     - port: 80
-      # By default and for convenience, the `targetPort` is set to
-      # the same value as the `port` field.
+      # Стандартно та для зручності, `targetPort` встановлено
+      # в те ж значення, що й поле `port`.
       targetPort: 80
-      # Optional field
-      # By default and for convenience, the Kubernetes control plane
-      # will allocate a port from a range (default: 30000-32767)
+      # Необовʼязкове поле
+      # Стандартно та для зручності, панель управління Kubernetes
+      # виділить порт з діапазону (станадртно: 30000-32767)
       nodePort: 30007
 ```
 
-#### Reserve Nodeport ranges to avoid collisions  {#avoid-nodeport-collisions}
+#### Резервування діапазонів NodePort для уникнення конфліктів {#avoid-nodeport-collisions}
 
 {{< feature-state for_k8s_version="v1.29" state="stable" >}}
 
-The policy for assigning ports to NodePort services applies to both the auto-assignment and
-the manual assignment scenarios. When a user wants to create a NodePort service that
-uses a specific port, the target port may conflict with another port that has already been assigned.
+Політика виділення портів для NodePort-сервісів застосовується як до автоматичного, так і до ручного виділення. Коли користувач хоче створити NodePort-сервіс, який використовує певний порт, цей цільовий порт може конфліктувати з іншим портом, який вже виділено.
 
-To avoid this problem, the port range for NodePort services is divided into two bands.
-Dynamic port assignment uses the upper band by default, and it may use the lower band once the 
-upper band has been exhausted. Users can then allocate from the lower band with a lower risk of port collision.
+Щоб уникнути цієї проблеми, діапазон портів для NodePort-сервісів розбито на дві частини. Типово для динамічного виділення портів використовується верхній діапазон, і він може використовувати нижній діапазон, якщо верхній діапазон вичерпано. Користувачі можуть виділяти порти з нижнього діапазону з меншим ризиком конфлікту портів.
 
-#### Custom IP address configuration for `type: NodePort` Services {#service-nodeport-custom-listen-address}
+#### Налаштування власної IP-адреси для `type: NodePort` Сервісів {#service-nodeport-custom-listen-address}
 
-You can set up nodes in your cluster to use a particular IP address for serving node port
-services. You might want to do this if each node is connected to multiple networks (for example:
-one network for application traffic, and another network for traffic between nodes and the
-control plane).
+Ви можете налаштувати вузли у своєму кластері використовувати певну IP-адресу для обслуговування сервісів з портом вузла. Ви можете це зробити, якщо кожен вузол підключений до декількох мереж (наприклад: одна мережа для трафіку застосунків, а інша мережа для трафіку між вузлами та панеллю управління).
 
-If you want to specify particular IP address(es) to proxy the port, you can set the
-`--nodeport-addresses` flag for kube-proxy or the equivalent `nodePortAddresses`
-field of the [kube-proxy configuration file](/docs/reference/config-api/kube-proxy-config.v1alpha1/)
-to particular IP block(s).
+Якщо ви хочете вказати певні IP-адреси для проксі-порта, ви можете встановити прапорець `--nodeport-addresses` для kube-proxy або еквівалентне поле `nodePortAddresses` у [файлі конфігурації kube-proxy](/docs/reference/config-api/kube-proxy-config.v1alpha1/) на конкретні блоки IP.
 
-This flag takes a comma-delimited list of IP blocks (e.g. `10.0.0.0/8`, `192.0.2.0/25`)
-to specify IP address ranges that kube-proxy should consider as local to this node.
+Цей прапорець приймає список IP-блоків через кому (наприклад, `10.0.0.0/8`, `192.0.2.0/25`) для вказівки діапазонів IP-адрес, які kube-proxy повинен вважати локальними для цього вузла.
 
-For example, if you start kube-proxy with the `--nodeport-addresses=127.0.0.0/8` flag,
-kube-proxy only selects the loopback interface for NodePort Services.
-The default for `--nodeport-addresses` is an empty list.
-This means that kube-proxy should consider all available network interfaces for NodePort.
-(That's also compatible with earlier Kubernetes releases.)
+Наприклад, якщо ви запускаєте kube-proxy з прапорцем `--nodeport-addresses=127.0.0.0/8`, kube-proxy вибирає лише інтерфейс loopback для NodePort-сервісів. Типово для `--nodeport-addresses` є порожній список. Це означає, що kube-proxy повинен вважати всі доступні мережеві інтерфейси локальними для NodePort. (Це також сумісно з раніше випущеними версіями Kubernetes.)
+
 {{< note >}}
-This Service is visible as `<NodeIP>:spec.ports[*].nodePort` and `.spec.clusterIP:spec.ports[*].port`.
-If the `--nodeport-addresses` flag for kube-proxy or the equivalent field
-in the kube-proxy configuration file is set, `<NodeIP>` would be a filtered
-node IP address (or possibly IP addresses).
+Цей Сервіс видно як `<NodeIP>:spec.ports[*].nodePort` та `.spec.clusterIP:spec.ports[*].port`. Якщо встановлено прапорець `--nodeport-addresses` для kube-proxy або еквівалентне поле у файлі конфігурації kube-proxy, `<NodeIP>` буде IP-адресою вузла (або можливо IP-адресами) для фільтрування.
 {{< /note >}}
 
 ### `type: LoadBalancer` {#loadbalancer}
 
-On cloud providers which support external load balancers, setting the `type`
-field to `LoadBalancer` provisions a load balancer for your Service.
-The actual creation of the load balancer happens asynchronously, and
-information about the provisioned balancer is published in the Service's
-`.status.loadBalancer` field.
-For example:
+У хмарних постачальників, які підтримують зовнішні балансувальники навантаження, встановлення поле `type` в `LoadBalancer` надає балансувальник навантаження для вашого Сервісу. Створення балансувальника навантаження відбувається асинхронно, і інформація про створений балансувальник публікується у поле `.status.loadBalancer` Сервісу. Наприклад:
 
 ```yaml
 apiVersion: v1
@@ -585,124 +399,76 @@ status:
     - ip: 192.0.2.127
 ```
 
-Traffic from the external load balancer is directed at the backend Pods. The cloud
-provider decides how it is load balanced.
+Трафік від зовнішнього балансувальника навантаження направляється на бекенд-Podʼи. Хмарний постачальник вирішує, як він балансує навантаження.
 
-To implement a Service of `type: LoadBalancer`, Kubernetes typically starts off
-by making the changes that are equivalent to you requesting a Service of
-`type: NodePort`. The cloud-controller-manager component then configures the external
-load balancer to forward traffic to that assigned node port.
+Для реалізації Сервісу з `type: LoadBalancer`, Kubernetes зазвичай починає з того, що вносить зміни, які еквівалентні вашим запитам на Сервіс `type: NodePort`. Компонент cloud-controller-manager потім налаштовує зовнішній балансувальник для пересилання трафіку на цей призначений порт вузла.
 
-You can configure a load balanced Service to
-[omit](#load-balancer-nodeport-allocation) assigning a node port, provided that the
-cloud provider implementation supports this.
+Ви можете налаштувати балансований за навантаженням Сервіс для [виключення](#load-balancer-nodeport-allocation) призначення порта вузла, за умови, що реалізація постачальника хмари це підтримує.
 
-Some cloud providers allow you to specify the `loadBalancerIP`. In those cases, the load-balancer is created
-with the user-specified `loadBalancerIP`. If the `loadBalancerIP` field is not specified,
-the load balancer is set up with an ephemeral IP address. If you specify a `loadBalancerIP`
-but your cloud provider does not support the feature, the `loadbalancerIP` field that you
-set is ignored.
-
+Деякі постачальники хмар дозволяють вам вказати `loadBalancerIP`. У цих випадках балансувальник створюється з вказаною користувачем `loadBalancerIP`. Якщо поле `loadBalancerIP` не вказано, то балансувальник налаштовується з ефемерною IP-адресою. Якщо ви вказали `loadBalancerIP`, але ваш постачальник хмари не підтримує цю функцію, то вказане вами поле `loadbalancerIP` ігнорується.
 
 {{< note >}}
-The`.spec.loadBalancerIP` field for a Service was deprecated in Kubernetes v1.24.
+Поле `.spec.loadBalancerIP` для Сервісу було визнане застарілим в Kubernetes v1.24.
 
-This field was under-specified and its meaning varies across implementations.
-It also cannot support dual-stack networking. This field may be removed in a future API version.
+Це поле було недостатньо визначеним, і його значення різниться в різних реалізаціях. Воно також не підтримує мережі з подвійним стеком. Це поле може бути вилучено в майбутніх версіях API.
 
-If you're integrating with a provider that supports specifying the load balancer IP address(es)
-for a Service via a (provider specific) annotation, you should switch to doing that.
+Якщо ви інтегруєтеся з постачальником, який підтримує вказання IP-адреси(в) балансувальника навантаження для Сервісу через анотацію (специфічну для постачальника), вам слід перейти на цей метод.
 
-If you are writing code for a load balancer integration with Kubernetes, avoid using this field.
-You can integrate with [Gateway](https://gateway-api.sigs.k8s.io/) rather than Service, or you
-can define your own (provider specific) annotations on the Service that specify the equivalent detail.
+Якщо ви пишете код для інтеграції балансувальника з Kubernetes, уникайте використання цього поля. Ви можете інтегрувати його з [Gateway](https://gateway-api.sigs.k8s.io/) замість Service, або ви можете визначити власні анотації (специфічні для постачальника) для Сервісу, які визначають еквівалентну деталь.
 {{< /note >}}
 
-#### Load balancers with mixed protocol types
+#### Балансувальники з мішаними типами протоколів {#load-balancer-with-mixed-protocol-types}
 
-{{< feature-state for_k8s_version="v1.26" state="stable" >}}
+{{< feature-state feature_gate_name="MixedProtocolLBService" >}}
 
-By default, for LoadBalancer type of Services, when there is more than one port defined, all
-ports must have the same protocol, and the protocol must be one which is supported
-by the cloud provider.
+Типово для Сервісів типу LoadBalancer, коли визначено більше одного порту, всі порти повинні мати один і той же протокол, і цей протокол повинен бути підтримуваний
+постачальником хмари.
 
-The feature gate `MixedProtocolLBService` (enabled by default for the kube-apiserver as of v1.24) allows the use of
-different protocols for LoadBalancer type of Services, when there is more than one port defined.
+Feature gate `MixedProtocolLBService` (стандартно увімкнено для kube-apiserver з версії v1.24) дозволяє використовувати різні протоколи для Сервісів типу LoadBalancer, коли визначено більше одного порту.
 
 {{< note >}}
-The set of protocols that can be used for load balanced Services is defined by your
-cloud provider; they may impose restrictions beyond what the Kubernetes API enforces.
+Набір протоколів, які можна використовувати для балансованих навантажень Сервісів, визначається вашим постачальником хмари; вони можуть накладати обмеження поза тим, що накладає API Kubernetes.
 {{< /note >}}
 
-#### Disabling load balancer NodePort allocation {#load-balancer-nodeport-allocation}
+#### Вимкнення виділення порту вузла для балансувальника навантаження {#load-balancer-nodeport-allocation}
 
 {{< feature-state for_k8s_version="v1.24" state="stable" >}}
 
-You can optionally disable node port allocation for a Service of `type: LoadBalancer`, by setting
-the field `spec.allocateLoadBalancerNodePorts` to `false`. This should only be used for load balancer implementations
-that route traffic directly to pods as opposed to using node ports. By default, `spec.allocateLoadBalancerNodePorts`
-is `true` and type LoadBalancer Services will continue to allocate node ports. If `spec.allocateLoadBalancerNodePorts`
-is set to `false` on an existing Service with allocated node ports, those node ports will **not** be de-allocated automatically.
-You must explicitly remove the `nodePorts` entry in every Service port to de-allocate those node ports.
+Ви можете вимкнути виділення порту вузла для Сервісу з `type: LoadBalancer`, встановивши поле `spec.allocateLoadBalancerNodePorts` в `false`. Це слід використовувати тільки для реалізацій балансувальників, які маршрутизують трафік безпосередньо до Podʼів, а не використовують порти вузла. Стандартно `spec.allocateLoadBalancerNodePorts` дорівнює `true`, і Сервіси типу LoadBalancer будуть продовжувати виділяти порти вузла. Якщо `spec.allocateLoadBalancerNodePorts` встановлено в `false` для існуючого Сервісу з виділеними портами вузла, ці порти вузла **не** будуть автоматично видалятися. Вам слід явно видалити запис `nodePorts` в кожному порту Сервісу для деалокації цих портів вузла.
 
-#### Specifying class of load balancer implementation {#load-balancer-class}
+#### Вказання класу реалізації балансувальника {#load-balancer-class}
 
 {{< feature-state for_k8s_version="v1.24" state="stable" >}}
 
-For a Service with `type` set to `LoadBalancer`, the `.spec.loadBalancerClass` field
-enables you to use a load balancer implementation other than the cloud provider default.
+Для Сервісу з `type` встановленим на `LoadBalancer`, поле `.spec.loadBalancerClass`
+дозволяє вам використовувати реалізацію балансувальника, відмінну від тієї, яку типово встановлено постачальником хмари.
 
-By default, `.spec.loadBalancerClass` is not set and a `LoadBalancer`
-type of Service uses the cloud provider's default load balancer implementation if the
-cluster is configured with a cloud provider using the `--cloud-provider` component
-flag.
+Типово `.spec.loadBalancerClass` не встановлено, і Сервіс з `LoadBalancer`  використовує реалізацію балансувальника що постачається в хмарі, якщо кластер налаштовано постачальником хмари за допомогою прапорця компоненту `--cloud-provider`. Якщо ви вказуєте `.spec.loadBalancerClass`, вважається, що реалізація балансувальника, яка відповідає вказаному класу, відстежує Сервіси. Будь-яка стандартн реалізація балансувальника (наприклад, та, яку надає постачальник хмари), ігнорує Сервіси, у яких встановлено це поле. `spec.loadBalancerClass` може бути встановлено тільки для Сервісу типу `LoadBalancer`. Після встановлення його не можна змінити. Значення `spec.loadBalancerClass` повинно бути ідентифікатором у формі мітки, з необовʼязковим префіксом, таким як "`internal-vip`" або "`example.com/internal-vip`". Безпрефіксні імена зарезервовані для кінцевих користувачів.
 
-If you specify `.spec.loadBalancerClass`, it is assumed that a load balancer
-implementation that matches the specified class is watching for Services.
-Any default load balancer implementation (for example, the one provided by
-the cloud provider) will ignore Services that have this field set.
-`spec.loadBalancerClass` can be set on a Service of type `LoadBalancer` only.
-Once set, it cannot be changed.
-The value of `spec.loadBalancerClass` must be a label-style identifier,
-with an optional prefix such as "`internal-vip`" or "`example.com/internal-vip`".
-Unprefixed names are reserved for end-users.
+#### Вказання IPMode для стану балансувальника {#load-balancer-ip-mode}
 
-#### Specifying IPMode of load balancer status {#load-balancer-ip-mode}
+{{< feature-state feature_gate_name="LoadBalancerIPMode" >}}
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+Починаючи з Alpha в Kubernetes 1.29, [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) з іменем `LoadBalancerIPMode` дозволяє встановлювати значення `.status.loadBalancer.ingress.ipMode` для Сервісу з `type` встановленим у `LoadBalancer`. `.status.loadBalancer.ingress.ipMode` вказує, як веде себе IP-адреса балансувальника. Воно може бути вказано лише тоді, коли вказано поле `.status.loadBalancer.ingress.ip`.
 
-Starting as Alpha in Kubernetes 1.29, 
-a [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) 
-named `LoadBalancerIPMode` allows you to set the `.status.loadBalancer.ingress.ipMode` 
-for a Service with `type` set to `LoadBalancer`. 
-The `.status.loadBalancer.ingress.ipMode` specifies how the load-balancer IP behaves. 
-It may be specified only when the `.status.loadBalancer.ingress.ip` field is also specified.
+Є два можливі значення для `.status.loadBalancer.ingress.ipMode`: "VIP" та "Proxy".Типово встановлене значення "VIP", що означає, що трафік подається на вузол з призначенням, встановленим на IP та порт балансувальника. Є два випадки, коли встановлено значення "Proxy", залежно від того, як постачальник хмари балансує трафік:
 
-There are two possible values for `.status.loadBalancer.ingress.ipMode`: "VIP" and "Proxy". 
-The default value is "VIP" meaning that traffic is delivered to the node 
-with the destination set to the load-balancer's IP and port. 
-There are two cases when setting this to "Proxy", depending on how the load-balancer 
-from the cloud provider delivers the traffics:  
+* Якщо трафік подається на вузол, а потім перенаправляється до Podʼа, призначення буде встановлено на IP та порт вузла;
+* Якщо трафік подається безпосередньо до Podʼа, призначення буде встановлено на IP та порт Podʼа.
 
-- If the traffic is delivered to the node then DNATed to the pod, the destination would be set to the node's IP and node port;
-- If the traffic is delivered directly to the pod, the destination would be set to the pod's IP and port.
+Реалізації Сервісів можуть використовувати цю інформацію для налаштування маршрутизації трафіку.
 
-Service implementations may use this information to adjust traffic routing.
+#### Внутрішній балансувальник
 
-#### Internal load balancer
+У змішаному середовищі іноді необхідно направляти трафік від Сервісів всередині того ж (віртуального) мережевого блоку.
 
-In a mixed environment it is sometimes necessary to route traffic from Services inside the same
-(virtual) network address block.
+У середовищі DNS із подвійним горизонтом вам може знадобитися два Сервіси для маршрутизації зовнішнього і внутрішнього трафіку до ваших ендпоінтів.
 
-In a split-horizon DNS environment you would need two Services to be able to route both external
-and internal traffic to your endpoints.
-
-To set an internal load balancer, add one of the following annotations to your Service
-depending on the cloud service provider you're using:
+Щоб встановити внутрішній балансувальник, додайте одну з наступних анотацій до Сервісу в залежності від постачальника хмари, який ви використовуєте:
 
 {{< tabs name="service_tabs" >}}
-{{% tab name="Default" %}}
-Select one of the tabs.
+{{% tab name="Типово" %}}
+Виберіть одну з вкладок.
 {{% /tab %}}
 
 {{% tab name="GCP" %}}
@@ -713,6 +479,7 @@ metadata:
   annotations:
       networking.gke.io/load-balancer-type: "Internal"
 ```
+
 {{% /tab %}}
 {{% tab name="AWS" %}}
 
@@ -790,16 +557,15 @@ metadata:
   annotations:
       service.beta.kubernetes.io/oci-load-balancer-internal: true
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### `type: ExternalName` {#externalname}
 
-Services of type ExternalName map a Service to a DNS name, not to a typical selector such as
-`my-service` or `cassandra`. You specify these Services with the `spec.externalName` parameter.
+Сервіси типу ExternalName звʼязують Сервіс з DNS-іменем, а не на типовим селектором, таким як `my-service` або `cassandra`. Ви вказуєте ці Сервіси параметром `spec.externalName`.
 
-This Service definition, for example, maps
-the `my-service` Service in the `prod` namespace to `my.database.example.com`:
+Наприклад, це визначення Сервісу звʼязує Сервіс `my-service` в просторі імен `prod` з `my.database.example.com`:
 
 ```yaml
 apiVersion: v1
@@ -813,84 +579,55 @@ spec:
 ```
 
 {{< note >}}
-A Service of `type: ExternalName` accepts an IPv4 address string,
-but treats that string as a DNS name comprised of digits,
-not as an IP address (the internet does not however allow such names in DNS).
-Services with external names that resemble IPv4
-addresses are not resolved by DNS servers.
+Сервіс типу `ExternalName` приймає рядок IPv4 адреси, але трактує цей рядок як імʼя DNS, що складається з цифр, а не як IP-адресу (інтернет, однак, не дозволяє такі імена в DNS). Сервіси зовнішніх імен, які нагадують IPv4 адреси, не вирішуються DNS-серверами.
 
-If you want to map a Service directly to a specific IP address, consider using
-[headless Services](#headless-services).
+Якщо ви хочете звʼязати Сервіс безпосередньо з конкретною IP-адресою, розгляньте можливість використання [headless Services](#headless-services).
 {{< /note >}}
 
-When looking up the host `my-service.prod.svc.cluster.local`, the cluster DNS Service
-returns a `CNAME` record with the value `my.database.example.com`. Accessing
-`my-service` works in the same way as other Services but with the crucial
-difference that redirection happens at the DNS level rather than via proxying or
-forwarding. Should you later decide to move your database into your cluster, you
-can start its Pods, add appropriate selectors or endpoints, and change the
-Service's `type`.
+При пошуку хоста `my-service.prod.svc.cluster.local`, DNS-сервіс кластера повертає запис `CNAME` із значенням `my.database.example.com`. Доступ до `my-service` працює так само, як і для інших Сервісів, але з важливою різницею в тому, що перенаправлення відбувається на рівні DNS, а не через проксі або переадресацію. Якщо ви пізніше вирішите перемістити свою базу даних в кластер, ви можете запустити його Podʼи, додати відповідні селектори чи endpointʼи та змінити тип Сервісу.
 
 {{< caution >}}
-You may have trouble using ExternalName for some common protocols, including HTTP and HTTPS.
-If you use ExternalName then the hostname used by clients inside your cluster is different from
-the name that the ExternalName references.
+Можливі проблеми з використанням ExternalName для деяких загальних протоколів, таких як HTTP та HTTPS. Якщо ви використовуєте ExternalName, імʼя хоста, яке використовують клієнти всередині вашого кластера, відрізняється від
+імені, на яке посилається ExternalName.
 
-For protocols that use hostnames this difference may lead to errors or unexpected responses.
-HTTP requests will have a `Host:` header that the origin server does not recognize;
-TLS servers will not be able to provide a certificate matching the hostname that the client connected to.
+Для протоколів, які використовують імена хостів, ця різниця може призвести до помилок або непередбачуваних відповідей. HTTP-запити матимуть заголовок `Host:`, який сервер-джерело не визнає; сервери TLS не зможуть надати сертифікат, що відповідає імені хоста, до якого приєдно клієнта.
 {{< /caution >}}
 
 ## Headless Services
 
-Sometimes you don't need load-balancing and a single Service IP.  In
-this case, you can create what are termed _headless Services_, by explicitly
-specifying `"None"` for the cluster IP address (`.spec.clusterIP`).
+Іноді вам не потрібен балансувальник навантаження та одна IP-адреса Сервісу. У
+цьому випадку ви можете створити так звані _headless Services_, якщо явно
+вказати `"None"` для IP-адреси кластера (`.spec.clusterIP`).
 
-You can use a headless Service to interface with other service discovery mechanisms,
-without being tied to Kubernetes' implementation.
+Ви можете використовувати headless Сервіс для взаємодії з іншими механізмами виявлення служб, не будучи привʼязаним до реалізації Kubernetes.
 
-For headless Services, a cluster IP is not allocated, kube-proxy does not handle
-these Services, and there is no load balancing or proxying done by the platform
-for them. How DNS is automatically configured depends on whether the Service has
-selectors defined:
+Для headless Сервісів кластерна IP-адреса не видається, kube-proxy не обслуговує
+ці Сервіси, і для них платформа не виконує балансування навантаження чи проксі-послугу. Те, як автоматично налаштовано DNS, залежить від того, чи визначені селектори Сервісу:
 
-### With selectors
+### З селекторами {#with-selectors}
 
-For headless Services that define selectors, the endpoints controller creates
-EndpointSlices in the Kubernetes API, and modifies the DNS configuration to return
-A or AAAA records (IPv4 or IPv6 addresses) that point directly to the Pods backing the Service.
+Для headless Сервісів, які визначають селектори, контролер endpointʼів створює обʼєкти EndpointSlice в Kubernetes API та змінює конфігурацію DNS так, щоб повертати записи A або AAAA (IPv4 або IPv6 адреси), які напрямую вказують на Podʼи, які підтримують Сервіс.
 
-### Without selectors
+### Без селекторів {#without-selectors}
 
-For headless Services that do not define selectors, the control plane does
-not create EndpointSlice objects. However, the DNS system looks for and configures
-either:
+Для headless Сервісів, які не визначають селектори, панель управління не створює обʼєкти EndpointSlice. Проте система DNS шукає та налаштовує або:
 
-* DNS CNAME records for [`type: ExternalName`](#externalname) Services.
-* DNS A / AAAA records for all IP addresses of the Service's ready endpoints,
-  for all Service types other than `ExternalName`.
-  * For IPv4 endpoints, the DNS system creates A records.
-  * For IPv6 endpoints, the DNS system creates AAAA records.
+* DNS-записи CNAME для Сервісів з [`type: ExternalName`](#externalname).
+* DNS-записи A / AAAA для всіх IP-адрес Сервісу з готовими endpointʼами, для всіх типів Сервісів, крім `ExternalName`.
+  * Для IPv4 endpointʼів система DNS створює A-записи.
+  * Для IPv6 endpointʼів система DNS створює AAAA-записи.
 
-When you define a headless Service without a selector, the `port` must
-match the `targetPort`.
+Коли ви визначаєте headless Сервіс без селектора, поле `port` повинно відповідати полю `targetPort`.
 
-## Discovering services
+## Виявлення сервісів {#discovering-services}
 
-For clients running inside your cluster, Kubernetes supports two primary modes of
-finding a Service: environment variables and DNS.
+Для клієнтів, що працюють всередині вашого кластера, Kubernetes підтримує два основних способи виявлення Сервісу: змінні середовища та DNS.
 
-### Environment variables
+### Змінні середовища
 
-When a Pod is run on a Node, the kubelet adds a set of environment variables
-for each active Service. It adds `{SVCNAME}_SERVICE_HOST` and `{SVCNAME}_SERVICE_PORT` variables,
-where the Service name is upper-cased and dashes are converted to underscores.
+Коли Pod запускається на вузлі, kubelet додає набір змінних середовища для кожного активного Сервісу. Додаються змінні середовища `{SVCNAME}_SERVICE_HOST` та `{SVCNAME}_SERVICE_PORT`, де імʼя Сервісу перетворюється у верхній регістр, а тире конвертуються у підкреслення.
 
-
-For example, the Service `redis-primary` which exposes TCP port 6379 and has been
-allocated cluster IP address 10.0.0.11, produces the following environment
-variables:
+Наприклад, Сервіс `redis-primary`, який використовує TCP-порт 6379 та має присвоєну IP-адресу кластера 10.0.0.11, створює наступні змінні середовища:
 
 ```shell
 REDIS_PRIMARY_SERVICE_HOST=10.0.0.11
@@ -903,49 +640,28 @@ REDIS_PRIMARY_PORT_6379_TCP_ADDR=10.0.0.11
 ```
 
 {{< note >}}
-When you have a Pod that needs to access a Service, and you are using
-the environment variable method to publish the port and cluster IP to the client
-Pods, you must create the Service *before* the client Pods come into existence.
-Otherwise, those client Pods won't have their environment variables populated.
+Коли у вас є Pod, який потребує доступу до Сервісу, і ви використовуєте метод змінної середовища для публікації порту та кластерного IP для Podʼів клієнта, ви повинні створити Сервіс _перед_ створенням Podʼів клієнта. В іншому випадку ці Podʼи клієнта не матимуть заповнених змінних середовища.
 
-If you only use DNS to discover the cluster IP for a Service, you don't need to
-worry about this ordering issue.
+Якщо ви використовуєте лише DNS для визначення кластерного IP для Сервісу, вам не потрібно турбуватися про цю проблему порядку.
 {{< /note >}}
 
-Kubernetes also supports and provides variables that are compatible with Docker
-Engine's "_[legacy container links](https://docs.docker.com/network/links/)_" feature.
-You can read [`makeLinkVariables`](https://github.com/kubernetes/kubernetes/blob/dd2d12f6dc0e654c15d5db57a5f9f6ba61192726/pkg/kubelet/envvars/envvars.go#L72)
-to see how this is implemented in Kubernetes.
+Kubernetes також підтримує та надає змінні, які сумісні з "_[legacy container links](https://docs.docker.com/network/links/)_" Docker Engine. Ви можете переглянути [`makeLinkVariables`](https://github.com/kubernetes/kubernetes/blob/dd2d12f6dc0e654c15d5db57a5f9f6ba61192726/pkg/kubelet/envvars/envvars.go#L72) щоб побачити, як це реалізовано в Kubernetes.
 
 ### DNS
 
-You can (and almost always should) set up a DNS service for your Kubernetes
-cluster using an [add-on](/docs/concepts/cluster-administration/addons/).
+Ви можете (і майже завжди повинні) налаштувати службу DNS для вашого кластера Kubernetes, використовуючи [надбудову](/docs/concepts/cluster-administration/addons/).
 
-A cluster-aware DNS server, such as CoreDNS, watches the Kubernetes API for new
-Services and creates a set of DNS records for each one.  If DNS has been enabled
-throughout your cluster then all Pods should automatically be able to resolve
-Services by their DNS name.
+Сервер DNS, знається на кластерах, такий як CoreDNS, стежить за Kubernetes API для виявлення нових Сервісів і створює набір DNS-записів для кожного з них. Якщо DNS увімкнено в усьому кластері, то всі Podʼи повинні автоматично мати можливість знаходити Сервіси за їхнім DNS-імʼям.
 
-For example, if you have a Service called `my-service` in a Kubernetes
-namespace `my-ns`, the control plane and the DNS Service acting together
-create a DNS record for `my-service.my-ns`. Pods in the `my-ns` namespace
-should be able to find the service by doing a name lookup for `my-service`
-(`my-service.my-ns` would also work).
+Наприклад, якщо у вас є Сервіс з назвою `my-service` в просторі імен Kubernetes `my-ns`, то разом панель управління та служба DNS створюють DNS-запис для `my-service.my-ns`. Podʼи в просторі імен `my-ns` повинні мати можливість знаходити Сервіс, роблячи запит за іменем `my-service` (`my-service.my-ns` також працюватиме).
 
-Pods in other namespaces must qualify the name as `my-service.my-ns`. These names
-will resolve to the cluster IP assigned for the Service.
+Podʼи в інших просторах імен повинні вказати імʼя як `my-service.my-ns`. Ці імена будуть розповсюджуватись на призначений кластером IP для Сервісу.
 
-Kubernetes also supports DNS SRV (Service) records for named ports.  If the
-`my-service.my-ns` Service has a port named `http` with the protocol set to
-`TCP`, you can do a DNS SRV query for `_http._tcp.my-service.my-ns` to discover
-the port number for `http`, as well as the IP address.
+Kubernetes також підтримує DNS SRV (Service) записи для іменованих портів. Якщо Сервіс `my-service.my-ns` має порт з іменем `http` і протоколом, встановленим в `TCP`, ви можете виконати DNS SRV-запит для `_http._tcp.my-service.my-ns`, щоб дізнатися номер порту для `http`, а також IP-адресу.
 
-The Kubernetes DNS server is the only way to access `ExternalName` Services.
-You can find more information about `ExternalName` resolution in
-[DNS for Services and Pods](/docs/concepts/services-networking/dns-pod-service/).
+Сервер DNS Kubernetes — єдиний спосіб доступу до Сервісів `ExternalName`. Ви можете знайти більше інформації про вирішення `ExternalName` в [DNS для Сервісів та Podʼів](/docs/concepts/services-networking/dns-pod-service/).
 
-<!-- preserve existing hyperlinks -->
+<!-- Збережіть існуючі гіперпосилання -->
 <a id="shortcomings" />
 <a id="the-gory-details-of-virtual-ips" />
 <a id="proxy-modes" />
@@ -954,37 +670,25 @@ You can find more information about `ExternalName` resolution in
 <a id="proxy-mode-ipvs" />
 <a id="ips-and-vips" />
 
-## Virtual IP addressing mechanism
+### Механізм віртуальних IP-адрес {#virtual-ip-addressing-mechanism}
 
-Read [Virtual IPs and Service Proxies](/docs/reference/networking/virtual-ips/) explains the
-mechanism Kubernetes provides to expose a Service with a virtual IP address.
+Прочитайте [Віртуальні IP-адреси та сервісні проксі](/docs/reference/networking/virtual-ips/), що пояснює механізм, який Kubernetes надає для експозиції Сервісу з віртуальною IP-адресою.
 
-### Traffic policies
+### Політики трафіку {#traffic-policies}
 
-You can set the `.spec.internalTrafficPolicy` and `.spec.externalTrafficPolicy` fields
-to control how Kubernetes routes traffic to healthy (“ready”) backends.
+Ви можете встановити поля `.spec.internalTrafficPolicy` та `.spec.externalTrafficPolicy`, щоб контролювати, як Kubernetes маршрутизує трафік до справних ("готових") бекендів.
 
-See [Traffic Policies](/docs/reference/networking/virtual-ips/#traffic-policies) for more details.
+Дивіться [Політики трафіку](/docs/reference/networking/virtual-ips/#traffic-policies) для отримання докладнішої інформації.
 
-### Session stickiness
+### Збереження сесії {#session-stickiness}
 
-If you want to make sure that connections from a particular client are passed to
-the same Pod each time, you can configure session affinity based on the client's
-IP address. Read [session affinity](/docs/reference/networking/virtual-ips/#session-affinity)
-to learn more.
+Якщо ви хочете переконатися, що зʼєднання з певного клієнта щоразу передаються до одного і того ж Pod, ви можете налаштувати спорідненість сеансу на основі IP-адреси клієнта. Докладніше читайте [збереження сесії](/docs/reference/networking/virtual-ips/#session-affinity).
 
-## External IPs
+## Зовнішні IP {#external-ips}
 
-If there are external IPs that route to one or more cluster nodes, Kubernetes Services
-can be exposed on those `externalIPs`. When network traffic arrives into the cluster, with
-the external IP (as destination IP) and the port matching that Service, rules and routes
-that Kubernetes has configured ensure that the traffic is routed to one of the endpoints
-for that Service.
+Якщо існують зовнішні IP-адреси, які маршрутизують до одного чи декількох вузлів кластера, Сервіси Kubernetes можна використовувати на цих `externalIPs`. Коли мережевий трафік потрапляє в кластер із зовнішнім IP (як IP призначення) та портом, який відповідає цьому Сервісу, правила та маршрути, які Kubernetes налаштовує, забезпечують маршрутизацію трафіку до одного з кінцевих пунктів цього Сервісу.
 
-When you define a Service, you can specify `externalIPs` for any
-[service type](#publishing-services-service-types).
-In the example below, the Service named `"my-service"` can be accessed by clients using TCP,
-on `"198.51.100.32:80"` (calculated from `.spec.externalIPs[]` and `.spec.ports[].port`).
+При визначенні Сервісу ви можете вказати `externalIPs` для будь-якого [типу сервісу](#publishing-services-service-types). У наведеному нижче прикладі Сервіс з іменем `"my-service"` може отримати доступ від клієнтів за допомогою TCP за адресою `"198.51.100.32:80"` (розраховано із `.spec.externalIPs[]` та `.spec.ports[].port`).
 
 ```yaml
 apiVersion: v1
@@ -1004,31 +708,25 @@ spec:
 ```
 
 {{< note >}}
-Kubernetes does not manage allocation of `externalIPs`; these are the responsibility
-of the cluster administrator.
+Kubernetes не керує виділенням `externalIPs`; це відповідальність адміністратора кластера.
 {{< /note >}}
 
-## API Object
+## API Обʼєкт {#api-object}
 
-Service is a top-level resource in the Kubernetes REST API. You can find more details
-about the [Service API object](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core).
+Сервіс — це ресурс верхнього рівня в Kubernetes REST API. Ви можете знайти більше деталей про [обʼєкт API Service](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core).
 
 ## {{% heading "whatsnext" %}}
 
-Learn more about Services and how they fit into Kubernetes:
+Дізнайтеся більше про Сервіси та те, як вони вписуються в Kubernetes:
 
-* Follow the [Connecting Applications with Services](/docs/tutorials/services/connect-applications-service/)
-  tutorial.
-* Read about [Ingress](/docs/concepts/services-networking/ingress/), which
-  exposes HTTP and HTTPS routes from outside the cluster to Services within
-  your cluster.
-* Read about [Gateway](/docs/concepts/services-networking/gateway/), an extension to
-  Kubernetes that provides more flexibility than Ingress.
+* Дізнайтесь про [Підключення Застосунків за допомогою Сервісів](/docs/tutorials/services/connect-applications-service/) уроку.
+* Прочитайте про [Ingress](/docs/concepts/services-networking/ingress/), який експонує маршрути HTTP та HTTPS ззовні кластера до Сервісів всередині вашого кластера.
+* Прочитайте про [Gateway](/docs/concepts/services-networking/gateway/), розширення для Kubernetes, яке надає більше гнучкості, ніж Ingress.
 
-For more context, read the following:
+Для отримання додаткового контексту прочитайте наступне:
 
-* [Virtual IPs and Service Proxies](/docs/reference/networking/virtual-ips/)
+* [Віртуальні IP та сервісні проксі](/docs/reference/networking/virtual-ips/)
 * [EndpointSlices](/docs/concepts/services-networking/endpoint-slices/)
-* [Service API reference](/docs/reference/kubernetes-api/service-resources/service-v1/)
-* [EndpointSlice API reference](/docs/reference/kubernetes-api/service-resources/endpoint-slice-v1/)
-* [Endpoint API reference (legacy)](/docs/reference/kubernetes-api/service-resources/endpoints-v1/)
+* [Довідка н API Service](/docs/reference/kubernetes-api/service-resources/service-v1/)
+* [Довідка API EndpointSlice](/docs/reference/kubernetes-api/service-resources/endpoint-slice-v1/)
+* [Довідка API Endpoint (застаріле)](/docs/reference/kubernetes-api/service-resources/endpoints-v1/)
