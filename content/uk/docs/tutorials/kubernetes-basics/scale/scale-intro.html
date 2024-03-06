@@ -22,18 +22,13 @@ description: |-
                     <ul>
                         <li>Масштабування застосунку за допомогою kubectl.</li>
                     </ul>
-                </div>
-    
-                <div class="col-md-8">
+
            <h3>Масштабування Застосунку</h3>
     
                 <p>Раніше ми створили <a href="/uk/docs/concepts/workloads/controllers/deployment/">Deployment</a>, а потім робили його загальнодоступним за допомогою <a href="/uk/docs/concepts/services-networking/service/">Service</a>. Deployment створив лише один Pod для запуску нашого pfcnjceyre. Зі збільшенням трафіку, нам потрібно масштабувати застосунок, щоб відповідати зростаючим вимогам користувачів.</p>
                 <p>Якщо ви ще не працювали над попередніми розділами, почніть з <a href="/uk/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/">Використання minikube для створення кластера</a>.</p>
     
-                <p><em>Масштабування</em> досягається зміною кількості реплік в Deployment</p>
-                  {{< note >}}
-                <p>Якщо ви виконуєте це завдання після <a href="/uk/docs/tutorials/kubernetes-basics/expose/expose-intro/">попереднього розділу</a>, можливо, ви видалили Service, що надавав доступ до Deploymentʼу. У цьому випадку, будь ласка, надайте доступ до Deploymentʼу командою:</p><p><code><b>kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080</b></code></p>
-                  {{< /note >}}
+                <p><em>Масштабування</em> досягається зміною кількості реплік в Deployment.</p>
                 </div>
                 <div class="col-md-4">
                     <div class="content__box content__box_lined">
@@ -47,7 +42,14 @@ description: |-
                     </div>
                 </div>
             </div>
-            <br>
+
+            <div class="row">
+              <div class="col-md-12">
+                {{< note >}}
+                <p>Якщо ви виконуєте це завдання після <a href="/uk/docs/tutorials/kubernetes-basics/expose/expose-intro/">попереднього розділу</a>, можливо, ви видалили Service, що надавав доступ до Deploymentʼу. У цьому випадку, будь ласка, надайте доступ до Deploymentʼу командою:</p><p><code><b>kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080</b></code></p>
+                {{< /note >}}
+              </div>
+            </div>
     
             <div class="row">
                 <div class="col-md-8">

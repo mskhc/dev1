@@ -174,7 +174,7 @@ kubectl describe node <вставте-назву-вузла-тут>
 [резервування ресурсів для системних служб](/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved).
 {{< /note >}}
 
-## Топологія вузла
+## Топологія вузла {#node-topology}
 
 {{< feature-state feature_gate_name="TopologyManager" >}}
 

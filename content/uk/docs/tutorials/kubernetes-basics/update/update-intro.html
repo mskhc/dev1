@@ -131,7 +131,7 @@ description: |-
                    <p>Для перегляду поточної версії образу застосунку виконайте команду <code>describe pods</code> та шукайте поле <code>Image</code>:</p>
                    <p><code><b>kubectl describe pods</b></code></p>
                    <p>Для оновлення образу застосунку до версії 2 використовуйте команду <code>set image</code>, за якою йде назва Deployment та нова версія образу:</p>
-                   <p><code><b>kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2</b></code></p>
+                   <p><code><b>kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/jocatalin/kubernetes-bootcamp:v2</b></code></p>
                    <p>Команда повідомляє Deployment про використання іншого образу для вашого застосунку та запускає поступове оновлення. Перевірте стан нових Podʼів та перегляньте той, що відключається, використовуючи команду <code>get pods</code>:</p>
                    <p><code><b>kubectl get pods</b></code></p>
                 </div>

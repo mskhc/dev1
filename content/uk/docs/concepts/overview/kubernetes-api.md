@@ -139,7 +139,7 @@ Kubernetes працює як з OpenAPI v2.0, так і з OpenAPI v3.0. OpenAPI
 
 ### OpenAPI V3
 
-{{< feature-state state="stable" for_k8s_version="v1.27" >}}
+{{< feature-state feature_gate_name="OpenAPIV3" >}}
 
 Kubernetes підтримує публікацію опису своїх API у форматі OpenAPI v3.
 
