@@ -248,12 +248,12 @@ pause_image="registry.k8s.io/pause:3.6"
 ### Docker Engine {#docker}
 
 {{< note >}}
-Ці інструкції передбачають, що ви використовуєте адаптер [`cri-dockerd`](https://github.com/Mirantis/cri-dockerd) для інтеграції Docker Engine з Kubernetes.
+Ці інструкції передбачають, що ви використовуєте адаптер [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/) для інтеграції Docker Engine з Kubernetes.
 {{< /note >}}
 
 1. На кожному з ваших вузлів встановіть Docker для вашого дистрибутиву Linux; дивіться [Інсталяція Docker Engine](https://docs.docker.com/engine/install/#server).
 
-2. Встановіть [`cri-dockerd`](https://github.com/Mirantis/cri-dockerd), дотримуючись інструкцій у репозиторій з вихідним кодом.
+2. Встановіть [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/usage/install), дотримуючись інструкцій у репозиторій з вихідним кодом.
 
 Для `cri-dockerd` типовий сокет CRI — `/run/cri-dockerd.sock`.
 
@@ -261,7 +261,7 @@ pause_image="registry.k8s.io/pause:3.6"
 
 [Mirantis Container Runtime](https://docs.mirantis.com/mcr/20.10/overview.html) (MCR) є комерційно доступною реалізацією середовища виконання контейнерів, яка була раніше відома як Docker Enterprise Edition.
 
-Ви можете використовувати Mirantis Container Runtime з Kubernetes за допомогою відкритої реалізації компонента [`cri-dockerd`](https://github.com/Mirantis/cri-dockerd), який входить до складу MCR.
+Ви можете використовувати Mirantis Container Runtime з Kubernetes за допомогою відкритої реалізації компонента [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/), який входить до складу MCR.
 
 Для отримання докладнішої інформації щодо встановлення Mirantis Container Runtime
 дивіться [посібник з розгортання MCR](https://docs.mirantis.com/mcr/20.10/install.html).

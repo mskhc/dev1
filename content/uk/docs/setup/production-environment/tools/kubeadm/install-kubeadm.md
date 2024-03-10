@@ -67,7 +67,7 @@ nc 127.0.0.1 6443 -v
 Дивіться [середовища виконання контейнерів](/docs/setup/production-environment/container-runtimes/) для отримання додаткової інформації.
 
 {{< note >}}
-Рушій Docker не має реалізації [CRI](/docs/concepts/architecture/cri/), що є вимогою для роботи контейнерного середовища в Kubernetes. З цього приводу слід встановити додатковий сервіс [cri-dockerd](https://github.com/Mirantis/cri-dockerd).
+Рушій Docker не має реалізації [CRI](/docs/concepts/architecture/cri/), що є вимогою для роботи контейнерного середовища в Kubernetes. З цього приводу слід встановити додатковий сервіс [cri-dockerd](https://mirantis.github.io/cri-dockerd/).
 `cri-dockerd` — це проєкт, побудований на основі колишньої вбудованої підтримки Docker Engine, яка була [вилучена](/dockershim) з kubelet у версії 1.24.
 {{< /note >}}
 
