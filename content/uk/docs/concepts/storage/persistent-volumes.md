@@ -16,122 +16,63 @@ weight: 20
 
 <!-- overview -->
 
-This document describes _persistent volumes_ in Kubernetes. Familiarity with
-[volumes](/docs/concepts/storage/volumes/), [StorageClasses](/docs/concepts/storage/storage-classes/)
-and [VolumeAttributesClasses](/docs/concepts/storage/volume-attributes-classes/) is suggested.
+Цей документ описує _постійні томи (persistent volumes)_ в Kubernetes. Рекомендується вже мати уявлення про [томи](/docs/concepts/storage/volumes/), [StorageClasses](/docs/concepts/storage/storage-classes/) та [VolumeAttributesClasses](/docs/concepts/storage/volume-attributes-classes/).
 
 <!-- body -->
 
-## Introduction
+## Вступ {#introduction}
 
-Managing storage is a distinct problem from managing compute instances.
-The PersistentVolume subsystem provides an API for users and administrators
-that abstracts details of how storage is provided from how it is consumed.
-To do this, we introduce two new API resources: PersistentVolume and PersistentVolumeClaim.
+Управління зберіганням — це задача, що є відокремленою від управління обчислювальними ресурсами. Підсистема PersistentVolume надає API для користувачів та адміністраторів, яке абстрагує деталі того, як забезпечується зберігання від того, як воно використовується. Для цього ми вводимо два нових ресурси API: PersistentVolume та PersistentVolumeClaim.
 
-A _PersistentVolume_ (PV) is a piece of storage in the cluster that has been
-provisioned by an administrator or dynamically provisioned using
-[Storage Classes](/docs/concepts/storage/storage-classes/). It is a resource in
-the cluster just like a node is a cluster resource. PVs are volume plugins like
-Volumes, but have a lifecycle independent of any individual Pod that uses the PV.
-This API object captures the details of the implementation of the storage, be that
-NFS, iSCSI, or a cloud-provider-specific storage system.
+**PersistentVolume** (PV) — це частина системи зберігання в кластері, яка була надана адміністратором або динамічно надана за допомогою [Storage Classes](/docs/concepts/storage/storage-classes/). Це ресурс в кластері, так само як вузол — це ресурс кластера. PV — це втулки томів, так само як Volumes, але вони мають життєвий цикл, незалежний від будь-якого окремого Podʼа, який використовує PV. Цей обʼєкт API охоплює деталі реалізації зберігання, такі як NFS, iSCSI або система зберігання, специфічна для постачальника хмарних послуг.
 
-A _PersistentVolumeClaim_ (PVC) is a request for storage by a user. It is similar
-to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can
-request specific levels of resources (CPU and Memory). Claims can request specific
-size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany,
-ReadWriteMany, or ReadWriteOncePod, see [AccessModes](#access-modes)).
+**PersistentVolumeClaim** (PVC) — це запит на зберігання від користувача. Він схожий на Pod. Podʼи використовують ресурси вузла, а PVC використовують ресурси PV. Podʼи можуть запитувати конкретні рівні ресурсів (CPU та памʼять). Claims можуть запитувати конкретний розмір та режими доступу (наприклад, їх можна монтувати в режимі ReadWriteOnce, ReadOnlyMany, ReadWriteMany або ReadWriteOncePod, див. [AccessModes](#access-modes)).
 
-While PersistentVolumeClaims allow a user to consume abstract storage resources,
-it is common that users need PersistentVolumes with varying properties, such as
-performance, for different problems. Cluster administrators need to be able to
-offer a variety of PersistentVolumes that differ in more ways than size and access
-modes, without exposing users to the details of how those volumes are implemented.
-For these needs, there is the _StorageClass_ resource.
+Хоча PersistentVolumeClaims дозволяють користувачам споживати абстрактні ресурси зберігання, часто користувачам потрібні PersistentVolumes з різними властивостями, такими як продуктивність для різних завдань. Адміністратори кластера повинні мати можливість надавати різноманітні PersistentVolumes, які відрізняються не тільки розміром і режимами доступу, але й іншими характеристиками, не розголошуючи користувачам деталей того, як реалізовані ці томи. Для цих потреб існує ресурс **StorageClass**.
 
-See the [detailed walkthrough with working examples](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/).
+Дивіться [докладний огляд із робочими прикладами](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/).
 
-## Lifecycle of a volume and claim
+## Життєвий цикл тому та запиту {#lifecycle-of-a-volume-and-claim}
 
-PVs are resources in the cluster. PVCs are requests for those resources and also act
-as claim checks to the resource. The interaction between PVs and PVCs follows this lifecycle:
+PV (PersistentVolume) — це ресурс в кластері. PVC (PersistentVolumeClaim) — це запити на ці ресурси та також діють як перевірки запитів ресурсів. Взаємодія між PV та PVC слідує такому життєвому циклу:
 
-### Provisioning
+### Виділення {#provisioning}
 
-There are two ways PVs may be provisioned: statically or dynamically.
+Існує два способи надання PV: статичне чи динамічне.
 
-#### Static
+#### Статичне {#static}
 
-A cluster administrator creates a number of PVs. They carry the details of the
-real storage, which is available for use by cluster users. They exist in the
-Kubernetes API and are available for consumption.
+Адміністратор кластера створює кілька PV. Вони містять деталі реального зберігання, яке доступне для використання користувачами кластера. Вони існують в API Kubernetes і доступні для споживання.
 
-#### Dynamic
+#### Динамічне {#dynamic}
 
-When none of the static PVs the administrator created match a user's PersistentVolumeClaim,
-the cluster may try to dynamically provision a volume specially for the PVC.
-This provisioning is based on StorageClasses: the PVC must request a
-[storage class](/docs/concepts/storage/storage-classes/) and
-the administrator must have created and configured that class for dynamic
-provisioning to occur. Claims that request the class `""` effectively disable
-dynamic provisioning for themselves.
+Коли жоден зі статичних PV, які створив адміністратор, не відповідає PersistentVolumeClaim користувача, кластер може спробувати динамічно надати том спеціально для PVC. Це надання ґрунтується на StorageClasses: PVC повинен запитати [клас зберігання](/docs/concepts/storage/storage-classes/), а адміністратор повинен створити та налаштувати цей клас для динамічного надання. Заявки, які запитують клас `""`, ефективно вимикають динамічне надання для себе.
 
-To enable dynamic storage provisioning based on storage class, the cluster administrator
-needs to enable the `DefaultStorageClass`
-[admission controller](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass)
-on the API server. This can be done, for example, by ensuring that `DefaultStorageClass` is
-among the comma-delimited, ordered list of values for the `--enable-admission-plugins` flag of
-the API server component. For more information on API server command-line flags,
-check [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/) documentation.
+Для активації динамічного надання сховища на основі класу зберігання адміністратор кластера повинен увімкнути [контролер допуску](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass) `DefaultStorageClass` на API-сервері. Це можна зробити, наприклад, забезпечивши, що `DefaultStorageClass` знаходиться серед значень, розділених комами, у впорядкованому списку для прапорця `--enable-admission-plugins` компонента API-сервера. Для отримання додаткової інформації щодо прапорців командного рядка API-сервера перевірте документацію [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/).
 
-### Binding
+### Звʼязування {#binding}
 
-A user creates, or in the case of dynamic provisioning, has already created,
-a PersistentVolumeClaim with a specific amount of storage requested and with
-certain access modes. A control loop in the control plane watches for new PVCs, finds
-a matching PV (if possible), and binds them together. If a PV was dynamically
-provisioned for a new PVC, the loop will always bind that PV to the PVC. Otherwise,
-the user will always get at least what they asked for, but the volume may be in
-excess of what was requested. Once bound, PersistentVolumeClaim binds are exclusive,
-regardless of how they were bound. A PVC to PV binding is a one-to-one mapping,
-using a ClaimRef which is a bi-directional binding between the PersistentVolume
-and the PersistentVolumeClaim.
+Користувач створює, або, у разі динамічного надання, вже створив, PersistentVolumeClaim із конкретним обсягом запитаного сховища та з певними режимами доступу. Цикл керування в панелі управління бачить нові PVC, знаходить відповідний PV (якщо це можливо), і звʼязує їх один з одним. Якщо PV був динамічно наданий для нового PVC, цикл завжди буде привʼязувати цей PV до PVC. В іншому випадку користувач завжди отримає принаймні те, про що вони просили, але том може бути більшим, ніж те, що було запитано. Як тільки звʼязування виконане, привʼязки PersistentVolumeClaim є ексклюзивними, незалежно від того, як вони були звʼязані. Привʼязка PVC до PV — це відображення один до одного, використовуючи ClaimRef, яке є двонапрямним звʼязуванням між PersistentVolume і PersistentVolumeClaim.
 
-Claims will remain unbound indefinitely if a matching volume does not exist.
-Claims will be bound as matching volumes become available. For example, a
-cluster provisioned with many 50Gi PVs would not match a PVC requesting 100Gi.
-The PVC can be bound when a 100Gi PV is added to the cluster.
+Заявки залишатимуться непривʼязаними нескінченно довго, якщо відповідного тому не існує. Заявки будуть привʼязані, в міру того як стають доступні відповідні томи. Наприклад, кластер, який має багато PV розміром 50Gi, не буде відповідати PVC розміром 100Gi. PVC може бути привʼязаний, коли до кластера додається PV розміром 100Gi.
 
-### Using
+### Використання {#using}
 
-Pods use claims as volumes. The cluster inspects the claim to find the bound
-volume and mounts that volume for a Pod. For volumes that support multiple
-access modes, the user specifies which mode is desired when using their claim
-as a volume in a Pod.
+Podʼи використовують заявки як томи. Кластер перевіряє заявку, щоб знайти привʼязаний том і монтує цей том для Podʼу. Для томів, які підтримують кілька режимів доступу, користувач вказує бажаний режим при використанні своєї заявки як тому в Podʼі.
 
-Once a user has a claim and that claim is bound, the bound PV belongs to the
-user for as long as they need it. Users schedule Pods and access their claimed
-PVs by including a `persistentVolumeClaim` section in a Pod's `volumes` block.
-See [Claims As Volumes](#claims-as-volumes) for more details on this.
+Якщо у користувача є заявка, і ця заявка привʼязана, привʼязаний PV належить користувачеві стільки, скільки він йому потрібний. Користувачі планують Podʼи та отримують доступ до своїх заявлених PV, включивши розділ `persistentVolumeClaim` в блок `volumes` Podʼу. Див. [Заявки як томи](#claims-as-volumes) для отримання докладнішої інформації щодо цього.
 
-### Storage Object in Use Protection
+### Захист обʼєкта зберігання, що використовується {#storage-object-in-use-protection}
 
-The purpose of the Storage Object in Use Protection feature is to ensure that
-PersistentVolumeClaims (PVCs) in active use by a Pod and PersistentVolume (PVs)
-that are bound to PVCs are not removed from the system, as this may result in data loss.
+Мета функції захисту обʼєктів зберігання — це забезпечити, що PersistentVolumeClaims (PVC), які активно використовуються Podʼом, та PersistentVolume (PV), які привʼязані до PVC, не видаляються з системи, оскільки це може призвести до втрати даних.
 
 {{< note >}}
-PVC is in active use by a Pod when a Pod object exists that is using the PVC.
+PVC активно використовується Podʼом, коли існує обʼєкт Pod, який використовує PVC.
 {{< /note >}}
 
-If a user deletes a PVC in active use by a Pod, the PVC is not removed immediately.
-PVC removal is postponed until the PVC is no longer actively used by any Pods. Also,
-if an admin deletes a PV that is bound to a PVC, the PV is not removed immediately.
-PV removal is postponed until the PV is no longer bound to a PVC.
+Якщо користувач видаляє PVC, що активно використовується Podʼом, PVC не видаляється негайно. Видалення PVC відкладається до тих пір, поки PVC більше активно не використовується жодними Podʼами. Також, якщо адміністратор видаляє PV, який привʼязаний до PVC, PV не видаляється негайно. Видалення PV відкладається до тих пір, поки PV більше не є привʼязаним до PVC.
 
-You can see that a PVC is protected when the PVC's status is `Terminating` and the
-`Finalizers` list includes `kubernetes.io/pvc-protection`:
+Ви можете перевірити, що PVC захищено, коли статус PVC — «Terminating», а список `Finalizers` включає `kubernetes.io/pvc-protection`:
 
 ```shell
 kubectl describe pvc hostpath
@@ -147,8 +88,7 @@ Finalizers:    [kubernetes.io/pvc-protection]
 ...
 ```
 
-You can see that a PV is protected when the PV's status is `Terminating` and
-the `Finalizers` list includes `kubernetes.io/pv-protection` too:
+Ви можете перевірити, що PV захищено, коли статус PV — «Terminating», а список `Finalizers` також включає `kubernetes.io/pv-protection`:
 
 ```shell
 kubectl describe pv task-pv-volume
@@ -170,55 +110,34 @@ Source:
 Events:            <none>
 ```
 
-### Reclaiming
+### Повторне використання {#reclaiming}
 
-When a user is done with their volume, they can delete the PVC objects from the
-API that allows reclamation of the resource. The reclaim policy for a PersistentVolume
-tells the cluster what to do with the volume after it has been released of its claim.
-Currently, volumes can either be Retained, Recycled, or Deleted.
+Коли користувач закінчує використання свого тому, він може видалити обʼєкти PVC з API, що дозволяє відновлення ресурсу. Політика відновлення для PersistentVolume повідомляє кластеру, що робити з томом після звільнення заявки на нього. Наразі томи можуть бути Retained, Recycled, або Deleted
 
 #### Retain
 
-The `Retain` reclaim policy allows for manual reclamation of the resource.
-When the PersistentVolumeClaim is deleted, the PersistentVolume still exists
-and the volume is considered "released". But it is not yet available for
-another claim because the previous claimant's data remains on the volume.
-An administrator can manually reclaim the volume with the following steps.
+Політика повторного використання `Retain` дозволяє ручне повторне використання ресурсу. Коли видаляється PersistentVolumeClaim, PersistentVolume все ще існує, і том вважається "звільненим". Але він ще не доступний для іншої заявки через те, що дані попередньої заявки залишаються на томі. Адміністратор може вручну відновити том виконавши наступні кроки.
 
-1. Delete the PersistentVolume. The associated storage asset in external infrastructure
-   still exists after the PV is deleted.
-1. Manually clean up the data on the associated storage asset accordingly.
-1. Manually delete the associated storage asset.
+1. Видаліть PersistentVolume. Повʼязаний актив в зовнішній інфраструктурі все ще існує після видалення PV.
+1. Вручну очистіть дані на повʼязаному активі відповідно.
+1. Вручну видаліть повʼязаний актив.
 
-If you want to reuse the same storage asset, create a new PersistentVolume with
-the same storage asset definition.
+Якщо ви хочете використовувати той самий актив, створіть новий PersistentVolume з тим же описом активу.
 
 #### Delete
 
-For volume plugins that support the `Delete` reclaim policy, deletion removes
-both the PersistentVolume object from Kubernetes, as well as the associated
-storage asset in the external infrastructure. Volumes that were dynamically provisioned
-inherit the [reclaim policy of their StorageClass](#reclaim-policy), which
-defaults to `Delete`. The administrator should configure the StorageClass
-according to users' expectations; otherwise, the PV must be edited or
-patched after it is created. See
-[Change the Reclaim Policy of a PersistentVolume](/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
+Для втулків томів, які підтримують політику відновлення `Delete`, видалення видаляє як обʼєкт PersistentVolume з Kubernetes, так і повʼязаний актив зовнішньої інфраструктури. Томи, які були динамічно виділені, успадковують [політику пвоторного використання їх StorageClass](#reclaim-policy), яка типово встановлена в `Delete`. Адміністратор повинен налаштувати StorageClass відповідно до очікувань користувачів; в іншому випадку PV повинен бути відредагований або виправлений після створення. Див.
+[Змінення політики повторного використання PersistentVolume](/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
 
 #### Recycle
 
 {{< warning >}}
-The `Recycle` reclaim policy is deprecated. Instead, the recommended approach
-is to use dynamic provisioning.
+Політика повторного використання `Recycle` є застарілою. Замість цього рекомендований підхід — використовувати динамічне виділення.
 {{< /warning >}}
 
-If supported by the underlying volume plugin, the `Recycle` reclaim policy performs
-a basic scrub (`rm -rf /thevolume/*`) on the volume and makes it available again for a new claim.
+Якщо підтримується відповідний втулок томів, політика повторного використання `Recycle` виконує базове очищення (`rm -rf /thevolume/*`) тому та знову робить його доступним для нової заявки.
 
-However, an administrator can configure a custom recycler Pod template using
-the Kubernetes controller manager command line arguments as described in the
-[reference](/docs/reference/command-line-tools-reference/kube-controller-manager/).
-The custom recycler Pod template must contain a `volumes` specification, as
-shown in the example below:
+Однак адміністратор може налаштувати власний шаблон Podʼу для повторного використання тому за допомогою аргументів командного рядка контролера Kubernetes, як описано в [довідці](/docs/reference/command-line-tools-reference/kube-controller-manager/). Власний шаблон Podʼу повторного використання тому повинен містити специфікацію `volumes`, як показано у прикладі нижче:
 
 ```yaml
 apiVersion: v1
@@ -241,21 +160,18 @@ spec:
       mountPath: /scrub
 ```
 
-However, the particular path specified in the custom recycler Pod template in the
-`volumes` part is replaced with the particular path of the volume that is being recycled.
+Проте конкретний шлях, вказаний у власному шаблоні Podʼа для повторного використання тому, в частині `volumes`, замінюється конкретним шляхом тому, який використовується.
 
-### PersistentVolume deletion protection finalizer
+### Завершувач захисту від видалення PersistentVolume {#persistentvolume-deletion-protection-finalizer}
+
 {{< feature-state for_k8s_version="v1.23" state="alpha" >}}
 
-Finalizers can be added on a PersistentVolume to ensure that PersistentVolumes
-having `Delete` reclaim policy are deleted only after the backing storage are deleted.
+До PersistentVolume можна додавати завершувачі, щоб забезпечити, що PersistentVolume з політикою відновлення `Delete` буде видалено лише після видалення сховища, яке він забезпечував.
 
-The newly introduced finalizers `kubernetes.io/pv-controller` and
-`external-provisioner.volume.kubernetes.io/finalizer`
-are only added to dynamically provisioned volumes.
+Введені нові завершувачі `kubernetes.io/pv-controller` та `external-provisioner.volume.kubernetes.io/finalizer` додаються лише до томів, що виділені динамічно.
 
-The finalizer `kubernetes.io/pv-controller` is added to in-tree plugin volumes.
-The following is an example
+Завершувач `kubernetes.io/pv-controller` додається до томів внутрішніх втулків.
+Наприклад:
 
 ```shell
 kubectl describe pv pvc-74a498d6-3929-47e8-8c02-078c1ece4d78
@@ -282,8 +198,7 @@ Source:
 Events:                 <none>
 ```
 
-The finalizer `external-provisioner.volume.kubernetes.io/finalizer` is added for CSI volumes.
-The following is an example:
+Завершувач `external-provisioner.volume.kubernetes.io/finalizer` додається для томів CSI. Наприклад:
 
 ```shell
 Name:            pvc-2f0bab97-85a8-4552-8044-eb8be45cf48d
@@ -310,23 +225,15 @@ Source:
 Events:                <none>
 ```
 
-When the `CSIMigration{provider}` feature flag is enabled for a specific in-tree volume plugin,
-the `kubernetes.io/pv-controller` finalizer is replaced by the
-`external-provisioner.volume.kubernetes.io/finalizer` finalizer.
+Коли прапорець функції `CSIMigration{provider}` увімкнено для конкретного внутрішнього втулка, завершувач `kubernetes.io/pv-controller` замінюється завершувачем `external-provisioner.volume.kubernetes.io/finalizer`.
 
-### Reserving a PersistentVolume
+### Резервування PersistentVolume {#reserving-persistentvolume}
 
-The control plane can [bind PersistentVolumeClaims to matching PersistentVolumes](#binding)
-in the cluster. However, if you want a PVC to bind to a specific PV, you need to pre-bind them.
+Панель управління може [привʼязувати PersistentVolumeClaims до PersistentVolume](#binding) в кластері. Однак, якщо вам потрібно, щоб PVC привʼязувався до певного PV, вам слід заздалегідь їх привʼязувати.
 
-By specifying a PersistentVolume in a PersistentVolumeClaim, you declare a binding
-between that specific PV and PVC. If the PersistentVolume exists and has not reserved
-PersistentVolumeClaims through its `claimRef` field, then the PersistentVolume and
-PersistentVolumeClaim will be bound.
+Вказавши PersistentVolume в PersistentVolumeClaim, ви оголошуєте привʼязку між цим конкретним PV та PVC. Якщо PersistentVolume існує і не зарезервував PersistentVolumeClaim через своє поле `claimRef`, тоді PersistentVolume і PersistentVolumeClaim будуть привʼязані.
 
-The binding happens regardless of some volume matching criteria, including node affinity.
-The control plane still checks that [storage class](/docs/concepts/storage/storage-classes/),
-access modes, and requested storage size are valid.
+Привʼязка відбувається попри деякі критерії відповідності, включаючи спорідненість вузла. Панель управління все ще перевіряє, що [клас сховища](/docs/concepts/storage/storage-classes/), режими доступу та розмір запитаного сховища є дійсними.
 
 ```yaml
 apiVersion: v1
@@ -335,15 +242,12 @@ metadata:
   name: foo-pvc
   namespace: foo
 spec:
-  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+  storageClassName: "" # Порожній рядок повинен бути явно встановлений, інакше буде встановлено типовий StorageClass
   volumeName: foo-pv
   ...
 ```
 
-This method does not guarantee any binding privileges to the PersistentVolume.
-If other PersistentVolumeClaims could use the PV that you specify, you first
-need to reserve that storage volume. Specify the relevant PersistentVolumeClaim
-in the `claimRef` field of the PV so that other PVCs can not bind to it.
+Цей метод не гарантує жодних привʼязок для PersistentVolume. Якщо інші PersistentVolumeClaims можуть використовувати PV, який ви вказуєте, вам слід заздалегідь резервувати цей обсяг сховища. Вкажіть відповідний PersistentVolumeClaim у поле `claimRef` PV, щоб інші PVC не могли привʼязатися до нього.
 
 ```yaml
 apiVersion: v1
@@ -358,23 +262,21 @@ spec:
   ...
 ```
 
-This is useful if you want to consume PersistentVolumes that have their `persistentVolumeReclaimPolicy` set
-to `Retain`, including cases where you are reusing an existing PV.
+Це корисно, якщо ви хочете використовувати PersistentVolumes з політикою повторного використання `Retain`, включаючи випадки, коли ви повторно використовуєте наявний PV.
 
-### Expanding Persistent Volumes Claims
+### Розширення Persistent Volume Claims {#expanding-persistent-volume-claims}
 
 {{< feature-state for_k8s_version="v1.24" state="stable" >}}
 
-Support for expanding PersistentVolumeClaims (PVCs) is enabled by default. You can expand
-the following types of volumes:
+Підтримка розширення PersistentVolumeClaims (PVCs) є типово увімкненою. Ви можете розширити наступні типи томів:
 
-* azureFile (deprecated)
+* azureFile (застарілий)
 * {{< glossary_tooltip text="csi" term_id="csi" >}}
-* flexVolume (deprecated)
-* rbd (deprecated)
-* portworxVolume (deprecated)
+* flexVolume (застарілий)
+* rbd (застарілий)
+* portworxVolume (застарілий)
 
-You can only expand a PVC if its storage class's `allowVolumeExpansion` field is set to true.
+Ви можете розширити PVC лише в тому випадку, якщо поле `allowVolumeExpansion` його класу сховища має значення true.
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -390,162 +292,101 @@ parameters:
 allowVolumeExpansion: true
 ```
 
-To request a larger volume for a PVC, edit the PVC object and specify a larger
-size. This triggers expansion of the volume that backs the underlying PersistentVolume. A
-new PersistentVolume is never created to satisfy the claim. Instead, an existing volume is resized.
+Для запиту більшого тому для PVC відредагуйте обʼєкт PVC та вказуйте більший розмір. Це спричинює розширення тому, який стоїть за основним PersistentVolume. Новий PersistentVolume ніколи не створюється для задоволення вимоги. Замість цього, змінюється розмір поточного тому.
 
 {{< warning >}}
-Directly editing the size of a PersistentVolume can prevent an automatic resize of that volume.
-If you edit the capacity of a PersistentVolume, and then edit the `.spec` of a matching
-PersistentVolumeClaim to make the size of the PersistentVolumeClaim match the PersistentVolume,
-then no storage resize happens.
-The Kubernetes control plane will see that the desired state of both resources matches,
-conclude that the backing volume size has been manually
-increased and that no resize is necessary.
+Пряме редагування розміру PersistentVolume може запобігти автоматичному зміненню розміру цього тому. Якщо ви редагуєте обсяг PersistentVolume, а потім редагуєте `.spec` відповідного PersistentVolumeClaim, щоб розмір PersistentVolumeClaim відповідав PersistentVolume, то зміна розміру сховища не відбудеться. Панель управління Kubernetes побачить, що бажаний стан обох ресурсів збігається, і робить висновок, що розмір обʼєкта був збільшений вручну і розширення не потрібне.
 {{< /warning >}}
 
-#### CSI Volume expansion
+#### Розширення томів CSI {#csi-volume-expansion}
 
 {{< feature-state for_k8s_version="v1.24" state="stable" >}}
 
-Support for expanding CSI volumes is enabled by default but it also requires a
-specific CSI driver to support volume expansion. Refer to documentation of the
-specific CSI driver for more information.
+Підтримка розширення томів CSI типово увімкнена, але вона також вимагає, щоб конкретний драйвер CSI підтримував розширення тому. Зверніться до документації відповідного драйвера CSI для отримання додаткової інформації.
 
-#### Resizing a volume containing a file system
+#### Зміна розміру тому, що містить файлову систему {#resizing-a-volume-containing-a-filesystem}
 
-You can only resize volumes containing a file system if the file system is XFS, Ext3, or Ext4.
+Ви можете змінювати розмір томів, що містять файлову систему, тільки якщо файлова система є XFS, Ext3 або Ext4.
 
-When a volume contains a file system, the file system is only resized when a new Pod is using
-the PersistentVolumeClaim in `ReadWrite` mode. File system expansion is either done when a Pod is starting up
-or when a Pod is running and the underlying file system supports online expansion.
+Коли том містить файлову систему, розмір файлової системи змінюється тільки тоді, коли новий Pod використовує PersistentVolumeClaim у режимі `ReadWrite`. Розширення файлової системи виконується при запуску нового Pod або коли Pod працює, і базова файлова система підтримує онлайн-розширення.
 
-FlexVolumes (deprecated since Kubernetes v1.23) allow resize if the driver is configured with the
-`RequiresFSResize` capability to `true`. The FlexVolume can be resized on Pod restart.
+FlexVolumes (застарілий починаючи з Kubernetes v1.23) дозволяє змінювати розмір, якщо драйвер налаштований із можливістю `RequiresFSResize` встановленою в `true`. FlexVolume може бути змінений при перезапуску Pod.
 
-#### Resizing an in-use PersistentVolumeClaim
+#### Зміна розміру використовуваного PersistentVolumeClaim {#resizing-an-in-use-persistentvolumeclaim}
 
 {{< feature-state for_k8s_version="v1.24" state="stable" >}}
 
-In this case, you don't need to delete and recreate a Pod or deployment that is using an existing PVC.
-Any in-use PVC automatically becomes available to its Pod as soon as its file system has been expanded.
-This feature has no effect on PVCs that are not in use by a Pod or deployment. You must create a Pod that
-uses the PVC before the expansion can complete.
+В цьому випадку вам не потрібно видаляти та перестворювати Pod або Deployment, який використовує наявний PVC. Будь-який PVC, який знаходиться у використанні, автоматично стає доступним для свого Pod, як тільки його файлова система буде розширена. Ця функція не впливає на PVC, які не використовуються Pod або Deployment. Ви повинні створити Pod, який використовує PVC, перш ніж розширення може завершитися.
 
-Similar to other volume types - FlexVolume volumes can also be expanded when in-use by a Pod.
+Аналогічно іншим типам томів — томи FlexVolume також можуть бути розширені в разі використання Podʼом.
 
 {{< note >}}
-FlexVolume resize is possible only when the underlying driver supports resize.
+Змінювати розмір FlexVolume можливо лише тоді, коли зміна розміру підтримується драйвером.
 {{< /note >}}
 
-#### Recovering from Failure when Expanding Volumes
+#### Відновлення після невдалих спроб розширення томів {#recovering-from-failure-while-expanding-volumes}
 
-If a user specifies a new size that is too big to be satisfied by underlying
-storage system, expansion of PVC will be continuously retried until user or
-cluster administrator takes some action. This can be undesirable and hence
-Kubernetes provides following methods of recovering from such failures.
+Якщо користувач вказав новий розмір, який надто великий для задоволення базовою системою зберігання, розширення PVC буде намагатися робити спроби його задовольнити, доки користувач або адміністратор кластера не вживе будь-яких заходів. Це може бути небажаним, і, отже, Kubernetes надає наступні методи відновлення після таких невдач.
 
 {{< tabs name="recovery_methods" >}}
-{{% tab name="Manually with Cluster Administrator access" %}}
+{{% tab name="Вручну з доступом адміністратора кластера" %}}
 
-If expanding underlying storage fails, the cluster administrator can manually
-recover the Persistent Volume Claim (PVC) state and cancel the resize requests.
-Otherwise, the resize requests are continuously retried by the controller without
-administrator intervention.
+Якщо розширення базового сховища не вдається, адміністратор кластера може вручну відновити стан Persistent Volume Claim (PVC) та скасувати запити на зміну розміру. Інакше запити на зміну розміру буде продовжено автоматично контролером без втручання адміністратора.
 
-1. Mark the PersistentVolume(PV) that is bound to the PersistentVolumeClaim(PVC)
-   with `Retain` reclaim policy.
-2. Delete the PVC. Since PV has `Retain` reclaim policy - we will not lose any data
-   when we recreate the PVC.
-3. Delete the `claimRef` entry from PV specs, so as new PVC can bind to it.
-   This should make the PV `Available`.
-4. Re-create the PVC with smaller size than PV and set `volumeName` field of the
-   PVC to the name of the PV. This should bind new PVC to existing PV.
-5. Don't forget to restore the reclaim policy of the PV.
+1. Позначте Persistent Volume (PV), який привʼязаний до Persistent Volume Claim (PVC), політикою вилучення `Retain`.
+2. Видаліть PVC. Оскільки PV має політику вилучення `Retain`, ми не втратимо жодних даних під час повторного створення PVC.
+3. Видаліть запис `claimRef` з характеристик PV, щоб новий PVC міг привʼязатися до нього. Це повинно зробити PV `Available`.
+4. Створіть заново PVC з меншим розміром, ніж у PV, і встановіть в поле `volumeName` PVC імʼя PV. Це повинно привʼязати новий PVC до наявного PV.
+5. Не забудьте відновити політику вилучення PV.
 
 {{% /tab %}}
-{{% tab name="By requesting expansion to smaller size" %}}
+{{% tab name="Шляхом запиту на зменшення розміру" %}}
 {{% feature-state for_k8s_version="v1.23" state="alpha" %}}
 
 {{< note >}}
-Recovery from failing PVC expansion by users is available as an alpha feature
-since Kubernetes 1.23. The `RecoverVolumeExpansionFailure` feature must be
-enabled for this feature to work. Refer to the
-[feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-documentation for more information.
+Можливість відновлення після невдачі розширення PVC користувачами доступна як альфа-функція з Kubernetes 1.23. Функцію `RecoverVolumeExpansionFailure` слід увімкнути для коректної роботи цієї функції. Докладніше дивіться в [документації feature gate](/docs/reference/command-line-tools-reference/feature-gates/).
 {{< /note >}}
 
-If the feature gates `RecoverVolumeExpansionFailure` is
-enabled in your cluster, and expansion has failed for a PVC, you can retry expansion with a
-smaller size than the previously requested value. To request a new expansion attempt with a
-smaller proposed size, edit `.spec.resources` for that PVC and choose a value that is less than the
-value you previously tried.
-This is useful if expansion to a higher value did not succeed because of capacity constraint.
-If that has happened, or you suspect that it might have, you can retry expansion by specifying a
-size that is within the capacity limits of underlying storage provider. You can monitor status of
-resize operation by watching `.status.allocatedResourceStatuses` and events on the PVC.
+Якщо в вашому кластері увімкнено feature gate `RecoverVolumeExpansionFailure`, і розширення не вдалося для PVC, ви можете повторити спробу розширення з меншим розміром, ніж раніше запитаний. Щоб запросити нову спробу розширення з новим запропонованим розміром, відредагуйте `.spec.resources` для цього PVC і виберіть значення, яке менше за попереднє значення. Це корисно, якщо розширення до більшого значення не вдалося через обмеження місткості. Якщо це трапилося або ви підозрюєте, що це може трапитися, ви можете повторити спробу розширення, вказавши розмір, який знаходиться в межах обмежень місткості базового постачальника сховища. Ви можете слідкувати за станом операції зміни розміру, спостерігаючи за `.status.allocatedResourceStatuses` та подіями на PVC.
 
-Note that,
-although you can specify a lower amount of storage than what was requested previously,
-the new value must still be higher than `.status.capacity`.
-Kubernetes does not support shrinking a PVC to less than its current size.
+Зверніть увагу, що, навіть якщо ви можете вказати менше обсягу зберігання, ніж запитано раніше, нове значення все ще повинно бути вищим за `.status.capacity`. Kubernetes не підтримує зменшення PVC до меншого розміру, ніж його поточний розмір.
 {{% /tab %}}
 {{% /tabs %}}
 
-## Types of Persistent Volumes
+## Типи Persistent Volume {#types-of-persistent-volumes}
 
-PersistentVolume types are implemented as plugins. Kubernetes currently supports the following plugins:
+Типи PersistentVolume реалізовані у вигляді втулків. Kubernetes наразі підтримує наступні втулки:
 
-* [`csi`](/docs/concepts/storage/volumes/#csi) - Container Storage Interface (CSI)
-* [`fc`](/docs/concepts/storage/volumes/#fc) - Fibre Channel (FC) storage
-* [`hostPath`](/docs/concepts/storage/volumes/#hostpath) - HostPath volume
-  (for single node testing only; WILL NOT WORK in a multi-node cluster;
-  consider using `local` volume instead)
-* [`iscsi`](/docs/concepts/storage/volumes/#iscsi) - iSCSI (SCSI over IP) storage
-* [`local`](/docs/concepts/storage/volumes/#local) - local storage devices
-  mounted on nodes.
-* [`nfs`](/docs/concepts/storage/volumes/#nfs) - Network File System (NFS) storage
+* [`csi`](/docs/concepts/storage/volumes/#csi) — Інтерфейс зберігання контейнерів (Container Storage Interface, CSI)
+* [`fc`](/docs/concepts/storage/volumes/#fc) — Сховище Fibre Channel (FC)
+* [`hostPath`](/docs/concepts/storage/volumes/#hostpath) — Том HostPath (для тестування на одному вузлі лише; НЕ ПРАЦЮВАТИМЕ в кластері з декількома вузлами; розгляньте використання тому `local` замість цього)
+* [`iscsi`](/docs/concepts/storage/volumes/#iscsi) — Сховище iSCSI (SCSI через IP)
+* [`local`](/docs/concepts/storage/volumes/#local) — Локальні пристрої зберігання, підключені до вузлів.
+* [`nfs`](/docs/concepts/storage/volumes/#nfs) — Сховище в мережевій файловій системі (NFS)
 
-The following types of PersistentVolume are deprecated.
-This means that support is still available but will be removed in a future Kubernetes release.
+Наступні типи PersistentVolume є застарілими. Це означає, що підтримка все ще доступна, але буде видалена у майбутньому випуску Kubernetes.
 
-* [`azureFile`](/docs/concepts/storage/volumes/#azurefile) - Azure File
-  (**deprecated** in v1.21)
-* [`flexVolume`](/docs/concepts/storage/volumes/#flexvolume) - FlexVolume
-  (**deprecated** in v1.23)
-* [`portworxVolume`](/docs/concepts/storage/volumes/#portworxvolume) - Portworx volume
-  (**deprecated** in v1.25)
-* [`vsphereVolume`](/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume
-  (**deprecated** in v1.19)
-* [`cephfs`](/docs/concepts/storage/volumes/#cephfs) - CephFS volume
-  (**deprecated** in v1.28)
-* [`rbd`](/docs/concepts/storage/volumes/#rbd) - Rados Block Device (RBD) volume
-  (**deprecated** in v1.28)
+* [`azureFile`](/docs/concepts/storage/volumes/#azurefile) — Azure File (**застаріло** у версії v1.21)
+* [`flexVolume`](/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** у версії v1.23)
+* [`portworxVolume`](/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**застаріло** у версії v1.25)
+* [`vsphereVolume`](/docs/concepts/storage/volumes/#vspherevolume) — Том vSphere VMDK (**застаріло** у версії v1.19)
+* [`cephfs`](/docs/concepts/storage/volumes/#cephfs) — Том CephFS (**застаріло** у версії v1.28)
+* [`rbd`](/docs/concepts/storage/volumes/#rbd) — Том Rados Block Device (RBD) (**застаріло** у версії v1.28)
 
-Older versions of Kubernetes also supported the following in-tree PersistentVolume types:
+Старші версії Kubernetes також підтримували наступні типи вбудованих PersistentVolume:
 
-* [`awsElasticBlockStore`](/docs/concepts/storage/volumes/#awselasticblockstore) - AWS Elastic Block Store (EBS)
-  (**not available** in v1.27)
-* [`azureDisk`](/docs/concepts/storage/volumes/#azuredisk) - Azure Disk
-  (**not available** in v1.27)
-* [`cinder`](/docs/concepts/storage/volumes/#cinder) - Cinder (OpenStack block storage)
-  (**not available** in v1.26)
-* `photonPersistentDisk` - Photon controller persistent disk.
-  (**not available** starting v1.15)
-* `scaleIO` - ScaleIO volume.
-  (**not available** starting v1.21)
-* `flocker` - Flocker storage.
-  (**not available** starting v1.25)
-* `quobyte` - Quobyte volume.
-  (**not available** starting v1.25)
-* `storageos` - StorageOS volume.
-  (**not available** starting v1.25)
+* [`awsElasticBlockStore`](/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**недоступно** у версії v1.27)
+* [`azureDisk`](/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**недоступно** у версії v1.27)
+* [`cinder`](/docs/concepts/storage/volumes/#cinder) — Cinder (блокове зберігання OpenStack) (**недоступно** у версії v1.26)
+* `photonPersistentDisk` — Постійний диск Photon controller. (**недоступно** починаючи з версії v1.15)
+* `scaleIO` — Том ScaleIO. (**недоступно** починаючи з версії v1.21)
+* `flocker` — Сховище Flocker. (**недоступно** починаючи з версії v1.25)
+* `quobyte` — Том Quobyte. (**недоступно** починаючи з версії v1.25)
+* `storageos` — Том StorageOS. (**недоступно** починаючи з версії v1.25)
 
 ## Persistent Volumes
 
-Each PV contains a spec and status, which is the specification and status of the volume.
-The name of a PersistentVolume object must be a valid
-[DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Кожен PersistentVolume (PV) містить специфікацію та статус, які являють собою характеристики та стан тому. Імʼя обʼєкта PersistentVolume повинно бути дійсним [DNS імʼям субдомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ```yaml
 apiVersion: v1
@@ -569,214 +410,159 @@ spec:
 ```
 
 {{< note >}}
-Helper programs relating to the volume type may be required for consumption of
-a PersistentVolume within a cluster.  In this example, the PersistentVolume is
-of type NFS and the helper program /sbin/mount.nfs is required to support the
-mounting of NFS filesystems.
+Можливо, для використання PersistentVolume у кластері будуть потрібні допоміжні програми. У цьому прикладі PersistentVolume має тип NFS, і для підтримки монтування файлових систем NFS необхідна допоміжна програма /sbin/mount.nfs.
 {{< /note >}}
 
-### Capacity
+### Обсяг {#capacity}
 
-Generally, a PV will have a specific storage capacity. This is set using the PV's
-`capacity` attribute which is a {{< glossary_tooltip term_id="quantity" >}} value.
+Зазвичай у PV є конкретний обсяг зберігання. Він встановлюється за допомогою атрибута `capacity` PV, який є значенням {{< glossary_tooltip term_id="quantity" text="кількості" >}} обсягу.
 
-Currently, storage size is the only resource that can be set or requested.
-Future attributes may include IOPS, throughput, etc.
+Наразі розмір — це єдиний ресурс, який можна встановити або вимагати. Майбутні атрибути можуть включати IOPS, пропускну здатність тощо.
 
-### Volume Mode
+### Режим тому {#volume-mode}
 
 {{< feature-state for_k8s_version="v1.18" state="stable" >}}
 
-Kubernetes supports two `volumeModes` of PersistentVolumes: `Filesystem` and `Block`.
+Kubernetes підтримує два режими `volumeModes` для PersistentVolumes: `Filesystem` та `Block`.
 
-`volumeMode` is an optional API parameter.
-`Filesystem` is the default mode used when `volumeMode` parameter is omitted.
+`volumeMode` є необовʼязковим параметром API. `Filesystem` є типовим режимом, який використовується, коли параметр `volumeMode` пропущено.
 
-A volume with `volumeMode: Filesystem` is *mounted* into Pods into a directory. If the volume
-is backed by a block device and the device is empty, Kubernetes creates a filesystem
-on the device before mounting it for the first time.
+Том з `volumeMode: Filesystem` _монтується_ в Podʼах в каталог. Якщо том підтримується блоковим пристроєм, і пристрій порожній, Kubernetes створює файлову систему на пристрої перед його першим монтуванням.
 
-You can set the value of `volumeMode` to `Block` to use a volume as a raw block device.
-Such volume is presented into a Pod as a block device, without any filesystem on it.
-This mode is useful to provide a Pod the fastest possible way to access a volume, without
-any filesystem layer between the Pod and the volume. On the other hand, the application
-running in the Pod must know how to handle a raw block device.
-See [Raw Block Volume Support](#raw-block-volume-support)
-for an example on how to use a volume with `volumeMode: Block` in a Pod.
+Ви можете встановити значення `volumeMode` в `Block`, щоб використовувати том як блоковий пристрій. Такий том представляється в Podʼі як блоковий пристрій, без будь-якої файлової системи на ньому. Цей режим корисний, щоб надати Podʼу найшвидший можливий спосіб доступу до тому, без будь-якого рівня файлової системи між Podʼом і томом. З іншого боку, застосунок, який працює в Podʼі, повинен знати, як взаємодіяти з блоковим пристроєм. Дивіться [Підтримка блокового тому](#raw-block-volume-support) для прикладу використання тому з `volumeMode: Block` в Podʼі.
 
-### Access Modes
+### Режими доступу {#access-modes}
 
-A PersistentVolume can be mounted on a host in any way supported by the resource
-provider. As shown in the table below, providers will have different capabilities
-and each PV's access modes are set to the specific modes supported by that particular
-volume. For example, NFS can support multiple read/write clients, but a specific
-NFS PV might be exported on the server as read-only. Each PV gets its own set of
-access modes describing that specific PV's capabilities.
+PersistentVolume може бути підключений до вузла будь-яким способом, який підтримує постачальник ресурсів. Як показано в таблиці нижче, постачальники матимуть різні можливості, і кожному PV присвоюється набір режимів доступу, які описують можливості саме цього PV.
 
-The access modes are:
+Режими доступу такі:
 
 `ReadWriteOnce`
-: the volume can be mounted as read-write by a single node. ReadWriteOnce access
-  mode still can allow multiple pods to access the volume when the pods are
-  running on the same node. For single pod access, please see ReadWriteOncePod.
+: том може бути підключений як для читання-запису одним вузлом. Режим доступу ReadWriteOnce все  ще може дозволяти доступ до тому для кількох Podʼів, коли Podʼи працюють на тому самому вузлі. Для доступу одного Podʼу, див. ReadWriteOncePod.
 
 `ReadOnlyMany`
-: the volume can be mounted as read-only by many nodes.
+: том може бути підключений як для читання лише багатьма вузлами.
 
 `ReadWriteMany`
-: the volume can be mounted as read-write by many nodes.
+: том може бути підключений як для читання-запису багатьма вузлами.
 
  `ReadWriteOncePod`
 : {{< feature-state for_k8s_version="v1.29" state="stable" >}}
-  the volume can be mounted as read-write by a single Pod. Use ReadWriteOncePod
-  access mode if you want to ensure that only one pod across the whole cluster can
-  read that PVC or write to it.
+  том може бути підключений як для читання-запису одним Podʼом. Використовуйте режим доступу ReadWriteOncePod, якщо ви хочете забезпечити, що тільки один Pod по всьому кластеру може читати цей PVC або писати в нього.
 
 {{< note >}}
-The `ReadWriteOncePod` access mode is only supported for
-{{< glossary_tooltip text="CSI" term_id="csi" >}} volumes and Kubernetes version
-1.22+. To use this feature you will need to update the following
-[CSI sidecars](https://kubernetes-csi.github.io/docs/sidecar-containers.html)
-to these versions or greater:
+Режим доступу `ReadWriteOncePod` підтримується лише для {{< glossary_tooltip text="CSI" term_id="csi" >}} томів та Kubernetes версії 1.22+. Щоб використовувати цю функцію, вам потрібно оновити наступні [CSI sidecars](https://kubernetes-csi.github.io/docs/sidecar-containers.html) до цих версій або новіших:
 
 * [csi-provisioner:v3.0.0+](https://github.com/kubernetes-csi/external-provisioner/releases/tag/v3.0.0)
 * [csi-attacher:v3.3.0+](https://github.com/kubernetes-csi/external-attacher/releases/tag/v3.3.0)
 * [csi-resizer:v1.3.0+](https://github.com/kubernetes-csi/external-resizer/releases/tag/v1.3.0)
 {{< /note >}}
 
-In the CLI, the access modes are abbreviated to:
+У командному рядку режими доступу скорочено так:
 
-* RWO - ReadWriteOnce
-* ROX - ReadOnlyMany
-* RWX - ReadWriteMany
-* RWOP - ReadWriteOncePod
+* RWO — ReadWriteOnce
+* ROX — ReadOnlyMany
+* RWX — ReadWriteMany
+* RWOP — ReadWriteOncePod
 
 {{< note >}}
-Kubernetes uses volume access modes to match PersistentVolumeClaims and PersistentVolumes.
-In some cases, the volume access modes also constrain where the PersistentVolume can be mounted.
-Volume access modes do **not** enforce write protection once the storage has been mounted.
-Even if the access modes are specified as ReadWriteOnce, ReadOnlyMany, or ReadWriteMany,
-they don't set any constraints on the volume. For example, even if a PersistentVolume is
-created as ReadOnlyMany, it is no guarantee that it will be read-only. If the access modes
-are specified as ReadWriteOncePod, the volume is constrained and can be mounted on only a single Pod.
+Kubernetes використовує режими доступу до тому для відповідності PersistentVolumeClaims та PersistentVolumes. У деяких випадках режими доступу до тому також обмежують місця, де може бути підключений PersistentVolume. Режими доступу до тому **не** накладають захист від запису після підключення сховища. Навіть якщо режими доступу вказані як ReadWriteOnce, ReadOnlyMany або ReadWriteMany, вони не встановлюють жодних обмежень на том. Наприклад, навіть якщо PersistentVolume створено як ReadOnlyMany, це не гарантує, що він буде доступний лише для читання. Якщо режими доступу
+вказані як ReadWriteOncePod, том обмежений і може бути підключений лише до одного пода.
 {{< /note >}}
 
-> __Important!__ A volume can only be mounted using one access mode at a time,
-> even if it supports many.
+> **Важливо!** Том може бути підключений лише одним режимом доступу одночасно, навіть якщо він підтримує багато.  
 
-| Volume Plugin        | ReadWriteOnce          | ReadOnlyMany          | ReadWriteMany | ReadWriteOncePod       |
+| Тип тому             | ReadWriteOnce          | ReadOnlyMany          | ReadWriteMany | ReadWriteOncePod       |
 | :---                 | :---:                  | :---:                 | :---:         | -                      |
 | AzureFile            | &#x2713;               | &#x2713;              | &#x2713;      | -                      |
 | CephFS               | &#x2713;               | &#x2713;              | &#x2713;      | -                      |
-| CSI                  | depends on the driver  | depends on the driver | depends on the driver | depends on the driver |
+| CSI                  | залежить від драйвера  | залежить від драйвера | залежить від драйвера | залежить від драйвера |
 | FC                   | &#x2713;               | &#x2713;              | -             | -                      |
-| FlexVolume           | &#x2713;               | &#x2713;              | depends on the driver | -              |
+| FlexVolume           | &#x2713;               | &#x2713;              | залежить від драйвера | -              |
 | HostPath             | &#x2713;               | -                     | -             | -                      |
 | iSCSI                | &#x2713;               | &#x2713;              | -             | -                      |
 | NFS                  | &#x2713;               | &#x2713;              | &#x2713;      | -                      |
 | RBD                  | &#x2713;               | &#x2713;              | -             | -                      |
-| VsphereVolume        | &#x2713;               | -                     | - (works when Pods are collocated) | - |
+| VsphereVolume        | &#x2713;               | -                     | - (працює, коли Podʼи розташовані разом) | - |
 | PortworxVolume       | &#x2713;               | -                     | &#x2713;      | -                  | - |
 
 ### Class
 
-A PV can have a class, which is specified by setting the
-`storageClassName` attribute to the name of a
-[StorageClass](/docs/concepts/storage/storage-classes/).
-A PV of a particular class can only be bound to PVCs requesting
-that class. A PV with no `storageClassName` has no class and can only be bound
-to PVCs that request no particular class.
+PV може мати клас, який вказується, встановленням атрибуту `storageClassName` на імʼя [StorageClass](/docs/concepts/storage/storage-classes/). PV певного класу може бути призначений лише до PVC, що запитує цей клас. PV без `storageClassName` не має класу і може бути призначений тільки до PVC, які не запитують жодного конкретного класу.
 
-In the past, the annotation `volume.beta.kubernetes.io/storage-class` was used instead
-of the `storageClassName` attribute. This annotation is still working; however,
-it will become fully deprecated in a future Kubernetes release.
+У минулому для цього використовувався атрибут `volume.beta.kubernetes.io/storage-class` замість `storageClassName`. Ця анотація все ще працює; однак вона повністю застаріє в майбутньому релізі Kubernetes.
 
-### Reclaim Policy
+### Політика повторного використання {#reclaim-policy}
 
-Current reclaim policies are:
+Поточні політики повторного використання:
 
-* Retain -- manual reclamation
-* Recycle -- basic scrub (`rm -rf /thevolume/*`)
-* Delete -- delete the volume
+* Retain — ручне відновлення
+* Recycle — базова очистка (`rm -rf /thevolume/*`)
+* Delete — видалити том
 
-For Kubernetes {{< skew currentVersion >}}, only `nfs` and `hostPath` volume types support recycling.
+Для Kubernetes {{< skew currentVersion >}} підтримують повторнн використання лише типи томів `nfs` та `hostPath`.
 
-### Mount Options
+### Параметри монтування {#mount-options}
 
-A Kubernetes administrator can specify additional mount options for when a
-Persistent Volume is mounted on a node.
+Адміністратор Kubernetes може вказати додаткові параметри монтування для випадку, коли постійний том монтується на вузлі.
 
 {{< note >}}
-Not all Persistent Volume types support mount options.
+Не всі типи постійних томів підтримують параметри монтування.
 {{< /note >}}
 
-The following volume types support mount options:
+Наступні типи томів підтримують параметри монтування:
 
 * `azureFile`
-* `cephfs` (**deprecated** in v1.28)
-* `cinder` (**deprecated** in v1.18)
+* `cephfs` (**застаріло** в v1.28)
+* `cinder` (**застаріло** в v1.18)
 * `iscsi`
 * `nfs`
-* `rbd` (**deprecated** in v1.28)
+* `rbd` (**застаріло** в v1.28)
 * `vsphereVolume`
 
-Mount options are not validated. If a mount option is invalid, the mount fails.
+Параметри монтування не перевіряються на валідність. Якщо параметр монтування недійсний, монтування не вдасться.
 
-In the past, the annotation `volume.beta.kubernetes.io/mount-options` was used instead
-of the `mountOptions` attribute. This annotation is still working; however,
-it will become fully deprecated in a future Kubernetes release.
+У минулому для цього використовувалася анотація `volume.beta.kubernetes.io/mount-options` замість атрибуту `mountOptions`. Ця анотація все ще працює; однак вона повністю застаріє в майбутньому релізі Kubernetes.
 
 ### Node Affinity
 
 {{< note >}}
-For most volume types, you do not need to set this field.
-You need to explicitly set this for [local](/docs/concepts/storage/volumes/#local) volumes.
+Для більшості типів томів вам не потрібно встановлювати це поле. Вам слід явно встановити його для [локальних](/docs/concepts/storage/volumes/#local) томів.
 {{< /note >}}
 
-A PV can specify node affinity to define constraints that limit what nodes this
-volume can be accessed from. Pods that use a PV will only be scheduled to nodes
-that are selected by the node affinity. To specify node affinity, set
-`nodeAffinity` in the `.spec` of a PV. The
-[PersistentVolume](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec)
-API reference has more details on this field.
+Постійний том може вказувати властивості спорідненості вузла для визначення обмежень, які обмежують доступ до цього тому з визначених вузлів. Podʼи, які використовують PV, будуть заплановані тільки на ті вузли, які вибрані за допомогою спорідненості вузла. Щоб вказати спорідненість вузла, встановіть `nodeAffinity` в `.spec` PV. Деталі поля можна знайти у референсі API [PersistentVolume](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec).
 
-### Phase
+### Фаза {#phase}
 
-A PersistentVolume will be in one of the following phases:
+PersistentVolume може перебувати в одній з наступних фаз:
 
 `Available`
-: a free resource that is not yet bound to a claim
+: вільний ресурс, який ще не призначений запиту
 
 `Bound`
-: the volume is bound to a claim
+: том призначено запиту
 
 `Released`
-: the claim has been deleted, but the associated storage resource is not yet reclaimed by the cluster
+: запит було видалено, але повʼязане сховища ще не вилучено кластером
 
 `Failed`
-: the volume has failed its (automated) reclamation
+: том не вдалося вилучити (автоматично)
 
-You can see the name of the PVC bound to the PV using `kubectl describe persistentvolume <name>`.
+Ви можете бачити імʼя PVC, призначеного для PV, використовуючи `kubectl describe persistentvolume <імʼя>`.
 
-#### Phase transition timestamp
+#### Час переходу фази {#phase-transition-timestamp}
 
 {{< feature-state for_k8s_version="v1.29" state="beta" >}}
 
-The `.status` field for a PersistentVolume can include an alpha `lastPhaseTransitionTime` field. This field records
-the timestamp of when the volume last transitioned its phase. For newly created
-volumes the phase is set to `Pending` and `lastPhaseTransitionTime` is set to
-the current time.
+Поле `.status` для PersistentVolume може включати альфа-поле `lastPhaseTransitionTime`. Це поле фіксує відмітку часу, коли том востаннє перейшов у свою фазу. Для новостворених томів фаза встановлюється як `Pending`, а `lastPhaseTransitionTime` встановлюється на поточний час.
 
 {{< note >}}
-You need to enable the `PersistentVolumeLastPhaseTransitionTime` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-to use or see the `lastPhaseTransitionTime` field.
+Вам потрібно увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `PersistentVolumeLastPhaseTransitionTime`, щоб використовувати або переглядати поле `lastPhaseTransitionTime`.
 {{< /note >}}
 
 ## PersistentVolumeClaims
 
-Each PVC contains a spec and status, which is the specification and status of the claim.
-The name of a PersistentVolumeClaim object must be a valid
-[DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Кожен PVC містить специфікацію та статус, які визначають вимоги та стан заявок. Імʼя обʼєкта PersistentVolumeClaim повинно бути дійсним [DNS-піддоменом](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ```yaml
 apiVersion: v1
@@ -798,118 +584,63 @@ spec:
       - {key: environment, operator: In, values: [dev]}
 ```
 
-### Access Modes
+### Режим доступу {#access-modes-1}
 
-Claims use [the same conventions as volumes](#access-modes) when requesting
-storage with specific access modes.
+Заявки використовують [ті ж самі конвенції, що й томи](#access-modes), коли вони вимагають зберігання з конкретними режимами доступу.
 
-### Volume Modes
+### Режим тому {#volume-modes}
 
-Claims use [the same convention as volumes](#volume-mode) to indicate the
-consumption of the volume as either a filesystem or block device.
+Заявки використовують [ту ж саму конвенцію, що і томи](#volume-mode), щоб вказати споживання тому як файлової системи чи блокового пристрою.
 
-### Resources
+### Ресурси {#resources}
 
-Claims, like Pods, can request specific quantities of a resource. In this case,
-the request is for storage. The same
-[resource model](https://git.k8s.io/design-proposals-archive/scheduling/resources.md)
-applies to both volumes and claims.
+Заявки, подібно до Podʼів, можуть вимагати конкретну кількість ресурсів. У цьому випадку запит стосується зберігання. До заявок застосовується та ж [модель ресурсів](https://git.k8s.io/design-proposals-archive/scheduling/resources.md), що і до томів.
 
-### Selector
+### Селектор {#selector}
 
-Claims can specify a
-[label selector](/docs/concepts/overview/working-with-objects/labels/#label-selectors)
-to further filter the set of volumes. Only the volumes whose labels match the selector
-can be bound to the claim. The selector can consist of two fields:
+Заявки можуть вказати [селектор міток](/docs/concepts/overview/working-with-objects/labels/#label-selectors), щоб додатково фільтрувати набір томів. До заявки може бути привʼязано лише ті томи, мітки яких відповідають селектору. Селектор може складатися з двох полів:
 
-* `matchLabels` - the volume must have a label with this value
-* `matchExpressions` - a list of requirements made by specifying key, list of values,
-  and operator that relates the key and values. Valid operators include In, NotIn,
-  Exists, and DoesNotExist.
+* `matchLabels` — том повинен містити мітку з таким значенням
+* `matchExpressions` — список вимог, які визначаються за допомогою ключа, списку значень та оператора, який повʼязує ключ і значення. Допустимі оператори включають In, NotIn, Exists та DoesNotExist.
 
-All of the requirements, from both `matchLabels` and `matchExpressions`, are
-ANDed together – they must all be satisfied in order to match.
+Всі вимоги як з `matchLabels`, так і з `matchExpressions` обʼєднуються за допомогою ЛОГІЧНОГО «І» — всі вони повинні бути задоволені, щоб мати збіг.
 
 ### Class
 
-A claim can request a particular class by specifying the name of a
-[StorageClass](/docs/concepts/storage/storage-classes/)
-using the attribute `storageClassName`.
-Only PVs of the requested class, ones with the same `storageClassName` as the PVC, can
-be bound to the PVC.
+Заявка може вимагати певний клас, вказавши імʼя [StorageClass](/docs/concepts/storage/storage-classes/) за допомогою атрибута `storageClassName`. Тільки Томи з запитаним класом, тобто ті, у яких `storageClassName` збігається з PVC, можуть бути привʼязані до PVC.
 
-PVCs don't necessarily have to request a class. A PVC with its `storageClassName` set
-equal to `""` is always interpreted to be requesting a PV with no class, so it
-can only be bound to PVs with no class (no annotation or one set equal to
-`""`). A PVC with no `storageClassName` is not quite the same and is treated differently
-by the cluster, depending on whether the
-[`DefaultStorageClass` admission plugin](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass)
-is turned on.
+PVC не обоʼязково повинен вимагати клас. PVC зі своїм `storageClassName`, встановленим рівним `""`, завжди інтерпретується як PVC, який вимагає PV без класу, тобто він може бути привʼязаний лише до PV без класу (без анотації або з анотацією, встановленою рівною `""`). PVC без `storageClassName` не зовсім те ж саме і відзначається по-іншому кластером, залежно від того, чи включений [втулок доступу `DefaultStorageClass`](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass).
 
-* If the admission plugin is turned on, the administrator may specify a
-  default StorageClass. All PVCs that have no `storageClassName` can be bound only to
-  PVs of that default. Specifying a default StorageClass is done by setting the
-  annotation `storageclass.kubernetes.io/is-default-class` equal to `true` in
-  a StorageClass object. If the administrator does not specify a default, the
-  cluster responds to PVC creation as if the admission plugin were turned off. If more than one
-  default StorageClass is specified, the newest default is used when the
-  PVC is dynamically provisioned.
-* If the admission plugin is turned off, there is no notion of a default
-  StorageClass. All PVCs that have `storageClassName` set to `""` can be
-  bound only to PVs that have `storageClassName` also set to `""`.
-  However, PVCs with missing `storageClassName` can be updated later once
-  default StorageClass becomes available. If the PVC gets updated it will no
-  longer bind to PVs that have `storageClassName` also set to `""`.
+* Якщо втулок доступу увімкнено, адміністратор може вказати типовий StorageClass. Усі PVC, у яких немає `storageClassName`, можуть бути привʼязані лише до PV з цим типовим StorageClass. Вказання типового StorageClass виконується, встановивши анотацію `storageclass.kubernetes.io/is-default-class` рівною `true` в обʼєкті StorageClass. Якщо адміністратор не вказав типовий StorageClass, кластер відповідає на створення PVC так, ніби втулок доступу був вимкнений. Якщо вказано більше одного типового StorageClass, для привʼязки PVC використовується остання версія типового StorageClass, коли PVC динамічно виділяється.
+* Якщо втулок доступу вимкнено, немає поняття типового StorageClass. Усі PVC, у яких `storageClassName` встановлено рівно `""`, можуть бути привʼязані лише до PV, у яких `storageClassName` також встановлено рівно `""`. Однак PVC з відсутнім `storageClassName` можна буде оновити пізніше, коли стане доступним типовий StorageClass. Якщо PVC оновлюється, він більше не буде привʼязуватися до PV з `storageClassName`, також встановленим рівно `""`.
 
-See [retroactive default StorageClass assignment](#retroactive-default-storageclass-assignment) for more details.
+Дивіться [ретроактивне призначення типового StorageClass](#retroactive-default-storageclass-assignment) для отримання докладнішої інформації.
 
-Depending on installation method, a default StorageClass may be deployed
-to a Kubernetes cluster by addon manager during installation.
+Залежно від методу встановлення, типовий StorageClass може бути розгорнутий в кластер Kubernetes менеджером надбудов під час встановлення.
 
-When a PVC specifies a `selector` in addition to requesting a StorageClass,
-the requirements are ANDed together: only a PV of the requested class and with
-the requested labels may be bound to the PVC.
+Коли PVC вказує `selector`, крім вимоги типового StorageClass, вимоги використовують ЛОГІЧНЕ «І»: лише PV вказаного класу і з вказаними мітками може бути привʼязаний до PVC.
 
 {{< note >}}
-Currently, a PVC with a non-empty `selector` can't have a PV dynamically provisioned for it.
+На даний момент PVC з непорожнім `selector` не може мати PV, динамічно виділеного для нього.
 {{< /note >}}
 
-In the past, the annotation `volume.beta.kubernetes.io/storage-class` was used instead
-of `storageClassName` attribute. This annotation is still working; however,
-it won't be supported in a future Kubernetes release.
+У минулому анотація `volume.beta.kubernetes.io/storage-class` використовувалася замість атрибута `storageClassName`. Ця анотація все ще працює; однак вона не буде підтримуватися в майбутньому релізі Kubernetes.
 
-#### Retroactive default StorageClass assignment
+#### Ретроактивне призначення типового StorageClass {#retroactive-default-storageclass-assignment}
 
 {{< feature-state for_k8s_version="v1.28" state="stable" >}}
 
-You can create a PersistentVolumeClaim without specifying a `storageClassName`
-for the new PVC, and you can do so even when no default StorageClass exists
-in your cluster. In this case, the new PVC creates as you defined it, and the
-`storageClassName` of that PVC remains unset until default becomes available.
+Ви можете створювати PersistentVolumeClaim без вказівки `storageClassName` для нового PVC, і ви можете це робити навіть тоді, коли в кластері немає типового StorageClass. У цьому випадку новий PVC створюється так, як ви його визначили, і `storageClassName` цього PVC залишається невизначеним, доки не стане доступним типовий StorageClass.
 
-When a default StorageClass becomes available, the control plane identifies any
-existing PVCs without `storageClassName`. For the PVCs that either have an empty
-value for `storageClassName` or do not have this key, the control plane then
-updates those PVCs to set `storageClassName` to match the new default StorageClass.
-If you have an existing PVC where the `storageClassName` is `""`, and you configure
-a default StorageClass, then this PVC will not get updated.
+Коли стає доступним типовий StorageClass, панель управління ідентифікує всі наявні PVC без `storageClassName`. Для PVC, у яких або встановлено порожнє значення для `storageClassName`, або цей ключ взагалі відсутній, панель управління оновлює ці PVC, встановлюючи `storageClassName`, щоб відповідати новому типовому StorageClass. Якщо у вас є наявний PVC, у якого `storageClassName` дорівнює `""`, і ви налаштовуєте типовий StorageClass, то цей PVC не буде оновлено.
 
-In order to keep binding to PVs with `storageClassName` set to `""`
-(while a default StorageClass is present), you need to set the `storageClassName`
-of the associated PVC to `""`.
+Щоб продовжувати привʼязувати до PV з `storageClassName`, встановленим рівно `""` (коли присутній типовий StorageClass), вам потрібно встановити `storageClassName` асоційованого PVC рівно `""`.
 
-This behavior helps administrators change default StorageClass by removing the
-old one first and then creating or setting another one. This brief window while
-there is no default causes PVCs without `storageClassName` created at that time
-to not have any default, but due to the retroactive default StorageClass
-assignment this way of changing defaults is safe.
+Це поведінка допомагає адміністраторам змінювати типовий StorageClass, видаляючи спочатку старий, а потім створюючи або встановлюючи інший. Це короткочасне вікно, коли немає типового StorageClass, призводить до того, що PVC без `storageClassName`, створені в цей час, не мають жодного типового значення, але завдяки ретроактивному призначенню типового StorageClass цей спосіб зміни типових значень є безпечним.
 
-## Claims As Volumes
+## Заявки як томи {#claims-as-volumes}
 
-Pods access storage by using the claim as a volume. Claims must exist in the
-same namespace as the Pod using the claim. The cluster finds the claim in the
-Pod's namespace and uses it to get the PersistentVolume backing the claim.
-The volume is then mounted to the host and into the Pod.
+Podʼи отримують доступ до сховища, використовуючи заявки як томи. Заявки повинні існувати в тому ж просторі імен, що і Pod, який її використовує. Кластер знаходить заявку в просторі імен Pod і використовує її для отримання PersistentVolume, який підтримує заявку. Потім том монтується на хост та у Pod.
 
 ```yaml
 apiVersion: v1
@@ -929,35 +660,30 @@ spec:
         claimName: myclaim
 ```
 
-### A Note on Namespaces
+### Примітка щодо просторів імен {#a-note-on-namespaces}
 
-PersistentVolumes binds are exclusive, and since PersistentVolumeClaims are
-namespaced objects, mounting claims with "Many" modes (`ROX`, `RWX`) is only
-possible within one namespace.
+Привʼязки PersistentVolumes є ексклюзивними, і оскільки PersistentVolumeClaims є обʼєктами з простором імен, монтування заявк з режимами "Many" (`ROX`, `RWX`) можливе лише в межах одного простору імен.
 
-### PersistentVolumes typed `hostPath`
+### PersistentVolumes типу `hostPath` {#persistentvolumes-typed-hostpath}
 
-A `hostPath` PersistentVolume uses a file or directory on the Node to emulate
-network-attached storage. See
-[an example of `hostPath` typed volume](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
+PersistentVolume типу `hostPath` використовує файл або каталог на вузлі для емуляції мережевого сховища. Див. [приклад тому типу `hostPath`](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
 
-## Raw Block Volume Support
+## Підтримка блокового тому {#raw-block-volume-support}
 
 {{< feature-state for_k8s_version="v1.18" state="stable" >}}
 
-The following volume plugins support raw block volumes, including dynamic provisioning where
-applicable:
+Наступні втулки томів підтримують блокові томи, включаючи динамічне надання, де це можливо:
 
 * CSI
 * FC (Fibre Channel)
 * iSCSI
-* Local volume
+* Локальний том
 * OpenStack Cinder
-* RBD (deprecated)
-* RBD (Ceph Block Device; deprecated)
+* RBD (застаріло)
+* RBD (Ceph Block Device; застаріло)
 * VsphereVolume
 
-### PersistentVolume using a Raw Block Volume {#persistent-volume-using-a-raw-block-volume}
+### PersistentVolume, що використовує блоковий том {#persistent-volume-using-a-raw-block-volume}
 
 ```yaml
 apiVersion: v1
@@ -977,7 +703,7 @@ spec:
     readOnly: false
 ```
 
-### PersistentVolumeClaim requesting a Raw Block Volume {#persistent-volume-claim-requesting-a-raw-block-volume}
+### PersistentVolumeClaim, який запитує блоковий том {#persistent-volume-claim-requesting-a-raw-block-volume}
 
 ```yaml
 apiVersion: v1
@@ -993,7 +719,7 @@ spec:
       storage: 10Gi
 ```
 
-### Pod specification adding Raw Block Device path in container
+### Специфікація Pod з додаванням шляху блокового пристрою в контейнер {#pod-specification-adding-raw-block-device-path-to-container}
 
 ```yaml
 apiVersion: v1
@@ -1016,47 +742,37 @@ spec:
 ```
 
 {{< note >}}
-When adding a raw block device for a Pod, you specify the device path in the
-container instead of a mount path.
+При додаванні блокового пристрою для Pod ви вказуєте шлях до пристрою в контейнері замість шляху монтування.
 {{< /note >}}
 
-### Binding Block Volumes
+### Привʼязка блокових томів {#binding-block-volumes}
 
-If a user requests a raw block volume by indicating this using the `volumeMode`
-field in the PersistentVolumeClaim spec, the binding rules differ slightly from
-previous releases that didn't consider this mode as part of the spec.
-Listed is a table of possible combinations the user and admin might specify for
-requesting a raw block device. The table indicates if the volume will be bound or
-not given the combinations: Volume binding matrix for statically provisioned volumes:
+Якщо користувач вимагає блокового тому, вказавши це за допомогою поля `volumeMode` у специфікації PersistentVolumeClaim, правила привʼязки трохи відрізняються від попередніх версій, які не враховували цей режим як частину специфікації. У таблиці наведено можливі комбінації, які користувач і адміністратор можуть вказати для запиту блокового пристрою. Таблиця показує, чи буде привʼязаний том чи ні, враховуючи ці комбінації: Матриця привʼязки томів для статично виділених томів:
 
-| PV volumeMode | PVC volumeMode  | Result           |
-| --------------|:---------------:| ----------------:|
-|   unspecified | unspecified     | BIND             |
-|   unspecified | Block           | NO BIND          |
-|   unspecified | Filesystem      | BIND             |
-|   Block       | unspecified     | NO BIND          |
-|   Block       | Block           | BIND             |
-|   Block       | Filesystem      | NO BIND          |
-|   Filesystem  | Filesystem      | BIND             |
-|   Filesystem  | Block           | NO BIND          |
-|   Filesystem  | unspecified     | BIND             |
+| PV volumeMode    | PVC volumeMode   | Результат        |
+| -----------------|:----------------:| ----------------:|
+|   не вказано     | не вказано       | ПРИВ'ЯЗАНИЙ      |
+|   не вказано     | Блоковий         | НЕ ПРИВ'ЯЗАНИЙ   |
+|   не вказано     | Файлова система  | ПРИВ'ЯЗАНИЙ      |
+|   Блоковий       | не вказано       | НЕ ПРИВ'ЯЗАНИЙ   |
+|   Блоковий       | Блоковий         | ПРИВ'ЯЗАНИЙ      |
+|   Блоковий       | Файлова система  | НЕ ПРИВ'ЯЗАНИЙ   |
+|   Файлова система| Файлова система  | ПРИВ'ЯЗАНИЙ      |
+|   Файлова система| Блоковий         | НЕ ПРИВ'ЯЗАНИЙ   |
+|   Файлова система| не вказано       | ПРИВ'ЯЗАНИЙ      |
 
 {{< note >}}
-Only statically provisioned volumes are supported for alpha release. Administrators
-should take care to consider these values when working with raw block devices.
+Підтримуються лише статично виділені томи для альфа-релізу. Адміністраторам слід бути обережними, враховуючи ці значення при роботі з блоковими пристроями.
 {{< /note >}}
 
-## Volume Snapshot and Restore Volume from Snapshot Support
+## Підтримка знімків томів та відновлення тому зі знімка {#volume-snapshot-and-restore-volume-from-snapshot-support}
 
 {{< feature-state for_k8s_version="v1.20" state="stable" >}}
 
-Volume snapshots only support the out-of-tree CSI volume plugins.
-For details, see [Volume Snapshots](/docs/concepts/storage/volume-snapshots/).
-In-tree volume plugins are deprecated. You can read about the deprecated volume
-plugins in the
-[Volume Plugin FAQ](https://github.com/kubernetes/community/blob/master/sig-storage/volume-plugin-faq.md).
+Знімки томів підтримують лише зовнішні втулки томів CSI. Докладні відомості див. у [Знімках томів](/docs/concepts/storage/volume-snapshots/). Втулки томів, які входять до складу Kubernetes, є застарілими. Про застарілі
+втулки томів можна прочитати в [ЧаПи втулків томів](https://github.com/kubernetes/community/blob/master/sig-storage/volume-plugin-faq.md).
 
-### Create a PersistentVolumeClaim from a Volume Snapshot {#create-persistent-volume-claim-from-volume-snapshot}
+### Створення PersistentVolumeClaim із знімка тому {#create-persistent-volume-claim-from-volume-snapshot}
 
 ```yaml
 apiVersion: v1
@@ -1076,12 +792,11 @@ spec:
       storage: 10Gi
 ```
 
-## Volume Cloning
+## Клонування томів {#volume-cloning}
 
-[Volume Cloning](/docs/concepts/storage/volume-pvc-datasource/)
-only available for CSI volume plugins.
+[Клонування томів](/docs/concepts/storage/volume-pvc-datasource/) доступне лише для втулків томів CSI.
 
-### Create PersistentVolumeClaim from an existing PVC {#create-persistent-volume-claim-from-an-existing-pvc}
+### Створення PersistentVolumeClaim із існуючого PVC {#create-persistent-volume-claim-from-an-existing-pvc}
 
 ```yaml
 apiVersion: v1
@@ -1100,79 +815,46 @@ spec:
       storage: 10Gi
 ```
 
-## Volume populators and data sources
+## Наповнювачі томів та джерела даних {#volume-populators-and-data-sources}
 
 {{< feature-state for_k8s_version="v1.24" state="beta" >}}
 
-Kubernetes supports custom volume populators.
-To use custom volume populators, you must enable the `AnyVolumeDataSource`
-[feature gate](/docs/reference/command-line-tools-reference/feature-gates/) for
-the kube-apiserver and kube-controller-manager.
+Kubernetes підтримує користувацькі заповнювачі томів. Для використання користувацьких заповнювачів томів слід увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` для kube-apiserver та kube-controller-manager.
 
-Volume populators take advantage of a PVC spec field called `dataSourceRef`. Unlike the
-`dataSource` field, which can only contain either a reference to another PersistentVolumeClaim
-or to a VolumeSnapshot, the `dataSourceRef` field can contain a reference to any object in the
-same namespace, except for core objects other than PVCs. For clusters that have the feature
-gate enabled, use of the `dataSourceRef` is preferred over `dataSource`.
+Наповнювачі томів використовують поле специфікації PVC, що називається `dataSourceRef`. На відміну від поля `dataSource`, яке може містити тільки посилання на інший PersistentVolumeClaim або на VolumeSnapshot, поле `dataSourceRef` може містити посилання на будь-який обʼєкт у тому ж просторі імен, за винятком основних обʼєктів, окрім PVC. Для кластерів, які мають увімкнутий feature gate, використання `dataSourceRef` бажано перед `dataSource`.
 
-## Cross namespace data sources
+## Джерела даних зі змішаними просторами імен {#cross-namespace-data-sources}
 
 {{< feature-state for_k8s_version="v1.26" state="alpha" >}}
 
-Kubernetes supports cross namespace volume data sources.
-To use cross namespace volume data sources, you must enable the `AnyVolumeDataSource`
-and `CrossNamespaceVolumeDataSource`
-[feature gates](/docs/reference/command-line-tools-reference/feature-gates/) for
-the kube-apiserver and kube-controller-manager.
-Also, you must enable the `CrossNamespaceVolumeDataSource` feature gate for the csi-provisioner.
+Kubernetes підтримує джерела даних томів зі змішаними просторами імен. Для використання джерел даних томів із змішаними просторами імен слід увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` та `CrossNamespaceVolumeDataSource` для kube-apiserver та kube-controller-manager. Також вам слід увімкнути `CrossNamespaceVolumeDataSource` для csi-provisioner.
 
-Enabling the `CrossNamespaceVolumeDataSource` feature gate allows you to specify
-a namespace in the dataSourceRef field.
+Увімкнення `CrossNamespaceVolumeDataSource` дозволяє вам вказати простір імен у полі `dataSourceRef`.
 
 {{< note >}}
-When you specify a namespace for a volume data source, Kubernetes checks for a
-ReferenceGrant in the other namespace before accepting the reference.
-ReferenceGrant is part of the `gateway.networking.k8s.io` extension APIs.
-See [ReferenceGrant](https://gateway-api.sigs.k8s.io/api-types/referencegrant/)
-in the Gateway API documentation for details.
-This means that you must extend your Kubernetes cluster with at least ReferenceGrant from the
-Gateway API before you can use this mechanism.
+Коли ви вказуєте простір імен для джерела даних тому, Kubernetes перевіряє наявність ReferenceGrant у іншому просторі імен перед прийняттям посилання. ReferenceGrant є частиною розширених API `gateway.networking.k8s.io`. Докладні відомості див. в документації API Gateway за посиланням [ReferenceGrant](https://gateway-api.sigs.k8s.io/api-types/referencegrant/). Це означає, що вам слід розширити свій кластер Kubernetes принаймні за допомогою ReferenceGrant зі
+специфікації API Gateway, перш ніж ви зможете використовувати цей механізм.
 {{< /note >}}
 
-## Data source references
+## Посилання на джерела даних {#data-source-references}
 
-The `dataSourceRef` field behaves almost the same as the `dataSource` field. If one is
-specified while the other is not, the API server will give both fields the same value. Neither
-field can be changed after creation, and attempting to specify different values for the two
-fields will result in a validation error. Therefore the two fields will always have the same
-contents.
+Поле `dataSourceRef` поводиться майже так само, як і поле `dataSource`. Якщо в одне задано, а інше — ні, сервер API надасть обом полям одне й те ж значення. Жодне з цих полів не можна змінити після створення, і спроба вказати різні значення для обох полів призведе до помилки перевірки правильності. Таким чином, обидва поля завжди матимуть однаковий вміст.
 
-There are two differences between the `dataSourceRef` field and the `dataSource` field that
-users should be aware of:
+Є дві різниці між полем `dataSourceRef` і полем `dataSource`, які користувачам слід знати:
 
-* The `dataSource` field ignores invalid values (as if the field was blank) while the
-  `dataSourceRef` field never ignores values and will cause an error if an invalid value is
-  used. Invalid values are any core object (objects with no apiGroup) except for PVCs.
-* The `dataSourceRef` field may contain different types of objects, while the `dataSource` field
-  only allows PVCs and VolumeSnapshots.
+* Поле `dataSource` ігнорує неправильні значення (мовби поле було порожнім), тоді як поле `dataSourceRef` ніколи не ігнорує значення і призведе до помилки, якщо використано неправильне значення. Неправильними значеннями є будь-які обʼєкти основних обʼєктів (обʼєкти без apiGroup), окрім PVC.
+* Поле `dataSourceRef` може містити обʼєкти різних типів, тоді як поле `dataSource` дозволяє лише PVC та VolumeSnapshot.
 
-When the `CrossNamespaceVolumeDataSource` feature is enabled, there are additional differences:
+Коли увімкнено `CrossNamespaceVolumeDataSource`, є додаткові відмінності:
 
-* The `dataSource` field only allows local objects, while the `dataSourceRef` field allows
-  objects in any namespaces.
-* When namespace is specified, `dataSource` and `dataSourceRef` are not synced.
+* Поле `dataSource` дозволяє лише локальні обʼєкти, тоді як поле `dataSourceRef` дозволяє обʼєкти у будь-яких просторах імен.
+* Коли вказано простір імен, `dataSource` і `dataSourceRef` не синхронізуються.
 
-Users should always use `dataSourceRef` on clusters that have the feature gate enabled, and
-fall back to `dataSource` on clusters that do not. It is not necessary to look at both fields
-under any circumstance. The duplicated values with slightly different semantics exist only for
-backwards compatibility. In particular, a mixture of older and newer controllers are able to
-interoperate because the fields are the same.
+Користувачам завжди слід використовувати `dataSourceRef` в кластерах, де увімкнено feature gate, і використовувати `dataSource` в кластерах, де він вимкнений. В будь-якому випадку необхідно дивитися на обидва поля. Дубльовані значення із трошки різними семантиками існують лише з метою забезпечення сумісності з попередніми версіями. Зокрема, старі й нові контролери можуть взаємодіяти, оскільки поля однакові.
 
-### Using volume populators
+### Використання засобів наповнення томів {#using-volume-populators}
 
-Volume populators are {{< glossary_tooltip text="controllers" term_id="controller" >}} that can
-create non-empty volumes, where the contents of the volume are determined by a Custom Resource.
-Users create a populated volume by referring to a Custom Resource using the `dataSourceRef` field:
+Засоби наповнення томів — це контролери, які можуть створювати томи з не порожнім вмістом, де вміст тому визначається за допомогою Custom Resource. Користувачі створюють наповнений том, посилаючись на Custom Resource із використанням поля `dataSourceRef`:
 
 ```yaml
 apiVersion: v1
@@ -1191,99 +873,74 @@ spec:
       storage: 10Gi
 ```
 
-Because volume populators are external components, attempts to create a PVC that uses one
-can fail if not all the correct components are installed. External controllers should generate
-events on the PVC to provide feedback on the status of the creation, including warnings if
-the PVC cannot be created due to some missing component.
+Оскільки засоби наповнення томів — це зовнішні компоненти, спроби створити PVC, який використовує їх, можуть завершитися неуспішно, якщо встановлені не всі необхідні компоненти. Зовнішні контролери повинні генерувати події на PVC для надання зворотного звʼязку щодо стану створення, включаючи попередження, якщо PVC не може бути створено через відсутність деякого компонента.
 
-You can install the alpha [volume data source validator](https://github.com/kubernetes-csi/volume-data-source-validator)
-controller into your cluster. That controller generates warning Events on a PVC in the case that no populator
-is registered to handle that kind of data source. When a suitable populator is installed for a PVC, it's the
-responsibility of that populator controller to report Events that relate to volume creation and issues during
-the process.
+Ви можете встановити альфа-контролер [перевірки джерела даних тому](https://github.com/kubernetes-csi/volume-data-source-validator) у вашому кластері. Цей контролер генерує події попередження на PVC у випадку, якщо не зареєстровано жодного засобу наповнення для обробки цього виду джерела даних. Коли для PVC встановлюється відповідний засіб наповнення, це відповідальність цього контролера наповнення повідомляти про події, що стосуються створення тому та проблем під час цього процесу.
 
-### Using a cross-namespace volume data source
+### Використання джерела даних томів зі змішаними просторами імен {#using-cross-namespace-volume-data-sources}
 
 {{< feature-state for_k8s_version="v1.26" state="alpha" >}}
 
-Create a ReferenceGrant to allow the namespace owner to accept the reference.
-You define a populated volume by specifying a cross namespace volume data source
-using the `dataSourceRef` field. You must already have a valid ReferenceGrant
-in the source namespace:
+Створіть ReferenceGrant, щоб дозволити власнику простору імен приймати посилання. Ви визначаєте наповнений том, вказавши джерело даних тому між просторами імен за допомогою поля `dataSourceRef`. Вам вже повинен бути дійсний ReferenceGrant у вихідному просторі імен:
 
-   ```yaml
-   apiVersion: gateway.networking.k8s.io/v1beta1
-   kind: ReferenceGrant
-   metadata:
-     name: allow-ns1-pvc
-     namespace: default
-   spec:
-     from:
-     - group: ""
-       kind: PersistentVolumeClaim
-       namespace: ns1
-     to:
-     - group: snapshot.storage.k8s.io
-       kind: VolumeSnapshot
-       name: new-snapshot-demo
-   ```
+```yaml
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: allow-ns1-pvc
+  namespace: default
+spec:
+  from:
+  - group: ""
+    kind: PersistentVolumeClaim
+    namespace: ns1
+  to:
+  - group: snapshot.storage.k8s.io
+    kind: VolumeSnapshot
+    name: new-snapshot-demo
+```
 
-   ```yaml
-   apiVersion: v1
-   kind: PersistentVolumeClaim
-   metadata:
-     name: foo-pvc
-     namespace: ns1
-   spec:
-     storageClassName: example
-     accessModes:
-     - ReadWriteOnce
-     resources:
-       requests:
-         storage: 1Gi
-     dataSourceRef:
-       apiGroup: snapshot.storage.k8s.io
-       kind: VolumeSnapshot
-       name: new-snapshot-demo
-       namespace: default
-     volumeMode: Filesystem
-   ```
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: foo-pvc
+  namespace: ns1
+spec:
+  storageClassName: example
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  dataSourceRef:
+    apiGroup: snapshot.storage.k8s.io
+    kind: VolumeSnapshot
+    name: new-snapshot-demo
+    namespace: default
+  volumeMode: Filesystem
+```
 
-## Writing Portable Configuration
+## Написання переносимої конфігурації {#writing-portable-configuration}
 
-If you're writing configuration templates or examples that run on a wide range of clusters
-and need persistent storage, it is recommended that you use the following pattern:
+Якщо ви пишете шаблони конфігурації або приклади, які повинні працювати на широкому спектрі кластерів і вам потрібне постійний сховище, рекомендується використовувати такий підхід:
 
-- Include PersistentVolumeClaim objects in your bundle of config (alongside
-  Deployments, ConfigMaps, etc).
-- Do not include PersistentVolume objects in the config, since the user instantiating
-  the config may not have permission to create PersistentVolumes.
-- Give the user the option of providing a storage class name when instantiating
-  the template.
-  - If the user provides a storage class name, put that value into the
-    `persistentVolumeClaim.storageClassName` field.
-    This will cause the PVC to match the right storage
-    class if the cluster has StorageClasses enabled by the admin.
-  - If the user does not provide a storage class name, leave the
-    `persistentVolumeClaim.storageClassName` field as nil. This will cause a
-    PV to be automatically provisioned for the user with the default StorageClass
-    in the cluster. Many cluster environments have a default StorageClass installed,
-    or administrators can create their own default StorageClass.
-- In your tooling, watch for PVCs that are not getting bound after some time
-  and surface this to the user, as this may indicate that the cluster has no
-  dynamic storage support (in which case the user should create a matching PV)
-  or the cluster has no storage system (in which case the user cannot deploy
-  config requiring PVCs).
+* Включайте обʼєкти PersistentVolumeClaim у ваш набір конфігурації (нарізі з Deployment, ConfigMap і т. д.).
+* Не включайте обєкти PersistentVolume в конфігурацію, оскільки користувач, який створює конфігурацію, може не мати прав на створення PersistentVolumes.
+* Дайте користувачеві можливість надавати імʼя класу сховища при створенні шаблону.
+  * Якщо користувач вказує імʼя класу сховища, вставте це значення в поле `persistentVolumeClaim.storageClassName`. Це призведе до збігу PVC з відповідним класом сховища, якщо в адміністратора увімкнені класи сховища.
+  * Якщо користувач не вказує імʼя класу сховища, залиште поле `persistentVolumeClaim.storageClassName` нульовим. Це призведе до автоматичного надання користувачеві PV в кластері. Багато середовищ кластеру мають типовий клас сховища, або адміністратори можуть створити свій типовий клас сховища.
+* В інструментах спостерігайте за PVC, які не привʼязуються протягом певного часу та виводьте це користувачеві, оскільки це може вказувати на те, що у кластері відсутня підтримка динамічного сховища (у цьому випадку користувач повинен створити відповідний PV) або у кластері відсутня система сховища (у цьому випадку користувач не може розгортати конфігурацію, що вимагає PVC).
 
 ## {{% heading "whatsnext" %}}
 
-* Learn more about [Creating a PersistentVolume](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
-* Learn more about [Creating a PersistentVolumeClaim](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim).
-* Read the [Persistent Storage design document](https://git.k8s.io/design-proposals-archive/storage/persistent-storage.md).
+* Дізнайтеся більше про [створення PersistentVolume](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
+* Дізнайтеся більше про [створення PersistentVolumeClaim](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim).
+* Прочитайте [документ з дизайну постійного сховища](https://git.k8s.io/design-proposals-archive/storage/persistent-storage.md).
 
 ### API references {#reference}
 
-Read about the APIs described in this page:
+Дізнайтеся більше про описані на цій сторінці API:
 
 * [`PersistentVolume`](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/)
 * [`PersistentVolumeClaim`](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/)
