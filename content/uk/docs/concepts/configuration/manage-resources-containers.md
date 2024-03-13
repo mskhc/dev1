@@ -10,143 +10,83 @@ feature:
 
 <!-- overview -->
 
-When you specify a {{< glossary_tooltip term_id="pod" >}}, you can optionally specify how much of each resource a 
-{{< glossary_tooltip text="container" term_id="container" >}} needs. The most common resources to specify are CPU and memory 
-(RAM); there are others.
+Коли ви визначаєте {{< glossary_tooltip term_id="pod" >}}, ви можете додатково вказати, скільки кожного ресурсу потребує {{< glossary_tooltip text="контейнер" term_id="container" >}}. Найпоширеніші ресурси для вказання — це процесор та памʼять 
+(RAM); є й інші.
 
-When you specify the resource _request_ for containers in a Pod, the
-{{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}} uses this information to decide which node to place the Pod on. 
-When you specify a resource _limit_ for a container, the {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} enforces those 
-limits so that the running container is not allowed to use more of that resource 
-than the limit you set. The kubelet also reserves at least the _request_ amount of 
-that system resource specifically for that container to use.
+Коли ви вказуєте _запит ресурсів_ для контейнерів в Podʼі, {{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}} використовує цю інформацію для вибору вузла, на який розмістити Pod. Коли ви вказуєте _обмеження ресурсів_ для контейнера, {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} забезпечує виконання цих обмежень, щоб запущений контейнер не міг використовувати більше цього ресурсу, ніж обмеження, яке ви встановили. Крім того, kubelet резервує принаймні ту кількість _запитуваних_ ресурсів спеціально для використання цим контейнером.
 
 <!-- body -->
 
-## Requests and limits
+## Запити та обмеження {#requests-and-limits}
 
-If the node where a Pod is running has enough of a resource available, it's possible (and
-allowed) for a container to use more resource than its `request` for that resource specifies.
-However, a container is not allowed to use more than its resource `limit`.
+Якщо вузол, на якому запущений Pod, має достатньо вільного ресурсу, то можливе (і дозволено), щоб контейнер використовував більше ресурсу, ніж його `запит` для цього ресурсу вказує. Однак контейнеру не дозволяється використовувати більше, ніж його `обмеження` ресурсу.
 
-For example, if you set a `memory` request of 256 MiB for a container, and that container is in
-a Pod scheduled to a Node with 8GiB of memory and no other Pods, then the container can try to use
-more RAM.
+Наприклад, якщо ви встановите запит `memory` 256 МіБ для контейнера, і цей контейнер буде в Pod, запланованому на вузол з 8 ГіБ памʼяті та без інших Pod, то контейнер може спробувати використати більше оперативної памʼяті.
 
-If you set a `memory` limit of 4GiB for that container, the kubelet (and
-{{< glossary_tooltip text="container runtime" term_id="container-runtime" >}}) enforce the limit.
-The runtime prevents the container from using more than the configured resource limit. For example:
-when a process in the container tries to consume more than the allowed amount of memory,
-the system kernel terminates the process that attempted the allocation, with an out of memory
-(OOM) error.
+Якщо ви встановите обмеження `memory` 4 ГіБ для цього контейнера, kubelet (і
+{{< glossary_tooltip text="середовище виконання контейнерів" term_id="container-runtime" >}}) забезпечують виконання обмеження. Середовище запобігає контейнеру використовувати більше, ніж налаштоване обмеження ресурсів. Наприклад: коли процес в контейнері намагається використати більше дозволеної кількості памʼяті, ядро системи припиняє виконання процесу, що спробував здійснити виділення, з помилкою нестача памʼяті (out of memory, OOM).
 
-Limits can be implemented either reactively (the system intervenes once it sees a violation)
-or by enforcement (the system prevents the container from ever exceeding the limit). Different
-runtimes can have different ways to implement the same restrictions.
+Обмеження можуть бути виконані реактивно (система втручається після виявлення порушення) або за допомогою заборони (система завжди запобігає контейнеру перевищувати обмеження). Різні середовища можуть мати різні способи реалізації тих самих обмежень.
 
 {{< note >}}
-If you specify a limit for a resource, but do not specify any request, and no admission-time
-mechanism has applied a default request for that resource, then Kubernetes copies the limit
-you specified and uses it as the requested value for the resource.
+Якщо ви вказали обмеження для ресурсу, але не вказали жодного запиту, і жодний механізм часу входу не застосував стандартного значення запиту для цього ресурсу, то Kubernetes скопіює обмеження яке ви вказали та використовує його як запитане значення для ресурсу.
 {{< /note >}}
 
-## Resource types
+## Типи ресурсів {#resource-types}
 
-*CPU* and *memory* are each a *resource type*. A resource type has a base unit.
-CPU represents compute processing and is specified in units of [Kubernetes CPUs](#meaning-of-cpu).
-Memory is specified in units of bytes.
-For Linux workloads, you can specify _huge page_ resources.
-Huge pages are a Linux-specific feature where the node kernel allocates blocks of memory
-that are much larger than the default page size.
+_ЦП_ та _памʼять_ кожен є _типом ресурсу_. Тип ресурсу має базові одиниці вимірювання. ЦП представляє обчислювальні ресурси та вказується в одиницях [ЦП Kubernetes](#meaning-of-cpu). Памʼять вказується в байтах. Для робочих завдань на Linux ви можете вказати _huge page_ ресурсів. Huge page є функцією, специфічною для Linux, де ядро вузла виділяє блоки памʼяті, що значно більше, ніж розмір стандартної сторінки.
 
-For example, on a system where the default page size is 4KiB, you could specify a limit,
-`hugepages-2Mi: 80Mi`. If the container tries allocating over 40 2MiB huge pages (a
-total of 80 MiB), that allocation fails.
+Наприклад, у системі, де розмір стандартної сторінки становить 4 КіБ, ви можете вказати обмеження `hugepages-2Mi: 80Mi`. Якщо контейнер намагається виділити більше ніж 40 2МіБ великих сторінок (всього 80 МіБ), то це виділення не вдасться.
 
 {{< note >}}
-You cannot overcommit `hugepages-*` resources.
-This is different from the `memory` and `cpu` resources.
+Ви не можете перевищити ресурси `hugepages-*`. Це відрізняється від ресурсів `memory` та `cpu`.
 {{< /note >}}
 
-CPU and memory are collectively referred to as *compute resources*, or *resources*. Compute
-resources are measurable quantities that can be requested, allocated, and
-consumed. They are distinct from
-[API resources](/docs/concepts/overview/kubernetes-api/). API resources, such as Pods and
-[Services](/docs/concepts/services-networking/service/) are objects that can be read and modified
-through the Kubernetes API server.
+ЦП та памʼять спільно називаються _обчислювальними ресурсами_ або _ресурсами_. Обчислювальні ресурси – це вимірювальні величини, які можна запитувати, виділяти та використовувати. Вони відрізняються від [ресурсів API](/docs/concepts/overview/kubernetes-api/). Ресурси API, такі як Pod та [Service](/docs/concepts/services-networking/service/), є обʼєктами, які можна читати та змінювати за допомогою сервера API Kubernetes.
 
-## Resource requests and limits of Pod and container
+## Запити та обмеження ресурсів для Podʼа та контейнера {#resource-requests-and-limits-for-pod-and-container}
 
-For each container, you can specify resource limits and requests,
-including the following:
+Для кожного контейнера ви можете вказати обмеження та запити ресурсів, включаючи наступне:
 
-* `spec.containers[].resources.limits.cpu`
-* `spec.containers[].resources.limits.memory`
-* `spec.containers[].resources.limits.hugepages-<size>`
-* `spec.containers[].resources.requests.cpu`
-* `spec.containers[].resources.requests.memory`
-* `spec.containers[].resources.requests.hugepages-<size>`
+- `spec.containers[].resources.limits.cpu`
+- `spec.containers[].resources.limits.memory`
+- `spec.containers[].resources.limits.hugepages-<size>`
+- `spec.containers[].resources.requests.cpu`
+- `spec.containers[].resources.requests.memory`
+- `spec.containers[].resources.requests.hugepages-<size>`
 
-Although you can only specify requests and limits for individual containers,
-it is also useful to think about the overall resource requests and limits for
-a Pod.
-For a particular resource, a *Pod resource request/limit* is the sum of the
-resource requests/limits of that type for each container in the Pod.
+Хоча ви можете вказувати запити та обмеження тільки для окремих контейнерів, також корисно думати про загальні запити та обмеження ресурсів для Podʼа. Для певного ресурсу *запит/обмеження ресурсів Podʼа* — це сума запитів/обмежень цього типу для кожного контейнера в Podʼі.
 
-## Resource units in Kubernetes
+## Одиниці виміру ресурсів в Kubernetes {#resource-units-in-kubernetes}
 
-### CPU resource units {#meaning-of-cpu}
+### Одиниці виміру ресурсів процесора {#meaning-of-cpu}
 
-Limits and requests for CPU resources are measured in *cpu* units.
-In Kubernetes, 1 CPU unit is equivalent to **1 physical CPU core**,
-or **1 virtual core**, depending on whether the node is a physical host
-or a virtual machine running inside a physical machine.
+Обмеження та запити ресурсів процесора вимірюються в одиницях _cpu_. У Kubernetes 1 одиниця CPU еквівалентна **1 фізичному ядру процесора** або **1 віртуальному ядру**, залежно від того, чи є вузол фізичним хостом або віртуальною машиною, яка працює всередині фізичної машини.
 
-Fractional requests are allowed. When you define a container with
-`spec.containers[].resources.requests.cpu` set to `0.5`, you are requesting half
-as much CPU time compared to if you asked for `1.0` CPU.
-For CPU resource units, the [quantity](/docs/reference/kubernetes-api/common-definitions/quantity/) expression `0.1` is equivalent to the
-expression `100m`, which can be read as "one hundred millicpu". Some people say
-"one hundred millicores", and this is understood to mean the same thing.
+Допускаються дробові запити. Коли ви визначаєте контейнер з `spec.containers[].resources.requests.cpu` встановленою на `0.5`, ви просите вдвічі менше часу CPU порівняно з тим, якщо ви запросили `1.0` CPU. Для одиниць ресурсів процесора вираз кількості `0.1` еквівалентний виразу `100m`, що може бути прочитано як "сто міліпроцесорів". Деякі люди кажуть "сто міліядер", і це розуміється так само.
 
-CPU resource is always specified as an absolute amount of resource, never as a relative amount. For example,
-`500m` CPU represents the roughly same amount of computing power whether that container
-runs on a single-core, dual-core, or 48-core machine.
+Ресурс CPU завжди вказується як абсолютна кількість ресурсу, ніколи як відносна кількість. Наприклад, `500m` CPU представляє приблизно ту саму обчислювальну потужність, не важливо чи цей контейнер працює на одноядерній, двоядерній або 48-ядерній машині.
 
 {{< note >}}
-Kubernetes doesn't allow you to specify CPU resources with a precision finer than
-`1m` or `0.001` CPU. To avoid accidentally using an invalid CPU quantity, it's useful to specify CPU units using the milliCPU form 
-instead of the decimal form when using less than 1 CPU unit. 
+Kubernetes не дозволяє вказувати ресурси CPU з точністю вище `1m` або `0.001` CPU. Щоб уникнути випадкового використання неприпустимої кількості CPU, корисно вказувати одиниці CPU, використовуючи форму міліCPU замість десяткової форми при використанні менше ніж 1 одиниця CPU.
 
-For example, you have a Pod that uses `5m` or `0.005` CPU and would like to decrease
-its CPU resources. By using the decimal form, it's harder to spot that `0.0005` CPU
-is an invalid value, while by using the milliCPU form, it's easier to spot that
-`0.5m` is an invalid value.
+Наприклад, у вас є Pod, який використовує `5m` або `0.005` CPU, і ви хочете зменшити його ресурси CPU. Використовуючи десяткову форму, важко помітити, що `0.0005` CPU є неприпустимим значенням, тоді як використовуючи форму міліCPU, легше помітити, що `0.5m` є неприпустимим значенням.
 {{< /note >}}
 
-### Memory resource units {#meaning-of-memory}
+### Одиниці виміру ресурсів памʼяті {#meaning-of-memory}
 
-Limits and requests for `memory` are measured in bytes. You can express memory as
-a plain integer or as a fixed-point number using one of these
-[quantity](/docs/reference/kubernetes-api/common-definitions/quantity/) suffixes:
-E, P, T, G, M, k. You can also use the power-of-two equivalents: Ei, Pi, Ti, Gi,
-Mi, Ki. For example, the following represent roughly the same value:
+Обмеження та запити для `memory` вимірюються в байтах. Ви можете вказувати памʼять як звичайне ціле число або як число з плаваючою комою, використовуючи один з наступних суфіксів [кількості](/docs/reference/kubernetes-api/common-definitions/quantity/): E, P, T, G, M, k. Ви також можете використовувати еквіваленти степенів двійки: Ei, Pi, Ti, Gi, Mi, Ki. Наприклад, наступне приблизно представляє те ж саме значення:
 
 ```shell
 128974848, 129e6, 129M,  128974848000m, 123Mi
 ```
 
-Pay attention to the case of the suffixes. If you request `400m` of memory, this is a request
-for 0.4 bytes. Someone who types that probably meant to ask for 400 mebibytes (`400Mi`)
-or 400 megabytes (`400M`).
+Звертайте увагу на регістр суфіксів. Якщо ви запитуєте `400m` памʼяті, це запит на 0.4 байта. Той, хто вводить це, ймовірно, мав на увазі запросити 400 мебібайтів (`400Mi`)
+або 400 мегабайтів (`400M`).
 
-## Container resources example {#example-1}
+## Приклад ресурсів контейнера {#example-1}
 
-The following Pod has two containers. Both containers are defined with a request for
-0.25 CPU
-and 64MiB (2<sup>26</sup> bytes) of memory. Each container has a limit of 0.5
-CPU and 128MiB of memory. You can say the Pod has a request of 0.5 CPU and 128
-MiB of memory, and a limit of 1 CPU and 256MiB of memory.
+У наступному Podʼі є два контейнери. Обидва контейнери визначені з запитом на 0,25 CPU і 64 МіБ (2<sup>26</sup> байт) памʼяті. Кожен контейнер має обмеження в 0,5 CPU та 128 МіБ памʼяті. Можна сказати, що у Podʼі є запит на 0,5 CPU та 128 МіБ памʼяті, та обмеження в 1 CPU та 256 МіБ памʼяті.
 
 ```yaml
 ---
@@ -176,193 +116,120 @@ spec:
         cpu: "500m"
 ```
 
-## How Pods with resource requests are scheduled
+## Як Podʼи з запитаними ресурсами плануються {#how-pods-with-resource-requests-are-scheduled}
 
-When you create a Pod, the Kubernetes scheduler selects a node for the Pod to
-run on. Each node has a maximum capacity for each of the resource types: the
-amount of CPU and memory it can provide for Pods. The scheduler ensures that,
-for each resource type, the sum of the resource requests of the scheduled
-containers is less than the capacity of the node.
-Note that although actual memory
-or CPU resource usage on nodes is very low, the scheduler still refuses to place
-a Pod on a node if the capacity check fails. This protects against a resource
-shortage on a node when resource usage later increases, for example, during a
-daily peak in request rate.
+Коли ви створюєте Pod, планувальник Kubernetes вибирає вузол, на якому Pod буде запущено. Кожен вузол має максимальну місткість для кожного з типів ресурсів: кількість процесорних ядер (CPU) та обсяг памʼяті, які він може надати для Podʼів. Планувальник забезпечує, що для кожного типу ресурсів сума запитів ресурсів запланованих контейнерів буде менше, ніж місткість вузла. Зверніть увагу, що навіть якщо фактичне використання ресурсів CPU або памʼяті на вузлі дуже низьке, планувальник все одно відмовляється розміщувати Pod на вузлі, якщо перевірка місткості не пройшла успішно. Це захищає від нестачі ресурсів на вузлі, коли пізніше збільшується використання ресурсів, наприклад, під час денного піка запитів.
 
-## How Kubernetes applies resource requests and limits {#how-pods-with-resource-limits-are-run}
+## Як Kubernetes застосовує запити на ресурси та обмеження{#how-pods-with-resource-limits-are-run}
 
-When the kubelet starts a container as part of a Pod, the kubelet passes that container's
-requests and limits for memory and CPU to the container runtime.
+Коли kubelet запускає контейнер як частину Podʼу, він передає запити та обмеження для памʼяті та CPU цього контейнера до середовища виконання контейнера.
 
-On Linux, the container runtime typically configures
-kernel {{< glossary_tooltip text="cgroups" term_id="cgroup" >}} that apply and enforce the
-limits you defined.
+У Linux середовище виконання контейнера зазвичай налаштовує контрольні групи (cgroups) ядра, які застосовують і виконують обмеження, що ви визначили.
 
-- The CPU limit defines a hard ceiling on how much CPU time that the container can use.
-  During each scheduling interval (time slice), the Linux kernel checks to see if this
-  limit is exceeded; if so, the kernel waits before allowing that cgroup to resume execution.
-- The CPU request typically defines a weighting. If several different containers (cgroups)
-  want to run on a contended system, workloads with larger CPU requests are allocated more
-  CPU time than workloads with small requests.
-- The memory request is mainly used during (Kubernetes) Pod scheduling. On a node that uses
-  cgroups v2, the container runtime might use the memory request as a hint to set
-  `memory.min` and `memory.low`.
-- The memory limit defines a memory limit for that cgroup. If the container tries to
-  allocate more memory than this limit, the Linux kernel out-of-memory subsystem activates
-  and, typically, intervenes by stopping one of the processes in the container that tried
-  to allocate memory. If that process is the container's PID 1, and the container is marked
-  as restartable, Kubernetes restarts the container.
-- The memory limit for the Pod or container can also apply to pages in memory backed
-  volumes, such as an `emptyDir`. The kubelet tracks `tmpfs` emptyDir volumes as container
-  memory use, rather than as local ephemeral storage.
+- Обмеження CPU встановлює жорсткий ліміт на те, скільки часу процесора контейнер може використовувати. Протягом кожного інтервалу планування (часового відрізка) ядро Linux перевіряє, чи перевищується це обмеження; якщо так, ядро чекає, перш ніж дозволити цій групі продовжити виконання.
+- Запит CPU зазвичай визначає вагу. Якщо кілька різних контейнерів (cgroups) хочуть працювати на конкуруючій системі, робочі навантаження з більшими запитами CPU отримують більше часу CPU, ніж робочі навантаження з малими запитами.
+- Запит памʼяті в основному використовується під час планування Podʼу (Kubernetes). На вузлі, що використовує cgroups v2, середовище виконання контейнера може використовувати запит памʼяті як підказку для встановлення `memory.min` та `memory.low`.
+- Обмеження памʼяті встановлює обмеження памʼяті для цієї контрольної групи. Якщо контейнер намагається виділити більше памʼяті, ніж це обмеження, підсистема управління памʼяттю Linux активується і, зазвичай, втручається, зупиняючи один з процесів у контейнері, який намагався виділити памʼять. Якщо цей процес є PID 1 контейнера, і контейнер позначений як можливий до перезапуску, Kubernetes перезапускає контейнер.
+- Обмеження памʼяті для Podʼу або контейнера також може застосовуватися до сторінок в памʼяті, резервованих томами, як от `emptyDir`. Kubelet відстежує `tmpfs` томи `emptyDir` як використання памʼяті контейнера, а не як локальне ефемерне сховище.
 
-If a container exceeds its memory request and the node that it runs on becomes short of
-memory overall, it is likely that the Pod the container belongs to will be
-{{< glossary_tooltip text="evicted" term_id="eviction" >}}.
+Якщо контейнер перевищує свій запит на памʼять і вузол, на якому він працює, стикається з браком памʼяті взагалі, ймовірно, що Pod, якому належить цей контейнер, буде {{< glossary_tooltip text="виведено з експлуатації" term_id="eviction" >}}.
 
-A container might or might not be allowed to exceed its CPU limit for extended periods of time.
-However, container runtimes don't terminate Pods or containers for excessive CPU usage.
+Контейнер може або не може дозволяти перевищувати своє обмеження CPU протягом тривалого часу. Однак середовище виконання контейнерів не припиняють роботу Podʼа або контейнерів через надмірне використання CPU.
 
-To determine whether a container cannot be scheduled or is being killed due to resource limits,
-see the [Troubleshooting](#troubleshooting) section.
+Щоб визначити, чи не можна розмістити контейнер або, чи його роботи примусово припиняється через обмеження ресурсів, див. [Налагодження](#troubleshooting).
 
-### Monitoring compute & memory resource usage
+### Моніторинг використання обчислювальних ресурсів та ресурсів памʼяті {#monitoring-compute-memory-resources-usage}
 
-The kubelet reports the resource usage of a Pod as part of the Pod
-[`status`](/docs/concepts/overview/working-with-objects/#object-spec-and-status).
+kubelet повідомляє про використання ресурсів Podʼа як частину статусу Podʼа.
 
-If optional [tools for monitoring](/docs/tasks/debug/debug-cluster/resource-usage-monitoring/)
-are available in your cluster, then Pod resource usage can be retrieved either
-from the [Metrics API](/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api)
-directly or from your monitoring tools.
+Якщо в вашому кластері доступні [інструменти для моніторингу](/docs/tasks/debug/debug-cluster/resource-usage-monitoring/), то використання ресурсів Podʼа можна отримати або безпосередньо з [Metrics API](/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-api), або з вашого інструменту моніторингу.
 
-## Local ephemeral storage
+## Локальне тимчасове сховище {#local-ephemeral-storage}
 
 <!-- feature gate LocalStorageCapacityIsolation -->
 {{< feature-state for_k8s_version="v1.25" state="stable" >}}
 
-Nodes have local ephemeral storage, backed by
-locally-attached writeable devices or, sometimes, by RAM.
-"Ephemeral" means that there is no long-term guarantee about durability.
+На вузлах існує локальне тимчасове сховище, яке підтримується локально приєднаними пристроями для запису або іноді ОЗУ. "Тимчасове" означає, що не існує гарантії тривалості.
 
-Pods use ephemeral local storage for scratch space, caching, and for logs.
-The kubelet can provide scratch space to Pods using local ephemeral storage to
-mount [`emptyDir`](/docs/concepts/storage/volumes/#emptydir)
- {{< glossary_tooltip term_id="volume" text="volumes" >}} into containers.
+Podʼи використовують тимчасове локальне сховище для тимчасового простору, кешування та для логів. kubelet може надавати тимчасовий простір Podʼам, використовуючи локальне тимчасове сховище для підключення [`emptyDir`](/docs/concepts/storage/volumes/#emptydir)
+ {{< glossary_tooltip term_id="volume" text="тому" >}} до контейнерів.
 
-The kubelet also uses this kind of storage to hold
-[node-level container logs](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level),
-container images, and the writable layers of running containers.
+Крім того, kubelet використовує цей тип сховища для збереження [логів контейнерів на рівні вузла](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level), образів контейнерів та шарів з можливістю запису запущених контейнерів.
 
 {{< caution >}}
-If a node fails, the data in its ephemeral storage can be lost.
-Your applications cannot expect any performance SLAs (disk IOPS for example)
-from local ephemeral storage.
+Якщо вузол виходить з ладу, дані у його тимчасовому сховищі можуть бути втрачені. Ваші програми не можуть розраховувати на будь-які SLA щодо продуктивності (наприклад, IOPS диска) з локального тимчасового сховища.
 {{< /caution >}}
 
-
 {{< note >}}
-To make the resource quota work on ephemeral-storage, two things need to be done:
 
-* An admin sets the resource quota for ephemeral-storage in a namespace.
-* A user needs to specify limits for the ephemeral-storage resource in the Pod spec.
+Щоб квота ресурсів працювала на тимчасовому сховищі, потрібно зробити дві речі:
 
-If the user doesn't specify the ephemeral-storage resource limit in the Pod spec,
-the resource quota is not enforced on ephemeral-storage.
+- Адміністратор встановлює обмеження ресурсів для тимчасового сховища в просторі імен.
+- Користувач повинен вказати обмеження для ресурсу тимчасового сховища в специфікації Podʼа.
 
+Якщо користувач не вказує обмеження ресурсу тимчасового сховища в специфікації Podʼа, то обмеження ресурсу не накладається на тимчасове сховище.
 {{< /note >}}
 
-Kubernetes lets you track, reserve and limit the amount
-of ephemeral local storage a Pod can consume.
+Kubernetes дозволяє відстежувати, резервувати та обмежувати обсяг тимчасового локального сховища, яке може використовувати Pod.
 
-### Configurations for local ephemeral storage
+### Налаштування для локального тимчасового сховища {#configurations-for-local-ephemeral-storage}
 
-Kubernetes supports two ways to configure local ephemeral storage on a node:
+Kubernetes підтримує два способи налаштування локального тимчасового сховища на вузлі:
 {{< tabs name="local_storage_configurations" >}}
-{{% tab name="Single filesystem" %}}
-In this configuration, you place all different kinds of ephemeral local data
-(`emptyDir` volumes, writeable layers, container images, logs) into one filesystem.
-The most effective way to configure the kubelet means dedicating this filesystem
-to Kubernetes (kubelet) data.
+{{% tab name="Одна файлова система" %}}
+У цій конфігурації ви розміщуєте всі різновиди тимчасових локальних даних (таких як тимчасові томи `emptyDir`, шари з можливістю запису, образи контейнерів, логи) в одній файловій системі. Найефективніший спосіб налаштування kubelet — призначити цю файлову систему для даних Kubernetes (kubelet).
 
-The kubelet also writes
-[node-level container logs](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level)
-and treats these similarly to ephemeral local storage.
+Kubelet також записує [логи контейнерів на рівні вузла](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level) та обробляє їх аналогічно до тимчасового локального сховища.
 
-The kubelet writes logs to files inside its configured log directory (`/var/log`
-by default); and has a base directory for other locally stored data
-(`/var/lib/kubelet` by default).
+Kubelet записує логи в файли всередині свого налаштованого каталогу журналів (`/var/log` типово); та має базовий каталог для інших локально збережених даних (`/var/lib/kubelet` типово).
 
-Typically, both `/var/lib/kubelet` and `/var/log` are on the system root filesystem,
-and the kubelet is designed with that layout in mind.
+Зазвичай як `/var/lib/kubelet`, так і `/var/log` знаходяться на кореневій файловій системі системи, і kubelet розроблений з урахуванням цієї структури.
 
-Your node can have as many other filesystems, not used for Kubernetes,
-as you like.
+Ваш вузол може мати стільки інших файлових систем, не використовуваних для Kubernetes, скільки вам потрібно.
 {{% /tab %}}
-{{% tab name="Two filesystems" %}}
-You have a filesystem on the node that you're using for ephemeral data that
-comes from running Pods: logs, and `emptyDir` volumes. You can use this filesystem
-for other data (for example: system logs not related to Kubernetes); it can even
-be the root filesystem.
+{{% tab name="Дві файлові системи" %}}
+Ви маєте файлову систему на вузлі, яку використовуєте для тимчасових даних, які надходять від запущених Podʼів: логи та томи `emptyDir`. Ви можете використовувати цю файлову систему для інших даних (наприклад: системні логи, не повʼязані з Kubernetes); це може навіть бути кореневою файловою системою.
 
-The kubelet also writes
-[node-level container logs](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level)
-into the first filesystem, and treats these similarly to ephemeral local storage.
+Kubelet також записує [логи контейнерів на рівні вузла](/docs/concepts/cluster-administration/logging/#logging-at-the-node-level) у першу файлову систему та обробляє їх аналогічно до тимчасового локального сховища.
 
-You also use a separate filesystem, backed by a different logical storage device.
-In this configuration, the directory where you tell the kubelet to place
-container image layers and writeable layers is on this second filesystem.
+Ви також використовуєте окрему файлову систему, яка базується на іншому логічному пристрої зберігання. У цій конфігурації каталог, де ви вказуєте kubelet розміщувати шари образів контейнерів та шари з можливістю запису, знаходиться на цій другій файловій системі.
 
-The first filesystem does not hold any image layers or writeable layers.
+Перша файлова система не містить жодних шарів образів або шарів з можливістью запису.
 
-Your node can have as many other filesystems, not used for Kubernetes,
-as you like.
+Ваш вузол може мати стільки інших файлових систем, не використовуваних для Kubernetes,
+скільки вам потрібно.
 {{% /tab %}}
 {{< /tabs >}}
 
-The kubelet can measure how much local storage it is using. It does this provided
-that you have set up the node using one of the supported configurations for local
-ephemeral storage.
+Kubelet може вимірювати, скільки локального сховища він використовує. Він робить це, якщо ви налаштували вузол за однією з підтримуваних конфігурацій для локального тимчасового сховища.
 
-If you have a different configuration, then the kubelet does not apply resource
-limits for ephemeral local storage.
+Якщо у вас інша конфігурація, то kubelet не застосовує обмеження ресурсів для тимчасового локального сховища.
 
 {{< note >}}
-The kubelet tracks `tmpfs` emptyDir volumes as container memory use, rather
-than as local ephemeral storage.
+Kubelet відстежує тимчасові томи `tmpfs` як використання памʼяті контейнера, а не як локальне тимчасове сховище.
 {{< /note >}}
 
 {{< note >}}
-The kubelet will only track the root filesystem for ephemeral storage. OS layouts that mount a separate disk to `/var/lib/kubelet` or `/var/lib/containers` will not report ephemeral storage correctly.
+Kubelet відстежує тільки кореневу файлову систему для тимчасового сховища. Розкладки ОС, які монтували окремий диск у `/var/lib/kubelet` або `/var/lib/containers`, не будуть правильно відображати тимчасове сховище.
 {{< /note >}}
 
-### Setting requests and limits for local ephemeral storage
+### Налаштування запитів та обмежень для локального тимчасового сховища {#setting-requests-and-limits-for-local-ephemeral-storage}
 
-You can specify `ephemeral-storage` for managing local ephemeral storage. Each
-container of a Pod can specify either or both of the following:
+Ви можете вказати `ephemeral-storage` для керування локальним тимчасовим сховищем. Кожен контейнер Podʼа може вказати одне або обидва з наступного:
 
-* `spec.containers[].resources.limits.ephemeral-storage`
-* `spec.containers[].resources.requests.ephemeral-storage`
+- `spec.containers[].resources.limits.ephemeral-storage`
+- `spec.containers[].resources.requests.ephemeral-storage`
 
-Limits and requests for `ephemeral-storage` are measured in byte quantities.
-You can express storage as a plain integer or as a fixed-point number using one of these suffixes:
-E, P, T, G, M, k. You can also use the power-of-two equivalents: Ei, Pi, Ti, Gi,
-Mi, Ki. For example, the following quantities all represent roughly the same value:
+Обмеження та запити для `ephemeral-storage` вимірюються в кількості байтів. Ви можете виражати сховище як звичайне ціле число або як число з плаваючою точкою, використовуючи один з наступних суфіксів: E, P, T, G, M, k. Ви також можете використовувати еквіваленти степенів двійки: Ei, Pi, Ti, Gi, Mi, Ki. Наприклад, наступні кількості приблизно представляють одне й те ж значення:
 
 - `128974848`
 - `129e6`
 - `129M`
 - `123Mi`
 
-Pay attention to the case of the suffixes. If you request `400m` of ephemeral-storage, this is a request
-for 0.4 bytes. Someone who types that probably meant to ask for 400 mebibytes (`400Mi`)
-or 400 megabytes (`400M`).
+Звертайте увагу на регістр суфіксів. Якщо ви запитуєте `400m` тимчасового сховища, це запит на 0,4 байти. Хтось, хто вводить це, мабуть, мав на меті запросити 400 мебібайтів (`400Mi`) або 400 мегабайтів (`400M`).
 
-In the following example, the Pod has two containers. Each container has a request of
-2GiB of local ephemeral storage. Each container has a limit of 4GiB of local ephemeral
-storage. Therefore, the Pod has a request of 4GiB of local ephemeral storage, and
-a limit of 8GiB of local ephemeral storage. 500Mi of that limit could be
-consumed by the `emptyDir` volume.
+У наступному прикладі Pod має два контейнери. Кожен контейнер має запит на 2 гігабайти локального тимчасового сховища. Кожен контейнер має обмеження на 4 гігабайти локального тимчасового сховища. Отже, у Podʼа запит на 4 гігабайти локального тимчасового сховища, і обмеження на 8 ГіБ локального тимчасового сховища. З цього обмеження 500 Мі може бути витрачено на тимчасовий том `emptyDir`.
 
 ```yaml
 apiVersion: v1
@@ -397,163 +264,101 @@ spec:
         sizeLimit: 500Mi
 ```
 
-### How Pods with ephemeral-storage requests are scheduled
+### Як розміщуються Podʼи з запитами на локальне тимчасове сховище {#how-pods-with-local-ephemeral-storage-requests-are-scheduled}
 
-When you create a Pod, the Kubernetes scheduler selects a node for the Pod to
-run on. Each node has a maximum amount of local ephemeral storage it can provide for Pods.
-For more information, see
-[Node Allocatable](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable).
+При створенні Podʼа планувальник Kubernetes вибирає вузол, на якому буде виконуватися Под. Кожен вузол має максимальну кількість локального тимчасового сховища, яке він може надати для Podʼів. Для отримання додаткової інформації дивіться розділ [Виділення ресурсів вузла](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable).
 
-The scheduler ensures that the sum of the resource requests of the scheduled containers is less than the capacity of the node.
+Планувальник забезпечує те, щоб сума запитів ресурсів запланованих контейнерів була меншою за потужність вузла.
 
-### Ephemeral storage consumption management {#resource-emphemeralstorage-consumption}
+### Керування використанням локального тимчасового сховища {#resource-emphemeralstorage-consumption}
 
-If the kubelet is managing local ephemeral storage as a resource, then the
-kubelet measures storage use in:
+Якщо kubelet керує локальним тимчасовим сховищем як ресурсом, тоді kubelet вимірює використання сховища у таких областях:
 
-- `emptyDir` volumes, except _tmpfs_ `emptyDir` volumes
-- directories holding node-level logs
-- writeable container layers
+- `emptyDir` томи, за винятком _tmpfs_ `emptyDir` томів
+- каталоги, де зберігаються логи на рівні вузла
+- шари контейнера з можливістю запису
 
-If a Pod is using more ephemeral storage than you allow it to, the kubelet
-sets an eviction signal that triggers Pod eviction.
+Якщо Pod використовує більше тимчасового сховища, ніж дозволяється, kubelet встановлює сигнал вивільнення, який викликає виведення Podʼа з обслуговування.
 
-For container-level isolation, if a container's writable layer and log
-usage exceeds its storage limit, the kubelet marks the Pod for eviction.
+Для ізоляції на рівні контейнера, якщо записуваний шар контейнера та використання логу перевищують обмеження щодо сховища, то kubelet позначає Pod для вивільнення.
 
-For pod-level isolation the kubelet works out an overall Pod storage limit by
-summing the limits for the containers in that Pod. In this case, if the sum of
-the local ephemeral storage usage from all containers and also the Pod's `emptyDir`
-volumes exceeds the overall Pod storage limit, then the kubelet also marks the Pod
-for eviction.
+Для ізоляції на рівні Podʼа kubelet визначає загальне обмеження сховища для Podʼа, підсумовуючи обмеження для контейнерів у цьому Podʼі. У цьому випадку, якщо сума використання локального тимчасового сховища з усіх контейнерів та `emptyDir` томів Podʼа перевищує загальне обмеження сховища для Podʼа, то kubelet також позначає Pod для вивільнення.
 
 {{< caution >}}
-If the kubelet is not measuring local ephemeral storage, then a Pod
-that exceeds its local storage limit will not be evicted for breaching
-local storage resource limits.
+Якщо kubelet не вимірює локальне тимчасове сховище, тоді Pod, який перевищує своє обмеження локального сховища, не буде виведено за порушення обмежень ресурсів локального сховища.
 
-However, if the filesystem space for writeable container layers, node-level logs,
-or `emptyDir` volumes falls low, the node
-{{< glossary_tooltip text="taints" term_id="taint" >}} itself as short on local storage
-and this taint triggers eviction for any Pods that don't specifically tolerate the taint.
-
-See the supported [configurations](#configurations-for-local-ephemeral-storage)
-for ephemeral local storage.
+Проте, якщо простір файлової системи для записуваних шарів контейнерів, журналів на рівні вузла або `emptyDir` томів стає малим, вузол встановлює для себе {{< glossary_tooltip text="позначку" term_id="taint" >}} недостатності місця у локальному сховищі, і ця позначка викликає виведення будь-яких Podʼів, які не толерують цю позначку. Дивіться підтримані [конфігурації](#configurations-for-local-ephemeral-storage) для локального тимчасового сховища.
 {{< /caution >}}
 
-The kubelet supports different ways to measure Pod storage use:
+kubelet підтримує різні способи вимірювання використання сховища Podʼа:
 
 {{< tabs name="resource-emphemeralstorage-measurement" >}}
-{{% tab name="Periodic scanning" %}}
-The kubelet performs regular, scheduled checks that scan each
-`emptyDir` volume, container log directory, and writeable container layer.
+{{% tab name="Періодичне сканування" %}}
+kubelet виконує регулярні заплановані перевірки, які сканують кожний `emptyDir` том, каталог логів контейнера та записуваний шар контейнера.
 
-The scan measures how much space is used.
+Під час сканування вимірюється обсяг використаного простору.
 
 {{< note >}}
-In this mode, the kubelet does not track open file descriptors
-for deleted files.
+У цьому режимі kubelet не відстежує відкриті дескриптори файлів для видалених файлів.
 
-If you (or a container) create a file inside an `emptyDir` volume,
-something then opens that file, and you delete the file while it is
-still open, then the inode for the deleted file stays until you close
-that file but the kubelet does not categorize the space as in use.
+Якщо ви (або контейнер) створюєте файл всередині `emptyDir` тому, потім щось відкриває цей файл, і ви видаляєте файл, поки він ще відкритий, то inode для видаленого файлу залишається до тих пір, поки ви не закриєте цей файл, але kubelet не класифікує цей простір як використаний.
 {{< /note >}}
 {{% /tab %}}
-{{% tab name="Filesystem project quota" %}}
+{{% tab name="Квоти проєктів файлової системи" %}}
 
 {{< feature-state for_k8s_version="v1.15" state="alpha" >}}
 
-Project quotas are an operating-system level feature for managing
-storage use on filesystems. With Kubernetes, you can enable project
-quotas for monitoring storage use. Make sure that the filesystem
-backing the `emptyDir` volumes, on the node, provides project quota support.
-For example, XFS and ext4fs offer project quotas.
+Квоти проєктів — це функціональність на рівні операційної системи для управління використанням сховища у файлових системах. У Kubernetes ви можете ввімкнути квоти проєктів для моніторингу використання сховища. Переконайтеся, що файлова система, яка підтримує `emptyDir` томи, на вузлі надає підтримку квот проєктів. Наприклад, XFS та ext4fs пропонують квоти проєктів.
 
 {{< note >}}
-Project quotas let you monitor storage use; they do not enforce limits.
+Квоти проєктів дозволяють вам відслідковувати використання сховища, вони не встановлюють обмеження.
 {{< /note >}}
 
-Kubernetes uses project IDs starting from `1048576`. The IDs in use are
-registered in `/etc/projects` and `/etc/projid`. If project IDs in
-this range are used for other purposes on the system, those project
-IDs must be registered in `/etc/projects` and `/etc/projid` so that
-Kubernetes does not use them.
+Kubernetes використовує ідентифікатори проєктів, що починаються з `1048576`. Використані ідентифікатори зареєстровані в `/etc/projects` та `/etc/projid`. Якщо ідентифікатори проєктів у цьому діапазоні використовуються для інших цілей у системі, ці ідентифікатори проєктів повинні бути зареєстровані в `/etc/projects` та `/etc/projid`, щоб Kubernetes не використовував їх.
 
-Quotas are faster and more accurate than directory scanning. When a
-directory is assigned to a project, all files created under a
-directory are created in that project, and the kernel merely has to
-keep track of how many blocks are in use by files in that project.
-If a file is created and deleted, but has an open file descriptor,
-it continues to consume space. Quota tracking records that space accurately
-whereas directory scans overlook the storage used by deleted files.
+Квоти є швидкими та точними, ніж сканування каталогів. Коли каталог призначений для проєкту, всі файли, створені в каталозі, створюються в цьому проєкті, і ядро просто відстежує, скільки блоків використовується файлами в цьому проєкті. Якщо файл створений і видалений, але має відкритий файловий дескриптор, він продовжує споживати місце. Відстеження квот точно відображає цей простір, тоді як сканування каталогів не враховує місце, використане видаленими файлами.
 
-If you want to use project quotas, you should:
+Якщо ви хочете використовувати квоти проєктів, вам потрібно:
 
-* Enable the `LocalStorageCapacityIsolationFSQuotaMonitoring=true`
-  [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
-  using the `featureGates` field in the
-  [kubelet configuration](/docs/reference/config-api/kubelet-config.v1beta1/)
-  or the `--feature-gates` command line flag.
+- Увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `LocalStorageCapacityIsolationFSQuotaMonitoring=true` використовуючи поле `featureGates` в [конфігурації kubelet](/docs/reference/config-api/kubelet-config.v1beta1/) або прапорець командного рядка `--feature-gates`.
 
-* Ensure that the root filesystem (or optional runtime filesystem)
-  has project quotas enabled. All XFS filesystems support project quotas.
-  For ext4 filesystems, you need to enable the project quota tracking feature
-  while the filesystem is not mounted.
+- Переконайтеся, що коренева файлова система (або додаткова файлова система запуску) має увімкнену підтримку квот проєктів. Всі файлові системи XFS підтримують квоти проєктів. Для файлових систем ext4fs вам потрібно увімкнути функцію відстеження квот проєктів допоки файлова система не змонтована.
 
   ```bash
-  # For ext4, with /dev/block-device not mounted
+  # Для ext4, з /dev/block-device, не змонтовано
   sudo tune2fs -O project -Q prjquota /dev/block-device
   ```
 
-* Ensure that the root filesystem (or optional runtime filesystem) is
-  mounted with project quotas enabled. For both XFS and ext4fs, the
-  mount option is named `prjquota`.
+- Переконайтеся, що коренева файлова система (або додаткова файлова система запуску) змонтована з увімкненими квотами проєктів. Для XFS та ext4fs параметр монтування має назву `prjquota`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Extended resources
+## Розширені ресурси {#extended-resources}
 
-Extended resources are fully-qualified resource names outside the
-`kubernetes.io` domain. They allow cluster operators to advertise and users to
-consume the non-Kubernetes-built-in resources.
+Розширені ресурси — це повністю кваліфіковані імена ресурсів поза доменом `kubernetes.io`. Вони дозволяють операторам кластера оголошувати, а користувачам використовувати ресурси, які не вбудовані в Kubernetes.
 
-There are two steps required to use Extended Resources. First, the cluster
-operator must advertise an Extended Resource. Second, users must request the
-Extended Resource in Pods.
+Щоб скористатися Розширеними ресурсами, потрібно виконати два кроки. По-перше, оператор кластера повинен оголошувати Розширений Ресурс. По-друге, користувачі повинні запитувати Розширений Ресурс в Podʼах.
 
-### Managing extended resources
+### Керування розширеними ресурсами {#managing-extended-resources}
 
-#### Node-level extended resources
+#### Ресурси на рівні вузла {#node-level-extended-resources}
 
-Node-level extended resources are tied to nodes.
+Ресурси на рівні вузла повʼязані з вузлами.
 
-##### Device plugin managed resources
-See [Device
-Plugin](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/)
-for how to advertise device plugin managed resources on each node.
+##### Керовані ресурси втулків пристроїв {#device-plugin-managed-resources}
 
-##### Other resources
+Дивіться [Втулок пристроїв](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/) щодо того, як оголошувати ресурси, що керуються втулком пристроїв на кожному вузлі.
 
-To advertise a new node-level extended resource, the cluster operator can
-submit a `PATCH` HTTP request to the API server to specify the available
-quantity in the `status.capacity` for a node in the cluster. After this
-operation, the node's `status.capacity` will include a new resource. The
-`status.allocatable` field is updated automatically with the new resource
-asynchronously by the kubelet.
+##### Інші ресурси {#other-resources}
 
-Because the scheduler uses the node's `status.allocatable` value when
-evaluating Pod fitness, the scheduler only takes account of the new value after
-that asynchronous update. There may be a short delay between patching the
-node capacity with a new resource and the time when the first Pod that requests
-the resource can be scheduled on that node.
+Щоб оголошувати новий розширений ресурс на рівні вузла, оператор кластера може надіслати HTTP-запит типу `PATCH` до API-сервера, щоб вказати доступну кількість в полі `status.capacity` для вузла у кластері. Після цієї операції поле `status.capacity` вузла буде містити новий ресурс. Поле `status.allocatable` оновлюється автоматично з новим ресурсом асинхронно за допомогою kubelet.
 
-**Example:**
+Оскільки планувальник використовує значення `status.allocatable` вузла при оцінці придатності Podʼа, планувальник враховує нове значення лише після цього асинхронного оновлення. Між моментом зміни потужності вузла новим ресурсом і часом, коли перший Pod, який запитує ресурс, може бути запланований на цьому вузлі, може відбуватися коротка затримка.
 
-Here is an example showing how to use `curl` to form an HTTP request that
-advertises five "example.com/foo" resources on node `k8s-node-1` whose master
-is `k8s-master`.
+**Приклад:**
+
+Нижче наведено приклад використання `curl` для формування HTTP-запиту, який оголошує п'ять ресурсів "example.com/foo" на вузлі `k8s-node-1`, майстер якого `k8s-master`.
 
 ```shell
 curl --header "Content-Type: application/json-patch+json" \
@@ -563,30 +368,21 @@ http://k8s-master:8080/api/v1/nodes/k8s-node-1/status
 ```
 
 {{< note >}}
-In the preceding request, `~1` is the encoding for the character `/`
-in the patch path. The operation path value in JSON-Patch is interpreted as a
-JSON-Pointer. For more details, see
-[IETF RFC 6901, section 3](https://tools.ietf.org/html/rfc6901#section-3).
+У запиті `~1` — це кодування символу `/` в шляху патча. Значення операційного шляху у JSON-Patch інтерпретується як JSON-вказівник. Для отримання докладнішої інформації дивіться [RFC 6901, розділ 3](https://tools.ietf.org/html/rfc6901#section-3).
 {{< /note >}}
 
-#### Cluster-level extended resources
+#### Ресурси на рівні кластера {#cluster-level-extended-resources}
 
-Cluster-level extended resources are not tied to nodes. They are usually managed
-by scheduler extenders, which handle the resource consumption and resource quota.
+Ресурси на рівні кластера не повʼязані з вузлами. Зазвичай ними керують розширювачі планувальника, які відповідають за споживання ресурсів і квоту ресурсів.
 
-You can specify the extended resources that are handled by scheduler extenders
-in [scheduler configuration](/docs/reference/config-api/kube-scheduler-config.v1/)
+Ви можете вказати розширені ресурси, які обробляються розширювачами планувальника, в [конфігурації планувальника](/docs/reference/config-api/kube-scheduler-config.v1/).
 
-**Example:**
+**Приклад:**
 
-The following configuration for a scheduler policy indicates that the
-cluster-level extended resource "example.com/foo" is handled by the scheduler
-extender.
+Наступна конфігурація для політики планувальника вказує на те, що ресурс на рівні кластера "example.com/foo" обробляється розширювачем планувальника.
 
-- The scheduler sends a Pod to the scheduler extender only if the Pod requests
-     "example.com/foo".
-- The `ignoredByScheduler` field specifies that the scheduler does not check
-     the "example.com/foo" resource in its `PodFitsResources` predicate.
+- Планувальник відправляє Pod до розширювача планувальника тільки у випадку, якщо Pod запитує "example.com/foo".
+- Поле `ignoredByScheduler` вказує, що планувальник не перевіряє ресурс "example.com/foo" в своєму предикаті `PodFitsResources`.
 
 ```json
 {
@@ -607,36 +403,27 @@ extender.
 }
 ```
 
-### Consuming extended resources
+### Використання розширених ресурсів {#consuming-extended-resources}
 
-Users can consume extended resources in Pod specs like CPU and memory.
-The scheduler takes care of the resource accounting so that no more than the
-available amount is simultaneously allocated to Pods.
+Користувачі можуть використовувати розширені ресурси у специфікаціях Podʼа, подібно до CPU та памʼяті. Планувальник відповідає за облік ресурсів, щоб одночасно не виділялося більше доступної кількості ресурсів для Podʼів.
 
-The API server restricts quantities of extended resources to whole numbers.
-Examples of _valid_ quantities are `3`, `3000m` and `3Ki`. Examples of
-_invalid_ quantities are `0.5` and `1500m`.
+Сервер API обмежує кількості розширених ресурсів цілими числами. Приклади _дійсних_ кількостей: `3`, `3000m` та `3Ki`. Приклади _недійсних_ кількостей: `0.5` та `1500m`.
 
 {{< note >}}
-Extended resources replace Opaque Integer Resources.
-Users can use any domain name prefix other than `kubernetes.io` which is reserved.
+Розширені ресурси замінюють Opaque Integer Resources. Користувачі можуть використовувати будь-який префікс доменного імені, крім `kubernetes.io`, який зарезервований.
 {{< /note >}}
 
-To consume an extended resource in a Pod, include the resource name as a key
-in the `spec.containers[].resources.limits` map in the container spec.
+Щоб використовувати розширений ресурс у Podʼі, включіть імʼя ресурсу як ключ у масив `spec.containers[].resources.limits` у специфікації контейнера.
 
 {{< note >}}
-Extended resources cannot be overcommitted, so request and limit
-must be equal if both are present in a container spec.
+Розширені ресурси не можуть бути перевищені, тому запити та обмеження мають бути рівними, якщо обидва присутні у специфікації контейнера.
 {{< /note >}}
 
-A Pod is scheduled only if all of the resource requests are satisfied, including
-CPU, memory and any extended resources. The Pod remains in the `PENDING` state
-as long as the resource request cannot be satisfied.
+Pod є запланованим лише у випадку, якщо всі запити ресурсів задовольняються, включаючи CPU, памʼять та будь-які розширені ресурси. Pod залишається у стані `PENDING`, поки запит ресурсу не може бути задоволений.
 
-**Example:**
+**Приклад:**
 
-The Pod below requests 2 CPUs and 1 "example.com/foo" (an extended resource).
+Нижче наведено Pod, який запитує 2 CPU та 1 "example.com/foo" (розширений ресурс).
 
 ```yaml
 apiVersion: v1
@@ -655,53 +442,42 @@ spec:
         example.com/foo: 1
 ```
 
-## PID limiting
+## Обмеження PID {#pid-limiting}
 
-Process ID (PID) limits allow for the configuration of a kubelet
-to limit the number of PIDs that a given Pod can consume. See
-[PID Limiting](/docs/concepts/policy/pid-limiting/) for information.
+Обмеження ідентифікаторів процесів (PID) дозволяють налаштувати kubelet для обмеження кількості PID, яку може використовувати певний Pod. Див. [Обмеження PID](/docs/concepts/policy/pid-limiting/) для отримання інформації.
 
-## Troubleshooting
+### Усунення несправностей {#troubleshooting}
 
-### My Pods are pending with event message `FailedScheduling`
+### Мої Podʼи знаходяться в стані очікування з повідомленням події `FailedScheduling` {#my-pods-are-pending-with-event-message-failedscheduling}
 
-If the scheduler cannot find any node where a Pod can fit, the Pod remains
-unscheduled until a place can be found. An
-[Event](/docs/reference/kubernetes-api/cluster-resources/event-v1/) is produced
-each time the scheduler fails to find a place for the Pod. You can use `kubectl`
-to view the events for a Pod; for example:
+Якщо планувальник не може знайти жодного вузла, де може розмістити Pod, Pod залишається
+незапланованим, поки не буде знайдено місце. Кожного разу, коли планувальник не може знайти місце для Podʼа, створюється [подія](/docs/reference/kubernetes-api/cluster-resources/event-v1/). Ви можете використовувати `kubectl` для перегляду подій Podʼа; наприклад:
 
 ```shell
 kubectl describe pod frontend | grep -A 9999999999 Events
 ```
-```
+
+```none
 Events:
   Type     Reason            Age   From               Message
   ----     ------            ----  ----               -------
   Warning  FailedScheduling  23s   default-scheduler  0/42 nodes available: insufficient cpu
 ```
 
-In the preceding example, the Pod named "frontend" fails to be scheduled due to
-insufficient CPU resource on any node. Similar error messages can also suggest
-failure due to insufficient memory (PodExceedsFreeMemory). In general, if a Pod
-is pending with a message of this type, there are several things to try:
+У прикладі Pod під назвою "frontend" не вдалося запланувати через недостатній ресурс CPU на будь-якому вузлі. Схожі повідомлення про помилку також можуть вказувати на невдачу через недостатню памʼять (PodExceedsFreeMemory). Загалом, якщо Pod знаходиться в стані очікування з таким типом повідомлення, є кілька речей, які варто спробувати:
 
-- Add more nodes to the cluster.
-- Terminate unneeded Pods to make room for pending Pods.
-- Check that the Pod is not larger than all the nodes. For example, if all the
-  nodes have a capacity of `cpu: 1`, then a Pod with a request of `cpu: 1.1` will
-  never be scheduled.
-- Check for node taints. If most of your nodes are tainted, and the new Pod does
-  not tolerate that taint, the scheduler only considers placements onto the
-  remaining nodes that don't have that taint.
+- Додайте більше вузлів у кластер.
+- Завершіть непотрібні Podʼи, щоб звільнити місце для очікуваних Podʼів.
+- Перевірте, що Pod не є більшим, ніж усі вузли. Наприклад, якщо всі вузли мають місткість `cpu: 1`, то Pod з запитом `cpu: 1.1` ніколи не буде запланованим.
+- Перевірте наявність "taint" вузла. Якщо більшість ваших вузлів мають "taint", і новий Pod не толерує цей "taint", планувальник розглядає розміщення лише на залишкових вузлах, які не мають цього "taint".
 
-You can check node capacities and amounts allocated with the
-`kubectl describe nodes` command. For example:
+Ви можете перевірити місткості вузлів та виділені обсяги ресурсів за допомогою команди `kubectl describe nodes`. Наприклад:
 
 ```shell
 kubectl describe nodes e2e-test-node-pool-4lw4
 ```
-```
+
+```none
 Name:            e2e-test-node-pool-4lw4
 [ ... lines removed for clarity ...]
 Capacity:
@@ -720,7 +496,9 @@ Non-terminated Pods:        (5 in total)
   kube-system  kube-dns-3297075139-61lj3             260m (13%)    0 (0%)      100Mi (1%)       170Mi (2%)
   kube-system  kube-proxy-e2e-test-...               100m (5%)     0 (0%)      0 (0%)           0 (0%)
   kube-system  monitoring-influxdb-grafana-v4-z1m12  200m (10%)    200m (10%)  600Mi (8%)       600Mi (8%)
-  kube-system  node-problem-detector-v0.1-fj7m3      20m (1%)      200m (10%)  20Mi (0%)        100Mi (1%)
+  kube-system  node-problem-detector-v0.1-fj7m3      20m (1%)      200m (10%)  20Mi
+
+ (0%)        100Mi (1%)
 Allocated resources:
   (Total limits may be over 100 percent, i.e., overcommitted.)
   CPU Requests    CPU Limits    Memory Requests    Memory Limits
@@ -728,47 +506,29 @@ Allocated resources:
   680m (34%)      400m (20%)    920Mi (11%)        1070Mi (13%)
 ```
 
-In the preceding output, you can see that if a Pod requests more than 1.120 CPUs
-or more than 6.23Gi of memory, that Pod will not fit on the node.
+У виводі ви можете побачити, що якщо Pod запитує більше 1,120 CPU або більше 6,23 ГБ памʼяті, то цей Pod не поміститься на вузлі.
 
-By looking at the “Pods” section, you can see which Pods are taking up space on
-the node.
+Дивлячись на розділ "Podʼи", ви можете побачити, які Podʼи займають місце на вузлі.
 
-The amount of resources available to Pods is less than the node capacity because
-system daemons use a portion of the available resources. Within the Kubernetes API,
-each Node has a `.status.allocatable` field
-(see [NodeStatus](/docs/reference/kubernetes-api/cluster-resources/node-v1/#NodeStatus)
-for details).
+Обсяг ресурсів, доступних для Podʼів, менший за місткість вузла, оскільки системні служби використовують частину доступних ресурсів. У Kubernetes API, кожен вузол має поле `.status.allocatable` (див. [NodeStatus](/docs/reference/kubernetes-api/cluster-resources/node-v1/#NodeStatus) для деталей).
 
-The `.status.allocatable` field describes the amount of resources that are available
-to Pods on that node (for example: 15 virtual CPUs and 7538 MiB of memory).
-For more information on node allocatable resources in Kubernetes, see
-[Reserve Compute Resources for System Daemons](/docs/tasks/administer-cluster/reserve-compute-resources/).
+Поле `.status.allocatable` описує обсяг ресурсів, доступних для Podʼів на цьому вузлі (наприклад: 15 віртуальних ЦП та 7538 МіБ памʼяті). Для отримання додаткової інформації про виділені ресурси вузла в Kubernetes дивіться [Резервування обчислювальних ресурсів для системних служб](/docs/tasks/administer-cluster/reserve-compute-resources/).
 
-You can configure [resource quotas](/docs/concepts/policy/resource-quotas/)
-to limit the total amount of resources that a namespace can consume.
-Kubernetes enforces quotas for objects in particular namespace when there is a
-ResourceQuota in that namespace.
-For example, if you assign specific namespaces to different teams, you
-can add ResourceQuotas into those namespaces. Setting resource quotas helps to
-prevent one team from using so much of any resource that this over-use affects other teams.
+Ви можете налаштувати [квоти ресурсів](/docs/concepts/policy/resource-quotas/) для обмеження загального обсягу ресурсів, який може споживати простір імен. Kubernetes забезпечує дотримання квот для обʼєктів в конкретному просторі імен, коли існує ResourceQuota в цьому просторі імен. Наприклад, якщо ви призначаєте конкретні простори імен різним командам, ви можете додавати ResourceQuotas в ці простори імен. Встановлення квот ресурсів допомагає запобігти використанню однією командою так багато будь-якого ресурсу, що це впливає на інші команди.
 
-You should also consider what access you grant to that namespace:
-**full** write access to a namespace allows someone with that access to remove any
-resource, including a configured ResourceQuota.
+Вам також варто розглянути, який доступ ви надаєте в цьому просторі імен: **повний** дозвіл на запис у простір імен дозволяє тому, хто має такий доступ, видаляти будь-який ресурс, включаючи налаштований ResourceQuota.
 
-### My container is terminated
+### Робота мого контейнера завершується примусово {#my-container-is-terminted}
 
-Your container might get terminated because it is resource-starved. To check
-whether a container is being killed because it is hitting a resource limit, call
-`kubectl describe pod` on the Pod of interest:
+Робота вашого контейнера може бути завершена через нестачу ресурсів. Щоб перевірити, чи контейнер був завершений через досягнення обмеження ресурсів, викличте `kubectl describe pod` для цікавого вас Podʼа:
 
 ```shell
 kubectl describe pod simmemleak-hra99
 ```
 
-The output is similar to:
-```
+Вивід буде схожий на:
+
+```none
 Name:                           simmemleak-hra99
 Namespace:                      default
 Image(s):                       saadali/simmemleak
@@ -806,21 +566,15 @@ Events:
   Normal  Killing    32s   kubelet            Killing container with id ead3fb35-5cf5-44ed-9ae1-488115be66c6: Need to kill Pod
 ```
 
-In the preceding example, the `Restart Count:  5` indicates that the `simmemleak`
-container in the Pod was terminated and restarted five times (so far).
-The `OOMKilled` reason shows that the container tried to use more memory than its limit.
+У прикладі `Restart Count:  5` вказує на те, що контейнер `simmemleak` у Podʼі був завершений та перезапущений пʼять разів (до цього моменту). Причина `OOMKilled` показує, що контейнер намагався використовувати більше памʼяті, ніж встановлений йому ліміт.
 
-Your next step might be to check the application code for a memory leak. If you
-find that the application is behaving how you expect, consider setting a higher
-memory limit (and possibly request) for that container.
+Наступним кроком може бути перевірка коду програми на витік памʼяті. Якщо ви встановите, що програма працює так, як очікувалося, розгляньте встановлення вищого ліміту памʼяті (і, можливо, запит) для цього контейнера.
 
 ## {{% heading "whatsnext" %}}
 
-* Get hands-on experience [assigning Memory resources to containers and Pods](/docs/tasks/configure-pod-container/assign-memory-resource/).
-* Get hands-on experience [assigning CPU resources to containers and Pods](/docs/tasks/configure-pod-container/assign-cpu-resource/).
-* Read how the API reference defines a [container](/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container)
-  and its [resource requirements](/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources)
-* Read about [project quotas](https://www.linux.org/docs/man8/xfs_quota.html) in XFS
-* Read more about the [kube-scheduler configuration reference (v1)](/docs/reference/config-api/kube-scheduler-config.v1/)
-* Read more about [Quality of Service classes for Pods](/docs/concepts/workloads/pods/pod-qos/)
-
+- Отримайте практичний досвід [призначення ресурсів памʼяті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/).
+- Отримайте практичний досвід [призначення ресурсів ЦП контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-cpu-resource/).
+- Прочитайте, як API-довідка визначає [контейнер](/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) та його [вимоги до ресурсів](/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources)
+- Прочитайте про [квоти ресурсів проєкту](https://www.linux.org/docs/man8/xfs_quota.html) в XFS
+- Дізнайтеся більше про [конфігурацію планувальника kube-scheduler (v1)](/docs/reference/config-api/kube-scheduler-config.v1/)
+- Дізнайтеся більше про [класи якості обслуговування для Podʼів](/docs/concepts/workloads/pods/pod-qos/)

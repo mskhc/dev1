@@ -6,264 +6,163 @@ content_type: concept
 feature:
   title: Управління Secret та налаштуваннями
   description: >
-    Розгортання та оновлення Secrets та налаштуваннями застосунків без перебудови образу та без розкриття Secrets в конфігурації стеку.
+    Розгортайте та оновлюйте Secrets та налаштування застосунків без перебудови образу контейнера та без розкриття Secrets в конфігурації.
 weight: 30
 ---
 
 <!-- overview -->
 
-A Secret is an object that contains a small amount of sensitive data such as
-a password, a token, or a key. Such information might otherwise be put in a
-{{< glossary_tooltip term_id="pod" >}} specification or in a
-{{< glossary_tooltip text="container image" term_id="image" >}}. Using a
-Secret means that you don't need to include confidential data in your
-application code.
+Secret — це обʼєкт, який містить невелику кількість конфіденційних даних, таких як пароль, токен або ключ. Така інформація також може бути включена до специфікації {{< glossary_tooltip term_id="pod" >}} або в {{< glossary_tooltip text="образ контейнера" term_id="image" >}}. Використання Secret означає, що вам не потрібно включати конфіденційні дані у ваш код.
 
-Because Secrets can be created independently of the Pods that use them, there
-is less risk of the Secret (and its data) being exposed during the workflow of
-creating, viewing, and editing Pods. Kubernetes, and applications that run in
-your cluster, can also take additional precautions with Secrets, such as avoiding
-writing sensitive data to nonvolatile storage.
+Оскільки Secret можуть бути створені незалежно від Podʼів, які їх використовують, існує менше ризику того, що Secret (і його дані) буде викрито під час процесу створення, перегляду та редагування Podʼів. Kubernetes та програми, які працюють у вашому кластері, також можуть вживати додаткових заходів безпеки щодо Secretʼів, наприклад, уникання запису конфіденційних даних у енергонезалежне сховище.
 
-Secrets are similar to {{< glossary_tooltip text="ConfigMaps" term_id="configmap" >}}
-but are specifically intended to hold confidential data.
+Secretʼи схожі на {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}}, але призначені для зберігання конфіденційних даних.
 
 {{< caution >}}
-Kubernetes Secrets are, by default, stored unencrypted in the API server's underlying data store
-(etcd). Anyone with API access can retrieve or modify a Secret, and so can anyone with access to etcd.
-Additionally, anyone who is authorized to create a Pod in a namespace can use that access to read
-any Secret in that namespace; this includes indirect access such as the ability to create a
-Deployment.
+Керовані Kubernetes Secretʼи, стандартно, зберігаються незашифрованими у базі даних API-сервера (etcd). Будь-хто з доступом до API може отримати або змінити Secret, так само як будь-хто з доступом до etcd. Крім того, будь-хто, хто має дозвіл на створення Podʼа у просторі імен, може використовувати цей доступ для читання будь-якого Secretʼу у цьому просторі імен; це включає і непрямий доступ, такий як можливість створення Deployment.
 
-In order to safely use Secrets, take at least the following steps:
+Щоб безпечно використовувати Secretʼи, виконайте принаймні наступні кроки:
 
-1. [Enable Encryption at Rest](/docs/tasks/administer-cluster/encrypt-data/) for Secrets.
-2. [Enable or configure RBAC rules](/docs/reference/access-authn-authz/authorization/) with
-   least-privilege access to Secrets.
-3. Restrict Secret access to specific containers.
-4. [Consider using external Secret store providers](https://secrets-store-csi-driver.sigs.k8s.io/concepts.html#provider-for-the-secrets-store-csi-driver).
+1. [Увімкніть шифрування у стані спокою](/docs/tasks/administer-cluster/encrypt-data/) для Secret.
+2. [Увімкніть або налаштуйте правила RBAC](/docs/reference/access-authn-authz/authorization/) з найменшими правами доступу до Secret.
+3. Обмежте доступ до Secret для конкретних контейнерів.
+4. [Розгляньте використання зовнішніх постачальників сховища для Secret](https://secrets-store-csi-driver.sigs.k8s.io/concepts.html#provider-for-the-secrets-store-csi-driver).
 
-For more guidelines to manage and improve the security of your Secrets, refer to
-[Good practices for Kubernetes Secrets](/docs/concepts/security/secrets-good-practices).
-
+Для отримання додаткових рекомендацій щодо керування та покращення безпеки ваших Secret, ознайомтесь з [Належними практиками для Secret Kubernetes](/docs/concepts/security/secrets-good-practices).
 {{< /caution >}}
 
-See [Information security for Secrets](#information-security-for-secrets) for more details.
+Дивіться [Інформаційна безпека для Secret](#information-security-for-secrets) для отримання додаткових відомостей.
 
 <!-- body -->
 
-## Uses for Secrets
+## Застосування Secretʼів {#uses-for-secrets}
 
-You can use Secrets for purposes such as the following:
+Ви можете використовувати Secrets для таких цілей:
 
-- [Set environment variables for a container](/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data).
-- [Provide credentials such as SSH keys or passwords to Pods](/docs/tasks/inject-data-application/distribute-credentials-secure/#provide-prod-test-creds).
-- [Allow the kubelet to pull container images from private registries](/docs/tasks/configure-pod-container/pull-image-private-registry/).
+- [Встановлення змінних оточення для контейнера](/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data).
+- [Надання облікових даних, таких як SSH-ключі або паролі, Podʼам](/docs/tasks/inject-data-application/distribute-credentials-secure/#provide-prod-test-creds).
+- [Дозвіл kubelet отримувати образи контейнера з приватних реєстрів](/docs/tasks/configure-pod-container/pull-image-private-registry/).
 
-The Kubernetes control plane also uses Secrets; for example,
-[bootstrap token Secrets](#bootstrap-token-secrets) are a mechanism to
-help automate node registration.
+Панель управління Kubernetes також використовує Secretʼи; наприклад, [Secret токену реєстрації вузлів](#bootstrap-token-secrets) — це механізм, що допомагає автоматизувати реєстрацію вузлів.
 
-### Use case: dotfiles in a secret volume
+### Сценарій використання: dotfiles у томі Secret {#use-case-dotfiles-in-secret-volume}
 
-You can make your data "hidden" by defining a key that begins with a dot.
-This key represents a dotfile or "hidden" file. For example, when the following Secret
-is mounted into a volume, `secret-volume`, the volume will contain a single file,
-called `.secret-file`, and the `dotfile-test-container` will have this file
-present at the path `/etc/secret-volume/.secret-file`.
+Ви можете зробити ваші дані "прихованими", визначивши ключ, який починається з крапки. Цей ключ являє собою dotfile або "прихований" файл. Наприклад, коли наступний Secret підключається до тому `secret-volume`, том буде містити один файл, з назвою `.secret-file`, і контейнер `dotfile-test-container` матиме цей файл присутнім у шляху `/etc/secret-volume/.secret-file`.
 
 {{< note >}}
-Files beginning with dot characters are hidden from the output of `ls -l`;
-you must use `ls -la` to see them when listing directory contents.
+Файли, які починаються з крапок, приховані від виводу `ls -l`; для того, щоб побачити їх під час перегляду вмісту каталогу використовуйте `ls -la`.
 {{< /note >}}
 
 {{% code language="yaml" file="secret/dotfile-secret.yaml" %}}
 
-### Use case: Secret visible to one container in a Pod
+### Сценарій використання: Secret видимий для одного контейнера в Pod {#use-case-secret-visible-to-one-container-in-a-pod}
 
-Consider a program that needs to handle HTTP requests, do some complex business
-logic, and then sign some messages with an HMAC. Because it has complex
-application logic, there might be an unnoticed remote file reading exploit in
-the server, which could expose the private key to an attacker.
+Припустимо, що у вас є програма, яка потребує обробки HTTP-запитів, виконання складної бізнес-логіки та підписування деяких повідомлень HMAC. Оскільки у неї складна логіка застосунків, може бути непоміченою вразливість на віддалене читання файлів з сервера, що може дати доступ до приватного ключа зловмиснику.
 
-This could be divided into two processes in two containers: a frontend container
-which handles user interaction and business logic, but which cannot see the
-private key; and a signer container that can see the private key, and responds
-to simple signing requests from the frontend (for example, over localhost networking).
+Це можна розділити на два процеси у двох контейнерах: контейнер інтерфейсу, який обробляє взаємодію з користувачем та бізнес-логіку, але не може бачити приватний ключ; і контейнер що перевіряє підписи, який може бачити приватний ключ, та відповідає на прості запити на підпис від фронтенду (наприклад, через мережу localhost).
 
-With this partitioned approach, an attacker now has to trick the application
-server into doing something rather arbitrary, which may be harder than getting
-it to read a file.
+З цим розділеним підходом зловмиснику зараз потрібно обманути сервер застосунків, щоб зробити щось досить довільне, що може бути складніше, ніж змусити його прочитати файл.
 
-### Alternatives to Secrets
+### Альтернативи Secretʼам {#alternatives-to-secrets}
 
-Rather than using a Secret to protect confidential data, you can pick from alternatives.
+Замість використання Secret для захисту конфіденційних даних, ви можете вибрати з альтернатив.
 
-Here are some of your options:
+Ось деякі з варіантів:
 
-- If your cloud-native component needs to authenticate to another application that you
-  know is running within the same Kubernetes cluster, you can use a
-  [ServiceAccount](/docs/reference/access-authn-authz/authentication/#service-account-tokens)
-  and its tokens to identify your client.
-- There are third-party tools that you can run, either within or outside your cluster,
-  that manage sensitive data. For example, a service that Pods access over HTTPS,
-  that reveals a Secret if the client correctly authenticates (for example, with a ServiceAccount
-  token).
-- For authentication, you can implement a custom signer for X.509 certificates, and use
-  [CertificateSigningRequests](/docs/reference/access-authn-authz/certificate-signing-requests/)
-  to let that custom signer issue certificates to Pods that need them.
-- You can use a [device plugin](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/)
-  to expose node-local encryption hardware to a specific Pod. For example, you can schedule
-  trusted Pods onto nodes that provide a Trusted Platform Module, configured out-of-band.
+- Якщо ваш хмарно-орієнтований компонент потребує автентифікації від іншого застосунку, який, ви знаєте, працює в межах того ж кластера Kubernetes, ви можете використовувати   [ServiceAccount](/docs/reference/access-authn-authz/authentication/#service-account-tokens) та його токени, щоб ідентифікувати вашого клієнта.
+- Існують сторонні інструменти, які ви можете запускати, як в межах, так і поза вашим кластером, які керують чутливими даними. Наприклад, Service, до якого Podʼи мають доступ через HTTPS, який використовує Secret, якщо клієнт правильно автентифікується (наприклад, з токеном ServiceAccount).
+- Для автентифікації ви можете реалізувати спеціальний підписувач для сертифікатів X.509, і використовувати [CertificateSigningRequests](/docs/reference/access-authn-authz/certificate-signing-requests/), щоб дозволити цьому спеціальному підписувачу видавати сертифікати Podʼам, які їх потребують.
+- Ви можете використовувати [втулок пристрою](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/), щоб використовувати апаратне забезпечення шифрування, яке локалізоване на вузлі, для певного Podʼа. Наприклад, ви можете розмістити довірені Podʼи на вузлах, які надають Trusted Platform Module.
 
-You can also combine two or more of those options, including the option to use Secret objects themselves.
+Ви також можете комбінувати два або більше з цих варіантів, включаючи варіант використання Secret самостійно.
 
-For example: implement (or deploy) an {{< glossary_tooltip text="operator" term_id="operator-pattern" >}}
-that fetches short-lived session tokens from an external service, and then creates Secrets based
-on those short-lived session tokens. Pods running in your cluster can make use of the session tokens,
-and operator ensures they are valid. This separation means that you can run Pods that are unaware of
-the exact mechanisms for issuing and refreshing those session tokens.
+Наприклад: реалізуйте (або розгорніть) {{< glossary_tooltip text="оператор" term_id="operator-pattern" >}}, що отримує тимчасові токени сеансів від зовнішнього Service, а потім створює Secretʼи на основі цих тимчасових токенів. Podʼи, що працюють у вашому кластері, можуть використовувати токени сеансів, а оператор забезпечує їхню дійсність. Це розподілення означає, що ви можете запускати Podʼи, які не знають точних механізмів створення та оновлення цих токенів сеансів.
 
-## Types of Secret {#secret-types}
+## Типи Secret {#secret-types}
 
-When creating a Secret, you can specify its type using the `type` field of
-the [Secret](/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/)
-resource, or certain equivalent `kubectl` command line flags (if available).
-The Secret type is used to facilitate programmatic handling of the Secret data.
+При створенні Secret ви можете вказати його тип, використовуючи поле `type` ресурсу [Secret](/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/), або певні еквівалентні прапорці командного рядка `kubectl` (якщо вони доступні). Тип Secret використовується для сприяння програмному обробленню даних Secret.
 
-Kubernetes provides several built-in types for some common usage scenarios.
-These types vary in terms of the validations performed and the constraints
-Kubernetes imposes on them.
+Kubernetes надає кілька вбудованих типів для деяких типових сценаріїв використання. Ці типи відрізняються за умовами перевірки та обмеженнями, які Kubernetes накладає на них.
 
-| Built-in Type                         | Usage                                   |
+| Вбудований Тип                        | Використання                            |
 | ------------------------------------- |---------------------------------------- |
-| `Opaque`                              | arbitrary user-defined data            |
-| `kubernetes.io/service-account-token` | ServiceAccount token                    |
-| `kubernetes.io/dockercfg`             | serialized `~/.dockercfg` file          |
-| `kubernetes.io/dockerconfigjson`      | serialized `~/.docker/config.json` file |
-| `kubernetes.io/basic-auth`            | credentials for basic authentication    |
-| `kubernetes.io/ssh-auth`              | credentials for SSH authentication      |
-| `kubernetes.io/tls`                   | data for a TLS client or server         |
-| `bootstrap.kubernetes.io/token`       | bootstrap token data                    |
+| `Opaque`                              | довільні користувацькі дані           |
+| `kubernetes.io/service-account-token` | токен ServiceAccount        |
+| `kubernetes.io/dockercfg`             | серіалізований файл `~/.dockercfg`     |
+| `kubernetes.io/dockerconfigjson`      | серіалізований файл `~/.docker/config.json` |
+| `kubernetes.io/basic-auth`            | облікові дані для базової автентифікації |
+| `kubernetes.io/ssh-auth`              | облікові дані для SSH автентифікації  |
+| `kubernetes.io/tls`                   | дані для TLS клієнта або сервера       |
+| `bootstrap.kubernetes.io/token`       | дані bootstrap token                    |
 
-You can define and use your own Secret type by assigning a non-empty string as the
-`type` value for a Secret object (an empty string is treated as an `Opaque` type).
+Ви можете визначити та використовувати власний тип Secret, присвоївши непорожній рядок як значення `type` обʼєкту Secret (порожній рядок розглядається як тип `Opaque`).
 
-Kubernetes doesn't impose any constraints on the type name. However, if you
-are using one of the built-in types, you must meet all the requirements defined
-for that type.
+Kubernetes не накладає жодних обмежень на назву типу. Однак, якщо ви використовуєте один з вбудованих типів, ви повинні задовольнити всі вимоги, визначені для цього типу.
 
-If you are defining a type of Secret that's for public use, follow the convention
-and structure the Secret type to have your domain name before the name, separated
-by a `/`. For example: `cloud-hosting.example.net/cloud-api-credentials`.
+Якщо ви визначаєте тип Secret, призначений для загального використання, дотримуйтесь домовленостей та структуруйте тип Secret так, щоб він мав ваш домен перед назвою, розділений знаком `/`. Наприклад: `cloud-hosting.example.net/cloud-api-credentials`.
 
 ### Opaque Secrets
 
-`Opaque` is the default Secret type if you don't explicitly specify a type in
-a Secret manifest. When you create a Secret using `kubectl`, you must use the
-`generic` subcommand to indicate an `Opaque` Secret type. For example, the
-following command creates an empty Secret of type `Opaque`:
+`Opaque` — це стандартний тип Secret, якщо ви не вказуєте явно тип у маніфесті Secret. При створенні Secret за допомогою `kubectl` вам потрібно використовувати команду `generic`, щоб вказати тип Secret `Opaque`. Наприклад, наступна команда створює порожній Secret типу `Opaque`:
 
 ```shell
 kubectl create secret generic empty-secret
 kubectl get secret empty-secret
 ```
 
-The output looks like:
+Вивід виглядає наступним чином:
 
-```
+```none
 NAME           TYPE     DATA   AGE
 empty-secret   Opaque   0      2m6s
 ```
 
-The `DATA` column shows the number of data items stored in the Secret.
-In this case, `0` means you have created an empty Secret.
+У стовпчику `DATA` показується кількість елементів даних, збережених у Secret. У цьому випадку `0` означає, що ви створили порожній Secret.
 
-### ServiceAccount token Secrets
+### Secret токенів ServiceAccount {#serviceaccount-token-secrets}
 
-A `kubernetes.io/service-account-token` type of Secret is used to store a
-token credential that identifies a
-{{< glossary_tooltip text="ServiceAccount" term_id="service-account" >}}. This
-is a legacy mechanism that provides long-lived ServiceAccount credentials to
-Pods.
+Тип Secret `kubernetes.io/service-account-token` використовується для зберігання
+токену, який ідентифікує {{< glossary_tooltip text="ServiceAccount" term_id="service-account" >}}. Це старий механізм, який забезпечує довгострокові облікові дані ServiceAccount для Podʼів.
 
-In Kubernetes v1.22 and later, the recommended approach is to obtain a
-short-lived, automatically rotating ServiceAccount token by using the
-[`TokenRequest`](/docs/reference/kubernetes-api/authentication-resources/token-request-v1/)
-API instead. You can get these short-lived tokens using the following methods:
+У Kubernetes v1.22 та пізніших рекомендований підхід полягає в тому, щоб отримати короткостроковий, токен ServiceAccount який автоматично змінюється за допомогою API [`TokenRequest`](/docs/reference/kubernetes-api/authentication-resources/ token-request-v1/) замість цього. Ви можете отримати ці короткострокові токени, використовуючи наступні методи:
 
-* Call the `TokenRequest` API either directly or by using an API client like
-  `kubectl`. For example, you can use the
-  [`kubectl create token`](/docs/reference/generated/kubectl/kubectl-commands#-em-token-em-)
-  command.
-* Request a mounted token in a
-  [projected volume](/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume)
-  in your Pod manifest. Kubernetes creates the token and mounts it in the Pod.
-  The token is automatically invalidated when the Pod that it's mounted in is
-  deleted. For details, see
-  [Launch a Pod using service account token projection](/docs/tasks/configure-pod-container/configure-service-account/#launch-a-pod-using-service-account-token-projection).
+- Викликайте API `TokenRequest` або використовуйте клієнт API, такий як `kubectl`. Наприклад, ви можете використовувати команду [`kubectl create token`](/docs/reference/generated/kubectl/kubectl-commands#-em-token-em-).
+- Запитуйте монтований токен в [томі projected](/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) у вашому маніфесті Podʼа. Kubernetes створює токен і монтує його в Pod. Токен автоматично анулюється, коли Pod, в якому він монтується, видаляється. Докладні відомості див. в розділі [Запуск Podʼа за допомогою токена ServiceAccount](/docs/tasks/configure-pod-container/configure-service-account/#launch-a-pod-using-service-account-token-projection).
 
 {{< note >}}
-You should only create a ServiceAccount token Secret
-if you can't use the `TokenRequest` API to obtain a token,
-and the security exposure of persisting a non-expiring token credential
-in a readable API object is acceptable to you. For instructions, see
-[Manually create a long-lived API token for a ServiceAccount](/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount).
+Ви повинні створювати Secret токена ServiceAccount лише в тому випадку, якщо ви не можете використовувати API `TokenRequest` для отримання токена, і вам прийнятно з погляду безпеки зберігання постійного токена доступу у читабельному обʼєкті API. Для інструкцій див. [Створення довгострокового API-токена для ServiceAccount вручну](/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount).
 {{< /note >}}
 
-When using this Secret type, you need to ensure that the
-`kubernetes.io/service-account.name` annotation is set to an existing
-ServiceAccount name. If you are creating both the ServiceAccount and
-the Secret objects, you should create the ServiceAccount object first.
+При використанні цього типу Secret вам потрібно переконатися, що анотація `kubernetes.io/service-account.name` встановлена на наявне імʼя ServiceAccount. Якщо ви створюєте як Secret, так і обʼєкти ServiceAccount, ви повинні спочатку створити обʼєкт ServiceAccount.
 
-After the Secret is created, a Kubernetes {{< glossary_tooltip text="controller" term_id="controller" >}}
-fills in some other fields such as the `kubernetes.io/service-account.uid` annotation, and the
-`token` key in the `data` field, which is populated with an authentication token.
+Після створення Secret {{< glossary_tooltip text="контролер" term_id="controller" >}} Kubernetes заповнює деякі інші поля, такі як анотація `kubernetes.io/service-account.uid`, та ключ `token` в полі `data`, який заповнюється токеном автентифікації.
 
-The following example configuration declares a ServiceAccount token Secret:
+У наступному прикладі конфігурації оголошується Secret токена ServiceAccount:
 
 {{% code language="yaml" file="secret/serviceaccount-token-secret.yaml" %}}
 
-After creating the Secret, wait for Kubernetes to populate the `token` key in the `data` field.
+Після створення Secret дочекайтеся, коли Kubernetes заповнить ключ `token` в полі `data`.
 
-See the [ServiceAccount](/docs/concepts/security/service-accounts/)
-documentation for more information on how ServiceAccounts work.
-You can also check the `automountServiceAccountToken` field and the
-`serviceAccountName` field of the
-[`Pod`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
-for information on referencing ServiceAccount credentials from within Pods.
+Для отримання додаткової інформації про роботу ServiceAccounts перегляньте документацію по [ServiceAccount](/docs/concepts/security/service-accounts/). Ви також можете перевірити поле `automountServiceAccountToken` та поле `serviceAccountName` у [`Pod`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core) для отримання інформації про посилання на облікові дані ServiceAccount з Podʼів.
 
-### Docker config Secrets
+### Secret конфігурації Docker {#docker-config-secrets}
 
-If you are creating a Secret to store credentials for accessing a container image registry,
-you must use one of the following `type` values for that Secret:
+Якщо ви створюєте Secret для зберігання облікових даних для доступу до реєстру образів контейнерів, ви повинні використовувати одне з наступних значень `type` для цього Secret:
 
-- `kubernetes.io/dockercfg`: store a serialized `~/.dockercfg` which is the
-  legacy format for configuring Docker command line. The Secret
-  `data` field contains a `.dockercfg` key whose value is the content of a
-  base64 encoded `~/.dockercfg` file.
-- `kubernetes.io/dockerconfigjson`: store a serialized JSON that follows the
-  same format rules as the `~/.docker/config.json` file, which is a new format
-  for `~/.dockercfg`. The Secret `data` field must contain a
-  `.dockerconfigjson` key for which the value is the content of a base64
-  encoded `~/.docker/config.json` file.
+- `kubernetes.io/dockercfg`: збереже серіалізований `~/.dockercfg`, який є старим форматом налаштування командного рядка Docker. У полі `data` Secret міститься ключ `.dockercfg`, значення якого — це вміст файлу `~/.dockercfg`, закодованого у форматі base64.
+- `kubernetes.io/dockerconfigjson`: збереже серіалізований JSON, який слідує тим же правилам формату, що й файл `~/.docker/config.json`, який є новим форматом для `~/.dockercfg`. У полі `data` Secret має міститися ключ `.dockerconfigjson`, значення якого – це вміст файлу `~/.docker/config.json`, закодованого у форматі base64.
 
-Below is an example for a `kubernetes.io/dockercfg` type of Secret:
+Нижче наведено приклад для Secret типу `kubernetes.io/dockercfg`:
 
 {{% code language="yaml" file="secret/dockercfg-secret.yaml" %}}
 
 {{< note >}}
-If you do not want to perform the base64 encoding, you can choose to use the
-`stringData` field instead.
+Якщо ви не хочете виконувати кодування у формат base64, ви можете вибрати використання поля `stringData` замість цього.
 {{< /note >}}
 
-When you create Docker config Secrets using a manifest, the API
-server checks whether the expected key exists in the `data` field, and
-it verifies if the value provided can be parsed as a valid JSON. The API
-server doesn't validate if the JSON actually is a Docker config file.
+При створенні Secret конфігурації Docker за допомогою маніфесту, API сервер перевіряє, чи існує відповідний ключ у полі `data`, і перевіряє, чи надане значення можна розпізнати як дійсний JSON. API сервер не перевіряє, чи є цей JSON фактично файлом конфігурації Docker.
 
-You can also use `kubectl` to create a Secret for accessing a container
-registry, such as when you don't have a Docker configuration file:
+Ви також можете використовувати `kubectl` для створення Secret для доступу до реєстру контейнерів, наприклад, коли у вас немає файлу конфігурації Docker:
 
 ```shell
 kubectl create secret docker-registry secret-tiger-docker \
@@ -273,17 +172,15 @@ kubectl create secret docker-registry secret-tiger-docker \
   --docker-server=my-registry.example:5000
 ```
 
-This command creates a Secret of type `kubernetes.io/dockerconfigjson`.
+Ця команда створює Secret типу `kubernetes.io/dockerconfigjson`.
 
-Retrieve the `.data.dockerconfigjson` field from that new Secret and decode the
-data:
+Отримайте поле `.data.dockerconfigjson` з цього нового Secret та розкодуйте дані:
 
 ```shell
 kubectl get secret secret-tiger-docker -o jsonpath='{.data.*}' | base64 -d
 ```
 
-The output is equivalent to the following JSON document (which is also a valid
-Docker configuration file):
+Вихід еквівалентний наступному JSON-документу (який також є дійсним файлом конфігурації Docker):
 
 ```json
 {
@@ -299,92 +196,60 @@ Docker configuration file):
 ```
 
 {{< caution >}}
-The `auth` value there is base64 encoded; it is obscured but not secret.
-Anyone who can read that Secret can learn the registry access bearer token.
+Значення `auth` закодовано у формат base64; воно зашифроване, але не є Secretним. Будь-хто, хто може прочитати цей Secret, може дізнатися токен доступу до реєстру.
 
-It is suggested to use [credential providers](/docs/tasks/administer-cluster/kubelet-credential-provider/) to dynamically and securely provide pull secrets on-demand.
+Рекомендується використовувати [постачальників облікових записів](/docs/tasks/administer-cluster/kubelet-credential-provider/) для динамічного і безпечного надання Secretʼів на запит.
 {{< /caution >}}
 
-### Basic authentication Secret
+### Secret базової автентифікації {#basic-authentication-secret}
 
-The `kubernetes.io/basic-auth` type is provided for storing credentials needed
-for basic authentication. When using this Secret type, the `data` field of the
-Secret must contain one of the following two keys:
+Тип `kubernetes.io/basic-auth` наданий для зберігання облікових даних, необхідних для базової автентифікації. При використанні цього типу Secret, поле `data` Secret повинно містити один з двох наступних ключів:
 
-- `username`: the user name for authentication
-- `password`: the password or token for authentication
+- `username`: імʼя користувача для автентифікації
+- `password`: пароль або токен для автентифікації
 
-Both values for the above two keys are base64 encoded strings. You can
-alternatively provide the clear text content using the `stringData` field in the
-Secret manifest.
+Обидва значення для цих ключів закодовані у формат base64. Ви також можете надати чіткий текст, використовуючи поле `stringData` у маніфесті Secret.
 
-The following manifest is an example of a basic authentication Secret:
+Наступний маніфест є прикладом Secret для базової автентифікації:
 
 {{% code language="yaml" file="secret/basicauth-secret.yaml" %}}
 
 {{< note >}}
-The `stringData` field for a Secret does not work well with server-side apply.
+Поле `stringData` для Secret не дуже підходить для застосування на боці сервера.
 {{< /note >}}
 
-The basic authentication Secret type is provided only for convenience.
-You can create an `Opaque` type for credentials used for basic authentication.
-However, using the defined and public Secret type (`kubernetes.io/basic-auth`) helps other
-people to understand the purpose of your Secret, and sets a convention for what key names
-to expect.
-The Kubernetes API verifies that the required keys are set for a Secret of this type.
+Тип Secret для базової автентифікації наданий лише для зручності. Ви можете створити тип `Opaque` для облікових даних, які використовуються для базової автентифікації. Однак використання визначеного та публічного типу Secret (`kubernetes.io/basic-auth`) допомагає іншим людям зрозуміти призначення вашого Secret та встановлює домовленості для очікуваних назв ключів. API Kubernetes перевіряє, чи встановлені необхідні ключі для Secret цього типу.
 
-### SSH authentication Secrets
+### Secret для автентифікації SSH {#ssh-authentication-secrets}
 
-The builtin type `kubernetes.io/ssh-auth` is provided for storing data used in
-SSH authentication. When using this Secret type, you will have to specify a
-`ssh-privatekey` key-value pair in the `data` (or `stringData`) field
-as the SSH credential to use.
+Вбудований тип `kubernetes.io/ssh-auth` наданий для зберігання даних, що використовуються в автентифікації SSH. При використанні цього типу Secret, вам потрібно вказати пару ключ-значення `ssh-privatekey` в полі `data` (або `stringData`) як SSH-автентифікаційні дані для використання.
 
-The following manifest is an example of a Secret used for SSH public/private
-key authentication:
+Наступний маніфест є прикладом Secret, який використовується для автентифікації SSH з використанням пари публічного/приватного ключів:
 
 {{% code language="yaml" file="secret/ssh-auth-secret.yaml" %}}
 
-The SSH authentication Secret type is provided only for convenience.
-You can create an `Opaque` type for credentials used for SSH authentication.
-However, using the defined and public Secret type (`kubernetes.io/ssh-auth`) helps other
-people to understand the purpose of your Secret, and sets a convention for what key names
-to expect.
-The Kubernetes API verifies that the required keys are set for a Secret of this type.
+Тип Secret для автентифікації SSH наданий лише для зручності. Ви можете створити тип `Opaque` для облікових даних, які використовуються для автентифікації SSH. Однак використання визначеного та публічного типу Secret (`kubernetes.io/ssh-auth`) допомагає іншим людям зрозуміти призначення вашого Secret та встановлює домовленості для очікуваних назв ключів. API Kubernetes перевіряє, чи встановлені необхідні ключі для Secret цього типу.
 
 {{< caution >}}
-SSH private keys do not establish trusted communication between an SSH client and
-host server on their own. A secondary means of establishing trust is needed to
-mitigate "man in the middle" attacks, such as a `known_hosts` file added to a ConfigMap.
+Приватні ключі SSH не встановлюють довіру між клієнтом SSH та сервером хосту самі по собі. Для зменшення ризику атак "man-in-the-middle" потрібен додатковий спосіб встановлення довіри, наприклад, файл `known_hosts`, доданий до ConfigMap.
 {{< /caution >}}
 
 ### TLS Secrets
 
-The `kubernetes.io/tls` Secret type is for storing
-a certificate and its associated key that are typically used for TLS.
+Тип Secret `kubernetes.io/tls` призначений для зберігання сертифіката та його повʼязаного ключа, які зазвичай використовуються для TLS.
 
-One common use for TLS Secrets is to configure encryption in transit for
-an [Ingress](/docs/concepts/services-networking/ingress/), but you can also use it
-with other resources or directly in your workload.
-When using this type of Secret, the `tls.key` and the `tls.crt` key must be provided
-in the `data` (or `stringData`) field of the Secret configuration, although the API
-server doesn't actually validate the values for each key.
+Одним з поширених використань TLS Secret є налаштування шифрування під час передачі для
+[Ingress](/docs/concepts/services-networking/ingress/), але ви також можете використовувати його з іншими ресурсами або безпосередньо у вашій роботі. При використанні цього типу Secret ключі `tls.key` та `tls.crt` повинні бути надані в полі `data` (або `stringData`) конфігурації Secret, хоча сервер API фактично не перевіряє значення кожного ключа.
 
-As an alternative to using `stringData`, you can use the `data` field to provide
-the base64 encoded certificate and private key. For details, see
-[Constraints on Secret names and data](#restriction-names-data).
+Як альтернативу використанню `stringData`, ви можете використовувати поле `data` для надання сертифіката та приватного ключа у вигляді base64-кодованого тексту. Докладніше див. [Обмеження для назв і даних Secret](#restriction-names-data).
 
-The following YAML contains an example config for a TLS Secret:
+Наступний YAML містить приклад конфігурації TLS Secret:
 
 {{% code language="yaml" file="secret/tls-auth-secret.yaml" %}}
 
-The TLS Secret type is provided only for convenience.
-You can create an `Opaque` type for credentials used for TLS authentication.
-However, using the defined and public Secret type (`kubernetes.io/tls`)
-helps ensure the consistency of Secret format in your project. The API server
-verifies if the required keys are set for a Secret of this type.
+Тип TLS Secret наданий лише для зручності. Ви можете створити тип `Opaque` для облікових даних, які використовуються для TLS-автентифікації. Однак використання визначеного та публічного типу Secret (`kubernetes.io/tls`) допомагає забезпечити однорідність формату Secret у вашому проєкті. Сервер API перевіряє, чи встановлені необхідні ключі для Secret цього типу.
 
-To create a TLS Secret using `kubectl`, use the `tls` subcommand:
+Для створення TLS Secret за допомогою `kubectl` використовуйте підкоманду `tls`:
 
 ```shell
 kubectl create secret tls my-tls-secret \
@@ -392,246 +257,164 @@ kubectl create secret tls my-tls-secret \
   --key=path/to/key/file
 ```
 
-The public/private key pair must exist before hand. The public key certificate for `--cert` must be .PEM encoded
-and must match the given private key for `--key`.
+Пара публічного/приватного ключа повинна бути створена заздалегідь. Публічний ключ сертифіката для `--cert` повинен бути закодований у .PEM форматі і повинен відповідати наданому приватному ключу для `--key`.
 
-### Bootstrap token Secrets
+### Secret bootstrap-токенів {#bootstrap-token-secrets}
 
-The `bootstrap.kubernetes.io/token` Secret type is for
-tokens used during the node bootstrap process. It stores tokens used to sign
-well-known ConfigMaps.
+Тип Secret `bootstrap.kubernetes.io/token` призначений для токенів, що використовуються під час процесу ініціалізації вузла. Він зберігає токени, які використовуються для підпису відомих ConfigMaps.
 
-A bootstrap token Secret is usually created in the `kube-system` namespace and
-named in the form `bootstrap-token-<token-id>` where `<token-id>` is a 6 character
-string of the token ID.
+Secret токена ініціалізації зазвичай створюється в просторі імен `kube-system` і називається у формі `bootstrap-token-<token-id>`, де `<token-id>` — це 6-символьний
+рядок ідентифікатора токена.
 
-As a Kubernetes manifest, a bootstrap token Secret might look like the
-following:
+Як Kubernetes маніфест, Secret токена ініціалізації може виглядати наступним чином:
 
 {{% code language="yaml" file="secret/bootstrap-token-secret-base64.yaml" %}}
 
-A bootstrap token Secret has the following keys specified under `data`:
+У Secret токена ініціалізації вказані наступні ключі в `data`:
 
-- `token-id`: A random 6 character string as the token identifier. Required.
-- `token-secret`: A random 16 character string as the actual token Secret. Required.
-- `description`: A human-readable string that describes what the token is
-  used for. Optional.
-- `expiration`: An absolute UTC time using [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) specifying when the token
-  should be expired. Optional.
-- `usage-bootstrap-<usage>`: A boolean flag indicating additional usage for
-  the bootstrap token.
-- `auth-extra-groups`: A comma-separated list of group names that will be
-  authenticated as in addition to the `system:bootstrappers` group.
+- `token-id`: Випадковий рядок з 6 символів як ідентифікатор токена. Обовʼязковий.
+- `token-secret`: Випадковий рядок з 16 символів як сам Secret токена. Обовʼязковий.
+- `description`: Рядок, що призначений для користувачів, що описує, для чого використовується токен. Необовʼязковий.
+- `expiration`: Абсолютний час UTC, відповідно до [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), що вказує, коли дія токена має бути закінчена. Необовʼязковий.
+- `usage-bootstrap-<usage>`: Логічний прапорець, який вказує додаткове використання для
+  токена ініціалізації.
+- `auth-extra-groups`: Список імен груп, розділених комами, які будуть автентифікуватися як додатково до групи `system:bootstrappers`.
 
-You can alternatively provide the values in the `stringData` field of the Secret
-without base64 encoding them:
+Ви також можете надати значення в полі `stringData` Secret без їх base64 кодування:
 
 {{% code language="yaml" file="secret/bootstrap-token-secret-literal.yaml" %}}
 
 {{< note >}}
-The `stringData` field for a Secret does not work well with server-side apply.
+Поле `stringData` для Secret погано працює на боці сервера.
 {{< /note >}}
 
-## Working with Secrets
+## Робота з Secret {#working-with-secrets}
 
-### Creating a Secret
+### Створення Secret {#creating-a-secrets}
 
-There are several options to create a Secret:
+Є кілька способів створення Secret:
 
-- [Use `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/)
-- [Use a configuration file](/docs/tasks/configmap-secret/managing-secret-using-config-file/)
-- [Use the Kustomize tool](/docs/tasks/configmap-secret/managing-secret-using-kustomize/)
+- [Використання `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/)
+- [Використання файлу конфігурації](/docs/tasks/configmap-secret/managing-secret-using-config-file/)
+- [Використання інструменту Kustomize](/docs/tasks/configmap-secret/managing-secret-using-kustomize/)
 
-#### Constraints on Secret names and data {#restriction-names-data}
+#### Обмеження щодо імен і даних Secret {#restriction-names-data}
 
-The name of a Secret object must be a valid
-[DNS subdomain name](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Імʼя обʼєкта Secret повинно бути дійсним [імʼям DNS-піддомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
-You can specify the `data` and/or the `stringData` field when creating a
-configuration file for a Secret. The `data` and the `stringData` fields are optional.
-The values for all keys in the `data` field have to be base64-encoded strings.
-If the conversion to base64 string is not desirable, you can choose to specify
-the `stringData` field instead, which accepts arbitrary strings as values.
+Ви можете вказати поля `data` і/або `stringData` при створенні файлу конфігурації для Secret. Поля `data` і `stringData` є необовʼязковими. Значення для всіх ключів у полі `data` повинні бути base64-кодованими рядками. Якщо перетворення у рядок base64 не є бажаним, ви можете вибрати поле `stringData`, яке приймає довільні рядки як значення.
 
-The keys of `data` and `stringData` must consist of alphanumeric characters,
-`-`, `_` or `.`. All key-value pairs in the `stringData` field are internally
-merged into the `data` field. If a key appears in both the `data` and the
-`stringData` field, the value specified in the `stringData` field takes
-precedence.
+Ключі `data` і `stringData` повинні складатися з буквено-цифрових символів, `-`, `_` або `.`. Усі пари ключ-значення в полі `stringData` внутрішньо обʼєднуються в поле `data`. Якщо ключ зустрічається як у полі `data`, так і у полі `stringData`, значення, вказане у полі `stringData`, має пріоритет.
 
-#### Size limit {#restriction-data-size}
+#### Обмеження розміру {#restriction-data-size}
 
-Individual Secrets are limited to 1MiB in size. This is to discourage creation
-of very large Secrets that could exhaust the API server and kubelet memory.
-However, creation of many smaller Secrets could also exhaust memory. You can
-use a [resource quota](/docs/concepts/policy/resource-quotas/) to limit the
-number of Secrets (or other resources) in a namespace.
+Індивідуальні Secretʼи обмежені розміром 1 МБ. Це зроблено для того, щоб уникнути створення дуже великих Secret, які можуть вичерпати памʼять API-сервера та kubelet. Однак створення багатьох менших Secret також може вичерпати памʼять. Ви можете використовувати [квоту ресурсів](/docs/concepts/policy/resource-quotas/) для обмеження кількості Secret (або інших ресурсів) в просторі імен.
 
-### Editing a Secret
+### Редагування Secret {#editing-a-secret}
 
-You can edit an existing Secret unless it is [immutable](#secret-immutable). To
-edit a Secret, use one of the following methods:
+Ви можете редагувати наявний Secret, якщо він не є [незмінним](#secret-immutable). Для редагування Secret скористайтеся одним із наступних методів:
 
-- [Use `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/#edit-secret)
-- [Use a configuration file](/docs/tasks/configmap-secret/managing-secret-using-config-file/#edit-secret)
+- [Використання `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/#edit-secret)
+- [Використання файлу конфігурації](/docs/tasks/configmap-secret/managing-secret-using-config-file/#edit-secret)
 
-You can also edit the data in a Secret using the [Kustomize tool](/docs/tasks/configmap-secret/managing-secret-using-kustomize/#edit-secret). However, this
-method creates a new `Secret` object with the edited data.
+Ви також можете редагувати дані у Secret за допомогою [інструменту Kustomize](/docs/tasks/configmap-secret/managing-secret-using-kustomize/#edit-secret). Проте цей метод створює новий обʼєкт `Secret` з відредагованими даними.
 
-Depending on how you created the Secret, as well as how the Secret is used in
-your Pods, updates to existing `Secret` objects are propagated automatically to
-Pods that use the data. For more information, refer to [Using Secrets as files from a Pod](#using-secrets-as-files-from-a-pod) section.
+Залежно від того, як ви створили Secret, а також від того, як Secret використовується в ваших Podʼах, оновлення існуючих обʼєктів `Secret` автоматично поширюються на Podʼи, які використовують дані. Для отримання додаткової інформації звертайтеся до розділу [Використання Secret як файлів у Podʼі](#using-secrets-as-files-from-a-pod).
 
-### Using a Secret
+### Використання Secret {#using-a-secret}
 
-Secrets can be mounted as data volumes or exposed as
-{{< glossary_tooltip text="environment variables" term_id="container-env-variables" >}}
-to be used by a container in a Pod. Secrets can also be used by other parts of the
-system, without being directly exposed to the Pod. For example, Secrets can hold
-credentials that other parts of the system should use to interact with external
-systems on your behalf.
+Secret можна монтувати як томи даних або використовувати як {{< glossary_tooltip text="змінні оточення" term_id="container-env-variables" >}} для використання контейнером в Podʼі. Secret також можна використовувати іншими частинами системи, не надаючи прямого доступу до Podʼа. Наприклад, Secret можуть містити автентифікаційні дані, які інші частини системи повинні використовувати для взаємодії зовнішніми системами від вашого імені.
 
-Secret volume sources are validated to ensure that the specified object
-reference actually points to an object of type Secret. Therefore, a Secret
-needs to be created before any Pods that depend on it.
+Джерела томів Secret перевіряються на наявність для того, щоб переконатися, що вказано посилання на обʼєкт дійсно вказує на обʼєкт типу Secret. Тому Secret повинен бути створений перед будь-якими Podʼами, які залежать від нього.
 
-If the Secret cannot be fetched (perhaps because it does not exist, or
-due to a temporary lack of connection to the API server) the kubelet
-periodically retries running that Pod. The kubelet also reports an Event
-for that Pod, including details of the problem fetching the Secret.
+Якщо Secret не може бути отриманий (можливо, через те, що він не існує, або через тимчасову відсутність зʼєднання з сервером API), kubelet періодично повторює спробу запуску цього Podʼа. Крім того, kubelet також реєструє подію для цього Podʼа, включаючи деталі проблеми отримання Secret.
 
-#### Optional Secrets {#restriction-secret-must-exist}
+#### Необовʼязкові Secret {#restriction-secret-must-exist}
 
-When you reference a Secret in a Pod, you can mark the Secret as _optional_,
-such as in the following example. If an optional Secret doesn't exist,
-Kubernetes ignores it.
+Коли ви посилаєтеся на Secret у Podʼі, ви можете позначити Secret як _необовʼязковий_, як у наступному прикладі. Якщо необовʼязковий Secret не існує, Kubernetes ігнорує його.
 
 {{% code language="yaml" file="secret/optional-secret.yaml" %}}
 
-By default, Secrets are required. None of a Pod's containers will start until
-all non-optional Secrets are available.
+Типово Secret є обовʼязковими. Жоден з контейнерів Podʼа не розпочне роботу, доки всі обовʼязкові Secret не будуть доступні.
 
-If a Pod references a specific key in a non-optional Secret and that Secret
-does exist, but is missing the named key, the Pod fails during startup.
+Якщо Pod посилається на певний ключ у необовʼязковому Secret і цей Secret існує, але відсутній зазначений ключ, Pod не запускається під час старту.
 
-### Using Secrets as files from a Pod {#using-secrets-as-files-from-a-pod}
+### Використання Secret у вигляді файлів у Pod {#using-secrets-as-files-from-a-pod}
 
-If you want to access data from a Secret in a Pod, one way to do that is to
-have Kubernetes make the value of that Secret be available as a file inside
-the filesystem of one or more of the Pod's containers.
+Якщо ви хочете отримати доступ до даних з Secret у Podʼі, один із способів зробити це — це дозволити Kubernetes робити значення цього Secret доступним як файл у файловій системі одного або декількох контейнерів Podʼа.
 
-For instructions, refer to
-[Distribute credentials securely using Secrets](/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume).
+Щоб це зробити, дивіться [розподіл конфіденційних даних за допомогою Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume).
 
-When a volume contains data from a Secret, and that Secret is updated, Kubernetes tracks
-this and updates the data in the volume, using an eventually-consistent approach.
+Коли том містить дані з Secret, а цей Secret оновлюється, Kubernetes відстежує це і оновлює дані в томі, використовуючи підхід з подальшою згодою.
 
 {{< note >}}
-A container using a Secret as a
-[subPath](/docs/concepts/storage/volumes#using-subpath) volume mount does not receive
-automated Secret updates.
+Контейнер, який використовує Secret як том [subPath](/docs/concepts/storage/volumes#using-subpath), не отримує автоматичних оновлень Secret.
 {{< /note >}}
 
-The kubelet keeps a cache of the current keys and values for the Secrets that are used in
-volumes for pods on that node.
-You can configure the way that the kubelet detects changes from the cached values. The
-`configMapAndSecretChangeDetectionStrategy` field in the
-[kubelet configuration](/docs/reference/config-api/kubelet-config.v1beta1/) controls
-which strategy the kubelet uses. The default strategy is `Watch`.
+Kubelet зберігає кеш поточних ключів та значень для Secret, які використовуються у томах для Podʼів на цьому вузлі. Ви можете налаштувати спосіб, яким kubelet виявляє зміни від кешованих значень. Поле `configMapAndSecretChangeDetectionStrategy` в [конфігурації kubelet](/docs/reference/config-api/kubelet-config.v1beta1/) контролює стратегію, яку використовує kubelet. Стандартною стратегією є `Watch`.
 
-Updates to Secrets can be either propagated by an API watch mechanism (the default), based on
-a cache with a defined time-to-live, or polled from the cluster API server on each kubelet
-synchronisation loop.
+Оновлення Secret можуть бути передані за допомогою механізму спостереження за API (стандартно), на основі кешу з визначеним часом життя або отримані зі API-сервера кластера в кожнному циклі синхронізації kubelet.
 
-As a result, the total delay from the moment when the Secret is updated to the moment
-when new keys are projected to the Pod can be as long as the kubelet sync period + cache
-propagation delay, where the cache propagation delay depends on the chosen cache type
-(following the same order listed in the previous paragraph, these are:
-watch propagation delay, the configured cache TTL, or zero for direct polling).
+Як результат, загальна затримка від моменту оновлення Secret до моменту, коли нові ключі зʼявляються в Podʼі, може бути такою ж тривалою, як період синхронізації kubelet + затримка розповсюдження кешу, де затримка розповсюдження кешу залежить від обраного типу кешу (перший у списку це затримка розповсюдження спостереження, налаштований TTL кешу або нуль для прямого отримання).
 
-### Using Secrets as environment variables
+### Використання Secret як змінних оточення {#using-secrets-as-environment-variables}
 
-To use a Secret in an {{< glossary_tooltip text="environment variable" term_id="container-env-variables" >}}
-in a Pod:
+Для використання Secret в {{< glossary_tooltip text="змінних оточення" term_id="container-env-variables" >}} в Podʼі:
 
-1. For each container in your Pod specification, add an environment variable
-   for each Secret key that you want to use to the
-   `env[].valueFrom.secretKeyRef` field.
-1. Modify your image and/or command line so that the program looks for values
-   in the specified environment variables.
+1. Для кожного контейнера у вашому описі Podʼа додайте змінну оточення для кожного ключа Secret, який ви хочете використовувати, у поле `env[].valueFrom.secretKeyRef`.
+2. Змініть свій образ і/або командний рядок так, щоб програма шукала значення у вказаних змінних оточення.
 
-For instructions, refer to
-[Define container environment variables using Secret data](/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data).
+Для отримання інструкцій дивіться [Визначення змінних оточення контейнера за допомогою даних Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data).
 
-#### Invalid environment variables {#restriction-env-from-invalid}
+#### Невалідні змінні оточення {#restriction-env-from-invalid}
 
-If your environment variable definitions in your Pod specification are
-considered to be invalid environment variable names, those keys aren't made
-available to your container. The Pod is allowed to start.
+Якщо визначення змінних оточення у вашому описі Podʼа вважаються неприпустимими іменами змінних оточення, ці ключі не будуть доступні вашому контейнеру. Pod все ще зможе стартувати.
 
-Kubernetes adds an Event with the reason set to `InvalidVariableNames` and a
-message that lists the skipped invalid keys. The following example shows a Pod that refers to a Secret named `mysecret`, where `mysecret` contains 2 invalid keys: `1badkey` and `2alsobad`.
+Kubernetes додає подію з причиною, встановленою у `InvalidVariableNames`, та повідомленням, яке перераховує пропущені неправильні ключі. Наведений нижче приклад показує Pod, який посилається на Secret з назвою `mysecret`, де `mysecret` містить 2 неприпустимі ключі: `1badkey` та `2alsobad`.
 
 ```shell
 kubectl get events
 ```
 
-The output is similar to:
+Вивід буде подібний:
 
-```
+```none
 LASTSEEN   FIRSTSEEN   COUNT     NAME            KIND      SUBOBJECT                         TYPE      REASON
 0s         0s          1         dapi-test-pod   Pod                                         Warning   InvalidEnvironmentVariableNames   kubelet, 127.0.0.1      Keys [1badkey, 2alsobad] from the EnvFrom secret default/mysecret were skipped since they are considered invalid environment variable names.
 ```
 
-### Container image pull Secrets {#using-imagepullsecrets}
+### Використання Secret для витягування образів контейнерів {#using-imagepullsecrets}
 
-If you want to fetch container images from a private repository, you need a way for
-the kubelet on each node to authenticate to that repository. You can configure
-_image pull Secrets_ to make this possible. These Secrets are configured at the Pod
-level.
+Якщо ви хочете отримувати образи контейнерів з приватного репозиторію, вам потрібен спосіб автентифікації для kubelet на кожному вузлі для доступу до цього репозиторію. Ви можете налаштувати _Secret для витягування образів_ для досягнення цієї мети. Ці Secret налаштовані на рівні Pod.
 
-#### Using imagePullSecrets
+#### Використання imagePullSecrets {#using-imagepullsecrets}
 
-The `imagePullSecrets` field is a list of references to Secrets in the same namespace.
-You can use an `imagePullSecrets` to pass a Secret that contains a Docker (or other) image registry
-password to the kubelet. The kubelet uses this information to pull a private image on behalf of your Pod.
-See the [PodSpec API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
-for more information about the `imagePullSecrets` field.
+Поле `imagePullSecrets` є списком посилань на Secret в тому ж просторі імен. Ви можете використовувати `imagePullSecrets`, щоб передати Secret, який містить пароль Docker (або іншого) репозиторію образів, в kubelet. Kubelet використовує цю інформацію для витягування приватного образу від імені вашого Podʼу. Для отримання додаткової інформації про поле `imagePullSecrets`, дивіться [PodSpec API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
 
-##### Manually specifying an imagePullSecret
+##### Ручне вказання imagePullSecret {#manually-specifying-an-imagepullsecret}
 
-You can learn how to specify `imagePullSecrets` from the
-[container images](/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod)
-documentation.
+Ви можете дізнатися, як вказати `imagePullSecrets`, переглянувши документацію про [образи контейнерів](/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod).
 
-##### Arranging for imagePullSecrets to be automatically attached
+##### Організація автоматичного приєднання imagePullSecrets {#arranging-for-imagepullsecrets-to-be-automaticaly-attached}
 
-You can manually create `imagePullSecrets`, and reference these from a ServiceAccount. Any Pods
-created with that ServiceAccount or created with that ServiceAccount by default, will get their
-`imagePullSecrets` field set to that of the service account.
-See [Add ImagePullSecrets to a service account](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account)
-for a detailed explanation of that process.
+Ви можете вручну створити `imagePullSecrets` та посилатися на них з ServiceAccount. Будь-які Podʼи, створені з цим ServiceAccount або створені з цим ServiceAccount, отримають своє поле `imagePullSecrets`, встановлене на відповідне для сервісного облікового запису. Дивіться [Додавання ImagePullSecrets до Service Account](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account) для детального пояснення цього процесу.
 
-### Using Secrets with static Pods {#restriction-static-pod}
+### Використання Secret зі статичними Podʼами {#restriction-static-pod}
 
-You cannot use ConfigMaps or Secrets with {{< glossary_tooltip text="static Pods" term_id="static-pod" >}}.
+Ви не можете використовувати ConfigMaps або Secrets зі {{< glossary_tooltip text="статичними Podʼами" term_id="static-pod" >}}.
 
-## Immutable Secrets {#secret-immutable}
+## Незмінні Secret {#secret-immutable}
 
 {{< feature-state for_k8s_version="v1.21" state="stable" >}}
 
-Kubernetes lets you mark specific Secrets (and ConfigMaps) as _immutable_.
-Preventing changes to the data of an existing Secret has the following benefits:
+Kubernetes дозволяє вам позначати певні Secret (і ConfigMaps) як _незмінні_. Запобігання змінам даних існуючого Secret має наступні переваги:
 
-- protects you from accidental (or unwanted) updates that could cause applications outages
-- (for clusters that extensively use Secrets - at least tens of thousands of unique Secret
-  to Pod mounts), switching to immutable Secrets improves the performance of your cluster
-  by significantly reducing load on kube-apiserver. The kubelet does not need to maintain
-  a [watch] on any Secrets that are marked as immutable.
+- захищає вас від випадкових (або небажаних) оновлень, які можуть призвести до відмов застосунків
+- (для кластерів, що широко використовують Secret — щонайменше десятки тисяч унікальних монтувань Secret у Podʼи), перехід до незмінних Secret покращує продуктивність вашого кластера шляхом значного зменшення навантаження на kube-apiserver. kubeletʼу не потрібно підтримувати [watch] за будь-якими Secret, які позначені як незмінні.
 
-### Marking a Secret as immutable {#secret-immutable-create}
+### Позначення Secret як незмінного {#secret-immutable-create}
 
-You can create an immutable Secret by setting the `immutable` field to `true`. For example,
+Ви можете створити незмінний Secret, встановивши поле `immutable` в `true`. Наприклад,
 
 ```yaml
 apiVersion: v1
@@ -641,58 +424,38 @@ data: ...
 immutable: true
 ```
 
-You can also update any existing mutable Secret to make it immutable.
+Ви також можете оновити будь-який наявний змінний Secret, щоб зробити його незмінним.
 
 {{< note >}}
-Once a Secret or ConfigMap is marked as immutable, it is _not_ possible to revert this change
-nor to mutate the contents of the `data` field. You can only delete and recreate the Secret.
-Existing Pods maintain a mount point to the deleted Secret - it is recommended to recreate
-these pods.
+Як тільки Secret або ConfigMap позначений як незмінний, цю зміну _неможливо_ скасувати чи змінити зміст поля `data`. Ви можете тільки видалити і знову створити Secret. Наявні Podʼи зберігають точку монтування для видаленого Secret — рекомендується перестворити ці Podʼи.
 {{< /note >}}
 
-## Information security for Secrets
+## Інформаційна безпека для Secret {#information-security-for-secrets}
 
-Although ConfigMap and Secret work similarly, Kubernetes applies some additional
-protection for Secret objects.
+Хоча ConfigMap і Secret працюють схоже, Kubernetes застосовує додаткові заходи захисту для обʼєктів Secret.
 
-Secrets often hold values that span a spectrum of importance, many of which can
-cause escalations within Kubernetes (e.g. service account tokens) and to
-external systems. Even if an individual app can reason about the power of the
-Secrets it expects to interact with, other apps within the same namespace can
-render those assumptions invalid.
+Secret часто містять значення, які охоплюють широкий спектр важливостей, багато з яких можуть викликати ескалації всередині Kubernetes (наприклад, токени облікових записів служби) та зовнішніх систем. Навіть якщо окремий застосунок може мати на меті використання Secret, з якими він очікує взаємодіяти, інші застосунки в тому ж просторі імен можуть зробити ці припущення недійсними.
 
-A Secret is only sent to a node if a Pod on that node requires it.
-For mounting Secrets into Pods, the kubelet stores a copy of the data into a `tmpfs`
-so that the confidential data is not written to durable storage.
-Once the Pod that depends on the Secret is deleted, the kubelet deletes its local copy
-of the confidential data from the Secret.
+Secret буде відправлений на вузол тільки у випадку, якщо на цьому вузлі є Pod, якому він потрібен. Для монтування Secret Podʼи kubelet зберігає копію даних у `tmpfs`, щоб конфіденційні дані не записувалися у носії з довгостроковим зберіганням. Коли Pod, який залежить від Secret, видаляється, kubelet видаляє свою локальну копію конфіденційних даних з Secret.
 
-There may be several containers in a Pod. By default, containers you define
-only have access to the default ServiceAccount and its related Secret.
-You must explicitly define environment variables or map a volume into a
-container in order to provide access to any other Secret.
+У Podʼі може бути кілька контейнерів. Типово контейнери, які ви визначаєте, мають доступ тільки до службового стандартного облікового запису та повʼязаного з ним Secret. Вам потрібно явно визначити змінні середовища або відобразити том у контейнері, щоб надати доступ до будь-якого іншого Secret.
 
-There may be Secrets for several Pods on the same node. However, only the
-Secrets that a Pod requests are potentially visible within its containers.
-Therefore, one Pod does not have access to the Secrets of another Pod.
+Може бути Secret для кількох Podʼів на тому ж вузлі. Проте тільки Secretʼи, які запитує Pod, можливо бачити всередині його контейнерів. Таким чином, один Pod не має доступу до Secretʼів іншого Podʼа.
 
-### Configure least-privilege access to Secrets
+### Налаштування доступу за принципом найменшого дозволу до Secret {#configuring-least-privilege-access-to-secrets}
 
-To enhance the security measures around Secrets, Kubernetes provides a mechanism: you can
-annotate a ServiceAccount as `kubernetes.io/enforce-mountable-secrets: "true"`.
+Для підвищення заходів безпеки навколо Secret Kubernetes надає механізм: ви можете анотувати ServiceAccount як `kubernetes.io/enforce-mountable-secrets: "true"`.
 
-For more information, you can refer to the [documentation about this annotation](/docs/concepts/security/service-accounts/#enforce-mountable-secrets).
+Докладніше ви можете дізнатися з [документації про цю анотацію](/docs/concepts/security/service-accounts/#enforce-mountable-secrets).
 
 {{< warning >}}
-Any containers that run with `privileged: true` on a node can access all
-Secrets used on that node.
+Будь-які контейнери, які працюють з параметром `privileged: true` на вузлі, можуть отримати доступ до всіх Secret, що використовуються на цьому вузлі.
 {{< /warning >}}
 
 ## {{% heading "whatsnext" %}}
 
-- For guidelines to manage and improve the security of your Secrets, refer to
-  [Good practices for Kubernetes Secrets](/docs/concepts/security/secrets-good-practices).
-- Learn how to [manage Secrets using `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/)
-- Learn how to [manage Secrets using config file](/docs/tasks/configmap-secret/managing-secret-using-config-file/)
-- Learn how to [manage Secrets using kustomize](/docs/tasks/configmap-secret/managing-secret-using-kustomize/)
-- Read the [API reference](/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/) for `Secret`
+- Для настанов щодо керування та покращення безпеки ваших Secret перегляньте [Рекомендаціх щодо Secret в Kubernetes](/docs/concepts/security/secrets-good-practices).
+- Дізнайтеся, як [керувати Secret за допомогою `kubectl`](/docs/tasks/configmap-secret/managing-secret-using-kubectl/)
+- Дізнайтеся, як [керувати Secret за допомогою конфігураційного файлу](/docs/tasks/configmap-secret/managing-secret-using-config-file/)
+- Дізнайтеся, як [керувати Secret за допомогою kustomize](/docs/tasks/configmap-secret/managing-secret-using-kustomize/)
+- Прочитайте [довідник API](/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/) для `Secret`.
