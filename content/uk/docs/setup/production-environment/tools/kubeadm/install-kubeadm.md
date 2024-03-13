@@ -124,13 +124,13 @@ kubeadm **не буде** встановлювати або керувати `ku
 {{% legacy-repos-deprecation %}}
 
 {{< note >}}
-Є окремий репозиторій пакунків для кожної мінорної версії Kubernetes. Якщо ви хочете встановити іншу мінорну версію, крім {{< skew currentVersion >}}, див. посібник з встановлення для бажаної мінорної версії.
+Є окремий репозиторій пакунків для кожної мінорної версії Kubernetes. Якщо ви хочете встановити іншу мінорну версію, крім v{{< skew currentVersion >}}, див. посібник з встановлення для бажаної мінорної версії.
 {{< /note >}}
 
 {{< tabs name="k8s_install" >}}
 {{% tab name="Debian-подібні дистрибутиви" %}}
 
-Ці інструкції для Kubernetes {{< skew currentVersion >}}.
+Ці інструкції для Kubernetes v{{< skew currentVersion >}}.
 
 1. Оновіть індекс пакунків `apt` та встановіть пакунки, необхідні для використання репозитарію Kubernetes `apt`:
 
@@ -167,6 +167,12 @@ kubeadm **не буде** встановлювати або керувати `ku
    sudo apt-mark hold kubelet kubeadm kubectl
    ```
 
+5. (Опціонально) Увімкніть kublet перед запуском kubeadm:
+
+   ```shell
+   sudo systemctl enable --now kubelet
+   ```
+
 {{% /tab %}}
 {{% tab name="Red Hat-подібні дистрибутиви" %}}
 
@@ -187,7 +193,7 @@ kubeadm **не буде** встановлювати або керувати `ku
 
 {{< /caution >}}
 
-1. Додайте репозиторій Kubernetes `yum`. Параметр `exclude` в визначенні репозиторію забезпечує, що пакунки, повʼязані з Kubernetes, не оновлюються при виконанні `yum update`, оскільки є спеціальна процедура, якої слід дотримуватися для оновлення Kubernetes. Зверніть увагу, що цей репозиторій має пакунки лише для Kubernetes {{< skew currentVersion >}}; для інших мінорних версій Kubernetes вам потрібно змінити мінорну версію Kubernetes в URL так, щоб вона відповідала вашій бажаній мінорній версії (також перевірте, чи ви ознайомились з документацією для версії Kubernetes, яку ви плануєте встановити).
+2. Додайте репозиторій Kubernetes `yum`. Параметр `exclude` в визначенні репозиторію забезпечує, що пакунки, повʼязані з Kubernetes, не оновлюються при виконанні `yum update`, оскільки є спеціальна процедура, якої слід дотримуватися для оновлення Kubernetes. Зверніть увагу, що цей репозиторій має пакунки лише для Kubernetes v{{< skew currentVersion >}}; для інших мінорних версій Kubernetes вам потрібно змінити мінорну версію Kubernetes в URL так, щоб вона відповідала вашій бажаній мінорній версії (також перевірте, чи ви ознайомились з документацією для версії Kubernetes, яку ви плануєте встановити).
 
    ```shell
    # Це перезаписує будь-яку існуючу конфігурацію в /etc/yum.repos.d/kubernetes.repo
@@ -203,10 +209,15 @@ kubeadm **не буде** встановлювати або керувати `ku
 
    ```
 
-2. Встановіть kubelet, kubeadm та kubectl, та активуйте kubelet, щоб він автоматично запускається при запуску:
+3. Встановіть kubelet, kubeadm та kubectl, та активуйте kubelet:
 
    ```shell
    sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+   ```
+
+4. (Опціонально) Увімкніть kubelet перед запуском kubeadm:
+
+   ```shell
    sudo systemctl enable --now kubelet
    ```
 
@@ -242,7 +253,7 @@ ARCH="amd64"
 curl -L "https://github.com/kubernetes-sigs/cri-tools/releases/download/${CRICTL_VERSION}/crictl-${CRICTL_VERSION}-linux-${ARCH}.tar.gz" | sudo tar -C $DOWNLOAD_DIR -xz
 ```
 
-Встановіть `kubeadm`, `kubelet`, `kubectl` та додайте службу `kubelet` systemd:
+Встановіть `kubeadm`, `kubelet` та додайте службу `kubelet` systemd:
 
 ```bash
 RELEASE="$(curl -sSL https://dl.k8s.io/release/stable.txt)"
@@ -261,12 +272,12 @@ curl -sSL "https://raw.githubusercontent.com/kubernetes/release/${RELEASE_VERSIO
 Звіртесь з примітками в розділі [Перш ніж ви розпочнете](#before-you-begin) для дистрибутивів Linux, які типово не містять `glibc`.
 {{< /note >}}
 
-Встановіть `kubectl`, слідкуючи інструкціям на сторінці [Встановлення інструментів](/docs/tasks/tools/#kubectl).
+Встановіть `kubectl`, відповідно до інструкцій на сторінці [Встановлення інструментів](/docs/tasks/tools/#kubectl).
 
-Активуйте та запустіть `kubelet`:
+Опціонально, увімкніть службу `kubelet` перед запуском `kubeadm`:
 
 ```bash
-systemctl enable --now kubelet
+sudo systemctl enable --now kubelet
 ```
 
 {{< note >}}
