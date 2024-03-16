@@ -109,9 +109,12 @@ systemctl daemon-reload && systemctl restart kubelet
 
 `kubeadm` постачається з конфігурацією systemd для запуску kubelet. Зверніть увагу, що команда kubeadm CLI ніколи не торкається цього drop-in файлу.
 
-Цей файл конфігурації, встановлений за допомогою `kubeadm`
-[пакета](https://github.com/kubernetes/release/blob/cd53840/cmd/krel/templates/latest/kubeadm/10-kubeadm.conf), записується в `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf` та використовується systemd. Він доповнює основний
-[`kubelet.service`](https://github.com/kubernetes/release/blob/cd53840/cmd/krel/templates/latest/kubelet/kubelet.service):
+Цей файл конфігурації, встановлений за допомогою
+[пакунку](https://github.com/kubernetes/release/blob/cd53840/cmd/krel/templates/latest/kubeadm/10-kubeadm.conf) `kubeadm`, записується в `/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf` та використовується systemd. Він доповнює основний [`kubelet.service`](https://github.com/kubernetes/release/blob/cd53840/cmd/krel/templates/latest/kubelet/kubelet.service).
+
+Якщо ви хочете внести зміні, ви можете створити теку `/etc/systemd/system/kubelet.service.d/` (зверніть увагу, не `/usr/lib/systemd/system/kubelet.service.d/`) та внести власні налаштування у файл там. Наприклад, ви можете додати новий локальний файл `/etc/systemd/system/kubelet.service.d/local-overrides.conf` для того, щоб перевизначити налаштування елементів в `kubeadm`.
+
+Ось що ви, імовірно, знайдете в `/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf`:
 
 {{< note >}}
 Наведені нижче вміст — це лише приклад. Якщо ви не хочете використовувати менеджер пакунків, дотримуйтеся інструкції, описаної в розділі ([Без менеджера пакунків](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#k8s-install-2)).
