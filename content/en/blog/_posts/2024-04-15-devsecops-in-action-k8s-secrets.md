@@ -60,7 +60,6 @@ application (ready or not ready) and if the environment variable isn't defined
 Pod doesn't change status to `READY`.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/cmd/main.go#L10-L53)*
-
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD"
@@ -105,7 +104,6 @@ Environment variable is defined via `spec.containers.0.envFrom.secretRef.name`
 in Pod resource.
 
 *[kustomization/overlays/demo/kustomization.yml](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/kustomization/overlays/demo/kustomization.yml#L25-L28)*
-
 ```yaml
   envFrom:
     - secretRef:
@@ -119,7 +117,6 @@ That's why it's necessary to make changes to implementation readiness probes
 and deployment manifests.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/96afd59f8a391973a8ed5a9b410915b9e99d4bf4/cmd/main.go#L11-L67)*
-
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD_FILE"
@@ -154,7 +151,6 @@ Now applications check `DEMO_SECRET__PASSWD_FILE` was defined then application
 checks whether the file exists by value from the environment variable.
 
 *[kustomization/overlays/demo/kustomization.yml](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/96afd59f8a391973a8ed5a9b410915b9e99d4bf4/kustomization/overlays/demo/kustomization.yml#L25-L45)*
-
 ```yaml
 ...
 spec:
@@ -202,7 +198,6 @@ of readiness probe in order to make file with sensitive data to Pod useless for
 attacker.
 
 *[kustomization/overlays/demo/kustomization.yml](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/fba0bf048d1cd915fb265fc1b89041582a1d76f9/kustomization/overlays/demo/kustomization.yml#L23-L61)*
-
 ```yaml
 ...
   initContainers:
@@ -238,7 +233,6 @@ variable `DEMO_SECRET__PASSWD_FILE` containing a path to a secret file and if
 the file exists (checking via `/readianess` probe) then read it.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L45-L91)*
-
 ```go
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 
@@ -307,7 +301,6 @@ This will allow us to use the same variable and follow OWASP recommendations.
 First let's define variables and constants:
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L12-L20)*
-
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD"
@@ -324,7 +317,6 @@ Next, it's necessary to change the `fileExist` function. It's supposed to return
 a path to the file without a prefix if the file exists.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L31-L43)*
-
 ```go
 func fileExist(path string) (string, bool) {
 	if strings.HasPrefix(path, filePrefix) {
@@ -346,7 +338,6 @@ into function, if it's a file it will be read and current environment variable
 value will be overridden by a new value that was read from the file.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L45-L59)*
-
 ```go
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 	if !changed {
