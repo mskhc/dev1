@@ -18,7 +18,7 @@ out-of-the-box because Kubernetes philosophy carries simplicity in order not to
 compromise it engineers have to make sure Kubernetes Secret are saved
 
 According to
-[Good practices for Kubernetes Secrets](https://kubernetes.io/docs/concepts/security/secrets-good-practices/)
+[Good practices for Kubernetes Secrets](/docs/concepts/security/secrets-good-practices/)
 there are several options on how to improve security of this kind of Secret:
 encrypt secrets in the etcd, restrict the access to them via RBAC, configure
 access to external Secret, etc. However this partially solves the security issue
