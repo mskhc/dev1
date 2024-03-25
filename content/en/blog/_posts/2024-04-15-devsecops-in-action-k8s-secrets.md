@@ -12,7 +12,7 @@ The Secret is one of the basic resources that exists in the Kubernetes API. This
 kind of resource is used for different purposes and despite the name Secret,
 sensitive data is insecure to store in it. Recently considerable attention has
 been paid to
-[security improvement](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#)
+[security improvement](/docs/tasks/administer-cluster/encrypt-data/)
 for kind of Secret resource, but Kubernetes still doesn't include appropriate
 out-of-the-box because Kubernetes philosophy carries simplicity in order not to
 compromise it engineers have to make sure Kubernetes Secret are saved
