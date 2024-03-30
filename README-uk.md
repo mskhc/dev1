@@ -20,6 +20,9 @@
 - [Hugo (Розширена версія)](https://gohugo.io/)
 - Середовище запуску контейнерів, наприклад [Docker](https://www.docker.com/).
 
+> [!NOTE]
+Переконайтесь, що ви встановили розширену версію Hugo яку вказано у змінній оточення `HUGO_VERSION` файлу [`netlify.toml`](netlify.toml#L11).
+
 Перед тим як розпочати, встановіть залежності. Зробіть клон репозиторію та перейдіть в теку:
 
 ```bash
@@ -27,15 +30,17 @@ git clone https://github.com/kubernetes/website.git
 cd website
 ```
 
-Сайт Kubernetes використовує  [Docsy Hugo theme](https://github.com/google/docsy#readme). Навіть якщо ви плануєте запускати вебсайт в контейнері, ми настійливо рекомендуємо встановити субмодулі та інші залежності зробивши наступне:
+Сайт Kubernetes використовує [Docsy Hugo theme](https://github.com/google/docsy#readme). Навіть якщо ви плануєте запускати вебсайт в контейнері, ми настійливо рекомендуємо встановити субмодулі та інші залежності зробивши наступне:
 
 ### Windows
+
 ```powershell
 # отримання залежностей субмодулів
 git submodule update --init --recursive --depth 1
 ```
 
 ### Linux / інші Unix
+
 ```bash
 # отримання залежностей субмодулів
 make module-init
@@ -55,8 +60,6 @@ make container-serve
 Відкрийте у себе в оглядачі адресу <http://localhost:1313> для перегляду локального вебсайту. По міри того, як ви вноситимете зміни в сирці, Hugo оновлюватиме вебсайт та перезавантажуватиме сторінку в оглядачі.
 
 ## Запуск сайт локально з використанням Hugo
-
-Переконайтесь, що ви встановили розширену версію Hugo яку вказано у змінній оточення  `HUGO_VERSION` файлу  [`netlify.toml`](netlify.toml#L11).
 
 Для встановлення залежностей, розгорніть та перевірте сайт локально:
 
@@ -102,7 +105,6 @@ make container-serve
    Ви можете протестувати результати локально запустивши сайт з образу контейнера:
 
    ```bash
-   make container-image
    make container-serve
    ```
 
@@ -114,7 +116,7 @@ make container-serve
 
 ### error: failed to transform resource: TOCSS: failed to transform "scss/main.scss" (text/x-scss): this feature is not available in your current Hugo version
 
-Hugo має два виконуваних файли з технічних причин. Поточний вебсайт запускається лише на **Hugo Extended**. На сторінці [release page](https://github.com/gohugoio/hugo/releases) шукайте архів з `extended`  в назві. Для перевірки запустіть  `hugo version` та шукайте слово `extended` у виводі.
+Hugo має два виконуваних файли з технічних причин. Поточний вебсайт запускається лише на **Hugo Extended**. На сторінці [release page](https://github.com/gohugoio/hugo/releases) шукайте архів з `extended` в назві. Для перевірки запустіть `hugo version` та шукайте слово `extended` у виводі.
 
 ### Усунення несправностей в macOS для занадто великої кількості відкритих файлів
 
@@ -156,7 +158,7 @@ sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
 
 Дізнайтеся більше про спільноту SIG Docs Kubernetes та зустрічі на [сторінці спільноти](https://github.com/kubernetes/community/tree/master/sig-docs#meetings).
 
-Ви також можете звʼязатися з супроводжуючими цього проєкту:
+Ви також можете звʼязатися з командою цього проєкту:
 
 - [Slack](https://kubernetes.slack.com/messages/sig-docs)
   - [Отримайте запрошення до Slack](https://slack.k8s.io/)

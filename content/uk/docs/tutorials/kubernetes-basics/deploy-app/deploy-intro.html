@@ -140,7 +140,7 @@ description: |-
                 <p><b><code>export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')</code></b><br />
                     <b><code>echo Name of the Pod: $POD_NAME</code></b></p>
                 <p>Ви можете отримати доступ до Podʼу через проксі-API, запустивши:</p>
-                <p><b><code>curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/</code></b></p>
+                <p><b><code>curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME:8080/proxy/</code></b></p>
                 <p>Для того, щоб нове розгортання було доступним без використання проксі, потрібен сервіс, про що буде розказано в <a href="/uk/docs/tutorials/kubernetes-basics/expose/">Модулі 4</a>.</p>
             </div>
         </div>

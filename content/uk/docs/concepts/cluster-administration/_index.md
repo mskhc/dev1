@@ -43,6 +43,7 @@ card:
 ## Адміністрування кластера {#managing-a-cluster}
 
 * Дізнайтеся, як [керувати вузлами](/docs/concepts/architecture/nodes/).
+  * Ознайомтеся з [автомасштабуванням кластера]((/docs/concepts/cluster-administration/cluster-autoscaling/)).
 
 * Дізнайтеся, як налаштовувати та керувати [квотою ресурсів](/docs/concepts/policy/resource-quotas/) для спільних кластерів.
 
@@ -66,7 +67,7 @@ card:
 
 ### Захист kubelеt {#securing-kubelet}
 
-* [Комунікація Control Plane—Node](/docs/concepts/architecture/control-plane-node-communication/)
+* [Звʼязок між Вузлами та Панеллю управління](/docs/concepts/architecture/control-plane-node-communication/)
 * [Розгортання TLS](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/)
 * [Автентифікація/авторизація kubelet](/docs/reference/access-authn-authz/kubelet-authn-authz/)
 

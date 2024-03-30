@@ -82,6 +82,6 @@ weight: 10
 
 * `VerticalPodAutoscaler` — це власний ресурс, який ви можете розгортати у свій кластер, щоб допомогти управляти запитами та обмеженнями ресурсів для Podʼів. Дізнайтеся більше про [Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) та як ви можете використовувати його для масштабування компонентів кластера, включаючи критичні для кластера надбудови.
 
-* [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler#readme) інтегрується з рядом хмарних постачальників, щоб допомогти вам запускати правильну кількість вузлів для ресурсів у вашому кластері, відповідно до вимого.
+* [Автомасштабування кластера](/docs/concepts/cluster-administration/cluster-autoscaling/)
 
 * [Addon Resizer](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#readme) допомагає автоматично змінювати розміри надбудов при зміні масштабу вашого кластера.

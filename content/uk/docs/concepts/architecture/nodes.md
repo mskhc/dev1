@@ -369,6 +369,7 @@ Swap підтримується тільки з **cgroup v2**, cgroup v1 не п
 - [Компоненти](/docs/concepts/overview/components/#node-components), з яких складається вузол.
 - [Визначення API для вузла](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
 - [Node](https://git.k8s.io/design-proposals-archive/architecture/architecture.md#the-kubernetes-node) у документі з дизайну архітектури.
-- [Taints and Tolerations](/docs/concepts/scheduling-eviction/taint-and-toleration/).
+- [Автомаштабування кластера](/docs/concepts/cluster-administration/cluster-autoscaling/) для керування кількістю та розміром возлів у вашому кластері.
+- [Заплямованість та Толерантність](/docs/concepts/scheduling-eviction/taint-and-toleration/).
 - [Менеджери ресурсів вузла](/docs/concepts/policy/node-resource-managers/).
 - [Управління ресурсами для вузлів з операційною системою Windows](/docs/concepts/configuration/windows-resource-management/).
