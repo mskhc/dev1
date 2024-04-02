@@ -124,7 +124,7 @@ resources (GPU racks or TPU slices), running 1 model replica in each accelerator
 to oversubscribe their clusters, queue workloads to run as capacity becomes available, prevent
 partial scheduling and deadlocks, enable multi-tenancy, and more.
 
-## Example Use Case
+## Example use case
 
 One can install JobSet as follows:
 
@@ -189,9 +189,9 @@ having a leader pod, with a different template than workers, and worker pods. Th
 started before the workers are started and if all the workers finish we can consider the workload
 complete and the overallworkload can be considered successful.
 
-a) Different pod templates for workers and leaders
-b) Success policies on the workers
-c) Startup policies
+1) Different pod templates for workers and leaders
+2) Success policies on the workers
+3) Startup policies
 
 Example workload
 
