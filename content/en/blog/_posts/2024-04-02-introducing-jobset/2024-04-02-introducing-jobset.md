@@ -15,7 +15,7 @@ The Kubernetes community’s recent enhancements to the batch ecosystem on Kuber
 
 Large ML models (particularly LLMs) which cannot fit into the memory of the GPU or TPU chips on a single host are often distributed across tens of thousands of accelerator chips, which in turn may span thousands of hosts. 
 
-As such, the model training code is often containerized and executed simultaneously on all these hosts, performing distributed computations which often shard both the model parameters and/or the training dataset across the target accelerator chips, using NCCL or XLA collective primitives like all-gather and all-reduce to perform distributed computations and synchronize gradients between hosts. 
+As such, the model training code is often containerized and executed simultaneously on all these hosts, performing distributed computations which often shard both the model parameters and/or the training dataset across the target accelerator chips, using communication collective primitives like all-gather and all-reduce to perform distributed computations and synchronize gradients between hosts. 
 
 These workload characteristics make Kubernetes a great fit for this type of workload, as efficiently scheduling and managing the lifecycle of containerized applications across a cluster of compute resources is an area where it shines. 
 
