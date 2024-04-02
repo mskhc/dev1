@@ -47,23 +47,17 @@ completion mode, higher scalability, Pod failure policies and Pod backoff policy
 a few of the most recent enhancements. However, running ML training and HPC workloads using
 the upstream Job API requires extra orchestration to fill the following gaps:
 
-1) **Multi-template Pods**: Most HPC or ML training jobs include more than one type of Pods. 
-The different Pods are part of the same workload, but they need to run a different container,
-request different resources or have different failure policies. A common example is the
-driver-worker pattern.
+Multi-template Pods
+: Most HPC or ML training jobs include more than one type of Pods. The different Pods are part of the same workload, but they need to run a different container, request different resources or have different failure policies. A common example is the driver-worker pattern.
 
-2) **Job Groups**: Large scale training workloads span multiple network topologies, running
-across multiple racks for example. Such workloads are network latency sensitive, and aim to
-localize communication and minimize traffic crossing the higher-latency network links. To
-facilitate this, the workload needs to be split into groups of Pods each assigned to a
-network topology.
+Job groups
+: Large scale training workloads span multiple network topologies, running across multiple racks for example. Such workloads are network latency sensitive, and aim to localize communication and minimize traffic crossing the higher-latency network links. To facilitate this, the workload needs to be split into groups of Pods each assigned to a network topology.
 
-3) **Network setup**: Create and manage the resources (e.g. headless services) necessary to
-establish communication between the Pods of a job. 
+Inter-Pod communication
+: Create and manage the resources (e.g. [headless Services](/docs/concepts/services-networking/service/#headless-services)) necessary to establish communication between the Pods of a job.
 
-4) **Startup sequence**: Some jobs require a specific start sequence of pods; sometimes the
-driver is expected to start first (like Ray or Spark), in other cases the workers are expected
-to be ready before starting the driver (like MPI). 
+Startup sequencing
+: Some jobs require a specific start sequence of pods; sometimes the driver is expected to start first (like Ray or Spark), in other cases the workers are expected to be ready before starting the driver (like MPI).
 
 JobSet aims to address those gaps using the Job API as a building block to build a richer API
 for large-scale distributed HPC and ML use cases.
@@ -83,7 +77,8 @@ same job but with different names.
 
 Some other key JobSet features which address the problems described above include:
 
-1) **Job Groups**: In modern data centers, hardware accelerators like GPUs and TPUs allocated
+Replicated Jobs
+: In modern data centers, hardware accelerators like GPUs and TPUs allocated
 in islands of homogenous accelerators connected via a specialized, high bandwidth network links.
 For example, a user might provision nodes containing a group of hosts co-located on a rack, 
 each with H100 GPUs, where GPU chips within each host are connected via NVLink, with a NVLink
@@ -95,33 +90,36 @@ communicates with the pods within the same island to do segments of distributed 
 and keeping the gradient synchronization over DCN (data center network, which is lower bandwidth
 than ICI) to a bare minimum. 
 
-2) **Automatic headless service creation, configuration, and lifecycle management**: pod-to-pod
-communication via pod hostname is enabled by default, with automatic configuration and lifecycle
-management of the headless service enabling this. Configurable success policies: JobSet has
-configurable success policies which target specific ReplicatedJobs, with operators to target
-“Any” or “All” of their child jobs. For example, you can configure the JobSet to be marked
+Automatic headless service creation, configuration, and lifecycle management
+: Pod-to-pod communication via pod hostname is enabled by default, with automatic configuration
+and lifecycle management of the headless service enabling this. 
+
+Configurable success policies
+: JobSet has configurable success policies which target specific ReplicatedJobs, with operators
+to target “Any” or “All” of their child jobs. For example, you can configure the JobSet to be marked
 complete if and only if all pods that are part of the “worker” ReplicatedJob are completed.
 
-3) **Configurable failure policies**: JobSet has configurable failure policies which allow the
-user to specify a maximum number of times the JobSet should be restarted in the event of a failure.
-If any job is marked failed, the entire JobSet will be recreated, allowing the workload to resume
-from the last checkpoint. When no failure policy is specified, if any job fails, the JobSet simply
-fails. 
+Configurable failure policies
+: JobSet has configurable failure policies which allow the user to specify a maximum number of
+times the JobSet should be restarted in the event of a failure. If any job is marked failed,
+the entire JobSet will be recreated, allowing the workload to resume from the last checkpoint.
+When no failure policy is specified, if any job fails, the JobSet simply fails. 
 
-4) **Exclusive placement per topology domain**: JobSet allows users to express that child jobs
-have 1:1 exclusive assignment to a topology domain, typically an accelerator island like a rack
-For example, if the JobSet creates two child jobs, then this feature will enforce that the pods
-of each child job will be co-located on the same island, and that only one child job is allowed
-to schedule per island. This useful for scenarios where, for example, we want to use a data
-parallel distributed training strategy to train a model using multiple islands of compute
-resources (GPU racks or TPU slices), running 1 model replica in each accelerator island, ensuring
- the forward and backward passes themselves occur within a single model replica occurs over the
- high bandwidth interconnect linking the accelerators chips within the island, and only the
- gradient synchronization between model replicas occurs across accelerator islands over the
- lower bandwidth data center network.
+Exclusive placement per topology domain
+: JobSet allows users to express that child jobs have 1:1 exclusive assignment to a topology
+domain, typically an accelerator island like a rack. For example, if the JobSet creates
+two child jobs, then this feature will enforce that the pods of each child job will be
+co-located on the same island, and that only one child job is allowed to schedule per island.
+This useful for scenarios where, for example, we want to use a data parallel distributed
+training strategy to train a model using multiple islands of compute resources (GPU racks
+or TPU slices), running 1 model replica in each accelerator island, ensuring the forward
+and backward passes themselves occur within a single model replica occurs over the high
+bandwidth interconnect linking the accelerators chips within the island, and only the
+gradient synchronization between model replicas occurs across accelerator islands over the
+lower bandwidth data center network.
 
-5) **Integration with Kueue**: users can submit JobSets via [Kueue](https://kueue.sigs.k8s.io/)
-to oversubscribe their clusters, queue workloads to run as capacity becomes available, prevent
+Integration with Kueue
+: Users can submit JobSets via [Kueue](https://kueue.sigs.k8s.io/) to oversubscribe their clusters, queue workloads to run as capacity becomes available, prevent
 partial scheduling and deadlocks, enable multi-tenancy, and more.
 
 ## Example use case
