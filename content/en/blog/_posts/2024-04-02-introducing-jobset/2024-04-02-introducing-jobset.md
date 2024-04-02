@@ -79,7 +79,7 @@ a declarative way to easily create identical child-jobs to run on different isla
 accelerators, without resorting to scripting or Helm charts to generate many versions of the
 same job but with different names.
 
-![JobSet Architecture Diagram](jobset_diagram.png "JobSet Architecture")
+![JobSet Architecture Diagram](jobset_diagram.svg "JobSet Architecture")
 
 Some other key JobSet features which address the problems described above include:
 
