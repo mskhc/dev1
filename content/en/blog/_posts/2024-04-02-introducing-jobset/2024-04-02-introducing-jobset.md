@@ -19,7 +19,7 @@ These workload characteristics make Kubernetes a great fit for this type of work
 
 However, as distributed ML training techniques continue to evolve, existing Kubernetes primitives do not adequately model them alone anymore. Furthermore, the landscape of Kubernetes distributed training orchestration APIs has become fragmented, and each of the existing solutions in this fragmented landscape has certain limitations that make it non-optimal for distributed ML training. 
 
-On the one hand, the KubeFlow training operator defines custom APIs for different ML frameworks (e.g. PyTorchJob, TFJob, MPIJob, etc.); however, each of these job types are in fact a bespoke solution fit specifically to the target framework, each with different semantics and behavior. 
+On the one hand, the KubeFlow training operator defines custom APIs for different ML frameworks (e.g. PyTorchJob, TFJob, MPIJob, etc.); however, each of these job types are in fact a solution fit specifically to the target framework, each with different semantics and behavior. 
 
 On the other hand, the Job API fixed many gaps for running batch workloads, including Indexed completion mode, higher scalability, Pod failure policies and Pod backoff policy to mention a few of the most recent enhancements. However, running ML training and HPC workloads using the upstream Job API requires extra orchestration to fill the following gaps:
 
