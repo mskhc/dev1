@@ -11,11 +11,15 @@ In this article, we introduce [JobSet](https://jobset.sigs.k8s.io/), an open sou
 
 ## Why JobSet?
 
-The Kubernetes community’s recent enhancements to the batch ecosystem on Kubernetes attracted ML engineers who have found it to be a natural fit for the requirements of running distributed training workloads. Large ML models (particularly LLMs) which cannot fit into the memory of the GPU or TPU chips on a single host are often distributed across tens of thousands of accelerator chips, which in turn may span thousands of hosts. 
+The Kubernetes community’s recent enhancements to the batch ecosystem on Kubernetes attracted ML engineers who have found it to be a natural fit for the requirements of running distributed training workloads. 
+
+Large ML models (particularly LLMs) which cannot fit into the memory of the GPU or TPU chips on a single host are often distributed across tens of thousands of accelerator chips, which in turn may span thousands of hosts. 
 
 As such, the model training code is often containerized and executed simultaneously on all these hosts, performing distributed computations which often shard both the model parameters and/or the training dataset across the target accelerator chips, using NCCL or XLA collective primitives like all-gather and all-reduce to perform distributed computations and synchronize gradients between hosts. 
 
-These workload characteristics make Kubernetes a great fit for this type of workload, as efficiently scheduling and managing the lifecycle of containerized applications across a cluster of compute resources is an area where it shines. It is also very extensible, allowing developers to define their own Kubernetes APIs, objects, and controllers which manage the behavior and life cycle of these objects, allowing engineers to develop custom distributed training orchestration solutions to fit their needs.
+These workload characteristics make Kubernetes a great fit for this type of workload, as efficiently scheduling and managing the lifecycle of containerized applications across a cluster of compute resources is an area where it shines. 
+
+It is also very extensible, allowing developers to define their own Kubernetes APIs, objects, and controllers which manage the behavior and life cycle of these objects, allowing engineers to develop custom distributed training orchestration solutions to fit their needs.
 
 However, as distributed ML training techniques continue to evolve, existing Kubernetes primitives do not adequately model them alone anymore. Furthermore, the landscape of Kubernetes distributed training orchestration APIs has become fragmented, and each of the existing solutions in this fragmented landscape has certain limitations that make it non-optimal for distributed ML training. 
 
@@ -173,3 +177,13 @@ spec:
                 sleep 10
 ```
 
+## Future work and getting involved
+We have a number of features on the JobSet roadmap planned for development this year, which can be found in the [JobSet roadmap](https://github.com/kubernetes-sigs/jobset?tab=readme-ov-file#roadmap).
+
+Please feel free to reach out with feedback of any kind. We’re also open to additional contributors, whether it is to fix or report bugs, or help add new features or write documentation. 
+
+You can get in touch with
+us via our [repo](http://sigs.k8s.io/jobset), [mailing list](https://groups.google.com/a/kubernetes.io/g/wg-batch) or on 
+[Slack](https://kubernetes.slack.com/messages/wg-batch).
+
+Last but not least, thanks to all [our contributors](https://github.com/kubernetes-sigs/jobset/graphs/contributors) who made this project possible!
