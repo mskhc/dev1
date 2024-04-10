@@ -4,6 +4,9 @@ reviewers:
 - soltysh
 - janetkuo
 title: CronJob
+api_metadata:
+- apiVersion: "batch/v1"
+  kind: "CronJob"
 content_type: concept
 description: >-
   Обʼєкт CronJob запускає Job за повторюваним графіком.

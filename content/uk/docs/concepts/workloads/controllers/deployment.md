@@ -2,6 +2,9 @@
 reviewers:
 - janetkuo
 title: Deployment
+api_metadata:
+- apiVersion: "apps/v1"
+  kind: "Deployment"
 feature:
   title: Автоматизоване розгортання та згортання
   description: >

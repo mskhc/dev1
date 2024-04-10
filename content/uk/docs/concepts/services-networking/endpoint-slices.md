@@ -2,7 +2,10 @@
 reviewers:
 - freehan
 title: EndpointSlices
-content_type: концепція
+api_metadata:
+- apiVersion: "discovery.k8s.io/v1"
+  kind: "EndpointSlice"
+content_type: concept
 weight: 60
 description: >-
   API EndpointSlice — це механізм, який Kubernetes використовує, щоб ваш Service

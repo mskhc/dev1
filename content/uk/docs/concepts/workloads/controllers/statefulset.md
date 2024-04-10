@@ -7,6 +7,9 @@ reviewers:
 - kow3ns
 - smarterclayton
 title: StatefulSets
+api_metadata:
+- apiVersion: "apps/v1"
+  kind: "StatefulSet"
 content_type: concept
 description: >-
   StatefulSet — це обʼєкт робочого навантаження API, який використовується для управління застосунками зі збереженням стану. Він запускає групу Podʼів і зберігає стійку ідентичність для кожного з цих Podʼів. Це корисно для керування

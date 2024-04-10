@@ -2,7 +2,10 @@
 reviewers:
 - caesarxuchao
 - dchen1107
-title: Вузли 
+title: Вузли
+api_metadata:
+- apiVersion: "v1"
+  kind: "Node"
 aka: Nodes
 content_type: concept
 weight: 10

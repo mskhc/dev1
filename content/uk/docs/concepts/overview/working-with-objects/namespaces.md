@@ -6,6 +6,9 @@ reviewers:
 title: Простори імен 
 aka: 
   - Namespaces
+api_metadata:
+- apiVersion: "v1"
+  kind: "Namespace"
 content_type: concept
 weight: 45
 ---

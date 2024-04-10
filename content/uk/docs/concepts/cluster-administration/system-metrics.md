@@ -4,7 +4,7 @@ reviewers:
 - brancz
 - logicalhan
 - RainbowMango
-content_type: концепція
+content_type: concept
 weight: 70
 ---
 

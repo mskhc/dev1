@@ -5,6 +5,9 @@ reviewers:
 - thockin
 - msau42
 title: Томи
+api_metadata:
+- apiVersion: ""
+  kind: "Volume"
 content_type: concept
 weight: 10
 ---
@@ -215,11 +218,16 @@ spec:
 ### gitRepo (застаріло) {#gitrepo}
 
 {{< warning >}}
-Тип тому `gitRepo` застарів. Щоб забезпечити контейнер репозиторієм git, замініть його на [EmptyDir](#emptydir), який монтується в InitContainer, що клонує репозиторій за допомогою git, а потім монтує [EmptyDir](#emptydir) в контейнер Podʼа.
+Тип тому `gitRepo` застарів. Щоб забезпечити те, що Pod має змонтований репозиторій git,  ви можете змонтувати том [EmptyDir](#emptydir), який монтується в [init container](/docs/concepts/workloads/pods/init-containers/), що клонує репозиторій за допомогою git, а потім монтує [EmptyDir](#emptydir) в контейнер Podʼа.
+
+---
+
+Ви можете обмежити використання томів `gitRepo` у вашому кластері, використовуючи [політики](/docs/concepts/policy/), такі як [ValidatingAdmissionPolicy](/docs/reference/access-authn-authz/validating-admission-policy/). Ви можете використовувати наступний вираз мови виразів загального виразу (Common Expression Language, CEL) як частину політики для відхилення використання томів `gitRepo`: `!has(object.spec.volumes) || !object.spec.volumes.exists(v, has(v.gitRepo))`.
+
 {{< /warning >}}
 
 Том `gitRepo` є прикладом втулка тому. Цей втулок монтує порожній каталог і клонує репозиторій git у цей каталог
-для використання вашим Pod\ом.
+для використання вашим Podʼом.
 
 Ось приклад тому `gitRepo`:
 

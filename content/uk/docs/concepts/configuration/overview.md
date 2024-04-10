@@ -2,7 +2,7 @@
 reviewers:
 - mikedanese
 title: Поради щодо конфігурації
-content_type: концепція
+content_type: concept
 weight: 10
 ---
 

@@ -6,6 +6,9 @@ reviewers:
 - msau42
 - xing-yang
 title: Постійні томи
+api_metadata:
+- apiVersion: "v1"
+  kind: "PersistentVolume"
 feature:
   title: Оркестрація зберігання
   description: >

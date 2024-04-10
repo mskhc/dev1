@@ -2,6 +2,11 @@
 reviewers:
 - bprashanth
 title: Ingress
+api_metadata:
+- apiVersion: "networking.k8s.io/v1"
+  kind: "Ingress"
+- apiVersion: "networking.k8s.io/v1"
+  kind: "IngressClass"  
 content_type: concept
 description: >-
   Робить вашу мережеву службу HTTP (або HTTPS) доступною за допомогою конфігурації, яка розуміє протокол та враховує вебконцепції, такі як URI, імена хостів, шляхи та інше. Концепція Ingress дозволяє вам направляти трафік на різні бекенди на основі правил, які ви визначаєте через API Kubernetes.

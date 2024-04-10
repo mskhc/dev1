@@ -4,7 +4,7 @@ reviewers:
 - jsturtevant
 - zshihang
 title: Projected томи
-content_type: концепція
+content_type: concept
 weight: 21 # одразу після постійних томів
 ---
 

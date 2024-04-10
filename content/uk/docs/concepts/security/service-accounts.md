@@ -2,6 +2,9 @@
 title: Облікові записи служб
 description: >
   Дізнайтеся про обʼєкти ServiceAccount в Kubernetes.
+api_metadata:
+- apiVersion: "v1"
+  kind: "ServiceAccount"
 content_type: concept
 weight: 25
 ---

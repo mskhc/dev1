@@ -6,6 +6,9 @@ reviewers:
 title: Мережеві політики 
 aka: Network Policies
 content_type: concept
+api_metadata:
+- apiVersion: "networking.k8s.io/v1"
+  kind: "NetworkPolicy"
 weight: 70
 description: >-
   Якщо ви хочете контролювати потік трафіку на рівні IP-адреси чи порту (рівень OSI 3 або 4), мережеві політики Kubernetes дозволяють вам визначати правила потоку трафіку всередині вашого кластера, а також між Podʼами та зовнішнім світом. Ваш кластер повинен використовувати мережевий втулок, який підтримує NetworkPolicy.

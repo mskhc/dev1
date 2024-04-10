@@ -6,6 +6,9 @@ reviewers:
 - janetkuo
 - kow3ns
 title: DaemonSet
+api_metadata:
+- apiVersion: "apps/v1"
+  kind: "DaemonSet"
 description: >-
   DaemonSet визначає Podʼи, які забезпечують засоби локального вузла. Це може бути фундаментально важливим для роботи вашого кластера, таким як інструмент-помічник мережі, або бути частиною застосунку.
 content_type: concept
