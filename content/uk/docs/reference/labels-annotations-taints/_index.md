@@ -1145,7 +1145,7 @@ The kube-proxy has this label for custom proxy, which delegates service control 
 The annotation is used to run Windows containers with Hyper-V isolation.
 
 {{< note >}}
-Starting from v1.20, this annotation is deprecated.
+Starting from v1.20, Ця анатоція є застарілою.
 Experimental Hyper-V support was removed in 1.21.
 {{< /note >}}
 
@@ -1245,7 +1245,7 @@ Pod. For example, `kubectl logs` without `-c` or `--container` flag will use thi
 container.
 
 {{< note >}}
-This annotation is deprecated. You should use the
+Ця анатоція є застарілою. You should use the
 [`kubectl.kubernetes.io/default-container`](#kubectl-kubernetes-io-default-container)
 annotation instead. Kubernetes versions 1.25 and newer ignore this annotation.
 {{< /note >}}
@@ -2047,6 +2047,20 @@ Do not modify or add the `service.beta.kubernetes.io/aws-load-balancer-type` ann
 on an existing Service object. See the AWS documentation on this topic for more
 details.
 {{< /caution >}}
+
+### service.beta.kubernetes.io/azure-load-balancer-disable-tcp-reset (deprecated) {#service-beta-kubernetes-azure-load-balancer-disble-tcp-reset}
+
+Приклад: `service.beta.kubernetes.io/azure-load-balancer-disable-tcp-reset: "false"`
+
+Використовується для: Service
+
+Ця анотація працює лише для Service, підтримуваних стандартним балансувальником навантаження Azure. Вона використовується у Service для вказівки, чи слід вимикати або вмикати скидання TCP при бездіяльності. Якщо увімкнено, це допомагає застосункам працювати більш передбачувано, виявляти обриви зʼєднання, видаляти застарілі зʼєднання та ініціювати нові. Ви можете встановити значення як true або false.
+
+Дивіться [Скидання TCP балансувальника навантаження](https://learn.microsoft.com/en-gb/azure/load-balancer/load-balancer-tcp-reset) для отримання додаткової інформації.
+
+{{< note >}}
+Ця анатоція є застарілою.
+{{< /note >}}
 
 ### pod-security.kubernetes.io/enforce
 

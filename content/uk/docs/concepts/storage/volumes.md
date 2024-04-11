@@ -222,7 +222,7 @@ spec:
 
 ---
 
-Ви можете обмежити використання томів `gitRepo` у вашому кластері, використовуючи [політики](/docs/concepts/policy/), такі як [ValidatingAdmissionPolicy](/docs/reference/access-authn-authz/validating-admission-policy/). Ви можете використовувати наступний вираз мови виразів загального виразу (Common Expression Language, CEL) як частину політики для відхилення використання томів `gitRepo`: `!has(object.spec.volumes) || !object.spec.volumes.exists(v, has(v.gitRepo))`.
+Ви можете обмежити використання томів `gitRepo` у вашому кластері, використовуючи [політики](/docs/concepts/policy/), такі як [ValidatingAdmissionPolicy](/docs/reference/access-authn-authz/validating-admission-policy/). Ви можете використовувати наступний вираз мови виразів загального виразу (Common Expression Language, CEL) як частину політики для відхилення використання томів `gitRepo`: `has(object.spec.volumes) || !object.spec.volumes.exists(v, has(v.gitRepo))`.
 
 {{< /warning >}}
 
