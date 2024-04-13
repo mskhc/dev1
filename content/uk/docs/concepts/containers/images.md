@@ -3,7 +3,7 @@ reviewers:
 - erictune
 - thockin
 title: Образ контейнера
-content_type: Концепція
+content_type: concept
 weight: 10
 hide_summary: true # Окремо вказано у розділі змісту
 ---

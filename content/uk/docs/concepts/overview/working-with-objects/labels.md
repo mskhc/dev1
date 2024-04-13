@@ -2,7 +2,7 @@
 reviewers:
 - mikedanese
 title: Мітки та Селектори
-content_type: Концепція
+content_type: concept
 weight: 40
 ---
 
