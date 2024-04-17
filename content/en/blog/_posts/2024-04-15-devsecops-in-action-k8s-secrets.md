@@ -228,7 +228,7 @@ with secret, otherwise `spec.containers.0.postStart` hook will clean it.
 
 ## Stage-03: Smooth update
 
-So at the current moment the application can be configured via the environment
+So at the current moment, the application can be configured via the environment
 variable `DEMO_SECRET__PASSWD_FILE` containing a path to a secret file and if
 the file exists (checking via `/readianess` probe) then read it.
 
