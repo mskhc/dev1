@@ -41,7 +41,7 @@ sensitive data via environment variables isn't recommended, but at the same time
 it's recommended in The
 [Twelve Factors](https://12factor.net/config).
 These are general recommendations which don't impact security issues that's why
-their application should make sense,but passing config via environment variables
+their application should make sense, but passing config via environment variables
 with sensitive data must be kept to a minimum.
 
 Injection of Secret via file and in-memory has pros and cons and I would like to
