@@ -20,7 +20,7 @@ According to
 [Good practices for Kubernetes Secrets](/docs/concepts/security/secrets-good-practices/)
 there are several options on how to improve security of this kind of Secret:
 encrypt secrets in the etcd, restrict the access to them via RBAC, configure
-access to external Secret, etc. However this partially solves the security issue
+access to external Secret, etc. However, this partially solves the security issue
 because they are cluster side solutions and they help to improve security of the
 cluster overall.
 
