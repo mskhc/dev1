@@ -35,7 +35,7 @@ entire IT lifecycle. In other words, security solutions must start with the
 development process and apply to all other levels correspondingly.
 
 According to
-[OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#5-containers-orchestrators)
+[OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html#5-containers-orchestrators),
 it's recommended to use Injection of Secret via file and in-memory. Provision of
 sensitive data via environment variables isn't recommended, but at the same time
 it's recommended in The
