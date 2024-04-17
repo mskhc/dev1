@@ -4,6 +4,9 @@ reviewers:
 - erictune
 - soltysh
 title: Jobs
+api_metadata:
+- apiVersion: "batch/v1"
+  kind: "Job"
 content_type: concept
 description: >-
   Jobs represent one-off tasks that run to completion and then stop.
@@ -750,7 +753,7 @@ reset to the current time. This means that the `.spec.activeDeadlineSeconds`
 timer will be stopped and reset when a Job is suspended and resumed.
 
 When you suspend a Job, any running Pods that don't have a status of `Completed`
-will be [terminated](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination).
+will be [terminated](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)
 with a SIGTERM signal. The Pod's graceful termination period will be honored and
 your Pod must handle this signal in this period. This may involve saving
 progress for later or undoing changes. Pods terminated this way will not count

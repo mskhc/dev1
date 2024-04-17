@@ -3,6 +3,9 @@ reviewers:
 - caesarxuchao
 - dchen1107
 title: Nodes
+api_metadata:
+- apiVersion: "v1"
+  kind: "Node"
 content_type: concept
 weight: 10
 ---
@@ -578,6 +581,8 @@ Learn more about the following:
 * [API definition for Node](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
 * [Node](https://git.k8s.io/design-proposals-archive/architecture/architecture.md#the-kubernetes-node)
   section of the architecture design document.
+* [Cluster autoscaling](/docs/concepts/cluster-administration/cluster-autoscaling/) to
+  manage the number and size of nodes in your cluster.
 * [Taints and Tolerations](/docs/concepts/scheduling-eviction/taint-and-toleration/).
 * [Node Resource Managers](/docs/concepts/policy/node-resource-managers/).
 * [Resource Management for Windows nodes](/docs/concepts/configuration/windows-resource-management/).

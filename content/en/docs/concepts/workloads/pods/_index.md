@@ -2,6 +2,9 @@
 reviewers:
 - erictune
 title: Pods
+api_metadata:
+- apiVersion: "v1"
+  kind: "Pod"
 content_type: concept
 weight: 10
 no_list: true
@@ -163,6 +166,10 @@ PodTemplates are specifications for creating Pods, and are included in workload 
 Each controller for a workload resource uses the `PodTemplate` inside the workload
 object to make actual Pods. The `PodTemplate` is part of the desired state of whatever
 workload resource you used to run your app.
+
+When you create a Pod, you can include
+[environment variables](/docs/tasks/inject-data-application/define-environment-variable-container/)
+in the Pod template for the containers that run in the Pod.
 
 The sample below is a manifest for a simple Job with a `template` that starts one
 container. The container in that Pod prints a message then pauses.
