@@ -382,6 +382,11 @@ Let's check process environment:
 
 ```bash
 # strings /proc/1/environ
+```
+
+The output is similar to this:
+
+```text
 ...
 DEMO_SECRET__PASSWD=file:///secrets/secret.file
 ...
