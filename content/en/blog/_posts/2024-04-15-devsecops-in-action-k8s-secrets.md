@@ -24,7 +24,7 @@ access to external Secret, etc. However, this partially solves the security issu
 because they are cluster-side solutions and they help to improve security of the
 cluster overall.
 
-In the modern world unilateral solutions aren't effective enough and can hide
+In the modern world, unilateral solutions aren't effective enough and can hide
 security issues known as
 [Security through obscurity](https://en.m.wikipedia.org/wiki/Security_through_obscurity).
 In order to avoid it it's necessary to integrate
