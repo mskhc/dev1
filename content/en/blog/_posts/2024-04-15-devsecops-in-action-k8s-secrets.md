@@ -362,6 +362,11 @@ content which is defined in the environment variable:
 
 ```bash
 curl -v localhost:8080
+```
+
+The output is similar to this:
+
+```text
 ...
 > GET / HTTP/1.1
 > Host: localhost:8080
