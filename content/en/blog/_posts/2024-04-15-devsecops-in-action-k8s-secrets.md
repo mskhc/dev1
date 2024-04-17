@@ -498,7 +498,7 @@ application runs into container and is managed by orchestrator such as:
 Kubernetes, then it generates additional problems which have to be solved in
 order to use debug tool.
 
-For more details please see [Debugging Go Code with GDB](https://go.dev/doc/gdb)
+For more details please see [Debugging Go Code with GDB](https://go.dev/doc/gdb).
 
 All source code, deployment files and Installation guide to local environment
 can be found in the
