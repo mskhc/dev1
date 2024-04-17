@@ -294,7 +294,7 @@ variable for two cases:
 * new: using env variable for storing path to file with sensitive data and
 override current value to value from the file
 
-In order to distinguish sensitive data values from path to file, by using prefix.
+To distinguish sensitive data values from path to file, by using prefixes,
 this will allow you to use the same variable and follow OWASP recommendations.
 
 First let's define variables and constants:
