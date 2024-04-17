@@ -410,6 +410,11 @@ will contain the file name which was defined in the environment variable:
 
 ```bash
 # curl -v localhost:8080
+```
+
+The output is similar to this:
+
+```text
 ...
 > GET / HTTP/1.1
 > Host: localhost:8080
@@ -419,12 +424,23 @@ will contain the file name which was defined in the environment variable:
 < HTTP/1.1 200 OK
 ...
 /secrets/secret.file
+```
 
+```bash
 # strings /proc/1/environ
+```
+
+```text
+...
 DEMO_SECRET__PASSWD=/secrets/secret.file
 ...
+```
 
+```bash
 # cat /secrets/secret.file
+```
+
+```text
 cat: /secrets/secret.file: No such file or directory
 ```
 
