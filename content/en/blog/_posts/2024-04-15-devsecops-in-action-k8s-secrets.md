@@ -3,9 +3,10 @@ layout: blog
 title: "DevSecOps in Action: Kubernetes Secrets"
 slug: devsecops-in-action-k8s-secrets
 date: 2024-04-15
+author: >
+  Evgenii Frikin
 ---
 
-**Author**: Evgenii Frikin
 
 The Secret is one of the basic resources that exists in the Kubernetes API. This
 kind of resource is used for different purposes and despite the name Secret,
