@@ -295,7 +295,7 @@ variable for two cases:
 override current value to value from the file
 
 In order to distinguish sensitive data values from path to file, by using prefix.
-This will allow us to use the same variable and follow OWASP recommendations.
+this will allow you to use the same variable and follow OWASP recommendations.
 
 First let's define variables and constants:
 
