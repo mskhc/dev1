@@ -38,7 +38,7 @@ spec:
   # Налаштувати обмеження поширення топології
   topologySpreadConstraints:
     - maxSkew: <ціле число>
-      minDomains: <ціле число> # необовʼязково; бета з v1.25
+      minDomains: <ціле число> # необовʼязково
       topologyKey: <рядок>
       whenUnsatisfiable: <рядок>
       labelSelector: <обʼєкт>
@@ -61,8 +61,9 @@ spec:
 
 - **minDomains** вказує мінімальну кількість прийнятних областей. Це поле є необовʼязковим. Домен — це певний екземпляр топології. Прийнятний домен — це домен, чиї вузли відповідають селектору вузлів.
 
+  <!-- OK to remove this note once v1.29 Kubernetes is out of support -->
   {{< note >}}
-  Прапорець `MinDomainsInPodTopologySpread` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) включає `minDomains` для поширення топології Pod. Починаючи з v1.28, `MinDomainsInPodTopologySpread` типово ввімкнено. В старіших кластерах Kubernetes він може бути явно відключений або поле може бути недоступним.
+  До Kubernetes v1.30 поле `minDomains` було доступним, якщо `MinDomainsInPodTopologySpread` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) було увімкнено (типово увімкнено починаючи з v1.28). В старіших кластерах Kubernetes воно може бути явно відключеним або поле може бути недоступним.
   {{< /note >}}
 
   - Значення `minDomains` повинно бути більше ніж 0, коли вказано. Ви можете вказати `minDomains` лише разом з `whenUnsatisfiable: DoNotSchedule`.

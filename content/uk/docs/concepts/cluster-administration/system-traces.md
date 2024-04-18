@@ -19,6 +19,8 @@ weight: 90
 
 ## Збір трейсів {#trace-collection}
 
+Компоненти Kubernetes мають вбудовані експортери gRPC для OTLP для експорту трейсів, або через OpenTelemetry Collector, або без нього.
+
 Для повного посібника зі збору трейсів та використання колектора див. [Початок роботи з OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/). Однак є кілька речей, на які варто звернути увагу, що є специфічними для компонентів Kubernetes.
 
 Типово компоненти Kubernetes експортують трейси за допомогою експортера grpc для OTLP на
@@ -39,6 +41,12 @@ service:
       receivers: [otlp]
       exporters: [logging]
 ```
+
+Для безпосереднього надсилання трейсів до бекенду без використання колектора, вкажіть поле `endpoint` у конфігурації Kubernetes з адресою бекенду. Цей метод усуває потребу в колекторі та спрощує загальну структуру.
+
+Для конфігурації заголовків backend trace, включаючи дані автентифікації, можна використовувати змінні середовища з `OTEL_EXPORTER_OTLP_HEADERS`, див. [Конфігурація Експортера OTLP](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/).
+
+Додатково, для конфігурації атрибутів ресурсів trace, таких як назва кластера Kubernetes, простір імен, імʼя Pod і т. д., також можна використовувати змінні середовища з `OTEL_RESOURCE_ATTRIBUTES`, див. [Ресурс Kubernetes OTLP](https://opentelemetry.io/docs/specs/semconv/resource/k8s/).
 
 ## Трейси компонентів {#component-traces}
 
@@ -94,3 +102,4 @@ Kubelet у Kubernetes v{{< skew currentVersion >}} збирає спани зі 
 ## {{% heading "whatsnext" %}}
 
 * Прочитайте про [Початок роботи з OpenTelemetry Collector](https://opentelemetry.io/docs/collector/getting-started/)
+* Прочитайте про [Конфігурацію Експортера OTLP](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/)

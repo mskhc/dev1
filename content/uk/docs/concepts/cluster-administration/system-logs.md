@@ -96,13 +96,13 @@ second line.}
 
 ### Контекстне ведення логів {#contextual-logging}
 
-{{< feature-state for_k8s_version="v1.24" state="alpha" >}}
+{{< feature-state for_k8s_version="v1.30" state="beta" >}}
 
 Контекстне ведення логів базується на структурованому веденні логів. Це переважно стосується того, як розробники використовують системні виклики ведення логів: код, побудований на цьому концепті, є більш гнучким і підтримує додаткові варіанти використання, як описано в [KEP щодо контекстного ведення логів](https://github.com/kubernetes/enhancements/tree/master/keps/sig-instrumentation/3077-contextual-logging).
 
 Якщо розробники використовують додаткові функції, такі як `WithValues` або `WithName`, у своїх компонентах, то записи в журнал міститимуть додаткову інформацію, яка передається у функції своїм абонентам.
 
-Наразі це залежить від feature gate `StructuredLogging` та за типово вимкнене. Інфраструктура для цього була додана в 1.24 без модифікації компонентів. Команда [`component-base/logs/example`](https://github.com/kubernetes/kubernetes/blob/v1.24.0-beta.0/staging/src/k8s.io/component-base/logs/example/cmd/logger.go) показує, як використовувати нові виклики ведення логів та як компонент поводиться, якщо він підтримує контекстне ведення логів.
+Для Kubernetes Kubernetes {{< skew currentVersion >}}, це керується через `ContextualLogging`[feature gate](/docs/reference/command-line-tools-reference/feature-gates/), що є типово увімкненим. Інфраструктура для цього була додана в 1.24 без модифікації компонентів. Команда [`component-base/logs/example`](https://github.com/kubernetes/kubernetes/blob/v1.24.0-beta.0/staging/src/k8s.io/component-base/logs/example/cmd/logger.go) показує, як використовувати нові виклики ведення логів та як компонент поводиться, якщо він підтримує контекстне ведення логів.
 
 ```console
 $ cd $GOPATH/src/k8s.io/kubernetes/staging/src/k8s.io/component-base/logs/example/cmd/
@@ -111,22 +111,22 @@ $ go run . --help
       --feature-gates mapStringBool  Набір пар ключ=значення, які описують feature gate для експериментальних функцій. Опції:
                                      AllAlpha=true|false (ALPHA - стандартно=false)
                                      AllBeta=true|false (BETA - стандартно=false)
-                                     ContextualLogging=true|false (ALPHA - стандартно=false)
+                                     ContextualLogging=true|false (BETA - default=true)
 $ go run . --feature-gates ContextualLogging=true
 ...
-I0404 18:00:02.916429  451895 logger.go:94] "example/myname: runtime" foo="bar" duration="1m0s"
-I0404 18:00:02.916447  451895 logger.go:95] "example: another runtime" foo="bar" duration="1m0s"
+I0222 15:13:31.645988  197901 example.go:54] "runtime" logger="example.myname" foo="bar" duration="1m0s"
+I0222 15:13:31.646007  197901 example.go:55] "another runtime" logger="example" foo="bar" duration="1h0m0s" duration="1m0s"
 ```
 
-Префікс `example` та `foo="bar"` були додані абонентом функції, яка записує повідомлення `runtime` та значення `duration="1m0s"`, без необхідності модифікувати цю функцію.
+Ключ `logger` та `foo="bar"` були додані абонентом функції, яка записує повідомлення `runtime` та значення `duration="1m0s"`, без необхідності модифікувати цю функцію.
 
 Коли контекстне ведення логів вимкнене, функції `WithValues` та `WithName` нічого не роблять, а виклики ведення логів пройшли через глобальний реєстратор klog. Отже, ця додаткова інформація більше не виводиться в журнал:
 
 ```console
 $ go run . --feature-gates ContextualLogging=false
 ...
-I0404 18:03:31.171945  452150 logger.go:94] "runtime" duration="1m0s"
-I0404 18:03:31.171962  452150 logger.go:95] "another runtime" duration="1m0s"
+I0222 15:14:40.497333  198174 example.go:54] "runtime" duration="1m0s"
+I0222 15:14:40.497346  198174 example.go:55] "another runtime" duration="1h0m0s" duration="1m0s"
 ```
 
 ### Формат логу у форматі JSON {#json-log-format}
@@ -189,7 +189,7 @@ I0404 18:03:31.171962  452150 logger.go:95] "another runtime" duration="1m0s"
 
 Для допомоги у розвʼязанні проблем на вузлах Kubernetes версії v1.27 введено функцію, яка дозволяє переглядати логи служб, що працюють на вузлі. Щоб скористатися цією функцією, переконайтеся, що для цього вузла увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `NodeLogQuery`, а також що параметри конфігурації kubelet `enableSystemLogHandler` та `enableSystemLogQuery` обидва встановлені в значення true. На Linux ми припускаємо, що логи служб доступні через journald. На Windows ми припускаємо, що логи служб доступні в постачальнику логів застосунків. В обох операційних системах логи також доступні за допомогою читання файлів у теці `/var/log/`.
 
-Якщо у вас є дозвіл на взаємодію з обʼєктами Node, ви можете спробувати цю альфа-функцію на всіх ваших вузлах або лише на їх підмножині. Ось приклад отримання логу служби kubelet з вузла:
+Якщо у вас є дозвіл на взаємодію з обʼєктами Node, ви можете спробувати цю функцію на всіх ваших вузлах або лише на їх підмножині. Ось приклад отримання логу служби kubelet з вузла:
 
 ```shell
 # Отримати логи kubelet з вузла під назвою node-1.example
@@ -229,3 +229,4 @@ kubectl get --raw "/api/v1/nodes/node-1.example/proxy/logs/?query=kubelet&patter
 - Дізнайтеся про [Контекстне ведення логу](https://github.com/kubernetes/enhancements/tree/master/keps/sig-instrumentation/3077-contextual-logging)
 - Дізнайтеся про [застарілі прапорці klog](https://github.com/kubernetes/enhancements/tree/master/keps/sig-instrumentation/2845-deprecate-klog-specific-flags-in-k8s-components)
 - Дізнайтеся про [Умови ведення логу за важливістю](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md)
+- Дізнайтеся про [Log Query](https://kep.k8s.io/2258)

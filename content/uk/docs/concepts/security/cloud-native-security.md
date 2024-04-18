@@ -87,7 +87,7 @@ Kubernetes покладається на {{< glossary_tooltip text="програ
 3. Визначати [ResourceQuotas](/docs/concepts/policy/resource-quotas/) для справедливого розподілу спільних ресурсів та використовувати механізми, такі як [LimitRanges](/docs/concepts/policy/limit-range/) для забезпечення того, що Podʼи вказують свої вимоги до ресурсів.
 4. Розподіляти робочі навантаження по різних вузлах. Використовуйте механізми [ізоляції вузлів](/docs/concepts/scheduling-eviction/assign-pod-node/#node-isolation-restriction), як від самого Kubernetes, так і від екосистеми, щоб гарантувати, що Pod з різними контекстами довіри виконуються на окремих наборах вузлів.
 5. Використовуйте {{< glossary_tooltip text="програмне забезпечення виконання контейнерів" term_id="container-runtime" >}}, яке надає обмеження для підтримання безпеки.
-6. На вузлах Linux використовуйте модуль безпеки Linux, такий як [AppArmor](/docs/tutorials/security/apparmor/) (бета) або [seccomp](/docs/tutorials/security/seccomp/).
+6. На вузлах Linux використовуйте модуль безпеки Linux, такий як [AppArmor](/docs/tutorials/security/apparmor/) або [seccomp](/docs/tutorials/security/seccomp/).
 
 ### Захист під час виконання: зберігання {#protection-runtime-storage}
 

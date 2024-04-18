@@ -87,7 +87,7 @@ Podʼи часто створюються не безпосередньо, а ш
 - Будь-які оновлення метаданих **виключають** зміну анотацій seccomp або AppArmor:
   - `seccomp.security.alpha.kubernetes.io/pod` (застарілий)
   - `container.seccomp.security.alpha.kubernetes.io/*` (застарілий)
-  - `container.apparmor.security.beta.kubernetes.io/*`
+  - `container.apparmor.security.beta.kubernetes.io/*` (застарілий)
 - Дійсні оновлення `.spec.activeDeadlineSeconds`
 - Дійсні оновлення `.spec.tolerations`
 

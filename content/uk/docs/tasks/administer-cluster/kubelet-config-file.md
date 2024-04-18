@@ -7,6 +7,12 @@ content_type: task
 weight: 330
 ---
 
+## {{% heading "prerequisites" %}}
+
+Деякі кроки на цій сторінці використовують інструмент `jq`. Якщо у вас немає `jq`, ви можете встановити його через отримання оновлень програм вашої операційної системи або завантажити з [https://jqlang.github.io/jq/](https://jqlang.github.io/jq/).
+
+Деякі кроки також включають встановлення `curl`, який також можна встановити засобами встановлення програмного забезпечення вашої операційної системи.
+
 <!-- overview -->
 
 Частину параметрів конфігурації kubelet можна встановити за допомогою конфігураційного файлу на диску, як альтернативу командним прапорцям.
@@ -69,44 +75,178 @@ evictionHard:
 
 ## Тека для файлів конфігурації kubelet {#kubelet-conf-d}
 
-Починаючи з Kubernetes версії 1.28.0, можливості kubelet були розширені для підтримки теки drop-in конфігурації. Її місцеположення можна вказати за допомогою параметра `--config-dir`, який типово встановлено в значення `""` і відключено.
+{{<feature-state for_k8s_version="v1.30" state="beta" >}}
 
-Ви можете встановити `--config-dir` лише якщо задана змінна середовища `KUBELET_CONFIG_DROPIN_DIR_ALPHA` для процесу kubelet (значення цієї змінної не має значення). Для Kubernetes v{{< skew currentVersion >}}, kubelet поверне помилку, якщо ви вкажете `--config-dir` без цієї змінної, і запуск завершиться збоєм. Ви не можете вказати теку drop-in конфігурації за допомогою файлу конфігурації kubelet; тільки аргумент командного рядка `--config-dir` може це встановити.
+Ви можете вказати теку конфігурації drop-in для kubelet. Стандартно kubelet не шукає файли конфігурації drop-in — ви повинні вказати шлях. Наприклад: `--config-dir=/etc/kubernetes/kubelet.conf.d`
 
-Теку конфігурації kubelet можна використовувати подібно до файлу конфігурації kubelet.
+Для Kubernetes v1.28 по v1.29 ви можете вказати лише `--config-dir`, якщо також встановите змінну середовища `KUBELET_CONFIG_DROPIN_DIR_ALPHA` для процесу kubelet (значення цієї змінної не має значення).
+
 {{< note >}}
-Суфікс файлу конфігурації drop-in для kubelet має бути `.conf`. Наприклад: `99-kubelet-address.conf`
+Суфікс дійсного файлу конфігурації drop-in для kubelet **має** бути `.conf`. Наприклад: `99-kubelet-address.conf`
 {{< /note >}}
 
-Наприклад, ви бажаєте мати базову конфігурацію kubelet для всіх вузлів, але вам може знадобитись налаштувати поле `address`. Це можна зробити так:
+Kubelet обробляє файли у своїй теці конфігурації drop-in, сортуючи по **повному імені файлу**. Наприклад, `00-kubelet.conf` обробляється першим, а потім перезаписується файлом з назвою `01-kubelet.conf`.
 
-Вміст основного файлу конфігурації kubelet:
+Ці файли можуть містити часткові конфігурації та можуть бути не дійсними файлами конфігурації самі по собі. Перевірка виконується лише для остаточної конфігурації, збереженої внутрішньо в kubelet. Це дозволяє вам гнучко керувати та комбінувати конфігурацію kubelet, яка походить з різних джерел. Однак важливо зазначити, що поведінка варіюється залежно від типу даних полів конфігурації.
 
-```yaml
-apiVersion: kubelet.config.k8s.io/v1beta1
-kind: KubeletConfiguration
-port: 20250
-serializeImagePulls: false
-evictionHard:
-    memory.available:  "200Mi"
+Різні типи даних у структурі конфігурації kubelet обʼєднуються по-різному. Дивіться [посилання на довідку](/docs/reference/node/kubelet-config-directory-merging.md) для отримання додаткової інформації.
+
+### Порядок обʼєднання конфігурації kubelet {#kubelet-configurations-merging-order}
+
+При запуску kubelet обʼєднує конфігурацію з:
+
+- Feature gate, вказаних через командний рядок (найнижчий пріоритет).
+- Конфігурація kubelet.
+- Файли конфігурації drop-in, відповідно до порядку сортування.
+- Аргументи командного рядка, за винятком feature gate (найвищий пріоритет).
+
+{{< note >}}
+Механізм теки конфігурації drop-in для kubelet схожий, але відрізняється від того, як інструмент `kubeadm` дозволяє вам патчити конфігурацію. Інструмент `kubeadm` використовує конкретну [стратегію застосування патчів](/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches) для своєї конфігурації, тоді як єдина стратегія накладання патчів для файлів конфігурації drop-in kubelet це `replace`. Kubelet визначає порядок обʼєднання на основі сортування **суфіксів** алфавітно-цифровим чином, і замінює кожне поле, присутнє у файлі вищого пріоритету.
+{{< /note >}}
+
+## Перегляд конфігурації kubelet {#viewing-the-kubelet-configuration}
+
+Оскільки конфігурація тепер може бути розподілена у декілька файлів за допомогою цієї функції, якщо хтось хоче переглянути остаточну активовану конфігурацію, то вони можуть скористатися цими кроками для перегляду конфігурації kubelet:
+
+1. Запустіть проксі-сервер за допомогою команди [`kubectl proxy`](/docs/reference/kubectl/generated/kubectl-commands#proxy) у вашому терміналі.
+
+```bash
+kubectl proxy
 ```
 
-Вміст файлу в теці `--config-dir`:
+Це дозволить отримати вивід подібний до:
 
-```yaml
-apiVersion: kubelet.config.k8s.io/v1beta1
-kind: KubeletConfiguration
-address: "192.168.0.8"
+```bash
+Starting to serve on 127.0.0.1:8001
 ```
 
-Під час запуску kubelet обʼєднує конфігурацію з:
+2. Відкрийте інше вікно термінала і скористайтесь `curl`, щоб отримати конфігурацію kubelet. Замініть `<node-name>` на фактичне ім'я вашого вузла:
 
-- Параметри командного рядка (найнижчий пріоритет).
-- Конфігурація kubelet
-- Drop-in файли конфігурації відповідно до порядку сортування.
-- Feature gate, вказані через командний рядок (найвищий пріоритет).
+```bash
+curl -X GET http://127.0.0.1:8001/api/v1/nodes/<node-name>/proxy/configz | jq .
+```
 
-Це призводить до такого ж результату, як якби ви використовували [один конфігураційний файл](#create-the-config-file) з попереднього прикладу.
+```json
+{
+  "kubeletconfig": {
+    "enableServer": true,
+    "staticPodPath": "/var/run/kubernetes/static-pods",
+    "syncFrequency": "1m0s",
+    "fileCheckFrequency": "20s",
+    "httpCheckFrequency": "20s",
+    "address": "192.168.1.16",
+    "port": 10250,
+    "readOnlyPort": 10255,
+    "tlsCertFile": "/var/lib/kubelet/pki/kubelet.crt",
+    "tlsPrivateKeyFile": "/var/lib/kubelet/pki/kubelet.key",
+    "rotateCertificates": true,
+    "authentication": {
+      "x509": {
+        "clientCAFile": "/var/run/kubernetes/client-ca.crt"
+      },
+      "webhook": {
+        "enabled": true,
+        "cacheTTL": "2m0s"
+      },
+      "anonymous": {
+        "enabled": true
+      }
+    },
+    "authorization": {
+      "mode": "AlwaysAllow",
+      "webhook": {
+        "cacheAuthorizedTTL": "5m0s",
+        "cacheUnauthorizedTTL": "30s"
+      }
+    },
+    "registryPullQPS": 5,
+    "registryBurst": 10,
+    "eventRecordQPS": 50,
+    "eventBurst": 100,
+    "enableDebuggingHandlers": true,
+    "healthzPort": 10248,
+    "healthzBindAddress": "127.0.0.1",
+    "oomScoreAdj": -999,
+    "clusterDomain": "cluster.local",
+    "clusterDNS": [
+      "10.0.0.10"
+    ],
+    "streamingConnectionIdleTimeout": "4h0m0s",
+    "nodeStatusUpdateFrequency": "10s",
+    "nodeStatusReportFrequency": "5m0s",
+    "nodeLeaseDurationSeconds": 40,
+    "imageMinimumGCAge": "2m0s",
+    "imageMaximumGCAge": "0s",
+    "imageGCHighThresholdPercent": 85,
+    "imageGCLowThresholdPercent": 80,
+    "volumeStatsAggPeriod": "1m0s",
+    "cgroupsPerQOS": true,
+    "cgroupDriver": "systemd",
+    "cpuManagerPolicy": "none",
+    "cpuManagerReconcilePeriod": "10s",
+    "memoryManagerPolicy": "None",
+    "topologyManagerPolicy": "none",
+    "topologyManagerScope": "container",
+    "runtimeRequestTimeout": "2m0s",
+    "hairpinMode": "promiscuous-bridge",
+    "maxPods": 110,
+    "podPidsLimit": -1,
+    "resolvConf": "/run/systemd/resolve/resolv.conf",
+    "cpuCFSQuota": true,
+    "cpuCFSQuotaPeriod": "100ms",
+    "nodeStatusMaxImages": 50,
+    "maxOpenFiles": 1000000,
+    "contentType": "application/vnd.kubernetes.protobuf",
+    "kubeAPIQPS": 50,
+    "kubeAPIBurst": 100,
+    "serializeImagePulls": true,
+    "evictionHard": {
+      "imagefs.available": "15%",
+      "memory.available": "100Mi",
+      "nodefs.available": "10%",
+      "nodefs.inodesFree": "5%"
+    },
+    "evictionPressureTransitionPeriod": "1m0s",
+    "enableControllerAttachDetach": true,
+    "makeIPTablesUtilChains": true,
+    "iptablesMasqueradeBit": 14,
+    "iptablesDropBit": 15,
+    "featureGates": {
+      "AllAlpha": false
+    },
+    "failSwapOn": false,
+    "memorySwap": {},
+    "containerLogMaxSize": "10Mi",
+    "containerLogMaxFiles": 5,
+    "configMapAndSecretChangeDetectionStrategy": "Watch",
+    "enforceNodeAllocatable": [
+      "pods"
+    ],
+    "volumePluginDir": "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/",
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 3,
+      "options": {
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "enableSystemLogHandler": true,
+    "enableSystemLogQuery": false,
+    "shutdownGracePeriod": "0s",
+    "shutdownGracePeriodCriticalPods": "0s",
+    "enableProfilingHandler": true,
+    "enableDebugFlagsHandler": true,
+    "seccompDefault": false,
+    "memoryThrottlingFactor": 0.9,
+    "registerNode": true,
+    "localStorageCapacityIsolation": true,
+    "containerRuntimeEndpoint": "unix:///var/run/crio/crio.sock"
+  }
+}
+```
 
 <!-- discussion -->
 
@@ -114,3 +254,4 @@ address: "192.168.0.8"
 
 - Дізнайтеся більше про конфігурацію kubelet, переглянувши
   [довідник `KubeletConfiguration`](/docs/reference/config-api/kubelet-config.v1beta1/).
+- Дізнайтеся більше про обʼєднання конфігурації kubelet у [довідці](/docs/reference/node/kubelet-config-directory-merging.md).

@@ -37,7 +37,7 @@ weight: 40
 
 * Exec — Виконує конкретну команду, таку як `pre-stop.sh`, всередині cgroups та namespaces контейнера. Ресурси, спожиті командою, зараховуються на рахунок контейнера.
 * HTTP — Виконує HTTP-запит до конкретного endpoint в контейнері.
-* Sleep — Призупиняє контейнер на вказаний час. Дія "Sleep" доступна, коли [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `PodLifecycleSleepAction` увімкнено.
+* Sleep — Призупиняє контейнер на вказаний час. Обробник "Sleep" є функцією бета-рівня типово увімкненою через [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `PodLifecycleSleepAction`.
 
 ### Виконання обробника хука {#hook-handler-execution}
 

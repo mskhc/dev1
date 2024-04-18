@@ -158,8 +158,21 @@ weight: 15
 		<tr>
 			<td style="white-space: nowrap">AppArmor</td>
 			<td>
-				<p>На підтримуваних вузлах стандартно застосовується профіль AppArmor <code>runtime/default</code>. Політика Baseline має заборонити зміну або вимкнення профілю AppArmor стандартно, або обмежити заміни дозволеним набором профілів.</p>
+				<p>На підтримуваних вузлах стандартно застосовується профіль AppArmor <code>RuntimeDefault</code>. Політика Baseline має заборонити зміну або вимкнення профілю AppArmor стандартно, або обмежити заміни дозволеним набором профілів.</p>
 				<p><strong>Заборонені поля</strong></p>
+				<ul>
+					<li><code>spec.securityContext.appArmorProfile.type</code></li>
+					<li><code>spec.containers[*].securityContext.appArmorProfile.type</code></li>
+					<li><code>spec.initContainers[*].securityContext.appArmorProfile.type</code></li>
+					<li><code>spec.ephemeralContainers[*].securityContext.appArmorProfile.type</code></li>
+				</ul>
+				<p><strong>Дозволені значення</strong></p>
+				<ul>
+					<li>Undefined/nil</li>
+					<li><code>RuntimeDefault</code></li>
+					<li><code>Localhost</code></li>
+				</ul>
+				<hr />
 				<ul>
 					<li><code>metadata.annotations["container.apparmor.security.beta.kubernetes.io/*"]</code></li>
 				</ul>

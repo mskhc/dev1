@@ -539,7 +539,7 @@ Events:
 Ви можете використовувати різні способи надання доступу до Service, які безпосередньо не стосуються ресурсу Ingress:
 
 * Використовуйте [Service.Type=LoadBalancer](/docs/concepts/services-networking/service/#loadbalancer)
-* Використовуйте [Service.Type=NodePort](/docs/concepts/services-networking/service/#nodeport)
+* Використовуйте [Service.Type=NodePort](/docs/concepts/services-networking/service/#type-nodeport)
 
 ## {{% heading "whatsnext" %}}
 

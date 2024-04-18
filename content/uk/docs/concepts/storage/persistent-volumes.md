@@ -367,20 +367,21 @@ FlexVolumes (застарілий починаючи з Kubernetes v1.23) доз
 * [`local`](/docs/concepts/storage/volumes/#local) — Локальні пристрої зберігання, підключені до вузлів.
 * [`nfs`](/docs/concepts/storage/volumes/#nfs) — Сховище в мережевій файловій системі (NFS)
 
-Наступні типи PersistentVolume є застарілими. Це означає, що підтримка все ще доступна, але буде видалена у майбутньому випуску Kubernetes.
+Наступні типи PersistentVolume застарілі, але все ще доступні. Якщо ви використовуєте ці типи томів, окрім `flexVolume`, `cephfs` та `rbd`, будь ласка, встановіть відповідні драйвери CSI.
 
-* [`azureFile`](/docs/concepts/storage/volumes/#azurefile) — Azure File (**застаріло** у версії v1.21)
-* [`flexVolume`](/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** у версії v1.23)
-* [`portworxVolume`](/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**застаріло** у версії v1.25)
-* [`vsphereVolume`](/docs/concepts/storage/volumes/#vspherevolume) — Том vSphere VMDK (**застаріло** у версії v1.19)
-* [`cephfs`](/docs/concepts/storage/volumes/#cephfs) — Том CephFS (**застаріло** у версії v1.28)
-* [`rbd`](/docs/concepts/storage/volumes/#rbd) — Том Rados Block Device (RBD) (**застаріло** у версії v1.28)
+* [`awsElasticBlockStore`](/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**міграція типово увімкнена** починаючи з v1.23)
+* [`azureDisk`](/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**міграція типово увімкнена** починаючи з v1.23)
+* [`azureFile`](/docs/concepts/storage/volumes/#azurefile) — Azure File (**міграція типово увімкнена** починаючи з v1.24)
+* [`cephfs`](/docs/concepts/storage/volumes/#cephfs) — CephFS volume (**застаріло** починаючи з v1.28, план міграції відсутній, підтримка буде видалена у майбутньому випуску)
+* [`cinder`](/docs/concepts/storage/volumes/#cinder) — Cinder (блочне сховище OpenStack) (**міграція типово увімкнена** починаючи з v1.21)
+* [`flexVolume`](/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** починаючи з версії v1.23, план міграції відсутній, планів припинення підтримки немає)
+* [`gcePersistentDisk`](/docs/concepts/storage/volumes/#gcePersistentDisk) — GCE Persistent Disk (**застаріло** починаючи з v1.23, план міграції відсутній, планів припинення підтримки немає)
+* [`portworxVolume`](/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**застаріло**  починаючи з версії версії v1.25)
+* [`rbd`](/docs/concepts/storage/volumes/#rbd) — Том Rados Block Device (RBD) (**застаріло**  починаючи з версії v1.28, план міграції відсутній, підтримку буде видалено у майбутньому випуску)
+* [`vsphereVolume`](/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**міграція типово увімкнена** починаючи з v1.25)
 
 Старші версії Kubernetes також підтримували наступні типи вбудованих PersistentVolume:
 
-* [`awsElasticBlockStore`](/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**недоступно** у версії v1.27)
-* [`azureDisk`](/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**недоступно** у версії v1.27)
-* [`cinder`](/docs/concepts/storage/volumes/#cinder) — Cinder (блокове зберігання OpenStack) (**недоступно** у версії v1.26)
 * `photonPersistentDisk` — Постійний диск Photon controller. (**недоступно** починаючи з версії v1.15)
 * `scaleIO` — Том ScaleIO. (**недоступно** починаючи з версії v1.21)
 * `flocker` — Сховище Flocker. (**недоступно** починаючи з версії v1.25)

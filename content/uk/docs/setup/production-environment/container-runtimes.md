@@ -36,47 +36,29 @@ Kubernetes {{< skew currentVersion >}} вимагає використання r
 
 ## Встановлення та налаштування передумов {#install-and-configure-prerequisites}
 
-Наведені нижче кроки застосовують загальні налаштування для вузлів Kubernetes у Linux.
+### Конфігурація мережі {#network-configuration}
 
-Ви можете пропустити певні налаштування, якщо ви впевнені, що вони вам не потрібні.
+Стандартно ядро Linux не дозволяє маршрутизувати пакети IPv4 між інтерфейсами. Більшість реалізацій мережі кластера Kubernetes змінить це налаштування (якщо це потрібно), але деякі можуть очікувати, що адміністратор зробить це за них. (Деякі також можуть очікувати встановлення інших параметрів sysctl, завантаження модулів ядра тощо; перевірте документацію для вашої конкретної мережної реалізації.)
 
-Для отримання додаткової інформації дивіться [Вимоги мережевих втулків](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/#network-plugin-requirements) або документацію для вашого конкретного середовища виконання контейнерів.
 
-### Переспрямування IPv4 трафіку та надання дозволів iptables бачити трафік, що проходить через міст {#forward-ipv4-and-letting-iptables-see-bridged-traffic}
+### Увімкнення маршрутизації IPv4 пакетів {#prerequisite-ipv4-forwarding-optional}
 
-Виконайте наведені нижче інструкції:
+Для увімкнення вручну маршрутизації IPv4 пакетів:
 
 ```bash
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
-
-sudo modprobe overlay
-sudo modprobe br_netfilter
-
-# Параметри sysctl, необхідні для налаштування; параметри зберігаються після перезавантаження
+# параметри sysctl, необхідні для налаштування, параметри зберігаються після перезавантаження
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
+net.ipv4.ip_forward = 1
 EOF
 
 # Застосувати параметри sysctl без перезавантаження
 sudo sysctl --system
 ```
 
-Перевірте, чи завантажені модулі `br_netfilter`, `overlay`, виконавши наступні команди:
+Перевірте, що `net.ipv4.ip_forward` встановлено на 1 за допомогою:
 
 ```bash
-lsmod | grep br_netfilter
-lsmod | grep overlay
-```
-
-Перевірте, чи системні змінні `net.bridge.bridge-nf-call-iptables`, `net.bridge.bridge-nf-call-ip6tables` та `net.ipv4.ip_forward` встановлені в `1` в вашому конфігураційному файлі `sysctl`, виконавши наступну команду:
-
-```bash
-sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
+sysctl net.ipv4.ip_forward
 ```
 
 ## Драйвери cgroup {#cgroup-drivers}

@@ -3,7 +3,7 @@
 # Наприклад, якщо у просторі імен є мітка {"environment": "staging"}, всі контейнери повинні мати репозиторій, який є або staging.example.com/*
 # або не містить "example.com" взагалі, якщо розгортання має мітку {"exempt": "true"}.
 
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingAdmissionPolicy
 metadata:
   name: "image-matches-namespace-environment.policy.example.com"

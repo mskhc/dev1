@@ -32,6 +32,20 @@ kubectl get ingress --field-selector foo.bar=baz
 Error from server  (BadRequest): Unable to find "ingresses" that match label selector "", field selector "foo.bar=baz": "foo.bar" is not a known field selector: only "metadata.name", "metadata.namespace"
 ```
 
+### Список підтримуваних полів {#list-of-supported-fields}
+
+| Вид                       | Поля                                                                                                                                                                                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pod                       | `spec.nodeName`<br>`spec.restartPolicy`<br>`spec.schedulerName`<br>`spec.serviceAccountName`<br>`spec.hostNetwork`<br>`status.phase`<br>`status.podIP`<br>`status.nominatedNodeName`                                                                            |
+| Event                     | `involvedObject.kind`<br>`involvedObject.namespace`<br>`involvedObject.name`<br>`involvedObject.uid`<br>`involvedObject.apiVersion`<br>`involvedObject.resourceVersion`<br>`involvedObject.fieldPath`<br>`reason`<br>`reportingComponent`<br>`source`<br>`type` |
+| Secret                    | `type`                                                                                                                                                                                                                                                          |
+| Namespace                 | `status.phase`                                                                                                                                                                                                                                                  |
+| ReplicaSet                | `status.replicas`                                                                                                                                                                                                                                               |
+| ReplicationController     | `status.replicas`                                                                                                                                                                                                                                               |
+| Job                       | `status.successful`                                                                                                                                                                                                                                             |
+| Node                      | `spec.unschedulable`                                                                                                                                                                                                                                            |
+| CertificateSigningRequest | `spec.signerName`                                                                                                                                                                                                                                               |
+
 ## Підтримувані оператори {#supported-operators}
 
 Ви можете використовувати оператори `=`, `==` та `!=` з селекторами полів (`=` та `==` означають те саме). Наприклад, ця команда `kubectl` вибирає всі сервіси Kubernetes, які не знаходяться в просторі імен `default`:

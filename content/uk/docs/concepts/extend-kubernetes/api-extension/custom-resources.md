@@ -221,6 +221,39 @@ CRD завжди використовують ту саму автентифік
 - REST-клієнта, який ви напишете.
 - Клієнта, згенерованого за допомогою [інструментів генерації клієнта Kubernetes](https://github.com/kubernetes/code-generator) (генерація є складним завданням, але деякі проєкти можуть постачати клієнтів разом з CRD або AA).
 
+## Селектори полів власних ресурсів {#custom-resource-field-selectors}
+
+[Селектори полів](/docs/concepts/overview/working-with-objects/field-selectors/) дозволяють клієнтам вибирати власні ресурси за значенням полів одного чи більше ресурсів.
+
+Всі власні ресурси підтримують селектори полів `metadata.name` та `metadata.namespace`.
+
+Поля оголошені у {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} можуть бути використані з селекторами полів, коли вони вказані у полі `spec.versions[*].selectableFields` в {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}}.
+
+### Поля власних ресурсів, які підтримуються селекторами {#crd-selectable-fields}
+
+{{< feature-state feature_gate_name="CustomResourceFieldSelectors" >}}
+
+Для використання цієї функції вам потрібно активувати 
+[feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors`, після чого ця функція буде застосовуватися до всіх CustomResourceDefinitions у вашому кластері.
+
+Поле `spec.versions[*].selectableFields` в {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для вказівки, які інші поля в власному ресурсі можуть бути використані в полях селекторах. Наступний приклад додає поля `.spec.color` та `.spec.size` як поля для селекторів.
+
+{{% code_sample file="customresourcedefinition/shirt-resource-definition.yaml" %}}
+
+За допомогою полів селекторів можна отримати лише ресурси `color` зі значенням `blue`:
+
+```shell
+kubectl get shirts.stable.example.com --field-selector spec.color=blue
+```
+
+Вивід повинен бути наступним:
+
+```console
+NAME       COLOR  SIZE
+example1   blue   S
+example2   blue   M
+```
+
 ## {{% heading "whatsnext" %}}
 
 - Дізнайтеся, як [розширити API Kubernetes за допомогою агрегаційного рівня](/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/).
