@@ -1,5 +1,5 @@
 ---
-title: Вивільнення, ініційоване API
+title: Виселення, ініційоване API
 content_type: concept
 weight: 110
 ---
@@ -9,7 +9,7 @@ weight: 110
 Ви можете ініціювати виселення, викликавши Eviction API безпосередньо або програмно,
 використовуючи клієнт {{<glossary_tooltip term_id="kube-apiserver" text="API-сервера">}}, наприклад, команду `kubectl drain`. Це створює обʼєкт `Eviction`, що призводить до завершення роботи Podʼу через API-сервер.
 
-Вивільнення ресурсів ініційовані API дотримуються вашого налаштованого [`PodDisruptionBudgets`](/docs/tasks/run-application/configure-pdb/) та [`terminationGracePeriodSeconds`](/docs/concepts/workloads/pods/pod-lifecycle#pod-termination).
+Виселення ініційовані API дотримуються вашого налаштованого [`PodDisruptionBudgets`](/docs/tasks/run-application/configure-pdb/) та [`terminationGracePeriodSeconds`](/docs/concepts/workloads/pods/pod-lifecycle#pod-termination).
 
 Використання API для створення обʼєкта Eviction для Podʼу схоже на виконання контрольованої політикою операції [`DELETE`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#delete-delete-a-pod) на Podʼі.
 
@@ -93,5 +93,5 @@ curl -v -H 'Content-type: application/json' https://your-cluster-api-endpoint.ex
 ## {{% heading "whatsnext" %}}
 
 * Дізнайтеся, як захистити ваші застосунки за допомогою [Бюджету відмови Podʼів](/docs/tasks/run-application/configure-pdb/).
-* Дізнайтеся про [Вивільнення ресурсів внаслідок тиску на вузол](/docs/concepts/scheduling-eviction/node-pressure-eviction/).
+* Дізнайтеся про [Виселення внаслідок тиску на вузол](/docs/concepts/scheduling-eviction/node-pressure-eviction/).
 * Дізнайтеся про [Пріоритет та випередження Podʼів](/docs/concepts/scheduling-eviction/pod-priority-preemption/).

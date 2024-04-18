@@ -10,7 +10,7 @@ api_metadata:
 - apiVersion: "apps/v1"
   kind: "DaemonSet"
 description: >-
-  DaemonSet визначає Podʼи, які забезпечують засоби локального вузла. Це може бути фундаментально важливим для роботи вашого кластера, таким як інструмент-помічник мережі, або бути частиною застосунку.
+  DaemonSet визначає Podʼи, які забезпечують локальноі засоби вузла. Це може бути фундаментально важливим для роботи вашого кластера, таким як інструмент-помічник мережі, або бути частиною застосунку.
 content_type: concept
 weight: 40
 hide_summary: true # Listed separately in section index
@@ -26,7 +26,7 @@ _**DaemonSet**_ переконується, що всі (або деякі) ву
 - запуск демона збору логів на кожному вузлі
 - запуск демона моніторингу вузла на кожному вузлі
 
-У простому випадку один DaemonSet, який охоплює всі вузли, може використовуватися для кожного типу демона. Складніше налаштування може використовувати кілька DaemonSet для одного типу демона, але з різними прапорами, або різними запитами памʼяті та CPU для різних типів обладнання.
+У простому випадку один DaemonSet, який охоплює всі вузли, може використовуватися для кожного типу демона. Складніше налаштування може використовувати кілька DaemonSet для одного типу демона, але з різними прапорцями, або різними запитами памʼяті та CPU для різних типів обладнання.
 
 <!-- body -->
 
@@ -86,16 +86,15 @@ DaemonSet також потребує [`.spec`](https://git.k8s.io/community/con
 
 ## Як заплановані Daemon Podʼи {#how-daemon-pods-are-scheduled}
 
-DaemonSet може бути використаний для того, щоб забезпечити, щоб всі придатні вузли запускали копію Podʼа. Контролер DaemonSet створює Pod для кожного придатного вузла та додає поле `spec.affinity.nodeAffinity` Podʼа для відповідності цільовому хосту. Після створення Podʼа, зазвичай вступає в дію типовий планувальник і привʼязує Pod до цільового хосту, встановлюючи поле `.spec.nodeName`. Якщо новий Pod не може поміститися на вузлі, типовий планувальник може здійснити перерозподіл (витіснення) деяких наявних Podʼів на основі [пріоритету](/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) нового Podʼа.
+DaemonSet може бути використаний для того, щоб забезпечити, щоб всі придатні вузли запускали копію Podʼа. Контролер DaemonSet створює Pod для кожного придатного вузла та додає поле `spec.affinity.nodeAffinity` Podʼа для відповідності цільовому хосту. Після створення Podʼа, зазвичай вступає в дію типовий планувальник і привʼязує Pod до цільового хосту, встановлюючи поле `.spec.nodeName`. Якщо новий Pod не може поміститися на вузлі, типовий планувальник може здійснити перерозподіл (виселення) деяких наявних Podʼів на основі [пріоритету](/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority) нового Podʼа.
 
 {{< note >}}
-Якщо важливо, щоб Pod DaemonSet запускався на кожному вузлі, часто бажано встановити `.spec.template.spec.priorityClassName` DaemonSet на [PriorityClass](/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass) з вищим пріоритетом, щоб забезпечити витіснення.
+Якщо важливо, щоб Pod DaemonSet запускався на кожному вузлі, часто бажано встановити `.spec.template.spec.priorityClassName` DaemonSet на [PriorityClass](/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass) з вищим пріоритетом, щоб переконатись, що таке виселення видбувається.
 {{< /note >}}
 
 Користувач може вказати інший планувальник для Podʼів DaemonSet, встановивши поле `.spec.template.spec.schedulerName` DaemonSet.
 
-Оригінальний афінітет вузла, вказаний в полі `.spec.template.spec.affinity.nodeAffinity` (якщо вказано), береться до уваги контролером DaemonSet при оцінці придатних вузлів, але замінюється на афінітет вузла, який відповідає імені
-придатного вузла, на створеному Podʼі.
+Оригінальна спорідненість вузла, вказана в полі `.spec.template.spec.affinity.nodeAffinity` (якщо вказано), береться до уваги контролером DaemonSet при оцінці придатних вузлів, але замінюється на спорідненість вузла, що відповідає імені придатного вузла, на створеному Podʼі.
 
 ```yaml
 nodeAffinity:
@@ -116,8 +115,8 @@ nodeAffinity:
 
 | Ключ толерантності                                                                                                        | Ефект        | Деталі                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`node.kubernetes.io/not-ready`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-not-ready)             | `NoExecute`  | Podʼи DaemonSet можуть бути заплановані на вузли, які не є справними або готовими приймати Podʼи. Будь-які Podʼи DaemonSet, які працюють на таких вузлах, не будуть витіснені. |
-| [`node.kubernetes.io/unreachable`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-unreachable)         | `NoExecute`  | Podʼи DaemonSet можуть бути заплановані на вузли, які недоступні з контролера вузла. Будь-які Podʼи DaemonSet, які працюють на таких вузлах, не будуть витіснені. |
+| [`node.kubernetes.io/not-ready`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-not-ready)             | `NoExecute`  | Podʼи DaemonSet можуть бути заплановані на вузли, які не є справними або готовими приймати Podʼи. Будь-які Podʼи DaemonSet, які працюють на таких вузлах, не будуть виселені. |
+| [`node.kubernetes.io/unreachable`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-unreachable)         | `NoExecute`  | Podʼи DaemonSet можуть бути заплановані на вузли, які недоступні з контролера вузла. Будь-які Podʼи DaemonSet, які працюють на таких вузлах, не будуть виселені. |
 | [`node.kubernetes.io/disk-pressure`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-disk-pressure)     | `NoSchedule` | Podʼи DaemonSet можуть бути заплановані на вузли із проблемами дискового тиску.                                                                         |
 | [`node.kubernetes.io/memory-pressure`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-memory-pressure) | `NoSchedule` | Podʼи DaemonSet можуть бути заплановані на вузли із проблемами памʼяті.                                                                        |
 | [`node.kubernetes.io/pid-pressure`](/docs/reference/labels-annotations-taints/#node-kubernetes-io-pid-pressure) | `NoSchedule` | Podʼи DaemonSet можуть бути заплановані на вузли з проблемами процесів.                                                                        |
