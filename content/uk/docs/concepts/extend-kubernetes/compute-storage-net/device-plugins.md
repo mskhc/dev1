@@ -353,6 +353,7 @@ pluginapi.Device{ID: "25102017", Health: pluginapi.Healthy, Topology:&pluginapi.
 
 Ось деякі приклади реалізації втулків пристроїв:
 
+* [Akri](https://github.com/project-akri/akri) дозволяє легко використовувати різнорідні пристрої вузла (такі як IP-камери та USB-пристрої).
 * [Втулок пристрою AMD GPU](https://github.com/ROCm/k8s-device-plugin)
 * [Загальний втулок пристрою](https://github.com/squat/generic-device-plugin) для загальних пристроїв Linux та USB пристроїв
 * [Втулки пристроїв Intel](https://github.com/intel/intel-device-plugins-for-kubernetes) для пристроїв Intel GPU, FPGA, QAT, VPU, SGX, DSA, DLB і IAA

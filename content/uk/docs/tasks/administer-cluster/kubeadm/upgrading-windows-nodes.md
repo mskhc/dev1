@@ -13,7 +13,7 @@ weight: 110
 
 ## {{% heading "prerequisites" %}}
  
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{< include "task-tutorial-prereqs-node-upgrade.md" >}} {{< version-check >}}
 
 * Ознайомтеся з [процесом оновлення інших вузлів вашого кластера kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам слід оновити вузли панелі управління перед оновленням вузлів Windows.
 

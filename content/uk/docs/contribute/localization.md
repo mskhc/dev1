@@ -243,7 +243,7 @@ labels:
 
 ```shell
 mkdir -p content/de/docs/tutorials
-cp content/en/docs/tutorials/kubernetes-basics.md content/de/docs/tutorials/kubernetes-basics.md
+cp -ra content/en/docs/tutorials/kubernetes-basics/ content/de/docs/tutorials/
 ```
 
 Інструменти для роботи з перекладами значно прискорюють процес перекладу. Наприклад, деякі редактори пропонують втулки для швидкого перекладу тексту.

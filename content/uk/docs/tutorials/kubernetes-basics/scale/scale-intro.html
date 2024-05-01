@@ -29,6 +29,10 @@ description: |-
                 <p>Якщо ви ще не працювали над попередніми розділами, почніть з <a href="/uk/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/">Використання minikube для створення кластера</a>.</p>
     
                 <p><em>Масштабування</em> досягається зміною кількості реплік в Deployment.</p>
+                <p><b>ПРИМІТКА</b> Якщо ви спробуєте це після <a href="/docs/tutorials/kubernetes-basics/expose/expose-intro/">попереднього розділу</a>, то, можливо, ви видалили Service, який створили, або створили Service з <tt>type: NodePort</tt>. У цьому розділі припускається, що для Deployment kubernetes-bootcamp створено Service з <tt>type: LoadBalancer</tt>.</p>
+                <p>Якщо ви <em>не</em> видалили Service, створений в <a href="/docs/tutorials/kubernetes-basics/expose/expose-intro">попередньому розділі</a>, спочатку видаліть цей Service, а потім запустіть наступну команду для створення нового Service з параметром <tt>type</tt> встановленим на <tt>LoadBalancer</tt>:</p>
+                <p><code><b>kubectl expose deployment/kubernetes-bootcamp --type="LoadBalancer" --port 8080</b></code></p>
+                </br>
                 </div>
                 <div class="col-md-4">
                     <div class="content__box content__box_lined">

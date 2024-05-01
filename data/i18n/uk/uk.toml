@@ -15,11 +15,24 @@ other = """<p>Цю сторінку було стоврено автоматич
 [blog_post_show_more]
 other = "Показати більше…"
 
+[banner_acknowledgement]
+other = "Приховати це повідомлення"
+
+[case_study_prefix]
+other = "Приклад:"
+
 [caution]
 other = "Увага:"
 
 [cleanup_heading]
 other = "Очищення"
+
+# Localization note (no need to translate this note)
+# This is always followed by Chinese text, as required by the Kubernetes
+# project's ICP license, issued by the government of the People's Republic
+# of China.
+[china_icp_license]
+other = "ICP license:"
 
 [community_events_calendar]
 other = "Календар подій"
@@ -30,6 +43,9 @@ other = "Форум"
 [community_github_name]
 other = "GitHub"
 
+[community_server_fault_name]
+other = "Помилка сервера"
+
 [community_slack_name]
 other = "Slack"
 
@@ -37,7 +53,10 @@ other = "Slack"
 other = "Stack Overflow"
 
 [community_twitter_name]
-other = "Twitter"
+other = "X (колись Twitter)"
+
+[community_x_name]
+other = "X (колись Twitter)"
 
 [community_youtube_name]
 other = "YouTube"
@@ -377,6 +396,9 @@ other = "Дізнайтесь про"
 [main_read_more]
 other = "Дізнайтесь більше"
 
+[monthly_patch_release]
+other = "Щомісячний випуск виправлень"
+
 [not_applicable]
 # Localization teams: it's OK to use a longer text here
 other = "н/д"
@@ -487,6 +509,9 @@ other = "(випущено: "
 # Use a suitable format for your locale
 [release_date_format]
 other = "2006-01-02"
+
+[release_date_format_month]
+other = "January 2006"
 
 [release_cherry_pick_deadline]
 other = "Строк Cherry Pick"

@@ -8,7 +8,7 @@ min-kubernetes-server-version: v1.25
 
 <!-- overview -->
 
-{{< feature-state for_k8s_version="v1.30" state="beta" >}}
+{{< feature-state feature_gate_name="UserNamespacesSupport" >}}
 
 Ця сторінка показує, як налаштувати простір імен користувача для Podʼів. Це дозволяє ізолювати користувача, що працює всередині контейнера, від того, який працює на хості.
 

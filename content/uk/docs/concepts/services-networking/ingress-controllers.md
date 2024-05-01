@@ -30,7 +30,7 @@ weight: 50
 * [Contour](https://projectcontour.io/) — це контролер Ingress на основі [Envoy](https://www.envoyproxy.io/).
 * [Emissary-Ingress](https://www.getambassador.io/products/api-gateway) API Gateway — це контролер Ingress на основі [Envoy](https://www.envoyproxy.io).
 * [EnRoute](https://getenroute.io/) — це шлюз API на основі [Envoy](https://www.envoyproxy.io), який може працювати як контролер Ingress.
-* [Easegress IngressController](https://github.com/megaease/easegress/blob/main/doc/reference/ingresscontroller.md) — це шлюз API на основі [Easegress](https://megaease.com/easegress/), який може працювати як контролер Ingress.
+* [Easegress IngressController](https://megaease.com/docs/easegress/04.cloud-native/4.1.kubernetes-ingress-controller/) — це шлюз API на основі [Easegress](https://megaease.com/easegress/), який може працювати як контролер Ingress.
 * [F5 BIG-IP Container Ingress Services for Kubernetes](https://clouddocs.f5.com/containers/latest/userguide/kubernetes/) дозволяє використовувати Ingress для конфігурації віртуальних серверів F5 BIG-IP.
 * [FortiADC Ingress Controller](https://docs.fortinet.com/document/fortiadc/7.0.0/fortiadc-ingress-controller/742835/fortiadc-ingress-controller-overview) підтримує ресурси Kubernetes Ingress та дозволяє керувати обʼєктами FortiADC з Kubernetes
 * [Gloo](https://gloo.solo.io) — це відкритий контролер Ingress на основі [Envoy](https://www.envoyproxy.io), який пропонує функціональність воріт API.

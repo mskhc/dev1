@@ -10,7 +10,7 @@ weight: 100
 
 ## {{% heading "prerequisites" %}}
 
-{{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+{{< include "task-tutorial-prereqs-node-upgrade.md" >}} {{< version-check >}}
 
 * Ознайомтеся з [процесом оновлення решти вузлів панелі управління за допомогою kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам потрібно буде спочатку оновити вузли панелі управління перед оновленням вузлів робочих навантажень Linux.
 

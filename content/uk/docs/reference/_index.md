@@ -65,7 +65,6 @@ no_list: true
 * [kube-apiserver configuration (v1alpha1)](/docs/reference/config-api/apiserver-config.v1alpha1/) та
 * [kube-apiserver configuration (v1beta1)](/docs/reference/config-api/apiserver-config.v1beta1/) та
   [kube-apiserver configuration (v1)](/docs/reference/config-api/apiserver-config.v1/)
-* [kube-apiserver encryption (v1)](/docs/reference/config-api/apiserver-encryption.v1/)
 * [kube-apiserver event rate limit (v1alpha1)](/docs/reference/config-api/apiserver-eventratelimit.v1alpha1/)
 * [kubelet configuration (v1alpha1)](/docs/reference/config-api/kubelet-config.v1alpha1/) та
   [kubelet configuration (v1beta1)](/docs/reference/config-api/kubelet-config.v1beta1/)

@@ -125,4 +125,4 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/docs/reference/config-api/apiserver-encryption.v1/).
+- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/docs/reference/config-api/apiserver-config.v1/).

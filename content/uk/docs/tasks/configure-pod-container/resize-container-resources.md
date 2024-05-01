@@ -7,11 +7,13 @@ min-kubernetes-server-version: 1.27
 
 <!-- overview -->
 
-{{< feature-state state="alpha" for_k8s_version="v1.27" >}}
+{{< feature-state feature_gate_name="InPlacePodVerticalScaling" >}}
 
 Ця сторінка передбачає, що ви обізнані з [Якістю обслуговування](/docs/tasks/configure-pod-container/quality-service-pod/) для Podʼів Kubernetes.
 
 Ця сторінка показує, як змінити обсяги CPU та памʼяті, призначені для контейнерів працюючого Podʼа без перезапуску самого Podʼа або його контейнерів. Вузол Kubernetes виділяє ресурси для Podʼа на основі його `запитів`, і обмежує використання ресурсів Podʼа на основі `лімітів`, вказаних у контейнерах Podʼа.
+
+Зміна розподілу ресурсів для запущеного Podʼа вимагає [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` має бути увімкнено. Альтернативою може бути видалення Podʼа і ввімкнення параметра, щоб [workload controller](/docs/concepts/workloads/controllers/) створив новий Pod з іншими вимогами до ресурсів.
 
 Для зміни ресурсів Podʼа на місці:
 
@@ -27,6 +29,8 @@ min-kubernetes-server-version: 1.27
 ## {{% heading "prerequisites" %}}
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
+
+Має бути увімкнено [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling`для вашої панелі управління і для всіх вузлів вашого кластера.
 
 ## Політики зміни розміру контейнера {#container-resize-policies}
 
@@ -140,7 +144,7 @@ spec:
 
 ## Оновлення ресурсів Podʼа {#updating-the-pod-s-resources}
 
-Скажімо, вимоги до CPU зросли, і тепер потрібно 0.8 CPU. Це зазвичай визначається і може бути програмно застосовано сутністю, такою як [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA).
+Скажімо, вимоги до CPU зросли, і тепер потрібно 0.8 CPU. Це можна вказати вручну, або визначити і застосувати програмно, наприклад, за допомогою таких засобів, як [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA).
 
 {{< note >}}
 Хоча ви можете змінити запити та ліміти Podʼа, щоб виразити нові бажані ресурси, ви не можете змінити клас якості обслуговування, в якому був створений Pod.

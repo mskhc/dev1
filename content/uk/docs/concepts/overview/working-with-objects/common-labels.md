@@ -25,11 +25,11 @@ weight: 100
 | Ключ                               | Опис                  | Приклад  | Тип |
 | ----------------------------------- | --------------------- | -------- | ---- |
 | `app.kubernetes.io/name`            | Назва застосунку         | `mysql` | рядок |
-| `app.kubernetes.io/instance`        | Унікальна назва, що ідентифікує екземпляр застосунку | `mysql-abcxzy` | рядок |
+| `app.kubernetes.io/instance`        | Унікальна назва, що ідентифікує екземпляр застосунку | `mysql-abcxyz` | рядок |
 | `app.kubernetes.io/version`         | Поточна версія застосунку (наприклад, [SemVer 1.0](https://semver.org/spec/v1.0.0.html), хеш ревізії і т.д.) | `5.7.21` | рядок |
 | `app.kubernetes.io/component`       | Компонент всередині архітектури | `database` | рядок |
 | `app.kubernetes.io/part-of`         | Назва вищого рівня застосунку, частину якого складає цей | `wordpress` | рядок |
-| `app.kubernetes.io/managed-by`      | Інструмент, який використовується для управління операцією застосунку | `helm` | рядок |
+| `app.kubernetes.io/managed-by`      | Інструмент, який використовується для управління операцією застосунку | `Helm` | рядок |
 
 Щоб проілюструвати ці мітки в дії, розгляньте наступний обʼєкт {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}:
 
@@ -40,24 +40,24 @@ kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: mysql
-    app.kubernetes.io/instance: mysql-abcxzy
+    app.kubernetes.io/instance: mysql-abcxyz
     app.kubernetes.io/version: "5.7.21"
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: wordpress
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
 ```
 
 ## Застосунки та екземпляри застосунків {#applications-and-application-instances}
 
 Застосунок можна встановити один або декілька разів в кластер Kubernetes і, у деяких випадках, в тому ж просторі імен. Наприклад, WordPress можна встановити більше одного разу, де різні вебсайти є різними екземплярами WordPress.
 
-Назва застосунку та назва екземпляра записуються окремо. Наприклад, у WordPress є `app.kubernetes.io/name` — `wordpress`, тоді як назва екземпляра представлена як `app.kubernetes.io/instance` зі значенням `wordpress-abcxzy`. Це дозволяє ідентифікувати застосунок та його екземпляр. Кожен екземпляр застосунку повинен мати унікальну назву.
+Назва застосунку та назва екземпляра записуються окремо. Наприклад, у WordPress є `app.kubernetes.io/name` — `wordpress`, тоді як назва екземпляра представлена як `app.kubernetes.io/instance` зі значенням `wordpress-abcxyz`. Це дозволяє ідентифікувати застосунок та його екземпляр. Кожен екземпляр застосунку повинен мати унікальну назву.
 
 ## Приклади {#examples}
 
 Щоб проілюструвати різні способи використання цих міток, наведено різні приклади складності.
 
-### Простий Stateless Service
+### Простий Stateless Service {#a-simple-stateless-service}
 
 Розгляньте випадок простого Stateless Serviceʼу, розгорнутого за допомогою обʼєктів `Deployment` та `Service`. Наведені нижче два уривки представляють, як можуть бути використані мітки у їх найпростішій формі.
 
@@ -69,7 +69,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: myservice
-    app.kubernetes.io/instance: myservice-abcxzy
+    app.kubernetes.io/instance: myservice-abcxyz
 ...
 ```
 
@@ -81,7 +81,7 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: myservice
-    app.kubernetes.io/instance: myservice-abcxzy
+    app.kubernetes.io/instance: myservice-abcxyz
 ...
 ```
 
@@ -97,9 +97,9 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: wordpress
-    app.kubernetes.io/instance: wordpress-abcxzy
+    app.kubernetes.io/instance: wordpress-abcxyz
     app.kubernetes.io/version: "4.9.4"
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: server
     app.kubernetes.io/part-of: wordpress
 ...
@@ -113,9 +113,9 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: wordpress
-    app.kubernetes.io/instance: wordpress-abcxzy
+    app.kubernetes.io/instance: wordpress-abcxyz
     app.kubernetes.io/version: "4.9.4"
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: server
     app.kubernetes.io/part-of: wordpress
 ...
@@ -129,9 +129,9 @@ kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: mysql
-    app.kubernetes.io/instance: mysql-abcxzy
+    app.kubernetes.io/instance: mysql-abcxyz
     app.kubernetes.io/version: "5.7.21"
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: wordpress
 ...
@@ -145,9 +145,9 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: mysql
-    app.kubernetes.io/instance: mysql-abcxzy
+    app.kubernetes.io/instance: mysql-abcxyz
     app.kubernetes.io/version: "5.7.21"
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: wordpress
 ...

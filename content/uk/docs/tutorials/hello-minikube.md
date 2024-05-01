@@ -2,12 +2,6 @@
 title: Привіт Minikube
 content_type: tutorial
 weight: 5
-menu:
-  main:
-    title: "Розпочнемо"
-    weight: 10
-    post: >
-      <p>Готові забруднити руки? Побудуйте простий кластер Kubernetes, який запускає тестовий застосунок.</p>
 card:
   name: tutorials
   weight: 10

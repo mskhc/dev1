@@ -12,7 +12,7 @@ weight: 410
 
 <!-- overview -->
 
-{{< feature-state state="beta" for_k8s_version="v1.22" >}}
+{{< feature-state feature_gate_name="MemoryManager" >}}
 
 Менеджер памʼяті Kubernetes дозволяє функцію гарантованого виділення памʼяті (та великих сторінок) для Podʼів {{< glossary_tooltip text="QoS класу" term_id="qos-class" >}} `Guaranteed`.
 

@@ -61,7 +61,7 @@ Kubernetes реалізує всі мітки та анотації в прос�
 
 Тип: Label
 
-Приклад: `app.kubernetes.io/instance: "mysql-abcxzy"`
+Приклад: `app.kubernetes.io/instance: "mysql-abcxyz"`
 
 Використовується для: Всі обʼєкти (зазвичай використовується на
 [ресурсах робочого навантаження](/docs/reference/kubernetes-api/workload-resources/)).
@@ -1281,6 +1281,16 @@ The annotation indicates that the Endpoints object is over capacity and the numb
 has been truncated to 1000.
 
 If the number of backend endpoints falls below 1000, the control plane removes this annotation.
+
+### endpoints.kubernetes.io/last-change-trigger-time
+
+Тип: Annotation
+
+Приклад: `endpoints.kubernetes.io/last-change-trigger-time: "2023-07-20T04:45:21Z"`
+
+Використовується для: Endpoints
+
+Ця анотація встановлює обʼєкт [Endpoints](/docs/concepts/services-networking/service/#endpoints), який представляє мітку часу (Мітка часу зберігається у форматі дата-часового рядка RFC 3339. Наприклад, '2018-10-22T19:32:52.1Z'). Це позначка часу останньої зміни в деякому обʼєкті Pod або Service, яка спричинила зміну в обʼєкті Endpoints.
 
 ### control-plane.alpha.kubernetes.io/leader (deprecated) {#control-plane-alpha-kubernetes-io-leader}
 
