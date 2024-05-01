@@ -545,7 +545,7 @@ spec:
 
 ### projected
 
-Споектований том відображає кілька існуючих джерел томів в один каталог. Докладніше дивіться [спроектовані томи](/docs/concepts/storage/projected-volumes/).
+Том projected підʼєднує кілька існуючих джерел томів в одну теку. Докладніше дивіться [projected томи](/docs/concepts/storage/projected-volumes/).
 
 #### rbd
 
