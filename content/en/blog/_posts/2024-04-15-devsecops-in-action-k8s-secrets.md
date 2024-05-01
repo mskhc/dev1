@@ -447,7 +447,7 @@ cat: /secrets/secret.file: No such file or directory
 `/secrets/secret.file` is a string interpreted as sensitive data, that's why
 the file wasn't injected.
 
-At least attacker life has become more complicated because now in order to
+The attacker's life has become more complicated because now in order to
 access sensitive data it's necessary either to make a process dump or to use a
 debugger tool. In order to show debug process, first it's necessary to make
 build with disabled compiler optimization flags and run `gdb`:
