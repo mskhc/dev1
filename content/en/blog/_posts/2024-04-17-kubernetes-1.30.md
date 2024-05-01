@@ -23,7 +23,7 @@ entering Beta, and 10 have graduated to Alpha.
 
 Kubernetes v1.30: *Uwubernetes*
 
-{{< figure src="/images/blog/2024-04-17-kubernetes-1.30-release/k8s-1.30.png" alt="Kubernetes 1.30 Uwubernetes logo" class="release-logo" >}}
+{{< figure src="/images/blog/2024-04-17-kubernetes-1.30-release/k8s-1.30.png" alt="Kubernetes v1.30 Uwubernetes logo" class="release-logo" >}}
 
 Kubernetes v1.30 makes your clusters cuter!
 
@@ -58,7 +58,7 @@ disabled.
 
 ### Prevent unauthorized volume mode conversion during volume restore ([SIG Storage](https://github.com/kubernetes/community/tree/master/sig-storage))
 
-For Kubernetes 1.30, the control plane always prevents unauthorized changes to volume modes when
+For Kubernetes v1.30, the control plane always prevents unauthorized changes to volume modes when
 restoring a snapshot into a PersistentVolume. As a cluster administrator, you'll need to grant
 permissions to the appropriate identity principals (for example: ServiceAccounts representing a
 storage integration) if you need to allow that kind of change at restore time.
@@ -175,6 +175,37 @@ behaves. It may be specified only when the `.status.loadBalancer.ingress.ip` fie
 specified. See more details about [specifying IPMode of load balancer
 status](/docs/concepts/services-networking/service/#load-balancer-ip-mode).
 
+### Structured Authentication Configuration ([SIG Auth](https://github.com/kubernetes/community/tree/master/sig-auth))
+
+_Structured Authentication Configuration_ graduates to beta in this release.
+
+Kubernetes has had a long-standing need for a more flexible and extensible
+authentication system. The current system, while powerful, has some limitations
+that make it difficult to use in certain scenarios. For example, it is not
+possible to use multiple authenticators of the same type (e.g., multiple JWT
+authenticators) or to change the configuration without restarting the API server. The
+Structured Authentication Configuration feature is the first step towards
+addressing these limitations and providing a more flexible and extensible way
+to configure authentication in Kubernetes. See more details about [structured
+authentication configuration](/docs/reference/access-authn-authz/authentication/#using-authentication-configuration).
+
+### Structured Authorization Configuration ([SIG Auth](https://github.com/kubernetes/community/tree/master/sig-auth))
+
+_Structured Authorization Configuration_ graduates to beta in this release.
+
+Kubernetes continues to evolve to meet the intricate requirements of system
+administrators and developers alike. A critical aspect of Kubernetes that
+ensures the security and integrity of the cluster is the API server
+authorization. Until recently, the configuration of the authorization chain in
+kube-apiserver was somewhat rigid, limited to a set of command-line flags and
+allowing only a single webhook in the authorization chain. This approach, while
+functional, restricted the flexibility needed by cluster administrators to
+define complex, fine-grained authorization policies. The latest Structured
+Authorization Configuration feature aims to revolutionize this aspect by introducing 
+a more structured and versatile way to configure the authorization chain, focusing 
+on enabling multiple webhooks and providing explicit control mechanisms. See more
+details about [structured authorization configuration](/docs/reference/access-authn-authz/authorization/#configuring-the-api-server-using-an-authorization-config-file).
+
 ## New alpha features
 
 ### Speed up recursive SELinux label change ([SIG Storage](https://github.com/kubernetes/community/tree/master/sig-storage))
@@ -185,11 +216,11 @@ option. The slower legacy behavior requires the container runtime to recursively
 whole volumes and apply SELinux labelling individually to each file and directory; this is
 especially noticable for volumes with large amount of files and directories.
 
-Kubernetes 1.27 graduated this feature as beta, but limited it to ReadWriteOncePod volumes. The
+Kubernetes v1.27 graduated this feature as beta, but limited it to ReadWriteOncePod volumes. The
 corresponding feature gate is `SELinuxMountReadWriteOncePod`. It's still enabled by default and
-remains beta in 1.30.
+remains beta in v1.30.
 
-Kubernetes 1.30 extends support for SELinux mount option to **all** volumes as alpha, with a
+Kubernetes v1.30 extends support for SELinux mount option to **all** volumes as alpha, with a
 separate feature gate: `SELinuxMount`. This feature gate introduces a behavioral change when
 multiple Pods with different SELinux labels share the same volume. See
 [KEP](https://github.com/kubernetes/enhancements/tree/master/keps/sig-storage/1710-selinux-relabeling#behavioral-changes)
@@ -252,6 +283,18 @@ strategy.
 See [Traffic Distribution](/docs/reference/networking/virtual-ips/#traffic-distribution) for more 
 details. 
 
+### Storage Version Migration ([SIG API Machinery](https://github.com/kubernetes/community/tree/master/sig-api-machinery))
+Kubernetes v1.30 introduces a new built-in API for _StorageVersionMigration_.
+Kubernetes relies on API data being actively re-written, to support some
+maintenance activities related to at rest storage. Two prominent examples are
+the versioned schema of stored resources (that is, the preferred storage schema
+changing from v1 to v2 for a given resource) and encryption at rest (that is,
+rewriting stale data based on a change in how the data should be encrypted).
+
+StorageVersionMigration is alpha API which was available [out of tree](https://github.com/kubernetes-sigs/kube-storage-version-migrator) before.
+
+See [storage version migration](/docs/tasks/manage-kubernetes-objects/storage-version-migration) for more details.
+
 ## Graduations, deprecations and removals for Kubernetes v1.30
 
 ### Graduated to stable
@@ -289,16 +332,16 @@ available since v1.25, is recommended instead.
 
 ## Release notes
 
-Check out the full details of the Kubernetes 1.30 release in our [release
+Check out the full details of the Kubernetes v1.30 release in our [release
 notes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.30.md).
 
 ## Availability
 
-Kubernetes 1.30 is available for download on
+Kubernetes v1.30 is available for download on
 [GitHub](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.0). To get started with
 Kubernetes, check out these [interactive tutorials](/docs/tutorials/) or run
 local Kubernetes clusters using [minikube](https://minikube.sigs.k8s.io/). You can also easily
-install 1.30 using [kubeadm](/docs/setup/independent/create-cluster-kubeadm/). 
+install v1.30 using [kubeadm](/docs/setup/independent/create-cluster-kubeadm/). 
 
 ## Release team
 
@@ -342,10 +385,6 @@ upgrades. For more information and registration, visit the [event
 page](https://community.cncf.io/events/details/cncf-cncf-online-programs-presents-cncf-live-webinar-kubernetes-130-release/)
 on the CNCF Online Programs site.
 
-Join members of the Kubernetes v1.30 release team on DATE AND TIME TBA to learn about the major
-features of this release, as well as deprecations and removals to help plan for upgrades. For more
-information and registration, visit the event page on the CNCF Online Programs site.
-
 ## Get involved
 
 The simplest way to get involved
@@ -366,3 +405,4 @@ and through the channels below. Thank you for your continued feedback and suppor
 - Learn more about the [Kubernetes Release
   Team](https://github.com/kubernetes/sig-release/tree/master/release-team)
 
+*This blog was updated on April 19th, 2024 to highlight two additional changes not originally included in the release blog.*
