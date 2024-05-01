@@ -177,7 +177,7 @@ defines all mountpoints to Pod.
 Excellent! Part of recommendations have been completed, but for the full picture
 it's necessary to solve the following issues:
 
-* The secret file is a mountpoint and it's necessary to remove after it usage
+* The secret file is mounted as a volume and it's necessary to remove after it usage
 (e.g reading)
 * Kind Secret is insecure that's why it's necessary to minimize its use
 * Additional implementation of environment variable such as:
