@@ -403,7 +403,7 @@ Let's check the secret file:
 #
 ```
 
-The file is empty! After redianess probe passed, the file was truncated.
+The file is empty! After readiness probe passed, the file was truncated.
 
 If define `DEMO_SECRET__PASSWD=/secrets/secret.file` (without prefix) response
 will contain the file name which was defined in the environment variable:
