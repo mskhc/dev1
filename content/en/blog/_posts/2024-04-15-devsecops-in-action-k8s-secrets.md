@@ -51,7 +51,7 @@ implementation will be different in terms of specific management and delivery
 secrets tools. To keep the examples simple I will use `spec.initContainers` to
 simulate an injection agent for delivering secrets to Pod.
 
-## Baseline
+## Baseline application 
 
 Imagine there is a simple application which processes http requests. On request
 to `root` location client receives environment variable value
