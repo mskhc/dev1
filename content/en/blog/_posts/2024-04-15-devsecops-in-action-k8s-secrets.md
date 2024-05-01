@@ -172,7 +172,7 @@ spec:
 
 `spec.containers.0.envFrom` defines all of the Secret's data as container
 environment variables and `spec.volume/spec.containers.0.volumeMounts`
-defines all mountpoints to Pod.
+mounts the Secret as a volume to the Pod.
 
 Excellent! Part of recommendations have been completed, but for the full picture
 it's necessary to solve the following issues:
