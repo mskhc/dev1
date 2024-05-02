@@ -51,13 +51,15 @@ implementation will be different in terms of specific management and delivery
 secrets tools. To keep the examples simple I will use `spec.initContainers` to
 simulate an injection agent for delivering secrets to Pod.
 
-## Baseline application 
+## Baseline application
 
 Imagine there is a simple application which processes http requests. On request
 to `root` location client receives environment variable value
-`DEMO_SECRET__PASSWD`. On request `/readiness` receives status
-application (ready or not ready) and if the environment variable isn't defined
-Pod doesn't change status to `READY`.
+`DEMO_SECRET__PASSWD` which is defined via
+[spec.containers.0.envFrom.secretRef.name](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/kustomization/overlays/demo/kustomization.yml#L25-L28)
+in Pod resource. On request `/readiness` receives status application
+(ready or not ready) and if the environment variable isn't defined Pod doesn't
+change status to `READY`.
 
 *[cmd/main.go](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/cmd/main.go#L10-L53)*
 ```go
@@ -98,16 +100,6 @@ func httpHandle(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "404 Not Found")
 	}
 }
-```
-
-Environment variable is defined via `spec.containers.0.envFrom.secretRef.name`
-in Pod resource.
-
-*[kustomization/overlays/demo/kustomization.yml](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/kustomization/overlays/demo/kustomization.yml#L25-L28)*
-```yaml
-  envFrom:
-    - secretRef:
-        name: demo-secret
 ```
 
 ## Stage-01: Reject environment vars for storing sensitive data
