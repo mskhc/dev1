@@ -189,7 +189,7 @@ delivery to Pod will be done via `spec.initContainers` then
 of readiness probe in order to make file with sensitive data to Pod useless for
 attacker.
 
-*[kustomization/overlays/demo/kustomization.yml](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/fba0bf048d1cd915fb265fc1b89041582a1d76f9/kustomization/overlays/demo/kustomization.yml#L23-L61)*
+[kustomization/patch](kustomization/patches/stage-02.yaml)
 ```yaml
 ...
   initContainers:
