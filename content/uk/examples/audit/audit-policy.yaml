@@ -1,68 +1,68 @@
-apiVersion: audit.k8s.io/v1 # This is required.
+apiVersion: audit.k8s.io/v1 # Це обовʼязково.
 kind: Policy
-# Don't generate audit events for all requests in RequestReceived stage.
+# Не генерувати події аудиту для всіх запитів на етапі RequestReceived.
 omitStages:
   - "RequestReceived"
 rules:
-  # Log pod changes at RequestResponse level
+  # Логувати зміни у вузлах на рівні RequestResponse
   - level: RequestResponse
     resources:
     - group: ""
-      # Resource "pods" doesn't match requests to any subresource of pods,
-      # which is consistent with the RBAC policy.
+      # Ресурс "pods" не відповідає запитам на будь-який підресурс вузлів,
+      # що відповідає політиці RBAC.
       resources: ["pods"]
-  # Log "pods/log", "pods/status" at Metadata level
+  # Логувати "pods/log", "pods/status" на рівні Metadata
   - level: Metadata
     resources:
     - group: ""
       resources: ["pods/log", "pods/status"]
 
-  # Don't log requests to a configmap called "controller-leader"
+  # Не логувати запити на configmap під назвою "controller-leader"
   - level: None
     resources:
     - group: ""
       resources: ["configmaps"]
       resourceNames: ["controller-leader"]
 
-  # Don't log watch requests by the "system:kube-proxy" on endpoints or services
+  # Не логувати watch-запити "system:kube-proxy" на endpoints або services
   - level: None
     users: ["system:kube-proxy"]
     verbs: ["watch"]
     resources:
-    - group: "" # core API group
+    - group: "" # Основна група API
       resources: ["endpoints", "services"]
 
-  # Don't log authenticated requests to certain non-resource URL paths.
+  # Не логувати автентифіковані запити до певних URL-шляхів, що не є ресурсами.
   - level: None
     userGroups: ["system:authenticated"]
     nonResourceURLs:
-    - "/api*" # Wildcard matching.
+    - "/api*" # Зіставлення з шаблоном.
     - "/version"
 
-  # Log the request body of configmap changes in kube-system.
+  # Логувати тіло запиту на зміни configmap у kube-system.
   - level: Request
     resources:
-    - group: "" # core API group
+    - group: "" # Основна група API
       resources: ["configmaps"]
-    # This rule only applies to resources in the "kube-system" namespace.
-    # The empty string "" can be used to select non-namespaced resources.
+    # Це правило застосовується тільки до ресурсів в просторі імен "kube-system".
+    # Порожній рядок "" можна використовувати для вибору ресурсів без простору імен.
     namespaces: ["kube-system"]
 
-  # Log configmap and secret changes in all other namespaces at the Metadata level.
+  # Логувати зміни configmap і secret у всіх інших просторах імен на рівні Metadata.
   - level: Metadata
     resources:
-    - group: "" # core API group
+    - group: "" # Основна група API
       resources: ["secrets", "configmaps"]
 
-  # Log all other resources in core and extensions at the Request level.
+  # Логувати всі інші ресурси в основній і розширюваній групах на рівні Request.
   - level: Request
     resources:
-    - group: "" # core API group
-    - group: "extensions" # Version of group should NOT be included.
+    - group: "" # Основна група API
+    - group: "extensions" # Версія групи НЕ повинна включатися.
 
-  # A catch-all rule to log all other requests at the Metadata level.
+  # Загальне правило для логування всіх інших запитів на рівні Metadata.
   - level: Metadata
-    # Long-running requests like watches that fall under this rule will not
-    # generate an audit event in RequestReceived.
+    # Довгострокові запити, такі як watches, які підпадають під це правило,
+    # не генерують подію аудиту на етапі RequestReceived.
     omitStages:
       - "RequestReceived"
