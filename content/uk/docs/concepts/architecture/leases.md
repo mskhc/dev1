@@ -17,7 +17,7 @@ weight: 30
 
 Kubernetes використовує API Lease для звʼязку з пульсом kubelet вузла з  API сервером Kubernetes. Для кожного `Node` існує обʼєкт `Lease` з відповідним імʼям в просторі імен `kube-node-lease`. Під капотом кожен сигнал пульсу kubelet — це запит на **оновлення** цього обʼєкта `Lease`, який оновлює поле `spec.renewTime` для оренди. Панель управління Kubernetes використовує відмітку часу цього поля для визначення доступності цього вузла.
 
-Дивіться [Обʼєкти Lease вузлів](/docs/concepts/architecture/nodes/#heartbeats) для отримання додаткових деталей.
+Дивіться [Обʼєкти Lease вузлів](/docs/concepts/architecture/nodes/#node-heartbeats) для отримання додаткових деталей.
 
 ## Вибір лідера {#leader-election}
 

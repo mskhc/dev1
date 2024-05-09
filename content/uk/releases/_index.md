@@ -20,12 +20,14 @@ notoc: true
 
 <!-- body -->
 
-## Історія випусків
+## Історія випусків {#release-history}
 
 {{< release-data >}}
 
-## Майбутні випуски
+## Майбутні випуски {#upcoming-releases}
 
 Ознайомтесь з [графіком](https://github.com/kubernetes/sig-release/tree/master/releases/release-{{< skew nextMinorVersion >}}) виходу майбутнього випуску **{{< skew nextMinorVersion >}}** Kubernetes!
 
-## Додаткові ресурси
+## Додаткові ресурси {#helpful-resources}
+
+Зверніться до [ресурсів команди випуску Kubernetes](https://github.com/kubernetes/sig-release/tree/master/release-team) для ключової інформації про ролі та процес випуску.

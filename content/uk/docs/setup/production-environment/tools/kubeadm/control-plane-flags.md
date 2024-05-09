@@ -134,9 +134,9 @@ patches:
 Наприклад, `kube-apiserver0+merge.yaml` або просто `etcd.json`.
 
 - `target` може бути одним із `kube-apiserver`, `kube-controller-manager`, `kube-scheduler`, `etcd` та `kubeletconfiguration`.
+- `suffix` — це необовʼязковий рядок, який можна використовувати для визначення порядку застосування патчів за алфавітною послідовністю.
 - `patchtype` може бути одним із `strategic`, `merge` або `json` і вони повинні відповідати форматам патчів, [підтримуваним kubectl](/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch). Типово `patchtype` — `strategic`.
 - `extension` повинен бути або `json`, або `yaml`.
-- `suffix` — це необовʼязковий рядок, який можна використовувати для визначення порядку застосування патчів за алфавітною послідовністю.
 
 {{< note >}}
 Якщо ви використовуєте `kubeadm upgrade` для оновлення ваших вузлів kubeadm, вам слід знову надати ті самі патчі, щоб налаштування залишалося після оновлення. Для цього ви можете використовувати прапорець `--patches`, який повинен вказувати на той самий каталог. `kubeadm upgrade` зараз не підтримує структуру конфігурації API,

@@ -61,7 +61,7 @@ VMware vSphere | https://www.vmware.com/security/hardening-guides |
 
 ## Політики {#policies}
 
-Ви можете визначати політики безпеки за допомогою механізмів, вбудованих у Kubernetes, таких як [NetworkPolicy](/docs/concepts/services-networking/network-policies/) (декларативний контроль над фільтрацією мережевих пакетів) або [ValidatingAdmisisonPolicy](/docs/reference/access-authn-authz/validating-admission-policy/) (декларативні обмеження на те, які зміни може вносити кожен за допомогою API Kubernetes).
+Ви можете визначати політики безпеки за допомогою механізмів, вбудованих у Kubernetes, таких як [NetworkPolicy](/docs/concepts/services-networking/network-policies/) (декларативний контроль над фільтрацією мережевих пакетів) або [ValidatingAdmissionPolicy](/docs/reference/access-authn-authz/validating-admission-policy/) (декларативні обмеження на те, які зміни може вносити кожен за допомогою API Kubernetes).
 
 Однак ви також можете покладатися на реалізації політик з ширшої екосистеми навколо Kubernetes. Kubernetes надає механізми розширення, щоб ці проєкти екосистеми могли впроваджувати власні елементи керування політиками щодо перегляду вихідного коду, затвердження контейнерних образів, контролю доступу до API, мережевого звʼязку та інших аспектів.
 

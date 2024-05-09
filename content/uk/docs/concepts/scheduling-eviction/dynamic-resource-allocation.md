@@ -21,7 +21,7 @@ Kubernetes v{{< skew currentVersion >}} включає підтримку API н
 
 ## API
 
-{{< glossary_tooltip text="Група API" term_id="api-group" >}}  `resource.k8s.io/v1alpha2` надає чотири типи:
+{{< glossary_tooltip text="Група API" term_id="api-group" >}} `resource.k8s.io/v1alpha2` надає наступні типи:
 
 ResourceClass
 : Визначає, який драйвер ресурсу обробляє певний вид ресурсу та надає загальні параметри для нього. ResourceClasses створюються адміністратором кластера при встановленні драйвера ресурсів.

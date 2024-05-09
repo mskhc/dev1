@@ -107,7 +107,7 @@ weight: 20
 
 Наприклад, розгляньте наступну специфікацію Podʼа:
 
-{{% code_sample file="pods/pod-with-affinity-anti-affinity.yaml" %}}
+{{% code_sample file="pods/pod-with-affinity-preferred-weight.yaml" %}}
 
 Якщо існують два можливих вузли, які відповідають правилу `preferredDuringSchedulingIgnoredDuringExecution`, один з міткою `label-1:key-1`, а інший з міткою `label-2:key-2`, планувальник бере до уваги `weight` кожного вузла і додає вагу до інших балів для цього вузла, і планує Pod на вузол з найвищим кінцевим балом.
 

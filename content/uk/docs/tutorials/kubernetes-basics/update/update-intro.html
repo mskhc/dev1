@@ -139,8 +139,8 @@ description: |-
             <div class="row">
                 <div class="col-md-12">
                    <h3>Перевірка оновлення</h3>
-                   <p>Спочатку перевірте, чи застосунок працює. Для знаходження зовнішньої IP-адреси та порту виконайте команду <code>describe service</code>:</p>
-                   <p><code><b>kubectl describe services/kubernetes-bootcamp</b></code></p>
+                   <p>Спочатку перевірте, чи Service працює, бо ви могли його видалити його на попередньому кроці, виконайте <code>kubectl describe services/kubernetes-bootcamp</code>. Якщо його немає, створіть його знов:</p>
+                   <p><code><b>kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080</b></code></p>
                    <p>Створіть змінну середовища з іменем <tt>NODE_PORT</tt> зі значенням призначеного порту вузла:</p>
                    <p><code><b>export NODE_PORT="$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')"</b></code><br />
                       <code><b>echo "NODE_PORT=$NODE_PORT"</b></code></p>
