@@ -33,7 +33,7 @@ The connection to the server <server-name:port> was refused - did you specify th
 kubectl cluster-info dump
 ```
 
-### Усунення неполадок повідомлення про помилку 'No Auth Provider Found' {#no-auth-provider-found}
+### Усунення несправностей повідомлення про помилку 'No Auth Provider Found' {#no-auth-provider-found}
 
 У Kubernetes 1.26, kubectl видалив вбудовану автентифікацію для Kubernetes-кластерів керованих хмарними провайдерами. Ці провайдери випустили втулок для kubectl для надання хмарно-специфічної автентифікації. Для інструкцій див. документацію відповідного провайдера:
 

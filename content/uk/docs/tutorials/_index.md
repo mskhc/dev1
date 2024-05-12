@@ -28,7 +28,7 @@ weight: 60
 * [Вивід зовнішньої IP-адреси для доступу до застосунку в кластері](/docs/tutorials/stateless-application/expose-external-ip-address/)
 * [Приклад: Розгортання застосунку PHP Guestbook з Redis](/docs/tutorials/stateless-application/guestbook/)
 
-## Stateful-застосунки {#stateful-applications
+## Stateful-застосунки {#stateful-applications}
 
 * [Основи StatefulSet](/docs/tutorials/stateful-application/basic-stateful-set/)
 * [Приклад: WordPress та MySQL з постійними томами](/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)

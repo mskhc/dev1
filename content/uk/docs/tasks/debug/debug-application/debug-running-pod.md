@@ -368,7 +368,7 @@ kubectl exec -it cassandra -- sh
 
 {{< feature-state state="stable" for_k8s_version="v1.25" >}}
 
-{{< glossary_tooltip text="Ефемерні контейнери" term_id="ephemeral-container" >}} корисні для інтерактивного усунення неполадок, коли `kubectl exec` недостатній через аварію контейнера або те, що образ контейнера не містить утиліт для налагодження, наприклад, в [образах distroless](https://github.com/GoogleContainerTools/distroless).
+{{< glossary_tooltip text="Ефемерні контейнери" term_id="ephemeral-container" >}} корисні для інтерактивного усунення несправностей, коли `kubectl exec` недостатній через аварію контейнера або те, що образ контейнера не містить утиліт для налагодження, наприклад, в [образах distroless](https://github.com/GoogleContainerTools/distroless).
 
 ### Приклад налагодження за допомогою ефемерних контейнерів {#ephemeral-container-example}
 

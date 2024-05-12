@@ -71,7 +71,7 @@ kubeadm init --config=kubeadm-config.yaml
 Прапори kube-controller-manager `--node-cidr-mask-size-ipv4|--node-cidr-mask-size-ipv6` встановлені у стандартні значення. Див. [налаштування подвійного стека IPv4/IPv6](/docs/concepts/services-networking/dual-stack#configure-ipv4-ipv6-dual-stack).
 
 {{< note >}}
-Прапор `--apiserver-advertise-address` не підтримує подвійний стек.
+Прапорець `--apiserver-advertise-address` не підтримує подвійний стек.
 {{< /note >}}
 
 ### Приєднання вузла до кластера з подвійним стеком {#join-a-node-to-dual-stack-cluster}

@@ -10,9 +10,9 @@ weight: 60
 
 Коли Kubernetes створює Pod, він призначає один з таких класів QoS для Podʼа:
 
-* [Guaranteed](/docs/concepts/workloads/pods/pod-qos/#гарантований)
-* [Burstable](/docs/concepts/workloads/pods/pod-qos/#розширюваний)
-* [BestEffort](/docs/concepts/workloads/pods/pod-qos/#найкращий-зусилля)
+* [Guaranteed](/docs/concepts/workloads/pods/pod-qos/#guaranteed)
+* [Burstable](/docs/concepts/workloads/pods/pod-qos/#burstable)
+* [BestEffort](/docs/concepts/workloads/pods/pod-qos/#besteffort)
 
 ## {{% heading "prerequisites" %}}
 

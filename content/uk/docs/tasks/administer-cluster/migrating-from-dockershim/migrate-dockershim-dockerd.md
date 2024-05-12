@@ -88,7 +88,7 @@ systemctl restart kubelet
 ## Перевірте, що вузол справний {#verify-that-the-node-is-healthy}
 
 Щоб перевірити, чи використовує вузол кінцеву точку `cri-dockerd`, слідувати інструкціям у [Дізнайтеся, який рантайм ви використовуєте](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/).
-Прапор `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
+Прапорець `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
 
 ## Введення вузла в експлуатацію {#uncordon-the-node}
 

@@ -66,7 +66,7 @@ node-3       Ready    v1.19.6   containerd://1.4.1
 
    Якщо у вас немає `tr` або `pgrep`, перевірте командний рядок для процесу kubelet вручну.
 
-1. У виведенні шукайте прапор `--container-runtime` та прапор `--container-runtime-endpoint`.
+1. У виведенні шукайте прапорець `--container-runtime` та прапорець `--container-runtime-endpoint`.
 
    * Якщо ваші вузли використовують Kubernetes v1.23 та старіший, і ці прапори відсутні або прапорець `--container-runtime` не є `remote`, ви використовуєте сокет dockershim з Docker Engine. Параметр командного рядка `--container-runtime` не доступний у Kubernetes v1.27 та пізніше.
    * Якщо прапорець `--container-runtime-endpoint` присутній, перевірте імʼя сокета, щоб дізнатися, яке середовище ви використовуєте. Наприклад, `unix:///run/containerd/containerd.sock` — це кінцева точка containerd.
