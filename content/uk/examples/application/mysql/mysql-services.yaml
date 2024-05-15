@@ -1,4 +1,4 @@
-# Headless service for stable DNS entries of StatefulSet members.
+# Service headless для стабільних записів DNS членів StatefulSet.
 apiVersion: v1
 kind: Service
 metadata:
@@ -14,8 +14,8 @@ spec:
   selector:
     app: mysql
 ---
-# Client service for connecting to any MySQL instance for reads.
-# For writes, you must instead connect to the primary: mysql-0.mysql.
+# Service клієнт для підʼєднання до екземпляру MySQL для читання.
+# Для запису ви повинні підключитися до основного: mysql-0.mysql.
 apiVersion: v1
 kind: Service
 metadata:

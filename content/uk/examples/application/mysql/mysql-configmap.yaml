@@ -7,11 +7,11 @@ metadata:
     app.kubernetes.io/name: mysql
 data:
   primary.cnf: |
-    # Apply this config only on the primary.
+    # Застосовує цю конфігурацію до primary.
     [mysqld]
     log-bin
   replica.cnf: |
-    # Apply this config only on replicas.
+    # Застосовує цю конфігурацію до реплік.
     [mysqld]
     super-read-only
 
