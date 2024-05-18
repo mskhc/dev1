@@ -175,7 +175,7 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
 
 2. Встановіть прапорець `--encryption-provider-config` на kube-apiserver, щоб вказати місце розташування файлу конфігурації.
 
-3. Аргумент `--encryption-provider-config-automatic-reload` булевого типу визначає, чи повинен файл, встановлений за допомогою `--encryption-provider-config`, автоматично перезавантажуватися, якщо змінюються вміст диска. Це дозволяє регулярно змінювати ключі без перезапуску API-сервера.
+3. Аргумент `--encryption-provider-config-automatic-reload` типу boolean визначає, чи слід [автоматично перезавантажувати](/docs/tasks/administer-cluster/encrypt-data/#configure-automatic-reloading) файл, встановлений за допомогою `--encryption-provider-config`, у разі зміни вмісту на диску.
 
 4. Перезапустіть свій API-сервер.
 
@@ -192,12 +192,12 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
        providers:
          - kms:
              name: myKmsPluginFoo
-             endpoint: unix:///tmp/socketfile.sock
+             endpoint: unix:///tmp/socketfile-foo.sock
              cachesize: 100
              timeout: 3s
          - kms:
              name: myKmsPluginBar
-             endpoint: unix:///tmp/socketfile.sock
+             endpoint: unix:///tmp/socketfile-bar.sock
              cachesize: 100
              timeout: 3s
    ```
@@ -216,12 +216,12 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
          - kms:
              apiVersion: v2
              name: myKmsPluginFoo
-             endpoint: unix:///tmp/socketfile.sock
+             endpoint: unix:///tmp/socketfile-foo.sock
              timeout: 3s
          - kms:
              apiVersion: v2
              name: myKmsPluginBar
-             endpoint: unix:///tmp/socketfile.sock
+             endpoint: unix:///tmp/socketfile-bar.sock
              timeout: 3s
    ```
 

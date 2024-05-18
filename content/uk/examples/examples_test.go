@@ -364,7 +364,7 @@ func walkConfigFiles(inDir string, t *testing.T, fn func(name, path string, data
 
 		file := filepath.Base(path)
 		if ext := filepath.Ext(file); ext == ".json" || ext == ".yaml" {
-			data, err := io.ReadFile(path)
+			data, err := os.ReadFile(path)
 			if err != nil {
 				return err
 			}
@@ -565,9 +565,11 @@ func TestExampleObjectSchemas(t *testing.T) {
 			"example-no-conflict-with-limitrange-cpu": {&api.Pod{}},
 		},
 		"configmap": {
-			"configmaps":          {&api.ConfigMap{}, &api.ConfigMap{}},
-			"configmap-multikeys": {&api.ConfigMap{}},
-			"configure-pod":       {&api.Pod{}},
+			"configmaps":              {&api.ConfigMap{}, &api.ConfigMap{}},
+			"configmap-multikeys":     {&api.ConfigMap{}},
+			"configure-pod":           {&api.Pod{}},
+			"immutable-configmap":     {&api.ConfigMap{}},
+			"new-immutable-configmap": {&api.ConfigMap{}},
 		},
 		"controllers": {
 			"daemonset":                           {&apps.DaemonSet{}},
@@ -582,6 +584,7 @@ func TestExampleObjectSchemas(t *testing.T) {
 			"job-pod-failure-policy-example":      {&batch.Job{}},
 			"job-pod-failure-policy-failjob":      {&batch.Job{}},
 			"job-pod-failure-policy-ignore":       {&batch.Job{}},
+			"job-success-policy":                  {&batch.Job{}},
 			"replicaset":                          {&apps.ReplicaSet{}},
 			"replication":                         {&api.ReplicationController{}},
 			"replication-nginx-1.14.2":            {&api.ReplicationController{}},

@@ -19,7 +19,7 @@ card:
 
 Цей документ описує різні компоненти, які вам потрібні для повноцінного та працездатного кластера Kubernetes.
 
-{{< figure src="/images/docs/components-of-kubernetes.svg" alt="Components of Kubernetes" caption="Компоненти кластера Kubernetes" class="diagram-large" >}}
+{{< figure src="/images/docs/components-of-kubernetes.svg" alt="Компоненти Kubernetes" caption="Компоненти кластера Kubernetes" class="diagram-large" clicktozoom="true" >}}
 
 <!-- body -->
 

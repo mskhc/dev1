@@ -68,6 +68,9 @@ other = "YouTube"
 [conjunction_1]
 other = "та"
 
+[copy_sample_to_clipboard]
+other = "Копіювати {{ .filename }} до буферу обміну"
+
 [cve_id]
 other = "CVE ID"
 

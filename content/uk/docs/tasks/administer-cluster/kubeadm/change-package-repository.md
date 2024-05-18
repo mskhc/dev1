@@ -130,7 +130,7 @@ URL, використаний для репозиторіїв пакунків K
 1. Змініть версію в URL на **наступний доступний мінорний випуск**, наприклад:
 
    ```none
-   deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{< param "версія" >}}/deb/ /
+   deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{< param "version" >}}/deb/ /
    ```
 
 1. Збережіть файл і вийдіть з текстового редактора. Продовжуйте дотримуватися відповідних інструкцій щодо оновлення.

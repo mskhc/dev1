@@ -576,7 +576,7 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 Ви можете налаштувати автоматичне перезавантаження конфігурації провайдера шифрування. Ця настройка визначає, чи має {{< glossary_tooltip text="API server" term_id="kube-apiserver" >}} завантажувати файл, який ви вказали для `--encryption-provider-config` тільки один раз при запуску, або автоматично кожного разу, коли ви змінюєте цей файл. Увімкнення цієї опції дозволяє змінювати ключі для шифрування у спокої без перезапуску API server.
 
-Щоб дозволити автоматичне перезавантаження, налаштуйте API server для запуску з параметром: `--encryption-provider-config-automatic-reload=true`
+Щоб дозволити автоматичне перезавантаження, налаштуйте API server для запуску з параметром: `--encryption-provider-config-automatic-reload=true`. Коли ввімкнено, зміни файлів перевіряються кожну хвилину для спостереження за модифікаціями. Метрика `apiserver_encryption_config_controller_automatic_reload_last_timestamp_seconds` визначає час, коли нова конфігурація набирає чинності. Це дозволяє виконувати ротацію ключів шифрування без перезапуску API-сервера.
 
 ## {{% heading "whatsnext" %}}
 

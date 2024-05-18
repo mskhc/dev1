@@ -54,7 +54,7 @@ Podʼи не зникають, поки хтось (людина або конт
 
 Ось кілька способів помʼякшення невідворотних розладів:
 
-- Переконайтеся, що ваш Pod [звератється по необхідні ресурси](/docs/tasks/configure-pod-container/assign-memory-resource).
+- Переконайтеся, що ваш Pod [звертається по необхідні ресурси](/docs/tasks/configure-pod-container/assign-memory-resource).
 - Реплікуйте своє застосунки, якщо вам потрібна вища доступність. (Дізнайтеся про запуск реплікованих [stateless](/docs/tasks/run-application/run-stateless-application-deployment/) та [stateful](/docs/tasks/run-application/run-replicated-stateful-application/) застосунків.)
 - Для ще більшої доступності при запуску реплікованих застосунків розподіліть їх по стійках (за допомогою [anti-affinity](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)) чи по зонах (якщо використовуєте
   [кластер з кількома зонами](/docs/setup/multiple-zones).)
