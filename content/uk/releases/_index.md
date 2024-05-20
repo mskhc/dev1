@@ -16,7 +16,7 @@ notoc: true
 - **y** — мінорна версія, а
 - **z** — версія патча, відповідно до термінології [Semantic Versioning](https://semver.org/lang/uk/).
 
-Докладніше про політику розбіжностей між версіями у документі — [version skew policy](/releases/version-skew-policy/).
+Докладніше про політику розбіжностей між версіями у документі — [Політика версійної розбіжності](/releases/version-skew-policy/).
 
 <!-- body -->
 
