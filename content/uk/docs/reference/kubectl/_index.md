@@ -109,7 +109,7 @@ kubectl config set-context --current --namespace=<namespace-name>
 `auth` | `kubectl auth [flags] [options]` | Перегляд авторизації.
 `autoscale` | <code>kubectl autoscale (-f FILENAME &#124; TYPE NAME &#124; TYPE/NAME) [--min=MINPODS] --max=MAXPODS [--cpu-percent=CPU] [flags]</code> | Автоматично масштабувати набір Podʼів, керованих контролером реплікації.
 `certificate` | `kubectl certificate SUBCOMMAND [options]` | Змінити ресурси сертифікатів.
-`cluster-info` | `kubectl cluster-info [flags]` | Показати інформацію про кінцеві точки майстра та служб в кластері.
+`cluster-info` | `kubectl cluster-info [flags]` | Показати інформацію про точки доступу майстра та служб в кластері.
 `completion` | `kubectl completion SHELL [options]` | Вивести код функції автозавершення оболонки для bash або zsh.
 `config` | `kubectl config SUBCOMMAND [flags]` | Змінити файли kubeconfig. Див. окремі команди для отримання деталей.
 `convert` | `kubectl convert -f FILENAME [options]` | Конвертувати файли конфігурації між різними версіями API. Приймаються формати YAML та JSON. Примітка — потрібно встановити втулок `kubectl-convert`.

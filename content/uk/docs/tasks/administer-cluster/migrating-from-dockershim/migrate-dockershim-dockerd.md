@@ -87,12 +87,11 @@ systemctl restart kubelet
 
 ## Перевірте, що вузол справний {#verify-that-the-node-is-healthy}
 
-Щоб перевірити, чи використовує вузол кінцеву точку `cri-dockerd`, слідувати інструкціям у [Дізнайтеся, який рантайм ви використовуєте](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/).
-Прапорець `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
+Щоб перевірити, чи використовує вузол точку доступу `cri-dockerd`, слідувати інструкціям [Дізнайтеся, яке середовище виконання контейнерів використовується](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/). Прапорець `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
 
 ## Введення вузла в експлуатацію {#uncordon-the-node}
 
-Введіть вузол в експлуатацію, щоб Podʼи могли запускатися на ньому: 
+Введіть вузол в експлуатацію, щоб Podʼи могли запускатися на ньому:
 
 ```shell
 kubectl uncordon <NODE_NAME>

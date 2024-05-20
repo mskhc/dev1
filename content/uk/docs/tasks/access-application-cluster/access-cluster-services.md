@@ -115,7 +115,7 @@ heapster is running at https://192.0.2.1/api/v1/namespaces/kube-system/services/
   https://192.0.2.1/api/v1/namespaces/kube-system/services/https:elasticsearch-logging:/proxy/_cluster/health?pretty=true
   ```
 
-#### Використання вебогляачів для доступу до Serviceʼів, що працюють у кластері {#using-web-browsers-to-access-services-running-on-the-cluster}
+#### Використання вебоглядачів для доступу до Serviceʼів, що працюють у кластері {#using-web-browsers-to-access-services-running-on-the-cluster}
 
 Ви можете вставити URL-адресу проксі api-сервера у адресний рядок оглядача. Однак:
 

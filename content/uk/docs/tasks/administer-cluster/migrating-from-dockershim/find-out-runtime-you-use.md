@@ -35,7 +35,7 @@ node-2       Ready    v1.16.15   docker://19.3.1
 node-3       Ready    v1.16.15   docker://19.3.1
 ```
 
-Якщо ваше середовище показується як Docker Engine, це все одно не означає, що вас точно торкнеться видалення dockershim у Kubernetes v1.24. [Перевірте кінцеву точку середовища](#which-endpoint), щоб побачити, чи використовуєте ви dockershim. Якщо ви не використовуєте dockershim, вас це не стосується.
+Якщо ваше середовище показується як Docker Engine, це все одно не означає, що вас точно торкнеться видалення dockershim у Kubernetes v1.24. [Перевірте точку доступу середовища](#which-endpoint), щоб побачити, чи використовуєте ви dockershim. Якщо ви не використовуєте dockershim, вас це не стосується.
 
 Для containerd вивід схожий на цей:
 
@@ -48,7 +48,7 @@ node-3       Ready    v1.19.6   containerd://1.4.1
 
 Дізнайтеся більше інформації про середовища виконання контейнерів на сторінці [Середовища виконання контейнерів](/docs/setup/production-environment/container-runtimes/).
 
-## Дізнайтеся, яку кінцеву точку середовища виконання контейнерів ви використовуєте {#which-endpoint}
+## Дізнайтеся, яку точку доступу середовища виконання контейнерів ви використовуєте {#which-endpoint}
 
 Середовище виконання контейнерів спілкується з kubelet через Unix-сокет, використовуючи [протокол CRI](/docs/concepts/architecture/cri/), який базується на фреймворку gRPC. Kubelet діє як клієнт, а середовище — як сервер. У деяких випадках може бути корисно знати, який сокет використовується на ваших вузлах. Наприклад, з видаленням dockershim у Kubernetes v1.24 і пізніше ви, можливо, захочете знати, чи використовуєте ви Docker Engine з dockershim.
 
@@ -69,6 +69,6 @@ node-3       Ready    v1.19.6   containerd://1.4.1
 1. У виведенні шукайте прапорець `--container-runtime` та прапорець `--container-runtime-endpoint`.
 
    * Якщо ваші вузли використовують Kubernetes v1.23 та старіший, і ці прапори відсутні або прапорець `--container-runtime` не є `remote`, ви використовуєте сокет dockershim з Docker Engine. Параметр командного рядка `--container-runtime` не доступний у Kubernetes v1.27 та пізніше.
-   * Якщо прапорець `--container-runtime-endpoint` присутній, перевірте імʼя сокета, щоб дізнатися, яке середовище ви використовуєте. Наприклад, `unix:///run/containerd/containerd.sock` — це кінцева точка containerd.
+   * Якщо прапорець `--container-runtime-endpoint` присутній, перевірте імʼя сокета, щоб дізнатися, яке середовище ви використовуєте. Наприклад, `unix:///run/containerd/containerd.sock` — це точка доступу containerd.
 
 Якщо ви хочете змінити середовище виконання контейнерів на вузлі з Docker Engine на containerd, ви можете дізнатися більше інформації про [міграцію з Docker Engine на containerd](/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/), або, якщо ви хочете продовжити використовувати Docker Engine у Kubernetes v1.24 та пізніше, мігруйте на сумісний з CRI адаптер, наприклад [`cri-dockerd`](https://github.com/Mirantis/cri-dockerd).

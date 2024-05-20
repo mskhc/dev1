@@ -146,7 +146,7 @@ Kubernetes [починаючи з v1.26](/blog/2022/11/18/upcoming-changes-in-ku
 {{% /tab %}}
 {{< /tabs >}}
 
-У Linux, типовий CRI-socket для containerd — `/run/containerd/containerd.sock`. У Windows, типова CRI-кінцева точка — `npipe://./pipe/containerd-containerd`.
+У Linux, типовий CRI-socket для containerd — `/run/containerd/containerd.sock`. У Windows, типова CRI-точка доступу — `npipe://./pipe/containerd-containerd`.
 
 #### Налаштування драйвера cgroup `systemd` {#containerd-systemd}
 

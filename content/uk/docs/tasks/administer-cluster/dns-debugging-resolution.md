@@ -188,7 +188,7 @@ NAME       ENDPOINTS                       AGE
 kube-dns   10.180.3.17:53,10.180.3.17:53    1h
 ```
 
-Якщо ви не бачите кінцеві точки, дивіться розділ кінцевих точок у документації [налагодження Service](/docs/tasks/debug/debug-application/debug-service/).
+Якщо ви не бачите точки доступу, дивіться розділ про точки доступу у документації [налагодження Service](/docs/tasks/debug/debug-application/debug-service/).
 
 Для додаткових прикладів DNS Kubernetes дивіться [приклади dns в кластері](https://github.com/kubernetes/examples/tree/master/staging/cluster-dns) у репозиторії Kubernetes GitHub.
 
