@@ -5,6 +5,7 @@ reviewers:
 - soltysh
 description: "Дізнайтеся, як розширити kubectl за допомогою втулків."
 content_type: task
+weight: 150
 ---
 
 <!-- Overview -->
