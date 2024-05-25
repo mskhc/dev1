@@ -11,6 +11,7 @@ tags:
 - fundamental
 - architecture
 ---
+
 Застосунок, який обслуговує функціонал Kubernetes через RESTful інтерфейс та зберігає стан кластера.
 
 <!--more--> 

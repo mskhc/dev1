@@ -6,7 +6,8 @@ full_link:
 short_description: >
   Може вказувати на: Розробника застосунків, Учасника що робіть внесок до коду Kubernetes або Розробника платформи.
 
-aka: 
+aka:
+- Developer
 tags:
 - community
 - user-type

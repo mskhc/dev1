@@ -7,9 +7,12 @@ short_description: >
   Спеціалізований контролер, призначений для управління власним ресурсом.
 
 aka:
+- Operator
+- Operator pattern
 tags:
 - architecture
 ---
+
 [Шаблон Operator](/docs/concepts/extend-kubernetes/operator/) — це системний дизайн, який повʼязує контролер з одним чи кількома власними ресурсами.
 
 <!--more-->

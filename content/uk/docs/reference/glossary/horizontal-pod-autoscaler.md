@@ -4,7 +4,7 @@ id: horizontal-pod-autoscaler
 date: 2018-04-12
 full_link: /docs/tasks/run-application/horizontal-pod-autoscale/
 short_description: >
-  Ресурс API, який автоматично масштабує кількість реплік {{< glossary_tooltip term_id="pod" text="Podʼу" >}} на основі вказаних параметрів використання ЦП або власних метрик.
+  Ресурс API, який автоматично масштабує кількість реплік {{< glossary_tooltip term_id="pod" text="Podʼа" >}} на основі вказаних параметрів використання ЦП або власних метрик.
 
 aka: 
 - HPA
@@ -12,7 +12,8 @@ aka:
 tags:
 - operation
 ---
-Ресурс API, який автоматично масштабує кількість реплік {{< glossary_tooltip term_id="pod" text="Podʼу" >}} на основі вказаних параметрів використання ЦП або власних метрик.
+
+Ресурс API, який автоматично масштабує кількість реплік {{< glossary_tooltip term_id="pod" text="Podʼа" >}} на основі вказаних параметрів використання ЦП або власних метрик.
 
 <!--more--> 
 

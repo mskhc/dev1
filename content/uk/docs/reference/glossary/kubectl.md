@@ -12,6 +12,7 @@ tags:
 - tool
 - fundamental
 ---
+
 Інструмент командного рядка для взаємодії із кластером Kubernetes,
 {{< glossary_tooltip text="панеллю управління" term_id="control-plane" >}}, використовуючи API Kubernetes.
 

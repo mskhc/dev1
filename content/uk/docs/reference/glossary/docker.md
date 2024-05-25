@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 Docker (зокрема, Docker Engine) — це програмна технологія, яка забезпечує віртуалізацію на рівні операційної системи, також відому як {{< glossary_tooltip text="контейнери" term_id="container" >}}.
 
 <!--more-->

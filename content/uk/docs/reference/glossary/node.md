@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 Вузол — це робоча машина в Kubernetes.
 
 <!--more-->

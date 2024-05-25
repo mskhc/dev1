@@ -7,9 +7,11 @@ short_description: >
   Ресурси, які розширюють функціональність Kubernetes.
 
 aka:
+- Add-ons
 tags:
 - tool
 ---
+
 Ресурси, які розширюють функціональність Kubernetes.
 
 <!--more-->

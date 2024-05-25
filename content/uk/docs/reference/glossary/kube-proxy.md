@@ -11,6 +11,7 @@ tags:
 - fundamental
 - networking
 ---
+
 kube-proxy є мережевим проксі, що запущений на кожному вузлі кластера і реалізує частину концепції Kubernetes {{< glossary_tooltip term_id="service" text="Service">}}.
 
 <!--more-->

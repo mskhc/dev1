@@ -10,6 +10,7 @@ tags:
 - fundamental
 - extension
 ---
+
 Втулки пристроїв працюють на вузлах кластера ({{< glossary_tooltip term_id="node" text="Nodes" >}}) та забезпечують {{< glossary_tooltip term_id="pod" text="Podʼам" >}} доступ до ресурсів, таких як локальне обладнання, яке вимагає вендор-специфічної ініціалізації чи налаштувань.
 
 <!--more-->

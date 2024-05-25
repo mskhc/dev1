@@ -7,10 +7,13 @@ short_description: >
   Endpoints відстежують IP-адреси Podʼів з відповідними селекторами Serviceʼу.
 
 aka:
+- Точки доступу
 tags:
 - networking
 ---
+
 Endpoints відстежують IP-адреси Podʼів з відповідними {{< glossary_tooltip text="селекторами" term_id="selector" >}} Serviceʼу.
 
 <!--more-->
+
 Endpoints можуть бути налаштовані вручну для {{< glossary_tooltip text="Serviceʼів" term_id="service" >}}, які не мають визначених селекторів. Ресурс {{< glossary_tooltip text="EndpointSlice" term_id="endpoint-slice" >}} надає масштабовану та розширювану альтернативу Endpoints.

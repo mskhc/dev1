@@ -7,10 +7,12 @@ short_description: >
   Фрагмент коду, який перехоплює запити до сервера API Kubernetes перед збереженням обʼєкта.
 
 aka:
+- Admission Controller
 tags:
 - extension
 - security
 ---
+
 Фрагмент коду, який перехоплює запити до сервера API Kubernetes перед збереженням обʼєкта.
 
 <!--more-->

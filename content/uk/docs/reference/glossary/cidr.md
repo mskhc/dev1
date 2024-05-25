@@ -10,6 +10,7 @@ aka:
 tags:
 - networking
 ---
+
 CIDR (Classless Inter-Domain Routing) — це нотація для опису блоків IP-адрес широко використовується в налаштуваннях конфігурації мережі.
 
 <!--more-->

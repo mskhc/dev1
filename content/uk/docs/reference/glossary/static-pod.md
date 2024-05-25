@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 {{< glossary_tooltip text="Pod" term_id="pod" >}}, яким управляє безпосередньо демон {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} на певному вузлі,
 
 <!--more-->

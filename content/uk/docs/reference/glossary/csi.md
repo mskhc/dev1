@@ -7,6 +7,8 @@ short_description: >
     Інтерфейс зберігання контейнерів (CSI) визначає стандартний інтерфейс для взаємодії з системами зберігання з контейнерами.
 
 aka: 
+- Container Storage Interface
+- CSI
 tags:
 - storage 
 ---

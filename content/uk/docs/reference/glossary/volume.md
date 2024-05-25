@@ -12,6 +12,7 @@ tags:
 - core-object
 - fundamental
 ---
+
 Тека, що містить дані та доступна для {{< glossary_tooltip text="контейнерів" term_id="container" >}} у {{< glossary_tooltip term_id="pod" text="Podʼі" >}}.
 
 <!--more-->

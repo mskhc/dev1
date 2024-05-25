@@ -11,6 +11,7 @@ aka:
 tags:
 - operation
 ---
+
 Виселення через тиск на вузол — це процес, при якому {{<glossary_tooltip term_id="kubelet" text="kubelet">}} активно завершує роботу Podʼів для звільнення ресурсів на вузлах.
 
 <!--more-->

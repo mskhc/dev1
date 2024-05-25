@@ -7,10 +7,12 @@ short_description: >
   Умови, за якими учасник ліцензує свій внесок до проєкту з відкритими сирцями.
 
 aka: 
+- Contributor License Agreement
 tags:
 - community
 ---
- Умови, за якими {{< glossary_tooltip text="учасник" term_id="contributor" >}} ліцензує свій внесок до проєкту з відкритими сирцями.
+
+Умови, за якими {{< glossary_tooltip text="учасник" term_id="contributor" >}} ліцензує свій внесок до проєкту з відкритими сирцями.
 
 <!--more--> 
 

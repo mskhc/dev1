@@ -11,6 +11,7 @@ tags:
 - architecture
 - fundamental
 ---
+
 Компонент панелі управління, який запускає процеси {{< glossary_tooltip text="контролера" term_id="controller" >}}.
 
 <!--more-->

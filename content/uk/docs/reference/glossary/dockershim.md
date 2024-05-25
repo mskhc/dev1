@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 Dockershim є компонентом Kubernetes версії 1.23 та раніше. Він дозволяє {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} взаємодіяти з {{< glossary_tooltip text="Docker Engine" term_id="docker" >}}.
 
 <!--more-->

@@ -3,7 +3,7 @@ title: Downward API
 id: downward-api
 date: 2022-03-21
 short_description: >
-  Механізм використання Kubernetes для надання значень полів Podʼу та контейнера коду, що працює в контейнері.
+  Механізм використання Kubernetes для надання значень полів Podʼа та контейнера коду, що працює в контейнері.
 
 aka:
 full_link: /docs/concepts/workloads/pods/downward-api/
@@ -11,7 +11,7 @@ tags:
 - architecture
 ---
 
-Механізм Kubernetes для надання значень полів Podʼу та контейнера коду, що працює в контейнері
+Механізм Kubernetes для надання значень полів Podʼа та контейнера коду, що працює в контейнері
 
 <!--more-->
 

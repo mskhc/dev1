@@ -6,11 +6,13 @@ full_link: https://github.com/kubernetes/community/tree/master/contributors/deve
 short_description: >
   Особа, яка розробляє та вносить внески до відкритого коду Kubernetes.
 
-aka: 
+aka:
+- Code Contributor
 tags:
 - community
 - user-type
 ---
+
 Особа, яка розробляє та вносить внески до відкритого коду Kubernetes.
 
 <!--more--> 

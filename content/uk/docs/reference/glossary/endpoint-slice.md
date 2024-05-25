@@ -7,10 +7,10 @@ short_description: >
   Спосіб групування мережевих точок доступу разом із ресурсами Kubernetes.
 
 aka:
-- EndpointSlice
 tags:
 - networking
 ---
+
 Спосіб групування мережевих точок доступу разом із ресурсами Kubernetes.
 
 <!--more-->

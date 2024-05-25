@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 Змінні середовища контейнера — це пари name=value, які надають корисну інформацію контейнерам, які працюють у {{< glossary_tooltip text="Podʼі" term_id="pod" >}}.
 
 <!--more-->

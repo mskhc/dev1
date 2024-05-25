@@ -11,8 +11,9 @@ tags:
 - fundamental
 - core-object
 ---
+
 Агент, запущений на кожному {{< glossary_tooltip text="вузлі" term_id="node" >}} кластера. Забезпечує запуск і роботу контейнерів в Podʼах.
 
 <!--more-->
 
-[kubelet](/docs/reference/command-line-tools-reference/kubelet/)  використовує специфікації PodSpecs, які надаються за допомогою різних механізмів, і забезпечує працездатність і справність усіх контейнерів, що описані у PodSpecs. kubelet керує лише тими контейнерами, що були створені Kubernetes.
+[kubelet](/docs/reference/command-line-tools-reference/kubelet/) використовує специфікації PodSpecs, які надаються за допомогою різних механізмів, і забезпечує працездатність і справність усіх контейнерів, що описані у PodSpecs. kubelet керує лише тими контейнерами, що були створені Kubernetes.

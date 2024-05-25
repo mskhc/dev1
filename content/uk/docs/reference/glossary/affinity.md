@@ -7,13 +7,16 @@ short_description: >
     Правила, що використовуються планувальником для визначення місця розташування Podʼів.
 
 aka:
+- Affinity
+- Афінітет
 tags:
 - fundamental
 ---
 
-У Kubernetes _Affinity_ — це набір правил, які дають підказки планувальнику, де розміщувати поди.
+У Kubernetes _Affinity_ — це набір правил, які дають підказки планувальнику, де розміщувати Podʼи.
 
 <!--more-->
+
 Є два види спорідненості:
 
 * [спорідненість вузла](/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)

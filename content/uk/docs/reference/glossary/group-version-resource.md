@@ -11,6 +11,7 @@ aka:
 tags:
 - architecture
 ---
+
 Спосіб представлення унікального ресурсу API Kubernetes.
 
 <!--more-->

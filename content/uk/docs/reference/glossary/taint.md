@@ -11,8 +11,9 @@ tags:
 - core-object
 - fundamental
 ---
+
 Основний обʼєкт, що складається з трьох обовʼязкових властивостей: key, value, та effect. Taints (додаткові властивості) запобігають розміщенню {{< glossary_tooltip text="Podʼів" term_id="pod" >}} на вузлах чи групах вузлів.
 
 <!--more-->
 
-Taints та {{< glossary_tooltip text="tolerations" term_id="toleration" >}} співпрацюють, щоб забезпечити те, що Podʼи не розміщуються на непридатних вузлах. Один чи декілька taints застосовуються до вузла. Вузол повинен розміщувати лише Podʼи з tolerations, що збігаються з налаштованими taints.
+Taints та {{< glossary_tooltip text="tolerations" term_id="toleration" >}} співпрацюють, щоб забезпечити те, що Podʼи не розміщуються на непридатних вузлах. Один чи декілька taint застосовуються до вузла. Вузол повинен розміщувати лише Podʼи з tolerations, що збігаються з налаштованими taints.

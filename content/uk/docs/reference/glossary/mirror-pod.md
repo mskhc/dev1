@@ -10,6 +10,7 @@ aka:
 tags:
 - fundamental
 ---
+
 {{< glossary_tooltip text="Pod" term_id="pod" >}}, який {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} використовує для представлення {{< glossary_tooltip text="статичного Podʼа" term_id="static-pod" >}}.
 
 <!--more-->

@@ -2,7 +2,7 @@
 title: Довідник
 approvers:
 - chenopis
-linkTitle: "Довідник"
+linkTitle: "Довідники"
 main_menu: true
 weight: 70
 content_type: concept
@@ -20,15 +20,14 @@ no_list: true
 * [Глосарій](/docs/reference/glossary/) — докладний, стандартизований перелік термінології Kubernetes
 
 * [Довідник API Kubernetes](/docs/reference/kubernetes-api/)
-* [Односторінковий довідник API Kubernetes {{< param "version" >}}](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Довідник API Kubernetes {{< param "version" >}}](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/), все на одній сторінці
 * [Використання API Kubernetes](/docs/reference/using-api/) — огляд API для Kubernetes.
 * [API керування доступом](/docs/reference/access-authn-authz/) — докладно про те, як Kubernetes контролює доступи API
-* [Добре відомі мітки (labels), анотації (annotations) та пристосування (taints).](/docs/reference/labels-annotations-taints/)
+* [Добре відомі мітки (labels), анотації (annotations) та позначення (taints).](/docs/reference/labels-annotations-taints/)
 
 ## Офіційно підтримувані клієнтські бібліотеки {#officially-supported-client-libraries}
 
-Для надсилання викликів до API Kubernetes з мов програмування ви можете використовувати
-[клієнтські бібліотеки](/docs/reference/using-api/client-libraries/). Офіційно підтримуються наступні:
+Для надсилання викликів до API Kubernetes використовуючи одну з мов програмування ви можете використовувати [клієнтські бібліотеки](/docs/reference/using-api/client-libraries/). Офіційно підтримуються наступні:
 
 * [Kubernetes Go client library](https://github.com/kubernetes/client-go/)
 * [Kubernetes Python client library](https://github.com/kubernetes-client/python)
@@ -41,14 +40,14 @@ no_list: true
 
 * [kubectl](/docs/reference/kubectl/) — Основний інструмент командного рядка для виконання команд та управління кластерами Kubernetes.
   * [JSONPath](/docs/reference/kubectl/jsonpath/) — Посібник з синтаксису використання виразів [JSONPath](https://goessner.net/articles/JsonPath/) з kubectl.
-* [kubeadm](/docs/reference/setup-tools/kubeadm/) — Інструмент командного рядка для легкого впровадження роботи з захищеним кластером Kubernetes.
+* [kubeadm](/docs/reference/setup-tools/kubeadm/) — Інструмент командного рядка для легкого налаштування захищеного кластера Kubernetes.
 
 ## Компоненти {#components}
 
-* [kubelet](/docs/reference/command-line-tools-reference/kubelet/) — Основний агент, який працює на кожному вузлі. Kubelet отримує набір PodSpecs і переконується, що описані контейнери працюють і є функціональними.
+* [kubelet](/docs/reference/command-line-tools-reference/kubelet/) — Основний агент, який працює на кожному вузлі. Kubelet отримує набір PodSpecs і переконується, що описані контейнери працюють і є справними.
 * [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/) — REST API, що перевіряє та налаштовує дані для обʼєктів API, таких як Podʼи, Serviceʼи, контролери реплікацій.
-* [kube-controller-manager](/docs/reference/command-line-tools-reference/kube-controller-manager/) — Демон, який вбудовує основні процеси управління, які постачаються з Kubernetes.
-* [kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) — Може виконувати просте перенаправлення потоку TCP/UDP або перенаправляти потік TCP/UDP методом "round-robin" через набір backend-ів.
+* [kube-controller-manager](/docs/reference/command-line-tools-reference/kube-controller-manager/) — Демон, який містить основні процеси управління, які постачаються з Kubernetes.
+* [kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) — Може виконувати просте перенаправлення потоку TCP/UDP або перенаправляти потік TCP/UDP методом "round-robin" через набір бекендів.
 * [kube-scheduler](/docs/reference/command-line-tools-reference/kube-scheduler/) — Планувальник, який керує доступністю, продуктивністю та місткістю.
 
   * [Політики планування](/docs/reference/scheduling/policies)
@@ -96,7 +95,7 @@ no_list: true
 
 ## Документи проєктування {#design-docs}
 
-Архів документів проєктування для функціонала Kubernetes. Ви можете розпочати з
+Архів документів проєктування функціонала Kubernetes. Ви можете розпочати з
 
 * [Архітектура Kubernetes](https://git.k8s.io/design-proposals-archive/architecture/architecture.md) та
 * [Огляд дизайну Kubernetes](https://git.k8s.io/design-proposals-archive).

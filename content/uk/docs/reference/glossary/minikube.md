@@ -11,6 +11,7 @@ tags:
 - fundamental
 - tool
 ---
+
 Інструмент для локального запуску Kubernetes.
 
 <!--more-->

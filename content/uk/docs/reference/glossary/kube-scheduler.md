@@ -10,6 +10,7 @@ aka:
 tags:
 - architecture
 ---
+
 Компонент панелі управління, що відстежує створені {{< glossary_tooltip term_id="pod" text="Podʼи" >}}, які ще не розподілені по {{< glossary_tooltip term_id="node" text="вузлах">}}, і обирає вузол, на якому вони працюватимуть.
 
 <!--more-->
