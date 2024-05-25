@@ -386,5 +386,5 @@ Serviceʼи `Redis`, які ви створили, доступні тільки
 
 * Пройдіть інтерактивні навчальні посібники [Основи Kubernetes](/docs/tutorials/kubernetes-basics/) 
 * Використовуйте Kubernetes для створення блогу з використанням [постійних томів для MySQL і WordPress](/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#visit-your-new-wordpress-blog)
-* Дізнайтеся більше про [зʼєднання з застосунками за допомогою сервісів](/docs/tutorials/services/connect-applications-service/)
+* Дізнайтеся більше про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/)
 * Дізнайтеся більше про [ефективне використання міток](/docs/concepts/overview/working-with-objects/labels/#using-labels-effectively)

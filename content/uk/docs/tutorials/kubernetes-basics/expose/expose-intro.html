@@ -40,7 +40,7 @@ description: |-
                     <li><i>LoadBalancer</i> — створює зовнішній балансувальник навантаження в поточному хмарному середовищі (якщо підтримується) та призначає фіксовану зовнішню IP-адресу для Service. Є надмножиною відносно NodePort.</li>
                     <li><i>ExternalName</i> — звʼязує Service з вмістом поля <code>externalName</code> (наприклад, <code>foo.bar.example.com</code>), повертаючи запис <code>CNAME</code> із його значенням. Не встановлюється жодного проксі. Цей тип вимагає v1.7 або вище <code>kube-dns</code> або CoreDNS версії 0.0.8 або вище.</li>
                 </ul>
-                <p>Додаткову інформацію про різновиди Service можна знайти у посібнику <a href="/uk/docs/tutorials/services/source-ip/">Використання IP-адреси джерела</a>. Дивіться також <a href="/uk/docs/tutorials/services/connect-applications-service/">Підключення застосунків до Service</a>.</p>
+                <p>Додаткову інформацію про різновиди Service можна знайти у посібнику <a href="/uk/docs/tutorials/services/source-ip/">Використання IP-адреси джерела</a>. Дивіться також <a href="/uk/docs/tutorials/services/connect-applications-service/">Підключення застосунків за допомогою Service</a>.</p>
                 <p>Крім того, слід зауважити, що існують випадки використання Service, при яких не визначається <code>selector</code> у специфікації. Service, створений без <code>selector</code>, також не створить відповідний обʼєкт <i>Endpoints</i>. Це дозволяє користувачам вручну відкривати доступ Service на конкретні точки доступу. Ще одна можливість, чому може бути відсутній селектор — використання виключно <code>type: ExternalName</code>.</p>
             </div>
 

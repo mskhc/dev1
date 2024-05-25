@@ -132,4 +132,4 @@ kubectl delete services example-service
 
 ## {{% heading "whatsnext" %}}
 
-Ознайомтесь з посібником [Підключення застосунків до Service](/docs/tutorials/services/connect-applications-service/).
+Ознайомтесь з посібником [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/).

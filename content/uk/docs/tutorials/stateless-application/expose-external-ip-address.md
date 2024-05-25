@@ -152,4 +152,4 @@ kubectl delete deployment hello-world
 
 ## {{% heading "whatsnext" %}}
 
-Дізнайтеся більше про [зʼєднання з застосунками за допомогою сервісів](/docs/tutorials/services/connect-applications-service/).
+Дізнайтеся більше про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/).

@@ -741,7 +741,7 @@ Kubernetes не керує виділенням `externalIPs`; це відпов
 
 Дізнайтеся більше про Сервіси та те, як вони вписуються в Kubernetes:
 
-* Дізнайтесь про [Підключення Застосунків за допомогою Сервісів](/docs/tutorials/services/connect-applications-service/) уроку.
+* Дізнайтесь про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/) уроку.
 * Прочитайте про [Ingress](/docs/concepts/services-networking/ingress/), який експонує маршрути HTTP та HTTPS ззовні кластера до Сервісів всередині вашого кластера.
 * Прочитайте про [Gateway](/docs/concepts/services-networking/gateway/), розширення для Kubernetes, яке надає більше гнучкості, ніж Ingress.
 
