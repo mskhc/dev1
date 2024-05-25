@@ -71,7 +71,7 @@ minikube dashboard
 minikube dashboard --url
 ```
 
-Тепер поверніться до терміналу, де ви запустили `minikube start`.
+Тепер поверніться до термінала, де ви запустили `minikube start`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -81,7 +81,7 @@ minikube dashboard --url
 [*Pod*](/docs/concepts/workloads/pods/) в Kubernetes — це група з одного або більше контейнерів, які повʼязуються один з одним для керування та використання мережевих ресурсів. Pod в цьому посібнику містить тільки один контейнер. Kubernetes [*Deployment*](/docs/concepts/workloads/controllers/deployment/) перевіряє життєздатність вашого Podʼу та, якщо він виходить з ладу, перезапускає його. Deployment є рекомендованим способом створення та масштабування Podʼів.
 
 1. Скористайтесь командою `kubectl create` для створення Deployment, що буде керувати Podʼом. Pod виконує контейнер, який міститься в образі Docker.
-  
+
    ```shell
    # Запустіть тестовий образ контейнера, який містить вебсервер
    kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
@@ -94,11 +94,13 @@ minikube dashboard --url
   ```
 
   Ви маєте отримати вивід, подібний до такого:
-  
+
   ```output
   NAME         READY   UP-TO-DATE   AVAILABLE   AGE
   hello-node   1/1     1            1           1m
   ```
+
+  (Зачекайте деякий час, поки Pod стане доступним. Якщо ви бачите "0/1", спробуйте ще раз через кілька секунд.)
 
 1. Перевірте, чи створено Pod.
 
@@ -107,7 +109,7 @@ minikube dashboard --url
   ```
 
   Ви маєте отримати вивід, подібний до такого:
-  
+
   ```output
   NAME                          READY   STATUS    RESTARTS   AGE
   hello-node--5f76cf6ccf-br9b5  1/1     Running   0          1m
@@ -180,11 +182,11 @@ minikube dashboard --url
 
   Це відкриє вікно вебоглядача, що показує відповідь застосунку.
 
-## Увімкнення додатків {#enable-addons}
+## Увімкнення надбудов {#enable-addons}
 
-Інструменти minikube містять набір вбудованих {{< glossary_tooltip text="додатків" term_id="addons" >}}, які можна увімкнути, вимкнути та відкрити в локальному оточені Kubernetes.
+Інструменти minikube містять набір вбудованих {{< glossary_tooltip text="надбудов" term_id="addons" >}}, які можна увімкнути, вимкнути та відкрити в локальному оточені Kubernetes.
 
-1. Перегляньте список доступних додатків:
+1. Перегляньте список доступних надбудов:
 
   ```shell
   minikube addons list
@@ -212,7 +214,7 @@ minikube dashboard --url
   storage-provisioner-gluster: disabled
   ```
 
-1. Увімкніть додаток, наприклад, `metrics-server`:
+1. Увімкніть надбудову, наприклад, `metrics-server`:
 
   ```shell
   minikube addons enable metrics-server
@@ -266,7 +268,7 @@ minikube dashboard --url
   hello-node-ccf4b9788-4jn97   1m           6Mi             
   ```
 
-  Якщо ви бачете наступне повідомлення, почекайте та спробуйте ще раз:
+  Якщо ви бачите наступне повідомлення, почекайте та спробуйте ще раз:
 
   ```output
   error: Metrics API not available

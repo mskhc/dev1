@@ -125,7 +125,7 @@ weight: 10
    ```shell
    sudo apt-get update
    # apt-transport-https може бути макетним пакетом; якщо так, ви можете пропустити цей пакет
-   sudo apt-get install -y apt-transport-https ca-certificates curl
+   sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
    ```
 
 2. Завантажте публічний ключ підпису для репозиторіїв пакунків Kubernetes. Той самий ключ підпису використовується для всіх репозиторіїв, тому ви можете проігнорувати версію в URL:

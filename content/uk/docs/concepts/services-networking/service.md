@@ -252,6 +252,8 @@ Kubernetes обмежує кількість endpointʼів, які можуть
 | Протокол | Опис        |
 |----------|-------------|
 | `kubernetes.io/h2c` | HTTP/2 поверх чіткого тексту, як описано в [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540) |
+| `kubernetes.io/ws`  | WebSocket через текст, як описано у [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455) |
+| `kubernetes.io/wss` | WebSocket через TLS, як описано у [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455) |
 
 ### Сервіси з кількома портами {#multi-port-services}
 
