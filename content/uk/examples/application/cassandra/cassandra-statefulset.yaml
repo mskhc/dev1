@@ -72,15 +72,15 @@ spec:
             - /ready-probe.sh
           initialDelaySeconds: 15
           timeoutSeconds: 5
-        # These volume mounts are persistent. They are like inline claims,
-        # but not exactly because the names need to match exactly one of
-        # the stateful pod volumes.
+        # Ці точки монтування томів є постійними. Вони подібни до вбудованих заявок,
+        # але не зовсіс, тому що імена повинні точно збігатись з одним з томів
+        # томів Podʼів stateful.
         volumeMounts:
         - name: cassandra-data
           mountPath: /cassandra_data
-  # These are converted to volume claims by the controller
-  # and mounted at the paths mentioned above.
-  # do not use these in production until ssd GCEPersistentDisk or other ssd pd
+  # Це перетворюється у заявки на томи контролером
+  # та монтується в шлях, зазначений вище.
+  # не використовуйте це в операційній діяльності, допоки тип ssd є GCEPersistentDisk чи інший ssd pd
   volumeClaimTemplates:
   - metadata:
       name: cassandra-data
