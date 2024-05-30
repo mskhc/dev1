@@ -7,16 +7,16 @@ slug: introducing-jobset
 
 **Authors**: Daniel Vega-Myhre (Google), Abdullah Gharaibeh (Google), Kevin Hannon (Red Hat)
 
-In this article, we introduce [JobSet](https://jobset.sigs.k8s.io/), an open source API for representing distributed jobs. The goal of JobSet is to provide a stable API for running/building APIs with AI/ML and HPC use cases in mind.
+In this article, we introduce [JobSet](https://jobset.sigs.k8s.io/), an open source API for representing distributed jobs. The goal of JobSet is to provide a unified API for distributed ML training and HPC workloads on Kubernetes.
 
 ## Why JobSet?
 
-The Kubernetes community’s recent enhancements to the batch ecosystem on Kubernetes attracted ML engineers
+The Kubernetes community’s recent enhancements to the batch ecosystem on Kubernetes has attracted ML engineers
 who have found it to be a natural fit for the requirements of running distributed training workloads. 
 
 Large ML models (particularly LLMs) which cannot fit into the memory of the GPU or TPU chips on a single
 host are often distributed across tens of thousands of accelerator chips, which in turn may span thousands
-of hosts. 
+of hosts.
 
 As such, the model training code is often containerized and executed simultaneously on all these hosts,
 performing distributed computations which often shard both the model parameters and/or the training
@@ -110,7 +110,7 @@ Exclusive placement per topology domain
 domain, typically an accelerator island like a rack. For example, if the JobSet creates
 two child jobs, then this feature will enforce that the pods of each child job will be
 co-located on the same island, and that only one child job is allowed to schedule per island.
-This useful for scenarios where, for example, we want to use a data parallel distributed
+This is useful for scenarios where we want to use a distributed data parallel (DDP)
 training strategy to train a model using multiple islands of compute resources (GPU racks
 or TPU slices), running 1 model replica in each accelerator island, ensuring the forward
 and backward passes themselves occur within a single model replica occurs over the high
@@ -124,126 +124,64 @@ partial scheduling and deadlocks, enable multi-tenancy, and more.
 
 ## Example use case
 
-One can install JobSet as follows:
+### Distributed ML training on multiple TPU slices with Jax
 
+The following example is a JobSet spec for running a TPU Multislice workload on
+4 TPU v5e [slices](https://cloud.google.com/tpu/docs/system-architecture-tpu-vm#slices). To learn 
+more about TPU concepts and terminology, please refer to these [docs](https://cloud.google.com/tpu/docs/system-architecture-tpu-vm).
 
-```bash
-VERSION=v0.4.0
-kubectl apply --server-side -f https://github.com/kubernetes-sigs/jobset/releases/download/$VERSION/manifests.yaml
-```
+This example uses [Jax](https://jax.readthedocs.io/en/latest/quickstart.html), an ML framework with native support for Just-In-Time (JIT)
+compilation targeting TPU chips via [OpenXLA](https://github.com/openxla). However, you can also use 
+[PyTorch/XLA](https://pytorch.org/xla/release/2.3/index.html) to do ML training on TPUs.
 
-Pytorch training
-
-The following example demonstrates how to run distributed training using PyTorch. JobSet creates
-a Job with 4 pods and a headless service defined as pytorch. This allows for communication between
-the replicas. JobSet streamlines the creation of the headless service and allows for a single CRD
-for representing these jobs.
+This example makes use of several JobSet features (both explicitly and implicitly) to support the unique scheduling requirements of
+TPU multislice training out-of-the-box with very little configuration required by the user.
 
 ```yaml
-# Distributed training of a traditional CNN model to do image classification 
-# using the MNIST dataset and PyTorch.
+# Run a simple Jax workload on 
 apiVersion: jobset.x-k8s.io/v1alpha2
 kind: JobSet
 metadata:
-  name: pytorch
+  name: multislice
+  annotations:
+    # Give each child Job exclusive usage of a TPU slice 
+    alpha.jobset.sigs.k8s.io/exclusive-topology: cloud.google.com/gke-nodepool
 spec:
+  failurePolicy:
+    maxRestarts: 3
   replicatedJobs:
   - name: workers
+    replicas: 4 # Set to number of TPU slices
     template:
       spec:
-        parallelism: 4
-        completions: 4
+        parallelism: 2 # Set to number of VMs per TPU slice
+        completions: 2 # Set to number of VMs per TPU slice
         backoffLimit: 0
         template:
           spec:
+            hostNetwork: true
+            dnsPolicy: ClusterFirstWithHostNet
+            nodeSelector:
+              cloud.google.com/gke-tpu-accelerator: tpu-v5-lite-podslice
+              cloud.google.com/gke-tpu-topology: 2x4
             containers:
-            - name: pytorch
-              image: gcr.io/k8s-staging-jobset/pytorch-mnist:latest
+            - name: jax-tpu
+              image: python:3.8
               ports:
-              - containerPort: 3389
-              env:
-              - name: MASTER_ADDR
-                value: "pytorch-workers-0-0.pytorch"
-              - name: MASTER_PORT
-                value: "3389"
-              - name: RANK
-                valueFrom:
-                  fieldRef:
-                    fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
-              # Force python to not buffer output and write directly to stdout, so we can view training logs via `kubectl logs`.
-              - name: PYTHONUNBUFFERED
-                value: "0"
+              - containerPort: 8471
+              - containerPort: 8080
+              securityContext:
+                privileged: true
               command:
               - bash
-              - -xc
+              - -c
               - |
-                torchrun --rdzv_id=123 --nnodes=4 --nproc_per_node=1 --master_addr=$MASTER_ADDR --master_port=$MASTER_PORT --node_rank=$RANK mnist.py --epochs=1 --log-interval=1 
-```
-
-Leader-Worker
-
-A popular paradigm for distributed workloads is the leader-worker design. Leader-worker entails
-having a leader pod, with a different template than workers, and worker pods. The leader must be
-started before the workers are started and if all the workers finish we can consider the workload
-complete and the overallworkload can be considered successful.
-
-1) Different pod templates for workers and leaders
-2) Success policies on the workers
-3) Startup policies
-
-Example workload
-
-```yaml
-apiVersion: jobset.x-k8s.io/v1alpha2
-kind: JobSet
-metadata:
-  name: success-policy
-spec:
-# We want to start our JobSet in order with leader starting first and then workers starting
-  startupPolicy:
-    startupPolicyOrder: InOrder
-# We want to declare our JobSet successful if workers finish.
-# If workers finish we should clean up the remaining replicatedJobs.
-  successPolicy:
-    operator: All
-    targetReplicatedJobs:
-    - workers
-  replicatedJobs:
-  - name: leader
-    replicas: 1
-    template:
-      spec:
-        # Set backoff limit to 0 so job will immediately fail if any pod fails.
-        backoffLimit: 0 
-        completions: 1
-        parallelism: 1
-        template:
-          spec:
-            containers:
-            - name: leader
-              image: bash:latest
-              command:
-              - bash
-              - -xc
-              - |
-                sleep 10000
-  - name: workers
-    replicas: 1
-    template:
-      spec:
-        backoffLimit: 0 
-        completions: 2
-        parallelism: 2
-        template:
-          spec:
-            containers:
-            - name: worker
-              image: bash:latest
-              command:
-              - bash
-              - -xc
-              - |
-                sleep 10
+                pip install "jax[tpu]" -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
+                python -c 'import jax; print("Global device count:", jax.device_count())'
+                sleep 60
+              resources:
+                limits:
+                  google.com/tpu: 4
 ```
 
 ## Future work and getting involved
