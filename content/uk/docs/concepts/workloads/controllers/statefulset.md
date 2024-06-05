@@ -189,7 +189,7 @@ Podʼи StatefulSet мають унікальну ідентичність, як
 
 Коли StatefulSet {{<glossary_tooltip text="контролер" term_id="controller">}} створює Pod, він додає мітку `statefulset.kubernetes.io/pod-name`, яка дорівнює назві Podʼа. Ця мітка дозволяє прикріплювати Service до конкретного Podʼа в StatefulSet.
 
-### Мітка індексу Podʼа
+### Мітка індексу Podʼа {#pod-index-label}
 
 {{< feature-state for_k8s_version="v1.28" state="beta" >}}
 
