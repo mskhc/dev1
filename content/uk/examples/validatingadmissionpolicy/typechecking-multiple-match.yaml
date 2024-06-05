@@ -10,6 +10,6 @@ spec:
       operations:  ["CREATE", "UPDATE"]
       resources:   ["deployments","replicasets"]
   validations:
-  - expression: "object.replicas > 1" # should be "object.spec.replicas > 1"
+  - expression: "object.replicas > 1" # має бути "object.spec.replicas > 1"
     message: "must be replicated"
     reason: Invalid

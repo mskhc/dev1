@@ -13,7 +13,7 @@ metadata:
       is nothing to restore for the EndpointSlice API.
   labels:
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
-  name: custom:aggregate-to-edit:endpoints # you can change this if you wish
+  name: custom:aggregate-to-edit:endpoints # виможете змінити це поле, за бажанням
 rules:
   - apiGroups: [""]
     resources: ["endpoints"]
