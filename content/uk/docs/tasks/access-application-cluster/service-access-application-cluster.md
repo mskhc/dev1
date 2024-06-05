@@ -109,7 +109,9 @@ weight: 60
    де `<public-node-ip>` — це публічна IP-адреса вашого вузла, а `<node-port>` — це значення NodePort для вашого Service. Відповідь на успішний запит буде повідомленням з привітанням:
 
    ```none
-   Hello Kubernetes!
+   Hello, world!
+   Version: 2.0.0
+   Hostname: hello-world-cdd4458f4-m47c8
    ```
 
 ## Використання конфігураційного файлу Service {#using-a-service-configuration-file}

@@ -47,7 +47,7 @@ kubectl get pods dnsutils
 ```
 
 ```none
-NAME      READY     STATUS    RESTARTS   AGE
+NAME       READY     STATUS    RESTARTS   AGE
 dnsutils   1/1       Running   0          <some-time>
 ```
 

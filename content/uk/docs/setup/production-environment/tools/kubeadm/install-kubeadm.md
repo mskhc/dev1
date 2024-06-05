@@ -24,7 +24,7 @@ card:
 * Повноцінне мережеве зʼєднання між усіма машинами в кластері (публічна чи приватна мережа підходить).
 * Унікальні імена хостів, MAC-адреси та product_uuid для кожного вузла. Див. [тут](#verify-mac-address) для отримання докладнішої інформації.
 * Відкриті певні порти на ваших машинах. Див. [тут](#check-required-ports) для отримання докладнішої інформації.
-* Конфігурація swap. Починаючи з версії v1.22, обрана поведінка kubelet полягає в тому, щоб відмовлятися запускатися, якщо на вузлі виявлено swap. Swap підтримується починаючи з версії v1.22. З версії v1.28 підтримується swap лише для cgroup v2; feature gate NodeSwap в kubelet є бета-версією, типово відключений.
+* Конфігурація swap. Стандартно kubelet не запускався, якщо на вузлі було виявлено swap. Докладніші відомості наведено у статті [Керування swap](/docs/concepts/architecture/nodes/#swap-memory).
   * Ви **ПОВИННІ** вимкнути swap, якщо kubelet не налаштований на використання swap. Наприклад, `sudo swapoff -a` вимкне обмін тимчасово. Щоб зробити ці зміни постійними після перезавантаження, переконайтеся, що swap вимкнено у файлах конфігурації, таких як `/etc/fstab`, `systemd.swap`, залежно від того, як він був налаштований у вашій системі.
 
 {{< note >}}
@@ -248,7 +248,7 @@ sudo mkdir -p "$DOWNLOAD_DIR"
 Встановіть crictl (необхідно для kubeadm / Kubelet Container Runtime Interface (CRI)):
 
 ```bash
-CRICTL_VERSION="v1.28.0"
+CRICTL_VERSION="v1.30.0"
 ARCH="amd64"
 curl -L "https://github.com/kubernetes-sigs/cri-tools/releases/download/${CRICTL_VERSION}/crictl-${CRICTL_VERSION}-linux-${ARCH}.tar.gz" | sudo tar -C $DOWNLOAD_DIR -xz
 ```

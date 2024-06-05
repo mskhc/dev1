@@ -77,9 +77,8 @@ weight: 90
 При визначенні Service ви можете конфігурувати його як двостековий за власним бажанням. Щоб вказати потрібну поведінку, ви встановлюєте в поле `.spec.ipFamilyPolicy` одне з наступних значень:
 
 * `SingleStack`: Service з одним стеком. Панель управління виділяє IP кластера для Service, використовуючи перший налаштований діапазон IP кластера для Service.
-* `PreferDualStack`:
-  * Виділяє кластерні IP-адреси IPv4 та IPv6 для Service.
-* `RequireDualStack`: Виділяє `.spec.ClusterIPs` Service з діапазонів адрес IPv4 та IPv6.
+* `PreferDualStack`: Виділяє IP-адреси кластерів IPv4 та IPv6 для Service, коли ввімкнено подвійний стек. Якщо подвійний стек не ввімкнено або не підтримується, він повертається до одностекового режиму.
+* `RequireDualStack`: Виділяє IP-адреси Service `.spec.clusterIP` з діапазонів адрес IPv4 та IPv6, якщо увімкнено подвійний стек. Якщо подвійний стек не ввімкнено або не підтримується, створення обʼєкта Service API завершиться невдачею.
   * Вибирає `.spec.ClusterIP` зі списку `.spec.ClusterIPs` на основі сімейства адрес першого елемента у масиві `.spec.ipFamilies`.
 
 Якщо ви хочете визначити, яке сімейство IP використовувати для одностекової конфігурації або визначити порядок IP для двостекової, ви можете вибрати сімейства адрес, встановивши необовʼязкове поле `.spec.ipFamilies` в Service.
@@ -93,8 +92,8 @@ weight: 90
 
 * `["IPv4"]`
 * `["IPv6"]`
-* `["IPv4","IPv6"]` (двостекова)
-* `["IPv6","IPv4"]` (двостекова)
+* `["IPv4","IPv6"]` (два стеки)
+* `["IPv6","IPv4"]` (два стеки)
 
 Перше сімейство, яке ви перераховуєте, використовується для легасі-поля `.spec.ClusterIP`.
 
@@ -102,17 +101,17 @@ weight: 90
 
 Ці приклади демонструють поведінку різних сценаріїв конфігурації двостекового Service.
 
-#### Параметри подвійного стеку в нових Service {#dual-stack-options-on-new-services}
+#### Параметри подвійного стека в нових Service {#dual-stack-options-on-new-services}
 
 1. Специфікація цього Service явно не визначає `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service, Kubernetes виділяє кластерний IP для Service з першого налаштованого `service-cluster-ip-range` та встановлює значення `.spec.ipFamilyPolicy` на `SingleStack`. ([Service без селекторів](/docs/concepts/services-networking/service/#services-without-selectors) та [headless Services](/docs/concepts/services-networking/service/#headless-services) із селекторами будуть працювати так само.)
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
-2. Специфікація цього Service явно визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service в двостековому кластері, Kubernetes призначає як IPv4, так і IPv6 адреси для Service. Панель управління оновлює `.spec` для Service, щоб зафіксувати адреси IP. Поле `.spec.ClusterIPs` є основним полем і містить обидві призначені адреси IP; `.spec.ClusterIP` є вторинним полем зі значенням, обчисленим з `.spec.ClusterIPs`.
+2. Специфікація цього Service явно визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service у двостековому кластері, Kubernetes призначає як IPv4, так і IPv6 адреси для Service. Панель управління оновлює `.spec` для Service, щоб зафіксувати адреси IP. Поле `.spec.ClusterIPs` є основним полем і містить обидві призначені адреси IP; `.spec.ClusterIP` є вторинним полем зі значенням, обчисленим з `.spec.ClusterIPs`.
 
    * Для поля `.spec.ClusterIP` панель управління записує IP-адресу, яка є з того ж самого сімейства адрес, що й перший діапазон кластерних IP Service.
-   * На одностековому кластері поля `.spec.ClusterIPs` та `.spec.ClusterIP` містять лише одну адресу.
-   * На кластері з увімкненими двома стеками вказання `RequireDualStack` в `.spec.ipFamilyPolicy` працює так само як і `PreferDualStack`.
+   * У одностековому кластері поля `.spec.ClusterIPs` та `.spec.ClusterIP` містять лише одну адресу.
+   * У кластері з увімкненими двома стеками вказання `RequireDualStack` в `.spec.ipFamilyPolicy` працює так само як і `PreferDualStack`.
 
    {{% code_sample file="service/networking/dual-stack-preferred-svc.yaml" %}}
 

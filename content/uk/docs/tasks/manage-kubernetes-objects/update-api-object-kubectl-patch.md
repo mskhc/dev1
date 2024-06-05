@@ -210,7 +210,7 @@ spec:
     spec:
       containers:
       - name: patch-demo-ctr-3
-        image: gcr.io/google-samples/node-hello:1.0
+        image: gcr.io/google-samples/hello-app:2.0
 ```
 
 У вашій команді патча встановіть `type` на `merge`:
@@ -230,7 +230,7 @@ kubectl get deployment patch-demo --output yaml
 ```yaml
 spec:
   containers:
-  - image: gcr.io/google-samples/node-hello:1.0
+  - image: gcr.io/google-samples/hello-app:2.0
     ...
     name: patch-demo-ctr-3
 ```

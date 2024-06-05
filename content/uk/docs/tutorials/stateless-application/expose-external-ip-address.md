@@ -133,7 +133,9 @@ weight: 10
    Відповідь на успішний запит — привітальне повідомлення:
 
    ```shell
-   Hello Kubernetes!
+   Hello, world!
+   Version: 2.0.0
+   Hostname: 0bd46b45f32f
    ```
 
 ## {{% heading "cleanup" %}}

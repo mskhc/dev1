@@ -15,7 +15,7 @@ weight: 40
 Якщо у вас ще немає застосунку, що працює у вашому кластері, запустіть застосунок Hello world, скориставшись:
 
 ```shell
-kubectl create deployment node-hello --image=gcr.io/google-samples/node-hello:1.0 --port=8080
+kubectl create deployment hello-app --image=gcr.io/google-samples/hello-app:2.0 --port=8080
 ```
 
 <!-- steps -->

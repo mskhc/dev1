@@ -94,8 +94,8 @@ kubectl get statefulset web
 ```
 
 ```none
-NAME      DESIRED   CURRENT   AGE
-web       2         1         20s
+NAME   READY   AGE
+web    2/2     37s
 ```
 
 ### Упорядковане створення Podʼів {#ordered-pod-creation}
@@ -518,7 +518,7 @@ www-web-4   Bound     pvc-e11bb5f8-b508-11e6-932f-42010a800002   1Gi        RWO 
 В одному вікні термінала відредагуйте StatefulSet `web`, щоб знову змінити образ контейнера:
 
 ```shell
-kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"gcr.io/google_containers/nginx-slim:0.8"}]'
+kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"registry.k8s.io/nginx-slim:0.8"}]'
 ```
 
 ```none

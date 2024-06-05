@@ -615,11 +615,7 @@ that the Pod is already using, the Pod continues to run.
 
 Використовується для: Node
 
-Kubernetes automatically enables the `ServiceNodeExclusion` feature gate on
-the clusters it creates. With this feature gate enabled on a cluster,
-you can add labels to particular worker nodes to exclude them from the list of backend servers.
-The following command can be used to exclude a worker node from the list of backend servers in a
-backend set:
+Ви можете додати мітки до певних робочих вузлів, щоб виключити їх зі списку серверів бекенда, які використовуються зовнішніми балансувальниками навантаження. Наступна команда може бути використана для виключення робочого вузла зі списку серверів бекенда у наборі серверів бекенда:
 
 ```shell
 kubectl label nodes <node-name> node.kubernetes.io/exclude-from-external-load-balancers=true
