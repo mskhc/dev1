@@ -1261,12 +1261,18 @@ scheduling pods:
   webhooks' resources from being inspected by later webhooks.  This ensures that the "earliest"
   webhook can start, which in turn allows the next.
 
+  Where protection for the webhook and/or its namespace is desired, [Validating Admission Policies](/docs/reference/access-authn-authz/validating-admission-policy/)
+  provide many protection capabilities without introducing dependency cycles.
+
 * Webhooks can intercept rsesources used by critical cluster infrastructure, such as coredns,
   the active CNI and, storage plugins.  These resources may be required to schedule the webhook pods
   on the cluster, creating a deadlock if the webhook is configured to intercept them.
 
-  It is recommended to exclude cluster infratructure namespaces from webhooks, including kube-system,
+  It is recommended to exclude cluster infrastructure namespaces from webhooks, including kube-system,
   any namespaces used by CNI plugins, etc.
+
+  Where protection for the infrastructure components is desired, [Validating Admission Policies](/docs/reference/access-authn-authz/validating-admission-policy/)
+  provide many protection capabilities without introducing dependency cycles.
 
 ### Side effects
 
