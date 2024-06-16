@@ -62,7 +62,7 @@ PodSpec — це опис Pod.
 
 - **imagePullSecrets** ([]<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
 
-  ImagePullSecrets — це необовʼязковий список посилань на Secretʼи у тому ж просторі імен, які використовуються для отримання будь-яких образів, що використовуються у цьому PodSpec. Якщо вказано, ці Secretʼи будуть передані індивідуальним реалізаціям отримувачів для їх використання. Додаткова інформація: [https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod](/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod)
+  ImagePullSecrets — це необовʼязково список посилань на Secretʼи у тому ж просторі імен, які використовуються для отримання будь-яких образів, що використовуються у цьому PodSpec. Якщо вказано, ці Secretʼи будуть передані індивідуальним реалізаціям отримувачів для їх використання. Додаткова інформація: [https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod](/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod)
 
 - **enableServiceLinks** (boolean)
 
@@ -200,7 +200,7 @@ PodSpec — це опис Pod.
   <a name="TopologySpreadConstraint"></a>
   *TopologySpreadConstraint визначає, як розподіляти відповідні Podʼи серед заданої топології.*
 
-  - **topologySpreadConstraints.maxSkew** (int32), обовʼязковий
+  - **topologySpreadConstraints.maxSkew** (int32), обовʼязково
 
     MaxSkew описує ступінь нерівномірного розподілу Podʼів. Коли `whenUnsatisfiable=DoNotSchedule`, це максимальна допустима різниця між кількістю відповідних Podʼів у цільовій топології та глобальним мінімумом. Глобальний мінімум — це мінімальна кількість відповідних Podʼів у відповідному домені або нуль, якщо кількість відповідних доменів менша за MinDomains. Наприклад, у кластері з 3 зонами MaxSkew встановлено на 1, і Podʼи з однаковим labelSelector розподіляються як 2/2/1: У цьому випадку глобальний мінімум дорівнює 1.
 
@@ -229,11 +229,11 @@ PodSpec — це опис Pod.
     - якщо MaxSkew дорівнює 1, новий Pod може бути розміщений тільки в zone3, щоб стати 2/2/2; розміщення його в zone1 (zone2) призведе до порушення MaxSkew (1) через ActualSkew (3-1) в zone1 (zone2).
     - якщо MaxSkew дорівнює 2, новий Pod може бути розміщений у будь-якій зоні. Коли `whenUnsatisfiable=ScheduleAnyway`, це використовується для надання більшої переваги топологіям, які задовольняють цю умову. Це обовʼязкове поле. Стандартне значення — 1; 0 не допускається.
 
-  - **topologySpreadConstraints.topologyKey** (string), обовʼязковий
+  - **topologySpreadConstraints.topologyKey** (string), обовʼязково
 
     TopologyKey — це ключ міток вузлів. Вузли, які мають мітку з цим ключем та ідентичними значеннями, вважаються такими, що належать до однієї топології. Ми розглядаємо кожен \<key, value> як "кошик" і намагаємося розмістити збалансовану кількість Podʼів у кожному кошику. Ми визначаємо домен як конкретний екземпляр топології. Також ми визначаємо відповідний домен як домен, чиї вузли відповідають вимогам nodeAffinityPolicy та nodeTaintsPolicy. Наприклад, якщо TopologyKey — це "kubernetes.io/hostname", кожен вузол є доменом цієї топології. І, якщо TopologyKey — це "topology.kubernetes.io/zone", кожна зона є доменом цієї топології. Це обовʼязкове поле.
 
-  - **topologySpreadConstraints.whenUnsatisfiable** (string), обовʼязковий
+  - **topologySpreadConstraints.whenUnsatisfiable** (string), обовʼязково
 
     WhenUnsatisfiable вказує, як діяти з Podʼом, якщо він не відповідає умовам розподілу.
 
@@ -802,7 +802,7 @@ PodSpec — це опис Pod.
 
   - **envFrom.prefix** (string)
 
-    Необовʼязковий ідентифікатор для вставлення перед кожним ключем в ConfigMap. Повинен бути C_IDENTIFIER.
+    Необовʼязково ідентифікатор для вставлення перед кожним ключем в ConfigMap. Повинен бути C_IDENTIFIER.
 
   - **envFrom.secretRef** (SecretEnvSource)
 
@@ -1236,7 +1236,7 @@ PodSpec — це опис Pod.
 
   - **envFrom.prefix** (string)
 
-    Необовʼязковий ідентифікатор для вставлення перед кожним ключем в ConfigMap. Повинен бути C_IDENTIFIER.
+    Необовʼязково ідентифікатор для вставлення перед кожним ключем в ConfigMap. Повинен бути C_IDENTIFIER.
 
   - **envFrom.secretRef** (SecretEnvSource)
 
@@ -2016,27 +2016,27 @@ PodStatus представляє інформацію про стан Podʼа. �
   <a name="PodCondition"></a>
   *PodCondition містить деталі поточного стану цього Podʼа.*
 
-  - **conditions.status** (string), обовʼязковий
+  - **conditions.status** (string), обовʼязково
 
-    Статус є станом умови. Може бути True, False, Unknown. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
+    Статус стану. Може бути True, False, Unknown. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
 
-  - **conditions.type** (string), обовʼязковий
+  - **conditions.type** (string), обовʼязково
 
-    Тип є типом умови. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
+    Тип є типом стану. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
 
   - **conditions.lastProbeTime** (Time)
 
-    Останній час, коли ми перевіряли умову.
+    Останній час, коли ми перевіряли стан.
 
     <a name="Time"></a>
-    *Time — це обгортка навколо time.Time, яка підтримує правильне перетворення в YAML і JSON. Обгортки надаються для багатьох фабричних методів, які пропонує пакет time.*
+    *Time — це обгортка навколо time.Time, яка підтримує коректне перетворення у YAML та JSON. Для багатьох з функцій, які пропонує пакет time, надаються обгортки.*
 
   - **conditions.lastTransitionTime** (Time)
 
-    Останній час, коли умова перейшла з одного стану в інший.
+    Останній час, коли стан перейшов з одного статусу в інший.
 
     <a name="Time"></a>
-    *Time — це обгортка навколо time.Time, яка підтримує правильне перетворення в YAML і JSON. Обгортки надаються для багатьох фабричних методів, які пропонує пакет time.*
+    *Time — це обгортка навколо time.Time, яка підтримує коректне перетворення у YAML та JSON. Для багатьох з функцій, які пропонує пакет time, надаються обгортки.*
 
   - **conditions.message** (string)
 
@@ -2082,7 +2082,7 @@ PodStatus представляє інформацію про стан Podʼа. �
   <a name="PodResourceClaimStatus"></a>
   *PodResourceClaimStatus зберігається у PodStatus для кожної PodResourceClaim, яка посилається на ResourceClaimTemplate. Він зберігає згенеровану назву для відповідної ResourceClaim.*
 
-  - **resourceClaimStatuses.name** (string), обовʼязковий
+  - **resourceClaimStatuses.name** (string), обовʼязково
 
     Імʼя унікально ідентифікує цю ресурсну заявку всередині Podʼа. Воно має відповідати імені в pod.spec.resourceClaims, що означає, що рядок повинен бути DNS_LABEL.
 
@@ -2100,7 +2100,7 @@ PodList — це список Podʼів.
 
 ---
 
-- **items** ([]<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>), обовʼязковий
+- **items** ([]<a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>), обовʼязково
 
   Список Podʼів. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
 
@@ -2120,7 +2120,7 @@ PodList — це список Podʼів.
 
 ---
 
-### `get` зчитує вказаний Pod {#get-read-the-specified-pod}
+### `get` отримати вказаний Pod {#get-read-the-specified-pod}
 
 #### HTTP Запит {#http-request}
 
@@ -2128,13 +2128,13 @@ GET /api/v1/namespaces/{namespace}/pods/{name}
 
 #### Параметри {#parameters}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   назва Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **pretty** (*у запиті*): string
 
@@ -2146,7 +2146,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}
 
 401: Unauthorized
 
-### `get` зчитує ефемерні контейнери вказаного Podʼа {#get-read-ephemeral-containers-of-the-specified-pod}
+### `get` отримати ефемерні контейнери вказаного Podʼа {#get-read-ephemeral-containers-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-1}
 
@@ -2154,13 +2154,13 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 #### Параметри {#parameters-1}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   назва Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **pretty** (*у запиті*): string
 
@@ -2172,7 +2172,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 401: Unauthorized
 
-### `get` зчитує лог вказаного Podʼа {#get-read-the-log-of-the-specified-pod}
+### `get` отримати лог вказаного Podʼа {#get-read-the-log-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-2}
 
@@ -2180,13 +2180,13 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/log
 
 #### Параметри {#parameters-2}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   назва Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **container** (*у запиті*): string
 
@@ -2230,7 +2230,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/log
 
 401: Unauthorized
 
-### `get` зчитує статус вказаного Podʼа {#get-read-the-status-of-the-specified-pod}
+### `get` отримати статус вказаного Podʼа {#get-read-the-status-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-3}
 
@@ -2238,13 +2238,13 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/status
 
 #### Параметри {#parameters-3}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   назва Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **pretty** (*у запиті*): string
 
@@ -2256,7 +2256,7 @@ GET /api/v1/namespaces/{namespace}/pods/{name}/status
 
 401: Unauthorized
 
-### `list` перелічує або стежить за обʼєктами типу Pod {#list-list-or-watch-objects-of-kind-pod}
+### `list` перелік або перегляд обʼєктів типу Pod {#list-list-or-watch-objects-of-kind-pod}
 
 #### HTTP Запит {#http-request-4}
 
@@ -2264,9 +2264,9 @@ GET /api/v1/namespaces/{namespace}/pods
 
 #### Параметри {#parameters-4}
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **allowWatchBookmarks** (*у запиті*): boolean
 
@@ -2318,7 +2318,7 @@ GET /api/v1/namespaces/{namespace}/pods
 
 401: Unauthorized
 
-### `list` перелічує або стежить за обʼєктами типу Pod {#list-list-or-watch-objects-of-kind-pod-1}
+### `list` перелік або перегляд обʼєктів типу Pod {#list-list-or-watch-objects-of-kind-pod-1}
 
 #### HTTP Запит {#http-request-5}
 
@@ -2376,7 +2376,7 @@ GET /api/v1/pods
 
 401: Unauthorized
 
-### `create` створює Pod {#create-create-pod}
+### `create` створення Podʼа {#create-create-pod}
 
 #### HTTP Запит {#http-request-6}
 
@@ -2384,11 +2384,11 @@ POST /api/v1/namespaces/{namespace}/pods
 
 #### Параметри {#parameters-6}
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязковий
+- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2416,7 +2416,7 @@ POST /api/v1/namespaces/{namespace}/pods
 
 401: Unauthorized
 
-### `update` замінює зазначений Pod {#update-replace-the-specified-pod}
+### `update` заміна вказаного Podʼа {#update-replace-the-specified-pod}
 
 #### HTTP Запит {#http-request-7}
 
@@ -2424,15 +2424,15 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}
 
 #### Параметри {#parameters-7}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязковий
+- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2458,7 +2458,7 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}
 
 401: Unauthorized
 
-### `update` замінює ephemeralcontainers зазначеного Podʼа {#update-replace-the-ephemeralcontainers-of-the-specified-pod}
+### `update` заміна ephemeralcontainers вказаного Podʼа {#update-replace-the-ephemeralcontainers-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-8}
 
@@ -2466,15 +2466,15 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 #### Параметри {#parameters-8}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязковий
+- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2500,7 +2500,7 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 401: Unauthorized
 
-### `update` замінює статус зазначеного Podʼа {#update-replace-the-status-of-the-specified-pod}
+### `update` заміна статусу вказаного Podʼа {#update-replace-the-status-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-9}
 
@@ -2508,15 +2508,15 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/status
 
 #### Параметри {#parameters-9}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязковий
+- **body**: <a href="{{< ref "../workload-resources/pod-v1#Pod" >}}">Pod</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2542,7 +2542,7 @@ PUT /api/v1/namespaces/{namespace}/pods/{name}/status
 
 401: Unauthorized
 
-### `patch` часткове оновлення зазначеного Podʼа {#patch-partially-update-the-specified-pod}
+### `patch` часткове оновлення вказаного Podʼа {#patch-partially-update-the-specified-pod}
 
 #### HTTP Запит {#http-request-10}
 
@@ -2550,15 +2550,15 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}
 
 #### Параметри {#parameters-10}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязковий
+- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2588,7 +2588,7 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}
 
 401: Unauthorized
 
-### `patch` часткове оновлення ephemeralcontainers зазначеного Podʼа {#patch-partially-update-ephemeralcontainers-of-the-specified-pod}
+### `patch` часткове оновлення ephemeralcontainers вказаного Podʼа {#patch-partially-update-ephemeralcontainers-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-11}
 
@@ -2596,15 +2596,15 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 #### Параметри {#parameters-11}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязковий
+- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2634,7 +2634,7 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers
 
 401: Unauthorized
 
-### `patch` часткове оновлення статусу зазначеного Podʼа {#patch-partially-update-the-status-of-the-specified-pod}
+### `patch` часткове оновлення статусу вказаного Podʼа {#patch-partially-update-the-status-of-the-specified-pod}
 
 #### HTTP Запит {#http-request-12}
 
@@ -2642,15 +2642,15 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/status
 
 #### Параметри {#parameters-12}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязковий
+- **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
 - **dryRun** (*у запиті*): string
 
@@ -2680,7 +2680,7 @@ PATCH /api/v1/namespaces/{namespace}/pods/{name}/status
 
 401: Unauthorized
 
-### `delete` видалити Pod {#delete-delete-pod}
+### `delete` видалення Pod {#delete-delete-pod}
 
 #### HTTP Запит {#http-request-13}
 
@@ -2688,13 +2688,13 @@ DELETE /api/v1/namespaces/{namespace}/pods/{name}
 
 #### Параметри {#parameters-13}
 
-- **name** (*у шляху*): string, обовʼязковий
+- **name** (*у шляху*): string, обовʼязково
 
   імʼя Podʼа
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
@@ -2722,7 +2722,7 @@ DELETE /api/v1/namespaces/{namespace}/pods/{name}
 
 401: Unauthorized
 
-### `deletecollection` видалити колекцію Podʼів {#deletecollection-delete-collection-of-pod}
+### `deletecollection` видалення колекції Podʼів {#deletecollection-delete-collection-of-pod}
 
 #### HTTP Запит {#http-request-14}
 
@@ -2730,9 +2730,9 @@ DELETE /api/v1/namespaces/{namespace}/pods
 
 #### Параметри {#parameters-14}
 
-- **namespace** (*у шляху*): string, обовʼязковий
+- **namespace** (*у шляху*): string, обовʼязково
 
-  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">простір імен</a>
+  <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
