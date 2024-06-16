@@ -20,6 +20,21 @@ guide on a cluster with at least two nodes that are not acting as control plane
 nodes. If you do not already have a cluster, you can create one by using
 [minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/).
 
+### Understanding etcdctl and etcdutl
+
+`etcdctl` and `etcdutl` are command-line tools used to interact with etcd clusters, but they serve different purposes:
+
+- `etcdctl`: This is the primary command-line client for interacting with etcd over a
+network. It is used for day-to-day operations such as managing keys and values,
+administering the cluster, checking health, and more.
+
+- `etcdutl`: This is an administration utility designed to operate directly on etcd data
+files, including migrating data between etcd versions, defragmenting the database,
+restoring snapshots, and validating data consistency. For network operations, `etcdctl`
+should be used.
+
+For more information on `etcdutl`, you can refer to the [etcd recovery documentation](https://etcd.io/docs/v3.5/op-guide/recovery/).
+
 <!-- steps -->
 
 ## Prerequisites
@@ -281,17 +296,54 @@ ETCDCTL_API=3 etcdctl --endpoints $ENDPOINT snapshot save snapshot.db
 
 Verify the snapshot:
 
-```shell
-ETCDCTL_API=3 etcdctl --write-out=table snapshot status snapshot.db
-```
+{{< tabs name="etcd_verify_snapshot" >}}
+{{% tab name="Use etcdutl" %}}
+   The below example depicts the usage of the `etcdutl` tool for verifying a snapshot:
 
-```console
-+----------+----------+------------+------------+
-|   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE |
-+----------+----------+------------+------------+
-| fe01cf57 |       10 |          7 | 2.1 MB     |
-+----------+----------+------------+------------+
-```
+   ```shell
+   etcdutl --write-out=table snapshot status snapshot.db 
+   ```
+
+   This should generate an output resembling the example provided below:
+
+   ```console
+   +----------+----------+------------+------------+
+   |   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE |
+   +----------+----------+------------+------------+
+   | fe01cf57 |       10 |          7 | 2.1 MB     |
+   +----------+----------+------------+------------+
+   ```
+
+{{% /tab %}}
+{{% tab name="Use etcdctl (Deprecated)" %}}
+
+   {{< note >}}
+   The usage of `etcdctl snapshot status` has been **deprecated** since etcd v3.5.x and is slated for removal from etcd v3.6.
+   It is recommended to utilize [`etcdutl`](https://github.com/etcd-io/etcd/blob/main/etcdutl/README.md) instead.
+   {{< /note >}}
+
+   The below example depicts the usage of the `etcdctl` tool for verifying a snapshot:
+
+   ```shell
+   export ETCDCTL_API=3
+   etcdctl --write-out=table snapshot status snapshot.db
+   ```
+
+   This should generate an output resembling the example provided below:
+
+   ```console
+   Deprecated: Use `etcdutl snapshot status` instead.
+
+   +----------+----------+------------+------------+
+   |   HASH   | REVISION | TOTAL KEYS | TOTAL SIZE |
+   +----------+----------+------------+------------+
+   | fe01cf57 |       10 |          7 | 2.1 MB     |
+   +----------+----------+------------+------------+
+   ```
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Volume snapshot
 
@@ -342,24 +394,36 @@ Before starting the restore operation, a snapshot file must be present. It can
 either be a snapshot file from a previous backup operation, or from a remaining
 [data directory](https://etcd.io/docs/current/op-guide/configuration/#--data-dir).
 
-When restoring the cluster, use the `--data-dir` option to specify to which folder the cluster should be restored:
+{{< tabs name="etcd_restore" >}}
+{{% tab name="Use etcdutl" %}}
+   When restoring the cluster using [`etcdutl`](https://github.com/etcd-io/etcd/blob/main/etcdutl/README.md),
+   use the `--data-dir` option to specify to which folder the cluster should be restored:
 
-```shell
-etcdutl --data-dir <data-dir-location> snapshot restore snapshot.db
-```
-where `<data-dir-location>` is a directory that will be created during the restore process.
+   ```shell
+   etcdutl --data-dir <data-dir-location> snapshot restore snapshot.db
+   ```
+   where `<data-dir-location>` is a directory that will be created during the restore process.
 
-The below example depicts the usage of the `etcdctl` tool for the restore operation:
-{{< note >}}
-The usage of `etcdctl` for restoring has been deprecated since etcd v3.5.x and may be removed from a future etcd release.
-{{< /note >}}
+{{% /tab %}}
+{{% tab name="Use etcdctl (Deprecated)" %}}
 
-```shell
-export ETCDCTL_API=3
-etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
-```
+   {{< note >}}
+   The usage of `etcdctl` for restoring has been **deprecated** since etcd v3.5.x and is slated for removal from etcd v3.6.
+   It is recommended to utilize [`etcdutl`](https://github.com/etcd-io/etcd/blob/main/etcdutl/README.md) instead.
+   {{< /note >}}
 
-If `<data-dir-location>` is the same folder as before, delete it and stop the etcd process before restoring the cluster. Otherwise, change etcd configuration and restart the etcd process after restoration to have it use the new data directory.
+   The below example depicts the usage of the `etcdctl` tool for the restore operation:
+
+   ```shell
+   export ETCDCTL_API=3
+   etcdctl --data-dir <data-dir-location> snapshot restore snapshot.db
+   ```
+
+   If `<data-dir-location>` is the same folder as before, delete it and stop the etcd process before restoring the cluster. 
+   Otherwise, change etcd configuration and restart the etcd process after restoration to have it use the new data directory.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information and examples on restoring a cluster from a snapshot file, see
 [etcd disaster recovery documentation](https://etcd.io/docs/current/op-guide/recovery/#restoring-a-cluster).
