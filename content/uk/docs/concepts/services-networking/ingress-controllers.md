@@ -44,6 +44,7 @@ weight: 50
 * Контролер Ingress [NGINX для Kubernetes](https://www.nginx.com/products/nginx-ingress-controller/) працює з вебсервером [NGINX](https://www.nginx.com/resources/glossary/nginx/) (як проксі).
 * [ngrok Kubernetes Ingress Controller](https://github.com/ngrok/kubernetes-ingress-controller) — це контролер Ingress з відкритим кодом для надання безпечного публічного доступу до ваших служб K8s за допомогою платформи [ngrok](https://ngrok.com).
 * Контролер Ingress [OCI Native](https://github.com/oracle/oci-native-ingress-controller#readme) — це контролер Ingress для Oracle Cloud Infrastructure, який дозволяє керувати [OCI Load Balancer](https://docs.oracle.com/en-us/iaas/Content/Balance/home.htm).
+* [OpenNJet Ingress Controller](https://gitee.com/njet-rd/open-njet-kic) є ingress-контролером на основі [OpenNJet](https://njet.org.cn/).
 * Контролер Ingress [Pomerium](https://www.pomerium.com/docs/k8s/ingress.html) — це контролер Ingress на основі [Pomerium](https://pomerium.com/), який пропонує політику доступу з урахуванням контексту.
 * [Skipper](https://opensource.zalando.com/skipper/kubernetes/ingress-controller/) — це HTTP-маршрутизатор та зворотний проксі для композиції служб, включаючи випадки використання, такі як Kubernetes Ingress, розроблений як бібліотека для побудови вашого власного проксі.
 * Контролер Ingress [Traefik Kubernetes provider](https://doc.traefik.io/traefik/providers/kubernetes-ingress/) — це контролер Ingress для проксі [Traefik](https://traefik.io/traefik/).

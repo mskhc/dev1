@@ -79,7 +79,7 @@ weight: 90
 * `SingleStack`: Service з одним стеком. Панель управління виділяє IP кластера для Service, використовуючи перший налаштований діапазон IP кластера для Service.
 * `PreferDualStack`: Виділяє IP-адреси кластерів IPv4 та IPv6 для Service, коли ввімкнено подвійний стек. Якщо подвійний стек не ввімкнено або не підтримується, він повертається до одностекового режиму.
 * `RequireDualStack`: Виділяє IP-адреси Service `.spec.clusterIP` з діапазонів адрес IPv4 та IPv6, якщо увімкнено подвійний стек. Якщо подвійний стек не ввімкнено або не підтримується, створення обʼєкта Service API завершиться невдачею.
-  * Вибирає `.spec.ClusterIP` зі списку `.spec.ClusterIPs` на основі сімейства адрес першого елемента у масиві `.spec.ipFamilies`.
+  * Вибирає `.spec.clusterIP` зі списку `.spec.clusterIPs` на основі сімейства адрес першого елемента у масиві `.spec.ipFamilies`.
 
 Якщо ви хочете визначити, яке сімейство IP використовувати для одностекової конфігурації або визначити порядок IP для двостекової, ви можете вибрати сімейства адрес, встановивши необовʼязкове поле `.spec.ipFamilies` в Service.
 
@@ -95,7 +95,7 @@ weight: 90
 * `["IPv4","IPv6"]` (два стеки)
 * `["IPv6","IPv4"]` (два стеки)
 
-Перше сімейство, яке ви перераховуєте, використовується для легасі-поля `.spec.ClusterIP`.
+Перше сімейство, яке ви перераховуєте, використовується для легасі-поля `.spec.clusterIP`.
 
 ### Сценарії конфігурації двостекового Service {#dual-stack-service-configuration-scenarios}
 
@@ -107,15 +107,15 @@ weight: 90
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
-2. Специфікація цього Service явно визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service у двостековому кластері, Kubernetes призначає як IPv4, так і IPv6 адреси для Service. Панель управління оновлює `.spec` для Service, щоб зафіксувати адреси IP. Поле `.spec.ClusterIPs` є основним полем і містить обидві призначені адреси IP; `.spec.ClusterIP` є вторинним полем зі значенням, обчисленим з `.spec.ClusterIPs`.
+2. Специфікація цього Service явно визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service у двостековому кластері, Kubernetes призначає як IPv4, так і IPv6 адреси для Service. Панель управління оновлює `.spec` для Service, щоб зафіксувати адреси IP. Поле `.spec.clusterIPs` є основним полем і містить обидві призначені адреси IP; `.spec.clusterIP` є вторинним полем зі значенням, обчисленим з `.spec.clusterIPs`.
 
-   * Для поля `.spec.ClusterIP` панель управління записує IP-адресу, яка є з того ж самого сімейства адрес, що й перший діапазон кластерних IP Service.
-   * У одностековому кластері поля `.spec.ClusterIPs` та `.spec.ClusterIP` містять лише одну адресу.
+   * Для поля `.spec.clusterIP` панель управління записує IP-адресу, яка є з того ж самого сімейства адрес, що й перший діапазон кластерних IP Service.
+   * У одностековому кластері поля `.spec.clusterIPs` та `.spec.clusterIP` містять лише одну адресу.
    * У кластері з увімкненими двома стеками вказання `RequireDualStack` в `.spec.ipFamilyPolicy` працює так само як і `PreferDualStack`.
 
    {{% code_sample file="service/networking/dual-stack-preferred-svc.yaml" %}}
 
-3. Специфікація цього Service явно визначає `IPv6` та `IPv4` в `.spec.ipFamilies`, а також визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли Kubernetes призначає IPv6 та IPv4 адреси в `.spec.ClusterIPs`, `.spec.ClusterIP` встановлюється на IPv6 адресу, оскільки це перший елемент у масиві `.spec.ClusterIPs`, що перевизначає типові значення.
+3. Специфікація цього Service явно визначає `IPv6` та `IPv4` в `.spec.ipFamilies`, а також визначає `PreferDualStack` в `.spec.ipFamilyPolicy`. Коли Kubernetes призначає IPv6 та IPv4 адреси в `.spec.clusterIPs`, `.spec.clusterIP` встановлюється на IPv6 адресу, оскільки це перший елемент у масиві `.spec.clusterIPs`, що перевизначає типові значення.
 
    {{% code_sample file="service/networking/dual-stack-preferred-ipfamilies-svc.yaml" %}}
 
@@ -123,7 +123,7 @@ weight: 90
 
 Ці приклади демонструють типову поведінку при увімкненні двостековості в кластері, де вже існують Service. (Оновлення наявного кластера до версії 1.21 або новіше вмикає двостековість.)
 
-1. Коли двостековість увімкнена в кластері, наявні Service (безперебійно `IPv4` або `IPv6`) конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес наявного Service. Кластерний IP наявного Service буде збережено в `.spec.ClusterIPs`.
+1. Коли двостековість увімкнена в кластері, наявні Service (безперебійно `IPv4` або `IPv6`) конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес наявного Service. Кластерний IP наявного Service буде збережено в `.spec.clusterIPs`.
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
@@ -158,7 +158,7 @@ weight: 90
      loadBalancer: {}
    ```
 
-2. Коли двостековість увімкнена в кластері, наявні [headless Services](/docs/concepts/services-networking/service/#headless-services) з селекторами конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес першого діапазону кластерних IP Service (налаштованого за допомогою прапорця `--service-cluster-ip-range` для kube-apiserver), навіть якщо `.spec.ClusterIP` встановлено в `None`.
+2. Коли двостековість увімкнена в кластері, наявні [headless Services](/docs/concepts/services-networking/service/#headless-services) з селекторами конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес першого діапазону кластерних IP Service (налаштованого за допомогою прапорця `--service-cluster-ip-range` для kube-apiserver), навіть якщо `.spec.clusterIP` встановлено в `None`.
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
@@ -212,7 +212,7 @@ Service можна перемикати з одностекового режим
      ipFamilyPolicy: PreferDualStack
    ```
 
-2. Для того щоби змінити Service з двостекового режиму на одностековий, змініть `.spec.ipFamilyPolicy` з `PreferDualStack` або `RequireDualStack` на `SingleStack`. Коли ви змінюєте цей Service з двостекового режиму на одностековий, Kubernetes залишає лише перший елемент у масиві `.spec.ClusterIPs`, і встановлює `.spec.ClusterIP` на цю IP-адресу і встановлює `.spec.ipFamilies` на адресне сімейство `.spec.ClusterIPs`.
+2. Для того щоби змінити Service з двостекового режиму на одностековий, змініть `.spec.ipFamilyPolicy` з `PreferDualStack` або `RequireDualStack` на `SingleStack`. Коли ви змінюєте цей Service з двостекового режиму на одностековий, Kubernetes залишає лише перший елемент у масиві `.spec.clusterIPs`, і встановлює `.spec.clusterIP` на цю IP-адресу і встановлює `.spec.ipFamilies` на адресне сімейство `.spec.clusterIPs`.
 
 ### Headless Services без селекторів {#headless-services-without-selectors}
 

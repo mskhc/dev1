@@ -8,7 +8,7 @@ weight: 160
 ---
 
 <!-- overview -->
-{{< feature-state state="stable" >}}
+{{< feature-state feature_gate_name="HugePages" >}}
 
 Kubernetes підтримує виділення та використання заздалегідь розміщених великих сторінок (huge pages) застосунками в Podʼі. Ця сторінка описує, як користувачі можуть використовувати великі сторінки.
 

@@ -203,6 +203,9 @@ other = "електронна адреса"
 [javascript_required]
 other = "Вам потрібно [увімкнути](https://www.enable-javascript.com/) JavaScript, щоб переглядати цей вміст"
 
+[k8s_birthday_show_original_content]
+other = "Показати оригінальний вміст…"
+
 [katacoda_message]
 other = """<h4>Закриття інтерактивних посібників</h4>
 <p>Роботу інтерактивних посібників на цьому сайті призупинено. Проєкт Kubernetes 

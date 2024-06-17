@@ -89,98 +89,102 @@ minikube dashboard --url
 
 1. Перевірте, чи створено Deployment.
 
-  ```shell
-  kubectl get deployments
-  ```
+   ```shell
+   kubectl get deployments
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  NAME         READY   UP-TO-DATE   AVAILABLE   AGE
-  hello-node   1/1     1            1           1m
-  ```
+   ```output
+   NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+   hello-node   1/1     1            1           1m
+   ```
 
-  (Зачекайте деякий час, поки Pod стане доступним. Якщо ви бачите "0/1", спробуйте ще раз через кілька секунд.)
+   (Зачекайте деякий час, поки Pod стане доступним. Якщо ви бачите "0/1", спробуйте ще раз через кілька секунд.)
 
 1. Перевірте, чи створено Pod.
 
-  ```shell
-  kubectl get pods
-  ```
+   ```shell
+   kubectl get pods
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  NAME                          READY   STATUS    RESTARTS   AGE
-  hello-node--5f76cf6ccf-br9b5  1/1     Running   0          1m
-  ```
+   ```output
+   NAME                          READY   STATUS    RESTARTS   AGE
+   hello-node--5f76cf6ccf-br9b5  1/1     Running   0          1m
+   ```
 
 1. Перегляд подій кластера:
 
-  ```shell
-  kubectl get events
-  ```
+   ```shell
+   kubectl get events
+   ```
 
 1. Перегляд конфігурації `kubectl`:
 
-  ```shell
-  kubectl config view
-  ```
+   ```shell
+   kubectl config view
+   ```
 
-1. Перегляд логів застосунку з контейнера в Podʼі:
+1. Перегляд логів застосунку з контейнера в Podʼі (замініть назву Podʼа на ту, яку ви отримали з `kubectl get pods`).
 
-  ```shell
-  kubectl logs hello-node-5f76cf6ccf-br9b5
-  ```
+   {{< note >}}
+   Замініть `hello-node-5f76cf6ccf-br9b5` у команді `kubectl logs` на назву Podʼа, яку ви отримали з виводу `kubectl get pods`.
+   {{< /note >}}
 
-  Вивід має бути подібним до такого:
+   ```shell
+   kubectl logs hello-node-5f76cf6ccf-br9b5
+   ```
 
-  ```output
-  I0911 09:19:26.677397       1 log.go:195] Started HTTP server on port 8080
-  I0911 09:19:26.677586       1 log.go:195] Started UDP server on port  8081
-  ```
+   Вивід має бути подібним до такого:
 
-  {{< note >}}
-  Для ознайомлення з додатковими командами `kubectl` дивіться [Команди kubectl](/docs/reference/kubectl/).
-  {{< /note >}}
+   ```output
+   I0911 09:19:26.677397       1 log.go:195] Started HTTP server on port 8080
+   I0911 09:19:26.677586       1 log.go:195] Started UDP server on port  8081
+   ```
+
+{{< note >}}
+Для ознайомлення з додатковими командами `kubectl` дивіться [Команди kubectl](/docs/reference/kubectl/).
+{{< /note >}}
 
 ## Створення Service {#create-service}
 
 Стандартно, Pod доступний лише за його внутрішньою IP-адресою в межах Kubernetes-кластера. Щоб зробити контейнер `hello-node` доступним назовні віртуальної мережі Kubernetes, вам потрібно подати Pod як [*Service*](/docs/concepts/services-networking/service/) Kubernetes.
 
-1. Скористайтесь командою `kubectl expose` для пердставлення Podʼу у загальний доступ:
+1. Скористайтесь командою `kubectl expose` для надання Podʼу у загальний доступ:
 
-  ```shell
-  kubectl expose deployment hello-node --type=LoadBalancer --port=8080
-  ```
+   ```shell
+   kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+   ```
 
-  Прапорець `--type=LoadBalancer` вказує, що ви хочете надати доступ до вашого Serviceʼу назовні кластера.
+   Прапорець `--type=LoadBalancer` вказує, що ви хочете надати доступ до вашого Serviceʼу назовні кластера.
 
-  Код застосунку всередині тестового образу контейнера тільки прослуховує порт 8080. Якщо ви використовуєте інший порт в `kubectl expose`, клієнти не зможуть отримати доступ до вашого застосунку.
+   Код застосунку всередині тестового образу контейнера тільки прослуховує порт 8080. Якщо ви використовуєте інший порт в `kubectl expose`, клієнти не зможуть отримати доступ до вашого застосунку.
 
 1. Перевірте, чи створено Service:
 
-  ```shell
-  kubectl get services
-  ```
+   ```shell
+   kubectl get services
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-  hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
-  kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
-  ```
+   ```output
+   NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+   hello-node   LoadBalancer   10.108.144.78   <pending>     8080:30369/TCP   21s
+   kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          23m
+   ```
 
-  Хмарні провайдери, які підтримують балансувальники навантаження, зовнішні IP-адреси можуть надаватись для доступу до Serviceʼу. В minikube `LoadBalancer` створює Service, доступний через команду `minikube service`.
+   Хмарні провайдери, які підтримують балансувальники навантаження, зовнішні IP-адреси можуть надаватись для доступу до Serviceʼу. В minikube `LoadBalancer` створює Service, доступний через команду `minikube service`.
 
 1. Виконайте наступну команду:
 
-  ```shell
-  minikube service hello-node
-  ```
+   ```shell
+   minikube service hello-node
+   ```
 
-  Це відкриє вікно вебоглядача, що показує відповідь застосунку.
+   Це відкриє вікно вебоглядача, що показує відповідь застосунку.
 
 ## Увімкнення надбудов {#enable-addons}
 
@@ -188,97 +192,97 @@ minikube dashboard --url
 
 1. Перегляньте список доступних надбудов:
 
-  ```shell
-  minikube addons list
-  ```
+   ```shell
+   minikube addons list
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  addon-manager: enabled
-  dashboard: enabled
-  default-storageclass: enabled
-  efk: disabled
-  freshpod: disabled
-  gvisor: disabled
-  helm-tiller: disabled
-  ingress: disabled
-  ingress-dns: disabled
-  logviewer: disabled
-  metrics-server: disabled
-  nvidia-driver-installer: disabled
-  nvidia-gpu-device-plugin: disabled
-  registry: disabled
-  registry-creds: disabled
-  storage-provisioner: enabled
-  storage-provisioner-gluster: disabled
-  ```
+   ```output
+   addon-manager: enabled
+   dashboard: enabled
+   default-storageclass: enabled
+   efk: disabled
+   freshpod: disabled
+   gvisor: disabled
+   helm-tiller: disabled
+   ingress: disabled
+   ingress-dns: disabled
+   logviewer: disabled
+   metrics-server: disabled
+   nvidia-driver-installer: disabled
+   nvidia-gpu-device-plugin: disabled
+   registry: disabled
+   registry-creds: disabled
+   storage-provisioner: enabled
+   storage-provisioner-gluster: disabled
+   ```
 
 1. Увімкніть надбудову, наприклад, `metrics-server`:
 
-  ```shell
-  minikube addons enable metrics-server
-  ```
+   ```shell
+   minikube addons enable metrics-server
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  The 'metrics-server' addon is enabled
-  ```
+   ```output
+   The 'metrics-server' addon is enabled
+   ```
 
 1. Перегляньте Podʼи та Serviceʼи, які щойно було створено:
 
-  ```shell
-  kubectl get pod,svc -n kube-system
-  ```
+   ```shell
+   kubectl get pod,svc -n kube-system
+   ```
 
-  Вивід має бути подібним до такого:
+   Вивід має бути подібним до такого:
 
-  ```output
-  NAME                                        READY     STATUS    RESTARTS   AGE
-  pod/coredns-5644d7b6d9-mh9ll                1/1       Running   0          34m
-  pod/coredns-5644d7b6d9-pqd2t                1/1       Running   0          34m
-  pod/metrics-server-67fb648c5                1/1       Running   0          26s
-  pod/etcd-minikube                           1/1       Running   0          34m
-  pod/influxdb-grafana-b29w8                  2/2       Running   0          26s
-  pod/kube-addon-manager-minikube             1/1       Running   0          34m
-  pod/kube-apiserver-minikube                 1/1       Running   0          34m
-  pod/kube-controller-manager-minikube        1/1       Running   0          34m
-  pod/kube-proxy-rnlps                        1/1       Running   0          34m
-  pod/kube-scheduler-minikube                 1/1       Running   0          34m
-  pod/storage-provisioner                     1/1       Running   0          34m
+   ```output
+   NAME                                        READY     STATUS    RESTARTS   AGE
+   pod/coredns-5644d7b6d9-mh9ll                1/1       Running   0          34m
+   pod/coredns-5644d7b6d9-pqd2t                1/1       Running   0          34m
+   pod/metrics-server-67fb648c5                1/1       Running   0          26s
+   pod/etcd-minikube                           1/1       Running   0          34m
+   pod/influxdb-grafana-b29w8                  2/2       Running   0          26s
+   pod/kube-addon-manager-minikube             1/1       Running   0          34m
+   pod/kube-apiserver-minikube                 1/1       Running   0          34m
+   pod/kube-controller-manager-minikube        1/1       Running   0          34m
+   pod/kube-proxy-rnlps                        1/1       Running   0          34m
+   pod/kube-scheduler-minikube                 1/1       Running   0          34m
+   pod/storage-provisioner                     1/1       Running   0          34m
 
-  NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-  service/metrics-server         ClusterIP   10.96.241.45    <none>        80/TCP              26s
-  service/kube-dns               ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP       34m
-  service/monitoring-grafana     NodePort    10.99.24.54     <none>        80:30002/TCP        26s
-  service/monitoring-influxdb    ClusterIP   10.111.169.94   <none>        8083/TCP,8086/TCP   26s
-  ```
+   NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+   service/metrics-server         ClusterIP   10.96.241.45    <none>        80/TCP              26s
+   service/kube-dns               ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP       34m
+   service/monitoring-grafana     NodePort    10.99.24.54     <none>        80:30002/TCP        26s
+   service/monitoring-influxdb    ClusterIP   10.111.169.94   <none>        8083/TCP,8086/TCP   26s
+   ```
 
-  1. Перевірте вивід з `metrics-server`:
+1. Перевірте вивід з `metrics-server`:
 
-  ```shell
-  kubectl top pods
-  ```
+   ```shell
+   kubectl top pods
+   ```
 
-  Ви маєте отримати вивід, подібний до такого:
+   Ви маєте отримати вивід, подібний до такого:
 
-  ```output
-  NAME                         CPU(cores)   MEMORY(bytes)   
-  hello-node-ccf4b9788-4jn97   1m           6Mi             
-  ```
+   ```output
+   NAME                         CPU(cores)   MEMORY(bytes)   
+   hello-node-ccf4b9788-4jn97   1m           6Mi             
+   ```
 
-  Якщо ви бачите наступне повідомлення, почекайте та спробуйте ще раз:
+   Якщо ви бачите наступне повідомлення, почекайте та спробуйте ще раз:
 
-  ```output
-  error: Metrics API not available
-  ```
+   ```output
+   error: Metrics API not available
+   ```
 
 1. Вимкніть `metrics-server`:
 
-  ```output
-  metrics-server was successfully disabled
-  ```
+   ```output
+   metrics-server was successfully disabled
+   ```
 
 ## Видалення кластера minikube {#clean-up}
 

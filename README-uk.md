@@ -189,21 +189,22 @@ sudo launchctl load -w /Library/LaunchDaemons/limit.maxfiles.plist
 
 Якщо вам потрібна допомога в будь-який момент, коли ви робите свій внесок, [помічник для нових учасників](https://kubernetes.io/docs/contribute/advanced/#serve-as-a-new-contributor-ambassador) є тою особою, до якої варто звертатись. Вони затверджують роботу інших в SIG Docs, їх обовʼязки включають наставництво нових учасників та допомогу їм у перших кількох запитах на злиття змін. Найкращим місцем для звʼязку з помічниками є [Kubernetes Slack](https://slack.k8s.io/). Поточні помічники в SIG Docs:
 
-| Імʼя                       | Slack                      | GitHub                     |                   
+| Імʼя                       | Slack                      | GitHub                     |
 | -------------------------- | -------------------------- | -------------------------- |
-| Arsh Sharma                | @arsh                      | @RinkiyaKeDad              |
+| Sreeram Venkitesh          | @sreeram.venkitesh         | @sreeram-venkitesh         |
 
 ## Локалізовані файли README
 
 | Мова                          | Мова                          |
 | ----------------------------- | ----------------------------- |
-| [Англійська](README.md)       | [Китайська](README-zh.md)     |
-| [Корейська](README-ko.md)     | [Французька](README-fr.md)    |
-| [Польська](README-pl.md)      | [Німецька](README-de.md)      |
-| [Португальська](README-pt.md) | [Хінді](README-hi.md)         | 
-| [Російська](README-ru.md)     | [Індонезійська](README-id.md) |
-| [Іспанська](README-es.md)     | [Італійська](README-it.md)    | 
-| [Японська](README-ja.md)      | [Вʼєтнамська](README-vi.md)   |
+| [Англійська](README.md)       | [Бенгалі](README-bn.md)       |
+| [Китайська](README-zh.md)     | [Корейська](README-ko.md)     |
+| [Французька](README-fr.md)    | [Польська](README-pl.md)      |
+| [Німецька](README-de.md)      | [Португальська](README-pt.md) |
+| [Хінді](README-hi.md)         | [Російська](README-ru.md)     |
+| [Індонезійська](README-id.md) | [Іспанська](README-es.md)     |
+| [Італійська](README-it.md)    | [Вʼєтнамська](README-vi.md)   |
+| [Японська](README-ja.md)      | |
 
 ## Кодекс поведінки
 

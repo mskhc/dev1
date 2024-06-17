@@ -518,7 +518,7 @@ www-web-4   Bound     pvc-e11bb5f8-b508-11e6-932f-42010a800002   1Gi        RWO 
 В одному вікні термінала відредагуйте StatefulSet `web`, щоб знову змінити образ контейнера:
 
 ```shell
-kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"registry.k8s.io/nginx-slim:0.8"}]'
+kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"registry.k8s.io/nginx-slim:0.24"}]'
 ```
 
 ```none
@@ -582,9 +582,9 @@ for p in 0 1 2; do kubectl get pod "web-$p" --template '{{range $i, $c := .spec.
 ```
 
 ```none
-registry.k8s.io/nginx-slim:0.8
-registry.k8s.io/nginx-slim:0.8
-registry.k8s.io/nginx-slim:0.8
+registry.k8s.io/nginx-slim:0.24
+registry.k8s.io/nginx-slim:0.24
+registry.k8s.io/nginx-slim:0.24
 
 ```
 
@@ -618,7 +618,7 @@ statefulset.apps/web patched
 Знову виправте StatefulSet, щоб змінити образ контейнера, який використовує цей StatefulSet:
 
 ```shell
-kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"registry.k8s.io/nginx-slim:0.7"}]'
+kubectl patch statefulset web --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"registry.k8s.io/nginx-slim:0.21"}]'
 ```
 
 ```none
@@ -657,7 +657,7 @@ kubectl get pod web-2 --template '{{range $i, $c := .spec.containers}}{{$c.image
 ```
 
 ```none
-registry.k8s.io/nginx-slim:0.8
+registry.k8s.io/nginx-slim:0.24
 ```
 
 Зверніть увагу, що, навіть якщо стратегія оновлення — `RollingUpdate`, StatefulSet відновив Pod з початковим образом контейнера. Це тому, що порядковий номер Podʼа менше, ніж `partition`, вказаний у `updateStrategy`.
@@ -702,7 +702,7 @@ kubectl get pod web-2 --template '{{range $i, $c := .spec.containers}}{{$c.image
 ```
 
 ```none
-registry.k8s.io/nginx-slim:0.7
+registry.k8s.io/nginx-slim:0.21
 ```
 
 Коли ви змінили `partition`, контролер StatefulSet автоматично оновив Pod `web-2`, оскільки порядковий номер Podʼа був більшим або рівним `partition`.
@@ -747,7 +747,7 @@ kubectl get pod web-1 --template '{{range $i, $c := .spec.containers}}{{$c.image
 ```
 
 ```none
-registry.k8s.io/nginx-slim:0.8
+registry.k8s.io/nginx-slim:0.24
 ```
 
 `web-1` був відновлений до своєї початкової конфігурації, тому що порядковий номер Podʼа
@@ -776,7 +776,7 @@ kubectl get pod -l app=nginx --watch
 
 Вивід подібний до:
 
-```
+```none
 NAME      READY     STATUS              RESTARTS   AGE
 web-0     1/1       Running             0          3m
 web-1     0/1       ContainerCreating   0          11s
@@ -801,9 +801,9 @@ for p in 0 1 2; do kubectl get pod "web-$p" --template '{{range $i, $c := .spec.
 ```
 
 ```none
-registry.k8s.io/nginx-slim:0.7
-registry.k8s.io/nginx-slim:0.7
-registry.k8s.io/nginx-slim:0.7
+registry.k8s.io/nginx-slim:0.21
+registry.k8s.io/nginx-slim:0.21
+registry.k8s.io/nginx-slim:0.21
 ```
 
 Переміщуючи `partition` на `0`, ви дозволили StatefulSet продовжити процес оновлення.

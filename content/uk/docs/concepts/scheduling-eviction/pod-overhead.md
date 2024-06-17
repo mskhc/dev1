@@ -68,6 +68,10 @@ spec:
         memory: 100Mi
 ```
 
+{{< note >}}
+Якщо в визначенні Podʼу вказані лише `limits`, kubelet виведе `requests` з цих обмежень і встановить їх такими ж, як і визначені `limits`.
+{{< /note >}}
+
 Під час обробки допуску (admission) контролер [admission controller](/docs/reference/access-authn-authz/admission-controllers/) RuntimeClass оновлює PodSpec робочого навантаження, щоб включити `overhead`, що є в RuntimeClass. Якщо PodSpec вже має це поле визначеним, Pod буде відхилено. У поданому прикладі, оскільки вказано лише імʼя RuntimeClass, контролер обробки допуску змінює Pod, щоб включити `overhead`.
 
 Після того, як контролер обробки допуску RuntimeClass вніс зміни, ви можете перевірити оновлене значення `overhead` Pod:
