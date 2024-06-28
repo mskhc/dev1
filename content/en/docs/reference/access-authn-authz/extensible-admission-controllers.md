@@ -1243,7 +1243,7 @@ scheduling pods:
   to intercept resources required to start its own pods.
 
   For example, a mutating admission webhook is configured to admit `CREATE` pod requests only if a certain label is set in the
-  pod (e.g. `"env": "prod"`). The webhook server runs in a deployment which doesn't set the `"env"` label.
+  pod (such as `"env": "prod"`). The webhook server runs in a deployment which doesn't set the `"env"` label.
   When a node that runs the webhook server pods
   becomes unhealthy, the webhook deployment will try to reschedule the pods to another node. However the requests will
   get rejected by the existing webhook server since the `"env"` label is unset, and the migration cannot happen.
