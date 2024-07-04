@@ -571,10 +571,79 @@ root@ek8s:/#
 * `kubectl debug` автоматично генерує назву нового Podʼа на основі назви вузла.
 * Коренева файлова система вузла буде змонтована в `/host`.
 * Контейнер працює у просторах імен IPC, мережі та PID вузла, хоча Pod не є привілейованим, тому читання деякої інформації про процеси може не вдатися, і `chroot /host` може не спрацювати.
-* Якщо вам потрібен привілейований Pod, створіть його вручну.
+* Якщо вам потрібен привілейований Pod, створіть його вручну або використовуйте прапорець `--profile=sysadmin`
 
 Не забудьте прибрати Pod для налагодження, коли ви закінчите з ним:
 
 ```shell
 kubectl delete pod node-debugger-mynode-pdx84
+```
+
+## Профілі налагодження {#debugging-profiles}
+
+Коли ви використовуєте `kubectl debug` для налагодження вузла за допомогою Podʼа налагодження, Pod за ефемерним контейнером або скопійованого Pod, ви можете застосувати до них профіль налагодження за допомогою прапорця `--profile`. Застосовуючи профіль, встановлюються конкретні властивості, такі як [securityContext](/docs/tasks/configure-pod-container/security-context/), що дозволяє адаптуватися до різних сценаріїв.
+
+Доступні наступні профілі:
+
+| Профіль      | Опис                                                               |
+| ------------ | ------------------------------------------------------------------ |
+| legacy       | Набір властивостей для зворотної сумісності з поведінкою 1.22      |
+| general      | Розумний набір загальних властивостей для кожного завдання налагодження |
+| baseline     | Набір властивостей, сумісних з [Політикою базової безпеки PodSecurityStandard](/docs/concepts/security/pod-security-standards/#baseline) |
+| restricted   | Набір властивостей, сумісних з [Політикою обмеженої безпеки PodSecurityStandard](/docs/concepts/security/pod-security-standards/#restricted) |
+| netadmin     | Набір властивостей, включаючи привілеї адміністратора мережі       |
+| sysadmin     | Набір властивостей, включаючи привілеї системного адміністратора (root) |
+
+{{< note >}}
+Якщо ви не вкажете `--profile`, стандартно використовується профіль `legacy`, але його планується найближчим часом визнати застарілим. Тому рекомендується використовувати інші профілі, такі як `general`.
+{{< /note >}}
+
+Припустимо, що ви створюєте Pod і налагоджуєте його. Спочатку створіть Pod з назвою `myapp`, наприклад:
+
+```shell
+kubectl run myapp --image=busybox:1.28 --restart=Never -- sleep 1d
+```
+
+Потім, перевірте Pod за допомогою ефемерного контейнера. Якщо ефемерному контейнеру потрібно мати привілеї, ви можете використовувати профіль `sysadmin`:
+
+```shell
+kubectl debug -it myapp --image=busybox:1.28 --target=myapp --profile=sysadmin
+```
+
+```none
+Targeting container "myapp". If you don't see processes from this container it may be because the container runtime doesn't support this feature.
+Defaulting debug container name to debugger-6kg4x.
+If you don't see a command prompt, try pressing enter.
+/ #
+```
+
+Перевірте можливості процесу ефемерного контейнера, виконавши наступну команду всередині контейнера:
+
+```shell
+/ # grep Cap /proc/$$/status
+```
+
+```none
+...
+CapPrm:	000001ffffffffff
+CapEff:	000001ffffffffff
+...
+```
+
+Це означає, що процес контейнера наділений усіма можливостями як привілейований контейнер завдяки застосуванню профілю `sysadmin`. Дивіться більше деталей про [можливості](/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container).
+
+Ви також можете перевірити, що ефемерний контейнер був створений як привілейований контейнер:
+
+```shell
+kubectl get pod myapp -o jsonpath='{.spec.ephemeralContainers[0].securityContext}'
+```
+
+```none
+{"privileged":true}
+```
+
+Очистіть Pod, коли ви закінчите з ним:
+
+```shell
+kubectl delete pod myapp
 ```

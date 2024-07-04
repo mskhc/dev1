@@ -86,9 +86,9 @@ Kubernetes керує життєвим циклом всіх образів че
 
 Як бета-функцію, ви можете вказати максимальний час, протягом якого локальний образ може бути невикористаний, незалежно від використання дискового простору. Це налаштування kubelet, яке ви вказуєте для кожного вузла.
 
-Щоб налаштувати параметр, увімкніть [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `ImageMaximumGCAge` для kubelet, а також встановіть значення поля `ImageMaximumGCAge` в файлі конфігурації kubelet.
+Щоб налаштувати параметр, увімкніть [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `imageMaximumGCAge` для kubelet, а також встановіть значення поля `imageMaximumGCAge` в файлі конфігурації kubelet.
 
-Значення вказується як _duration_ Kubernetes; Допустимі одиниці часу для поля `ImageMaximumGCAge` у файлі конфігурації kubelet:
+Значення вказується як _duration_ Kubernetes; Допустимі одиниці часу для поля `imageMaximumGCAge` у файлі конфігурації kubelet:
 
 * «ns» для наносекунд
 * «us» або «µs» для мікросекунд
@@ -100,7 +100,7 @@ Kubernetes керує життєвим циклом всіх образів че
 Наприклад, ви можете встановити значення поля конфігурації `12h45m`, що означає 12 годин 45 хвилин.
 
 {{< note >}}
-Ця функція не відстежує використання образів kubeletʼами під час перезапуску. Якщо kubelet перезапускається, вік відстежуваного образу скидається, що призводить до того, що kubelet очікує повний проміжок часу `ImageMaximumGCAge` перед тим як кваліфікувати образ для прибирання збирачем сміття на основі віку образу.
+Ця функція не відстежує використання образів kubeletʼами під час перезапуску. Якщо kubelet перезапускається, вік відстежуваного образу скидається, що призводить до того, що kubelet очікує повний проміжок часу `imageMaximumGCAge` перед тим як кваліфікувати образ для прибирання збирачем сміття на основі віку образу.
 {{< /note >}}
 
 ### Збір сміття контейнерів {#container-image-garbage-collection}
@@ -128,7 +128,7 @@ Kubelet збирає сміття лише для контейнерів, яки
 
 * [Налаштування каскадного видалення обʼєктів Kubernetes](/docs/tasks/administer-cluster/use-cascading-deletion/)
 * [Налаштування очищення завершених завдань (Jobs)](/docs/concepts/workloads/controllers/ttlafterfinished/)
-  
+
 ## {{% heading "whatsnext" %}}
 
 * Дізнайтеся більше про [власність обʼєктів Kubernetes](/docs/concepts/overview/working-with-objects/owners-dependents/).

@@ -117,4 +117,4 @@ Kubernetes може розгортатися різними способами, 
 ## {{% heading "whatsnext" %}}
 
 * Скористайтесь довідником [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/).
-* Дізнайтесь про поле [trafficDistribution](/docs/concepts/services-networking/service/#trafic-distribution), що тісно повʼязане з анотацією `service.kubernetes.io/topology-mode` та надає гнучкість управління маршрутизацією трафіку в Kubernetes.
+* Дізнайтесь про поле [trafficDistribution](/docs/concepts/services-networking/service/#traffic-distribution), що тісно повʼязане з анотацією `service.kubernetes.io/topology-mode` та надає гнучкість управління маршрутизацією трафіку в Kubernetes.

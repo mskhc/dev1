@@ -22,6 +22,10 @@ Kubernetes покладається на активне переписуванн
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
+Переконайтеся, що у вашому кластері увімкнено [функціональні можливості](/docs/reference/command-line-tools-reference/feature-gates/) `StorageVersionMigrator` та `InformerResourceVersion`. Для внесення цих змін вам знадобиться доступ адміністратора панелі управління.
+
+Увімкніть REST API для міграції версій сховища, встановивши параметр конфігурації `storagemigration.k8s.io/v1alpha1` на `true` для API-сервера. Для отримання додаткової інформації про те, як це зробити, прочитайте [увімкнення або вимкнення API Kubernetes](/docs/tasks/administer-cluster/enable-disable-api/).
+
 <!-- steps -->
 
 ## Перешифрування Secret Kubernetes за допомогою міграції версій сховища {#re-encrypt-kubernetes-secrets-using-storage-version-migration}

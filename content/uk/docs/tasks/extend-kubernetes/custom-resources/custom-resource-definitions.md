@@ -1411,7 +1411,6 @@ my-new-cron-object   * * * * *   1          7s
 
 #### Поля селекторів власних ресурсів {#crd-selectable-fields}
 
-{{< feature-state state="alpha" for_k8s_version="v1.30" >}}
 {{< feature-state feature_gate_name="CustomResourceFieldSelectors" >}}
 
 Вам потрібно увімкнути `CustomResourceFieldSelectors` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/), щоб використовувати цю функцію, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.

@@ -772,7 +772,7 @@ API сервери надсилають першу версію `ConversionRevie
 
 - `uid`, скопійований з `request.uid`, надісланого до вебхука
 - `result`, встановлений на `{"status":"Success"}`
-- `convertedObjects`, що містить всі обʼєкти з `request.objects`, конвертовані до `request.desiredVersion`
+- `convertedObjects`, що містить всі обʼєкти з `request.objects`, конвертовані до `request.desiredAPIVersion`
 
 Приклад мінімально успішної відповіді від вебхука:
 

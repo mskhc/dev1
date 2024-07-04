@@ -38,7 +38,7 @@ StorageClass надає можливість адміністраторам оп
 
 Якщо PVC не вказує `storageClassName`, буде використовуватися типовий StorageClass.
 
-Якщо ви встановите анотацію [`storageclass.kubernetes.io/is-default-class`](/docs/reference/labels-annotations-taints/#ingressclass-kubernetes-io-is-default-class) у значення true для більше ніж одного StorageClass у вашому кластері, і потім створите PersistentVolumeClaim без вказання `storageClassName`, Kubernetes використовуватиме найновіший типовий StorageClass.
+Якщо ви встановите анотацію [`storageclass.kubernetes.io/is-default-class`](/docs/reference/labels-annotations-taints/#storageclass-kubernetes-io-is-default-class) у значення true для більше ніж одного StorageClass у вашому кластері, і потім створите PersistentVolumeClaim без вказання `storageClassName`, Kubernetes використовуватиме найновіший типовий StorageClass.
 
 {{< note >}}
 Спробуйте мати лише один типовий StorageClass у вашому кластері. Причина, чому Kubernetes дозволяє вам мати кілька типових StorageClass, — це можливість безшовної міграції.
