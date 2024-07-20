@@ -8,7 +8,7 @@ weight: 50
 card:
   name: contribute
   weight: 50
-  title: Локазізація документації
+  title: Локалізація документації
 ---
 
 <!-- overview -->
