@@ -198,7 +198,7 @@ sudo systemctl restart containerd
 
 У цьому розділі наведено необхідні кроки для встановлення CRI-O як середовища виконання контейнерів.
 
-Для встановлення CRI-O слід дотримуватися [Інструкцій з встановлення CRI-O](https://github.com/cri-o/cri-o/blob/main/install.md#readme).
+Для встановлення CRI-O слід дотримуватися [Інструкцій з встановлення CRI-O](https://github.com/cri-o/packaging/blob/main/README.md#usage).
 
 #### Драйвер cgroup {#cgroup-driver}
 

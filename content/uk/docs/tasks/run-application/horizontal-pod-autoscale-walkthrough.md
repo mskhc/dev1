@@ -57,7 +57,7 @@ service/php-apache створено
 
 ## Створіть HorizontalPodAutoscaler {#create-horizontal-pod-autoscaler}
 
-Тепер, коли сервер працює, створіть автомасштабувальник за допомогою `kubectl`. Існує підкоманда [`kubectl autoscale`](/docs/reference/generated/kubectl/kubectl-commands#autoscale), частина `kubectl`, яка допомагає це зробити.
+Тепер, коли сервер працює, створіть автомасштабувальник за допомогою `kubectl`. Підкоманда [`kubectl autoscale`](/docs/reference/generated/kubectl/kubectl-commands#autoscale), частина `kubectl`, допоможе зробити це.
 
 За мить ви виконаєте команду, яка створить HorizontalPodAutoscaler, що підтримує від 1 до 10 реплік контрольованих Podʼів за допомогою Deployment php-apache, який ви створили на першому етапі цих інструкцій.
 

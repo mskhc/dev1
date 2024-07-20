@@ -17,13 +17,13 @@ description: Створення обʼєктів Secret за допомогою 
 
 ## Створення Secret {#create-a-secret}
 
-Ви можете створити Secret, визначивши `secretGenerator` у файлі `kustomization.yaml`, який посилається на інші наявні файли, файли `.env` або літеральні значення. Наприклад, наведені нижче інструкції створюють файл конфігурації Kustomization для імені користувача `admin` та пароля `1f2d1e2e67df`.
+Ви можете створити Secret, визначивши `secretGenerator` у файлі `kustomization.yaml`, який посилається на інші наявні файли, файли `.env` або літеральні значення. Наприклад, наведені нижче інструкції створюють файл конфігурації kustomization для імені користувача `admin` та пароля `1f2d1e2e67df`.
 
 {{< note >}}
 Поле `stringData` для Secret погано працює із застосуванням на стороні сервера.
 {{< /note >}}
 
-### Створення файлу Kustomization
+### Створення файлу kustomization {#create-the-kustomization-file}
 
 {{< tabs name="Secret data" >}}
 {{< tab name="Літерали" codelang="yaml" >}}
@@ -87,7 +87,7 @@ secret/database-creds-5hdh7hhgfk created
 
 Коли Secret генерується, імʼя Secret створюється шляхом хешування даних Secret і додавання до нього значення хешу. Це забезпечує, що при зміні даних генерується новий Secret.
 
-Щоб перевірити, що Secret був створений та розкодувати дані Secret, 
+Щоб перевірити, що Secret був створений та розкодувати дані Secret,
 
 ```shell
 kubectl get -k <directory-path> -o jsonpath='{.data}' 
@@ -96,17 +96,17 @@ kubectl get -k <directory-path> -o jsonpath='{.data}'
 Вивід буде подібний до:
 
 ```none
-{ "password": "UyFCXCpkJHpEc2I9", "username": "YWRtaW4=" }
+{ "password": "MWYyZDFlMmU2N2Rm", "username": "YWRtaW4=" }
 ```
 
-```
-echo 'UyFCXCpkJHpEc2I9' | base64 --decode
+```shell
+echo 'MWYyZDFlMmU2N2Rm' | base64 --decode
 ```
 
 Вивід буде подібний до:
 
 ```none
-S!B\*d$zDsb=
+1f2d1e2e67df
 ```
 
 Для отримання додаткової інформації див. [Керування Secret за допомогою kubectl](/docs/tasks/configmap-secret/managing-secret-using-kubectl/#перевірка-секрету) та [Декларативне керування обʼєктами Kubernetes за допомогою Kustomize](/docs/tasks/manage-kubernetes-objects/kustomization/).

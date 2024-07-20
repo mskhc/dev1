@@ -81,10 +81,10 @@ credspec:
   DomainJoinConfig:
     DnsName: contoso.com  # Імʼя домену DNS
     DnsTreeName: contoso.com # Корінь імені домену DNS
-    Guid: 244818ae-87ac-4fcd-92ec-e79e5252348a  # GUID
+    Guid: 244818ae-87ac-4fcd-92ec-e79e5252348a  # GUID для Domain
     MachineAccountName: WebApp1 # Імʼя користувача облікового запису GMSA
     NetBiosName: CONTOSO  # Імʼя домену NETBIOS
-    Sid: S-1-5-21-2126449477-2524075714-3094792973 # SID облікового запису GMSA
+    Sid: S-1-5-21-2126449477-2524075714-3094792973 # SID для Domain
 ```
 
 Вищезазначений ресурс специфікації облікових даних може бути збережений як `gmsa-Webapp1-credspec.yaml` і застосований до кластера за допомогою: `kubectl apply -f gmsa-Webapp1-credspec.yaml`.

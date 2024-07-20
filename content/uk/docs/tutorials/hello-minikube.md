@@ -152,7 +152,11 @@ minikube dashboard --url
 
 Стандартно, Pod доступний лише за його внутрішньою IP-адресою в межах Kubernetes-кластера. Щоб зробити контейнер `hello-node` доступним назовні віртуальної мережі Kubernetes, вам потрібно подати Pod як [*Service*](/docs/concepts/services-networking/service/) Kubernetes.
 
-1. Скористайтесь командою `kubectl expose` для надання Podʼу у загальний доступ:
+{{< warning >}}
+Контейнер agnhost має точку доступу `/shell`, яка корисна для налагодження, але небезпечний для публічного доступу з інтернету. Не запускайте його в кластері, що має вихід до інтернету, або на операційному кластері.
+{{< /warning >}}
+
+1. Скористайтесь командою `kubectl expose` для експонування Podʼа:
 
    ```shell
    kubectl expose deployment hello-node --type=LoadBalancer --port=8080
@@ -162,7 +166,7 @@ minikube dashboard --url
 
    Код застосунку всередині тестового образу контейнера тільки прослуховує порт 8080. Якщо ви використовуєте інший порт в `kubectl expose`, клієнти не зможуть отримати доступ до вашого застосунку.
 
-1. Перевірте, чи створено Service:
+2. Перевірте, чи створено Service:
 
    ```shell
    kubectl get services
@@ -178,7 +182,7 @@ minikube dashboard --url
 
    Хмарні провайдери, які підтримують балансувальники навантаження, зовнішні IP-адреси можуть надаватись для доступу до Serviceʼу. В minikube `LoadBalancer` створює Service, доступний через команду `minikube service`.
 
-1. Виконайте наступну команду:
+3. Виконайте наступну команду:
 
    ```shell
    minikube service hello-node

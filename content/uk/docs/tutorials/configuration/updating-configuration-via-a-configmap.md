@@ -420,7 +420,7 @@ NAME                                           READY   STATUS    RESTARTS   AGE
 configmap-sidecar-container-5fb59f558b-87rp7   2/2     Running   0          94s
 configmap-sidecar-container-5fb59f558b-ccs7s   2/2     Running   0          94s
 configmap-sidecar-container-5fb59f558b-wnmgk   2/2     Running   0          94s
-````
+```
 
 Надайте доступ до Deployment (інструмент `kubectl` створює
 {{<glossary_tooltip text="Service" term_id="service">}} для вас):
