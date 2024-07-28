@@ -1,5 +1,5 @@
 ---
 title: Відлагодження кластера
-weight: 120
+weight: 125
 no_list: false
 ---
