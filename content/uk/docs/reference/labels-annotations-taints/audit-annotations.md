@@ -13,6 +13,18 @@ weight: 10
 
 <!-- body -->
 
+## k8s.io/deprecated
+
+Приклад: `k8s.io/deprecated: "true"`
+
+Значення **повинно** бути "true" або "false". Значення "true" вказує на те, що в запит використовував застарілу версію API.
+
+## k8s.io/removed-release
+
+Приклад: `k8s.io/removed-release: "1.22"`
+
+Значення **повинно** бути у форматі "<major>.<minor>". Встановлюється на цільовий випуск видалення на запити до застарілих версій API з цільовим випуском видалення.
+
 ## pod-security.kubernetes.io/exempt
 
 Приклад: `pod-security.kubernetes.io/exempt: namespace`

@@ -4,7 +4,7 @@ title: Kubelet Checkpoint API
 weight: 10
 ---
 
-{{< feature-state for_k8s_version="v1.25" state="alpha" >}}
+{{< feature-state feature_gate_name="ContainerCheckpoint" >}}
 
 Контрольна точка контейнера — це функціонал для створення копії контейнера зі станом запущеного контейнера. Після того, як у вас є копія контейнера з його станом, ви можете перенести його на інший компʼютер для налагодження або подібних цілей.
 

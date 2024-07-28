@@ -400,6 +400,7 @@ securityContext:
   * `/proc/sched_debug`
   * `/proc/scsi`
   * `/sys/firmware`
+  * `/sys/devices/virtual/powercap`
 
 * Шляхи доступні тільки для читання:
   * `/proc/bus`
