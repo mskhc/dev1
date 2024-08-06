@@ -135,11 +135,11 @@ description: |-
                 <p>Ви можете побачити всі ці API, розміщені через проксі-endpoint. Наприклад, ми можемо запитати версію напряму через API, використовуючи команду <code>curl</code>:</p>
                 <p><b><code>curl http://localhost:8001/version</code></b></p>
                 <div class="alert alert-info note callout" role="alert"><strong>Примітка:</strong> Якщо порт 8001 недоступний, переконайтеся, що команда <code>kubectl proxy</code>, яку ви запустили вище, працює в другому терміналі.</div>
-                <p>Сервер API автоматично створює точку доступу для кожного Podʼу на основі імені Podʼа, яка також доступна через проксі.</p>
-                <p>Спочатку нам потрібно отримати імʼя Podʼу, і ми збережемо його в змінну оточення <tt>POD_NAME</tt>:</p>
+                <p>Сервер API автоматично створює точку доступу для кожного Podʼа на основі імені Podʼа, яка також доступна через проксі.</p>
+                <p>Спочатку нам потрібно отримати імʼя Podʼа, і ми збережемо його в змінну оточення <tt>POD_NAME</tt>:</p>
                 <p><b><code>export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')</code></b><br />
                     <b><code>echo Name of the Pod: $POD_NAME</code></b></p>
-                <p>Ви можете отримати доступ до Podʼу через проксі-API, запустивши:</p>
+                <p>Ви можете отримати доступ до Podʼа через проксі-API, запустивши:</p>
                 <p><b><code>curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME:8080/proxy/</code></b></p>
                 <p>Для того, щоб нове розгортання було доступним без використання проксі, потрібен сервіс, про що буде розказано в <a href="/uk/docs/tutorials/kubernetes-basics/expose/">Модулі 4</a>.</p>
             </div>

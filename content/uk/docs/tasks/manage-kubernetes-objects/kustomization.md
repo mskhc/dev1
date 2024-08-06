@@ -946,7 +946,7 @@ kubectl describe -k ./
 kubectl diff -k ./
 ```
 
-Виконайте наступну команду, щоб видалити об'єкт Deployment `dev-my-nginx`:
+Виконайте наступну команду, щоб видалити обʼєкт Deployment `dev-my-nginx`:
 
 ```shell
 > kubectl delete -k ./

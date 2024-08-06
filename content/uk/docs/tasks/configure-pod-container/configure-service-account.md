@@ -230,7 +230,7 @@ token:          ...
 - Створіть imagePullSecret, як описано в [Вказування ImagePullSecrets в контейнері](/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod).
 
   ```shell
-  kubectl create secret docker-registry myregistrykey --docker-server=<ім'я реєстру> \
+  kubectl create secret docker-registry myregistrykey --docker-server=<імʼя реєстру> \
           --docker-username=ІМ'Я_КОРИСТУВАЧА --docker-password=ПАРОЛЬ_ДЛЯ_DOCKER \
           --docker-email=ЕЛЕКТРОННА_ПОШТА_ДЛЯ_DOCKER
   ```
@@ -298,7 +298,7 @@ imagePullSecrets:
 Тепер, коли створюється новий Pod у поточному просторі імен і використовується типовий ServiceAccount, у новому Podʼі автоматично встановлюється поле `spec.imagePullSecrets`:
 
 ```shell
-kubectl run nginx --image=<ім'я реєстру>/nginx --restart=Never
+kubectl run nginx --image=<імʼя реєстру>/nginx --restart=Never
 kubectl get pod nginx -o=jsonpath='{.spec.imagePullSecrets[0].name}{"\n"}'
 ```
 
@@ -365,9 +365,9 @@ Kubelet також може проєцювати токен ServiceAccount в Po
 }
 ```
 
-### Запуск Podʼу з використанням проєцювання токену службового облікового запису {#lunch-a-pod-using-service-account-token-projection}
+### Запуск Podʼа з використанням проєцювання токену службового облікового запису {#lunch-a-pod-using-service-account-token-projection}
 
-Щоб надати Podʼу токен з аудиторією `vault` та терміном дії дві години, ви можете визначити маніфест Podʼу, схожий на цей:
+Щоб надати Podʼу токен з аудиторією `vault` та терміном дії дві години, ви можете визначити маніфест Podʼа, схожий на цей:
 
 {{% code_sample file="pods/pod-projected-svc-token.yaml" %}}
 
@@ -377,7 +377,7 @@ Kubelet також може проєцювати токен ServiceAccount в Po
 kubectl create -f https://k8s.io/examples/pods/pod-projected-svc-token.yaml
 ```
 
-Kubelet буде: запитувати та зберігати токен від імені Podʼу; робити токен доступним для Podʼу за налаштованим шляхом до файлу; і оновлювати токен поблизу його закінчення. Kubelet активно запитує ротацію для токена, якщо він старший, ніж 80% від загального часу життя (TTL), або якщо токен старший, ніж 24 години.
+Kubelet буде: запитувати та зберігати токен від імені Podʼа; робити токен доступним для Podʼа за налаштованим шляхом до файлу; і оновлювати токен поблизу його закінчення. Kubelet активно запитує ротацію для токена, якщо він старший, ніж 80% від загального часу життя (TTL), або якщо токен старший, ніж 24 години.
 
 Застосунок відповідає за перезавантаження токена при його ротації. Зазвичай для застосунку достатньо завантажувати токен за розкладом (наприклад: один раз кожні 5 хвилин), без відстеження фактичного часу закінчення.
 

@@ -212,7 +212,7 @@ CertificateSigningRequestList — це колекція обʼєктів Certif
 
 - **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
 
-- **items** ([]<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>), обов'язково
+- **items** ([]<a href="{{< ref "../authentication-resources/certificate-signing-request-v1#CertificateSigningRequest" >}}">CertificateSigningRequest</a>), обовʼязково
 
   items — це колекція обʼєктів CertificateSigningRequest.
 

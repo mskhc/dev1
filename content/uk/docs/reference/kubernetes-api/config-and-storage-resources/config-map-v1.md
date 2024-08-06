@@ -54,7 +54,7 @@ ConfigMapList — це ресурс, що містить список обʼє�
 
   Докладніще: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([][ConfigMap](../config-and-storage-resources/config-map-v1#ConfigMap)), обов'язкове
+- **items** ([][ConfigMap](../config-and-storage-resources/config-map-v1#ConfigMap)), обовʼязкове
 
   Items — це список ConfigMap.
 

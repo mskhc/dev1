@@ -133,7 +133,7 @@ CSIDriverSpec — це специфікація CSIDriver.
 
 ## CSIDriverList {#CSIDriverList}
 
-CSIDriverList — це колекція об'єктів CSIDriver.
+CSIDriverList — це колекція обʼєктів CSIDriver.
 
 ---
 
@@ -145,7 +145,7 @@ CSIDriverList — це колекція об'єктів CSIDriver.
 
   Стандартні метадані списку. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-driver-v1#CSIDriver" >}}">CSIDriver</a>), обов'язково
+- **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-driver-v1#CSIDriver" >}}">CSIDriver</a>), обовʼязково
 
   items — це список CSIDriver.
 

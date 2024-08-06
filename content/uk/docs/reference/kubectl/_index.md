@@ -140,7 +140,7 @@ kubectl config set-context --current --namespace=<namespace-name>
 `scale` | <code>kubectl scale (-f FILENAME &#124; TYPE NAME &#124; TYPE/NAME) --replicas=COUNT [--resource-version=version] [--current-replicas=count] [flags]</code> | Оновити розмір вказаного контролера реплікації.
 `set` | `kubectl set SUBCOMMAND [options]` | Налаштувати ресурси застосунку.
 `taint` | `kubectl taint NODE NAME KEY_1=VAL_1:TAINT_EFFECT_1 ... KEY_N=VAL_N:TAINT_EFFECT_N [options]` | Оновити taint на одному чи декількох вузлах.
-`top` | <code>kubectl top (POD &#124; NODE) [flags] [options]</code> | Показати використання ресурсів (CPU/Memory/Storage) для Podʼу чи вузла.
+`top` | <code>kubectl top (POD &#124; NODE) [flags] [options]</code> | Показати використання ресурсів (CPU/Memory/Storage) для Podʼа чи вузла.
 `uncordon` | `kubectl uncordon NODE [options]` | Позначити вузол як доступний для планування.
 `version` | `kubectl version [--client] [flags]` | Показати версію Kubernetes, яка працює на клієнті та сервері.
 `wait` | <code>kubectl wait ([-f FILENAME] &#124; resource.group/resource.name &#124; resource.group [(-l label &#124; --all)]) [--for=delete&#124;--for condition=available] [options]</code> | Експериментально: чекати на певний стан одного чи кількох ресурсів.
@@ -365,7 +365,7 @@ kubectl get pods --field-selector=spec.nodeName=server01
 # Показати деталі вузла із імʼям <node-name>.
 kubectl describe nodes <node-name>
 
-# Показати деталі Podʼу із імʼям <pod-name>.
+# Показати деталі Podʼа із імʼям <pod-name>.
 kubectl describe pods/<pod-name>
 
 # Показати деталі всіх Podʼів, які керуються контролером реплікації із вказаним імʼям <rc-name>.
@@ -393,13 +393,13 @@ kubectl delete pods,services -l <label-key>=<label-value>
 kubectl delete pods --all
 ```
 
-`kubectl exec` — Виконати команду у контейнері Podʼу.
+`kubectl exec` — Виконати команду у контейнері Podʼа.
 
 ```shell
 # Отримати вивід виконання команди 'date' у Podʼі <pod-name>. Типово вивід виконується з першого контейнера.
 kubectl exec <pod-name> -- date
 
-# Отримати вивід виконання команди 'date' у контейнері <container-name> Podʼу <pod-name>.
+# Отримати вивід виконання команди 'date' у контейнері <container-name> Podʼа <pod-name>.
 kubectl exec <pod-name> -c <container-name> -- date
 
 # Отримати інтерактивний TTY та виконати /bin/bash у Podʼі <pod-name>. Типово вивід виконується з першого контейнера.

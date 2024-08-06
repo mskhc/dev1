@@ -10,7 +10,7 @@ weight: 10
 
 <!-- overview -->
 
-Kubernetes {{< skew currentVersion >}} підтримує [мережевий інтерфейс контейнерів](https://github.com/containernetworking/cni) (CNI) для втулків мережі кластера. Вам потрібно використовувати втулок CNI, який сумісний з вашим кластером та відповідає вашим потребам. В екосистемі Kubernetes доступні різні втулки (як з відкритим, так і закритим кодом).
+Kubernetes (з версії 1.3 і до останньої версії {{< skew currentVersion >}} та можливо й потім) дозволяє використовувати [мережевий інтерфейс контейнерів](https://github.com/containernetworking/cni) (CNI, Container Network Interface) для втулків мережі кластера. Вам потрібно використовувати втулок CNI, який сумісний з вашим кластером та відповідає вашим потребам. В екосистемі Kubernetes доступні різні втулки (як з відкритим, так і закритим кодом).
 
 Для імплементації [мережевої моделі Kubernetes](/docs/concepts/services-networking/#the-kubernetes-network-model) необхідно використовувати втулок CNI.
 

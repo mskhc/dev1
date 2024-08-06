@@ -69,7 +69,7 @@ spec:
 ```
 
 {{< note >}}
-Якщо в визначенні Podʼу вказані лише `limits`, kubelet виведе `requests` з цих обмежень і встановить їх такими ж, як і визначені `limits`.
+Якщо в визначенні Podʼа вказані лише `limits`, kubelet виведе `requests` з цих обмежень і встановить їх такими ж, як і визначені `limits`.
 {{< /note >}}
 
 Під час обробки допуску (admission) контролер [admission controller](/docs/reference/access-authn-authz/admission-controllers/) RuntimeClass оновлює PodSpec робочого навантаження, щоб включити `overhead`, що є в RuntimeClass. Якщо PodSpec вже має це поле визначеним, Pod буде відхилено. У поданому прикладі, оскільки вказано лише імʼя RuntimeClass, контролер обробки допуску змінює Pod, щоб включити `overhead`.
@@ -102,7 +102,7 @@ map[cpu:250m memory:120Mi]
 kubectl get pod test-pod -o jsonpath='{.spec.containers[*].resources.limits}'
 ```
 
-Загальні запити контейнера становлять 2000m CPU та 200MiB пам'яті:
+Загальні запити контейнера становлять 2000m CPU та 200MiB памʼяті:
 
 ```none
 map[cpu: 500m memory:100Mi] map[cpu:1500m memory:100Mi]
@@ -114,7 +114,7 @@ map[cpu: 500m memory:100Mi] map[cpu:1500m memory:100Mi]
 kubectl describe node | grep test-pod -B2
 ```
 
-Вивід показує запити для 2250m CPU та 320MiB пам'яті. Запити включають перевищення Pod:
+Вивід показує запити для 2250m CPU та 320MiB памʼяті. Запити включають перевищення Pod:
 
 ```none
   Namespace    Name       CPU Requests  CPU Limits   Memory Requests  Memory Limits  AGE
@@ -124,7 +124,7 @@ kubectl describe node | grep test-pod -B2
 
 ## Перевірка обмежень cgroup для Pod {#verify-pod-cgroup-limits}
 
-Перевірте cgroup памʼяті для Pod на вузлі, де запускається робоче навантаження. У наступному прикладі використовується [`crictl`](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md) на вузлі, який надає інтерфейс командного рядка для сумісних з CRI контейнерних середовищ. Це передбачається для демонстрації поведінки overhead Podʼу, і не очікується, що користувачі повинні безпосередньо перевіряти cgroups на вузлі.
+Перевірте cgroup памʼяті для Pod на вузлі, де запускається робоче навантаження. У наступному прикладі використовується [`crictl`](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md) на вузлі, який надає інтерфейс командного рядка для сумісних з CRI контейнерних середовищ. Це передбачається для демонстрації поведінки overhead Podʼа, і не очікується, що користувачі повинні безпосередньо перевіряти cgroups на вузлі.
 
 Спочатку, на конкретному вузлі, визначте ідентифікатор Pod:
 

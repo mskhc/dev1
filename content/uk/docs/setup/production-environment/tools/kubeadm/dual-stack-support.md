@@ -9,7 +9,7 @@ min-kubernetes-server-version: 1.21
 
 {{< feature-state for_k8s_version="v1.23" state="stable" >}}
 
-Ваш кластер Kubernetes має мережу з [підтримкою подвійного стека](/docs/concepts/services-networking/dual-stack/), що означає, що у кластері мережева взаємодія може використовувати обидві адресні родини. У кластері панель управління може призначити як IPv4-адреси, так і IPv6-адреси для {{< glossary_tooltip text="Podʼу" term_id="pod" >}} чи {{< glossary_tooltip text="Service" term_id="service" >}}.
+Ваш кластер Kubernetes має мережу з [підтримкою подвійного стека](/docs/concepts/services-networking/dual-stack/), що означає, що у кластері мережева взаємодія може використовувати обидві адресні родини. У кластері панель управління може призначити як IPv4-адреси, так і IPv6-адреси {{< glossary_tooltip text="Podʼу" term_id="pod" >}} чи {{< glossary_tooltip text="Service" term_id="service" >}}.
 
 <!-- body -->
 

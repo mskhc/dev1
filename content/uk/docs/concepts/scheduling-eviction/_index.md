@@ -23,7 +23,7 @@ no_list: true
 * [Готовність планування Pod](/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
 * [Descheduler](https://github.com/kubernetes-sigs/descheduler#descheduler-for-kubernetes)
 
-## Переривання роботи Podʼу {#pod-disruption}
+## Переривання роботи Podʼа {#pod-disruption}
 
 {{<glossary_definition term_id="pod-disruption" length="all">}}
 

@@ -35,7 +35,7 @@ kubectl delete statefulsets <statefulset-name>
 Після видалення StatefulSet може знадобитися окремо видалити повʼязаний headless service.
 
 ```shell
-kubectl delete service <ім'я-сервісу>
+kubectl delete service <імʼя-сервісу>
 ```
 
 Під час видалення StatefulSet через `kubectl`, StatefulSet масштабується до 0. Всі Podʼи, які є частиною цього робочого навантаження, також видаляються. Якщо ви хочете видалити лише StatefulSet і не Podʼи, використовуйте `--cascade=orphan`. Наприклад:

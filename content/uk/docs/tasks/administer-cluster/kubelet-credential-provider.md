@@ -88,7 +88,7 @@ providers:
       - "*.dkr.ecr-fips.*.amazonaws.com"
       - "*.dkr.ecr.us-iso-east-1.c2s.ic.gov"
       - "*.dkr.ecr.us-isob-east-1.sc2s.sgov.gov"
-    # defaultCacheDuration — це типовий час, протягом якої втулок буде кешувати облікові дані у пам'яті,
+    # defaultCacheDuration — це типовий час, протягом якої втулок буде кешувати облікові дані у памʼяті,
     # якщо тривалість кешу не надана у відповіді втулку. Це поле є обовʼязковим.
     defaultCacheDuration: "12h"
     # Вхідна версія CredentialProviderRequest є обовʼязковою. Відповідь CredentialProviderResponse

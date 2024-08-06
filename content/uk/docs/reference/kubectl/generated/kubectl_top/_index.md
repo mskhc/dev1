@@ -303,4 +303,4 @@ kubectl top [flags]
 
 * [kubectl](../kubectl/) — kubectl керує менеджером кластерів Kubernetes
 * [kubectl top node](kubectl_top_node/) — Показати використання ресурсів (процесор/памʼять) вузлами
-* [kubectl top pod](kubectl_top_pod/) — Показувати використання ресурсів (процесора/памʼять) pod'ами
+* [kubectl top pod](kubectl_top_pod/) — Показувати використання ресурсів (процесора/памʼять) Podʼами

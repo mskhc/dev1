@@ -215,7 +215,7 @@ kubectl delete namespace cpu-example
 * [Налаштування стандартних запитів та лімітів ЦП для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 * [Налаштування мінімальних та максимальних лімітів памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 * [Налаштування мінімальних та максимальних лімітів ЦП для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
-* [Налаштування квот на пам'ять та ЦП для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* [Налаштування квот на памʼять та ЦП для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
 * [Налаштування квоти для Podʼів у просторі імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 * [Налаштування квот для API-обʼєктів](/docs/tasks/administer-cluster/quota-api-object/)
 * [Зміна розміру ресурсів ЦП та памʼяті, призначених контейнерам](/docs/tasks/configure-pod-container/resize-container-resources/)

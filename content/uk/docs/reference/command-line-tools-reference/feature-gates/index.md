@@ -92,4 +92,4 @@ card:
 ## {{% heading "whatsnext" %}}
 
 - У [Політиці застарівання Kubernetes](/docs/reference/using-api/deprecation-policy/) пояснюється підхід проєкту до видалення функцій та компонентів.
-- Починаючи з Kubernetes 1.24, нові бета-версії API стандартно не увімкнені. При увімкненні бета-версії вам також потрібно буде увімкнути всі пов'язані з цим API ресурси. Наприклад, щоб увімкнути певний ресурс, наприклад `storage.k8s.io/v1beta1/csistoragecapacities`, встановіть `--runtime-config=storage.k8s.io/v1beta1/csistoragecapacities`. Докладнішу інформацію про прапорці командного рядка наведено в [Версіювання API](/docs/reference/using-api/#api-versioning).
+- Починаючи з Kubernetes 1.24, нові бета-версії API стандартно не увімкнені. При увімкненні бета-версії вам також потрібно буде увімкнути всі повʼязані з цим API ресурси. Наприклад, щоб увімкнути певний ресурс, наприклад `storage.k8s.io/v1beta1/csistoragecapacities`, встановіть `--runtime-config=storage.k8s.io/v1beta1/csistoragecapacities`. Докладнішу інформацію про прапорці командного рядка наведено в [Версіювання API](/docs/reference/using-api/#api-versioning).

@@ -257,6 +257,6 @@ kubectl delete namespace qos-example
 
 * [Налаштування квоти Podʼа для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 
-* [Налаштування квот для об'єктів API](/docs/tasks/administer-cluster/quota-api-object/)
+* [Налаштування квот для обʼєктів API](/docs/tasks/administer-cluster/quota-api-object/)
 
 * [Керування політиками управління топологією на вузлі](/docs/tasks/administer-cluster/topology-manager/)

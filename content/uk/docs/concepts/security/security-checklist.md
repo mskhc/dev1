@@ -141,7 +141,7 @@ Secret, необхідні для Podʼів, повинні зберігатис
 
 Podʼи, що потребують Secret, повинні автоматично мати їх змонтовані через томи, попередньо збережені у памʼяті, наприклад, за допомогою опції [`emptyDir.medium`](/docs/concepts/storage/volumes/#emptydir). Механізм може бути використаний також для введення Secret зі сторонніх сховищ як томів, наприклад, [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). Це слід робити переважно порівняно з наданням Podʼам облікових записів служб доступу RBAC до Secret. Це дозволить додавати Secret до Podʼів як змінні середовища або файли. Зверніть увагу, що метод змінних середовища може бути більш схильним до витоку через аварійні записи в логах та неконфіденційний характер змінної середовища в Linux, на відміну від механізму дозволу на файли.
 
-Токени облікових записів служби не повинні монтуватися в Podʼи, які не потребують їх. Це можна налаштувати, встановивши [`automountServiceAccountToken`](/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) в значення `false` або для облікового запису служби, щоб застосувати це на всі простори імен або конкретно для Podʼу. Для Kubernetes v1.22 і новіше використовуйте [привʼязані облікові записи служб](/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) для часово обмежених облікових записів служби.
+Токени облікових записів служби не повинні монтуватися в Podʼи, які не потребують їх. Це можна налаштувати, встановивши [`automountServiceAccountToken`](/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server) в значення `false` або для облікового запису служби, щоб застосувати це на всі простори імен або конкретно для Podʼа. Для Kubernetes v1.22 і новіше використовуйте [привʼязані облікові записи служб](/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume) для часово обмежених облікових записів служби.
 
 ## Образи {#images}
 
@@ -202,7 +202,7 @@ Podʼи, що потребують Secret, повинні автоматично
 [CVE-2020-8554: Man in the middle using LoadBalancer or ExternalIPs](https://github.com/kubernetes/kubernetes/issues/97076).
 
 [`NodeRestriction`](/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
-: Обмежує дозволи kubelet тільки на модифікацію ресурсів API для точок доступу керування мережевими підключеннями, якими він володіє або ресурсу API вузла, які представляють себе. Він також заважає використанню kubelet анотації `node-restriction.kubernetes.io/`, яку може використовувати зловмисник з доступом до облікових даних kubelet, щоб вплинути на розміщення Podʼу на вузлі.
+: Обмежує дозволи kubelet тільки на модифікацію ресурсів API для точок доступу керування мережевими підключеннями, якими він володіє або ресурсу API вузла, які представляють себе. Він також заважає використанню kubelet анотації `node-restriction.kubernetes.io/`, яку може використовувати зловмисник з доступом до облікових даних kubelet, щоб вплинути на розміщення Podʼа на вузлі.
 
 Третя група включає втулки, які за стандартно не увімкнені, але можуть бути розглянуті для певних випадків використання:
 

@@ -191,7 +191,7 @@ kubectl get po -n kube-system | grep coredns
 Видаліть Pod за допомогою:
 
 ```shell
-kubectl delete po -n kube-system <ім'я-пода>
+kubectl delete po -n kube-system <імʼя-пода>
 ```
 
 Нові Podʼи з оновленою конфігурацією CoreDNS будуть створені.
@@ -212,10 +212,10 @@ kubeadm записує Labels, Taints, сокенти CRI та іншу інфо
 kubectl edit no <імʼя-вузла>
 ```
 
-Під час виконання `kubeadm upgrade` вміст такого Node може бути перезаписаний. Якщо ви бажаєте зберегти свої зміни в об'єкті Node після оновлення, ви можете підготувати [команду патча для kubectl](/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/) і застосувати її до обʼєкта Node:
+Під час виконання `kubeadm upgrade` вміст такого Node може бути перезаписаний. Якщо ви бажаєте зберегти свої зміни в обʼєкті Node після оновлення, ви можете підготувати [команду патча для kubectl](/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/) і застосувати її до обʼєкта Node:
 
 ```shell
-kubectl patch no <ім'я-вузла> --patch-file <файл-патча>
+kubectl patch no <імʼя-вузла> --patch-file <файл-патча>
 ```
 
 #### Збереження переконфігурації компонента панелі управління {#persisting-control-plane-component-reconfiguration}

@@ -81,6 +81,6 @@ weight: 10
 
 - Використовуйте `kubectl apply -f <directory>`. Виконання цієї команди шукає конфігурацію Kubernetes у всіх файлах `.yaml`, `.yml` та `.json` у `<directory>` та передає її до `apply`.
 
-- Використовуйте селектори міток для операцій `get` та `delete` замість конкретних назв об'єктів. Подивіться розділи про [селектори міток](/docs/concepts/overview/working-with-objects/labels/#label-selectors) та [ефективне використання міток](/docs/concepts/overview/working-with-objects/labels/#using-labels-effectively).
+- Використовуйте селектори міток для операцій `get` та `delete` замість конкретних назв обʼєктів. Подивіться розділи про [селектори міток](/docs/concepts/overview/working-with-objects/labels/#label-selectors) та [ефективне використання міток](/docs/concepts/overview/working-with-objects/labels/#using-labels-effectively).
 
 - Використовуйте `kubectl create deployment` та `kubectl expose`, щоб швидко створити Deployment з одним контейнером та Service. Подивіться [Використання Service для доступу до застосунку в кластері](/docs/tasks/access-application-cluster/service-access-application-cluster/) для прикладу.

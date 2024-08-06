@@ -120,7 +120,7 @@ kubectl delete namespace quota-pod-example
 
 ### Для розробників застосунків {#for-application-developers}
 
-* [Надання ресурсів пам'яті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Надання ресурсів памʼяті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/)
 
 * [Надання ресурсів CPU контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-cpu-resource/)
 

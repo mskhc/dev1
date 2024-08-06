@@ -100,7 +100,7 @@ tier != frontend
 
 Перший вибирає всі ресурси з ключем `environment` та значенням `production`. Другий вибирає всі ресурси з ключем `tier` та значеннями відмінним від `frontend`, та всі ресурси без міток з ключем `tier`. Можна використовувати оператор коми для фільтрації ресурсів у `production`, іншими словами, `environment=production,tier!=frontend`.
 
-Один зі сценаріїв використання вимог на основі рівності використовується для Podʼів, які вказують критерії вибору вузлів. Наприклад, зразок Pod нижче вибирає вузли з міткою "`accelerator=nvidia-tesla-p100`".
+Один зі сценаріїв використання вимог на основі рівності використовується для Podʼів, які вказують критерії вибору вузлів. Наприклад, зразок Podʼа нижче вибирає вузли з міткою `accelerator` зі значенням "`accelerator=nvidia-tesla-p100`".
 
 ```yaml
 apiVersion: v1
@@ -146,7 +146,7 @@ partition
 
 ### Фільтрація LIST та WATCH {#list-and-watch-filtering}
 
-Операції LIST та WATCH можуть вказати селектори міток для фільтрації наборів обʼєктів за допомогою параметра запиту. Дозволені обидві вимоги (представлені тут так, як вони з'являтимуться в рядку запиту URL):
+Операції LIST та WATCH можуть вказати селектори міток для фільтрації наборів обʼєктів за допомогою параметра запиту. Дозволені обидві вимоги (представлені тут так, як вони зʼявлятимуться в рядку запиту URL):
 
 * вимоги на основі рівності: `?labelSelector=environment%3Dproduction,tier%3Dfrontend`
 * вимоги на основі множини: `?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29`
@@ -320,4 +320,4 @@ my-nginx-2035384211-u3t6x   1/1       Running   0          23m       fe
 * Знайдіть [Відомі мітки, Анотації та Ознаки](/docs/reference/labels-annotations-taints/)
 * Перегляньте [Рекомендовані мітки](/docs/concepts/overview/working-with-objects/common-labels/)
 * [Застосовуйте стандарти безпеки для Podʼів з мітками простору імен](/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/)
-* Прочитайте блог про [Написання контролера для міток Podʼу](/blog/2021/06/21/writing-a-controller-for-pod-labels/)
+* Прочитайте блог про [Написання контролера для міток Podʼа](/blog/2021/06/21/writing-a-controller-for-pod-labels/)

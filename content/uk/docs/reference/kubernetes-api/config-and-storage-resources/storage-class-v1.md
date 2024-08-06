@@ -92,7 +92,7 @@ StorageClassList — це колекція класів зберігання.
 
   Стандартні метадані списку. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>), обов'язкове
+- **items** ([]<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>), обовʼязкове
 
   items — це список StorageClasses.
 

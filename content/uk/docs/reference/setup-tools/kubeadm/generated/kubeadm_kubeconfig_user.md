@@ -32,7 +32,7 @@ kubeadm kubeconfig user --client-name=foo --config=bar
         </tr>
         <tr>
             <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>Ім'я користувача. Буде використовуватися як CN у разі створення клієнтських сертифікатів</p></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Імʼя користувача. Буде використовуватися як CN у разі створення клієнтських сертифікатів</p></td>
         </tr>
         <tr>
             <td colspan="2">--config string</td>

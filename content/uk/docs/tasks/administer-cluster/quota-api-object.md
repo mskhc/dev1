@@ -56,7 +56,7 @@ status:
 
 ## Створення PersistentVolumeClaim {#create-a-persistentvolumeclaim}
 
-Ось файл конфігурації для об'єкта PersistentVolumeClaim:
+Ось файл конфігурації для обʼєкта PersistentVolumeClaim:
 
 {{% code_sample file="admin/resource/quota-objects-pvc.yaml" %}}
 

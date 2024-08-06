@@ -16,9 +16,9 @@ weight: 10
 
 ## {{% heading "objectives" %}}
 
-* Запустіть п'ять екземплярів застосунку Hello World.
-* Створіть об'єкт Service, який відкриває зовнішню IP-адресу.
-* Використовуйте об'єкт Service для доступу до запущеного застосунку.
+* Запустіть пʼять екземплярів застосунку Hello World.
+* Створіть обʼєкт Service, який відкриває зовнішню IP-адресу.
+* Використовуйте обʼєкт Service для доступу до запущеного застосунку.
 
 <!-- lessoncontent -->
 
@@ -146,7 +146,7 @@ weight: 10
 kubectl delete services my-service
 ```
 
-Щоб видалити Deployment, ReplicaSet і Pod'и, які запускають застосунок Hello World, введіть цю команду:
+Щоб видалити Deployment, ReplicaSet і Podʼи, які запускають застосунок Hello World, введіть цю команду:
 
 ```shell
 kubectl delete deployment hello-world

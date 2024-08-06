@@ -15,7 +15,7 @@ content_type: concept
 
 <!-- body -->
 
-## Що таке правила перевірки допуску? 
+## Що таке правила перевірки допуску? {#what-is-validating-admission-policy}
 
 Правила перевірки допуску пропонують декларативну, вбудовану альтернативу веб-хукам перевірки допуску.
 
@@ -35,11 +35,6 @@ content_type: concept
 
 Якщо `ValidatingAdmissionPolicy` не потребує налаштування через параметри, просто залиште
 `spec.paramKind` в `ValidatingAdmissionPolicy` не вказаним.
-
-## {{% heading "prerequisites" %}}
-
-- Переконайтеся, що [функціональна можливість](/docs/reference/command-line-tools-reference/feature-gates/) `ValidatingAdmissionPolicy` увімкнена.
-- Переконайтеся, що API `admissionregistration.k8s.io/v1beta1` увімкнено.
 
 ## Початок роботи з правилами перевірки допуску {#getting-started-with-validating-admission-policy}
 

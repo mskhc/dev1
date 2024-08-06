@@ -243,7 +243,7 @@ message ClaimResource {
 
 // CDIDevice визначає інформацію про пристрій CDI
 message CDIDevice {
-    // Повністю кваліфіковане ім'я пристрою CDI
+    // Повністю кваліфіковане імʼя пристрою CDI
     // наприклад: vendor.com/gpu=gpudevice1
     // див. більше деталей в специфікації CDI:
     // https://github.com/container-orchestrated-devices/container-device-interface/blob/main/SPEC.md

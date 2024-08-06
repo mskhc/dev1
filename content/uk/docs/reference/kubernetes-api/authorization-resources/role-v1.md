@@ -67,7 +67,7 @@ RoleList — це колекція Ролей.
 
 - **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
 
-  Стандартні метадані об'єкта.
+  Стандартні метадані обʼєкта.
 
 - **items** ([]<a href="{{< ref "../authorization-resources/role-v1#Role" >}}">Role</a>), обовʼязково
 

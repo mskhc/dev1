@@ -76,7 +76,7 @@ ClusterTrustBundleList — це колекція обʼєктів ClusterTrustB
 
   metadata містить метадані списку.
 
-- **items** ([]<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>), обов'язково
+- **items** ([]<a href="{{< ref "../authentication-resources/cluster-trust-bundle-v1alpha1#ClusterTrustBundle" >}}">ClusterTrustBundle</a>), обовʼязково
 
   items — це колекція обʼєктів ClusterTrustBundle.
 

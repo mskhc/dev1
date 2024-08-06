@@ -10,7 +10,7 @@ weight: 20
 
 {{< feature-state for_k8s_version="v1.18" state="stable" >}}
 
-Bootstrap-токени — це простий токен на предʼявника, який призначений для використання під час створення нових кластерів або приєднання нових вузлів до наявного кластера. Він був створений для підтримки [kubeadm](/docs/reference/setup-tools/kubeadm/), але може використовуватися в інших контекстах для користувачів, які бажають створювати кластери без `kubeadm`. Також він призначений для роботи, через політику RBAC, з системою [Kubelet TLS Bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/).
+Bootstrap-токени — це простий токен на предʼявника, який призначений для використання під час створення нових кластерів або приєднання нових вузлів до наявного кластера. Він був створений для підтримки [kubeadm](/docs/reference/setup-tools/kubeadm/), але може використовуватися в інших контекстах для користувачів, які бажають створювати кластери без `kubeadm`. Також він призначений для роботи, через політику RBAC, з [kubelet TLS Bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/).
 
 <!-- body -->
 

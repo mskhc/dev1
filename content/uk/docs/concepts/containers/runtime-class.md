@@ -50,10 +50,10 @@ RuntimeClass — це функція для вибору конфігураці
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  # Ім'я, за яким буде викликано RuntimeClass.
+  # Імʼя, за яким буде викликано RuntimeClass.
   # RuntimeClass - ресурс без простору імен.
   name: myclass 
-# Ім'я відповідної конфігурації CRI
+# Імʼя відповідної конфігурації CRI
 handler: myconfiguration 
 ```
 
@@ -77,7 +77,7 @@ spec:
   # ...
 ```
 
-Це доручить kubelet використовувати названий RuntimeClass для запуску цього Podʼу. Якщо зазначений RuntimeClass не існує або CRI не може виконати відповідний handler, Pod увійде в термінальну [фазу](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) `Failed`. Шукайте відповідну [подію](/docs/tasks/debug/debug-application/debug-running-pod/) для отримання повідомлення про помилку.
+Це доручить kubelet використовувати названий RuntimeClass для запуску цього Podʼа. Якщо зазначений RuntimeClass не існує або CRI не може виконати відповідний handler, Pod увійде в термінальну [фазу](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) `Failed`. Шукайте відповідну [подію](/docs/tasks/debug/debug-application/debug-running-pod/) для отримання повідомлення про помилку.
 
 Якщо `runtimeClassName` не вказано, буде використовуватися стандартний обробник, що еквівалентно поведінці при вимкненні функції RuntimeClass.
 
@@ -116,7 +116,7 @@ spec:
 
 Щоб гарантувати, що Podʼи потрапляють на вузли, які підтримують конкретний RuntimeClass, цей набір вузлів повинен мати спільні мітки, які потім обираються полем `runtimeclass.scheduling.nodeSelector`. NodeSelector RuntimeClass обʼєднується з nodeSelector Pod під час допуску, фактично беручи перетин множини вузлів, обраних кожним.
 
-Якщо підтримувані вузли позначені, щоб завадити запуску інших Podʼів з іншим RuntimeClass на вузлі, ви можете додати `tolerations` до RuntimeClass. Як із `nodeSelector`, tolerations обʼєднуються з tolerations Pod у доступі, фактично беручи об'єднання множини вузлів, які влаштовують всіх.
+Якщо підтримувані вузли позначені, щоб завадити запуску інших Podʼів з іншим RuntimeClass на вузлі, ви можете додати `tolerations` до RuntimeClass. Як із `nodeSelector`, tolerations обʼєднуються з tolerations Pod у доступі, фактично беручи обʼєднання множини вузлів, які влаштовують всіх.
 
 Щоб дізнатися більше про налаштування селектора вузла і tolerations, див. [Призначення Podʼів вузлам](/docs/concepts/scheduling-eviction/assign-pod-node/).
 

@@ -1,6 +1,6 @@
 ---
 
-title: Створення Podʼу Windows HostProcess
+title: Створення Podʼа Windows HostProcess
 content_type: task
 weight: 50
 min-kubernetes-server-version: 1.23
@@ -79,7 +79,7 @@ Windows HostProcess контейнери дозволяють вам запус�
     <tr>
       <td style="white-space: nowrap"><a href="/docs/tasks/configure-pod-container/configure-runasusername/"><tt>securityContext.windowsOptions.runAsUserName</tt></a></td>
       <td>
-        <p>Необхідно вказати, яким користувачем має виконуватися контейнер HostProcess в специфікації Podʼу.</p>
+        <p>Необхідно вказати, яким користувачем має виконуватися контейнер HostProcess в специфікації Podʼа.</p>
         <p><strong>Дозволені значення</strong></p>
         <ul>
           <li><code>NT AUTHORITY\SYSTEM</code></li>

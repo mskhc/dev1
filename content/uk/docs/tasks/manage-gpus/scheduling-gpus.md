@@ -83,7 +83,7 @@ kind: Pod
 metadata:
   name: example-vector-add
 spec:
-  # Виможете використовувати Kubernetes node affinity для планування цього Podʼу на вузол
+  # Виможете використовувати Kubernetes node affinity для планування цього Podʼа на вузол
   # який надає kind типу GPU, який потрібе його контейнеру для роботи
   affinity:
     nodeAffinity:

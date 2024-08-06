@@ -126,7 +126,7 @@ Pod Template:
       /input from input (rw)
   Volumes:
    input:
-    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Type:       EmptyDir (тимчасова тека, яка поділяє життя Podʼа)
     Medium:
     SizeLimit:  <unset>
 Events:

@@ -7,11 +7,11 @@ weight: 110
 {{< glossary_definition term_id="api-eviction" length="short" >}} </br>
 
 Ви можете ініціювати виселення, викликавши Eviction API безпосередньо або програмно,
-використовуючи клієнт {{<glossary_tooltip term_id="kube-apiserver" text="API-сервера">}}, наприклад, команду `kubectl drain`. Це створює обʼєкт `Eviction`, що призводить до завершення роботи Podʼу через API-сервер.
+використовуючи клієнт {{<glossary_tooltip term_id="kube-apiserver" text="API-сервера">}}, наприклад, команду `kubectl drain`. Це створює обʼєкт `Eviction`, що призводить до завершення роботи Podʼа через API-сервер.
 
 Виселення ініційовані API дотримуються вашого налаштованого [`PodDisruptionBudgets`](/docs/tasks/run-application/configure-pdb/) та [`terminationGracePeriodSeconds`](/docs/concepts/workloads/pods/pod-lifecycle#pod-termination).
 
-Використання API для створення обʼєкта Eviction для Podʼу схоже на виконання контрольованої політикою операції [`DELETE`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#delete-delete-a-pod) на Podʼі.
+Використання API для створення обʼєкта Eviction для Podʼа схоже на виконання контрольованої політикою операції [`DELETE`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#delete-delete-a-pod) на Podʼі.
 
 ## Виклик Eviction API {#calling-the-eviction-api}
 
@@ -66,7 +66,7 @@ curl -v -H 'Content-type: application/json' https://your-cluster-api-endpoint.ex
 Коли ви запитуєте виселення за допомогою API, сервер API виконує перевірки допуску
 і відповідає одним із таких способів:
 
-* `200 ОК`: виселення дозволено, підресурс `Eviction` створюється, і Pod видаляється, подібно до надсилання `DELETE`-запиту на URL Podʼа.
+* `200 ОК`: виселення дозволено, субресурс `Eviction` створюється, і Pod видаляється, подібно до надсилання `DELETE`-запиту на URL Podʼа.
 * `429 Забагато запитів`: виселення на цей момент не дозволено через налаштований {{<glossary_tooltip term_id="pod-disruption-budget" text="PodDisruptionBudget">}}. Можливо, ви зможете спробувати виселення пізніше. Ви також можете отримати цю відповідь через обмеження швидкості API.
 * `500 Внутрішня помилка сервера`: виселення не дозволено через помилкову конфігурацію, наприклад, якщо декілька PodDisruptionBudget посилаються на той самий Pod.
 

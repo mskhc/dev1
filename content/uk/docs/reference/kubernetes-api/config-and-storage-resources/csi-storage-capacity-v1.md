@@ -81,7 +81,7 @@ CSIStorageCapacityList — це колекція обʼєктів CSIStorageCap
 
   Стандартні метадані списку. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-storage-capacity-v1#CSIStorageCapacity" >}}">CSIStorageCapacity</a>), обов'язково
+- **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-storage-capacity-v1#CSIStorageCapacity" >}}">CSIStorageCapacity</a>), обовʼязково
 
   *Map: унікальні значення за ключем name будуть збережені під час злиття*
 

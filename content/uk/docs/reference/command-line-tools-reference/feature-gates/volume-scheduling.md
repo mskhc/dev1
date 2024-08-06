@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає планування з урахуванням топології тома і робить прив'язку PersistentVolumeClaim (PVC) обізнаною з рішеннями щодо планування. Це також дозволяє використовувати тип тома [`local`](/docs/concepts/storage/volumes/#local) при використанні разом з функціональною можливістю `PersistentLocalVolumes`.
+Вмикає планування з урахуванням топології тома і робить привʼязку PersistentVolumeClaim (PVC) обізнаною з рішеннями щодо планування. Це також дозволяє використовувати тип тома [`local`](/docs/concepts/storage/volumes/#local) при використанні разом з функціональною можливістю `PersistentLocalVolumes`.

@@ -53,7 +53,7 @@ parameters:
 
 ## Використання динамічного впровадження {#using-dynamic-provisioning}
 
-Користувачі можуть запитувати динамічно впроваджене сховище, включаючи клас сховища у свій `PersistentVolumeClaim`. До версії Kubernetes v1.6 це робилося за допомогою анотації `volume.beta.kubernetes.io/storage-class`. Однак ця анотація застаріла з версії v1.9. Тепер користувачі можуть і повинні використовувати поле `storageClassName` об'єкта `PersistentVolumeClaim`. Значення цього поля повинно відповідати імені `StorageClass`, налаштованому адміністратором (див. [нижче](#enabling-dynamic-provisioning)).
+Користувачі можуть запитувати динамічно впроваджене сховище, включаючи клас сховища у свій `PersistentVolumeClaim`. До версії Kubernetes v1.6 це робилося за допомогою анотації `volume.beta.kubernetes.io/storage-class`. Однак ця анотація застаріла з версії v1.9. Тепер користувачі можуть і повинні використовувати поле `storageClassName` обʼєкта `PersistentVolumeClaim`. Значення цього поля повинно відповідати імені `StorageClass`, налаштованому адміністратором (див. [нижче](#enabling-dynamic-provisioning)).
 
 Наприклад, щоб вибрати клас сховища "fast", користувач створює наступний `PersistentVolumeClaim`:
 

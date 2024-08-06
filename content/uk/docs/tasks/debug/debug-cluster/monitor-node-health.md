@@ -46,7 +46,7 @@ weight: 20
    kubectl apply -f https://k8s.io/examples/debug/node-problem-detector.yaml
    ```
 
-### Використання Podʼу надбудови для увімкнення Node Problem Detector {#using-addon-pod}
+### Використання Podʼа надбудови для увімкнення Node Problem Detector {#using-addon-pod}
 
 Якщо ви використовуєте власне рішення для ініціалізації кластера та не потребуєте перезапису типової конфігурації, ви можете скористатися Podʼом надбудови, щоб автоматизувати розгортання.
 

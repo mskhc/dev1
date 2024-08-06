@@ -67,7 +67,7 @@ ComponentStatus (і ComponentStatusList) містить інформацію п�
 
   Стандартні метадані списку. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-- **items** ([]<a href="{{< ref "../cluster-resources/component-status-v1#ComponentStatus" >}}">ComponentStatus</a>), обов'язкове
+- **items** ([]<a href="{{< ref "../cluster-resources/component-status-v1#ComponentStatus" >}}">ComponentStatus</a>), обовʼязкове
 
   Список обʼєктів ComponentStatus.
 

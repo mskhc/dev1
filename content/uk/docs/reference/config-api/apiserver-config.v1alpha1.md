@@ -620,7 +620,7 @@ ProtocolType — набір допустимих значень для Connecti
 
 - [Transport](#apiserver-k8s-io-v1alpha1-Transport)
 
-TCPTransport надає інформацію для з'єднання з сервером konnectivity через TCP
+TCPTransport надає інформацію для зʼєднання з сервером konnectivity через TCP
 
 <table class="table">
     <thead><tr><th width="30%">Field</th><th>Description</th></tr></thead>
@@ -742,7 +742,7 @@ UserValidationRule надає конфігурацію для одного пр�
             <td><p>expression представляє вираз, який буде оцінюватися CEL. Повинен повернути true, щоб перевірка пройшла успішно.</p>
             <p>CEL вирази мають доступ до вмісту UserInfo, організованого в CEL змінну:</p>
             <ul>
-                <li>'user' - authentication.k8s.io/v1, Об'єкт Kind=UserInfo Див. https://github.com/kubernetes/api/blob/release-1.28/authentication/v1/types.go#L105-L122 для визначення. API документація: <a href="/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io</a></li>
+                <li>'user' - authentication.k8s.io/v1, Обʼєкт Kind=UserInfo Див. https://github.com/kubernetes/api/blob/release-1.28/authentication/v1/types.go#L105-L122 для визначення. API документація: <a href="/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io</a></li>
             </ul>
             <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>

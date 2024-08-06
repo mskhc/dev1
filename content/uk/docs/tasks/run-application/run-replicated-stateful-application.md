@@ -64,7 +64,7 @@ kubectl apply -f https://k8s.io/examples/application/mysql/mysql-configmap.yaml
 kubectl apply -f https://k8s.io/examples/application/mysql/mysql-services.yaml
 ```
 
-Service headless надає місце для DNS-записів, які {{< glossary_tooltip text="контролери" term_id="controller" >}} StatefulSet створюють для кожного Podʼу, що є частиною набору. Оскільки headless Service називається `mysql`, Podʼи доступні за допомогою зіставлення `<pod-name>.mysql` з будь-якого іншого Podʼа в тому ж Kubernetes кластері та просторі імен.
+Service headless надає місце для DNS-записів, які {{< glossary_tooltip text="контролери" term_id="controller" >}} StatefulSet створюють для кожного Podʼа, що є частиною набору. Оскільки headless Service називається `mysql`, Podʼи доступні за допомогою зіставлення `<pod-name>.mysql` з будь-якого іншого Podʼа в тому ж Kubernetes кластері та просторі імен.
 
 Клієнтський Service, з назвою `mysql-read`, є звичайним Service з власним кластерним IP, який розподіляє підключення між всіма Podʼами MySQL, які повідомляють про готовність. Набір потенційних точок доступу включає головний сервер MySQL та всі репліки.
 
@@ -107,9 +107,7 @@ mysql-2   2/2       Running   0          1m
 
 Контролер StatefulSet запускає Podʼи по одному, в порядку їх індексів. Він чекає, доки кожен Pod не повідомить про готовність, перш ніж запустити наступний.
 
-Крім того, контролер призначає кожному Podʼу унікальне, стабільне імʼя у формі
-`<statefulset-name>-<ordinal-index>`, в результаті отримуємо Podʼи з іменами `mysql-0`,
-`mysql-1` та `mysql-2`.
+Крім того, контролер призначає кожному Podʼу унікальне, стабільне імʼя у формі `<statefulset-name>-<ordinal-index>`, в результаті отримуємо Podʼи з іменами `mysql-0`, `mysql-1` та `mysql-2`.
 
 Шаблон Podʼа у вищенаведеному маніфесті StatefulSet використовує ці властивості, щоб здійснити впорядкований запуск реплікації MySQL.
 

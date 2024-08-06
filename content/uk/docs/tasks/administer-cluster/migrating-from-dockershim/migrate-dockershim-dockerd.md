@@ -74,7 +74,7 @@ content_type: task
     Замініть наступне:
 
     * `/шлях/до/admin.conf`: шлях до файлу конфігурації kubectl, `admin.conf`.
-    * `<NODE_NAME>`: ім'я вузла, яке ви хочете змінити.
+    * `<NODE_NAME>`: імʼя вузла, яке ви хочете змінити.
 
 1. Змініть `kubeadm.alpha.kubernetes.io/cri-socket` з `/var/run/dockershim.sock` на `unix:///var/run/cri-dockerd.sock`.
 2. Збережіть зміни. Обʼєкт `Node` оновлюється при збереженні.

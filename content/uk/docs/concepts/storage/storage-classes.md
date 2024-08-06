@@ -333,7 +333,7 @@ parameters:
 
 - `monitors`: Монітори Ceph, розділені комою. Цей параметр є обовʼязковим.
 - `adminId`: Ідентифікатор клієнта Ceph, який може створювати образи в пулі. Типово — "admin".
-- `adminSecretName`: Імʼя секрету для `adminId`. Цей параметр є обов'язковим. Наданий секрет повинен мати тип "kubernetes.io/rbd".
+- `adminSecretName`: Імʼя секрету для `adminId`. Цей параметр є обовʼязковим. Наданий секрет повинен мати тип "kubernetes.io/rbd".
 - `adminSecretNamespace`: Простір імен для `adminSecretName`. Типово — "default".
 - `pool`: Ceph RBD pool. Типово — "rbd".
 - `userId`: Ідентифікатор клієнта Ceph, який використовується для зіставлення образу RBD. Типово — такий самий, як і `adminId`.
@@ -421,6 +421,6 @@ provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-Локальні томи не підтримують динамічне впровадження в Kubernetes {{< skew currentVersion >}}; однак все одно слід створити StorageClass, щоб відкласти звʼязування тому до моменту фактичного планування Podʼу на відповідний вузол. Це вказано параметром звʼязування тому `WaitForFirstConsumer`.
+Локальні томи не підтримують динамічне впровадження в Kubernetes {{< skew currentVersion >}}; однак все одно слід створити StorageClass, щоб відкласти звʼязування тому до моменту фактичного планування Podʼа на відповідний вузол. Це вказано параметром звʼязування тому `WaitForFirstConsumer`.
 
 Відкладення звʼязування тому дозволяє планувальнику враховувати всі обмеження планування Podʼа при виборі відповідного PersistenVolume для PersistenVolumeClaim.

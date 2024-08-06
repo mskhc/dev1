@@ -98,7 +98,7 @@ NamespaceList — це список просторів імен.
 
 - **items** ([]<a href="{{< ref "../cluster-resources/namespace-v1#Namespace" >}}">Namespace</a>), обовʼязково
 
-  Items — це список об'єктів просторів імен у списку. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/](/docs/concepts/overview/working-with-objects/namespaces/)
+  Items — це список обʼєктів просторів імен у списку. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/](/docs/concepts/overview/working-with-objects/namespaces/)
 
 ## Операції {#operations}
 

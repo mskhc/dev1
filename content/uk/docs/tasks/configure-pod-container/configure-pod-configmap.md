@@ -481,7 +481,7 @@ configMapGenerator:
   - special.type=charm
 ```
 
-Застосуйте теку kustomization для створення об'єкта ConfigMap:
+Застосуйте теку kustomization для створення обʼєкта ConfigMap:
 
 ```shell
 kubectl apply -k .

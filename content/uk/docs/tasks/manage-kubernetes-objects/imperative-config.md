@@ -51,7 +51,7 @@ weight: 40
 Якщо файл конфігурації вказує поле `generateName` в секції `metadata` замість поля `name`, ви не можете видалити обʼєкт, використовуючи `kubectl delete -f <filename|url>`. Вам доведеться використовувати інші прапорці для видалення обʼєкта. Наприклад:
 
 ```shell
-kubectl delete <тип> <ім'я>
+kubectl delete <тип> <імʼя>
 kubectl delete <тип> -l <мітка>
 ```
 

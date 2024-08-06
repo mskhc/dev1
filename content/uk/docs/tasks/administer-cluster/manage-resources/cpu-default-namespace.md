@@ -167,11 +167,11 @@ kubectl delete namespace default-cpu-example
 
 * [Налаштування квоти для Podʼів у просторі імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 
-* [Налаштування квот для об'єктів API](/docs/tasks/administer-cluster/quota-api-object/)
+* [Налаштування квот для обʼєктів API](/docs/tasks/administer-cluster/quota-api-object/)
 
 ### Для розробників додатків {#for-application-developers}
 
-* [Призначення ресурсів пам'яті для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Призначення ресурсів памʼяті для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-memory-resource/)
 
 * [Призначення ресурсів CPU для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-cpu-resource/)
 

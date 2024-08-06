@@ -239,7 +239,7 @@ kubectl -n kube-system get deployment coredns -o yaml | \
   kubectl apply -f -
 ```
 
-Іншою причиною того, що CoreDNS має `CrashLoopBackOff`, є те, що Pod CoreDNS, розгорнутий в Kubernetes, виявляє цикл. [Існують різні обхідні варіанти](https://github.com/coredns/coredns/tree/master/plugin/loop#troubleshooting-loops-in-kubernetes-clusters), щоб уникнути спроб перезапуску Podʼу CoreDNS кожного разу, коли CoreDNS виявляє цикл та виходить.
+Іншою причиною того, що CoreDNS має `CrashLoopBackOff`, є те, що Pod CoreDNS, розгорнутий в Kubernetes, виявляє цикл. [Існують різні обхідні варіанти](https://github.com/coredns/coredns/tree/master/plugin/loop#troubleshooting-loops-in-kubernetes-clusters), щоб уникнути спроб перезапуску Podʼа CoreDNS кожного разу, коли CoreDNS виявляє цикл та виходить.
 
 {{< warning >}}
 Вимкнення SELinux або встановлення `allowPrivilegeEscalation` в `true` може піддавати ризику безпеку вашого кластера.

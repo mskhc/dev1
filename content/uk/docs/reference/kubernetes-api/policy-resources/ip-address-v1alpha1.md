@@ -51,7 +51,7 @@ IPAddressSpec описує атрибути IP-адреси.
 
   - **parentRef.name** (string)
 
-    Ім'я є іменем обʼєкта, на який посилаються.
+    Імʼя є іменем обʼєкта, на який посилаються.
 
   - **parentRef.namespace** (string)
 
@@ -79,7 +79,7 @@ IPAddressList містить список IPAddress.
 
   Метадані стандартного обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>), обов'язково
+- **items** ([]<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>), обовʼязково
 
   items є списком IP-адрес (IPAddress).
 

@@ -42,7 +42,7 @@ weight: 40
 
 Контейнери Windows також можуть працювати як облікові записи активного каталогу за допомогою [Group Managed Service Accounts](/docs/tasks/configure-pod-container/configure-gmsa/)
 
-## Ізоляція на рівні Podʼу {#pod-level-security-isolation}
+## Ізоляція на рівні Podʼа {#pod-level-security-isolation}
 
 Механізми контексту безпеки Podʼів, специфічні для Linux (такі як SELinux, AppArmor, Seccomp або власні POSIX можливості), не підтримуються на вузлах з Windows.
 

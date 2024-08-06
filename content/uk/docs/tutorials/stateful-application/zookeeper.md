@@ -145,7 +145,7 @@ myid zk-2
 3
 ```
 
-Щоб отримати повне доменне імʼя (FQDN) кожного Podʼу у StatefulSet `zk`, використовуйте таку команду.
+Щоб отримати повне доменне імʼя (FQDN) кожного Podʼа у StatefulSet `zk`, використовуйте таку команду.
 
 ```shell
 for i in 0 1 2; do kubectl exec zk-$i -- hostname -f; done
@@ -278,7 +278,7 @@ numChildren = 0
 
 Як зазначено в розділі [Основи ZooKeeper](#zookeeper), ZooKeeper фіксує всі записи в стійкому журналі (WAL) та періодично записує знімки стану памʼяті на носії. Використання WAL для забезпечення стійкості є поширеною технікою для застосунків, які використовують протоколи консенсусу для досягнення реплікованої машини станів.
 
-Використовуйте команду [`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити об'єкт `StatefulSet` `zk`.
+Використовуйте команду [`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити обʼєкт `StatefulSet` `zk`.
 
 ```shell
 kubectl delete statefulset zk
@@ -794,7 +794,7 @@ kubectl get nodes
 У цьому посібнику передбачається наявність кластера з щонайменше чотирма вузлами. Якщо в кластері є більше чотирьох вузлів, використовуйте [`kubectl cordon`](/docs/reference/generated/kubectl/kubectl-commands/#cordon), щоб заборонити доступ до всіх вузлів, окрім чотирьох. Обмеження до чотирьох вузлів гарантуватиме, що Kubernetes врахує обмеження подібності та PodDisruptionBudget при плануванні Podʼів zookeeper у наступній симуляції обслуговування.
 
 ```shell
-kubectl cordon <ім'я-вузла>
+kubectl cordon <імʼя-вузла>
 ```
 
 Використайте цю команду, щоб отримати `zk-pdb` `PodDisruptionBudget`.

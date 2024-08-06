@@ -44,7 +44,7 @@ kubectl get nodes k8s-linuxpool1-34450317-0 -o go-template --template='{{range .
 
 Має бути виділено один блок IPv4 та один блок IPv6.
 
-Перевірте, що на вузлі виявлено інтерфейс IPv4 та IPv6. Замініть ім'я вузла на дійсний вузол з кластера. У цьому прикладі ім'я вузла - `k8s-linuxpool1-34450317-0`:
+Перевірте, що на вузлі виявлено інтерфейс IPv4 та IPv6. Замініть імʼя вузла на дійсний вузол з кластера. У цьому прикладі імʼя вузла - `k8s-linuxpool1-34450317-0`:
 
 ```shell
 kubectl get nodes k8s-linuxpool1-34450317-0 -o go-template --template='{{range .status.addresses}}{{printf "%s: %s\n" .type .address}}{{end}}'
@@ -58,7 +58,7 @@ InternalIP: 2001:db8:10::5
 
 ### Перевірка адресації Pod {#validate-pod-addressing}
 
-Перевірте, що у Pod є призначена адреса IPv4 та IPv6. Замініть імʼя Pod на наявний Pod у вашому кластері. У цьому прикладі ім'я Pod - `pod01`:
+Перевірте, що у Pod є призначена адреса IPv4 та IPv6. Замініть імʼя Pod на наявний Pod у вашому кластері. У цьому прикладі імʼя Pod - `pod01`:
 
 ```shell
 kubectl get pods pod01 -o go-template --template='{{range .status.podIPs}}{{printf "%s\n" .ip}}{{end}}'

@@ -9,7 +9,7 @@ description: >-
 ## Метрики (v1.30) {#metrics-v1-30}
 
 <!-- (auto-generated 2024 Apr 24) -->
-<!-- (auto-generated v1.30) -->
+<!-- (auto-generated 2024 Jul 02) -->
 
 Ця сторінка містить деталі метрик, які експортують різні компоненти Kubernetes. Ви можете запитувати точки доступу метрик для цих компонентів за допомогою HTTP-запиту та отримувати поточні дані метрик у форматі Prometheus.
 
@@ -64,8 +64,26 @@ description: >-
         </ul>
     </div>
     <div class="metric" data-stability="stable">
+        <div class="metric_name">apiserver_request_duration_seconds</div>
+        <div class="metric_help">Розподіл затримки відповіді в секундах для кожного дієслова, значення dry run, групи, версії, ресурсу, субресурсу, області застосування та компонента.</div>
+        <ul>
+            <li><label class="metric_detail"Рівень стабільності:</label><span class="metric_stability_level">STABLE</span></li>
+            <li data-type="histogram"><label class="metric_detail">Тип</label> <span class="metric_type">Histogram</span></li>
+            <li class="metric_labels_varying"><label class="metric_detail">>Мітки:</label><span class="metric_label">component</span><span class="metric_label">dry_run</span><span class="metric_label">group</span><span class="metric_label">resource</span><span class="metric_label">scope</span><span class="metric_label">subresource</span><span class="metric_label">verb</span><span class="metric_label">version</span></li>
+        </ul>
+	</div>
+    <div class="metric" data-stability="stable">
+        <div class="metric_name">apiserver_request_total</div>
+        <div class="metric_help">Лічильник запитів apiserver з розбивкою по кожному дієслову, dry run, групі, версії, ресурсу, області застосування, компоненту і коду HTTP-відповіді.</div>
+        <ul>
+            <li><label class="metric_detail"Рівень стабільності:</label><span class="metric_stability_level">STABLE</span></li>
+            <li data-type="counter"><label class="metric_detail">Тип</label> <span class="metric_type">Counter</span></li>
+            <li class="metric_labels_varying"><label class="metric_detail">>Мітки:</label><span class="metric_label">code</span><span class="metric_label">component</span><span class="metric_label">dry_run</span><span class="metric_label">group</span><span class="metric_label">resource</span><span class="metric_label">scope</span><span class="metric_label">subresource</span><span class="metric_label">verb</span><span class="metric_label">version</span></li>
+        </ul>
+	</div>
+    <div class="metric" data-stability="stable">
         <div class="metric_name">apiserver_requested_deprecated_apis</div>
-        <div class="metric_help">Вимірювач запитуваних застарілих API, розподілених за групами API, версією, ресурсом, підресурсом і видаленим_випуском.</div>
+        <div class="metric_help">Вимірювач запитуваних застарілих API, розподілених за групами API, версією, ресурсом, субресурсом і видаленим_випуском.</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">STABLE</span></li>
             <li data-type="gauge"><label class="metric_detail">Тип:</label> <span class="metric_type">Gauge</span></li>
@@ -74,7 +92,7 @@ description: >-
     </div>
     <div class="metric" data-stability="stable">
         <div class="metric_name">apiserver_response_sizes</div>
-        <div class="metric_help">Розподіл розміру відповіді в байтах для кожної групи, версії, дієслова, ресурсу, підресурсу, області дії та компонента.</div>
+        <div class="metric_help">Розподіл розміру відповіді в байтах для кожної групи, версії, дієслова, ресурсу, субресурсу, області дії та компонента.</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">STABLE</span></li>
             <li data-type="histogram"><label class="metric_detail">Тип:</label> <span class="metric_type">Histogram</span></li>
@@ -319,7 +337,7 @@ description: >-
     </div>
     <div class="metric" data-stability="stable">
         <div class="metric_name">scheduler_schedule_attempts_total</div>
-        <div class="metric_help">Кількість спроб запланувати pod'и, за результатом. "unscheduled" означає, що Pod не вдалося запланувати, тоді як "error" означає внутрішню проблему планувальника.</div>
+        <div class="metric_help">Кількість спроб запланувати Podʼи, за результатом. "unscheduled" означає, що Pod не вдалося запланувати, тоді як "error" означає внутрішню проблему планувальника.</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">STABLE</span></li>
             <li data-type="counter"><label class="metric_detail">Тип:</label> <span class="metric_type">Counter</span></li>
@@ -2074,7 +2092,7 @@ description: >-
     </div>
     <div class="metric" data-stability="alpha">
         <div class="metric_name">job_controller_pod_failures_handled_by_failure_policy_total</div>
-        <div class="metric_help">`Кількість збійних Pod'ів, оброблених політикою збоїв, відносно дії політики збоїв, застосованої на основі відповідного правила. Можливі значення мітки дії відповідають можливим значенням дії правила політики відмов, а саме: "FailJob", "Ignore" та "Count".`</div>
+        <div class="metric_help">`Кількість збійних Podʼів, оброблених політикою збоїв, відносно дії політики збоїв, застосованої на основі відповідного правила. Можливі значення мітки дії відповідають можливим значенням дії правила політики відмов, а саме: "FailJob", "Ignore" та "Count".`</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">ALPHA</span></li>
             <li data-type="counter"><label class="metric_detail">Тип:</label> <span class="metric_type">Counter</span></li>
@@ -3568,7 +3586,7 @@ description: >-
     </div>
     <div class="metric" data-stability="alpha">
         <div class="metric_name">scheduler_scheduler_cache_size</div>
-        <div class="metric_help">Кількість вузлів, Podʼів та передбачуваних (зв'язаних) Podʼів у кеші планувальника.</div>
+        <div class="metric_help">Кількість вузлів, Podʼів та передбачуваних (звʼязаних) Podʼів у кеші планувальника.</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">ALPHA</span></li>
             <li data-type="gauge"><label class="metric_detail">Тип:</label> <span class="metric_type">Gauge</span></li>
@@ -3761,7 +3779,7 @@ description: >-
     </div>
     <div class="metric" data-stability="alpha">
         <div class="metric_name">volume_manager_selinux_pod_context_mismatch_errors_total</div>
-        <div class="metric_help">Кількість помилок, коли Pod визначає різні контексти SELinux для своїх контейнерів, які використовують однаковий об'єм. Kubelet не зможе запустити такий Pod і спробує ще раз, тому значення цієї метрики може не відповідати дійсній кількості Podʼів.</div>
+        <div class="metric_help">Кількість помилок, коли Pod визначає різні контексти SELinux для своїх контейнерів, які використовують однаковий обʼєм. Kubelet не зможе запустити такий Pod і спробує ще раз, тому значення цієї метрики може не відповідати дійсній кількості Podʼів.</div>
         <ul>
             <li><label class="metric_detail">Рівень стабільності:</label><span class="metric_stability_level">ALPHA</span></li>
             <li data-type="gauge"><label class="metric_detail">Тип:</label> <span class="metric_type">Gauge</span></li>

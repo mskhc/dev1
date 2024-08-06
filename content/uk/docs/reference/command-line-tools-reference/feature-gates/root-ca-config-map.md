@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Налаштуйте `kube-controller-manager` на публікацію {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} з назвою `kube-root-ca.crt` у кожному просторі імен. Цей ConfigMap містить пакет CA, який використовується для перевірки зʼєднань з kube-apiserver. Докладні відомості наведено у статті [Токени прив'язаних службових облікових записів](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md).
+Налаштуйте `kube-controller-manager` на публікацію {{< glossary_tooltip text="ConfigMap" term_id="configmap" >}} з назвою `kube-root-ca.crt` у кожному просторі імен. Цей ConfigMap містить пакет CA, який використовується для перевірки зʼєднань з kube-apiserver. Докладні відомості наведено у статті [Токени привʼязаних службових облікових записів](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md).

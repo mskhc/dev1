@@ -55,7 +55,7 @@ weight: 50
 
 ## Використання кількох контролерів Ingress {#using-multiple-ingress-controllers}
 
-Ви можете розгортати будь-яку кількість контролерів Ingress за допомогою [класу Ingress](/docs/concepts/services-networking/ingress/#ingress-class) у межах кластера. Зверніть увагу на значення `.metadata.name` вашого ресурсу класу Ingress. При створенні Ingress вам слід вказати це ім'я для визначення поля `ingressClassName` в обʼєкті Ingress (див. [специфікацію IngressSpec v1](/docs/reference/kubernetes-api/service-resources/ingress-v1/#IngressSpec)). `ingressClassName` є заміною застарілого [методу анотації](/docs/concepts/services-networking/ingress/#deprecated-annotation).
+Ви можете розгортати будь-яку кількість контролерів Ingress за допомогою [класу Ingress](/docs/concepts/services-networking/ingress/#ingress-class) у межах кластера. Зверніть увагу на значення `.metadata.name` вашого ресурсу класу Ingress. При створенні Ingress вам слід вказати це імʼя для визначення поля `ingressClassName` в обʼєкті Ingress (див. [специфікацію IngressSpec v1](/docs/reference/kubernetes-api/service-resources/ingress-v1/#IngressSpec)). `ingressClassName` є заміною застарілого [методу анотації](/docs/concepts/services-networking/ingress/#deprecated-annotation).
 
 Якщо ви не вказуєте IngressClass для Ingress, і у вашому кластері рівно один IngressClass відзначений як типовий, тоді Kubernetes [застосовує](/docs/concepts/services-networking/ingress/#default-ingress-class) типовий IngressClass кластера до Ingress. Ви вказуєте IngressClass як типовий, встановлюючи анотацію [`ingressclass.kubernetes.io/is-default-class`](/docs/reference/labels-annotations-taints/#ingressclass-kubernetes-io-is-default-class) для цього IngressClass, зі значенням `"true"`.
 

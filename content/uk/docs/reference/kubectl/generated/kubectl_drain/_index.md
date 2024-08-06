@@ -114,7 +114,7 @@ kubectl drain foo --grace-period=900
         </tr>
         <tr>
             <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо хначення DeletionTimestamp Podʼа старіще за N секунд, пропускати очікування Podʼу. Значення секунд має бути більще за 0, щоб його оминути.</p></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо хначення DeletionTimestamp Podʼа старіще за N секунд, пропускати очікування Podʼа. Значення секунд має бути більще за 0, щоб його оминути.</p></td>
         </tr>
         <tr>
             <td colspan="2">--timeout duration</td>

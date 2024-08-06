@@ -19,7 +19,7 @@ tags:
 
 Механізм downward API Kubernetes дозволяє контейнерам використовувати інформацію про себе або їхній контекст в кластері Kubernetes. Застосунки в контейнерах можуть мати доступ до цієї інформації, без потреби для них діяти як клієнт Kubernetes API.
 
-Є два способи надання доступу до полів Podʼу та контейнера для робочого контейнера:
+Є два способи надання доступу до полів Podʼа та контейнера для робочого контейнера:
 
 * використання [змінних оточення](/docs/tasks/inject-data-application/environment-variable-expose-pod-information/)
 * використання [томів `downwardAPI`](/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/)

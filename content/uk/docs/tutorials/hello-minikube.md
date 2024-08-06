@@ -78,7 +78,7 @@ minikube dashboard --url
 
 ## Створення Deployment {#create-deployment}
 
-[*Pod*](/docs/concepts/workloads/pods/) в Kubernetes — це група з одного або більше контейнерів, які повʼязуються один з одним для керування та використання мережевих ресурсів. Pod в цьому посібнику містить тільки один контейнер. Kubernetes [*Deployment*](/docs/concepts/workloads/controllers/deployment/) перевіряє життєздатність вашого Podʼу та, якщо він виходить з ладу, перезапускає його. Deployment є рекомендованим способом створення та масштабування Podʼів.
+[*Pod*](/docs/concepts/workloads/pods/) в Kubernetes — це група з одного або більше контейнерів, які повʼязуються один з одним для керування та використання мережевих ресурсів. Pod в цьому посібнику містить тільки один контейнер. Kubernetes [*Deployment*](/docs/concepts/workloads/controllers/deployment/) перевіряє життєздатність вашого Podʼа та, якщо він виходить з ладу, перезапускає його. Deployment є рекомендованим способом створення та масштабування Podʼів.
 
 1. Скористайтесь командою `kubectl create` для створення Deployment, що буде керувати Podʼом. Pod виконує контейнер, який міститься в образі Docker.
 

@@ -26,7 +26,7 @@ weight: 310
 
 Якщо доступність важлива для будь-яких застосунків, які запускаються або можуть запускатися на вузлах, які ви очищуєте, [спочатку налаштуйте PodDisruptionBudget](/docs/tasks/run-application/configure-pdb/), а потім продовжуйте виконувати цей посібник.
 
-Рекомендується встановити `AlwaysAllow` [Політика виселення несправного Podʼу](/docs/tasks/run-application/configure-pdb/#unhealthy-pod-eviction-policy) для PodDisruptionBudgets, щоб підтримувати виселення погано працюючих застосунків під час очищення вузла. Стандартна поведінка полягає в очікуванні на те, щоб Podʼи застосунків стали [справними](/docs/tasks/run-application/configure-pdb/#healthiness-of-a-pod), перш ніж можна буде продовжити очищення.
+Рекомендується встановити `AlwaysAllow` [Політика виселення несправного Podʼа](/docs/tasks/run-application/configure-pdb/#unhealthy-pod-eviction-policy) для PodDisruptionBudgets, щоб підтримувати виселення погано працюючих застосунків під час очищення вузла. Стандартна поведінка полягає в очікуванні на те, щоб Podʼи застосунків стали [справними](/docs/tasks/run-application/configure-pdb/#healthiness-of-a-pod), перш ніж можна буде продовжити очищення.
 
 ## Використання `kubectl drain` для очищення вузла {#use-kubectl-drain-to-remove-a-node-from-service}
 
@@ -61,7 +61,7 @@ kubectl drain --ignore-daemonsets <імʼя вузла>
 Після того, як процес завершиться (без помилки), ви можете безпечно вимкнути вузол (або еквівалентно, якщо ви працюєте на хмарній платформі, видалити віртуальну машину, на якій працює вузол). Якщо ви залишите вузол у кластері під час операції обслуговування, вам потрібно виконати
 
 ```shell
-kubectl uncordon <ім'я вузла>
+kubectl uncordon <імʼя вузла>
 ```
 
 після того, як ви дасте цю команду Kubernetes, він може продовжити планування нових Podʼів на вузол.
@@ -74,7 +74,7 @@ kubectl uncordon <ім'я вузла>
 
 ## API Eviction {#eviction-api}
 
-Якщо ви не бажаєте використовувати [kubectl drain](/docs/reference/generated/kubectl/kubectl-commands/#drain) (наприклад, для уникнення виклику зовнішньої команди або для отримання більш детального керування процесом виселення Podʼу), ви також можете програмно викликати виселення, використовуючи API Eviction.
+Якщо ви не бажаєте використовувати [kubectl drain](/docs/reference/generated/kubectl/kubectl-commands/#drain) (наприклад, для уникнення виклику зовнішньої команди або для отримання більш детального керування процесом виселення Podʼа), ви також можете програмно викликати виселення, використовуючи API Eviction.
 
 Для отримання додаткової інформації див. [Виселення, ініційоване API](/docs/concepts/scheduling-eviction/api-eviction/).
 

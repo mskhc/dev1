@@ -164,7 +164,7 @@ kubectl delete pv mysql-pv-volume
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [об'єкти Deployment](/docs/concepts/workloads/controllers/deployment/).
+- Дізнайтеся більше про [обʼєкти Deployment](/docs/concepts/workloads/controllers/deployment/).
 
 - Дізнайтеся більше про [розгортання застосунків](/docs/tasks/run-application/run-stateless-application-deployment/)
 

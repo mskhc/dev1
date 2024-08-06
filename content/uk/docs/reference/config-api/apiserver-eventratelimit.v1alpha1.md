@@ -25,7 +25,7 @@ Configuration надає конфігурацію для контролера д
             <td><code>Configuration</code></td>
         </tr>
         <tr>
-            <td><code>limits</code> <b>[Обов'язкове]</b><br/>
+            <td><code>limits</code> <b>[Обовʼязкове]</b><br/>
                 <a href="#eventratelimit-admission-k8s-io-v1alpha1-Limit"><code>[]Limit</code></a>
             </td>
             <td><p>limits — це обмеження на запити подій, що надходять. Обмеження можуть бути встановлені на події, отримані на рівні сервера, на рівні простору імен, на рівні користувача та на рівні джерела+обʼєкта. Потрібно принаймні одне обмеження.</p></td>
@@ -45,13 +45,13 @@ Limit — це конфігурація для певного типу обме
     <thead><tr><th width="30%">Поле</th><th>Опис</th></tr></thead>
     <tbody>
         <tr>
-            <td><code>type</code> <b>[Обов'язкове]</b><br/>
+            <td><code>type</code> <b>[Обовʼязкове]</b><br/>
                 <a href="#eventratelimit-admission-k8s-io-v1alpha1-LimitType"><code>LimitType</code></a>
             </td>
             <td><p>type — це тип обмеження, до якого застосовується ця конфігурація.</p></td>
         </tr>
         <tr>
-            <td><code>qps</code> <b>[Обов'язкове]</b><br/>
+            <td><code>qps</code> <b>[Обовʼязкове]</b><br/>
                 <code>int32</code>
             </td>
             <td><p>qps — це кількість запитів подій на секунду, дозволених для цього типу обмеження. Поля qps та burst використовуються разом, щоб визначити, чи приймається певний запит події. qps визначає, скільки запитів приймаються після вичерпання кількості запитів burst.</p></td>

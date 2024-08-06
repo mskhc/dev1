@@ -393,8 +393,8 @@ kubectl patch deployment patch-demo --patch '{"spec": {"template": {"spec": {"co
 
 {{< feature-state for_k8s_version="v1.24" state="alpha" >}}
 
-Прапорець `--subresource=[ім'я-підресурсу]` використовується з командами kubectl, такими як get, patch, edit і replace, для отримання та оновлення підресурсів `status` та `scale` ресурсів
-(застосовується для версії kubectl v1.24 або новішої). Цей прапорець використовується з усіма ресурсами API (вбудованими та CR), які мають підресурси `status` або `scale`. Deployment — один з прикладів, які підтримують ці підресурси.
+Прапорець `--subresource=[імʼя-субресурсу]` використовується з командами kubectl, такими як get, patch, edit і replace, для отримання та оновлення субресурсів `status` та `scale` ресурсів
+(застосовується для версії kubectl v1.24 або новішої). Цей прапорець використовується з усіма ресурсами API (вбудованими та CR), які мають субресурси `status` або `scale`. Deployment — один з прикладів, які підтримують ці субресурси.
 
 Ось маніфест для Deployment, що має дві репліки:
 
@@ -420,7 +420,7 @@ nginx-deployment-7fb96c846b-22567   1/1     Running   0          47s
 nginx-deployment-7fb96c846b-mlgns   1/1     Running   0          47s
 ```
 
-Тепер застосуйте патч до Deployment з прапорцем `--subresource=[ім'я-підресурсу]`:
+Тепер застосуйте патч до Deployment з прапорцем `--subresource=[імʼя-субресурсу]`:
 
 ```shell
 kubectl patch deployment nginx-deployment --subresource='scale' --type='merge' -p '{"spec":{"replicas":3}}'
@@ -466,7 +466,7 @@ status:
 ```
 
 {{< note >}}
-Якщо ви запускаєте `kubectl patch` і вказуєте прапорець `--subresource` для ресурсу, який не підтримує цей конкретний підресурс, сервер API повертає помилку 404 Not Found.
+Якщо ви запускаєте `kubectl patch` і вказуєте прапорець `--subresource` для ресурсу, який не підтримує цей конкретний субресурс, сервер API повертає помилку 404 Not Found.
 {{< /note >}}
 
 ## Підсумки {#summary}

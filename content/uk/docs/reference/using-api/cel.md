@@ -226,7 +226,7 @@ has(object.namex) ? object.namex == 'special' : request.name == 'special'
 | 'object' з AdditionalProperties                     | map                                                                                                                        |
 | 'object' з x-kubernetes-embedded-type               | object / "тип повідомлення", 'apiVersion', 'kind', 'metadata.name' і 'metadata.generateName' включені в схему               |
 | 'object' з x-kubernetes-preserve-unknown-fields     | object / "тип повідомлення", невідомі поля НЕ доступні у виразі CEL                                                         |
-| x-kubernetes-int-or-string                          | об'єднання int або string,  `self.intOrString < 100 \|\| self.intOrString == '50%'` обчислюється як true для `50` і `"50%"`  |
+| x-kubernetes-int-or-string                          | обʼєднання int або string,  `self.intOrString < 100 \|\| self.intOrString == '50%'` обчислюється як true для `50` і `"50%"`  |
 | 'array'                                             | list                                                                                                                       |
 | 'array' з x-kubernetes-list-type=map                | list з базованими на map рівноправністю та унікальними ключами                                                             |
 | 'array' з x-kubernetes-list-type=set                | list з базованими на set рівноправністю та унікальними елементами                                                          |
@@ -248,8 +248,8 @@ has(object.namex) ? object.namex == 'special' : request.name == 'special'
 
 Конкатенація для масивів з `x-kubernetes-list-type` використовує семантику типу списку:
 
-- `set`: `X + Y` виконує об'єднання, де позиції елементів у `X` зберігаються, а не перетинаючі елементи у `Y` додаються, зберігаючи їх частковий порядок.
-- `map`: `X + Y` виконує об'єднання, де позиції ключів у `X` зберігаються, але значення перезаписуються значеннями у `Y`, коли ключові множини `X` і `Y` перетинаються. Елементи у `Y` з неперетинаючими ключами додаються, зберігаючи їх частковий порядок.
+- `set`: `X + Y` виконує обʼєднання, де позиції елементів у `X` зберігаються, а не перетинаючі елементи у `Y` додаються, зберігаючи їх частковий порядок.
+- `map`: `X + Y` виконує обʼєднання, де позиції ключів у `X` зберігаються, але значення перезаписуються значеннями у `Y`, коли ключові множини `X` і `Y` перетинаються. Елементи у `Y` з неперетинаючими ключами додаються, зберігаючи їх частковий порядок.
 
 ## Екранування {#escaping}
 
