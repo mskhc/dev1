@@ -421,7 +421,7 @@ Base64-кодована, вона виглядатиме так: `W3sib3AiOiAiYW
 
 ## Конфігурація вебхука {#webhook-configuration}
 
-Для реєстрації вебхуків допуску створіть об’єкти API `MutatingWebhookConfiguration` або `ValidatingWebhookConfiguration`. Назва об’єкта `MutatingWebhookConfiguration` або `ValidatingWebhookConfiguration` має бути дійсним [DNS-імʼям субдомену](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
+Для реєстрації вебхуків допуску створіть об’єкти API `MutatingWebhookConfiguration` або `ValidatingWebhookConfiguration`. Назва об’єкта `MutatingWebhookConfiguration` або `ValidatingWebhookConfiguration` має бути дійсним [DNS-імʼям субдомену](/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names).
 
 Кожна конфігурація може містити один або кілька вебхуків. Якщо в одній конфігурації вказано кілька вебхуків, кожен з них повинен мати унікальну назву. Це необхідно для полегшення відповідності логів аудиту та метрик активних конфігурацій.
 
@@ -523,7 +523,7 @@ webhooks:
     scope: "*"
 ```
 
-Див. [концепцію міток](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels) для більшої кількості прикладів селекторів міток.
+Див. [концепцію міток](/docs/concepts/overview/working-with-objects/labels) для більшої кількості прикладів селекторів міток.
 
 ### Відповідність запитів: namespaceSelector {#matching-requests-namespaceselector}
 
@@ -571,7 +571,7 @@ webhooks:
         scope: "Namespaced"
 ```
 
-Див. [концепцію міток](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels) для більшої кількості прикладів селекторів міток.
+Див. [концепцію міток](/docs/concepts/overview/working-with-objects/labels) для більшої кількості прикладів селекторів міток.
 
 ### Відповідність запитів: matchPolicy {#matching-requests-matchpolicy}
 

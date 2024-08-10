@@ -1120,7 +1120,7 @@ shutdownGracePeriodSeconds: 30</li>
 </td>
 </tr>
 <tr><td><code>registerWithTaints</code><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p>registerWithTaints — це масив "taints" (міток) для додавання до обʼєкта вузла під час реєстрації kubelet. Набирає чинності лише тоді, коли параметр registerNode встановлено в значення true і під час початкової реєстрації вузла. Стандартно: nil</p>
@@ -1180,7 +1180,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
 <tr><td><code>kind</code><br/>string</td><td><code>SerializedNodeConfigSource</code></td></tr>
     
 <tr><td><code>source</code><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
 </td>
 <td>
    <p>source є джерелом, яке ми серіалізуємо.</p>
@@ -1475,7 +1475,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
    <span class="text-muted">Номер NUMA вузла, для якого задається резервування памʼяті.</span></td>
 </tr>
 <tr><td><code>limits</code> <b>[Обовʼязково]</b><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
 </td>
 <td>
    <span class="text-muted">Список ресурсів для резервування, які визначають обмеження памʼяті.</span></td>

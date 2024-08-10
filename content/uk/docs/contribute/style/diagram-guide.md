@@ -307,7 +307,7 @@ Shortcode "\{\{< figure >}}" є рекомендованим методом дл
 * Використання існуючих методів [kubernetes/website](https://github.com/kubernetes/website) для обробки файлів зображень `.svg`.
 * Середовище не вимагає підтримки Mermaid.
 
-Переконайтеся, що ваша діаграма правильно відображається, використовуючи [локальний](https://kubernetes.io/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
+Переконайтеся, що ваша діаграма правильно відображається, використовуючи [локальний](/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
 
 ### Зовнішні інструменти {#extrenal-tool}
 
@@ -372,7 +372,7 @@ click E "https://mermaid-js.github.io/mermaid-live-editor/edit/#pako:eNp9kttu00A
 * Учасники добре знайомі з зовнішнім інструментом.
 * Діаграми потребують більше деталей, ніж може надати Mermaid.
 
-Не забудьте перевірити, чи правильно відображається ваша діаграма, використовуючи [локальний](https://kubernetes.io/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
+Не забудьте перевірити, чи правильно відображається ваша діаграма, використовуючи [локальний](/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
 
 ## Приклади {#examples}
 
@@ -633,7 +633,7 @@ click C "https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNptkctOwkAY
 Ось shortcode `{{</* figure */>}}` для цієї діаграми:
 
 ```
-{{</* figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="https://kubernetes.io/docs/concepts/overview/components/" */>}}
+{{</* figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="/docs/concepts/overview/components/" */>}}
 ```
 
 {{< figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="/docs/concepts/overview/components/" >}}

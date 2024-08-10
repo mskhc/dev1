@@ -302,7 +302,7 @@ NodeAffinityArgs містить аргументи для налаштуванн
 <tr><td><code>apiVersion</code><br/>string</td><td><code>kubescheduler.config.k8s.io/v1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>NodeAffinityArgs</code></td></tr>
 <tr><td><code>addedAffinity</code><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#nodeaffinity-v1-core"><code>core/v1.NodeAffinity</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#nodeaffinity-v1-core"><code>core/v1.NodeAffinity</code></a>
 </td>
 <td>
    <p>AddedAffinity застосовується до всіх Podʼів додатково до NodeAffinity, вказаного в PodSpec. Тобто вузли повинні відповідати AddedAffinity І .spec.NodeAffinity. AddedAffinity є станадртно порожнім (є збіг зі всіма вузлами). Коли використовується AddedAffinity, деякі Podʼи з вимогами щодо спорідненості, які збігаються з конкретним вузлом (наприклад, Podʼи Daemonset), можуть залишатися непридатними для планування.</p>
@@ -374,7 +374,7 @@ PodTopologySpreadArgs містить аргументи для налаштув�
 <tr><td><code>apiVersion</code><br/>string</td><td><code>kubescheduler.config.k8s.io/v1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>PodTopologySpreadArgs</code></td></tr>
 <tr><td><code>defaultConstraints</code><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#topologyspreadconstraint-v1-core"><code>[]core/v1.TopologySpreadConstraint</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#topologyspreadconstraint-v1-core"><code>[]core/v1.TopologySpreadConstraint</code></a>
 </td>
 <td>
    <p>DefaultConstraints визначає обмеження на розподіл топології, які будуть застосовані до Podʼів, що не мають визначених обмежень у <code>pod.spec.topologySpreadConstraints</code>. <code>.defaultConstraints[*].labelSelectors</code> повинні бути порожніми, оскільки вони виводяться з приналежності Podʼа до Services, ReplicationControllers, ReplicaSets або StatefulSets. Якщо не порожньо, .defaultingType має бути &quot;List&quot;.</p>

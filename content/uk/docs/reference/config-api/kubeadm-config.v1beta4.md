@@ -996,7 +996,7 @@ EnvVar представляє змінну середовища, присутн�
 <thead><tr><th width="30%">Поле</th><th>Опис</th></tr></thead>
 <tbody>
 <tr><td><code>EnvVar</code> <b>[Обовʼязкове]</b><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#envvar-v1-core"><code>core/v1.EnvVar</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#envvar-v1-core"><code>core/v1.EnvVar</code></a>
 </td>
 <td>(Члени <code>EnvVar</code> вбудовані в цей тип.)
    <span class="text-muted">Опис не надано.</span></td>
@@ -1324,7 +1324,7 @@ NodeRegistrationOptions містить поля, що стосуються ре�
 </td>
 </tr>
 <tr><td><code>taints</code> <b>[Обовʼязкове]</b><br/>
-<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p><code>taints</code><p><code>taints</code> вказує на taints, з якими обʼєкт Node API повинен бути зареєстрований. Якщо це поле не встановлено, тобто nil, воно буде стандартно з control-plane taint для вузлів control-plane. Якщо ви не хочете taint для вашого вузла control-plane, встановіть в це поле порожній список, тобто <code>taints: []</code> у YAML файлі. Це поле використовується виключно для реєстрації вузлів.</p>
