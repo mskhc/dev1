@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає [PodOverhead](/docs/concepts/scheduling-eviction/pod-overhead/) для врахування накладних витрат на Pod.
+Вмикає [PodOverhead](/uk/docs/concepts/scheduling-eviction/pod-overhead/) для врахування накладних витрат на Pod.

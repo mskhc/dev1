@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Дозволити [priority & fairness](/docs/concepts/cluster-administration/flow-control/) на сервері API використовувати нульове значення для поля `nominalConcurrencyShares` секції `limited` рівня пріоритету.
+Дозволити [priority & fairness](/uk/docs/concepts/cluster-administration/flow-control/) на сервері API використовувати нульове значення для поля `nominalConcurrencyShares` секції `limited` рівня пріоритету.

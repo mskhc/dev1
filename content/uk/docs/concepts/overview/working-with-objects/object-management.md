@@ -140,10 +140,10 @@ kubectl apply -R -f configs/
 
 ## {{% heading "whatsnext" %}}
 
-- [Управління обʼєктами Kubernetes за допомогою імперативних команд](/docs/tasks/manage-kubernetes-objects/imperative-command/)
-- [Імперативне управління обʼєктами Kubernetes за допомогою файлів конфігурації](/docs/tasks/manage-kubernetes-objects/imperative-config/)
-- [Декларативне управління обʼєктами Kubernetes за допомогою файлів конфігурації](/docs/tasks/manage-kubernetes-objects/declarative-config/)
-- [Декларативне управління обʼєктами Kubernetes за допомогою Kustomize](/docs/tasks/manage-kubernetes-objects/kustomization/)
-- [Довідник команд Kubectl](/docs/reference/generated/kubectl/kubectl-commands/)
+- [Управління обʼєктами Kubernetes за допомогою імперативних команд](/uk/docs/tasks/manage-kubernetes-objects/imperative-command/)
+- [Імперативне управління обʼєктами Kubernetes за допомогою файлів конфігурації](/uk/docs/tasks/manage-kubernetes-objects/imperative-config/)
+- [Декларативне управління обʼєктами Kubernetes за допомогою файлів конфігурації](/uk/docs/tasks/manage-kubernetes-objects/declarative-config/)
+- [Декларативне управління обʼєктами Kubernetes за допомогою Kustomize](/uk/docs/tasks/manage-kubernetes-objects/kustomization/)
+- [Довідник команд Kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
 - [Книга Kubectl](https://kubectl.docs.kubernetes.io)
 - [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

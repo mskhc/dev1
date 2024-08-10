@@ -20,4 +20,4 @@ stages:
     toVersion: "1.29" 
 removed: true
 ---
-Відстеження використання [токенів службових облікових записів](/docs/concepts/security/service-accounts/#get-a-token), що базуються на Secret.
+Відстеження використання [токенів службових облікових записів](/uk/docs/concepts/security/service-accounts/#get-a-token), що базуються на Secret.

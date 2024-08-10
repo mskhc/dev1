@@ -22,4 +22,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Вмикає `minDomains` в [Обмеженнях поширення топології Pod](/docs/concepts/scheduling-eviction/topology-spread-constraints/).
+Вмикає `minDomains` в [Обмеженнях поширення топології Pod](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/).

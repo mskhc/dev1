@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає інʼєкцію токенів службових облікових записів у Pod через [`projected` том] (/docs/concepts/storage/volumes/#projected).
+Вмикає інʼєкцію токенів службових облікових записів у Pod через [`projected` том](/uk/docs/concepts/storage/volumes/#projected).

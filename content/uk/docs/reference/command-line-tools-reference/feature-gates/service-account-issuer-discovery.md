@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає точки доступу OIDC discovery (URL видачі та JWKS) для видачі службових облікових записів в API-сервері. Див. [Налаштування службових облікових записів для контейнерів Pod](/docs/tasks/configure-pod-container/configure-service-account/#service-account-issuer-discovery) для отримання додаткових відомостей.
+Вмикає точки доступу OIDC discovery (URL видачі та JWKS) для видачі службових облікових записів в API-сервері. Див. [Налаштування службових облікових записів для контейнерів Pod](/uk/docs/tasks/configure-pod-container/configure-service-account/#service-account-issuer-discovery) для отримання додаткових відомостей.

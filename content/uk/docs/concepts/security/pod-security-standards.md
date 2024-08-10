@@ -45,7 +45,7 @@ weight: 15
 		<tr>
 			<td style="white-space: nowrap">HostProcess</td>
 			<td>
-				<p>Для Podʼів Windows надається можливість запуску <a href="/docs/tasks/configure-pod-container/create-hostprocess-pod">HostProcess контейнерів</a>, що дозволяє привілейований доступ до машини хосту Windows. Привілеї на вузлs заборонені політикою baseline. {{< feature-state for_k8s_version="v1.26" state="stable" >}}</p>
+				<p>Для Podʼів Windows надається можливість запуску <a href="/uk/docs/tasks/configure-pod-container/create-hostprocess-pod">HostProcess контейнерів</a>, що дозволяє привілейований доступ до машини хосту Windows. Привілеї на вузлs заборонені політикою baseline. {{< feature-state for_k8s_version="v1.26" state="stable" >}}</p>
 				<p><strong>Заборонені поля</strong></p>
 				<ul>
 					<li><code>spec.securityContext.windowsOptions.hostProcess</code></li>
@@ -150,7 +150,7 @@ weight: 15
 				<p><strong>Дозволені значення</strong></p>
 				<ul>
 					<li>Undefined/nil</li>
-					<li>Відомий список (не підтримується вбудованим <a href="/docs/concepts/security/pod-security-admission/">контролером Pod Security Admission</a>)</li>
+					<li>Відомий список (не підтримується вбудованим <a href="/uk/docs/concepts/security/pod-security-admission/">контролером Pod Security Admission</a>)</li>
 					<li><code>0</code></li>
 				</ul>
 			</td>
@@ -438,7 +438,7 @@ weight: 15
 
 Після того як механізми стануть більш зрілими, вони будуть визначені нижче на основі кожної політики. Методи виконання окремих політик тут не визначені.
 
-[**Контролер Pod Security Admission**](/docs/concepts/security/pod-security-admission/)
+[**Контролер Pod Security Admission**](/uk/docs/concepts/security/pod-security-admission/)
 
 - {{< example file="security/podsecurity-privileged.yaml" >}}Привілейоване пространство імен{{< /example >}}
 - {{< example file="security/podsecurity-baseline.yaml" >}}Базове пространство імен{{< /example >}}
@@ -456,7 +456,7 @@ weight: 15
 
 ## Поле ОС Podʼа {#pod-os-field}
 
-У Kubernetes ви можете використовувати вузли, які працюють на операційних системах Linux або Windows. Ви можете комбінувати обидва типи вузлів в одному кластері. Windows в Kubernetes має деякі обмеження та відмінності від навантаженнь на базі Linux. Зокрема, багато з полів `securityContext` для контейнерів Pod [не мають ефекту у Windows](/docs/concepts/windows/intro/#compatibility-v1-pod-spec-containers-securitycontext).
+У Kubernetes ви можете використовувати вузли, які працюють на операційних системах Linux або Windows. Ви можете комбінувати обидва типи вузлів в одному кластері. Windows в Kubernetes має деякі обмеження та відмінності від навантаженнь на базі Linux. Зокрема, багато з полів `securityContext` для контейнерів Pod [не мають ефекту у Windows](/uk/docs/concepts/windows/intro/#compatibility-v1-pod-spec-containers-securitycontext).
 
 {{< note >}}
 Kubelet до версії v1.24 не здійснює контроль над полем OS для Pod, і якщо в кластері є вузли з версіями під номерами менше v1.24, політики Restricted повинні бути привʼязані до версії до v1.25.
@@ -475,7 +475,7 @@ Kubelet до версії v1.24 не здійснює контроль над п
 
 ## Простори імен користувачів {#user-namespaces}
 
-Простори імен користувачів — це функція лише для операційних систем Linux, яка дозволяє запускати завдання з підвищеним рівнем ізоляції. Як вони працюють разом зі стандартами безпеки Pod описано в [документації](/docs/concepts/workloads/pods/user-namespaces#integration-with-pod-security-admission-checks) Podʼів, що використовують простори імен користувачів.
+Простори імен користувачів — це функція лише для операційних систем Linux, яка дозволяє запускати завдання з підвищеним рівнем ізоляції. Як вони працюють разом зі стандартами безпеки Pod описано в [документації](/uk/docs/concepts/workloads/pods/user-namespaces#integration-with-pod-security-admission-checks) Podʼів, що використовують простори імен користувачів.
 
 ## ЧаПи {#faq}
 
@@ -487,9 +487,9 @@ SIG Auth може переосмислити цю позицію у майбут
 
 ### В чому різниця між профілем безпеки та контекстом безпеки? {#what-s-the-difference-between-a-security-profile-and-a-security-context}
 
-[Контексти безпеки](/docs/tasks/configure-pod-container/security-context/) налаштовують Podʼи та контейнери під час виконання. Контексти безпеки визначаються як частина специфікації Podʼа та контейнера в маніфесті Podʼа і представляють параметри для контейнерного середовища виконання.
+[Контексти безпеки](/uk/docs/tasks/configure-pod-container/security-context/) налаштовують Podʼи та контейнери під час виконання. Контексти безпеки визначаються як частина специфікації Podʼа та контейнера в маніфесті Podʼа і представляють параметри для контейнерного середовища виконання.
 
-Профілі безпеки — це механізми керування панелі управління для забезпечення певних налаштувань у контексті безпеки, а також інших повʼязаних параметрів поза контекстом безпеки. На даний момент, з липня 2021 року, [Політики безпеки Podʼів](/docs/concepts/security/pod-security-policy/) є застарілими на користь вбудованого [Контролера Pod Security Admission](/docs/concepts/security/pod-security-admission/).
+Профілі безпеки — це механізми керування панелі управління для забезпечення певних налаштувань у контексті безпеки, а також інших повʼязаних параметрів поза контекстом безпеки. На даний момент, з липня 2021 року, [Політики безпеки Podʼів](/uk/docs/concepts/security/pod-security-policy/) є застарілими на користь вбудованого [Контролера Pod Security Admission](/uk/docs/concepts/security/pod-security-admission/).
 
 ### Що на рахунок Podʼів у пісочниці? {#what-about-sandboxed-pods}
 

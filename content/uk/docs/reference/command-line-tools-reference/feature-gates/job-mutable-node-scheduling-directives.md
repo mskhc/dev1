@@ -17,4 +17,4 @@ stages:
 
 removed: true
 ---
-Дозволяє оновити директиви планування вузлів у шаблоні pod [Job](/docs/concepts/workloads/controllers/job).
+Дозволяє оновити директиви планування вузлів у шаблоні pod [Job](/uk/docs/concepts/workloads/controllers/job).

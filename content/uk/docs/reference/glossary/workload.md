@@ -2,7 +2,7 @@
 title: Робоче навантаження
 id: workload
 date: 2019-02-13
-full_link: /docs/concepts/workloads/
+full_link: /uk/docs/concepts/workloads/
 short_description: >
    Робоче навантаження є застосунком, який запущено в Kubernetes.
 

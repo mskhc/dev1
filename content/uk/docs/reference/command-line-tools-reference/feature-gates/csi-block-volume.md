@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає підтримку блочного сховища зовнішніми драйверами томів CSI. Див. статтю [Підтримка `CSI` для блочних томів](/docs/concepts/storage/volumes/#csi-raw-block-volume-support) для детальнішої інформації.
+Вмикає підтримку блочного сховища зовнішніми драйверами томів CSI. Див. статтю [Підтримка `CSI` для блочних томів](/uk/docs/concepts/storage/volumes/#csi-raw-block-volume-support) для детальнішої інформації.

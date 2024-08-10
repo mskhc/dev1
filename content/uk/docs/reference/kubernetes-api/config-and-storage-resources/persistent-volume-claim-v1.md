@@ -30,11 +30,11 @@ PersistentVolumeClaim представляє запит користувача �
 
 - **spec** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-claim-v1#PersistentVolumeClaimSpec" >}}">PersistentVolumeClaimSpec</a>)
 
-  Специфікація визначає бажані характеристики тому, запитаного автором Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
+  Специфікація визначає бажані характеристики тому, запитаного автором Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/uk/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
 
 - **status** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-claim-v1#PersistentVolumeClaimStatus" >}}">PersistentVolumeClaimStatus</a>)
 
-  Статус представляє поточну інформацію/стан запиту на постійний том. Тільки для читання. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
+  Статус представляє поточну інформацію/стан запиту на постійний том. Тільки для читання. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/uk/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
 
 ## PersistentVolumeClaimSpec {#PersistentVolumeClaimSpec}
 
@@ -44,7 +44,7 @@ PersistentVolumeClaimSpec описує загальні атрибути при�
 
 - **accessModes** ([]string)
 
-  accessModes містить бажані режими доступу, якими повинен користуватися том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1](/docs/concepts/storage/persistent-volumes#access-modes-1)
+  accessModes містить бажані режими доступу, якими повинен користуватися том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1](/uk/docs/concepts/storage/persistent-volumes#access-modes-1)
 
 - **selector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
 
@@ -52,7 +52,7 @@ PersistentVolumeClaimSpec описує загальні атрибути при�
 
 - **resources** (ResourceRequirements)
 
-  resources представляє мінімальні ресурси, якими повинен володіти том. Якщо включено можливість RecoverVolumeExpansionFailure, користувачам дозволяється вказувати вимоги до ресурсів, які нижчі за попереднє значення, але все ще мають бути вищими, ніж місткість, вказана в полі статусу вимоги. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources](/docs/concepts/storage/persistent-volumes#resources)
+  resources представляє мінімальні ресурси, якими повинен володіти том. Якщо включено можливість RecoverVolumeExpansionFailure, користувачам дозволяється вказувати вимоги до ресурсів, які нижчі за попереднє значення, але все ще мають бути вищими, ніж місткість, вказана в полі статусу вимоги. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources](/uk/docs/concepts/storage/persistent-volumes#resources)
 
   <a name="ResourceRequirements"></a>
   *ResourceRequirements описує вимоги до обчислювальних ресурсів.*
@@ -76,11 +76,11 @@ PersistentVolumeClaimSpec описує загальні атрибути при�
 
   - **resources.limits** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Limits описує максимальну кількість дозволених обчислювальних ресурсів. Додаткова інформація: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Limits описує максимальну кількість дозволених обчислювальних ресурсів. Додаткова інформація: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
   - **resources.requests** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється як Limits, якщо це явно вказано, інакше — як значення, визначене реалізацією. Запити не можуть перевищувати Limits. Додаткова інформація: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється як Limits, якщо це явно вказано, інакше — як значення, визначене реалізацією. Запити не можуть перевищувати Limits. Додаткова інформація: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
 - **volumeName** (string)
 
@@ -88,7 +88,7 @@ PersistentVolumeClaimSpec описує загальні атрибути при�
 
 - **storageClassName** (string)
 
-  storageClassName — це назва StorageClass, необхідного для вимоги. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1](/docs/concepts/storage/persistent-volumes#class-1)
+  storageClassName — це назва StorageClass, необхідного для вимоги. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1](/uk/docs/concepts/storage/persistent-volumes#class-1)
 
 - **volumeMode** (string)
 
@@ -142,7 +142,7 @@ PersistentVolumeClaimStatus — це поточний статус запиту
 
 - **accessModes** ([]string)
 
-  accessModes містить фактичні режими доступу, якими володіє том, що підтримує PVC. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1](/docs/concepts/storage/persistent-volumes#access-modes-1)
+  accessModes містить фактичні режими доступу, якими володіє том, що підтримує PVC. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1](/uk/docs/concepts/storage/persistent-volumes#access-modes-1)
 
 - **allocatedResourceStatuses** (map[string]string)
 
@@ -251,7 +251,7 @@ PersistentVolumeClaimList — це список елементів PersistentVo
 
 - **items** ([]<a href="{{< ref "../config-and-storage-resources/persistent-volume-claim-v1#PersistentVolumeClaim" >}}">PersistentVolumeClaim</a>), обовʼязково
 
-  items — це список запитів на постійні томи. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
+  items — це список запитів на постійні томи. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/uk/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
 
 ## Операції {#operations}
 

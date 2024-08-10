@@ -20,20 +20,20 @@ Volume становить собою іменований том у Pod, до я
 
 - **name** (string), обовʼязково
 
-  Назва тома. Повинна бути DNS_LABEL і унікальна в межах Pod. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+  Назва тома. Повинна бути DNS_LABEL і унікальна в межах Pod. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
 ### Відкриті постійні томи {#exposed-persistent-volumes}
 
 - **persistentVolumeClaim** (PersistentVolumeClaimVolumeSource)
 
-  persistentVolumeClaimVolumeSource — це посилання на PersistentVolumeClaim у тому ж просторі імен. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
+  persistentVolumeClaimVolumeSource — це посилання на PersistentVolumeClaim у тому ж просторі імен. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/uk/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
 
   <a name="PersistentVolumeClaimVolumeSource"></a>
   *PersistentVolumeClaimVolumeSource посилається на PVC користувача в тому ж просторі імен. Цей том знаходить привʼязаний PV та монтує цей том для Podʼа. PersistentVolumeClaimVolumeSource, фактично, є обгорткою навколо іншого типу тому, який належить комусь іншому (системі).*
 
   - **persistentVolumeClaim.claimName** (string), обовʼязково
 
-    claimName — це назва PersistentVolumeClaim у тому ж просторі імен, що й у Podʼа, який використовує цей том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
+    claimName — це назва PersistentVolumeClaim у тому ж просторі імен, що й у Podʼа, який використовує цей том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims](/uk/docs/concepts/storage/persistent-volumes#persistentvolumeclaims)
 
   - **persistentVolumeClaim.readOnly** (boolean)
 
@@ -52,7 +52,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **configMap.name** (string)
 
-    Name — назва обʼєкта ConfigMap, повʼязаного з томом. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+    Name — назва обʼєкта ConfigMap, повʼязаного з томом. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
   - **configMap.optional** (boolean)
 
@@ -68,7 +68,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **secret** (SecretVolumeSource)
 
-    secret — представляє secret, який повинен заповнити цей том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#secret](/docs/concepts/storage/volumes#secret)
+    secret — представляє secret, який повинен заповнити цей том. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#secret](/uk/docs/concepts/storage/volumes#secret)
 
     <a name="SecretVolumeSource"></a>
     *Адаптує Secret до тому.
@@ -77,7 +77,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **secret.secretName** (string)
 
-    secretName — назва обʼєкта Secret в просторі імен Podʼа, що буде використовуватись. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#secret](/docs/concepts/storage/volumes#secret)
+    secretName — назва обʼєкта Secret в просторі імен Podʼа, що буде використовуватись. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#secret](/uk/docs/concepts/storage/volumes#secret)
 
   - **secret.optional** (boolean)
 
@@ -135,7 +135,7 @@ Volume становить собою іменований том у Pod, до я
 
       - **projected.sources.configMap.name** (string)
 
-        Name — назва обʼєкта на який посилаються. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Name — назва обʼєкта на який посилаються. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **projected.sources.configMap.optional** (boolean)
 
@@ -167,7 +167,7 @@ Volume становить собою іменований том у Pod, до я
 
       - **projected.sources.secret.name** (string)
 
-        Name — назва обʼєкта на який посилаються. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Name — назва обʼєкта на який посилаються. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **projected.sources.secret.optional** (boolean)
 
@@ -200,39 +200,39 @@ Volume становить собою іменований том у Pod, до я
 
 - **emptyDir** (EmptyDirVolumeSource)
 
-  emptyDir представляє тимчасову теку, яка існує впродовж часу існування Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#emptydir](/docs/concepts/storage/volumes#emptydir)
+  emptyDir представляє тимчасову теку, яка існує впродовж часу існування Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#emptydir](/uk/docs/concepts/storage/volumes#emptydir)
 
   <a name="EmptyDirVolumeSource"></a>
   *Представляє порожню теку для Podʼа. Томи порожніх тек підтримують управління власністю та перепризначення міток SELinux.*
 
   - **emptyDir.medium** (string)
 
-    medium представляє тип носія для зберігання, який повинен підтримувати цю теку. Стандартне значення — "" (порожній рядок), що означає використання стандартного носія вузла. Повинно бути порожнім рядком (стандартно) або "Memory". Додаткова інформація: [Посилання на документацію Kubernetes про EmptyDir](/docs/concepts/storage/volumes#emptydir)
+    medium представляє тип носія для зберігання, який повинен підтримувати цю теку. Стандартне значення — "" (порожній рядок), що означає використання стандартного носія вузла. Повинно бути порожнім рядком (стандартно) або "Memory". Додаткова інформація: [Посилання на документацію Kubernetes про EmptyDir](/uk/docs/concepts/storage/volumes#emptydir)
 
   - **emptyDir.sizeLimit** (<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    sizeLimit — це загальна кількість локальної памʼяті, необхідна для цього тому EmptyDir. Обмеження розміру також застосовується для носія типу "Memory". Максимальне використання на носії типу "Memory" для EmptyDir буде мінімальним значенням між зазначеним тут SizeLimit та сумою обмежень памʼяті всіх контейнерів у Podʼі. Стандартне значення — nil, що означає, що обмеження не визначено. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#emptydir](/docs/concepts/storage/volumes#emptydir)
+    sizeLimit — це загальна кількість локальної памʼяті, необхідна для цього тому EmptyDir. Обмеження розміру також застосовується для носія типу "Memory". Максимальне використання на носії типу "Memory" для EmptyDir буде мінімальним значенням між зазначеним тут SizeLimit та сумою обмежень памʼяті всіх контейнерів у Podʼі. Стандартне значення — nil, що означає, що обмеження не визначено. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#emptydir](/uk/docs/concepts/storage/volumes#emptydir)
 
 - **hostPath** (HostPathVolumeSource)
 
-  hostPath представляє попередньо наявний файл або теку на хост-машині, який безпосередньо доступний контейнеру. Це зазвичай використовується для системних агентів або інших привілейованих речей, яким дозволено бачити хост-машину. Більшість контейнерів НЕ потребуватимуть цього. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+  hostPath представляє попередньо наявний файл або теку на хост-машині, який безпосередньо доступний контейнеру. Це зазвичай використовується для системних агентів або інших привілейованих речей, яким дозволено бачити хост-машину. Більшість контейнерів НЕ потребуватимуть цього. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
   <a name="HostPathVolumeSource"></a>
   *Представляє шлях хосту зіставлений з Pod. Томи hostPath не підтримують управління власністю або перевизначення міток SELinux.*
 
   - **hostPath.path** (string), обовʼязково
 
-    path — це шлях до теки на хості. Якщо шлях є символічним посиланням, воно буде слідувати за посиланням до реального шляху. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+    path — це шлях до теки на хості. Якщо шлях є символічним посиланням, воно буде слідувати за посиланням до реального шляху. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
   - **hostPath.type** (string)
 
-    type для тому HostPath. Стандартне значення — "". Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+    type для тому HostPath. Стандартне значення — "". Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
 ### Постійні томи {#persistent-volumes}
 
 - **awsElasticBlockStore** (AWSElasticBlockStoreVolumeSource)
 
-  awsElasticBlockStore представляє ресурс AWS Disk, який підключений до хост-машини kubelet і потім доступний Podʼу. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+  awsElasticBlockStore представляє ресурс AWS Disk, який підключений до хост-машини kubelet і потім доступний Podʼу. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   <a name="AWSElasticBlockStoreVolumeSource"></a>
   *Представляє ресурс Persistent Disk в AWS.
@@ -241,11 +241,11 @@ Volume становить собою іменований том у Pod, до я
 
   - **awsElasticBlockStore.volumeID** (string), обовʼязково
 
-    volumeID — це унікальний ідентифікатор постійного дискового ресурсу в AWS (том Amazon EBS). Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    volumeID — це унікальний ідентифікатор постійного дискового ресурсу в AWS (том Amazon EBS). Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   - **awsElasticBlockStore.fsType** (string)
 
-    fsType — це тип файлової системи тому, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хосту. Приклади: "ext4", "xfs", "ntfs". Якщо не вказано, неявно припускається, що це "ext4". Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    fsType — це тип файлової системи тому, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хосту. Приклади: "ext4", "xfs", "ntfs". Якщо не вказано, неявно припускається, що це "ext4". Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   - **awsElasticBlockStore.partition** (int32)
 
@@ -253,7 +253,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **awsElasticBlockStore.readOnly** (boolean)
 
-    readOnly — значення true примусово встановлює налаштування readOnly у VolumeMounts. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    readOnly — значення true примусово встановлює налаштування readOnly у VolumeMounts. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
 - **azureDisk** (AzureDiskVolumeSource)
 
@@ -493,7 +493,7 @@ Volume становить собою іменований том у Pod, до я
 
 - **gcePersistentDisk** (GCEPersistentDiskVolumeSource)
 
-  gcePersistentDisk представляє ресурс диска GCE, який приєднаний до хост-машини kubelet і потім відкривається для доступу у Podʼі. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+  gcePersistentDisk представляє ресурс диска GCE, який приєднаний до хост-машини kubelet і потім відкривається для доступу у Podʼі. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
   <a name="GCEPersistentDiskVolumeSource"></a>
   *Представляє ресурс постійного диска в Google Compute Engine.
@@ -502,19 +502,19 @@ Volume становить собою іменований том у Pod, до я
 
   - **gcePersistentDisk.pdName** (string), обовʼязково
 
-    pdName — унікальна назва ресурсу PD в GCE. Використовується для ідентифікації диска в GCE. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+    pdName — унікальна назва ресурсу PD в GCE. Використовується для ідентифікації диска в GCE. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
   - **gcePersistentDisk.fsType** (string)
 
-    fsType — тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+    fsType — тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
   - **gcePersistentDisk.partition** (int32)
 
-    partition — це розділ у томі, який ви хочете змонтувати. Якщо пропущено, стандартно монтується за імʼям тома. Приклади: Для тому `/dev/sda1` ви вказуєте розділ як "1". Так само, розділ тому для `/dev/sda` — "0" (або ви можете залишити властивість порожньою). Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+    partition — це розділ у томі, який ви хочете змонтувати. Якщо пропущено, стандартно монтується за імʼям тома. Приклади: Для тому `/dev/sda1` ви вказуєте розділ як "1". Так само, розділ тому для `/dev/sda` — "0" (або ви можете залишити властивість порожньою). Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
   - **gcePersistentDisk.readOnly** (boolean)
 
-    readOnly тут примусово встановить параметр ReadOnly у VolumeMounts. Стандартне значення — false. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+    readOnly тут примусово встановить параметр ReadOnly у VolumeMounts. Стандартне значення — false. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
 - **glusterfs** (GlusterfsVolumeSource)
 
@@ -564,7 +564,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **iscsi.fsType** (string)
 
-    fsType — це тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#iscsi](/docs/concepts/storage/volumes#iscsi)
+    fsType — це тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#iscsi](/uk/docs/concepts/storage/volumes#iscsi)
 
   - **iscsi.initiatorName** (string)
 
@@ -588,22 +588,22 @@ Volume становить собою іменований том у Pod, до я
 
 - **nfs** (NFSVolumeSource)
 
-  nfs представляє монтування NFS на хості, яке діє впрожовж життєвого циклу Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+  nfs представляє монтування NFS на хості, яке діє впрожовж життєвого циклу Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   <a name="NFSVolumeSource"></a>
   *Представляє монтування NFS, яке діє впрожовж життєвого циклу Podʼа. Томи NFS не підтримують керування власністю або перепризначення міток SELinux.*
 
   - **nfs.path** (string), обовʼязково
 
-    path — це шлях, який експортується NFS-сервером. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+    path — це шлях, який експортується NFS-сервером. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   - **nfs.server** (string), обовʼязково
 
-    server — це імʼя хоста або IP-адреса сервера NFS. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+    server — це імʼя хоста або IP-адреса сервера NFS. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   - **nfs.readOnly** (boolean)
 
-    readOnly тут примусово змусить експорт NFS монтувати з правами тільки на читання. Стандартне значення — false. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+    readOnly тут примусово змусить експорт NFS монтувати з правами тільки на читання. Стандартне значення — false. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
 - **photonPersistentDisk** (PhotonPersistentDiskVolumeSource)
 
@@ -687,7 +687,7 @@ Volume становить собою іменований том у Pod, до я
 
   - **rbd.fsType** (string)
 
-    fsType — це тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#rbd](/docs/concepts/storage/volumes#rbd)
+    fsType — це тип файлової системи тома, який ви хочете змонтувати. Порада: Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Неявно вважається "ext4", якщо не вказано інше. Додаткова інформація: [https://kubernetes.io/docs/concepts/storage/volumes#rbd](/uk/docs/concepts/storage/volumes#rbd)
 
   - **rbd.keyring** (string)
 

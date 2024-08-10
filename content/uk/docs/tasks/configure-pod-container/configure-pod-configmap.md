@@ -35,11 +35,11 @@ card:
 kubectl create configmap <map-name> <data-source>
 ```
 
-де, \<map-name> — це імʼя ConfigMap, а \<data-source> — це тека, файл чи літерал з даними, які ви хочете включити в ConfigMap. Імʼя обʼєкта ConfigMap повинно бути вірним [імʼям субдомену DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+де, \<map-name> — це імʼя ConfigMap, а \<data-source> — це тека, файл чи літерал з даними, які ви хочете включити в ConfigMap. Імʼя обʼєкта ConfigMap повинно бути вірним [імʼям субдомену DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 Коли ви створюєте ConfigMap на основі файлу, ключ в \<data-source> визначається імʼям файлу, а значення — вмістом файлу.
 
-Ви можете використовувати [`kubectl describe`](/docs/reference/generated/kubectl/kubectl-commands#describe) або [`kubectl get`](/docs/reference/generated/kubectl/kubectl-commands#get) для отримання інформації про ConfigMap.
+Ви можете використовувати [`kubectl describe`](/uk/docs/reference/generated/kubectl/kubectl-commands#describe) або [`kubectl get`](/uk/docs/reference/generated/kubectl/kubectl-commands#get) для отримання інформації про ConfigMap.
 
 #### Створення ConfigMap з тек {#create-a-configmap-from-directories}
 
@@ -651,7 +651,7 @@ SPECIAL_LEVEL
 SPECIAL_TYPE
 ```
 
-Текстові дані показуються у вигляді файлів з використанням кодування символів UTF-8. Щоб використовувати інше кодування символів, скористайтеся `binaryData` (див. [обʼєкт ConfigMap](/docs/concepts/configuration/configmap/#configmap-object) для докладніших відомостей).
+Текстові дані показуються у вигляді файлів з використанням кодування символів UTF-8. Щоб використовувати інше кодування символів, скористайтеся `binaryData` (див. [обʼєкт ConfigMap](/uk/docs/concepts/configuration/configmap/#configmap-object) для докладніших відомостей).
 
 {{< note >}}
 Якщо в теці `/etc/config` образу контейнера є будь-які файли, то змонтований том робить ці файли образу недоступними.
@@ -693,7 +693,7 @@ kubectl delete pod dapi-test-pod --now
 
 ### Спроєцюйте ключі на конкретні шляхи та встановлюйте права доступу до файлів {#project-keys-to-specific-paths-and-file-permissions}
 
-Ви можете спроєцювати ключі на конкретні шляхи. Зверніться до відповідного розділу в [Посібнику Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#project-secret-keys-to-specific-file-paths) для ознайомлення з синтаксисом. Ви можете встановлювати права доступу POSIX для ключів. Зверніться до відповідного розділу в [Посібнику Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) ознайомлення з синтаксисом.
+Ви можете спроєцювати ключі на конкретні шляхи. Зверніться до відповідного розділу в [Посібнику Secret](/uk/docs/tasks/inject-data-application/distribute-credentials-secure/#project-secret-keys-to-specific-file-paths) для ознайомлення з синтаксисом. Ви можете встановлювати права доступу POSIX для ключів. Зверніться до відповідного розділу в [Посібнику Secret](/uk/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) ознайомлення з синтаксисом.
 
 ### Необовʼязкові посилання {#optional-references}
 
@@ -706,15 +706,15 @@ kubectl delete pod dapi-test-pod --now
 Kubelet перевіряє, чи змонтований ConfigMap є актуальним під час кожної періодичної синхронізації. Однак він використовує свій локальний кеш на основі TTL для отримання поточного значення ConfigMap. В результаті загальна затримка від моменту оновлення ConfigMap до моменту, коли нові ключі проєцюються у Pod може бути таким, як період синхронізації kubelet (стандартно — 1 хвилина) + TTL кешу ConfigMaps (стандартно — 1 хвилина) в kubelet. Ви можете викликати негайне оновлення, оновивши одну з анотацій Podʼа.
 
 {{< note >}}
-Контейнери, які використовують ConfigMap як том [subPath](/docs/concepts/storage/volumes/#using-subpath) не отримуватимуть оновлення ConfigMap.
+Контейнери, які використовують ConfigMap як том [subPath](/uk/docs/concepts/storage/volumes/#using-subpath) не отримуватимуть оновлення ConfigMap.
 {{< /note >}}
 
 ## Розуміння ConfigMap та Podʼів {#understanding-configmaps-and-pods}
 
-Ресурс ConfigMap API зберігає конфігураційні дані у вигляді пар ключ-значення. Дані можуть бути використані в Podʼах або надавати конфігураційні дані для системних компонентів, таких як контролери. ConfigMap схожий на [Secret](/docs/concepts/configuration/secret), але надає засоби для роботи з рядками, що не містять конфіденційної інформації. Користувачі та системні компоненти можуть зберігати конфігураційні дані в ConfigMap.
+Ресурс ConfigMap API зберігає конфігураційні дані у вигляді пар ключ-значення. Дані можуть бути використані в Podʼах або надавати конфігураційні дані для системних компонентів, таких як контролери. ConfigMap схожий на [Secret](/uk/docs/concepts/configuration/secret), але надає засоби для роботи з рядками, що не містять конфіденційної інформації. Користувачі та системні компоненти можуть зберігати конфігураційні дані в ConfigMap.
 
 {{< note >}}
-ConfigMaps повинні посилатися на файли властивостей, а не заміняти їх. Подумайте про ConfigMap як щось подібне до теки `/etc` в Linux та її вмісту. Наприклад, якщо ви створюєте [Том Kubernetes](/docs/concepts/storage/volumes/) з ConfigMap, кожен елемент даних у ConfigMap представлений окремим файлом у томі.
+ConfigMaps повинні посилатися на файли властивостей, а не заміняти їх. Подумайте про ConfigMap як щось подібне до теки `/etc` в Linux та її вмісту. Наприклад, якщо ви створюєте [Том Kubernetes](/uk/docs/concepts/storage/volumes/) з ConfigMap, кожен елемент даних у ConfigMap представлений окремим файлом у томі.
 {{< /note >}}
 
 Поле `data` у ConfigMap містить дані конфігурації. Як показано у прикладі нижче, це може бути простим (наприклад, окремі властивості, визначені за допомогою `--from-literal`) або складним (наприклад, файли конфігурації або JSON-фрагменти, визначені за допомогою `--from-file`).
@@ -833,5 +833,5 @@ kubectl delete configmap -l 'game-config in (config-4,config-5)'
 
 ## {{% heading "whatsnext" %}}
 
-* Ознайомтесь з прикладом [налаштування Redis за допомогою ConfigMap](/docs/tutorials/configuration/configure-redis-using-configmap/).
-* Ознайомтесь з прикладом [оновлення конфігурації через ConfigMap](/docs/tutorials/configuration/updating-configuration-via-a-configmap/).
+* Ознайомтесь з прикладом [налаштування Redis за допомогою ConfigMap](/uk/docs/tutorials/configuration/configure-redis-using-configmap/).
+* Ознайомтесь з прикладом [оновлення конфігурації через ConfigMap](/uk/docs/tutorials/configuration/updating-configuration-via-a-configmap/).

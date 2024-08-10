@@ -18,4 +18,4 @@ stages:
     defaultValue: true
     fromVersion: "1.22"  
 ---
-Вмикає функцію [Server Side Apply (SSA)](/docs/reference/using-api/server-side-apply/) на сервері API.
+Вмикає функцію [Server Side Apply (SSA)](/uk/docs/reference/using-api/server-side-apply/) на сервері API.

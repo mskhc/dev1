@@ -15,4 +15,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Дозволяє використовувати необовʼязкове поле `.spec.persistentVolumeClaimRetentionPolicy`, що забезпечує контроль над видаленням PVC у життєвому циклі StatefulSet. Дивіться [PersistentVolumeClaim retention](/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) для більш детальної інформації.
+Дозволяє використовувати необовʼязкове поле `.spec.persistentVolumeClaimRetentionPolicy`, що забезпечує контроль над видаленням PVC у життєвому циклі StatefulSet. Дивіться [PersistentVolumeClaim retention](/uk/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention) для більш детальної інформації.

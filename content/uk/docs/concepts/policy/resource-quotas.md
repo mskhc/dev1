@@ -21,7 +21,7 @@ weight: 20
 
 Квоти ресурсів працюють наступним чином:
 
-- Різні команди працюють у різних просторах імен. Це може бути забезпечено з використанням [RBAC](/docs/reference/access-authn-authz/rbac/).
+- Різні команди працюють у різних просторах імен. Це може бути забезпечено з використанням [RBAC](/uk/docs/reference/access-authn-authz/rbac/).
 
 - Адміністратор створює одну квоту ресурсів для кожного простору імен.
 
@@ -31,15 +31,15 @@ weight: 20
 
 - Якщо квота включена в простір імен для обчислювальних ресурсів, таких як `cpu` та `memory`, користувачі повинні вказати запити або ліміти для цих значень; інакше, система квот може відхилити створення Podʼа. Підказка: Використовуйте контролер допуску `LimitRanger`, щоб надати для Podʼів, які не мають вимог до обчислювальних ресурсів, стандартні обсяги ресурсів.
 
-  Дивіться [посібник](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) для прикладу того, як уникнути цієї проблеми.
+  Дивіться [посібник](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) для прикладу того, як уникнути цієї проблеми.
 
 {{< note >}}
 
 - Для ресурсів `cpu` та `memory`, квоти ресурсів забезпечують, що **кожен** (новий) Pod у цьому просторі імен встановлює ліміт для цього ресурсу. Якщо ви встановлюєте квоту ресурсів у просторі імен для `cpu` або `memory`, ви, і інші клієнти, **повинні** вказати або `requests`, або `limits` для цього ресурсу, для кожного нового Podʼа, який ви створюєте. Якщо ви цього не робите, панель управління може відхилити допуск для цього Podʼа.
-- Для інших ресурсів: ResourceQuota працює та ігнорує Podʼи в просторі імен, які не встановлюють ліміт або запит для цього ресурсу. Це означає, що ви можете створити новий Pod без обмеження/запиту тимчасового сховища, якщо квота ресурсів обмежує тимчасове сховище цього простору імен. Ви можете використовувати [LimitRange](/docs/concepts/policy/limit-range/) для автоматичного встановлення стандартних запитів для цих ресурсів.
+- Для інших ресурсів: ResourceQuota працює та ігнорує Podʼи в просторі імен, які не встановлюють ліміт або запит для цього ресурсу. Це означає, що ви можете створити новий Pod без обмеження/запиту тимчасового сховища, якщо квота ресурсів обмежує тимчасове сховище цього простору імен. Ви можете використовувати [LimitRange](/uk/docs/concepts/policy/limit-range/) для автоматичного встановлення стандартних запитів для цих ресурсів.
 {{< /note >}}
 
-Назва обʼєкта ResourceQuota повинна бути дійсним [піддоменом DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Назва обʼєкта ResourceQuota повинна бути дійсним [піддоменом DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 Приклади політик, які можна створити за допомогою просторів імен та квот, такі:
 
@@ -59,7 +59,7 @@ ResourceQuota.
 
 ## Квота обчислювальних ресурсів {#compute-resource-quota}
 
-Ви можете обмежити загальну суму [обчислювальних ресурсів](/docs/concepts/configuration/manage-resources-containers/), які можуть бути запитані в певному просторі імен.
+Ви можете обмежити загальну суму [обчислювальних ресурсів](/uk/docs/concepts/configuration/manage-resources-containers/), які можуть бути запитані в певному просторі імен.
 
 Підтримуються наступні типи ресурсів:
 
@@ -75,7 +75,7 @@ ResourceQuota.
 
 ### Квота для розширених ресурсів {#resource-quota-for-extended-resources}
 
-Крім ресурсів, згаданих вище, в релізі 1.10 було додано підтримку квоти для [розширених ресурсів](/docs/concepts/configuration/manage-resources-containers/#extended-resources).
+Крім ресурсів, згаданих вище, в релізі 1.10 було додано підтримку квоти для [розширених ресурсів](/uk/docs/concepts/configuration/manage-resources-containers/#extended-resources).
 
 Оскільки перевищення не дозволяється для розширених ресурсів, немає сенсу вказувати як `requests`, так і `limits` для одного й того ж розширеного ресурсу у квоті. Таким чином, для розширених ресурсів дозволяються лише елементи квоти з префіксом `requests.` наразі.
 
@@ -87,16 +87,16 @@ ResourceQuota.
 
 ## Квота ресурсів зберігання {#storage-resource-quota}
 
-Ви можете обмежити загальну суму [ресурсів зберігання](/docs/concepts/storage/persistent-volumes/), які можуть бути запитані в певному просторі імен.
+Ви можете обмежити загальну суму [ресурсів зберігання](/uk/docs/concepts/storage/persistent-volumes/), які можуть бути запитані в певному просторі імен.
 
 Крім того, ви можете обмежити споживання ресурсів зберігання на основі повʼязаного класу зберігання.
 
 | Назва ресурсу | Опис |
 | --------------------- | ----------------------------------------------------------- |
 | `requests.storage` | У всіх запитах на постійний том, сума запитів зберігання не може перевищувати це значення. |
-| `persistentvolumeclaims` | Загальна кількість [PersistentVolumeClaims](/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати у просторі імен. |
+| `persistentvolumeclaims` | Загальна кількість [PersistentVolumeClaims](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати у просторі імен. |
 | `<storage-class-name>.storageclass.storage.k8s.io/requests.storage` | У всіх запитах на постійний том, повʼязаних з `<storage-class-name>`, сума запитів зберігання не може перевищувати це значення. |
-| `<storage-class-name>.storageclass.storage.k8s.io/persistentvolumeclaims` | У всіх запитах на постійний том, повʼязаних з `<storage-class-name>`, загальна кількість [запитів на постійні томи](/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати у просторі імен. |
+| `<storage-class-name>.storageclass.storage.k8s.io/persistentvolumeclaims` | У всіх запитах на постійний том, повʼязаних з `<storage-class-name>`, загальна кількість [запитів на постійні томи](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати у просторі імен. |
 
 Наприклад, якщо оператор хоче обмежити зберігання з класом зберігання `gold` окремо від класу зберігання `bronze`, оператор може визначити квоту так:
 
@@ -112,7 +112,7 @@ ResourceQuota.
 | `ephemeral-storage` | Те саме, що і `requests.ephemeral-storage`. |
 
 {{< note >}}
-При використанні середовища виконання контейнерів CRI, логи контейнера будуть зараховуватися до квоти тимчасового сховища. Це може призвести до неочікуваного видалення Podʼів, які вичерпали свої квоти на сховище. Дивіться [Архітектура логів](/docs/concepts/cluster-administration/logging/) для деталей.
+При використанні середовища виконання контейнерів CRI, логи контейнера будуть зараховуватися до квоти тимчасового сховища. Це може призвести до неочікуваного видалення Podʼів, які вичерпали свої квоти на сховище. Дивіться [Архітектура логів](/uk/docs/concepts/cluster-administration/logging/) для деталей.
 {{< /note >}}
 
 ## Квота на кількість обʼєктів {#object-count-quota}
@@ -135,7 +135,7 @@ ResourceQuota.
 - `count/jobs.batch`
 - `count/cronjobs.batch`
 
-Якщо ви визначаєте квоту таким чином, вона застосовується до API Kubernetes, які є частиною сервера API, а також до будь-яких власних ресурсів, підтримуваних CustomResourceDefinition. Якщо ви використовуєте [агрегацію API](/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/), щоб додати додаткові, власні API, які не визначені як CustomResourceDefinitions, основна панель управління Kubernetes не застосовує квоту для агрегованого API. Очікується, що розширений сервер API забезпечить виконання квот, якщо це відповідає потребам власного API. Наприклад, щоб створити квоту на власний ресурс `widgets` у групі API `example.com`, використовуйте `count/widgets.example.com`.
+Якщо ви визначаєте квоту таким чином, вона застосовується до API Kubernetes, які є частиною сервера API, а також до будь-яких власних ресурсів, підтримуваних CustomResourceDefinition. Якщо ви використовуєте [агрегацію API](/uk/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/), щоб додати додаткові, власні API, які не визначені як CustomResourceDefinitions, основна панель управління Kubernetes не застосовує квоту для агрегованого API. Очікується, що розширений сервер API забезпечить виконання квот, якщо це відповідає потребам власного API. Наприклад, щоб створити квоту на власний ресурс `widgets` у групі API `example.com`, використовуйте `count/widgets.example.com`.
 
 При використанні такої квоти ресурсів (практично для всіх видів обʼєктів), обʼєкт враховується у квоті, якщо вид обʼєкта існує (визначений) у панелі управління. Ці типи квот корисні для захисту від вичерпання ресурсів зберігання. Наприклад, ви можете хотіти обмежити кількість Secretʼів на сервері, враховуючи їх великий розмір. Занадто багато Secretʼів у кластері може фактично завадити запуску серверів і контролерів. Ви можете встановити квоту для Job, щоб захиститися від погано налаштованого CronJob. CronJobs, які створюють занадто багато Job у просторі імен, можуть призвести до заподіяння відмови в обслуговуванні.
 
@@ -144,7 +144,7 @@ ResourceQuota.
 | Назва ресурсу | Опис |
 | ------------------------------- | ------------------------------------------------- |
 | `configmaps` | Загальна кількість ConfigMaps, які можуть існувати в просторі імен. |
-| `persistentvolumeclaims` | Загальна кількість [PersistentVolumeClaims](/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати в просторі імен. |
+| `persistentvolumeclaims` | Загальна кількість [PersistentVolumeClaims](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims), які можуть існувати в просторі імен. |
 | `pods` | Загальна кількість Podʼів у просторі імен, що не перебувають в стані завершення роботи. Pod вважається таким, якщо `.status.phase in (Failed, Succeeded)` є true. |
 | `replicationcontrollers` | Загальна кількість ReplicationControllers, які можуть існувати в просторі імен. |
 | `resourcequotas` | Загальна кількість ResourceQuotas, які можуть існувати в просторі імен. |
@@ -169,8 +169,8 @@ ResourceQuota.
 | `NotTerminating` | Відповідає Podʼам, де `.spec.activeDeadlineSeconds is nil` |
 | `BestEffort` | Відповідає Podʼам, які мають найкращий рівень якості обслуговування. |
 | `NotBestEffort` | Відповідає Podʼам, які не мають найкращого рівня якості обслуговування. |
-| `PriorityClass` | Відповідає Podʼам, які посилаються на вказаний [клас пріоритету](/docs/concepts/scheduling-eviction/pod-priority-preemption). |
-| `CrossNamespacePodAffinity` | Відповідає Podʼам, які мають міжпросторові [(anti)affinity](/docs/concepts/scheduling-eviction/assign-pod-node). |
+| `PriorityClass` | Відповідає Podʼам, які посилаються на вказаний [клас пріоритету](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption). |
+| `CrossNamespacePodAffinity` | Відповідає Podʼам, які мають міжпросторові [(anti)affinity](/uk/docs/concepts/scheduling-eviction/assign-pod-node). |
 
 Область `BestEffort` обмежує квоту відстеження наступним ресурсом:
 
@@ -220,7 +220,7 @@ ResourceQuota.
 
 {{< feature-state for_k8s_version="v1.17" state="stable" >}}
 
-Podʼи можуть бути створені з певним [пріоритетом](/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority). Ви можете контролювати використання ресурсів системи для Podʼів з урахуванням їх пріоритету, використовуючи поле `scopeSelector` у специфікації квоти.
+Podʼи можуть бути створені з певним [пріоритетом](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority). Ви можете контролювати використання ресурсів системи для Podʼів з урахуванням їх пріоритету, використовуючи поле `scopeSelector` у специфікації квоти.
 
 Квота має збіг та використовується лише якщо `scopeSelector` у специфікації квоти вибирає Pod.
 
@@ -635,6 +635,6 @@ resourcequota/pods-cluster-services created
 ## {{% heading "whatsnext" %}}
 
 - Дивіться [документ з проєктування ResourceQuota](https://git.k8s.io/design-proposals-archive/resource-management/admission_control_resource_quota.md) для отримання додаткової інформації.
-- Перегляньте [детальний приклад використання квоти ресурсів](/docs/tasks/administer-cluster/quota-api-object/).
+- Перегляньте [детальний приклад використання квоти ресурсів](/uk/docs/tasks/administer-cluster/quota-api-object/).
 - Прочитайте [документ з проєктування підтримки квот для класу пріоритету](https://git.k8s.io/design-proposals-archive/scheduling/pod-priority-resourcequota.md).
 - Дивіться [LimitedResources](https://github.com/kubernetes/kubernetes/pull/36765)

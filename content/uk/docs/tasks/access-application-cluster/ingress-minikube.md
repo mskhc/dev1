@@ -7,13 +7,13 @@ min-kubernetes-server-version: 1.19
 
 <!-- overview -->
 
-[Ingress](/docs/concepts/services-networking/ingress/) — це API-обʼєкт, який визначає правила, що дозволяють зовнішній доступ до Serviceʼів у кластері. [Ingress-контролер](/docs/concepts/services-networking/ingress-controllers/) виконує правила, встановлені в Ingress.
+[Ingress](/uk/docs/concepts/services-networking/ingress/) — це API-обʼєкт, який визначає правила, що дозволяють зовнішній доступ до Serviceʼів у кластері. [Ingress-контролер](/uk/docs/concepts/services-networking/ingress-controllers/) виконує правила, встановлені в Ingress.
 
 Ця сторінка показує, як налаштувати простий Ingress, який маршрутизує запити до Service 'web' або 'web2' залежно від HTTP URI.
 
 ## {{% heading "prerequisites" %}}
 
-Це завдання передбачає, що ви використовуєте `minikube` для запуску локального Kubernetes кластера. Відвідайте сторінку[Встановлення інструментів](/docs/tasks/tools/#minikube), щоб дізнатися, як встановити `minikube`.
+Це завдання передбачає, що ви використовуєте `minikube` для запуску локального Kubernetes кластера. Відвідайте сторінку[Встановлення інструментів](/uk/docs/tasks/tools/#minikube), щоб дізнатися, як встановити `minikube`.
 
 {{< note >}}
 Це завдання використовує контейнер, який вимагає архітектури AMD64. Якщо ви використовуєте minikube на компʼютері з іншою архітектурою процесора, ви можете спробувати використовувати minikube з драйвером, який може емулювати AMD64. Наприклад, драйвер Docker Desktop може це робити.
@@ -449,6 +449,6 @@ min-kubernetes-server-version: 1.19
 
 ## {{% heading "whatsnext" %}}
 
-* Докладніше про [Ingress](/docs/concepts/services-networking/ingress/)
-* Докладніше про [Контролери Ingress](/docs/concepts/services-networking/ingress-controllers/)
-* Докладніше про [Service](/docs/concepts/services-networking/service/)
+* Докладніше про [Ingress](/uk/docs/concepts/services-networking/ingress/)
+* Докладніше про [Контролери Ingress](/uk/docs/concepts/services-networking/ingress-controllers/)
+* Докладніше про [Service](/uk/docs/concepts/services-networking/service/)

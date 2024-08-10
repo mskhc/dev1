@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.29"
 ---
-Дозволяє витягувати зображення на основі [класу виконання](/docs/concepts/containers/runtime-class/) Podʼів, які посилаються на них.
+Дозволяє витягувати зображення на основі [класу виконання](/uk/docs/concepts/containers/runtime-class/) Podʼів, які посилаються на них.

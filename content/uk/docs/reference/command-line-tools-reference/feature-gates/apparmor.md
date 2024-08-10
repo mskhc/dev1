@@ -10,4 +10,4 @@ stages:
     defaultValue: true
     fromVersion: "1.4"
 ---
-Вмикає використання примусового контролю доступу AppArmor для Podʼів, що працюють на вузлах Linux. Докладнішу інформацію наведено у [Посібнику з AppArmor](/docs/tutorials/security/apparmor/).
+Вмикає використання примусового контролю доступу AppArmor для Podʼів, що працюють на вузлах Linux. Докладнішу інформацію наведено у [Посібнику з AppArmor](/uk/docs/tutorials/security/apparmor/).

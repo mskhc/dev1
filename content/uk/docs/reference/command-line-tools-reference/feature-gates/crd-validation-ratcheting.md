@@ -14,5 +14,5 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Ввімкнути оновлення власних ресурсів, щоб вони містили порушення їхньої схеми OpenAPI, якщо частини ресурсу, що порушують оновлення не змінилися. Докладніші відомості наведено у статті [Проковзування валідації](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#validation-ratcheting).
+Ввімкнути оновлення власних ресурсів, щоб вони містили порушення їхньої схеми OpenAPI, якщо частини ресурсу, що порушують оновлення не змінилися. Докладніші відомості наведено у статті [Проковзування валідації](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#validation-ratcheting).
 

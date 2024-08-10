@@ -21,4 +21,4 @@ stages:
 
 removed: true
 ---
-Дозволяє визначити порти у правилі [NetworkPolicy](/docs/concepts/services-networking/network-policies/) як діапазон номерів портів.
+Дозволяє визначити порти у правилі [NetworkPolicy](/uk/docs/concepts/services-networking/network-policies/) як діапазон номерів портів.

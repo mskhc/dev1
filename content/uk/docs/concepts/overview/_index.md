@@ -99,7 +99,7 @@ Kubernetes:
 
 ## {{% heading "whatsnext" %}}
 
-* Подивіться на [Компоненти Kubernetes](/docs/concepts/overview/components/)
-* Подивіться на [API Kubernetes](/docs/concepts/overview/kubernetes-api/)
-* Подивіться на [Архітектура кластера](/docs/concepts/architecture/)
-* Готові [розпочати](/docs/setup/)?
+* Подивіться на [Компоненти Kubernetes](/uk/docs/concepts/overview/components/)
+* Подивіться на [API Kubernetes](/uk/docs/concepts/overview/kubernetes-api/)
+* Подивіться на [Архітектура кластера](/uk/docs/concepts/architecture/)
+* Готові [розпочати](/uk/docs/setup/)?

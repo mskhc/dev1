@@ -13,7 +13,7 @@ Kubernetes {{< glossary_tooltip text="namespaces" term_id="namespace" >}} доп
 
 Вони це роблять, надаючи наступне:
 
-1. Область для [Імен](/docs/concepts/overview/working-with-objects/names/).
+1. Область для [Імен](/uk/docs/concepts/overview/working-with-objects/names/).
 2. Механізм для прикріплення авторизації та політики до підрозділу кластера.
 
 Використання кількох просторів імен є необовʼязковим.
@@ -30,7 +30,7 @@ Kubernetes {{< glossary_tooltip text="namespaces" term_id="namespace" >}} доп
 
 У цьому прикладі передбачається наступне:
 
-1. У вас є [кластер Kubernetes](/docs/setup/).
+1. У вас є [кластер Kubernetes](/uk/docs/setup/).
 2. Ви маєте базове розуміння що таке {{< glossary_tooltip text="Pod" term_id="pod" >}}, {{< glossary_tooltip term_id="service" text="Service" >}} та {{< glossary_tooltip text="Deployment" term_id="deployment" >}} в Kubernetes.
 
 ## Стандартний простір імен {#understand-the-default-namespace}

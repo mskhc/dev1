@@ -19,11 +19,11 @@ weight: 70
 
 ### Налаштування шифрування даних у спокої {#сonfigure-encryption-at-rest}
 
-Стандартно обʼєкти Secret зберігаються у кластері в {{<glossary_tooltip term_id="etcd" text="etcd">}} у незашифрованому вигляді. Вам слід налаштувати шифрування конфіденційної інформації з Secret в `etcd`. Для отримання інструкцій дивіться [Шифрування конфіденційних даних у Secret у спокої](/docs/tasks/administer-cluster/encrypt-data/).
+Стандартно обʼєкти Secret зберігаються у кластері в {{<glossary_tooltip term_id="etcd" text="etcd">}} у незашифрованому вигляді. Вам слід налаштувати шифрування конфіденційної інформації з Secret в `etcd`. Для отримання інструкцій дивіться [Шифрування конфіденційних даних у Secret у спокої](/uk/docs/tasks/administer-cluster/encrypt-data/).
 
 ### Налаштування доступу з мінімальними привілеями до Secret {#least-privilege-secrets}
 
-Плануючи механізм керування доступом, такий як {{<glossary_tooltip term_id="rbac" text="Керування доступом на основі ролей">}} Kubernetes [(RBAC)](/docs/reference/access-authn-authz/rbac/), слід врахувати наступні рекомендації щодо доступу до обʼєктів `Secret`. Також слід дотримуватися [рекомендацій використання RBAC](/docs/concepts/security/rbac-good-practices).
+Плануючи механізм керування доступом, такий як {{<glossary_tooltip term_id="rbac" text="Керування доступом на основі ролей">}} Kubernetes [(RBAC)](/uk/docs/reference/access-authn-authz/rbac/), слід врахувати наступні рекомендації щодо доступу до обʼєктів `Secret`. Також слід дотримуватися [рекомендацій використання RBAC](/uk/docs/concepts/security/rbac-good-practices).
 
 - **Компоненти**: Обмежте доступ до `watch` або `list` тільки для найпривілейованіших системних компонентів. Дозвольте доступ лише для отримання Secret, якщо це необхідно для звичайної роботи компонента.
 - **Люди**: Обмежте доступ до Secrets на рівні `get`, `watch` або `list`. Дозвольте адміністраторам кластера отримувати доступ до `etcd`. Це включає доступ тільки для читання. Для складнішого керування доступом, такого як обмеження доступу до Secrets з конкретними анотаціями, слід розглянути використання механізмів авторизації сторонніх постачальників.
@@ -39,7 +39,7 @@ weight: 70
 
 #### Додаткові анотації ServiceAccount для керування Secret {#additional-serviceaccount-annotations-for-secret-management}
 
-Ви також можете використовувати анотацію `kubernetes.io/enforce-mountable-secrets` на ServiceAccount для виконання певних правил щодо того, як використовувати Secrets у Pod. Для отримання додаткових відомостей дивіться [документацію по цій анотації](/docs/reference/labels-annotations-taints/#enforce-mountable-secrets).
+Ви також можете використовувати анотацію `kubernetes.io/enforce-mountable-secrets` на ServiceAccount для виконання певних правил щодо того, як використовувати Secrets у Pod. Для отримання додаткових відомостей дивіться [документацію по цій анотації](/uk/docs/reference/labels-annotations-taints/#enforce-mountable-secrets).
 
 ### Покращення політик управління etcd {#improve-etcd-management-policies}
 

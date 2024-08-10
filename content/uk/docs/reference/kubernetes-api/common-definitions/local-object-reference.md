@@ -19,4 +19,4 @@ title: "LocalObjectReference
 
 - **name** (string)
 
-    Назва обʼєкта, на який ви посилаєтеся. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+    Назва обʼєкта, на який ви посилаєтеся. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)

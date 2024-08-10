@@ -9,11 +9,11 @@ min-kubernetes-server-version: 1.27
 
 {{< feature-state feature_gate_name="InPlacePodVerticalScaling" >}}
 
-Ця сторінка передбачає, що ви обізнані з [Якістю обслуговування](/docs/tasks/configure-pod-container/quality-service-pod/) для Podʼів Kubernetes.
+Ця сторінка передбачає, що ви обізнані з [Якістю обслуговування](/uk/docs/tasks/configure-pod-container/quality-service-pod/) для Podʼів Kubernetes.
 
 Ця сторінка показує, як змінити обсяги CPU та памʼяті, призначені для контейнерів працюючого Podʼа без перезапуску самого Podʼа або його контейнерів. Вузол Kubernetes виділяє ресурси для Podʼа на основі його `запитів`, і обмежує використання ресурсів Podʼа на основі `лімітів`, вказаних у контейнерах Podʼа.
 
-Зміна розподілу ресурсів для запущеного Podʼа вимагає [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` має бути увімкнено. Альтернативою може бути видалення Podʼа і ввімкнення параметра, щоб [workload controller](/docs/concepts/workloads/controllers/) створив новий Pod з іншими вимогами до ресурсів.
+Зміна розподілу ресурсів для запущеного Podʼа вимагає [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` має бути увімкнено. Альтернативою може бути видалення Podʼа і ввімкнення параметра, щоб [workload controller](/uk/docs/concepts/workloads/controllers/) створив новий Pod з іншими вимогами до ресурсів.
 
 Для зміни ресурсів Podʼа на місці:
 
@@ -30,7 +30,7 @@ min-kubernetes-server-version: 1.27
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Має бути увімкнено [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling`для вашої панелі управління і для всіх вузлів вашого кластера.
+Має бути увімкнено [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling`для вашої панелі управління і для всіх вузлів вашого кластера.
 
 ## Політики зміни розміру контейнера {#container-resize-policies}
 
@@ -81,7 +81,7 @@ spec:
 
 ## Створення Podʼа із запитами та лімітами ресурсів {#create-pod-with-resource-requests-and-limits}
 
-Ви можете створити Guaranteed або Burstable [клас якості обслуговування](/docs/tasks/configure-pod-container/quality-service-pod/) Podʼу, вказавши запити та/або ліміти для контейнерів Podʼа.
+Ви можете створити Guaranteed або Burstable [клас якості обслуговування](/uk/docs/tasks/configure-pod-container/quality-service-pod/) Podʼу, вказавши запити та/або ліміти для контейнерів Podʼа.
 
 Розгляньте наступний маніфест для Podʼа, який має один контейнер.
 
@@ -208,18 +208,18 @@ kubectl delete namespace qos-example
 
 ### Для розробників застосунків {#for-app-developers}
 
-- [Призначення ресурсів памʼяті для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-memory-resource/)
+- [Призначення ресурсів памʼяті для контейнерів та Podʼів](/uk/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-- [Призначення ресурсів CPU для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+- [Призначення ресурсів CPU для контейнерів та Podʼів](/uk/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
 ### Для адміністраторів кластерів {#for-cluster-administrators}
 
-- [Налаштування стандартних запитів та лімітів памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+- [Налаштування стандартних запитів та лімітів памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
 
-- [Налаштування стандартних запитів та лімітів CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+- [Налаштування стандартних запитів та лімітів CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 
-- [Налаштування мінімальних та максимальних лімітів памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
+- [Налаштування мінімальних та максимальних лімітів памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 
-- [Налаштування мінімальних та максимальних лімітів CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
+- [Налаштування мінімальних та максимальних лімітів CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
 
-- [Налаштування квот памʼяті та CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+- [Налаштування квот памʼяті та CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)

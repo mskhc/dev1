@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.29"
 ---
-Дозволяє запуск kube-proxy у режимі [nftables](/docs/reference/networking/virtual-ips/#proxy-mode-nftables).
+Дозволяє запуск kube-proxy у режимі [nftables](/uk/docs/reference/networking/virtual-ips/#proxy-mode-nftables).

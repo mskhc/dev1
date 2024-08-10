@@ -10,7 +10,7 @@ weight: 120
 
 <!-- overview -->
 
-У Kubernetes [Service](/docs/concepts/services-networking/service/) — це абстракція для експозиції застосунку, який працює на наборі Podʼів. Serviceʼи можуть мати віртуальну IP-адресу, доступну на рівні кластера (за допомогою Service з `type: ClusterIP`). Клієнти можуть підключатися за допомогою цієї віртуальної IP-адреси, і Kubernetes балансує трафік до цього Service між його Podʼами.
+У Kubernetes [Service](/uk/docs/concepts/services-networking/service/) — це абстракція для експозиції застосунку, який працює на наборі Podʼів. Serviceʼи можуть мати віртуальну IP-адресу, доступну на рівні кластера (за допомогою Service з `type: ClusterIP`). Клієнти можуть підключатися за допомогою цієї віртуальної IP-адреси, і Kubernetes балансує трафік до цього Service між його Podʼами.
 
 <!-- body -->
 
@@ -123,6 +123,6 @@ pie showData
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся про [Політики зовнішнього трафіку Service](/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip)
-* Дізнайтеся про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/)
-* Дізнайтеся про [Service](/docs/concepts/services-networking/service/)
+* Дізнайтеся про [Політики зовнішнього трафіку Service](/uk/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip)
+* Дізнайтеся про [Підключення застосунків за допомогою Service](/uk/docs/tutorials/services/connect-applications-service/)
+* Дізнайтеся про [Service](/uk/docs/concepts/services-networking/service/)

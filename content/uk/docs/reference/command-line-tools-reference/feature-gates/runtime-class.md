@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає [RuntimeClass](/docs/concepts/containers/runtime-class/) для вибору конфігурацій середовища виконання контейнера.
+Вмикає [RuntimeClass](/uk/docs/concepts/containers/runtime-class/) для вибору конфігурацій середовища виконання контейнера.

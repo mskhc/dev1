@@ -79,7 +79,7 @@ source: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 
 ### Створення Service Redis-лідера {#creating-the-redis-leader-service}
 
-Застосунок гостьової книги потребує звʼязку з Redis для запису своїх даних. Вам потрібно застосувати [Service](/docs/concepts/services-networking/service/), щоб спрямовувати трафік до Pod Redis. Service визначає політику доступу до Podʼів.
+Застосунок гостьової книги потребує звʼязку з Redis для запису своїх даних. Вам потрібно застосувати [Service](/uk/docs/concepts/services-networking/service/), щоб спрямовувати трафік до Pod Redis. Service визначає політику доступу до Podʼів.
 
 {{% code_sample file="application/guestbook/redis-leader-service.yaml" %}}
 
@@ -146,7 +146,7 @@ source: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 
 ### Створення Service Redis-фолловера {#creating-the-redis-follower-service}
 
-Застосунок гостьової книги потребує зʼязку з фолловерами Redis для читання даних. Щоб зробити фолловерів Redis доступними, потрібно налаштувати інший [Service](/docs/concepts/services-networking/service/).
+Застосунок гостьової книги потребує зʼязку з фолловерами Redis для читання даних. Щоб зробити фолловерів Redis доступними, потрібно налаштувати інший [Service](/uk/docs/concepts/services-networking/service/).
 
 {{% code_sample file="application/guestbook/redis-follower-service.yaml" %}}
 
@@ -218,7 +218,7 @@ source: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 
 ### Створення Service для Фронтенду {#creating-the-frontend-service}
 
-Serviceʼи `Redis`, які ви створили, доступні тільки всередині кластера Kubernetes, оскільки типовий тип для Service — [ClusterIP](/docs/concepts/services-networking/service/#publishing-services-service-types). `ClusterIP` надає одну IP-адресу для набору Podʼів, на які вказує Service. Ця IP-адреса доступна тільки всередині кластера.
+Serviceʼи `Redis`, які ви створили, доступні тільки всередині кластера Kubernetes, оскільки типовий тип для Service — [ClusterIP](/uk/docs/concepts/services-networking/service/#publishing-services-service-types). `ClusterIP` надає одну IP-адресу для набору Podʼів, на які вказує Service. Ця IP-адреса доступна тільки всередині кластера.
 
 Якщо ви хочете, щоб гості могли отримати доступ до вашої гостьової книги, ви повинні налаштувати Service фронтенду таким чином, щоб він був видимий зовні, щоб клієнт міг запитувати Service ззовні кластера Kubernetes. Проте користувачі Kubernetes можуть скористатися командою `kubectl port-forward`, щоб отримати доступ до Service, навіть якщо він використовує `ClusterIP`.
 
@@ -384,7 +384,7 @@ Serviceʼи `Redis`, які ви створили, доступні тільки
 
 ## {{% heading "whatsnext" %}}
 
-* Пройдіть інтерактивні навчальні посібники [Основи Kubernetes](/docs/tutorials/kubernetes-basics/) 
-* Використовуйте Kubernetes для створення блогу з використанням [постійних томів для MySQL і WordPress](/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#visit-your-new-wordpress-blog)
-* Дізнайтеся більше про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/)
-* Дізнайтеся більше про [ефективне використання міток](/docs/concepts/overview/working-with-objects/labels/#using-labels-effectively)
+* Пройдіть інтерактивні навчальні посібники [Основи Kubernetes](/uk/docs/tutorials/kubernetes-basics/) 
+* Використовуйте Kubernetes для створення блогу з використанням [постійних томів для MySQL і WordPress](/uk/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/#visit-your-new-wordpress-blog)
+* Дізнайтеся більше про [Підключення застосунків за допомогою Service](/uk/docs/tutorials/services/connect-applications-service/)
+* Дізнайтеся більше про [ефективне використання міток](/uk/docs/concepts/overview/working-with-objects/labels/#using-labels-effectively)

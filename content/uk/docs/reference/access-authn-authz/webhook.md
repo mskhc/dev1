@@ -21,7 +21,7 @@ Webhook — це зворотний виклик HTTP: HTTP POST, який ві
 
 Режим `Webhook` потребує файл для HTTP конфігурації, що вказується за допомогою прапорця `--authorization-webhook-config-file=SOME_FILENAME`.
 
-Файл конфігурації використовує формат файлу [kubeconfig](/docs/tasks/access-application-cluster/configure-access-multiple-clusters/). У файлі "users" стосується конфігурації webhook API сервера, а "clusters" — до віддаленого сервісу.
+Файл конфігурації використовує формат файлу [kubeconfig](/uk/docs/tasks/access-application-cluster/configure-access-multiple-clusters/). У файлі "users" стосується конфігурації webhook API сервера, а "clusters" — до віддаленого сервісу.
 
 Приклад конфігурації, що використовує клієнтську автентифікацію HTTPS:
 
@@ -59,7 +59,7 @@ contexts:
 
 При ухваленні рішення про авторизацію, API сервер надсилає JSON- серіалізований обʼєкт `authorization.k8s.io/v1beta1` `SubjectAccessReview`, що описує дію. Цей обʼєкт містить поля, що описують користувача, який намагається зробити запит, та деталі про ресурс, до якого здійснюється доступ, або атрибути запиту.
 
-Зверніть увагу, що обʼєкти API webhook підлягають тим самим [правилам сумісності версій](/docs/concepts/overview/kubernetes-api/), що й інші обʼєкти API Kubernetes. Імплементатори повинні бути обізнані з менш суворими обіцянками сумісності для бета-обʼєктів і перевіряти поле "apiVersion" запиту для забезпечення правильної десеріалізації. Додатково, API сервер повинен увімкнути групу розширень API `authorization.k8s.io/v1beta1` (`--runtime-config=authorization.k8s.io/v1beta1=true`).
+Зверніть увагу, що обʼєкти API webhook підлягають тим самим [правилам сумісності версій](/uk/docs/concepts/overview/kubernetes-api/), що й інші обʼєкти API Kubernetes. Імплементатори повинні бути обізнані з менш суворими обіцянками сумісності для бета-обʼєктів і перевіряти поле "apiVersion" запиту для забезпечення правильної десеріалізації. Додатково, API сервер повинен увімкнути групу розширень API `authorization.k8s.io/v1beta1` (`--runtime-config=authorization.k8s.io/v1beta1=true`).
 
 Приклад тіла запиту:
 

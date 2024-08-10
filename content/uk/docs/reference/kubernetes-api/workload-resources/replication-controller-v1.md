@@ -44,15 +44,15 @@ ReplicationControllerSpec — це специфікація контролер�
 
 - **selector** (map[string]string)
 
-  Selector — це запит міток (label query) з Podʼів, які повинні відповідати кількості реплік. Якщо Selector порожній, стандартно встановлюються мітки, які присутні в шаблоні Pod. Ключі та значення міток, які повинні збігатись для контролю цим контролером реплікації, за відсутності стандартних значень встановлюються мітки з шаблону Pod. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors](/docs/concepts/overview/working-with-objects/labels/#label-selectors)
+  Selector — це запит міток (label query) з Podʼів, які повинні відповідати кількості реплік. Якщо Selector порожній, стандартно встановлюються мітки, які присутні в шаблоні Pod. Ключі та значення міток, які повинні збігатись для контролю цим контролером реплікації, за відсутності стандартних значень встановлюються мітки з шаблону Pod. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors](/uk/docs/concepts/overview/working-with-objects/labels/#label-selectors)
 
 - **template** (<a href="{{< ref "../workload-resources/pod-template-v1#PodTemplateSpec" >}}">PodTemplateSpec</a>)
 
-  Template — це обʼєкт, який описує Pod, який буде створений у разі виявлення недостатньої кількості реплік. Це має перевагу над TemplateRef. Єдине дозволене значення template.spec.restartPolicy — "Always". Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template](/docs/concepts/workloads/controllers/replicationcontroller#pod-template)
+  Template — це обʼєкт, який описує Pod, який буде створений у разі виявлення недостатньої кількості реплік. Це має перевагу над TemplateRef. Єдине дозволене значення template.spec.restartPolicy — "Always". Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template](/uk/docs/concepts/workloads/controllers/replicationcontroller#pod-template)
 
 - **replicas** (int32)
 
-  Replicas — це кількість бажаних реплік. Це вказівка для розрізнення між явним нульовим значенням та невказаною кількістю. Стандартне значення — 1. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller](/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller)
+  Replicas — це кількість бажаних реплік. Це вказівка для розрізнення між явним нульовим значенням та невказаною кількістю. Стандартне значення — 1. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller](/uk/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller)
 
 - **minReadySeconds** (int32)
 
@@ -66,7 +66,7 @@ ReplicationControllerStatus представляє поточний статус
 
 - **replicas** (int32), обовʼязково
 
-  Replicas — це найновіша зафіксована кількість реплік. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller](/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller)
+  Replicas — це найновіша зафіксована кількість реплік. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller](/uk/docs/concepts/workloads/controllers/replicationcontroller#what-is-a-replicationcontroller)
 
 - **availableReplicas** (int32)
 
@@ -132,7 +132,7 @@ ReplicationControllerList — це колекція контролерів ре
 
 - **items** ([]<a href="{{< ref "../workload-resources/replication-controller-v1#ReplicationController" >}}">ReplicationController</a>), обовʼязково
 
-  Список контролерів реплікації. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller](/docs/concepts/workloads/controllers/replicationcontroller)
+  Список контролерів реплікації. Додаткова інформація: [https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller](/uk/docs/concepts/workloads/controllers/replicationcontroller)
 
 ## Операції {#operations}
 

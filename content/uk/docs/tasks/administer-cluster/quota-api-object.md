@@ -129,22 +129,22 @@ kubectl delete namespace quota-object-example
 
 ### Для адміністраторів кластера {#for-cluster-administrators}
 
-* [Налаштуйте типові запити та ліміти памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+* [Налаштуйте типові запити та ліміти памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
 
-* [Налаштуйте типові запити та ліміти центрального процесора для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+* [Налаштуйте типові запити та ліміти центрального процесора для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 
-* [Налаштуйте мінімальні та максимальні обмеження памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
+* [Налаштуйте мінімальні та максимальні обмеження памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 
-* [Налаштуйте мінімальні та максимальні обмеження центрального процесора для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
+* [Налаштуйте мінімальні та максимальні обмеження центрального процесора для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
 
-* [Налаштуйте квоти памʼяті та центрального процесора для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* [Налаштуйте квоти памʼяті та центрального процесора для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
 
-* [Налаштуйте квоту для портів для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
+* [Налаштуйте квоту для портів для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 
 ### Для розробників застосунків {#for-application-developers}
 
-* [Призначте ресурси памʼяті контейнерам та подам](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Призначте ресурси памʼяті контейнерам та подам](/uk/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-* [Призначте ресурси центрального процесора контейнерам та подам](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+* [Призначте ресурси центрального процесора контейнерам та подам](/uk/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
-* [Налаштуйте якість обслуговування для Podʼів](/docs/tasks/configure-pod-container/quality-service-pod/)
+* [Налаштуйте якість обслуговування для Podʼів](/uk/docs/tasks/configure-pod-container/quality-service-pod/)

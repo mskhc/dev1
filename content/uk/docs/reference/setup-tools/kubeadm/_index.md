@@ -17,17 +17,17 @@ kubeadm виконує необхідні дії для запуску міні�
 
 ## Як встановити {#how-to-install}
 
-Для встановлення kubeadm, див. [посібник з встановлення](/docs/setup/production-environment/tools/kubeadm/install-kubeadm).
+Для встановлення kubeadm, див. [посібник з встановлення](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm).
 
 ## {{% heading "whatsnext" %}}
 
-* [kubeadm init](/docs/reference/setup-tools/kubeadm/kubeadm-init) — для створення вузла панелі управління Kubernetes
-* [kubeadm join](/docs/reference/setup-tools/kubeadm/kubeadm-join) — для додавання робочого вузла Kubernetes до кластера
-* [kubeadm upgrade](/docs/reference/setup-tools/kubeadm/kubeadm-upgrade) — для оновлення кластера Kubernetes до нової версії
-* [kubeadm config](/docs/reference/setup-tools/kubeadm/kubeadm-config) — якщо ви ініціалізували свій кластер за допомогою kubeadm версії 1.7.x або нижче, для налаштування кластера для `kubeadm upgrade`
-* [kubeadm token](/docs/reference/setup-tools/kubeadm/kubeadm-token) — для управління токенами для `kubeadm join`
-* [kubeadm reset](/docs/reference/setup-tools/kubeadm/kubeadm-reset) — для скасування будь-яких змін, внесених цим хостом за допомогою `kubeadm init` або `kubeadm join`
-* [kubeadm certs](/docs/reference/setup-tools/kubeadm/kubeadm-certs) — для управління сертифікатами Kubernetes
-* [kubeadm kubeconfig](/docs/reference/setup-tools/kubeadm/kubeadm-kubeconfig) — для управління файлами kubeconfig
-* [kubeadm version](/docs/reference/setup-tools/kubeadm/kubeadm-version) — для виводу версії kubeadm
-* [kubeadm alpha](/docs/reference/setup-tools/kubeadm/kubeadm-alpha) — для попереднього перегляду набору функцій, що стануть доступними для збору відгуків від спільноти
+* [kubeadm init](/uk/docs/reference/setup-tools/kubeadm/kubeadm-init) — для створення вузла панелі управління Kubernetes
+* [kubeadm join](/uk/docs/reference/setup-tools/kubeadm/kubeadm-join) — для додавання робочого вузла Kubernetes до кластера
+* [kubeadm upgrade](/uk/docs/reference/setup-tools/kubeadm/kubeadm-upgrade) — для оновлення кластера Kubernetes до нової версії
+* [kubeadm config](/uk/docs/reference/setup-tools/kubeadm/kubeadm-config) — якщо ви ініціалізували свій кластер за допомогою kubeadm версії 1.7.x або нижче, для налаштування кластера для `kubeadm upgrade`
+* [kubeadm token](/uk/docs/reference/setup-tools/kubeadm/kubeadm-token) — для управління токенами для `kubeadm join`
+* [kubeadm reset](/uk/docs/reference/setup-tools/kubeadm/kubeadm-reset) — для скасування будь-яких змін, внесених цим хостом за допомогою `kubeadm init` або `kubeadm join`
+* [kubeadm certs](/uk/docs/reference/setup-tools/kubeadm/kubeadm-certs) — для управління сертифікатами Kubernetes
+* [kubeadm kubeconfig](/uk/docs/reference/setup-tools/kubeadm/kubeadm-kubeconfig) — для управління файлами kubeconfig
+* [kubeadm version](/uk/docs/reference/setup-tools/kubeadm/kubeadm-version) — для виводу версії kubeadm
+* [kubeadm alpha](/uk/docs/reference/setup-tools/kubeadm/kubeadm-alpha) — для попереднього перегляду набору функцій, що стануть доступними для збору відгуків від спільноти

@@ -23,7 +23,7 @@ HTTP-запити до HTTPS-точки доступу kubelet надають д
 
 * запустіть kubelet з прапорцем `--client-ca-file`, надаючи набір кореневих сертифікатів для перевірки клієнтських сертифікатів
 * запустіть apiserver з прапорцями `--kubelet-client-certificate` та `--kubelet-client-key`
-* див. [документацію з автентифікації apiserver](/docs/reference/access-authn-authz/authentication/#x509-client-certificates) для отримання додаткових відомостей
+* див. [документацію з автентифікації apiserver](/uk/docs/reference/access-authn-authz/authentication/#x509-client-certificates) для отримання додаткових відомостей
 
 Щоб увімкнути використання API-токенів на предʼявника (включаючи токени службових облікових записів) для автентифікації до HTTPS-точки доступу kubelet:
 
@@ -47,7 +47,7 @@ HTTP-запити до HTTPS-точки доступу kubelet надають д
 * запустіть kubelet з прапорцями `--authorization-mode=Webhook` та `--kubeconfig`
 * kubelet викликає API `SubjectAccessReview` на налаштованому apiserver, щоб визначити, чи авторизований кожний запит
 
-Kubelet авторизує запити до API, використовуючи той самий підхід до [атрибутів запиту](/docs/reference/access-authn-authz/authorization/#review-your-request-attributes), що й apiserver.
+Kubelet авторизує запити до API, використовуючи той самий підхід до [атрибутів запиту](/uk/docs/reference/access-authn-authz/authorization/#review-your-request-attributes), що й apiserver.
 
 Дієслово визначається з HTTP-дії вхідного запиту:
 

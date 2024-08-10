@@ -21,4 +21,4 @@ stages:
 
 removed: true  
 ---
-Вмикає запити [dry rin](/docs/reference/using-api/api-concepts/#dry-run) на боці сервера, щоб можна було тестувати валідацію, злиття та мутацію без впровадження змін.
+Вмикає запити [dry rin](/uk/docs/reference/using-api/api-concepts/#dry-run) на боці сервера, щоб можна було тестувати валідацію, злиття та мутацію без впровадження змін.

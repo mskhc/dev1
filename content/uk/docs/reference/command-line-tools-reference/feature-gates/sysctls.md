@@ -19,4 +19,4 @@ stages:
 
 removed: true
 ---
-Вмикання підтримки параметрів ядра у просторі імен (sysctls), які можна задавати для кожного з Podʼів. Докладні відомості наведено у [sysctls](/docs/tasks/administer-cluster/sysctl-cluster/).
+Вмикання підтримки параметрів ядра у просторі імен (sysctls), які можна задавати для кожного з Podʼів. Докладні відомості наведено у [sysctls](/uk/docs/tasks/administer-cluster/sysctl-cluster/).

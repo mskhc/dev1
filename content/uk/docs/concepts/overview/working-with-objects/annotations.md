@@ -76,5 +76,5 @@ spec:
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Мітки та Селектори](/docs/concepts/overview/working-with-objects/labels/).
-* Подивіться [Відомі мітки, Анотації та Позначення](/docs/reference/labels-annotations-taints/)
+* Дізнайтеся більше про [Мітки та Селектори](/uk/docs/concepts/overview/working-with-objects/labels/).
+* Подивіться [Відомі мітки, Анотації та Позначення](/uk/docs/reference/labels-annotations-taints/)

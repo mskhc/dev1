@@ -27,4 +27,4 @@ stages:
 
 removed: true  
 ---
-Вмикає EndpointSlices для більш масштабованих і розширюваних мережевих точок доступу. Див. статтю [Увімкнення EndpointSlices](/docs/concepts/services-networking/endpoint-slices/).
+Вмикає EndpointSlices для більш масштабованих і розширюваних мережевих точок доступу. Див. статтю [Увімкнення EndpointSlices](/uk/docs/concepts/services-networking/endpoint-slices/).

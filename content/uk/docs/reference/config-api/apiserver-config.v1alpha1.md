@@ -332,7 +332,7 @@ ClaimOrExpression надає конфігурацію для однієї зая
                 Наприклад, змінну з іменем 'sub' можна отримати як 'claims.sub'.
                 Вкладені заявки можна отримати за допомогою позначки крапки, наприклад, 'claims.foo.bar'.</li>
                 </ul>
-                <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
+                <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
                 <p>Взаємно виключаються в claim.</p>
             </td>
         </tr>
@@ -371,7 +371,7 @@ ClaimValidationRule надає конфігурацію для однієї пр
             <ul>
                 <li>'claims' це map назв заявок до значень заявок. Наприклад, змінну з іменем 'sub' можна отримати як 'claims.sub'. Вкладені заявки можна отримати за допомогою позначки крапки, наприклад, 'claims.foo.bar'. Повинно повернути true для проходження перевірки.</li>
             </ul>
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
             <p>Взаємно виключається в claim і requiredValue.</p>
             </td>
         </tr>
@@ -462,7 +462,7 @@ ExtraMapping надає конфігурацію для одного додат�
             <ul>
                 <li>'claims' це map назв заявок до значень заявок. Наприклад, змінну з іменем 'sub' можна отримати як 'claims.sub'. Вкладені заявки можна отримати за допомогою позначки крапки, наприклад, 'claims.foo.bar'.</li>
             </ul>
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>
     </tbody>
 </table>
@@ -597,7 +597,7 @@ PrefixedClaimOrExpression надає конфігурацію для одніє�
                 <ul>
                     <li>'claims' — це мапа імен заявок до їх значень. Наприклад, змінну з іменем 'sub' можна отримати як 'claims.sub'. Вкладені заявки можна отримати за допомогою нотації крапок, наприклад, 'claims.foo.bar'.</li>
                 </ul>
-                <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
+                <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
                 <p>Є взаємовиключною з claim і prefix.</p>
             </td>
         </tr>
@@ -742,9 +742,9 @@ UserValidationRule надає конфігурацію для одного пр�
             <td><p>expression представляє вираз, який буде оцінюватися CEL. Повинен повернути true, щоб перевірка пройшла успішно.</p>
             <p>CEL вирази мають доступ до вмісту UserInfo, організованого в CEL змінну:</p>
             <ul>
-                <li>'user' - authentication.k8s.io/v1, Обʼєкт Kind=UserInfo Див. https://github.com/kubernetes/api/blob/release-1.28/authentication/v1/types.go#L105-L122 для визначення. API документація: <a href="/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io</a></li>
+                <li>'user' - authentication.k8s.io/v1, Обʼєкт Kind=UserInfo Див. https://github.com/kubernetes/api/blob/release-1.28/authentication/v1/types.go#L105-L122 для визначення. API документація: <a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io">https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.28/#userinfo-v1-authentication-k8s-io</a></li>
             </ul>
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>
         <tr>
             <td><code>message</code><br/>
@@ -874,7 +874,7 @@ UserValidationRule надає конфігурацію для одного пр�
                 <code>string</code>
             </td>
             <td><p>expression представляє вираз, який буде оцінюватися за допомогою CEL. Повинен оцінюватися як bool. CEL вирази мають доступ до вмісту SubjectAccessReview у версії v1. Якщо версія, вказана в subjectAccessReviewVersion у змінній запиту, є v1beta1, вміст буде перетворено на версію v1 перед оцінкою виразу CEL.</p>
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>
     </tbody>
 </table>

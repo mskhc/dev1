@@ -35,21 +35,21 @@ weight: 110
 * Зіставлення блокового пристрою
 * Памʼять як носій зберігання (наприклад, `emptyDir.medium` встановлено на `Memory`)
 * Функції файлової системи, такі як uid/gid; дозволи Linux файлової системи для кожного користувача
-* Встановлення [дозволів секрета з DefaultMode](/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) (залежність від UID/GID)
+* Встановлення [дозволів секрета з DefaultMode](/uk/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) (залежність від UID/GID)
 * Підтримка зберігання/томів на основі NFS
 * Розширення змонтованого тому (resizefs)
 
 {{< glossary_tooltip text="Томи Kubernetes" term_id="volume" >}} дозволяють розгортання складних застосунків, які вимагають постійності даних та вимог до спільного використання томів Pod, розгорнутих у Kubernetes. Управління постійними томами, повʼязаними із конкретним сховищем або протоколом, включає дії, такі як надання/відміна надання/зміна розміру томів, приєднання/відʼєднання тому від/до вузла Kubernetes та монтування/відмонтування тому від/до окремих контейнерів у Podʼі, які повинні зберігати дані.
 
-Компоненти управління томами постачаються як [втулок томів Kubernetes](/docs/concepts/storage/volumes/#volume-types). У Windows підтримуються наступні широкі класи втулків томів Kubernetes:
+Компоненти управління томами постачаються як [втулок томів Kubernetes](/uk/docs/concepts/storage/volumes/#volume-types). У Windows підтримуються наступні широкі класи втулків томів Kubernetes:
 
-* [Втулки FlexVolume](/docs/concepts/storage/volumes/#flexvolume)
+* [Втулки FlexVolume](/uk/docs/concepts/storage/volumes/#flexvolume)
   * Зауважте, що FlexVolume були застарілі з версії 1.23
-* [Втулки CSI](/docs/concepts/storage/volumes/#csi)
+* [Втулки CSI](/uk/docs/concepts/storage/volumes/#csi)
 
 ##### Вбудовані втулки томів {#in-tree-volume-plugins}
 
 На вузлах Windows підтримуються наступні вбудовані втулки, які підтримують постійне зберігання:
 
-* [azureFile](/docs/concepts/storage/volumes/#azurefile)
-* [vsphereVolume](/docs/concepts/storage/volumes/#vspherevolume)
+* [azureFile](/uk/docs/concepts/storage/volumes/#azurefile)
+* [vsphereVolume](/uk/docs/concepts/storage/volumes/#vspherevolume)

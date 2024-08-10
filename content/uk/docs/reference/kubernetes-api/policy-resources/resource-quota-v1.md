@@ -44,7 +44,7 @@ ResourceQuotaSpec визначає бажані жорсткі обмеженн�
 
 - **hard** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-  hard — це набір бажаних жорстких обмежень для кожного названого ресурсу. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/docs/concepts/policy/resource-quotas/)
+  hard — це набір бажаних жорстких обмежень для кожного названого ресурсу. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/uk/docs/concepts/policy/resource-quotas/)
 
 - **scopeSelector** (ScopeSelector)
 
@@ -85,7 +85,7 @@ ResourceQuotaStatus визначає застосовані жорсткі об�
 
 - **hard** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-  Hard — це набір застосованих жорстких обмежень для кожного названого ресурсу. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/docs/concepts/policy/resource-quotas/)
+  Hard — це набір застосованих жорстких обмежень для кожного названого ресурсу. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/uk/docs/concepts/policy/resource-quotas/)
 
 - **used** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
@@ -107,7 +107,7 @@ ResourceQuotaList — це список елементів ResourceQuota.
 
 - **items** ([]<a href="{{< ref "../policy-resources/resource-quota-v1#ResourceQuota" >}}">ResourceQuota</a>), обовʼязково
 
-  Items — це список обʼєктів ResourceQuota. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/docs/concepts/policy/resource-quotas/)
+  Items — це список обʼєктів ResourceQuota. Докладніше: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](/uk/docs/concepts/policy/resource-quotas/)
 
 ## Операції {#operations}
 

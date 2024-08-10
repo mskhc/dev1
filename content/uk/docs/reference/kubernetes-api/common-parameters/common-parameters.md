@@ -100,7 +100,7 @@ limit — це максимальна кількість відповідей, 
 
 ## resourceVersion {#resourceVersion}
 
-resourceVersion встановлює обмеження на те, з яких версій ресурсів може обслуговуватися запит. Докладніше див. [https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions](/docs/reference/using-api/api-concepts/#resource-versions).
+resourceVersion встановлює обмеження на те, з яких версій ресурсів може обслуговуватися запит. Докладніше див. [https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions](/uk/docs/reference/using-api/api-concepts/#resource-versions).
 
 Стандартне значення не встановлено
 
@@ -108,7 +108,7 @@ resourceVersion встановлює обмеження на те, з яких �
 
 ## resourceVersionMatch {#resourceVersionMatch}
 
-resourceVersionMatch визначає, як resourceVersion застосовується до викликів списку. Наполегливо рекомендується встановлювати resourceVersionMatch для викликів списку, де встановлено resourceVersion. Докладніше див. [https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions](/docs/reference/using-api/api-concepts/#resource-versions).
+resourceVersionMatch визначає, як resourceVersion застосовується до викликів списку. Наполегливо рекомендується встановлювати resourceVersionMatch для викликів списку, де встановлено resourceVersion. Докладніше див. [https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions](/uk/docs/reference/using-api/api-concepts/#resource-versions).
 
 Стандартне значення не встановлено
 

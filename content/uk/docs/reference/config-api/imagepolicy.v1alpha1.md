@@ -26,7 +26,7 @@ ImageReview перевіряє, чи дозволений набір образ�
         </tr>
         <tr>
             <td><code>metadata</code><br/>
-                <a href="/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a>
+                <a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a>
             </td>
             <td><p>Стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata. Зверніться до документації Kubernetes API для полів метаданих <code>metadata</code>.</p></td>
         </tr>

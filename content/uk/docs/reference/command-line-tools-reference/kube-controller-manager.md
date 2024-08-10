@@ -265,7 +265,7 @@ kube-controller-manager [flags]
       <tr>
          <td></td>
          <td style="line-height: 130%; word-wrap: break-word;"><p>Кількість операцій синхронізації ефемерних томів, які будуть виконуватися одночасно. Більша кількість = швидше оновлення ефемерних томів, але більше навантаження на процесор (і мережу)</p></td>
-      </tr         <td colspan="2"><a href="/docs/concepts/cluster-administration/node-shutdown/#storage-force-detach-on-timeout">https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#storage-force-detach-on-timeout</a></td>
+      </tr         <td colspan="2"><a href="/uk/docs/concepts/cluster-administration/node-shutdown/#storage-force-detach-on-timeout">https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#storage-force-detach-on-timeout</a></td>
       </tr>32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 5</td>
       </tr>
       <tr>

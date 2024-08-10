@@ -2,7 +2,7 @@
 title: Випередження
 id: preemption
 date: 2019-01-31
-full_link: /docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption
+full_link: /uk/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption
 short_description: >
   Логіка пріоритетів в Kubernetes допомагає Podʼу, що очікує, знайти відповідний Вузол, виселяючи Podʼи з низьким пріоритетом, що вже існують на цьому Вузлі.
 
@@ -16,4 +16,4 @@ tags:
 
 <!--more-->
 
-Якщо Pod не можна призначити, планувальник намагається [випередити](/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption) Podʼи з меншим пріоритетом, щоб забезпечити можливість призначення Podʼа, що перебуває в очікуванні вузла.
+Якщо Pod не можна призначити, планувальник намагається [випередити](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption) Podʼи з меншим пріоритетом, щоб забезпечити можливість призначення Podʼа, що перебуває в очікуванні вузла.

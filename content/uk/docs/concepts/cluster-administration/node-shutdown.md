@@ -16,11 +16,11 @@ weight: 10
 
 Kubelet намагається виявити вимикання системи вузла та завершує виконання Podʼів на вузлі.
 
-Kubelet забезпечує виконання нормального [процесу завершення роботи Podʼа](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) під час вимикання вузла. Під час вимикання вузла kubelet не приймає нові Podʼи (навіть якщо ці Podʼи вже призначені вузлу).
+Kubelet забезпечує виконання нормального [процесу завершення роботи Podʼа](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) під час вимикання вузла. Під час вимикання вузла kubelet не приймає нові Podʼи (навіть якщо ці Podʼи вже призначені вузлу).
 
 Можливість відповідного вимикання вузла (Graceful node shutdown) залежить від systemd, оскільки вона використовує [блокування інгібіторів systemd](https://www.freedesktop.org/wiki/Software/systemd/inhibit/) для затримки вимкнення вузла на певний час.
 
-Вимикання вузла керується властивістю [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdown`, що є типово увімкненим з версії 1.21.
+Вимикання вузла керується властивістю [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdown`, що є типово увімкненим з версії 1.21.
 
 Зауважте, що типово обидва налаштування конфігурації, описані нижче, `shutdownGracePeriod` та `shutdownGracePeriodCriticalPods`, встановлені на нуль, таким чином, не активуючи функціональність відповідного вимикання вузла. Для активації цієї функції, два налаштування конфігурації kubelet повинні бути належним чином налаштовані та встановлені на значення, відмінні від нуля.
 
@@ -33,20 +33,20 @@ Kubelet **також** відхиляє Podʼи під час фази `PodAdmis
 Під час вимикання kubelet завершує Podʼи у два етапи:
 
 1. Завершує роботу звичайних Podʼів, які виконуються на вузлі.
-2. Завершує роботу [критичних Podʼи](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical), які виконуються на вузлі.
+2. Завершує роботу [критичних Podʼи](/uk/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical), які виконуються на вузлі.
 
 Функція відповідного вимикання вузла налаштовується двома параметрами конфігурації kubelet:
 
 - `shutdownGracePeriod`:
-  - Визначає загальний час, протягом якого вузол повинен затримати вимикання. Це загальний термін допомагає завершити Podʼи як звичайні, так і [критичні](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical).
+  - Визначає загальний час, протягом якого вузол повинен затримати вимикання. Це загальний термін допомагає завершити Podʼи як звичайні, так і [критичні](/uk/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical).
 - `shutdownGracePeriodCriticalPods`:
-  - Визначає термін, який використовується для завершення [критичних Podʼів](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical) під час вимикання вузла. Це значення повинно бути менше за `shutdownGracePeriod`.
+  - Визначає термін, який використовується для завершення [критичних Podʼів](/uk/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical) під час вимикання вузла. Це значення повинно бути менше за `shutdownGracePeriod`.
 
 {{< note >}}
 Є випадки, коли вимкнення вузла було скасовано системою (або, можливо, вручну адміністратором). У будь-якому з цих випадків вузол повернеться до стану `Ready`. Однак Podʼи, які вже розпочали процес завершення, не будуть відновлені kubelet і їх потрібно буде перепланувати.
 {{< /note >}}
 
-Наприклад, якщо `shutdownGracePeriod=30s`, а `shutdownGracePeriodCriticalPods=10s`, kubelet затримає вимикання вузла на 30 секунд. Під час вимикання перші 20 (30-10) секунд будуть зарезервовані для відповідного завершення звичайних Podʼів, а останні 10 секунд будуть зарезервовані для завершення [критичних Podʼів](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical).
+Наприклад, якщо `shutdownGracePeriod=30s`, а `shutdownGracePeriodCriticalPods=10s`, kubelet затримає вимикання вузла на 30 секунд. Під час вимикання перші 20 (30-10) секунд будуть зарезервовані для відповідного завершення звичайних Podʼів, а останні 10 секунд будуть зарезервовані для завершення [критичних Podʼів](/uk/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical).
 
 {{< note >}}
 Коли Podʼи були виселені під час відповідного вимикання вузла, вони позначаються як вимкнені. Виклик `kubectl get pods` показує стан виселених Podʼів як `Terminated`. І `kubectl describe pod` вказує, що Pod був виселений через вимикання вузла:
@@ -62,13 +62,13 @@ Message:        Pod was terminated in response to imminent node shutdown.
 
 {{< feature-state feature_gate_name="GracefulNodeShutdownBasedOnPodPriority" >}}
 
-Щоб забезпечити більше гнучкості під час відповідного вимикання вузла щодо порядку Podʼів під час вимикання, поступове вимикання вузла враховує PriorityClass для Podʼів, за умови, що ви активували цю функцію у своєму кластері. Функція дозволяє адміністраторам кластера явно визначити порядок Podʼів під час відповідного вимикання вузла на основі [priority classes](/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass).
+Щоб забезпечити більше гнучкості під час відповідного вимикання вузла щодо порядку Podʼів під час вимикання, поступове вимикання вузла враховує PriorityClass для Podʼів, за умови, що ви активували цю функцію у своєму кластері. Функція дозволяє адміністраторам кластера явно визначити порядок Podʼів під час відповідного вимикання вузла на основі [priority classes](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass).
 
 Функція [відповідного вимикання вузла](#graceful-node-shutdown), яка описана вище, вимикає Podʼи у дві фази: звичайні Podʼи, а потім критичні Podʼи. Якщо потрібна додаткова гнучкість для явного визначення порядку Podʼа під час вимикання в більш деталізований спосіб, можна використовувати відповідне (graceful) вимикання вузла на основі пріоритету Podʼа.
 
 Коли вимикання вузла враховує пріоритет Podʼів, це дозволяє виконувати вимикання вузла у кілька етапів, кожен етап — це завершення роботи Podʼів певного класу пріоритету. Kubelet можна налаштувати з точним числом етапів та часом вимикання для кожного етапу.
 
-Припустимо, що в кластері існують наступні власні [класи пріоритету Podʼів](/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass):
+Припустимо, що в кластері існують наступні власні [класи пріоритету Podʼів](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass):
 
 |Назва класу пріоритету Podʼа|Значення класу пріоритету Podʼа|
 |-------------------------|------------------------|
@@ -77,7 +77,7 @@ Message:        Pod was terminated in response to imminent node shutdown.
 |`custom-class-c`         | 1000                   |
 |`regular/unset`          | 0                      |
 
-В межах [конфігурації kubelet](/docs/reference/config-api/kubelet-config.v1beta1/) налаштування для `shutdownGracePeriodByPodPriority` може виглядати так:
+В межах [конфігурації kubelet](/uk/docs/reference/config-api/kubelet-config.v1beta1/) налаштування для `shutdownGracePeriodByPodPriority` може виглядати так:
 
 |Значення класу пріоритету Podʼа|Період вимкнення|
 |------------------------|---------------|
@@ -116,7 +116,7 @@ shutdownGracePeriodByPodPriority:
 
 Якщо ця функція увімкнена, а жодна конфігурація не надана, то дії з упорядкування не будуть виконані.
 
-Використання цієї функції передбачає активацію [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdownBasedOnPodPriority`, та встановлення `ShutdownGracePeriodByPodPriority` в [kubelet config](/docs/reference/config-api/kubelet-config.v1beta1/) до потрібної конфігурації, яка містить значення класу пріоритету Podʼа та відповідні періоди вимкнення.
+Використання цієї функції передбачає активацію [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdownBasedOnPodPriority`, та встановлення `ShutdownGracePeriodByPodPriority` в [kubelet config](/uk/docs/reference/config-api/kubelet-config.v1beta1/) до потрібної конфігурації, яка містить значення класу пріоритету Podʼа та відповідні періоди вимкнення.
 
 {{< note >}}
 Можливість враховування пріоритетів Podʼів під час відповідного вимикання вузла була введена як альфа-функція в Kubernetes v1.23. У Kubernetes {{< skew currentVersion >}} функція є бета-версією та є типово активованою.
@@ -132,7 +132,7 @@ shutdownGracePeriodByPodPriority:
 
 Коли вузол вимикається, але це не виявляється Node Shutdown Manager вузла kubelet, Podʼи, які є частиною {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}, залишаться в стані завершення на вимкненому вузлі та не зможуть перейти до нового робочого вузла. Це тому, що kubelet на вимкненому вузлі недоступний для видалення Podʼів, і StatefulSet не може створити новий Pod із такою ж назвою. Якщо є томи, які використовуються Podʼами, то VolumeAttachments не буде видалено з оригінального вимкненого вузла, і тому томи використовувані цими Podʼами не можуть бути приєднані до нового робочого вузла. В результаті застосунок, що виконується з StatefulSet, не може працювати належним чином. Якщо оригінальний вимкнений вузол вмикається, Podʼи будуть видалені kubelet, і нові Podʼи будуть створені на іншому робочому вузлі. Якщо оригінальний вимкнений вузол не повертається, ці Podʼи залишаться в стані завершення на вимкненому вузлі назавжди.
 
-Для помʼякшення вищезазначеної ситуації користувач може вручну додати позначку (taint) `node.kubernetes.io/out-of-service` з ефектом `NoExecute` чи `NoSchedule` до вузла, вказавши, що він вийшов із ладу. Якщо у {{< glossary_tooltip text="kube-controller-manager" term_id="kube-controller-manager" >}} увімкнено [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `NodeOutOfServiceVolumeDetach`, і вузол відзначений як такий, що вийшов з ладу з такою позначкою, Podʼи на вузлі будуть примусово видалені, якщо на них немає відповідних toleration, і операції відʼєднання томів для завершення Podʼів на вузлі відбудуться негайно. Це дозволяє Podʼам на вузлі, що вийшов з ладу, швидко відновитися на іншому вузлі.
+Для помʼякшення вищезазначеної ситуації користувач може вручну додати позначку (taint) `node.kubernetes.io/out-of-service` з ефектом `NoExecute` чи `NoSchedule` до вузла, вказавши, що він вийшов із ладу. Якщо у {{< glossary_tooltip text="kube-controller-manager" term_id="kube-controller-manager" >}} увімкнено [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeOutOfServiceVolumeDetach`, і вузол відзначений як такий, що вийшов з ладу з такою позначкою, Podʼи на вузлі будуть примусово видалені, якщо на них немає відповідних toleration, і операції відʼєднання томів для завершення Podʼів на вузлі відбудуться негайно. Це дозволяє Podʼам на вузлі, що вийшов з ладу, швидко відновитися на іншому вузлі.
 
 Під час такого (non-graceful) вимикання робота Podʼів завершується у дві фази:
 
@@ -151,7 +151,7 @@ shutdownGracePeriodByPodPriority:
 
 Поведінка примусового відʼєднання сховища є необовʼязковою; користувачі можуть вибрати використання функції "Non-graceful node shutdown" замість цього.
 
-Примусове відʼєднання сховища при перевищенні часу очікування можна вимкнути, встановивши поле конфігурації `disable-force-detach-on-timeout` в `kube-controller-manager`. Вимкнення функції примусового відʼєднання при перевищенні часу очікування означає, що у тому, який розміщено на вузлі, який несправний протягом понад 6 хвилин, не буде видалено його повʼязаний [VolumeAttachment](/docs/reference/kubernetes-api/config-and-storage-resources/volume-attachment-v1/).
+Примусове відʼєднання сховища при перевищенні часу очікування можна вимкнути, встановивши поле конфігурації `disable-force-detach-on-timeout` в `kube-controller-manager`. Вимкнення функції примусового відʼєднання при перевищенні часу очікування означає, що у тому, який розміщено на вузлі, який несправний протягом понад 6 хвилин, не буде видалено його повʼязаний [VolumeAttachment](/uk/docs/reference/kubernetes-api/config-and-storage-resources/volume-attachment-v1/).
 
 Після застосування цього налаштування, несправні Podʼи, які все ще приєднані до томів, повинні бути відновлені за допомогою процедури [Обробки невідповідних вимкнень вузлів](#non-graceful-node-shutdown), згаданої вище.
 
@@ -167,4 +167,4 @@ shutdownGracePeriodByPodPriority:
 Дізнайтеся більше про наступне:
 
 - Допис в Блозі – [Non-Graceful Node Shutdown](/blog/2023/08/16/kubernetes-1-28-non-graceful-node-shutdown-ga/).
-- Архітектура кластера: [Вузли](/docs/concepts/architecture/nodes/).
+- Архітектура кластера: [Вузли](/uk/docs/concepts/architecture/nodes/).

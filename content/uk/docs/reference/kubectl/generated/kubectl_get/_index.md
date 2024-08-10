@@ -143,7 +143,7 @@ kubectl get pod web-pod-13je7 --subresource status
         </tr>
         <tr>
             <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>Формат виводу. Один з: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath, jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide).Дивіться нестандартні стовпці [https://kubernetes.io/docs/reference/kubectl/#custom-columns](/docs/reference/kubectl/#custom-columns), шаблон golang [http://golang.org/pkg/text/template/#pkg-overview] та шаблон jsonpath [https://kubernetes.io/docs/reference/kubectl/jsonpath/](/docs/reference/kubectl/jsonpath/).</p></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Формат виводу. Один з: (json, yaml, name, go-template, go-template-file, template, templatefile, jsonpath, jsonpath-as-json, jsonpath-file, custom-columns, custom-columns-file, wide).Дивіться нестандартні стовпці [https://kubernetes.io/docs/reference/kubectl/#custom-columns](/uk/docs/reference/kubectl/#custom-columns), шаблон golang [http://golang.org/pkg/text/template/#pkg-overview] та шаблон jsonpath [https://kubernetes.io/docs/reference/kubectl/jsonpath/](/uk/docs/reference/kubectl/jsonpath/).</p></td>
         </tr>
         <tr>
             <td colspan="2">--output-watch-events</td>

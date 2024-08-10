@@ -10,8 +10,8 @@ weight: 20
 
 Якщо ви хочете відновити довідкову документацію для API Kubernetes або компонентів `kube-*` з коду upstream, перегляньте наступні інструкції:
 
-- [Генерація довідкової документації для API Kubernetes](/docs/contribute/generate-ref-docs/kubernetes-api/)
-- [Генерація довідкової документації для компонентів і інструментів Kubernetes](/docs/contribute/generate-ref-docs/kubernetes-components/)
+- [Генерація довідкової документації для API Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-api/)
+- [Генерація довідкової документації для компонентів і інструментів Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-components/)
 
 ## {{% heading "prerequisites" %}}
 
@@ -154,10 +154,10 @@ On branch master
 
 Попередній розділ показав, як редагувати вихідний файл і потім згенерувати декілька файлів, включаючи `api/openapi-spec/swagger.json` у репозиторії `kubernetes/kubernetes`. Файл `swagger.json` є файлом визначення OpenAPI, який використовується для генерації документації API.
 
-Тепер ви готові слідувати посібнику [Генерація довідкової документації для API Kubernetes](/docs/contribute/generate-ref-docs/kubernetes-api/), щоб згенерувати [опубліковану довідкову документацію API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
+Тепер ви готові слідувати посібнику [Генерація довідкової документації для API Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-api/), щоб згенерувати [опубліковану довідкову документацію API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
 
 ## {{% heading "whatsnext" %}}
 
-- [Генерація довідкової документації для API Kubernetes](/docs/contribute/generate-ref-docs/kubernetes-api/)
-- [Генерація довідкових документів для компонентів і інструментів Kubernetes](/docs/contribute/generate-ref-docs/kubernetes-components/)
-- [Генерація довідкової документації для команд kubectl](/docs/contribute/generate-ref-docs/kubectl/)
+- [Генерація довідкової документації для API Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-api/)
+- [Генерація довідкових документів для компонентів і інструментів Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-components/)
+- [Генерація довідкової документації для команд kubectl](/uk/docs/contribute/generate-ref-docs/kubectl/)

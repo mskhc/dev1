@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє контролеру [Job](/docs/concepts/workloads/controllers/job/) керувати завершенням Pod за індексом завершення.
+Дозволяє контролеру [Job](/uk/docs/concepts/workloads/controllers/job/) керувати завершенням Pod за індексом завершення.

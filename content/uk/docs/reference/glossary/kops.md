@@ -2,7 +2,7 @@
 title: kOps (Kubernetes Operations)
 id: kops
 date: 2018-04-12
-full_link: /docs/setup/production-environment/kops/
+full_link: /uk/docs/setup/production-environment/kops/
 short_description: >
   `kOps` не тільки допомагає створювати, оновлювати та підтримувати кластери Kubernetes промислового рівня з високою доступністю, але й надає необхідну хмарну інфраструктуру.
 

@@ -59,7 +59,7 @@ auto_generated: false
 
   - **scaleTargetRef.name** (string), обовʼязково
 
-    name — це імʼя посилання; Додаткова інформація: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names)
+    name — це імʼя посилання; Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
   - **scaleTargetRef.apiVersion** (string)
 

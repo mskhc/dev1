@@ -65,7 +65,7 @@ CertificateSigningRequestSpec містить запит на сертифіка�
   2. "kubernetes.io/kube-apiserver-client-kubelet": видає клієнтські сертифікати, які kubelets використовують для автентифікації до kube-apiserver. Запити для цього підписувача можуть бути автоматично затверджені контролером "csrapproving" у kube-controller-manager і можуть бути видані контролером "csrsigning" у kube-controller-manager.
   3. "kubernetes.io/kubelet-serving": видає серверні сертифікати, які kubelets використовують для обслуговування TLS-точок доступу, до яких kube-apiserver може підключатися безпечно. Запити для цього підписувача ніколи не затверджуються автоматично kube-controller-manager і можуть бути видані контролером "csrsigning" у kube-controller-manager.
 
-  Докладніше: https://k8s.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers
+  Докладніше: [https://k8s.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers](/uk/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers)
 
   Можуть також бути вказані нестандартні signerNames. Підписувач визначає:
 

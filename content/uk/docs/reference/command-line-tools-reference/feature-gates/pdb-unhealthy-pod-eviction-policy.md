@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Вмикає поле `unhealthyPodEvictionPolicy` в полі `PodDisruptionBudget`. Визначає, коли слід розглядати можливість виселення несправних Podʼів. Будь ласка, дивіться [Політику виселення несправних Podʼів](/docs/tasks/run-application/configure-pdb/#unhealthy-pod-eviction-policy) для більш детальної інформації.
+Вмикає поле `unhealthyPodEvictionPolicy` в полі `PodDisruptionBudget`. Визначає, коли слід розглядати можливість виселення несправних Podʼів. Будь ласка, дивіться [Політику виселення несправних Podʼів](/uk/docs/tasks/run-application/configure-pdb/#unhealthy-pod-eviction-policy) для більш детальної інформації.

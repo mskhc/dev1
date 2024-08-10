@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Вмикає kubelet `checkpoint` API. Дивіться [Kubelet Checkpoint API](/docs/reference/node/kubelet-checkpoint-api/) для більш детальної інформації.
+Вмикає kubelet `checkpoint` API. Дивіться [Kubelet Checkpoint API](/uk/docs/reference/node/kubelet-checkpoint-api/) для більш детальної інформації.

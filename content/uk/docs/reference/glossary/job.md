@@ -2,7 +2,7 @@
 title: Job
 id: job
 date: 2018-04-12
-full_link: /docs/concepts/workloads/controllers/job/
+full_link: /uk/docs/concepts/workloads/controllers/job/
 short_description: >
   Скінченне або пакетне завдання, яке виконується до завершення.
 

@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає [пробу](/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe) запуску в kubelet.
+Вмикає [пробу](/uk/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe) запуску в kubelet.

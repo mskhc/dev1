@@ -2,7 +2,7 @@
 title: Подія
 id: event
 date: 2022-01-16
-full_link: /docs/reference/kubernetes-api/cluster-resources/event-v1/
+full_link: /uk/docs/reference/kubernetes-api/cluster-resources/event-v1/
 short_description: >
    Події — це обʼєкти Kubernetes, які описують зміну стану в системі.
 
@@ -21,4 +21,4 @@ tags:
 
 Події слід розглядати як інформаційні дані, що надаються як найкраще, та які є додатковими даними.
 
-У Kubernetes [аудит](/docs/tasks/debug/debug-cluster/audit/) генерує інший вид Подій (API-група `audit.k8s.io`).
+У Kubernetes [аудит](/uk/docs/tasks/debug/debug-cluster/audit/) генерує інший вид Подій (API-група `audit.k8s.io`).

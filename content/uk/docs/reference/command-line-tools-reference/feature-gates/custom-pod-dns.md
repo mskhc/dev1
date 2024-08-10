@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє змінювати налаштування DNS для Pod за допомогою властивості `dnsConfig`. Для отримання додаткової інформації див. [DNS-налаштування Pod](/docs/concepts/services-networking/dns-pod-service/#pod-dns-config).
+Дозволяє змінювати налаштування DNS для Pod за допомогою властивості `dnsConfig`. Для отримання додаткової інформації див. [DNS-налаштування Pod](/uk/docs/concepts/services-networking/dns-pod-service/#pod-dns-config).

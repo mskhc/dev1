@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.26"
 ---
-Вмикає використання `nodeAffinityPolicy` та `nodeTaintsPolicy` в [Обмеження поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/) при обчисленні відхилення розповсюдження топології вузлів.
+Вмикає використання `nodeAffinityPolicy` та `nodeTaintsPolicy` в [Обмеження поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/) при обчисленні відхилення розповсюдження топології вузлів.

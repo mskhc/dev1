@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.30"
 ---
-Вмикає підтримку рекурсивних монтувань лише для читання. Докладні відомості наведено у статті [монтування лише для читання](/docs/concepts/storage/volumes/#read-only-mounts).
+Вмикає підтримку рекурсивних монтувань лише для читання. Докладні відомості наведено у статті [монтування лише для читання](/uk/docs/concepts/storage/volumes/#read-only-mounts).

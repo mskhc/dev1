@@ -66,7 +66,7 @@ kind: TracingConfiguration
 samplingRatePerMillion: 100
 ```
 
-Для отримання додаткової інформації про структуру `TracingConfiguration`, див. [API сервера конфігурації (v1beta1)](/docs/reference/config-api/apiserver-config.v1beta1/#apiserver-k8s-io-v1beta1-TracingConfiguration).
+Для отримання додаткової інформації про структуру `TracingConfiguration`, див. [API сервера конфігурації (v1beta1)](/uk/docs/reference/config-api/apiserver-config.v1beta1/#apiserver-k8s-io-v1beta1-TracingConfiguration).
 
 ### Трейси kubelet {#kubelet-traces}
 

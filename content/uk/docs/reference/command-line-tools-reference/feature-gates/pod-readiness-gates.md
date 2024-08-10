@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє увімкнути налаштування поля `PodReadinessGate` для розширення оцінювання готовності Pod. Дивіться [Готовність Podʼа](/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-gate) для більш детальної інформації.
+Дозволяє увімкнути налаштування поля `PodReadinessGate` для розширення оцінювання готовності Pod. Дивіться [Готовність Podʼа](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-readiness-gate) для більш детальної інформації.

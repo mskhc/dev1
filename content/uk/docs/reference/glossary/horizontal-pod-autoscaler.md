@@ -2,7 +2,7 @@
 title: Горизонтальне автомасштабування Podʼа
 id: horizontal-pod-autoscaler
 date: 2018-04-12
-full_link: /docs/tasks/run-application/horizontal-pod-autoscale/
+full_link: /uk/docs/tasks/run-application/horizontal-pod-autoscale/
 short_description: >
   Ресурс API, який автоматично масштабує кількість реплік {{< glossary_tooltip term_id="pod" text="Podʼа" >}} на основі вказаних параметрів використання ЦП або власних метрик.
 

@@ -11,9 +11,9 @@ weight: 30
 
 Кожен {{< glossary_tooltip text="обʼєкт" term_id="object" >}} у вашому кластері має [_Назву (імʼя)_](#names), яка є унікальною для цього типу ресурсу. Кожен обʼєкт Kubernetes також має [_UID_](#uids), який є унікальним в усьому вашому кластеру.
 
-Наприклад, ви можете мати лише один обʼєкт Pod із назвою `myapp-1234` в [просторі імен](/docs/concepts/overview/working-with-objects/namespaces/) з такою ж назвою, а також ви можете мати один обʼєкт Pod та один Deployment із назвами `myapp-1234` кожен.
+Наприклад, ви можете мати лише один обʼєкт Pod із назвою `myapp-1234` в [просторі імен](/uk/docs/concepts/overview/working-with-objects/namespaces/) з такою ж назвою, а також ви можете мати один обʼєкт Pod та один Deployment із назвами `myapp-1234` кожен.
 
-Для неунікальних атрибутів, наданих користувачем, Kubernetes надає [мітки (labels)](/docs/concepts/overview/working-with-objects/labels/) та [анотації (annotations)](/docs/concepts/overview/working-with-objects/annotations/).
+Для неунікальних атрибутів, наданих користувачем, Kubernetes надає [мітки (labels)](/uk/docs/concepts/overview/working-with-objects/labels/) та [анотації (annotations)](/uk/docs/concepts/overview/working-with-objects/annotations/).
 
 <!-- body -->
 
@@ -21,7 +21,7 @@ weight: 30
 
 {{< glossary_definition term_id="name" length="all" >}}
 
-**Назви повинні бути унікальними між усіма [версіями API](/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) того ж самого ресурсу. Ресурси API відрізняються своєю API-групою, типом ресурсу, простором імен (для ресурсів із просторами імен) та назвою. Іншими словами, версія API не має значення в цьому контексті.**
+**Назви повинні бути унікальними між усіма [версіями API](/uk/docs/concepts/overview/kubernetes-api/#api-groups-and-versioning) того ж самого ресурсу. Ресурси API відрізняються своєю API-групою, типом ресурсу, простором імен (для ресурсів із просторами імен) та назвою. Іншими словами, версія API не має значення в цьому контексті.**
 
 {{< note >}}
 У випадках, коли обʼєкти представляють фізичний обʼєкт, наприклад, Node, що представляє фізичний хост, коли хост перестворюється з тією ж самою назвою без видалення та перестворення Node, Kubernetes розглядає новий хост як старий, що може призвести до неузгодженостей.
@@ -93,5 +93,5 @@ UID Kubernetes — це унікальні ідентифікатори, так
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [мітки (labels)](/docs/concepts/overview/working-with-objects/labels/) та [анотації (annotations)](/docs/concepts/overview/working-with-objects/annotations/) в Kubernetes.
+- Дізнайтеся більше про [мітки (labels)](/uk/docs/concepts/overview/working-with-objects/labels/) та [анотації (annotations)](/uk/docs/concepts/overview/working-with-objects/annotations/) в Kubernetes.
 - Перегляньте документ [Ідентифікатори та Назви в Kubernetes](https://git.k8s.io/design-proposals-archive/architecture/identifiers.md).

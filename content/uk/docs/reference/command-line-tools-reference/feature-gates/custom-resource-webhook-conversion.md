@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Вмикає конверсію на основі webhook для ресурсів, створених з [CustomResourceDefinition](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Вмикає конверсію на основі webhook для ресурсів, створених з [CustomResourceDefinition](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).

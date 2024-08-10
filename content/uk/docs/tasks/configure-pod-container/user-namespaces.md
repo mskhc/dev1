@@ -31,17 +31,17 @@ min-kubernetes-server-version: v1.25
 * ОС вузла повинна бути Linux
 * Ви повинні мати можливість виконувати команди на хості
 * Ви повинні мати можливість виконувати команди у Podʼах
-* Вам потрібно увімкнути `UserNamespacesSupport` [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
+* Вам потрібно увімкнути `UserNamespacesSupport` [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/)
 
 {{< note >}}
 Feature gate для увімкнення просторів імен користувача раніше називався `UserNamespacesStatelessPodsSupport`, коли підтримувалися лише Podʼи без збереження стану. Тільки Kubernetes v1.25 по v1.27 визнають `UserNamespacesStatelessPodsSupport`.
 {{</ note >}}
 
-Кластер, який ви використовуєте, **обовʼязково** повинен містити принаймні один вузол, який відповідає [вимогам](/docs/concepts/workloads/pods/user-namespaces/#before-you-begin) щодо використання просторів імен користувача з Podʼами.
+Кластер, який ви використовуєте, **обовʼязково** повинен містити принаймні один вузол, який відповідає [вимогам](/uk/docs/concepts/workloads/pods/user-namespaces/#before-you-begin) щодо використання просторів імен користувача з Podʼами.
 
 Якщо у вас є суміш вузлів і лише деякі з них надають підтримку просторів імен користувача для
 Podʼів, вам також потрібно забезпечити те, що Podʼи з просторами імен користувача будуть
-[заплановані](/docs/concepts/scheduling-eviction/assign-pod-node/) на відповідні вузли.
+[заплановані](/uk/docs/concepts/scheduling-eviction/assign-pod-node/) на відповідні вузли.
 
 <!-- steps -->
 

@@ -19,5 +19,5 @@ stages:
     fromVersion: "1.30"
 
 ---
-Вмикає двостековий `kubelet --node-ip` із зовнішніми хмарними провайдерами. Див. статтю [Налаштування подвійного стека IPv4/IPv6](/docs/concepts/services-networking/dual-stack/#configure-ipv4-ipv6-dual-stack)
+Вмикає двостековий `kubelet --node-ip` із зовнішніми хмарними провайдерами. Див. статтю [Налаштування подвійного стека IPv4/IPv6](/uk/docs/concepts/services-networking/dual-stack/#configure-ipv4-ipv6-dual-stack)
 для більш детальної інформації.

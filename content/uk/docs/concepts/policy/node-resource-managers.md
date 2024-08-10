@@ -13,10 +13,10 @@ weight: 50
 
 <!-- body -->
 
-Основний менеджер, Менеджер топології, є складовою частиною Kubelet, який координує загальний процес управління ресурсами через свою [політику](/docs/tasks/administer-cluster/topology-manager/).
+Основний менеджер, Менеджер топології, є складовою частиною Kubelet, який координує загальний процес управління ресурсами через свою [політику](/uk/docs/tasks/administer-cluster/topology-manager/).
 
 Конфігурація окремих менеджерів розглянута у відповідних документах:
 
-- [Менеджера політик CPU](/docs/tasks/administer-cluster/cpu-management-policies/)
-- [Менеджер пристроїв](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#device-plugin-integration-with-the-topology-manager)
-- [Менеджера політик памʼяті](/docs/tasks/administer-cluster/memory-manager/)
+- [Менеджера політик CPU](/uk/docs/tasks/administer-cluster/cpu-management-policies/)
+- [Менеджер пристроїв](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#device-plugin-integration-with-the-topology-manager)
+- [Менеджера політик памʼяті](/uk/docs/tasks/administer-cluster/memory-manager/)

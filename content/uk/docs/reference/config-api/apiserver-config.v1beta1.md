@@ -399,7 +399,7 @@ ExtraMapping надає конфігурацію для одного додат�
             <ul>
                 <li>'claims' — це зіставлення імен вимог до значень вимог. Наприклад, змінна з імʼям 'sub' може бути доступна як 'claims.sub'. Вкладені вимоги можуть бути доступні за допомогою крапкової нотації, наприклад, 'claims.foo.bar'.</li>
             </ul>
-            <p>Документація з CEL: https://kubernetes.io/docs/reference/using-api/cel/</p></td>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>
     </tbody>
 </table>
@@ -534,7 +534,7 @@ PrefixedClaimOrExpression надає конфігурацію для одног�
             <ul>
                 <li>'claims' є зіставленням імен вимог до значень вимог. Наприклад, змінну з іменем 'sub' можна отримати як 'claims.sub'. Вкладені вимоги можна отримати за допомогою нотації з крапкою, наприклад 'claims.foo.bar'.</li>
             </ul>
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p>
             <p>Взаємовиключне з claim і prefix.</p></td>
         </tr>
     </tbody>
@@ -790,7 +790,7 @@ UserValidationRule надає конфігурацію для одного пр�
                 <code>string</code>
             </td>
             <td><p>expression представляє вираз, який буде оцінюватися CEL. Повинен оцінюватися як bool. CEL вирази мають доступ до вмісту SubjectAccessReview у версії v1. Якщо версія, вказана у змінній запиту subjectAccessReviewVersion, є v1beta1, вміст буде конвертовано у версію v1 перед оцінкою виразу CEL.</p> 
-            <p>Документація з CEL: <a href="/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
+            <p>Документація з CEL: <a href="/uk/docs/reference/using-api/cel/">https://kubernetes.io/docs/reference/using-api/cel/</a></p></td>
         </tr>
     </tbody>
 </table>

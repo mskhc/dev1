@@ -18,4 +18,4 @@ stages:
     defaultValue: true
     fromVersion: "1.29"  
 ---
-Дозволяє відстежувати кількість Podʼів, які мають [стан](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) `Ready`. Кількість `Ready` Podʼів записується у [status](/docs/reference/kubernetes-api/workload-resources/job-v1/#JobStatus) [Job](/docs/concepts/workloads/controllers/job).
+Дозволяє відстежувати кількість Podʼів, які мають [стан](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) `Ready`. Кількість `Ready` Podʼів записується у [status](/uk/docs/reference/kubernetes-api/workload-resources/job-v1/#JobStatus) [Job](/uk/docs/concepts/workloads/controllers/job).

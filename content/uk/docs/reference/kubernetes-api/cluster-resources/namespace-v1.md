@@ -44,7 +44,7 @@ NamespaceSpec описує атрибути простору імен.
 
 - **finalizers** ([]string)
 
-  Finalizers є непрозорим списком значень, які повинні бути порожніми щоб назавжди видалити обʼєкт з сховища. Докладніше: [https://kubernetes.io/docs/tasks/administer-cluster/namespaces/](/docs/tasks/administer-cluster/namespaces/)
+  Finalizers є непрозорим списком значень, які повинні бути порожніми щоб назавжди видалити обʼєкт з сховища. Докладніше: [https://kubernetes.io/docs/tasks/administer-cluster/namespaces/](/uk/docs/tasks/administer-cluster/namespaces/)
 
 ## NamespaceStatus {#NamespaceStatus}
 
@@ -80,7 +80,7 @@ NamespaceStatus — це інформація про поточний стат�
 
 - **phase** (string)
 
-  Phase — це поточна фаза життєвого циклу простору імен. Докладніше: [https://kubernetes.io/docs/tasks/administer-cluster/namespaces/](/docs/tasks/administer-cluster/namespaces/)
+  Phase — це поточна фаза життєвого циклу простору імен. Докладніше: [https://kubernetes.io/docs/tasks/administer-cluster/namespaces/](/uk/docs/tasks/administer-cluster/namespaces/)
 
 ## NamespaceList {#NamespaceList}
 
@@ -98,7 +98,7 @@ NamespaceList — це список просторів імен.
 
 - **items** ([]<a href="{{< ref "../cluster-resources/namespace-v1#Namespace" >}}">Namespace</a>), обовʼязково
 
-  Items — це список обʼєктів просторів імен у списку. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/](/docs/concepts/overview/working-with-objects/namespaces/)
+  Items — це список обʼєктів просторів імен у списку. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/](/uk/docs/concepts/overview/working-with-objects/namespaces/)
 
 ## Операції {#operations}
 

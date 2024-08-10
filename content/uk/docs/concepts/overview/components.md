@@ -27,7 +27,7 @@ card:
 
 Компонент панелі управління приймають глобальні рішення щодо кластера (наприклад, планування), а також виявляють та реагують на події кластера (наприклад, запуск нового {{< glossary_tooltip text="Podʼа" term_id="pod" >}} якщо поле `{{< glossary_tooltip text="replicas" term_id="replica" >}}` Deploymentʼу не задовільне).
 
-Компоненти панелі управління можуть запускатись на будь-якій машині в кластері. Однак для спрощення сценарії налаштування зазвичай запускають усі компоненти рівня керування на одній машині та не запускають контейнери користувача на цій машині. Дивіться [Створення кластера високої доступності за допомогою kubeadm](/docs/setup/production-environment/tools/kubeadm/high-availability/) для прикладу розгортання панелі управління, яка працює на кількох машинах.
+Компоненти панелі управління можуть запускатись на будь-якій машині в кластері. Однак для спрощення сценарії налаштування зазвичай запускають усі компоненти рівня керування на одній машині та не запускають контейнери користувача на цій машині. Дивіться [Створення кластера високої доступності за допомогою kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/high-availability/) для прикладу розгортання панелі управління, яка працює на кількох машинах.
 
 ### kube-apiserver
 
@@ -89,11 +89,11 @@ card:
 
 Доповнення використовують ресурси ({{< glossary_tooltip term_id="daemonset" >}}, {{< glossary_tooltip term_id="deployment" >}}, та інші) для реалізації функцій кластера. Оскільки вони надають функції на рівні кластера, ресурси простору імен для додатків належать до простору імен `kube-system`.
 
-Деякі доповнення описані нижче; за повним переліком доповнень звертайтесь до розділу [Доповнення](/docs/concepts/cluster-administration/addons/).
+Деякі доповнення описані нижче; за повним переліком доповнень звертайтесь до розділу [Доповнення](/uk/docs/concepts/cluster-administration/addons/).
 
 ### DNS
 
-Хоча інші додатки не є строго обовʼязковими, у всіх кластерах Kubernetes повинен бути [кластерний DNS](/docs/concepts/services-networking/dns-pod-service/), оскільки багато прикладів покладаються на його наявність.
+Хоча інші додатки не є строго обовʼязковими, у всіх кластерах Kubernetes повинен бути [кластерний DNS](/uk/docs/concepts/services-networking/dns-pod-service/), оскільки багато прикладів покладаються на його наявність.
 
 Кластерний DNS — це DNS-сервер, додатковий до інших DNS-серверів у вашому середовищі, який обслуговує DNS-записи для служб Kubernetes.
 
@@ -101,29 +101,29 @@ card:
 
 ### Web UI (Dashboard) {#web-ui-dashboard}
 
-[Dashboard](/docs/tasks/access-application-cluster/web-ui-dashboard/) — це універсальний вебінтерфейс для кластерів Kubernetes. Він дозволяє користувачам керувати та розвʼязувати проблеми з застосунками, які працюють у кластері, а також самим кластером.
+[Dashboard](/uk/docs/tasks/access-application-cluster/web-ui-dashboard/) — це універсальний вебінтерфейс для кластерів Kubernetes. Він дозволяє користувачам керувати та розвʼязувати проблеми з застосунками, які працюють у кластері, а також самим кластером.
 
 ### Моніторинг ресурсів контейнера {#container-resource-monitoring}
 
-[Моніторинг ресурсів контейнера](/docs/tasks/debug/debug-cluster/resource-usage-monitoring/) веде запис загальних метрик часових рядів
+[Моніторинг ресурсів контейнера](/uk/docs/tasks/debug/debug-cluster/resource-usage-monitoring/) веде запис загальних метрик часових рядів
 щодо контейнерів у центральній базі даних та надає інтерфейс користувача для перегляду цих даних.
 
 ### Логування на рівні кластера {#cluster-level-logging}
 
-Механізм [логування на рівні кластера](/docs/concepts/cluster-administration/logging/) відповідає за збереження логів контейнерів у центральному сховищі логів з інтерфейсом пошуку/перегляду.
+Механізм [логування на рівні кластера](/uk/docs/concepts/cluster-administration/logging/) відповідає за збереження логів контейнерів у центральному сховищі логів з інтерфейсом пошуку/перегляду.
 
 ### Втулки мережі {#network-plugins}
 
-[Втулки мережі](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins) – це програмні компоненти, які впроваджують специфікацію інтерфейсу мережі контейнера (CNI). Вони відповідають за виділення IP-адрес для Podʼів та уможливлюють їм взаємодію один з одним у межах кластера.
+[Втулки мережі](/uk/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins) – це програмні компоненти, які впроваджують специфікацію інтерфейсу мережі контейнера (CNI). Вони відповідають за виділення IP-адрес для Podʼів та уможливлюють їм взаємодію один з одним у межах кластера.
 
 ## {{% heading "whatsnext" %}}
 
 Дізнайтесь також про:
 
-* [Вузли](/docs/concepts/architecture/nodes/) та [обмін трафіком між ними](/docs/concepts/architecture/control-plane-node-communication/) та панеллю управління.
-* [Контролери](/docs/concepts/architecture/controller/) Kubernetes.
-* [kube-scheduler](/docs/concepts/scheduling-eviction/kube-scheduler/), який є стандартним планувальником Kubernetes.
+* [Вузли](/uk/docs/concepts/architecture/nodes/) та [обмін трафіком між ними](/uk/docs/concepts/architecture/control-plane-node-communication/) та панеллю управління.
+* [Контролери](/uk/docs/concepts/architecture/controller/) Kubernetes.
+* [kube-scheduler](/uk/docs/concepts/scheduling-eviction/kube-scheduler/), який є стандартним планувальником Kubernetes.
 * Офіційна [документація](https://etcd.io/docs/) etcd.
-* Кілька [середовищ виконання контейнерів](/docs/setup/production-environment/container-runtimes/) в Kubernetes.
-* Інтеграці з хмарними постачальниками з використанням [cloud-controller-manager](/docs/concepts/architecture/cloud-controller/).
-* Команди [kubectl](/docs/reference/generated/kubectl/kubectl-commands).
+* Кілька [середовищ виконання контейнерів](/uk/docs/setup/production-environment/container-runtimes/) в Kubernetes.
+* Інтеграці з хмарними постачальниками з використанням [cloud-controller-manager](/uk/docs/concepts/architecture/cloud-controller/).
+* Команди [kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands).

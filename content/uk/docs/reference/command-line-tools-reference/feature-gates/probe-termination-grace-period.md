@@ -25,4 +25,4 @@ stages:
 
 removed: true
 ---
-Вмикає [налаштування рівня проби `terminationGracePeriodSeconds`](/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#probe-level-terminationgraceperiodseconds) у контейнерах Pod. Дивіться [пропозицію щодо вдосконалення](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/2238-liveness-probe-grace-period) для більш детальної інформації.
+Вмикає [налаштування рівня проби `terminationGracePeriodSeconds`](/uk/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#probe-level-terminationgraceperiodseconds) у контейнерах Pod. Дивіться [пропозицію щодо вдосконалення](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/2238-liveness-probe-grace-period) для більш детальної інформації.

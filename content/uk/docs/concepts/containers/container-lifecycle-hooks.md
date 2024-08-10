@@ -29,7 +29,7 @@ weight: 40
 
 Цей хук викликається негайно перед тим, як контейнер буде завершено через запит API або подію управління, таку як невдача проби на живучість/запуску, передумови, конфлікт ресурсів та інші. Звернення до хука `PreStop` не вдасться, якщо контейнер вже перебуває у стані завершення або виконання, і хук повинен завершити виконання до того, як може бути відправлений сигнал TERM для зупинки контейнера. Відлік пільгового періоду припинення Pod починається до виконання хуку `PreStop`, тому, незалежно від результату обробника, контейнер врешті-решт закінчиться протягом пільгового періоду припинення Pod. Жодні параметри не передаються обробнику.
 
-Докладний опис поведінки припинення роботи Podʼів можна знайти в [Припинення роботи Podʼа](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination).
+Докладний опис поведінки припинення роботи Podʼів можна знайти в [Припинення роботи Podʼа](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination).
 
 ### Реалізації обробника хуків {#hook-handler-implementations}
 
@@ -37,7 +37,7 @@ weight: 40
 
 * Exec — Виконує конкретну команду, таку як `pre-stop.sh`, всередині cgroups та namespaces контейнера. Ресурси, спожиті командою, зараховуються на рахунок контейнера.
 * HTTP — Виконує HTTP-запит до конкретного endpoint в контейнері.
-* Sleep — Призупиняє контейнер на вказаний час. Обробник "Sleep" є функцією бета-рівня типово увімкненою через [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `PodLifecycleSleepAction`.
+* Sleep — Призупиняє контейнер на вказаний час. Обробник "Sleep" є функцією бета-рівня типово увімкненою через [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `PodLifecycleSleepAction`.
 
 ### Виконання обробника хука {#hook-handler-execution}
 
@@ -80,5 +80,5 @@ Events:
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Середовище контейнера](/docs/concepts/containers/container-environment/).
-* Отримайте практичний досвід, [прикріплюючи обробників до подій життєвого циклу контейнера](/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/).
+* Дізнайтеся більше про [Середовище контейнера](/uk/docs/concepts/containers/container-environment/).
+* Отримайте практичний досвід, [прикріплюючи обробників до подій життєвого циклу контейнера](/uk/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/).

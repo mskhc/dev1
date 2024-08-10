@@ -21,5 +21,5 @@ stages:
 
 removed: true  
 ---
-Вмикає [device-plugins](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/)
+Вмикає [device-plugins](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/)
 на основі виділення ресурсів на вузлах.

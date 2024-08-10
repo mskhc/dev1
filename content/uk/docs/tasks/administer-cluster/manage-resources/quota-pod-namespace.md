@@ -8,7 +8,7 @@ description: >
 
 <!-- overview -->
 
-На цій сторінці показано, як встановити квоту на загальну кількість Podʼів, які можуть працювати в {{< glossary_tooltip text="просторі імен" term_id="namespace" >}}. Ви вказуєте квоти в обʼєкті [ResourceQuota](/docs/reference/kubernetes-api/policy-resources/resource-quota-v1/).
+На цій сторінці показано, як встановити квоту на загальну кількість Podʼів, які можуть працювати в {{< glossary_tooltip text="просторі імен" term_id="namespace" >}}. Ви вказуєте квоти в обʼєкті [ResourceQuota](/uk/docs/reference/kubernetes-api/policy-resources/resource-quota-v1/).
 
 ## {{% heading "prerequisites" %}}
 
@@ -106,22 +106,22 @@ kubectl delete namespace quota-pod-example
 
 ### Для адміністраторів кластера {#for-cluster-administrators}
 
-* [Налаштування стандартних запитів та обмежень памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+* [Налаштування стандартних запитів та обмежень памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
 
-* [Налаштування стандартних запитів та обмежень CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+* [Налаштування стандартних запитів та обмежень CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 
-* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
+* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 
-* [Налаштування мінімальних та максимальних обмежень CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
+* [Налаштування мінімальних та максимальних обмежень CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
 
-* [Налаштування квот памʼяті та CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* [Налаштування квот памʼяті та CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
 
-* [Налаштування квот для обʼєктів API](/docs/tasks/administer-cluster/quota-api-object/)
+* [Налаштування квот для обʼєктів API](/uk/docs/tasks/administer-cluster/quota-api-object/)
 
 ### Для розробників застосунків {#for-application-developers}
 
-* [Надання ресурсів памʼяті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Надання ресурсів памʼяті контейнерам та Podʼам](/uk/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-* [Надання ресурсів CPU контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+* [Надання ресурсів CPU контейнерам та Podʼам](/uk/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
-* [Налаштування якості обслуговування для Podʼів](/docs/tasks/configure-pod-container/quality-service-pod/)
+* [Налаштування якості обслуговування для Podʼів](/uk/docs/tasks/configure-pod-container/quality-service-pod/)

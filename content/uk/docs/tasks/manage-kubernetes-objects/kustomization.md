@@ -22,7 +22,7 @@ kubectl apply -k <kustomization_directory>
 
 ## {{% heading "prerequisites" %}}
 
-Встановіть [`kubectl`](/docs/tasks/tools/).
+Встановіть [`kubectl`](/uk/docs/tasks/tools/).
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
@@ -978,5 +978,5 @@ deployment.apps "dev-my-nginx" deleted
 
 * [Kustomize](https://github.com/kubernetes-sigs/kustomize)
 * [Книга Kubectl](https://kubectl.docs.kubernetes.io)
-* [Довідник команд Kubectl](/docs/reference/generated/kubectl/kubectl-commands/)
+* [Довідник команд Kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
 * [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

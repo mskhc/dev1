@@ -34,14 +34,14 @@ weight: 25
 | Опис | ServiceAccount | Користувач або група |
 | --- | --- | --- |
 | Місцезнаходження | Kubernetes API (обʼєкт ServiceAccount) | Зовнішній |
-| Контроль доступу | Керування доступом за допомогою RBAC Kubernetes або іншими [механізмами авторизації](/docs/reference/access-authn-authz/authorization/#authorization-modules) | Керування доступом за допомогою RBAC Kubernetes або іншими механізмами управління ідентичністю та доступом |
+| Контроль доступу | Керування доступом за допомогою RBAC Kubernetes або іншими [механізмами авторизації](/uk/docs/reference/access-authn-authz/authorization/#authorization-modules) | Керування доступом за допомогою RBAC Kubernetes або іншими механізмами управління ідентичністю та доступом |
 | Призначене використання | Робочі завдання, автоматизація | Люди |
 
 {{< /table >}}
 
 ### Стандартні облікові записи служб {#default-service-accounts}
 
-При створенні кластера Kubernetes автоматично створює обʼєкт ServiceAccount з імʼям `default` для кожного простору імен у вашому кластері. Стандартні облікові записи служб у кожному просторі імен типово не мають прав, окрім [стандартних дозволів на знаходження API](/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings), які Kubernetes надає всім автентифікованим субʼєктам, якщо увімкнено контроль доступу на основі ролей (RBAC). Якщо ви видаляєте обʼєкт ServiceAccount з імʼям `default` в просторі імен, {{< glossary_tooltip text="панель управління" term_id="control-plane" >}} замінює його новим.
+При створенні кластера Kubernetes автоматично створює обʼєкт ServiceAccount з імʼям `default` для кожного простору імен у вашому кластері. Стандартні облікові записи служб у кожному просторі імен типово не мають прав, окрім [стандартних дозволів на знаходження API](/uk/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings), які Kubernetes надає всім автентифікованим субʼєктам, якщо увімкнено контроль доступу на основі ролей (RBAC). Якщо ви видаляєте обʼєкт ServiceAccount з імʼям `default` в просторі імен, {{< glossary_tooltip text="панель управління" term_id="control-plane" >}} замінює його новим.
 
 Якщо ви розгортаєте Pod у просторі імен, і ви не [вручну призначаєте ServiceAccount для Podʼа](#assign-to-pod), Kubernetes призначає ServiceAccount `default` для цього простору імен Podʼа.
 
@@ -53,7 +53,7 @@ weight: 25
   - Надання доступу лише для читання конфіденційної інформації, збереженої у Secret.
   - Надання [доступу між просторами імен](#cross-namespace), наприклад дозволу на читання, перелік та перегляд обʼєктів Lease в просторі імен `example` в просторі імен `kube-node-lease`.
 - Вашим Podʼам потрібно спілкуватися з зовнішнім сервісом. Наприклад, Podʼа робочого навантаження потрібна ідентичність для комерційного хмарного API, а комерційний постачальник дозволяє налаштувати відповідні довірчі стосунки.
-- [Автентифікація в приватному реєстрі образів за допомогою `imagePullSecret`](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
+- [Автентифікація в приватному реєстрі образів за допомогою `imagePullSecret`](/uk/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
 - Зовнішньому сервісу потрібно спілкуватися з сервером API Kubernetes. Наприклад, автентифікація у кластері як частина конвеєра CI/CD.
 - Ви використовуєте стороннє програмне забезпечення безпеки у своєму кластері, яке покладається на ідентичність сервісного облікового запису різних Podʼів, щоб згрупувати ці Podʼи у різні контексти.
 
@@ -62,18 +62,18 @@ weight: 25
 Щоб скористатися сервісним обліковим записом Kubernetes, виконайте наступне:
 
 1. Створіть обʼєкт ServiceAccount за допомогою клієнта Kubernetes, такого як `kubectl`, або за допомогою маніфесту, який визначає обʼєкт.
-2. Надайте дозволи обʼєкту ServiceAccount за допомогою механізму авторизації, такого як [RBAC](/docs/reference/access-authn-authz/rbac/).
+2. Надайте дозволи обʼєкту ServiceAccount за допомогою механізму авторизації, такого як [RBAC](/uk/docs/reference/access-authn-authz/rbac/).
 3. Призначте обʼєкт ServiceAccount Podʼам під час створення Podʼа.
 
    Якщо ви використовуєте ідентифікацію з зовнішнього сервісу, [отримайте токен ServiceAccount](#get-a-token) та використовуйте його з цього сервісу.
 
-Щоб дізнатися, як це зробити, перегляньте [Налаштування сервісних облікових записів для Podʼів](/docs/tasks/configure-pod-container/configure-service-account/).
+Щоб дізнатися, як це зробити, перегляньте [Налаштування сервісних облікових записів для Podʼів](/uk/docs/tasks/configure-pod-container/configure-service-account/).
 
 ### Надання дозволів обліковому запису ServiceAccount {#grant-permissions}
 
-Ви можете використовувати вбудований механізм [керування доступом на основі ролей (RBAC)](/docs/reference/access-authn-authz/rbac/) Kubernetes, щоб надати мінімальні дозволи, необхідні кожному сервісному обліковому запису. Ви створюєте *роль*, яка надає доступ, а потім *привʼязуєте* роль до вашого ServiceAccount. RBAC дозволяє визначити мінімальний набір дозволів, щоб дозволи облікового запису слідували принципу найменших прав. Podʼи, які використовують цей сервісний обліковий запис, не отримують більше дозволів, ніж необхідно для правильної роботи.
+Ви можете використовувати вбудований механізм [керування доступом на основі ролей (RBAC)](/uk/docs/reference/access-authn-authz/rbac/) Kubernetes, щоб надати мінімальні дозволи, необхідні кожному сервісному обліковому запису. Ви створюєте *роль*, яка надає доступ, а потім *привʼязуєте* роль до вашого ServiceAccount. RBAC дозволяє визначити мінімальний набір дозволів, щоб дозволи облікового запису слідували принципу найменших прав. Podʼи, які використовують цей сервісний обліковий запис, не отримують більше дозволів, ніж необхідно для правильної роботи.
 
-Для інструкцій дивіться [Дозволи ServiceAccount](/docs/reference/access-authn-authz/rbac/#service-account-permissions).
+Для інструкцій дивіться [Дозволи ServiceAccount](/uk/docs/reference/access-authn-authz/rbac/#service-account-permissions).
 
 #### Крос-простірний доступ за допомогою облікового запису ServiceAccount {#cross-namespace}
 
@@ -81,7 +81,7 @@ weight: 25
 
 ### Додавання ServiceAccount для Pod {#assign-to-pod}
 
-Щоб додати ServiceAccount для Pod, ви встановлюєте поле `spec.serviceAccountName` у специфікації Pod. Kubernetes автоматично надає облікові дані для цього ServiceAccount для Pod. У версії v1.22 і пізніше Kubernetes отримує короткостроковий, **автоматично змінюваний** токен за допомогою API `TokenRequest` та монтує його як [том projected](/docs/concepts/storage/projected-volumes/#serviceaccounttoken).
+Щоб додати ServiceAccount для Pod, ви встановлюєте поле `spec.serviceAccountName` у специфікації Pod. Kubernetes автоматично надає облікові дані для цього ServiceAccount для Pod. У версії v1.22 і пізніше Kubernetes отримує короткостроковий, **автоматично змінюваний** токен за допомогою API `TokenRequest` та монтує його як [том projected](/uk/docs/concepts/storage/projected-volumes/#serviceaccounttoken).
 
 Типово Kubernetes надає Podʼу облікові дані для призначеного ServiceAccount, хай то `default` ServiceAccount або спеціальний ServiceAccount, який ви вказуєте.
 
@@ -95,12 +95,12 @@ weight: 25
 
 Якщо вам потрібні облікові дані для ServiceAccount, щоб вони монтувалися у нестандартне місце або для аудиторії, яка не є API-сервером, скористайтеся одним із наступних методів:
 
-- [API TokenRequest](/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) (рекомендовано): Запитайте короткостроковий токен ServiceAccount безпосередньо з вашого власного *коду застосунку*. Токен автоматично закінчується і може змінюватись при закінченні строку дії. Якщо у вас є застаріла програма, яка не враховує Kubernetes, ви можете використовувати контейнер sidecar у тому ж самому Podʼі, щоб отримати ці токени та зробити їх доступними для робочого навантаження застосунку.
-- [Token Volume Projection](/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) (також рекомендовано): У Kubernetes v1.20 і пізніше скористайтеся специфікацією Pod, щоб вказати kubelet додати токен ServiceAccount до Pod як *projected том*. Токени projected автоматично закінчуються, а kubelet змінює токен до закінчення строку дії.
-- [Service Account Token Secrets](/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount) (не рекомендується): Ви можете монтувати токени облікового запису служби як Secret Kubernetes у Podʼах. Ці токени не мають терміну дії та не ротуються. У версіях до v1.24 для кожного облікового запису служби автоматично створювався постійний токен. Цей метод більше не рекомендується, особливо у великому масштабі, через ризики, повʼязані зі статичними, довготривалими обліковими даними. [Feature gate LegacyServiceAccountTokenNoAutoGeneration](/docs/reference/command-line-tools-reference/feature-gates-removed) (який був стандартно увімкнений в Kubernetes з v1.24 по v1.26), перешкоджав автоматичному створенню цих токенів для облікових записів служб. Його було вилучено у версії v1.27, оскільки він був піднятий до статусу GA; ви все ще можете вручну створювати нескінченні токени облікового запису служби, але повинні враховувати наслідки для безпеки.
+- [API TokenRequest](/uk/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) (рекомендовано): Запитайте короткостроковий токен ServiceAccount безпосередньо з вашого власного *коду застосунку*. Токен автоматично закінчується і може змінюватись при закінченні строку дії. Якщо у вас є застаріла програма, яка не враховує Kubernetes, ви можете використовувати контейнер sidecar у тому ж самому Podʼі, щоб отримати ці токени та зробити їх доступними для робочого навантаження застосунку.
+- [Token Volume Projection](/uk/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) (також рекомендовано): У Kubernetes v1.20 і пізніше скористайтеся специфікацією Pod, щоб вказати kubelet додати токен ServiceAccount до Pod як *projected том*. Токени projected автоматично закінчуються, а kubelet змінює токен до закінчення строку дії.
+- [Service Account Token Secrets](/uk/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount) (не рекомендується): Ви можете монтувати токени облікового запису служби як Secret Kubernetes у Podʼах. Ці токени не мають терміну дії та не ротуються. У версіях до v1.24 для кожного облікового запису служби автоматично створювався постійний токен. Цей метод більше не рекомендується, особливо у великому масштабі, через ризики, повʼязані зі статичними, довготривалими обліковими даними. [Feature gate LegacyServiceAccountTokenNoAutoGeneration](/uk/docs/reference/command-line-tools-reference/feature-gates-removed) (який був стандартно увімкнений в Kubernetes з v1.24 по v1.26), перешкоджав автоматичному створенню цих токенів для облікових записів служб. Його було вилучено у версії v1.27, оскільки він був піднятий до статусу GA; ви все ще можете вручну створювати нескінченні токени облікового запису служби, але повинні враховувати наслідки для безпеки.
 
 {{< note >}}
-Для застосунків, які працюють поза вашим кластером Kubernetes, ви, можливо, розглядаєте можливість створення довгострокового токена ServiceAccount, який зберігається в Secret. Це дозволяє автентифікацію, але проєкт Kubernetes рекомендує уникати такого підходу. Довгострокові мітки-наміри є ризиком безпеки, оскільки після розкриття токен може бути використаний не за призначенням. Замість цього розгляньте альтернативу. Наприклад, ваш зовнішній застосунок може автентифікуватися за допомогою добре захищеного приватного ключа та сертифікату або за допомогою спеціального механізму, такого як [webhook автентифікації токенів](/docs/reference/access-authn-authz/authentication/#webhook-token-authentication), який ви реалізуєте самостійно.
+Для застосунків, які працюють поза вашим кластером Kubernetes, ви, можливо, розглядаєте можливість створення довгострокового токена ServiceAccount, який зберігається в Secret. Це дозволяє автентифікацію, але проєкт Kubernetes рекомендує уникати такого підходу. Довгострокові мітки-наміри є ризиком безпеки, оскільки після розкриття токен може бути використаний не за призначенням. Замість цього розгляньте альтернативу. Наприклад, ваш зовнішній застосунок може автентифікуватися за допомогою добре захищеного приватного ключа та сертифікату або за допомогою спеціального механізму, такого як [webhook автентифікації токенів](/uk/docs/reference/access-authn-authz/authentication/#webhook-token-authentication), який ви реалізуєте самостійно.
 
 Ви також можете використовувати TokenRequest для отримання короткострокових токенів для вашого зовнішнього застосунку.
 {{< /note >}}
@@ -139,17 +139,17 @@ ServiceAccount використовують підписані {{<glossary_toolt
 4. Перевіряє, чи наразі дійсний токен.
 5. Перевіряє аудиторію тверджень.
 
-API TokenRequest створює *звʼязані токени* для ServiceAccount. Ця звʼязка повʼязана з життєвим циклом клієнта, такого як Pod, який діє як цей ServiceAccount. Дивіться [Token Volume Projection](/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) для прикладу схеми та полів JWT звʼязаного токена облікового запису служби.
+API TokenRequest створює *звʼязані токени* для ServiceAccount. Ця звʼязка повʼязана з життєвим циклом клієнта, такого як Pod, який діє як цей ServiceAccount. Дивіться [Token Volume Projection](/uk/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection) для прикладу схеми та полів JWT звʼязаного токена облікового запису служби.
 
 Для токенів, виданих за допомогою API `TokenRequest`, API-сервер також перевіряє, чи існує зараз конкретне посилання на обʼєкт, яке використовує ServiceAccount, відповідно до {{< glossary_tooltip term_id="uid" text="унікального ідентифікатора" >}} цього обʼєкта. Для застарілих токенів, які монтувалися як Secretʼи в Podʼах, API-сервер перевіряє токен за допомогою Secret.
 
-Для отримання додаткової інформації про процес автентифікації, див. [Автентифікація](/docs/reference/access-authn-authz/authentication/#service-account-tokens).
+Для отримання додаткової інформації про процес автентифікації, див. [Автентифікація](/uk/docs/reference/access-authn-authz/authentication/#service-account-tokens).
 
 ### Автентифікація облікових записів служби у вашому власному коді {#authenticating-in-code}
 
 Якщо у вас є власні служби, яким потрібно перевіряти облікові дані служби Kubernetes, ви можете використовувати наступні методи:
 
-- [API TokenReview](/docs/reference/kubernetes-api/authentication-resources/token-review-v1/) (рекомендовано)
+- [API TokenReview](/uk/docs/reference/kubernetes-api/authentication-resources/token-review-v1/) (рекомендовано)
 - Відкриття OIDC
 
 Проєкт Kubernetes рекомендує використовувати API TokenReview, оскільки цей метод анулює токени, які привʼязані до обʼєктів API, таких як Secrets, ServiceAccounts, Podʼи або Вузли, коли ці обʼєкти видаляються. Наприклад, якщо ви видаляєте Pod, що містить projected токен ServiceAccount, кластер негайно анулює цей токен, і перевірка TokenReview негайно зазнає невдачі. Якщо ви використовуєте перевірку OIDC замість цього, ваші клієнти продовжують розглядати токен як дійсний, доки токен не досягне часу закінчення дії.
@@ -158,20 +158,20 @@ API TokenRequest створює *звʼязані токени* для ServiceAc
 
 ## Альтернативи {#alternatives}
 
-- Видавайте свої власні токени, використовуючи інший механізм, а потім використовуйте [Автентифікацію токенів за допомогою веб-хуків](/docs/reference/access-authn-authz/authentication/#webhook-token-authentication), щоб перевіряти токени розробника за допомогою власної служби перевірки.
+- Видавайте свої власні токени, використовуючи інший механізм, а потім використовуйте [Автентифікацію токенів за допомогою веб-хуків](/uk/docs/reference/access-authn-authz/authentication/#webhook-token-authentication), щоб перевіряти токени розробника за допомогою власної служби перевірки.
 - Надавайте свої власні ідентифікатори для Podʼів.
   - [Використовуйте SPIFFE CSI driver, щоб надавати SPIFFE SVIDs як пари сертифікатів X.509 для Podʼів](https://cert-manager.io/docs/projects/csi-driver-spiffe/).
     {{% thirdparty-content single="true" %}}
   - [Використовуйте сервісний механізм, такий як Istio, для надання сертифікатів Podʼів](https://istio.io/latest/docs/tasks/security/cert-management/plugin-ca-cert/).
 - Автентифікуйтеся ззовні кластера до API-сервера без використання токенів облікового запису служби:
-  - [Налаштуйте API-сервер для прийняття токенів OpenID Connect (OIDC) від вашого постачальника ідентифікації](/docs/reference/access-authn-authz/authentication/#openid-connect-tokens).
+  - [Налаштуйте API-сервер для прийняття токенів OpenID Connect (OIDC) від вашого постачальника ідентифікації](/uk/docs/reference/access-authn-authz/authentication/#openid-connect-tokens).
   - Використовуйте облікові записи служби або облікові записи користувачів, створені за допомогою зовнішньої служби управління доступом та ідентифікації (IAM), наприклад від постачальника хмарних послуг, для автентифікації в вашому кластері.
-  - [Використовуйте API-інтерфейс CertificateSigningRequest з клієнтськими сертифікатами](/docs/tasks/tls/managing-tls-in-a-cluster/).
-- [Налаштуйте kubelet для отримання облікових даних з реєстру зображень](/docs/tasks/administer-cluster/kubelet-credential-provider/).
+  - [Використовуйте API-інтерфейс CertificateSigningRequest з клієнтськими сертифікатами](/uk/docs/tasks/tls/managing-tls-in-a-cluster/).
+- [Налаштуйте kubelet для отримання облікових даних з реєстру зображень](/uk/docs/tasks/administer-cluster/kubelet-credential-provider/).
 - Використовуйте втулок пристрою, щоб отримати доступ до віртуального Trusted Platform Module (TPM), що дозволяє потім автентифікуватися за допомогою приватного ключа.
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся, як [керувати ServiceAccounts як адміністратор кластера](/docs/reference/access-authn-authz/service-accounts-admin/).
-- Дізнайтеся, як [призначити ServiceAccounts для Podʼів](/docs/tasks/configure-pod-container/configure-service-account/).
-- Прочитайте [довідку API ServiceAccount](/docs/reference/kubernetes-api/authentication-resources/service-account-v1/).
+- Дізнайтеся, як [керувати ServiceAccounts як адміністратор кластера](/uk/docs/reference/access-authn-authz/service-accounts-admin/).
+- Дізнайтеся, як [призначити ServiceAccounts для Podʼів](/uk/docs/tasks/configure-pod-container/configure-service-account/).
+- Прочитайте [довідку API ServiceAccount](/uk/docs/reference/kubernetes-api/authentication-resources/service-account-v1/).

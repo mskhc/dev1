@@ -1,7 +1,7 @@
 ---
 id: pod-disruption
 title: Розлад в роботі Podʼа
-full_link: /docs/concepts/workloads/pods/disruptions/
+full_link: /uk/docs/concepts/workloads/pods/disruptions/
 date: 2021-05-12
 short_description: >
   Процес, за якого Podʼи на вузлах припиняють роботу добровільно, або примусово.
@@ -14,7 +14,7 @@ tags:
   - operation
 ---
 
-[Розлад в роботі Podʼа](/docs/concepts/workloads/pods/disruptions/) — це процес, за якого Podʼи на вузлах припиняють роботу добровільно, або примусово.
+[Розлад в роботі Podʼа](/uk/docs/concepts/workloads/pods/disruptions/) — це процес, за якого Podʼи на вузлах припиняють роботу добровільно, або примусово.
 
 <!--more-->
 

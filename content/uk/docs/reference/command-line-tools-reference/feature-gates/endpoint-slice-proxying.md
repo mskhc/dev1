@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Якщо цю опцію увімкнено, kube-proxy на Linux використовуватиме EndpointSlices як основне джерело даних замість точок доступу, що дає змогу підвищити масштабованість і продуктивність. Див. статтю [Увімкнення Endpoint Slices](/docs/concepts/services-networking/endpoint-slices/).
+Якщо цю опцію увімкнено, kube-proxy на Linux використовуватиме EndpointSlices як основне джерело даних замість точок доступу, що дає змогу підвищити масштабованість і продуктивність. Див. статтю [Увімкнення Endpoint Slices](/uk/docs/concepts/services-networking/endpoint-slices/).

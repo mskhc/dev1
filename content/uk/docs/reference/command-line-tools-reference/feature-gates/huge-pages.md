@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Увімкніть виділення та використання попередньо виділених [величезних сторінок] (/docs/tasks/manage-hugepages/scheduling-hugepages/).
+Увімкніть виділення та використання попередньо виділених [величезних сторінок](/uk/docs/tasks/manage-hugepages/scheduling-hugepages/).

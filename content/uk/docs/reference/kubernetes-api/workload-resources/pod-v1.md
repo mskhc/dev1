@@ -52,7 +52,7 @@ PodSpec — це опис Pod.
 
 - **initContainers** ([]<a href="{{< ref "../workload-resources/pod-v1#Container" >}}">Container</a>)
 
-  Список контейнерів ініціалізації, що належать Podʼу. Контейнери ініціалізації виконуються у визначеному порядку перед запуском звичайних контейнерів. Якщо будь-який контейнер ініціалізації зазнає збою, Pod вважається збійним та обробляється відповідно до restartPolicy. Імʼя контейнера ініціалізації або звичайного контейнера повинно бути унікальним серед усіх контейнерів. Контейнери ініціалізації не можуть мати дій Lifecycle, Readiness probes, Liveness probes, або Startup probes. resourceRequirements контейнера ініціалізації враховуються під час планування, знаходячи найбільше значення запиту/ліміту для кожного типу ресурсів, а потім використовуючи максимум цього значення або суму цих значень для звичайних контейнерів. Ліміти застосовуються до контейнерів ініціалізації аналогічним чином. Контейнери ініціалізації зараз не можуть бути додані або видалені. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/init-containers/](/docs/concepts/workloads/pods/init-containers/)
+  Список контейнерів ініціалізації, що належать Podʼу. Контейнери ініціалізації виконуються у визначеному порядку перед запуском звичайних контейнерів. Якщо будь-який контейнер ініціалізації зазнає збою, Pod вважається збійним та обробляється відповідно до restartPolicy. Імʼя контейнера ініціалізації або звичайного контейнера повинно бути унікальним серед усіх контейнерів. Контейнери ініціалізації не можуть мати дій Lifecycle, Readiness probes, Liveness probes, або Startup probes. resourceRequirements контейнера ініціалізації враховуються під час планування, знаходячи найбільше значення запиту/ліміту для кожного типу ресурсів, а потім використовуючи максимум цього значення або суму цих значень для звичайних контейнерів. Ліміти застосовуються до контейнерів ініціалізації аналогічним чином. Контейнери ініціалізації зараз не можуть бути додані або видалені. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/init-containers/](/uk/docs/concepts/workloads/pods/init-containers/)
 
 - **ephemeralContainers** ([]<a href="{{< ref "../workload-resources/pod-v1#EphemeralContainer" >}}">EphemeralContainer</a>)
 
@@ -62,7 +62,7 @@ PodSpec — це опис Pod.
 
 - **imagePullSecrets** ([]<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
 
-  ImagePullSecrets — це необовʼязково список посилань на Secretʼи у тому ж просторі імен, які використовуються для отримання будь-яких образів, що використовуються у цьому PodSpec. Якщо вказано, ці Secretʼи будуть передані індивідуальним реалізаціям отримувачів для їх використання. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod](/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod)
+  ImagePullSecrets — це необовʼязково список посилань на Secretʼи у тому ж просторі імен, які використовуються для отримання будь-яких образів, що використовуються у цьому PodSpec. Якщо вказано, ці Secretʼи будуть передані індивідуальним реалізаціям отримувачів для їх використання. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod](/uk/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod)
 
 - **enableServiceLinks** (boolean)
 
@@ -111,13 +111,13 @@ PodSpec — це опис Pod.
 
   *Patch strategies: retainKeys, обʼєднання по ключу `name`*
   
-  Список томів, які можуть бути змонтовані контейнерами, що належать Podʼу. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes](/docs/concepts/storage/volumes)
+  Список томів, які можуть бути змонтовані контейнерами, що належать Podʼу. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes](/uk/docs/concepts/storage/volumes)
 
 ### Планування {#scheduling}
 
 - **nodeSelector** (map[string]string)
 
-  NodeSelector — це селектор, який має бути істинним, щоб Pod підходив для вузла. Селектор, який має відповідати міткам вузла для планування Podʼа на цьому вузлі. Докладніше: [https://kubernetes.io/docs/concepts/configuration/assign-pod-node/](/docs/concepts/configuration/assign-pod-node/)
+  NodeSelector — це селектор, який має бути істинним, щоб Pod підходив для вузла. Селектор, який має відповідати міткам вузла для планування Podʼа на цьому вузлі. Докладніше: [https://kubernetes.io/docs/concepts/configuration/assign-pod-node/](/uk/docs/concepts/configuration/assign-pod-node/)
 
 - **nodeName** (string)
 
@@ -335,7 +335,7 @@ PodSpec — це опис Pod.
 
 - **restartPolicy** (string)
 
-  Політика перезапуску для всіх контейнерів у Podʼі. Одне з Always, OnFailure, Never. В деяких контекстах може бути дозволений лише субнабір цих значень. Стандартне значення — Always. Докладніше: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+  Політика перезапуску для всіх контейнерів у Podʼі. Одне з Always, OnFailure, Never. В деяких контекстах може бути дозволений лише субнабір цих значень. Стандартне значення — Always. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy](/uk/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)
 
 - **terminationGracePeriodSeconds** (int64)
 
@@ -441,7 +441,7 @@ PodSpec — це опис Pod.
 
 - **serviceAccountName** (string)
 
-  ServiceAccountName — це імʼя службового облікового запису, який використовується для запуску цього Podʼа. Детальніше: [https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/](/docs/tasks/configure-pod-container/configure-service-account/)
+  ServiceAccountName — це імʼя службового облікового запису, який використовується для запуску цього Podʼа. Детальніше: [https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/](/uk/docs/tasks/configure-pod-container/configure-service-account/)
 
 - **automountServiceAccountToken** (boolean)
 
@@ -651,11 +651,11 @@ PodSpec — це опис Pod.
 
 - **image** (string)
 
-  Назва образу контейнера. Докладніше: [https://kubernetes.io/docs/concepts/containers/images](/docs/concepts/containers/images). Це поле є необовʼязковим для того, щоб дозволити більш високому рівню управління конфігурацією використовувати стандартний образ або перевизначити образ контейнера в контролері навантаження, такому як Deployments та StatefulSets.
+  Назва образу контейнера. Докладніше: [https://kubernetes.io/docs/concepts/containers/images](/uk/docs/concepts/containers/images). Це поле є необовʼязковим для того, щоб дозволити більш високому рівню управління конфігурацією використовувати стандартний образ або перевизначити образ контейнера в контролері навантаження, такому як Deployments та StatefulSets.
 
 - **imagePullPolicy** (string)
 
-  Політика отримання образу. Одне з значень: Always, Never, IfNotPresent. Стандартно — Always, якщо вказано теґ `:latest`, або IfNotPresent у іншому випадку. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#updating-images](/docs/concepts/containers/images#updating-images)
+  Політика отримання образу. Одне з значень: Always, Never, IfNotPresent. Стандартно — Always, якщо вказано теґ `:latest`, або IfNotPresent у іншому випадку. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#updating-images](/uk/docs/concepts/containers/images#updating-images)
 
 ### Точка входу {#entrypoint}
 
@@ -665,7 +665,7 @@ PodSpec — це опис Pod.
 
 - **args** ([]string)
 
-  Аргументи точки входу. Якщо не надано, буде використано CMD образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
+  Аргументи точки входу. Якщо не надано, буде використано CMD образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/uk/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
 
 - **workingDir** (string)
 
@@ -743,7 +743,7 @@ PodSpec — це опис Pod.
 
       - **env.valueFrom.configMapKeyRef.name** (string)
 
-        Назва обʼєкта на який посилаються. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Назва обʼєкта на який посилаються. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **env.valueFrom.configMapKeyRef.optional** (boolean)
 
@@ -770,7 +770,7 @@ PodSpec — це опис Pod.
 
       - **env.valueFrom.secretKeyRef.name** (string)
 
-        Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **env.valueFrom.secretKeyRef.optional** (boolean)
 
@@ -794,7 +794,7 @@ PodSpec — це опис Pod.
 
     - **envFrom.configMapRef.name** (string)
 
-      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
     - **envFrom.configMapRef.optional** (boolean)
 
@@ -815,7 +815,7 @@ PodSpec — це опис Pod.
 
     - **envFrom.secretRef.name** (string)
 
-      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
     - **envFrom.secretRef.optional** (boolean)
 
@@ -877,7 +877,7 @@ PodSpec — це опис Pod.
 
 - **resources** (ResourceRequirements)
 
-  Обчислювальні ресурси, необхідні для цього контейнера. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+  Обчислювальні ресурси, необхідні для цього контейнера. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
   <a name="ResourceRequirements"></a>
   *ResourceRequirements описує вимоги до обчислювальних ресурсів.*
@@ -901,11 +901,11 @@ PodSpec — це опис Pod.
 
   - **resources.limits** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Limits визначає максимальну кількість обчислювальних ресурсів, дозволених. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Limits визначає максимальну кількість обчислювальних ресурсів, дозволених. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
   - **resources.requests** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється в Limits, якщо це явно вказано, інакше — у значення, визначеного реалізацією. Requests не може перевищувати Limits. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється в Limits, якщо це явно вказано, інакше — у значення, визначеного реалізацією. Requests не може перевищувати Limits. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
 - **resizePolicy** ([]ContainerResizePolicy)
 
@@ -935,11 +935,11 @@ PodSpec — це опис Pod.
 
   - **lifecycle.postStart** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
 
-    PostStart викликається негайно після створення контейнера. Якщо обробник не вдалося виконати, контейнер буде завершено і перезапущено згідно зі своєю політикою перезапуску. Інше управління контейнером блокується, поки хук не завершиться. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
+    PostStart викликається негайно після створення контейнера. Якщо обробник не вдалося виконати, контейнер буде завершено і перезапущено згідно зі своєю політикою перезапуску. Інше управління контейнером блокується, поки хук не завершиться. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/uk/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
 
   - **lifecycle.preStop** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
 
-    PreStop викликається негайно перед тим, як контейнер буде завершено через запит API або подію управління, таку як невдача проби справності/запуску, випередження, скорочення ресурсів тощо. Обробник не викликається, якщо контейнер впаде або закінчить роботу. Період перебігу належного завершення підраховується до виконання хуку PreStop. Незалежно від результату обробника, контейнер в кінцевому підсумку завершиться протягом періоду належного завершення Pod (якщо він не буде затриманий завершенням залишкових операцій). Інше управління контейнером блокується, поки хук не завершиться або досягне періоду належного завершення. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
+    PreStop викликається негайно перед тим, як контейнер буде завершено через запит API або подію управління, таку як невдача проби справності/запуску, випередження, скорочення ресурсів тощо. Обробник не викликається, якщо контейнер впаде або закінчить роботу. Період перебігу належного завершення підраховується до виконання хуку PreStop. Незалежно від результату обробника, контейнер в кінцевому підсумку завершиться протягом періоду належного завершення Pod (якщо він не буде затриманий завершенням залишкових операцій). Інше управління контейнером блокується, поки хук не завершиться або досягне періоду належного завершення. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/uk/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
 
 - **terminationMessagePath** (string)
 
@@ -951,15 +951,15 @@ PodSpec — це опис Pod.
 
 - **livenessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
 
-  Періодичне тестування життєздатності контейнера. Контейнер буде перезапущено, якщо тест не вдасться. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
+  Періодичне тестування життєздатності контейнера. Контейнер буде перезапущено, якщо тест не вдасться. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/uk/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
 
 - **readinessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
 
-  Періодична перевірка готовності контейнера до обслуговування. Контейнер буде видалено з точок доступу Service, якщо проба зазнає невдачі. Неможливо оновити. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
+  Періодична перевірка готовності контейнера до обслуговування. Контейнер буде видалено з точок доступу Service, якщо проба зазнає невдачі. Неможливо оновити. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/uk/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
 
 - **startupProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
 
-  StartupProbe вказує, що Pod успішно ініціалізовано. Якщо вказано, інші проби не виконуються, поки ця не закінчиться успіхом. Якщо цей тест не вдасться, Pod буде перезапущено, так само, як і в разі невдачі livenessProbe. Це може бути використано для надання різних параметрів проби на початку життєвого циклу Podʼа, коли завантаження даних або оновлення кешу може займати довгий час, ніж під час регулярної роботи. Це не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
+  StartupProbe вказує, що Pod успішно ініціалізовано. Якщо вказано, інші проби не виконуються, поки ця не закінчиться успіхом. Якщо цей тест не вдасться, Pod буде перезапущено, так само, як і в разі невдачі livenessProbe. Це може бути використано для надання різних параметрів проби на початку життєвого циклу Podʼа, коли завантаження даних або оновлення кешу може займати довгий час, ніж під час регулярної роботи. Це не може бути оновлено. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/uk/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
 
 - **restartPolicy** (string)
 
@@ -969,7 +969,7 @@ PodSpec — це опис Pod.
 
 - **securityContext** (SecurityContext)
 
-  SecurityContext визначає параметри безпеки, з якими має працювати контейнер. Якщо встановлено, поля SecurityContext замінять відповідні поля PodSecurityContext. Докладніше: [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/](/docs/tasks/configure-pod-container/security-context/)
+  SecurityContext визначає параметри безпеки, з якими має працювати контейнер. Якщо встановлено, поля SecurityContext замінять відповідні поля PodSecurityContext. Докладніше: [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/](/uk/docs/tasks/configure-pod-container/security-context/)
 
   <a name="SecurityContext"></a>
   *SecurityContext містить конфігурацію безпеки, яка буде застосована до контейнера. Деякі поля присутні як у SecurityContext, так і в PodSecurityContext. Якщо обидва встановлені, значення в SecurityContext мають пріоритет.*
@@ -1118,21 +1118,21 @@ PodSpec — це опис Pod.
 
 - **image** (string)
 
-  Імʼя образу контейнера. Докладніше: [https://kubernetes.io/docs/concepts/containers/images](/docs/concepts/containers/images)
+  Імʼя образу контейнера. Докладніше: [https://kubernetes.io/docs/concepts/containers/images](/uk/docs/concepts/containers/images)
 
 - **imagePullPolicy** (string)
 
-  Політика завантаження образу. Одне з значень: Always, Never, IfNotPresent. Стандартне значення — Always, якщо вказано теґ `:latest`, або IfNotPresent в іншому випадку. Не можна оновити. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#updating-images](/docs/concepts/containers/images#updating-images)
+  Політика завантаження образу. Одне з значень: Always, Never, IfNotPresent. Стандартне значення — Always, якщо вказано теґ `:latest`, або IfNotPresent в іншому випадку. Не можна оновити. Докладніше: [https://kubernetes.io/docs/concepts/containers/images#updating-images](/uk/docs/concepts/containers/images#updating-images)
 
 ### Точка входу {#entrypoint-1}
 
 - **command** ([]string)
 
-  Масив команд для точки входу. Не виконується в оболонці. Використовується ENTRYPOINT образу, якщо це не задано. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
+  Масив команд для точки входу. Не виконується в оболонці. Використовується ENTRYPOINT образу, якщо це не задано. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/uk/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
 
 - **args** ([]string)
 
-  Аргументи для точки входу.  Якщо не надано, буде використано CMD образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
+  Аргументи для точки входу.  Якщо не надано, буде використано CMD образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/uk/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
 
 - **workingDir** (string)
 
@@ -1177,7 +1177,7 @@ PodSpec — це опис Pod.
 
       - **env.valueFrom.configMapKeyRef.name** (string), обовʼязково
 
-        Назва обʼєкта на який посилаються. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Назва обʼєкта на який посилаються. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **env.valueFrom.configMapKeyRef.optional** (boolean)
 
@@ -1204,7 +1204,7 @@ PodSpec — це опис Pod.
 
       - **env.valueFrom.secretKeyRef.name** (string)
 
-        Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **env.valueFrom.secretKeyRef.optional** (boolean)
 
@@ -1228,7 +1228,7 @@ PodSpec — це опис Pod.
 
     - **envFrom.configMapRef.name** (string)
 
-      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
     - **envFrom.configMapRef.optional** (boolean)
 
@@ -1249,7 +1249,7 @@ PodSpec — це опис Pod.
 
     - **envFrom.secretRef.name** (string)
 
-      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+      Назва посилання. Докладніше: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
     - **envFrom.secretRef.optional** (boolean)
 
@@ -1358,7 +1358,7 @@ PodSpec — це опис Pod.
 
 - **securityContext** (SecurityContext)
 
-  SecurityContext визначає параметри безпеки, з якими має працювати контейнер. Якщо встановлено, поля SecurityContext замінять відповідні поля PodSecurityContext. Докладніше: [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/](/docs/tasks/configure-pod-container/security-context/)
+  SecurityContext визначає параметри безпеки, з якими має працювати контейнер. Якщо встановлено, поля SecurityContext замінять відповідні поля PodSecurityContext. Докладніше: [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/](/uk/docs/tasks/configure-pod-container/security-context/)
 
   <a name="SecurityContext"></a>
   *SecurityContext містить конфігурацію безпеки, яка буде застосована до контейнера. Деякі поля присутні як у SecurityContext, так і в PodSecurityContext. Якщо обидва встановлені, значення в SecurityContext мають пріоритет.*
@@ -1527,11 +1527,11 @@ PodSpec — це опис Pod.
 
   - **resources.limits** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Limits визначає максимальну кількість обчислювальних ресурсів, дозволених. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Limits визначає максимальну кількість обчислювальних ресурсів, дозволених. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
   - **resources.requests** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється в Limits, якщо це явно вказано, інакше — у значення, визначеного реалізацією. Requests не може перевищувати Limits. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/docs/concepts/configuration/manage-resources-containers/)
+    Requests описує мінімальну кількість обчислювальних ресурсів, що потрібна. Якщо Requests відсутній для контейнера, він стандартно встановлюється в Limits, якщо це явно вказано, інакше — у значення, визначеного реалізацією. Requests не може перевищувати Limits. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
 - **lifecycle** (Lifecycle)
 
@@ -1542,11 +1542,11 @@ PodSpec — це опис Pod.
 
   - **lifecycle.postStart** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
 
-    PostStart викликається негайно після створення контейнера. Якщо обробник не вдалося виконати, контейнер буде завершено і перезапущено згідно зі своєю політикою перезапуску. Інше управління контейнером блокується, поки хук не завершиться. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
+    PostStart викликається негайно після створення контейнера. Якщо обробник не вдалося виконати, контейнер буде завершено і перезапущено згідно зі своєю політикою перезапуску. Інше управління контейнером блокується, поки хук не завершиться. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/uk/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
 
   - **lifecycle.preStop** (<a href="{{< ref "../workload-resources/pod-v1#LifecycleHandler" >}}">LifecycleHandler</a>)
 
-    PreStop викликається негайно перед тим, як контейнер буде завершено через запит API або подію управління, таку як невдача проби справності/запуску, випередження, скорочення ресурсів тощо. Обробник не викликається, якщо контейнер впаде або закінчить роботу. Період перебігу належного завершення підраховується до виконання хуку PreStop. Незалежно від результату обробника, контейнер в кінцевому підсумку завершиться протягом періоду належного завершення Pod (якщо він не буде затриманий завершенням залишкових операцій). Інше управління контейнером блокується, поки хук не завершиться або досягне періоду належного завершення. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
+    PreStop викликається негайно перед тим, як контейнер буде завершено через запит API або подію управління, таку як невдача проби справності/запуску, випередження, скорочення ресурсів тощо. Обробник не викликається, якщо контейнер впаде або закінчить роботу. Період перебігу належного завершення підраховується до виконання хуку PreStop. Незалежно від результату обробника, контейнер в кінцевому підсумку завершиться протягом періоду належного завершення Pod (якщо він не буде затриманий завершенням залишкових операцій). Інше управління контейнером блокується, поки хук не завершиться або досягне періоду належного завершення. Докладніше: [https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks](/uk/docs/concepts/containers/container-lifecycle-hooks/#container-hooks)
 
 - **livenessProbe** (<a href="{{< ref "../workload-resources/pod-v1#Probe" >}}">Probe</a>)
 
@@ -1894,7 +1894,7 @@ Pod anti affinity — це група правил планування між 
 
 - **initialDelaySeconds** (int32)
 
-  Кількість секунд після запуску контейнера перед початком перевірки на життєздатність. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
+  Кількість секунд після запуску контейнера перед початком перевірки на життєздатність. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/uk/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
 
 - **terminationGracePeriodSeconds** (int64)
 
@@ -1906,7 +1906,7 @@ Pod anti affinity — це група правил планування між 
 
 - **timeoutSeconds** (int32)
 
-  Кількість секунд після якої перевірка завершується з тайм-аутом. Стандартне значення — 1 секунда. Мінімальне значення — 1. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
+  Кількість секунд після якої перевірка завершується з тайм-аутом. Стандартне значення — 1 секунда. Мінімальне значення — 1. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes](/uk/docs/concepts/workloads/pods/pod-lifecycle#container-probes)
 
 - **failureThreshold** (int32)
 
@@ -1980,7 +1980,7 @@ PodStatus представляє інформацію про стан Podʼа. �
   
   - Unknown: з якоїсь причини стан Podʼа не вдалося отримати, зазвичай через помилку у звʼязку з хостом Podʼа.
 
-  Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase](/docs/concepts/workloads/pods/pod-lifecycle#pod-phase)
+  Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-phase)
 
 - **message** (string)
 
@@ -2011,18 +2011,18 @@ PodStatus представляє інформацію про стан Podʼа. �
 
   *Patch strategy: злиття за ключем `type`*
   
-  Поточний стан обслуговування Podʼа. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
+  Поточний стан обслуговування Podʼа. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
 
   <a name="PodCondition"></a>
   *PodCondition містить деталі поточного стану цього Podʼа.*
 
   - **conditions.status** (string), обовʼязково
 
-    Статус стану. Може бути True, False, Unknown. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
+    Статус стану. Може бути True, False, Unknown. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
 
   - **conditions.type** (string), обовʼязково
 
-    Тип є типом стану. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
+    Тип є типом стану. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions)
 
   - **conditions.lastProbeTime** (Time)
 
@@ -2048,18 +2048,18 @@ PodStatus представляє інформацію про стан Podʼа. �
 
 - **qosClass** (string)
 
-  Класифікація якості обслуговування (QOS), присвоєна Podʼу на основі вимог до ресурсів. Дивіться тип PodQOSClass для доступних класів QOS. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes](/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes)
+  Класифікація якості обслуговування (QOS), присвоєна Podʼу на основі вимог до ресурсів. Дивіться тип PodQOSClass для доступних класів QOS. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes](/uk/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes)
 
 - **initContainerStatuses** ([]ContainerStatus)
 
-  Список містить один запис на кожен контейнер ініціалізації в маніфесті. Найбільш успішний контейнер ініціалізації матиме ready = true, найбільш нещодавно запущений контейнер матиме startTime встановлений. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status](/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status)
+  Список містить один запис на кожен контейнер ініціалізації в маніфесті. Найбільш успішний контейнер ініціалізації матиме ready = true, найбільш нещодавно запущений контейнер матиме startTime встановлений. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status)
 
   <a name="ContainerStatus"></a>
   *ContainerStatus містить деталі поточного стану цього контейнера.*
 
 - **containerStatuses** ([]ContainerStatus)
 
-  Список містить один запис на кожен контейнер в маніфесті. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status](/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status)
+  Список містить один запис на кожен контейнер в маніфесті. Докладніше: [https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status)
 
   <a name="ContainerStatus"></a>
   *ContainerStatus містить деталі поточного стану цього контейнера.*

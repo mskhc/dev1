@@ -2,7 +2,7 @@
 title: API Шлюзу
 id: gateway-api
 date: 2023-10-19
-full_link: /docs/concepts/services-networking/gateway/
+full_link: /uk/docs/concepts/services-networking/gateway/
 short_description: >
   API для створення мережі Service в Kubernetes.
 

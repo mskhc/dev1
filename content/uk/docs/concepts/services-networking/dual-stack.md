@@ -43,7 +43,7 @@ weight: 90
   Для отримання інформації щодо використання двостекових Serviceʼів із попередніми версіями Kubernetes, дивіться документацію для відповідної версії Kubernetes.
 
 * Підтримка постачальником двостекової мережі (постачальник хмари або інший повинен забезпечити вузлам Kubernetes маршрутизовані мережеві інтерфейси IPv4/IPv6)
-* [Мережевий втулок](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/), який підтримує двостекову мережу.
+* [Мережевий втулок](/uk/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/), який підтримує двостекову мережу.
 
 ## Налаштування двостекової мережі IPv4/IPv6 {#configure-ipv4-ipv6-dual-stack}
 
@@ -103,7 +103,7 @@ weight: 90
 
 #### Параметри подвійного стека в нових Service {#dual-stack-options-on-new-services}
 
-1. Специфікація цього Service явно не визначає `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service, Kubernetes виділяє кластерний IP для Service з першого налаштованого `service-cluster-ip-range` та встановлює значення `.spec.ipFamilyPolicy` на `SingleStack`. ([Service без селекторів](/docs/concepts/services-networking/service/#services-without-selectors) та [headless Services](/docs/concepts/services-networking/service/#headless-services) із селекторами будуть працювати так само.)
+1. Специфікація цього Service явно не визначає `.spec.ipFamilyPolicy`. Коли ви створюєте цей Service, Kubernetes виділяє кластерний IP для Service з першого налаштованого `service-cluster-ip-range` та встановлює значення `.spec.ipFamilyPolicy` на `SingleStack`. ([Service без селекторів](/uk/docs/concepts/services-networking/service/#services-without-selectors) та [headless Services](/uk/docs/concepts/services-networking/service/#headless-services) із селекторами будуть працювати так само.)
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
@@ -158,7 +158,7 @@ weight: 90
      loadBalancer: {}
    ```
 
-2. Коли двостековість увімкнена в кластері, наявні [headless Services](/docs/concepts/services-networking/service/#headless-services) з селекторами конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес першого діапазону кластерних IP Service (налаштованого за допомогою прапорця `--service-cluster-ip-range` для kube-apiserver), навіть якщо `.spec.clusterIP` встановлено в `None`.
+2. Коли двостековість увімкнена в кластері, наявні [headless Services](/uk/docs/concepts/services-networking/service/#headless-services) з селекторами конфігуруються панеллю управління так, щоб встановити `.spec.ipFamilyPolicy` на `SingleStack` та встановити `.spec.ipFamilies` на сімейство адрес першого діапазону кластерних IP Service (налаштованого за допомогою прапорця `--service-cluster-ip-range` для kube-apiserver), навіть якщо `.spec.clusterIP` встановлено в `None`.
 
    {{% code_sample file="service/networking/dual-stack-default-svc.yaml" %}}
 
@@ -216,7 +216,7 @@ Service можна перемикати з одностекового режим
 
 ### Headless Services без селекторів {#headless-services-without-selectors}
 
-Для [Headless Services без селекторів](/docs/concepts/services-networking/service/#without-selectors) і без явно вказаного `.spec.ipFamilyPolicy`, поле `.spec.ipFamilyPolicy` має типове значення `RequireDualStack`.
+Для [Headless Services без селекторів](/uk/docs/concepts/services-networking/service/#without-selectors) і без явно вказаного `.spec.ipFamilyPolicy`, поле `.spec.ipFamilyPolicy` має типове значення `RequireDualStack`.
 
 ### Тип Service — LoadBalancer {#service-type-loadbalancer}
 
@@ -248,9 +248,9 @@ Kubernetes на Windows не підтримує одностекову мере�
 Мережі VXLAN на Windows **не** підтримують двохстекову мережу.
 {{< /note >}}
 
-Ви можете дізнатися більше про різні режими мережі для Windows в розділі [Мережа у Windows](/docs/concepts/services-networking/windows-networking#network-modes).
+Ви можете дізнатися більше про різні режими мережі для Windows в розділі [Мережа у Windows](/uk/docs/concepts/services-networking/windows-networking#network-modes).
 
 ## {{% heading "whatsnext" %}}
 
-* [Перевірте двохстекову мережу IPv4/IPv6](/docs/tasks/network/validate-dual-stack)
-* [Увімкніть двохстекову мережу за допомогою kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/)
+* [Перевірте двохстекову мережу IPv4/IPv6](/uk/docs/tasks/network/validate-dual-stack)
+* [Увімкніть двохстекову мережу за допомогою kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/dual-stack-support/)

@@ -11,4 +11,4 @@ stages:
     fromVersion: "1.30"
     toVersion: "1.32"
 ---
-Вмикає міграцію версій сховища. Докладні відомості наведено у статті [Міграція обʼєктів Kubernetes за допомогою міграції версій сховища](/docs/tasks/manage-kubernetes-objects/storage-version-migration).
+Вмикає міграцію версій сховища. Докладні відомості наведено у статті [Міграція обʼєктів Kubernetes за допомогою міграції версій сховища](/uk/docs/tasks/manage-kubernetes-objects/storage-version-migration).

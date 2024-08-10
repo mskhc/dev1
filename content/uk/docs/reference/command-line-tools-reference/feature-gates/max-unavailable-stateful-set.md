@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.24"
 ---
-Дозволяє встановити поле `maxUnavailable` для [rolling update strategy](/docs/concepts/workloads/controllers/statefulset/#rolling-updates) набору StatefulSet. Поле визначає максимальну кількість Podʼів, які можуть бути недоступні під час оновлення.
+Дозволяє встановити поле `maxUnavailable` для [rolling update strategy](/uk/docs/concepts/workloads/controllers/statefulset/#rolling-updates) набору StatefulSet. Поле визначає максимальну кількість Podʼів, які можуть бути недоступні під час оновлення.

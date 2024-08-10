@@ -19,4 +19,4 @@ stages:
 
 removed: true
 ---
-Вмикає ротацію клієнтського TLS-сертифікату в kubelet. Дивіться [kubelet configuration](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/#kubelet-configuration) для більш детальної інформації.
+Вмикає ротацію клієнтського TLS-сертифікату в kubelet. Дивіться [kubelet configuration](/uk/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/#kubelet-configuration) для більш детальної інформації.

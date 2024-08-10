@@ -19,4 +19,4 @@ stages:
 
 removed: true  
 ---
-Вмикає [динамічне виділення](/docs/concepts/storage/dynamic-provisioning/) постійних томів для Podʼів.
+Вмикає [динамічне виділення](/uk/docs/concepts/storage/dynamic-provisioning/) постійних томів для Podʼів.

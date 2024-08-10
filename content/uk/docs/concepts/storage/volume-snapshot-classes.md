@@ -13,7 +13,7 @@ weight: 61 # just after volume snapshots
 
 <!-- overview -->
 
-У цьому документі описано концепцію VolumeSnapshotClass в Kubernetes. Рекомендується мати відомості про [знімки томів](/docs/concepts/storage/volume-snapshots/) та [класи сховищ](/docs/concepts/storage/storage-classes).
+У цьому документі описано концепцію VolumeSnapshotClass в Kubernetes. Рекомендується мати відомості про [знімки томів](/uk/docs/concepts/storage/volume-snapshots/) та [класи сховищ](/uk/docs/concepts/storage/storage-classes).
 
 <!-- body -->
 
@@ -61,7 +61,7 @@ parameters:
 
 ### DeletionPolicy
 
-Класи знімків томів мають [DeletionPolicy](/docs/concepts/storage/volume-snapshots/#delete). Вона дозволяє налаштувати, що відбудеться з VolumeSnapshotContent, коли буде видалено обʼєкт VolumeSnapshot, з яким він повʼязаний. DeletionPolicy класу знімків томів може бути або `Retain`, або `Delete`. Це поле обовʼязкове.
+Класи знімків томів мають [DeletionPolicy](/uk/docs/concepts/storage/volume-snapshots/#delete). Вона дозволяє налаштувати, що відбудеться з VolumeSnapshotContent, коли буде видалено обʼєкт VolumeSnapshot, з яким він повʼязаний. DeletionPolicy класу знімків томів може бути або `Retain`, або `Delete`. Це поле обовʼязкове.
 
 Якщо DeletionPolicy має значення `Delete`, тоді разом з обʼєктом VolumeSnapshotContent буде видалено знімок тому у сховищі. Якщо DeletionPolicy має значення `Retain`, то знімок тому та VolumeSnapshotContent залишаються.
 

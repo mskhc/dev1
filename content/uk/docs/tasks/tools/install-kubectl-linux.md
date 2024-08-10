@@ -150,7 +150,7 @@ weight: 10
    ```
 
 {{< note >}}
-Щоб оновити kubectl до іншого мінорного видання, вам потрібно буде збільшити версію в `/etc/apt/sources.list.d/kubernetes.list` перед виконанням `apt-get update` та `apt-get upgrade`. Цю процедуру більш докладно описано в [Зміні репозиторію пакунків Kubernetes](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+Щоб оновити kubectl до іншого мінорного видання, вам потрібно буде збільшити версію в `/etc/apt/sources.list.d/kubernetes.list` перед виконанням `apt-get update` та `apt-get upgrade`. Цю процедуру більш докладно описано в [Зміні репозиторію пакунків Kubernetes](/uk/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 {{< /note >}}
 
 4. Оновіть індекс пакунків `apt`, а потім встановіть kubectl:
@@ -179,7 +179,7 @@ weight: 10
    ```
 
 {{< note >}}
-Щоб оновити kubectl до іншого мінорного випуску, вам потрібно буде збільшити версію в `/etc/yum.repos.d/kubernetes.repo` перед виконанням `yum update`. Цю процедуру більш докладно описано в [Зміні репозиторію пакунків Kubernetes](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+Щоб оновити kubectl до іншого мінорного випуску, вам потрібно буде збільшити версію в `/etc/yum.repos.d/kubernetes.repo` перед виконанням `yum update`. Цю процедуру більш докладно описано в [Зміні репозиторію пакунків Kubernetes](/uk/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 {{< /note >}}
 
 2. Встановіть kubectl за допомогою `yum`:
@@ -208,7 +208,7 @@ weight: 10
 
 {{< note >}}
 Щоб оновити kubectl до іншого мінорного випуску, вам потрібно буде збільшити версію в `/etc/zypp/repos.d/kubernetes.repo` перед виконанням `zypper update`. Цю процедуру більш докладно описано в
-[Зміні репозиторію пакунків Kubernetes](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+[Зміні репозиторію пакунків Kubernetes](/uk/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 {{< /note >}}
 
 2. Встановіть kubectl за допомогою `zypper`:

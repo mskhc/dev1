@@ -350,4 +350,4 @@ CONTAINER ID   IMAGE    CREATED              STATE    NAME     ATTEMPT
 ## {{% heading "whatsnext" %}}
 
 * [Дізнайтеся більше про `crictl`](https://github.com/kubernetes-sigs/cri-tools).
-* [Зіставлення команд `docker` CLI з `crictl`](/docs/reference/tools/map-crictl-dockercli/).
+* [Зіставлення команд `docker` CLI з `crictl`](/uk/docs/reference/tools/map-crictl-dockercli/).

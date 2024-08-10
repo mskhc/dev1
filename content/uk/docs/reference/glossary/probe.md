@@ -2,7 +2,7 @@
 title: Проба
 id: probe
 date: 2023-03-21
-full_link: /docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+full_link: /uk/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
 
 short_description: >
   Періодична перевірка, яку kubelet виконує для контейнера в Podʼі.
@@ -17,4 +17,4 @@ tags:
 
 <!--more-->
 
-Для отримання додаткової інформації читайте [проби контейнера](/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
+Для отримання додаткової інформації читайте [проби контейнера](/uk/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).

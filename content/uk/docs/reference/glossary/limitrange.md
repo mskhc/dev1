@@ -2,7 +2,7 @@
 title: LimitRange
 id: limitrange
 date: 2019-04-15
-full_link:  /docs/concepts/policy/limit-range/
+full_link:  /uk/docs/concepts/policy/limit-range/
 short_description: >
   Впроваджує ліміти для обмеження обсягу споживання ресурсів для кожного контейнера чи Podʼа в просторі імен.
 

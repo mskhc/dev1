@@ -11,22 +11,22 @@ no_list: true
 
 ## Планування {#scheduling}
 
-* [Планувальник Kubernetes](/docs/concepts/scheduling-eviction/kube-scheduler/)
-* [Призначення Podʼів вузлам](/docs/concepts/scheduling-eviction/assign-pod-node/)
-* [Витрати ресурсів на Pod](/docs/concepts/scheduling-eviction/pod-overhead/)
-* [Обмеження поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/)
-* [Заплямованість та Толерантність](/docs/concepts/scheduling-eviction/taint-and-toleration/)
-* [Фреймворк планування](/docs/concepts/scheduling-eviction/scheduling-framework)
-* [Динамічне виділення ресурсів](/docs/concepts/scheduling-eviction/dynamic-resource-allocation)
-* [Налаштування продуктивності планувальника](/docs/concepts/scheduling-eviction/scheduler-perf-tuning/)
-* [Пакування ресурсів для розширених ресурсів](/docs/concepts/scheduling-eviction/resource-bin-packing/)
-* [Готовність планування Pod](/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
+* [Планувальник Kubernetes](/uk/docs/concepts/scheduling-eviction/kube-scheduler/)
+* [Призначення Podʼів вузлам](/uk/docs/concepts/scheduling-eviction/assign-pod-node/)
+* [Витрати ресурсів на Pod](/uk/docs/concepts/scheduling-eviction/pod-overhead/)
+* [Обмеження поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/)
+* [Заплямованість та Толерантність](/uk/docs/concepts/scheduling-eviction/taint-and-toleration/)
+* [Фреймворк планування](/uk/docs/concepts/scheduling-eviction/scheduling-framework)
+* [Динамічне виділення ресурсів](/uk/docs/concepts/scheduling-eviction/dynamic-resource-allocation)
+* [Налаштування продуктивності планувальника](/uk/docs/concepts/scheduling-eviction/scheduler-perf-tuning/)
+* [Пакування ресурсів для розширених ресурсів](/uk/docs/concepts/scheduling-eviction/resource-bin-packing/)
+* [Готовність планування Pod](/uk/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
 * [Descheduler](https://github.com/kubernetes-sigs/descheduler#descheduler-for-kubernetes)
 
 ## Переривання роботи Podʼа {#pod-disruption}
 
 {{<glossary_definition term_id="pod-disruption" length="all">}}
 
-* [Пріоритет та Випередження Podʼів](/docs/concepts/scheduling-eviction/pod-priority-preemption/)
-* [Виселення внаслідок тиску на вузол](/docs/concepts/scheduling-eviction/node-pressure-eviction/)
-* [Виселення, ініційоване API](/docs/concepts/scheduling-eviction/api-eviction/)
+* [Пріоритет та Випередження Podʼів](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/)
+* [Виселення внаслідок тиску на вузол](/uk/docs/concepts/scheduling-eviction/node-pressure-eviction/)
+* [Виселення, ініційоване API](/uk/docs/concepts/scheduling-eviction/api-eviction/)

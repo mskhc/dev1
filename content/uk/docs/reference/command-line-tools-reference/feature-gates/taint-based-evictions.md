@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє виселяти Podʼи з вузлів на основі taints на вузлах і толерантностей на Podʼах. Детальніше дивіться у статті [taint та tolerances](/docs/concepts/scheduling-eviction/taint-and-toleration/).
+Дозволяє виселяти Podʼи з вузлів на основі taints на вузлах і толерантностей на Podʼах. Детальніше дивіться у статті [taint та tolerances](/uk/docs/concepts/scheduling-eviction/taint-and-toleration/).

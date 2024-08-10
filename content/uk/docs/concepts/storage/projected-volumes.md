@@ -10,7 +10,7 @@ weight: 21 # одразу після постійних томів
 
 <!-- overview -->
 
-У цьому документі описано _спроєцьовані томи_ в Kubernetes. Рекомендується ознайомитися з [томами](/docs/concepts/storage/volumes/) для кращого розуміння.
+У цьому документі описано _спроєцьовані томи_ в Kubernetes. Рекомендується ознайомитися з [томами](/uk/docs/concepts/storage/volumes/) для кращого розуміння.
 
 <!-- body -->
 
@@ -20,9 +20,9 @@ weight: 21 # одразу після постійних томів
 
 Зараз наступні типи джерел томів можуть бути спроєцьовані:
 
-* [`secret`](/docs/concepts/storage/volumes/#secret)
-* [`downwardAPI`](/docs/concepts/storage/volumes/#downwardapi)
-* [`configMap`](/docs/concepts/storage/volumes/#configmap)
+* [`secret`](/uk/docs/concepts/storage/volumes/#secret)
+* [`downwardAPI`](/uk/docs/concepts/storage/volumes/#downwardapi)
+* [`configMap`](/uk/docs/concepts/storage/volumes/#configmap)
 * [`serviceAccountToken`](#serviceaccounttoken)
 * [`clusterTrustBundle`](#clustertrustbundle)
 
@@ -43,16 +43,16 @@ weight: 21 # одразу після постійних томів
 
 ## Спроєцьовані томи serviceAccountToken {#serviceaccounttoken}
 
-Ви можете впровадити токен для поточного [service accountʼу](/docs/reference/access-authn-authz/authentication/#service-account-tokens) в Pod за вказаним шляхом. Наприклад:
+Ви можете впровадити токен для поточного [service accountʼу](/uk/docs/reference/access-authn-authz/authentication/#service-account-tokens) в Pod за вказаним шляхом. Наприклад:
 
 {{% code_sample file="pods/storage/projected-service-account-token.yaml" %}}
 
-Pod в прикладі має project том, що містить впроваджений токен service account. Контейнери в цьому Pod можуть використовувати цей токен для доступу до сервера API Kubernetes, автентифікуючись за відомостями [service accountʼу Pod](/docs/tasks/configure-pod-container/configure-service-account/). Поле `audience` містить призначену аудиторію токена. Отримувач токена повинен ідентифікувати себе за ідентифікатором, вказаним в аудиторії токена, інакше він повинен відхилити токен. Це поле є необовʼязковим, але стандартним для ідентифікації в API сервері.
+Pod в прикладі має project том, що містить впроваджений токен service account. Контейнери в цьому Pod можуть використовувати цей токен для доступу до сервера API Kubernetes, автентифікуючись за відомостями [service accountʼу Pod](/uk/docs/tasks/configure-pod-container/configure-service-account/). Поле `audience` містить призначену аудиторію токена. Отримувач токена повинен ідентифікувати себе за ідентифікатором, вказаним в аудиторії токена, інакше він повинен відхилити токен. Це поле є необовʼязковим, але стандартним для ідентифікації в API сервері.
 
 Поле `expirationSeconds` містить час, через який токен стане недійсним. Типовим є час в одну годину, але він має бути принаймні 10 хвилин (600 секунд). Адміністратор може обмежити максимальне значення вказавши параметр `--service-account-max-token-expiration` в API сервері. Поле `path` містить відносний шлях до точки монтування тому.
 
 {{< note >}}
-Контейнер, що використовує джерела project томів як [`subPath`](/docs/concepts/storage/volumes/#using-subpath) для монтування тому не отримуватиме оновлення для цих джерел.
+Контейнер, що використовує джерела project томів як [`subPath`](/uk/docs/concepts/storage/volumes/#using-subpath) для монтування тому не отримуватиме оновлення для цих джерел.
 {{< /note >}}
 
 ## Спроєцьовані томи clusterTrustBundle {#clustertrustbundle}
@@ -60,12 +60,12 @@ Pod в прикладі має project том, що містить впрова�
 {{< feature-state for_k8s_version="v1.29" state="alpha" >}}
 
 {{< note >}}
-Для використання цієї функції в Kubernetes {{ skew currentVersion }} вам потрібно увімкнути підтримку обʼєктів ClusterTrustBundle з [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `ClusterTrustBundle` та прапорець `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` в kube-apiserver, а потім увімкнути функцію `ClusterTrustBundleProjection`.
+Для використання цієї функції в Kubernetes {{ skew currentVersion }} вам потрібно увімкнути підтримку обʼєктів ClusterTrustBundle з [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ClusterTrustBundle` та прапорець `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` в kube-apiserver, а потім увімкнути функцію `ClusterTrustBundleProjection`.
 {{< /note >}}
 
-Спроєцьований том `clusterTrustBundle` дозволяє впроваджувати контент одного чи більше обʼєктів [ClusterTrustBundle](/docs/reference/access-authn-authz/certificate-signing-requests/#cluster-trust-bundles) як автоматично оновлюваний файл у файловій системі контейнера.
+Спроєцьований том `clusterTrustBundle` дозволяє впроваджувати контент одного чи більше обʼєктів [ClusterTrustBundle](/uk/docs/reference/access-authn-authz/certificate-signing-requests/#cluster-trust-bundles) як автоматично оновлюваний файл у файловій системі контейнера.
 
-ClusterTrustBundle може бути обраний за допомогою [name](/docs/reference/access-authn-authz/certificate-signing-requests#ctb-signer-unlinked) або [signer name](/docs/reference/access-authn-authz/certificate-signing-requests#ctb-signer-linked).
+ClusterTrustBundle може бути обраний за допомогою [name](/uk/docs/reference/access-authn-authz/certificate-signing-requests#ctb-signer-unlinked) або [signer name](/uk/docs/reference/access-authn-authz/certificate-signing-requests#ctb-signer-linked).
 
 Для вибору за імʼям використовуйте поле `name`, щоб вказати один обʼєкт ClusterTrustBundle.
 
@@ -83,10 +83,10 @@ Kubelet виконує відсіювання дублікатів сертиф�
 
 ### Linux
 
-У Podʼах Linux, які мають projected том та `RunAsUser` вказано у [`SecurityContext`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context), projected файли мають правильно встановлені права власності, включаючи власника контейнера.
+У Podʼах Linux, які мають projected том та `RunAsUser` вказано у [`SecurityContext`](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context), projected файли мають правильно встановлені права власності, включаючи власника контейнера.
 
 Коли у всіх контейнерах в Podʼі встановлено одне й те ж `runAsUser` у їх
-[`PodSecurityContext`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) або [`SecurityContext`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1), то kubelet гарантує, що вміст тому `serviceAccountToken` належить цьому користувачеві, а файл токена має режим дозволів, встановлений в `0600`.
+[`PodSecurityContext`](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) або [`SecurityContext`](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1), то kubelet гарантує, що вміст тому `serviceAccountToken` належить цьому користувачеві, а файл токена має режим дозволів, встановлений в `0600`.
 
 {{< note >}}
 {{< glossary_tooltip text="ефемерні контейнери" term_id="ephemeral-container" >}} додані до Podʼа після його створення _не_ змінюють прав доступу до тому, які були встановлені при створенні Podʼа.

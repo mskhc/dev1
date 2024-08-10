@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє користувачеві налаштувати політику зміни дозволів на томи для fsGroups під час монтування тому в Pod. Див. [Налаштування політики зміни дозволів на томи та права власності для Podʼів](/docs/tasks/configure-pod-container/security-context/#configure-volume-permission-and-ownership-change-policy-for-pods) для більш детальної інформації.
+Дозволяє користувачеві налаштувати політику зміни дозволів на томи для fsGroups під час монтування тому в Pod. Див. [Налаштування політики зміни дозволів на томи та права власності для Podʼів](/uk/docs/tasks/configure-pod-container/security-context/#configure-volume-permission-and-ownership-change-policy-for-pods) для більш детальної інформації.

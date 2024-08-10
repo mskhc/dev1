@@ -24,7 +24,7 @@ card:
 Виконайте лише інструкції з __Кроку 1, Встановлення__. Решту розглянуто на цій сторінці.
 {{< /note >}}
 
-Вам також потрібно встановити `kubectl`. Дивіться [Встановлення інструментів](/docs/tasks/tools/#kubectl) для інструкцій щодо встановлення.
+Вам також потрібно встановити `kubectl`. Дивіться [Встановлення інструментів](/uk/docs/tasks/tools/#kubectl) для інструкцій щодо встановлення.
 
 <!-- lessoncontent -->
 
@@ -78,7 +78,7 @@ minikube dashboard --url
 
 ## Створення Deployment {#create-deployment}
 
-[*Pod*](/docs/concepts/workloads/pods/) в Kubernetes — це група з одного або більше контейнерів, які повʼязуються один з одним для керування та використання мережевих ресурсів. Pod в цьому посібнику містить тільки один контейнер. Kubernetes [*Deployment*](/docs/concepts/workloads/controllers/deployment/) перевіряє життєздатність вашого Podʼа та, якщо він виходить з ладу, перезапускає його. Deployment є рекомендованим способом створення та масштабування Podʼів.
+[*Pod*](/uk/docs/concepts/workloads/pods/) в Kubernetes — це група з одного або більше контейнерів, які повʼязуються один з одним для керування та використання мережевих ресурсів. Pod в цьому посібнику містить тільки один контейнер. Kubernetes [*Deployment*](/uk/docs/concepts/workloads/controllers/deployment/) перевіряє життєздатність вашого Podʼа та, якщо він виходить з ладу, перезапускає його. Deployment є рекомендованим способом створення та масштабування Podʼів.
 
 1. Скористайтесь командою `kubectl create` для створення Deployment, що буде керувати Podʼом. Pod виконує контейнер, який міститься в образі Docker.
 
@@ -145,12 +145,12 @@ minikube dashboard --url
    ```
 
 {{< note >}}
-Для ознайомлення з додатковими командами `kubectl` дивіться [Команди kubectl](/docs/reference/kubectl/).
+Для ознайомлення з додатковими командами `kubectl` дивіться [Команди kubectl](/uk/docs/reference/kubectl/).
 {{< /note >}}
 
 ## Створення Service {#create-service}
 
-Стандартно, Pod доступний лише за його внутрішньою IP-адресою в межах Kubernetes-кластера. Щоб зробити контейнер `hello-node` доступним назовні віртуальної мережі Kubernetes, вам потрібно подати Pod як [*Service*](/docs/concepts/services-networking/service/) Kubernetes.
+Стандартно, Pod доступний лише за його внутрішньою IP-адресою в межах Kubernetes-кластера. Щоб зробити контейнер `hello-node` доступним назовні віртуальної мережі Kubernetes, вам потрібно подати Pod як [*Service*](/uk/docs/concepts/services-networking/service/) Kubernetes.
 
 {{< warning >}}
 Контейнер agnhost має точку доступу `/shell`, яка корисна для налагодження, але небезпечний для публічного доступу з інтернету. Не запускайте його в кластері, що має вихід до інтернету, або на операційному кластері.
@@ -317,6 +317,6 @@ minikube delete
 
 ## {{% heading "whatsnext" %}}
 
-* Посібник [Розгортання вашого першого застосунку в Kubernetes за допомогою kubectl](/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).
-* Дізнайтесь більше про [Розгортання застосунків](/docs/tasks/run-application/run-stateless-application-deployment/).
-* Дізнайтесь більше про [Serviceʼи](/docs/concepts/services-networking/service/).
+* Посібник [Розгортання вашого першого застосунку в Kubernetes за допомогою kubectl](/uk/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).
+* Дізнайтесь більше про [Розгортання застосунків](/uk/docs/tasks/run-application/run-stateless-application-deployment/).
+* Дізнайтесь більше про [Serviceʼи](/uk/docs/concepts/services-networking/service/).

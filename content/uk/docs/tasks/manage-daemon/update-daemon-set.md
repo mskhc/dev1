@@ -28,8 +28,8 @@ DaemonSet має два типи стратегій оновлення:
 Щоб увімкнути функцію поетапного оновлення DaemonSet, необхідно встановити
 `.spec.updateStrategy.type` на `RollingUpdate`.
 
-Ви можете також встановити значення [`.spec.updateStrategy.rollingUpdate.maxUnavailable`](/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec) (типово 1), [`.spec.minReadySeconds`](/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec)
-(типово 0) та [`.spec.updateStrategy.rollingUpdate.maxSurge`](/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec)
+Ви можете також встановити значення [`.spec.updateStrategy.rollingUpdate.maxUnavailable`](/uk/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec) (типово 1), [`.spec.minReadySeconds`](/uk/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec)
+(типово 0) та [`.spec.updateStrategy.rollingUpdate.maxSurge`](/uk/docs/reference/kubernetes-api/workload-resources/daemon-set-v1/#DaemonSetSpec)
 (типово 0).
 
 ### Створення DaemonSet зі стратегією оновлення `RollingUpdate` {#creating-a-daemonset-with-rollingupdate-update-strategy}
@@ -80,7 +80,7 @@ RollingUpdate
 
 #### Декларативні команди {#declarative-commands}
 
-Якщо ви оновлюєте DaemonSets за допомогою [конфігураційних файлів](/docs/tasks/manage-kubernetes-objects/declarative-config/), використовуйте `kubectl apply`:
+Якщо ви оновлюєте DaemonSets за допомогою [конфігураційних файлів](/uk/docs/tasks/manage-kubernetes-objects/declarative-config/), використовуйте `kubectl apply`:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/controllers/fluentd-daemonset-update.yaml
@@ -88,7 +88,7 @@ kubectl apply -f https://k8s.io/examples/controllers/fluentd-daemonset-update.ya
 
 #### Імперативні команди {#imperative-commands}
 
-Якщо ви оновлюєте DaemonSets за допомогою [імперативних команд](/docs/tasks/manage-kubernetes-objects/imperative-command/), використовуйте `kubectl edit` :
+Якщо ви оновлюєте DaemonSets за допомогою [імперативних команд](/uk/docs/tasks/manage-kubernetes-objects/imperative-command/), використовуйте `kubectl edit` :
 
 ```shell
 kubectl edit ds/fluentd-elasticsearch -n kube-system
@@ -125,7 +125,7 @@ daemonset "fluentd-elasticsearch" successfully rolled out
 
 #### Деякі вузли вичерпали ресурси {#some-nodes-run-out-of-resources}
 
-Оновлення застрягло, оскільки нові Podʼи DaemonSet не можуть бути заплановані на принаймні один вузол. Це можливо, коли вузол [вичерпує ресурси](/docs/concepts/scheduling-eviction/node-pressure-eviction/).
+Оновлення застрягло, оскільки нові Podʼи DaemonSet не можуть бути заплановані на принаймні один вузол. Це можливо, коли вузол [вичерпує ресурси](/uk/docs/concepts/scheduling-eviction/node-pressure-eviction/).
 
 Коли це трапляється, знайдіть вузли, на яких не заплановані Podʼи DaemonSet, порівнявши вихід `kubectl get nodes` з виходом:
 
@@ -136,7 +136,7 @@ kubectl get pods -l name=fluentd-elasticsearch -o wide -n kube-system
 Після того, як ви знайдете ці вузли, видаліть деякі не-DaemonSet Podʼи з вузла, щоб звільнити місце для нових Podʼіів DaemonSet.
 
 {{< note >}}
-Це викличе переривання обслуговування, коли видалені Podʼи не контролюються жодними контролерами або Podʼи не реплікуються. Це також не враховує [PodDisruptionBudget](/docs/tasks/run-application/configure-pdb/).
+Це викличе переривання обслуговування, коли видалені Podʼи не контролюються жодними контролерами або Podʼи не реплікуються. Це також не враховує [PodDisruptionBudget](/uk/docs/tasks/run-application/configure-pdb/).
 {{< /note >}}
 
 #### Неправильне оновлення {#broken-rollout}
@@ -159,5 +159,5 @@ kubectl delete ds fluentd-elasticsearch -n kube-system
 
 ## {{% heading "whatsnext" %}}
 
-* Див. [Виконання відкату DaemonSet](/docs/tasks/manage-daemon/rollback-daemon-set/)
-* Див. [Створення DaemonSet для прийняття наявних Podʼів DaemonSet](/docs/concepts/workloads/controllers/daemonset/)
+* Див. [Виконання відкату DaemonSet](/uk/docs/tasks/manage-daemon/rollback-daemon-set/)
+* Див. [Створення DaemonSet для прийняття наявних Podʼів DaemonSet](/uk/docs/concepts/workloads/controllers/daemonset/)

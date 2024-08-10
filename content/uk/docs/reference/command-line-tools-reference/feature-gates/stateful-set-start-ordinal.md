@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Дозволити налаштування порядкового номера старту у StatefulSet. Дивіться [Start ordinal](/docs/concepts/workloads/controllers/statefulset/#start-ordinal) для більш детальної інформації.
+Дозволити налаштування порядкового номера старту у StatefulSet. Дивіться [Start ordinal](/uk/docs/concepts/workloads/controllers/statefulset/#start-ordinal) для більш детальної інформації.

@@ -20,9 +20,9 @@ weight: 110
 
 * [Linux Capabilities](https://linux-audit.com/linux-capabilities-hardening-linux-binaries-by-removing-setuid/): Надає процесу деякі привілеї, але не всі привілеї користувача root.
 
-* [AppArmor](/docs/tutorials/security/apparmor/): Використовуйте профілі програм для обмеження можливостей окремих програм.
+* [AppArmor](/uk/docs/tutorials/security/apparmor/): Використовуйте профілі програм для обмеження можливостей окремих програм.
 
-* [Seccomp](/docs/tutorials/security/seccomp/): Фільтрує системні виклики процесу.
+* [Seccomp](/uk/docs/tutorials/security/seccomp/): Фільтрує системні виклики процесу.
 
 * `allowPrivilegeEscalation`: Контролює, чи може процес отримувати більше привілеїв, ніж його батьківський процес. Ця логічна величина безпосередньо контролює, чи встановлюється прапорець [`no_new_privs`](https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt) для процесу контейнера. `allowPrivilegeEscalation` завжди true, коли контейнер:
 
@@ -154,7 +154,7 @@ securityContext:
 ```
 
 {{< note >}}
-Це поле не впливає на типи ефемерних томів, таких як [`secret`](/docs/concepts/storage/volumes/#secret), [`configMap`](/docs/concepts/storage/volumes/#configmap), та [`emptydir`](/docs/concepts/storage/volumes/#emptydir).
+Це поле не впливає на типи ефемерних томів, таких як [`secret`](/uk/docs/concepts/storage/volumes/#secret), [`configMap`](/uk/docs/concepts/storage/volumes/#configmap), та [`emptydir`](/uk/docs/concepts/storage/volumes/#emptydir).
 {{< /note >}}
 
 ## Делегування зміни прав власності та дозволів тому до драйвера CSI {#delegating-volume-permission-and-ownership-change-to-csi-driver}
@@ -365,15 +365,15 @@ securityContext:
 {{< note >}}
 У Kubernetes v1.27 було введено обмежену ранню форму такої поведінки, яка була застосовна тільки до томів (та PersistentVolumeClaims), які використовують режим доступу `ReadWriteOncePod`.
 
-Як альфа-функціонал, ви можете увімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `SELinuxMount`, щоб розширити це поліпшення продуктивності на інші види PersistentVolumeClaims, як пояснено докладніше нижче.
+Як альфа-функціонал, ви можете увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `SELinuxMount`, щоб розширити це поліпшення продуктивності на інші види PersistentVolumeClaims, як пояснено докладніше нижче.
 {{< /note >}}
 
 Стандартно, контейнерне середовище рекурсивно призначає мітку SELinux для всіх файлів на всіх томах Pod. Щоб прискорити цей процес, Kubernetes може миттєво змінити мітку SELinux тому за допомогою параметра монтування `-o context=<мітка>`.
 
 Щоб скористатися цим прискоренням, мають бути виконані всі ці умови:
 
-* [Feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `ReadWriteOncePod` та `SELinuxMountReadWriteOncePod` повинні бути увімкнені.
-* Pod повинен використовувати PersistentVolumeClaim з відповідними `accessModes` та [feature gate](/docs/reference/command-line-tools-reference/feature-gates/):
+* [Feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ReadWriteOncePod` та `SELinuxMountReadWriteOncePod` повинні бути увімкнені.
+* Pod повинен використовувати PersistentVolumeClaim з відповідними `accessModes` та [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/):
   * Або том має `accessModes: ["ReadWriteOncePod"]`, і властивість включення `SELinuxMountReadWriteOncePod` увімкнена.
   * Або том може використовувати будь-які інші режими доступу та обидва `SELinuxMountReadWriteOncePod` та `SELinuxMount` повинні бути увімкнені.
 * Pod (або всі його контейнери, які використовують PersistentVolumeClaim) повинні мати встановлені параметри `seLinuxOptions`.
@@ -421,7 +421,7 @@ securityContext:
 ```
 
 {{< note >}}
-Встановлення `procMount` в Unmasked потребує, щоб значення `spec.hostUsers` в специфікації Pod було `false`. Іншими словами: контейнер, який бажає мати Unmasked `/proc` або Unmasked `/sys`, також повинен бути у [просторі імен користувача](/docs/concepts/workloads/pods/user-namespaces/). У версіях Kubernetes v1.12 по v1.29 це вимога не дотримувалася.
+Встановлення `procMount` в Unmasked потребує, щоб значення `spec.hostUsers` в специфікації Pod було `false`. Іншими словами: контейнер, який бажає мати Unmasked `/proc` або Unmasked `/sys`, також повинен бути у [просторі імен користувача](/uk/docs/concepts/workloads/pods/user-namespaces/). У версіях Kubernetes v1.12 по v1.29 це вимога не дотримувалася.
 {{< /note >}}
 
 ## Обговорення {#discussion}
@@ -454,8 +454,8 @@ kubectl delete pod security-context-demo-4
 * [Посібник з налаштування втулків CRI](https://github.com/containerd/containerd/blob/main/docs/cri/config.md)
 * [Документ проєктування контекстів безпеки](https://git.k8s.io/design-proposals-archive/auth/security_context.md)
 * [Документ проєктування управління власністю](https://git.k8s.io/design-proposals-archive/storage/volume-ownership-management.md)
-* [Допуск PodSecurity](/docs/concepts/security/pod-security-admission/)
+* [Допуск PodSecurity](/uk/docs/concepts/security/pod-security-admission/)
 * [Документ проєктування AllowPrivilegeEscalation](https://git.k8s.io/design-proposals-archive/auth/no-new-privs.md)
 * Для отримання додаткової інформації про механізми безпеки в Linux дивіться [Огляд функцій безпеки ядра Linux](https://www.linux.com/learn/overview-linux-kernel-security-features) (Примітка: деяка інформація може бути застарілою)
-* Дізнайтеся більше про [Простори імен користувачів](/docs/concepts/workloads/pods/user-namespaces/) для Linux контейнерів.
+* Дізнайтеся більше про [Простори імен користувачів](/uk/docs/concepts/workloads/pods/user-namespaces/) для Linux контейнерів.
 * [Промасковані шляхи в специфікації OCI Runtime](https://github.com/opencontainers/runtime-spec/blob/f66aad47309/config-linux.md#masked-paths)

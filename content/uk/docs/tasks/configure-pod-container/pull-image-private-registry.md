@@ -31,7 +31,7 @@ docker login
 
 Коли буде запитано, введіть свій ідентифікатор Docker, а потім обрані вами облікові дані (токен доступу чи пароль до вашого Docker ID).
 
-Процес входу створює або оновлює файл `config.json`, який містить токен авторизації. Ознайомтеся з [тим, як Kubernetes інтерпретує цей файл](/docs/concepts/containers/images#config-json).
+Процес входу створює або оновлює файл `config.json`, який містить токен авторизації. Ознайомтеся з [тим, як Kubernetes інтерпретує цей файл](/uk/docs/concepts/containers/images#config-json).
 
 Перегляньте файл `config.json`:
 
@@ -216,9 +216,9 @@ Events:
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Secret](/docs/concepts/configuration/secret/)
+* Дізнайтеся більше про [Secret](/uk/docs/concepts/configuration/secret/)
   * або перегляньте посилання на API для {{< api-reference page="config-and-storage-resources/secret-v1" >}}
-* Дізнайтеся більше про [використання приватного реєстру](/docs/concepts/containers/images/#using-a-private-registry).
-* Дізнайтеся більше про [додавання Secrets для отримання образів до службового облікового запису](/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
-* Подивіться [kubectl create secret docker-registry](/docs/reference/generated/kubectl/kubectl-commands/#-em-secret-docker-registry-em-).
-* Подивіться поле `imagePullSecrets` у [визначеннях контейнерів](/docs/reference/kubernetes-api/workload-resources/pod-v1/#containers) Pod
+* Дізнайтеся більше про [використання приватного реєстру](/uk/docs/concepts/containers/images/#using-a-private-registry).
+* Дізнайтеся більше про [додавання Secrets для отримання образів до службового облікового запису](/uk/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account).
+* Подивіться [kubectl create secret docker-registry](/uk/docs/reference/generated/kubectl/kubectl-commands/#-em-secret-docker-registry-em-).
+* Подивіться поле `imagePullSecrets` у [визначеннях контейнерів](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#containers) Pod

@@ -122,7 +122,7 @@ cloudprovider_gce_api_request_duration_seconds { request = "list_disk"}
 
 Планувальник надає опціональні метрики, які повідомляють про запитані ресурси та бажані обмеження всіх запущених Podʼів. Ці метрики можна використовувати для побудови панелей управління ресурсами, оцінки поточних або історичних обмежень планування, швидкого виявлення навантажень, які не можуть бути розміщені через відсутність ресурсів, і порівняння фактичного використання з запитом Podʼа.
 
-kube-scheduler ідентифікує ресурсні [запити та обмеження](/docs/concepts/configuration/manage-resources-containers/) для кожного Podʼа; коли запит або обмеження не дорівнює нулю, kube-scheduler повідомляє про метричні часові ряди. Часові ряди мають мітки:
+kube-scheduler ідентифікує ресурсні [запити та обмеження](/uk/docs/concepts/configuration/manage-resources-containers/) для кожного Podʼа; коли запит або обмеження не дорівнює нулю, kube-scheduler повідомляє про метричні часові ряди. Часові ряди мають мітки:
 
 * простір імен
 * імʼя Podʼа
@@ -172,4 +172,4 @@ allow-list:
 
 * Дізнайтеся про [текстовий формат Prometheus](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md#text-based-format) для метрик
 * Перегляньте список [стабільних метрик Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/test/instrumentation/testdata/stable-metrics-list.yaml)
-* Прочитайте про [політику застаріння Kubernetes](/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)
+* Прочитайте про [політику застаріння Kubernetes](/uk/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)

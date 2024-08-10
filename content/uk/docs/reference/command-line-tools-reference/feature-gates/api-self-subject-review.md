@@ -21,4 +21,4 @@ stages:
     toVersion: "1.29"
 removed: true
 ---
-Вмикає API `SelfSubjectReview`, який дозволяє користувачам бачити автентифікаційну інформацію субʼєкта запиту. Дивіться [API доступу до автентифікаційної інформації для клієнта](/docs/reference/access-authn-authz/authentication/#self-subject-review) для більш детальної інформації.
+Вмикає API `SelfSubjectReview`, який дозволяє користувачам бачити автентифікаційну інформацію субʼєкта запиту. Дивіться [API доступу до автентифікаційної інформації для клієнта](/uk/docs/reference/access-authn-authz/authentication/#self-subject-review) для більш детальної інформації.

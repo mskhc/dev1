@@ -11,7 +11,7 @@ weight: 10
 
 <!-- overview -->
 
-Типово контейнери запускаються з необмеженими [обчислювальними ресурсами](/docs/concepts/configuration/manage-resources-containers/) у кластері Kubernetes. Використовуючи [квоти ресурсів Kubernetes](/docs/concepts/policy/resource-quotas/), адміністратори (_оператори кластера_) можуть обмежити споживання та створення ресурсів кластера (таких як час ЦП, памʼять та постійне сховище) у визначеному {{< glossary_tooltip text="namespace" term_id="namespace" >}}. У межах простору імен Pod може використовувати стільки ЦП та памʼяті, скільки дозволяють ResourceQuotas, що застосовуються до цього простору імен. Як оператору кластера або адміністратору на рівні простору імен вам також може бути важливо переконатися, що один обʼєкт не може монополізувати всі доступні ресурси у просторі імен.
+Типово контейнери запускаються з необмеженими [обчислювальними ресурсами](/uk/docs/concepts/configuration/manage-resources-containers/) у кластері Kubernetes. Використовуючи [квоти ресурсів Kubernetes](/uk/docs/concepts/policy/resource-quotas/), адміністратори (_оператори кластера_) можуть обмежити споживання та створення ресурсів кластера (таких як час ЦП, памʼять та постійне сховище) у визначеному {{< glossary_tooltip text="namespace" term_id="namespace" >}}. У межах простору імен Pod може використовувати стільки ЦП та памʼяті, скільки дозволяють ResourceQuotas, що застосовуються до цього простору імен. Як оператору кластера або адміністратору на рівні простору імен вам також може бути важливо переконатися, що один обʼєкт не може монополізувати всі доступні ресурси у просторі імен.
 
 LimitRange — це політика обмеження виділення ресурсів (ліміти та запити), яку можна вказати для кожного відповідного типу обʼєкта (такого як Pod або {{< glossary_tooltip text="PersistentVolumeClaim" term_id="persistent-volume-claim" >}}) у просторі імен.
 
@@ -26,7 +26,7 @@ _LimitRange_ надає обмеження, які можуть:
 
 Обмеження діапазону діє в певному просторі імен, коли існує обʼєкт LimitRange у цьому просторі імен.
 
-Назва обʼєкта LimitRange повинна бути дійсним [піддоменом DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Назва обʼєкта LimitRange повинна бути дійсним [піддоменом DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ## Обмеження на ліміти ресурсів та запити {#constraints-on-resource-limits-and-requests}
 
@@ -76,11 +76,11 @@ Pod "example-conflict-with-limitrange-cpu" is invalid: spec.containers[0].resour
 
 Для прикладів використання обмежень дивіться:
 
-- [як налаштувати мінімальні та максимальні обмеження CPU на простір імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/).
-- [як налаштувати мінімальні та максимальні обмеження памʼяті на простір імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/).
-- [як налаштувати стандартні запити та ліміти CPU на простір імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/).
-- [як налаштувати стандартні запити та ліміти памʼяті на простір імен](/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/).
-- [як налаштувати мінімальні та максимальні обмеження використання сховища на простір імен](/docs/tasks/administer-cluster/limit-storage-consumption/#limitrange-to-limit-requests-for-storage).
-- [детальний приклад налаштування квот на простір імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/).
+- [як налаштувати мінімальні та максимальні обмеження CPU на простір імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/).
+- [як налаштувати мінімальні та максимальні обмеження памʼяті на простір імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/).
+- [як налаштувати стандартні запити та ліміти CPU на простір імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/).
+- [як налаштувати стандартні запити та ліміти памʼяті на простір імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/).
+- [як налаштувати мінімальні та максимальні обмеження використання сховища на простір імен](/uk/docs/tasks/administer-cluster/limit-storage-consumption/#limitrange-to-limit-requests-for-storage).
+- [детальний приклад налаштування квот на простір імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/).
 
 Звертайтеся до [документа проєкту LimitRanger](https://git.k8s.io/design-proposals-archive/resource-management/admission_control_limit_range.md) для контексту та історичної інформації.

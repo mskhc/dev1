@@ -35,7 +35,7 @@ weight: 60
 
 ### kube-apiserver
 
-У [кластері з високою доступністю (HA)](/docs/setup/production-environment/tools/kubeadm/high-availability/), найновіші та найстаріші екземпляри `kube-apiserver` повинні бути в межах однієї мінорної версії.
+У [кластері з високою доступністю (HA)](/uk/docs/setup/production-environment/tools/kubeadm/high-availability/), найновіші та найстаріші екземпляри `kube-apiserver` повинні бути в межах однієї мінорної версії.
 
 Приклад:
 
@@ -140,13 +140,13 @@ weight: 60
 * Екземпляри `kube-controller-manager`, `kube-scheduler` та `cloud-controller-manager`, які взаємодіють з цим сервером, мають версію **{{< skew currentVersionAddMinor -1 >}}** (це забезпечує, що вони не новіші за поточну версію API сервера і знаходяться в межах 1 мінорної версії від нової версії API сервера)
 * Екземпляри `kubelet` на всіх вузлах мають версії **{{< skew currentVersionAddMinor -1 >}}** або **{{< skew currentVersionAddMinor -2 >}}** (це забезпечує, що вони не новіші за поточну версію API сервера і знаходяться в межах 2 мінорних версій від нової версії API сервера)
 * Зареєстровані вебхуки допуску здатні обробляти дані, які новий екземпляр `kube-apiserver` буде їм надсилати:
-  * Обʼєкти `ValidatingWebhookConfiguration` та `MutatingWebhookConfiguration` оновлені для включення будь-яких нових версій REST ресурсів, доданих у **{{< skew currentVersion >}}** (або використовують опцію [`matchPolicy: Equivalent`](/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-matchpolicy), доступну у версії v1.15+)
+  * Обʼєкти `ValidatingWebhookConfiguration` та `MutatingWebhookConfiguration` оновлені для включення будь-яких нових версій REST ресурсів, доданих у **{{< skew currentVersion >}}** (або використовують опцію [`matchPolicy: Equivalent`](/uk/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-matchpolicy), доступну у версії v1.15+)
   * Вебхуки здатні обробляти будь-які нові версії REST ресурсів, які будуть їм надсилатися, і будь-які нові поля, додані до поточних версій у **{{< skew currentVersion >}}**
 
 Оновіть `kube-apiserver` до **{{< skew currentVersion >}}**
 
 {{< note >}}
-Політики проєкту щодо [застарівання API](/docs/reference/using-api/deprecation-policy/) та
+Політики проєкту щодо [застарівання API](/uk/docs/reference/using-api/deprecation-policy/) та
 [рекомендацій щодо змін API](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api_changes.md) вимагають, щоб `kube-apiserver` не пропускав мінорні версії під час оновлення, навіть у кластерах, що складаються з одного екземпляру.
 {{< /note >}}
 
@@ -167,7 +167,7 @@ weight: 60
 За бажанням, оновіть екземпляри `kubelet` до **{{< skew currentVersion >}}** (або їх можна залишити на версіях **{{< skew currentVersionAddMinor -1 >}}**, **{{< skew currentVersionAddMinor -2 >}}**, або **{{< skew currentVersionAddMinor -3 >}}**)
 
 {{< note >}}
-Перед виконанням мінорного оновлення `kubelet`, [виселіть](/docs/tasks/administer-cluster/safely-drain-node/) Podʼи з цього вузла. Оновлення `kubelet` на місці до іншої мінорної версії не підтримується.
+Перед виконанням мінорного оновлення `kubelet`, [виселіть](/uk/docs/tasks/administer-cluster/safely-drain-node/) Podʼи з цього вузла. Оновлення `kubelet` на місці до іншої мінорної версії не підтримується.
 {{</ note >}}
 
 {{< warning >}}

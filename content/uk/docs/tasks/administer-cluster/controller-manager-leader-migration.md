@@ -115,7 +115,7 @@ controllerLeaders:
 
 Створіть новий вузол панелі управління версії N + 1 з оновленим маніфестом `cloud-controller-manager`, та з прапорцем `--cloud-provider`, встановленим на `external` для `kube-controller-manager`. `kube-controller-manager` версії N + 1 НЕ МУСИТЬ мати увімкненої міграції лідера, оскільки, зовнішній хмарний провайдер вже не запускає мігровані контролери, і, отже, він не бере участі в міграції.
 
-Будь ласка, зверніться до [Адміністрування менеджера керування хмарою](/docs/tasks/administer-cluster/running-cloud-controller/) для отримання детальнішої інформації щодо розгортання `cloud-controller-manager`.
+Будь ласка, зверніться до [Адміністрування менеджера керування хмарою](/uk/docs/tasks/administer-cluster/running-cloud-controller/) для отримання детальнішої інформації щодо розгортання `cloud-controller-manager`.
 
 ### Оновлення панелі управління {#update-control-plane}
 

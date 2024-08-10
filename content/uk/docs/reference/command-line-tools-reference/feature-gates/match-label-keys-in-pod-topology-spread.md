@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Вмикає поле `matchLabelKeys` для [Обмеження поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/).
+Вмикає поле `matchLabelKeys` для [Обмеження поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/).

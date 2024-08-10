@@ -15,7 +15,7 @@ weight: 110
  
 {{< include "task-tutorial-prereqs-node-upgrade.md" >}} {{< version-check >}}
 
-* Ознайомтеся з [процесом оновлення інших вузлів вашого кластера kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам слід оновити вузли панелі управління перед оновленням вузлів Windows.
+* Ознайомтеся з [процесом оновлення інших вузлів вашого кластера kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам слід оновити вузли панелі управління перед оновленням вузлів Windows.
 
 <!-- steps -->
 
@@ -87,4 +87,4 @@ weight: 110
 
 ## {{% heading "whatsnext" %}}
 
-* Подивіться, як [оновити вузли Linux](/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).
+* Подивіться, як [оновити вузли Linux](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).

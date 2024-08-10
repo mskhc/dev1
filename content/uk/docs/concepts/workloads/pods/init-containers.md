@@ -11,7 +11,7 @@ weight: 40
 
 Ви можете вказати контейнери ініціалізації в специфікації Podʼа разом із масивом `containers` (який описує контейнери застосунку).
 
-У Kubernetes [контейнер sidecar](/docs/concepts/workloads/pods/sidecar-containers/) — це контейнер, який запускається перед основним контейнером застосунку і _продовжує працювати_. Цей документ стосується контейнерів ініціалізації — контейнерів, які завершують свою роботу після ініціалізації Podʼа.
+У Kubernetes [контейнер sidecar](/uk/docs/concepts/workloads/pods/sidecar-containers/) — це контейнер, який запускається перед основним контейнером застосунку і _продовжує працювати_. Цей документ стосується контейнерів ініціалізації — контейнерів, які завершують свою роботу після ініціалізації Podʼа.
 
 <!-- body -->
 
@@ -26,27 +26,27 @@ weight: 40
 
 Якщо контейнер init Pod виходить з ладу, kubelet неодноразово перезапускає цей контейнер, поки він не досягне успіху. Однак якщо у Pod встановлено `restartPolicy` рівне Never, і контейнер ініціалізації виходить з ладу під час запуску Pod, Kubernetes розглядає весь Pod як неуспішний.
 
-Для зазначення контейнера ініціалізації для Pod додайте поле `initContainers` у [специфікацію Podʼа](/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec), у вигляді масиву обʼєктів `container` (аналогічно полю `containers` контейнерів застосунку і їх змісту). Дивіться [Container](/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) в
+Для зазначення контейнера ініціалізації для Pod додайте поле `initContainers` у [специфікацію Podʼа](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#PodSpec), у вигляді масиву обʼєктів `container` (аналогічно полю `containers` контейнерів застосунку і їх змісту). Дивіться [Container](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container) в
 довідці API для отримання докладнішої інформації.
 
 Стан контейнерів внвціалізації повертається у полі `.status.initContainerStatuses` у вигляді масиву станів контейнерів (аналогічно полю `.status.containerStatuses`).
 
 ### Відмінності від звичайних контейнерів {#differences-from-regular-containers}
 
-Контейнери ініціалізації підтримують всі поля та можливості контейнерів застосунків, включаючи обмеження ресурсів, [томи](/docs/concepts/storage/volumes/) та налаштування безпеки. Однак
+Контейнери ініціалізації підтримують всі поля та можливості контейнерів застосунків, включаючи обмеження ресурсів, [томи](/uk/docs/concepts/storage/volumes/) та налаштування безпеки. Однак
 запити та обмеження ресурсів для контейнера ініціалізації обробляються по-іншому, як описано в розділі [Спільне використання ресурсів в межах контейнерів](#resource-sharing-within-containers).
 
-Звичайні контейнери ініціалізації (іншими словами, виключаючи контейнери sidecar) не підтримують поля `lifecycle`, `livenessProbe`, `readinessProbe` чи `startupProbe`. Контейнери ініціалізації повинні успішно завершити свою роботу перед тим, як Pod може бути готовий; контейнери sidecar продовжують працювати протягом життєвого циклу Podʼа і _підтримують_ деякі проби. Дивіться [контейнер sidecar](/docs/concepts/workloads/pods/sidecar-containers/) для отримання додаткової інформації про nfrs контейнери.
+Звичайні контейнери ініціалізації (іншими словами, виключаючи контейнери sidecar) не підтримують поля `lifecycle`, `livenessProbe`, `readinessProbe` чи `startupProbe`. Контейнери ініціалізації повинні успішно завершити свою роботу перед тим, як Pod може бути готовий; контейнери sidecar продовжують працювати протягом життєвого циклу Podʼа і _підтримують_ деякі проби. Дивіться [контейнер sidecar](/uk/docs/concepts/workloads/pods/sidecar-containers/) для отримання додаткової інформації про nfrs контейнери.
 
 Якщо ви вказали кілька контейнерів ініціалізації для Podʼа, kubelet виконує кожен такий контейнер послідовно. Кожен контейнер ініціалізації повинен успішно завершити свою роботу, перш ніж може бути запущено наступний. Коли всі контейнери ініціалізації завершать свою роботу, kubelet ініціалізує контейнери застосунків для Podʼа та запускає їх як зазвичай.
 
 ### Відмінності від контейнерів sidecar {#differences-from-sidecar-containers}
 
-Контейнери ініціалізації запускаються і завершують свої завдання до того, як розпочнеться робота основного контейнера застосунку. На відміну від [контейнерів sidecar](/docs/concepts/workloads/pods/sidecar-containers), контейнери ініціалізації не продовжують працювати паралельно з основними контейнерами.
+Контейнери ініціалізації запускаються і завершують свої завдання до того, як розпочнеться робота основного контейнера застосунку. На відміну від [контейнерів sidecar](/uk/docs/concepts/workloads/pods/sidecar-containers), контейнери ініціалізації не продовжують працювати паралельно з основними контейнерами.
 
 Контейнери ініціалізації запускаються і завершують свою роботу послідовно, і основний контейнер не починає свою роботу, доки всі контейнери ініціалізації успішно не завершать свою роботу.
 
-Контейнери ініціалізації не підтримують `lifecycle`, `livenessProbe`, `readinessProbe` чи `startupProbe`, у той час, як контейнери sidecar підтримують всі ці [пробі](/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe), щоб керувати своїм життєвим циклом.
+Контейнери ініціалізації не підтримують `lifecycle`, `livenessProbe`, `readinessProbe` чи `startupProbe`, у той час, як контейнери sidecar підтримують всі ці [пробі](/uk/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe), щоб керувати своїм життєвим циклом.
 
 Контейнери ініціалізації використовують ті ж ресурси (CPU, памʼять, мережу) що й основні контейнери застосунків, але не взаємодіють з ними напряму. Однак вони можуть використовувати спільні томи для обміну даними.
 
@@ -260,7 +260,7 @@ myapp-pod   1/1       Running   0          9m
 У Linux, розподіл ресурсів для контрольних груп рівня Podʼів (cgroups) ґрунтується на ефективному запиті та ліміті рівня Podʼа, так само як і для планувальника.
 
 {{< comment >}}
-Цей розділ також присутній на сторінці [контейнерів sidecar](/docs/concepts/workloads/pods/sidecar-containers/). Якщо ви редагуєте цей розділ, змінюйте ці обидва місця.
+Цей розділ також присутній на сторінці [контейнерів sidecar](/uk/docs/concepts/workloads/pods/sidecar-containers/). Якщо ви редагуєте цей розділ, змінюйте ці обидва місця.
 {{< /comment >}}
 
 ### Причини перезапуску Pod {#pod-restart-reasons}
@@ -276,8 +276,8 @@ Pod не буде перезапущено, коли змінюється обр
 
 Дізнайтеся  більше про наступне:
 
-* [Створення Podʼа з контейнером ініціалізації](/docs/tasks/configure-pod-container/configure-pod-initialization/#create-a-pod-that-has-an-init-container).
-* [Налагодження контейнерів ініціалізації](/docs/tasks/debug/debug-application/debug-init-containers/).
-* Огляд [kubelet](/docs/reference/command-line-tools-reference/kubelet/) та [kubectl](/docs/reference/kubectl/).
-* [Види проб](/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe): liveness, readiness, startup probe.
-* [Контейнери sidecar](/docs/concepts/workloads/pods/sidecar-containers).
+* [Створення Podʼа з контейнером ініціалізації](/uk/docs/tasks/configure-pod-container/configure-pod-initialization/#create-a-pod-that-has-an-init-container).
+* [Налагодження контейнерів ініціалізації](/uk/docs/tasks/debug/debug-application/debug-init-containers/).
+* Огляд [kubelet](/uk/docs/reference/command-line-tools-reference/kubelet/) та [kubectl](/uk/docs/reference/kubectl/).
+* [Види проб](/uk/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe): liveness, readiness, startup probe.
+* [Контейнери sidecar](/uk/docs/concepts/workloads/pods/sidecar-containers).

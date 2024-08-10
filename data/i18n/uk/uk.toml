@@ -491,7 +491,7 @@ other = "Завантаження бінарних компонентів Kubern
 [release_binary_section]
 other = """Ви можете знайти посилання для завантаження компонентів версії <current-version> Kubernetes (разом з їх контрольними сумами) нижче.
 Щоб отримати доступ до завантажень для попередніх підтримуваних версій, перейдіть за відповідним посиланням в 
-документації для [попередніх версій](/docs/home/supported-doc-versions/#versions-older) або скористайтеся [downloadkubernetes.com](https://www.downloadkubernetes.com/).""" 
+документації для [попередніх версій](/uk/docs/home/supported-doc-versions/#versions-older) або скористайтеся [downloadkubernetes.com](https://www.downloadkubernetes.com/).""" 
 
 # NOTE: <current-version> and <current-changelog-url> are placeholders set by 'release-binaries' shortcode.
 # Please do not localize or modify <current-version> and <current-changelog-url>  placeholders.
@@ -570,7 +570,7 @@ other = "Підписатися"
 other = "Огляд"
 
 [thirdparty_message]
-other = """Цей розділ містить посилання на проєкти сторонніх розробників, які надають функціонал, необхідний для Kubernetes. Автори проєкту Kubernetes не несуть відповідальності за ці проєкти. Проєкти вказано в алфавітному порядку. Щоб додати проєкт до цього списку, ознайомтеся з <a href="/docs/contribute/style/content-guide/#third-party-content">посібником з контенту</a> перед надсиланням змін. <a href="#third-party-content-disclaimer">Докладніше.</a>"""
+other = """Цей розділ містить посилання на проєкти сторонніх розробників, які надають функціонал, необхідний для Kubernetes. Автори проєкту Kubernetes не несуть відповідальності за ці проєкти. Проєкти вказано в алфавітному порядку. Щоб додати проєкт до цього списку, ознайомтеся з <a href="/uk/docs/contribute/style/content-guide/#third-party-content">посібником з контенту</a> перед надсиланням змін. <a href="#third-party-content-disclaimer">Докладніше.</a>"""
 
 [thirdparty_message_edit_disclaimer]
 other="""Поради щодо сторонього вмісту"""
@@ -580,7 +580,7 @@ other="""Поради щодо сторонього вмісту"""
 other = """&#128711; Цей елемент посилається на сторонній проєкт або продукт, який не є частиною Kubernetes. <a class="alert-more-info" href="#third-party-content-disclaimer">Докладніше</a>"""
 
 [thirdparty_message_disclaimer]
-other = """<p>Елементи на цій сторінці відносяться до сторонніх продуктів чи проєктів, які надають функціонал, необхідний для Kubernetes. Автори проєкту Kubernetes не несуть відповідальності за ці проєкти. Ознайомтесь з <a href="https://github.com/cncf/foundation/blob/master/website-guidelines.md" target="_blank">настановами на вебсайті CNCF</a> для отримання докладної інформації.</p><p>Ознайомтесь з <a href="/docs/contribute/style/content-guide/#third-party-content">посібником з контенту</a> перед тим, як пропонувати додавання посилання на стороні компоненти.</p>"""
+other = """<p>Елементи на цій сторінці відносяться до сторонніх продуктів чи проєктів, які надають функціонал, необхідний для Kubernetes. Автори проєкту Kubernetes не несуть відповідальності за ці проєкти. Ознайомтесь з <a href="https://github.com/cncf/foundation/blob/master/website-guidelines.md" target="_blank">настановами на вебсайті CNCF</a> для отримання докладної інформації.</p><p>Ознайомтесь з <a href="/uk/docs/contribute/style/content-guide/#third-party-content">посібником з контенту</a> перед тим, як пропонувати додавання посилання на стороні компоненти.</p>"""
 
 [translated_by]
 other = "Перекладач(і)"

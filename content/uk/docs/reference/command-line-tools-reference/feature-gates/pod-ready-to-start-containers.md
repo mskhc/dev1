@@ -16,6 +16,6 @@ stages:
     defaultValue: true
     fromVersion: "1.29"
 ---
-Дозволяє kubelet позначати стан [PodReadyToStartContainers](/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network) для контейнерів Podʼів.
+Дозволяє kubelet позначати стан [PodReadyToStartContainers](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network) для контейнерів Podʼів.
 
 Раніше ця функціональна можливість була відома як `PodHasNetworkCondition`, а повʼязана з нею умова називалася `PodHasNetwork`.

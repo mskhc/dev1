@@ -11,7 +11,7 @@ description: >-
 
 {{< feature-state for_k8s_version="v1.23" state="alpha" >}}
 
-[kubelet](/docs/reference/command-line-tools-reference/kubelet/) збирає метрики Pod та контейнерів через [cAdvisor](https://github.com/google/cadvisor). Як альфа-функція, Kubernetes дозволяє налаштувати збір метрик Pod та контейнерів через {{< glossary_tooltip term_id="container-runtime-interface" text="Інтерфейс Виконання Контейнерів">}} (CRI). Ви повинні увімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `PodAndContainerStatsFromCRI` та використовувати сумісну реалізацію CRI (containerd >= 1.6.0, CRI-O >= 1.23.0), щоб використовувати механізм збору через CRI.
+[kubelet](/uk/docs/reference/command-line-tools-reference/kubelet/) збирає метрики Pod та контейнерів через [cAdvisor](https://github.com/google/cadvisor). Як альфа-функція, Kubernetes дозволяє налаштувати збір метрик Pod та контейнерів через {{< glossary_tooltip term_id="container-runtime-interface" text="Інтерфейс Виконання Контейнерів">}} (CRI). Ви повинні увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `PodAndContainerStatsFromCRI` та використовувати сумісну реалізацію CRI (containerd >= 1.6.0, CRI-O >= 1.23.0), щоб використовувати механізм збору через CRI.
 
 <!-- body -->
 

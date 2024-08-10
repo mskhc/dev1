@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.29"
 ---
-[джерела спроєцьованих томів `clusterTrustBundle`](/docs/concepts/storage/projected-volumes#clustertrustbundle).
+[джерела спроєцьованих томів `clusterTrustBundle`](/uk/docs/concepts/storage/projected-volumes#clustertrustbundle).

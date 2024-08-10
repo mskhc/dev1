@@ -18,4 +18,4 @@ stages:
     defaultValue: true
     fromVersion: "1.29" 
 ---
-Дозволяє використовувати різні стратегії розподілу портів для Сервісів NodePort. Докладні відомості наведено у статті [резервування діапазонів NodePort для уникнення колізій](/docs/concepts/services-networking/service/#avoid-nodeport-collisions).
+Дозволяє використовувати різні стратегії розподілу портів для Сервісів NodePort. Докладні відомості наведено у статті [резервування діапазонів NodePort для уникнення колізій](/uk/docs/concepts/services-networking/service/#avoid-nodeport-collisions).

@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Увімкнення рівномірного планування Podʼів у всіх топологіях доменів. Див. розділ [Обмеження поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/).
+Увімкнення рівномірного планування Podʼів у всіх топологіях доменів. Див. розділ [Обмеження поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/).

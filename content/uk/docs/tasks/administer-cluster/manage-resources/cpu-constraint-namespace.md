@@ -8,7 +8,7 @@ description: >
 
 <!-- overview -->
 
-Ця сторінка показує, як встановити мінімальні та максимальні значення ресурсів CPU, що використовуються контейнерами та Podʼами в {{< glossary_tooltip text="просторі імен" term_id="namespace" >}}. Ви вказуєте мінімальні та максимальні значення CPU в обʼєкті [LimitRange](/docs/reference/kubernetes-api/policy-resources/limit-range-v1/). Якщо Pod не відповідає обмеженням, накладеним LimitRange, його не можна створити у просторі імен.
+Ця сторінка показує, як встановити мінімальні та максимальні значення ресурсів CPU, що використовуються контейнерами та Podʼами в {{< glossary_tooltip text="просторі імен" term_id="namespace" >}}. Ви вказуєте мінімальні та максимальні значення CPU в обʼєкті [LimitRange](/uk/docs/reference/kubernetes-api/policy-resources/limit-range-v1/). Якщо Pod не відповідає обмеженням, накладеним LimitRange, його не можна створити у просторі імен.
 
 ## {{% heading "prerequisites" %}}
 
@@ -16,7 +16,7 @@ description: >
 
 Ви повинні мати доступ до створення просторів імен у своєму кластері.
 
-Кожен вузол у вашому кластері повинен мати щонайменше 1,0 CPU, доступний для Podʼів. Див. [значення CPU](/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu), щоб дізнатися, що означає в Kubernetes "1 CPU".
+Кожен вузол у вашому кластері повинен мати щонайменше 1,0 CPU, доступний для Podʼів. Див. [значення CPU](/uk/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu), щоб дізнатися, що означає в Kubernetes "1 CPU".
 
 <!-- steps -->
 
@@ -178,7 +178,7 @@ resources:
     cpu: 800m
 ```
 
-Тому що цей контейнер не вказав свій власний запит CPU та обмеження, панель управління застосовує [стандартні обмеження та запит CPU](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/) з LimitRange для цього простору імен.
+Тому що цей контейнер не вказав свій власний запит CPU та обмеження, панель управління застосовує [стандартні обмеження та запит CPU](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/) з LimitRange для цього простору імен.
 
 На цьому етапі ваш Pod може бути запущеним або не запущеним. Згадайте, що передумовою для цієї задачі є те, що у ваших вузлах повинно бути щонайменше 1 CPU для використання. Якщо в кожному вузлі у вас є лише 1 CPU, то, можливо, немає достатньої кількості CPU на будь-якому вузлі для виконання запиту у розмірі 800 мілі-CPU. Якщо ви використовуєте вузли з 2 CPU, то, ймовірно, у вас достатньо CPU для виконання запиту у розмірі 800 мілі-CPU.
 
@@ -212,22 +212,22 @@ kubectl delete namespace constraints-cpu-example
 
 ### Для адміністраторів кластера {#for-cluster-administrators}
 
-* [Типові налаштування запитів та обмежень памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
+* [Типові налаштування запитів та обмежень памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)
 
-* [Типові налаштування запитів та обмежень CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+* [Типові налаштування запитів та обмежень CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 
-* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
+* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 
-* [Налаштування квот памʼяті та CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* [Налаштування квот памʼяті та CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
 
-* [Налаштування квоти Podʼів для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
+* [Налаштування квоти Podʼів для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 
-* [Налаштування квот для обʼєктів API](/docs/tasks/administer-cluster/quota-api-object/)
+* [Налаштування квот для обʼєктів API](/uk/docs/tasks/administer-cluster/quota-api-object/)
 
 ### Для розробників застосунків {#for-app-developers}
 
-* [Надання ресурсів памʼяті контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Надання ресурсів памʼяті контейнерам та Podʼам](/uk/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-* [Надання ресурсів CPU контейнерам та Podʼам](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+* [Надання ресурсів CPU контейнерам та Podʼам](/uk/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
-* [Налаштування якості обслуговування для Podʼів](/docs/tasks/configure-pod-container/quality-service-pod/)
+* [Налаштування якості обслуговування для Podʼів](/uk/docs/tasks/configure-pod-container/quality-service-pod/)

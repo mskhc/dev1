@@ -76,7 +76,7 @@ content_type: reference
 * Перенесіть маніфести та клієнти API на версію API **autoscaling/v2**, доступну з версії v1.23.
 * Усі наявні обʼєкти, які зберігаються, доступні через новий API
 * Помітні зміни:
-  * `targetAverageUtilization` замінено на `target.averageUtilization` та `target.type: Utilization`. Див. [Автомасштабування за декількома метриками та власними метриками](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics).
+  * `targetAverageUtilization` замінено на `target.averageUtilization` та `target.type: Utilization`. Див. [Автомасштабування за декількома метриками та власними метриками](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics).
 
 ### v1.25
 
@@ -124,7 +124,7 @@ content_type: reference
 * Перенесіть маніфести та клієнти API на версію API **autoscaling/v2**, доступну з версії v1.23.
 * Усі наявні обʼєкти, які зберігаються, доступні через новий API
 * Помітні зміни:
-  * `targetAverageUtilization` замінено на `target.averageUtilization` та `target.type: Utilization`. Див. [Автомасштабування за декількома метриками та власними метриками](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics).
+  * `targetAverageUtilization` замінено на `target.averageUtilization` та `target.type: Utilization`. Див. [Автомасштабування за декількома метриками та власними метриками](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics).
 
 #### PodDisruptionBudget {#poddisruptionbudget-v125}
 
@@ -139,7 +139,7 @@ content_type: reference
 
 PodSecurityPolicy в версії API **policy/v1beta1** більше не обслуговується з версії v1.25, і контролер допуску PodSecurityPolicy буде видалено.
 
-Перейдіть до [Pod Security Admission](/docs/concepts/security/pod-security-admission/) або [виклику стороннього вебхуку допуску](/docs/reference/access-authn-authz/extensible-admission-controllers/). Для настанов з міграції, див. [Міграція з PodSecurityPolicy до вбудованого контролера допуску PodSecurity Admission Controller](/docs/tasks/configure-pod-container/migrate-from-psp/). Для отримання додаткової інформації про застарілість, див. [ВPodSecurityPolicy Deprecation: Past, Present, and Future](/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/).
+Перейдіть до [Pod Security Admission](/uk/docs/concepts/security/pod-security-admission/) або [виклику стороннього вебхуку допуску](/uk/docs/reference/access-authn-authz/extensible-admission-controllers/). Для настанов з міграції, див. [Міграція з PodSecurityPolicy до вбудованого контролера допуску PodSecurity Admission Controller](/uk/docs/tasks/configure-pod-container/migrate-from-psp/). Для отримання додаткової інформації про застарілість, див. [ВPodSecurityPolicy Deprecation: Past, Present, and Future](/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/).
 
 #### RuntimeClass {#runtimeclass-v125}
 
@@ -182,7 +182,7 @@ RuntimeClass в версії API **node.k8s.io/v1beta1** більше не об�
   * поле `spec.additionalPrinterColumns` вилучено в v1; використовуйте замість цього `spec.versions[*].additionalPrinterColumns`
   * `spec.conversion.webhookClientConfig` переміщено в `spec.conversion.webhook.clientConfig` в v1
   * `spec.conversion.conversionReviewVersions` переміщено в `spec.conversion.webhook.conversionReviewVersions` в v1
-  * поле `spec.versions[*].schema.openAPIV3Schema` тепер обовʼязкове при створенні обʼєктів CustomResourceDefinition для v1, і повинно бути [структурною схемою](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#specifying-a-structural-schema)
+  * поле `spec.versions[*].schema.openAPIV3Schema` тепер обовʼязкове при створенні обʼєктів CustomResourceDefinition для v1, і повинно бути [структурною схемою](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#specifying-a-structural-schema)
   * `spec.preserveUnknownFields: true` заборонено при створенні обʼєктів CustomResourceDefinition для v1; воно повинно бути вказано у визначеннях схем як `x-kubernetes-preserve-unknown-fields: true`
   * В елементах `additionalPrinterColumns` поле `JSONPath` перейменовано в `jsonPath` в v1
     (виправлення [#66531](https://github.com/kubernetes/kubernetes/issues/66531))
@@ -219,7 +219,7 @@ RuntimeClass в версії API **node.k8s.io/v1beta1** більше не об�
 * Помітні зміни в `certificates.k8s.io/v1`:
   * Для API-клієнтів, що запитують сертифікати:
     * Поле `spec.signerName` тепер обовʼязкове
-      (див. [відомі підписувачи Kubernetes](/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers)), і запити на `kubernetes.io/legacy-unknown` не дозволяються бути створеними через API `certificates.k8s.io/v1`
+      (див. [відомі підписувачи Kubernetes](/uk/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers)), і запити на `kubernetes.io/legacy-unknown` не дозволяються бути створеними через API `certificates.k8s.io/v1`
     * Поле `spec.usages` тепер обовʼязкове, не може містити дубльованих значень та повинно містити лише відомі використання
   * Для API-клієнтів, що схвалюють або підписують сертифікати:
     * `status.conditions` не може містити дублюються типи
@@ -379,13 +379,13 @@ Role та RoleBinding більше не обслуговується з верс
 
   `kubectl convert -f ./my-deployment.yaml --output-version apps/v1`
 
-  Це перетворення може використовувати не ідеальні стандартні значення. Щоб дізнатися більше про конкретний ресурс, зверніться до [довідника API Kubernetes](/docs/reference/kubernetes-api/).
+  Це перетворення може використовувати не ідеальні стандартні значення. Щоб дізнатися більше про конкретний ресурс, зверніться до [довідника API Kubernetes](/uk/docs/reference/kubernetes-api/).
 
   {{< note >}}
   Інструмент `kubectl convert` не стандартно встановлюється, хоча раніше він був частиною самого `kubectl`. Для отримання додаткової інформації ви можете прочитати [питання про застарілість та видалення](https://github.com/kubernetes/kubectl/issues/725) для вбудованої підкоманди.
 
   Щоб дізнатися, як налаштувати `kubectl convert` на вашому компʼютері, відвідайте сторінку, яка відповідає вашій операційній системі:
-  [Linux](/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin),
-  [macOS](/docs/tasks/tools/install-kubectl-macos/#install-kubectl-convert-plugin) або
-  [Windows](/docs/tasks/tools/install-kubectl-windows/#install-kubectl-convert-plugin).
+  [Linux](/uk/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin),
+  [macOS](/uk/docs/tasks/tools/install-kubectl-macos/#install-kubectl-convert-plugin) або
+  [Windows](/uk/docs/tasks/tools/install-kubectl-windows/#install-kubectl-convert-plugin).
   {{< /note >}}

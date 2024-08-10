@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє вказати повне доменне імʼя (FQDN) як імʼя хосту Podʼів. Див. розділ [Поле `setHostnameAsFQDN` у Pod](/docs/concepts/services-networking/dns-pod-service/#pod-sethostnameasfqdn-field).
+Дозволяє вказати повне доменне імʼя (FQDN) як імʼя хосту Podʼів. Див. розділ [Поле `setHostnameAsFQDN` у Pod](/uk/docs/concepts/services-networking/dns-pod-service/#pod-sethostnameasfqdn-field).

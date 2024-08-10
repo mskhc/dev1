@@ -16,4 +16,4 @@ tags:
 
 Коли в кластері працюють різні версії Kubernetes на різних API-серверах, ця функція дозволяє правильно обслуговувати запити до ресурсів за допомогою відповідного API-сервера.
 
-MVP стандартно вимкнено і може бути активовано, увімкненням [функціонала](/docs/reference/command-line-tools-reference/feature-gates/) `UnknownVersionInteroperabilityProxy` при запуску {{< glossary_tooltip text="API-сервера" term_id="kube-apiserver" >}}.
+MVP стандартно вимкнено і може бути активовано, увімкненням [функціонала](/uk/docs/reference/command-line-tools-reference/feature-gates/) `UnknownVersionInteroperabilityProxy` при запуску {{< glossary_tooltip text="API-сервера" term_id="kube-apiserver" >}}.

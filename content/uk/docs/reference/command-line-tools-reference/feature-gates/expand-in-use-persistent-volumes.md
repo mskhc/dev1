@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє розширювати використовувані постійні томи. Див. статтю [Зміна розміру PersistentVolumeClaim](/docs/concepts/storage/persistent-volumes/#resizing-an-in-use-persistentvolumeclaim).
+Дозволяє розширювати використовувані постійні томи. Див. статтю [Зміна розміру PersistentVolumeClaim](/uk/docs/concepts/storage/persistent-volumes/#resizing-an-in-use-persistentvolumeclaim).

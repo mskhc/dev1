@@ -22,7 +22,7 @@ card:
 
 Зазвичай автори документації не пишуть контент з нуля для випуску. Замість цього вони працюють з SIG, що створює нову функцію, щоб вдосконалити чернетку документації та підготувати її до випуску.
 
-Після того як ви вибрали функцію для документування або допомоги, запитайте про це в каналі Slack `#sig-docs`, на щотижневій зустрічі SIG Docs або безпосередньо в PR, поданому для функції SIG. Якщо вам дозволено, ви можете редагувати PR, використовуючи один з методів, описаних у [внесення змін в PR іншої особи](/docs/contribute/review/for-approvers/#commit-into-another-person-s-pr).
+Після того як ви вибрали функцію для документування або допомоги, запитайте про це в каналі Slack `#sig-docs`, на щотижневій зустрічі SIG Docs або безпосередньо в PR, поданому для функції SIG. Якщо вам дозволено, ви можете редагувати PR, використовуючи один з методів, описаних у [внесення змін в PR іншої особи](/uk/docs/contribute/review/for-approvers/#commit-into-another-person-s-pr).
 
 ### Дізнайтеся про майбутні функції {#find-out-about-upcoming-features}
 
@@ -74,7 +74,7 @@ card:
 
 Якщо ваша функція є Alpha або Beta функцією і залежить від (уві)вимкнення функціональних можливостей, вам потрібен файл функціональних можливостей для неї в `content/en/docs/reference/command-line-tools-reference/feature-gates/`. Назва файлу має бути назвою функціональних можливостей, перетвореним з `UpperCamelCase` в `kebab-case`, с розширенням `.md`. Ви можете подивитися інші файли, що вже знаходяться в цій теці, щоб отримати підказку про те, як повинен виглядати ваш файл. Зазвичай одного абзацу достатньо; для довших пояснень додайте документацію в інше місце і посилайтеся на неї.
 
-Також, щоб забезпечити, що ваші функціональні можливості зʼявляться в таблиці [Функціональні можливості Alpha/Beta](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features), включіть наступні деталі у [front matter](https://gohugo.io/content-management/front-matter/) вашого файлу Markdown:
+Також, щоб забезпечити, що ваші функціональні можливості зʼявляться в таблиці [Функціональні можливості Alpha/Beta](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features), включіть наступні деталі у [front matter](https://gohugo.io/content-management/front-matter/) вашого файлу Markdown:
 
 ```yaml
 stages:
@@ -88,7 +88,7 @@ stages:
 
 Коли ви змінюєте функціональну можливість зі стану стандартно вимкнено на стандартно увімкнено, вам також може знадобитися змінити іншу документацію (не лише список функціональних можливостей). Звертайте увагу на такі формулювання, як "Поле `exampleSetting` є полем beta і є стандартно вимкненим. Ви можете увімкнути його, увімкнувши функціональну можливість `ProcessExampleThings`."
 
-Якщо ваша функція GA'ed або знята з підтримки (deprecated), додайте додатковий запис `stage` у блок `stages` в файлі опису. Переконайтеся, що етапи Alpha та Beta залишаються незмінними. Цей крок переводить функціональну можливість з [Функціональних можливостей для Alpha/Feature](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) таблиці до таблиці [Функціональних можливостей для стабільних або застарілих функцій](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features). Наприклад:
+Якщо ваша функція GA'ed або знята з підтримки (deprecated), додайте додатковий запис `stage` у блок `stages` в файлі опису. Переконайтеся, що етапи Alpha та Beta залишаються незмінними. Цей крок переводить функціональну можливість з [Функціональних можливостей для Alpha/Feature](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) таблиці до таблиці [Функціональних можливостей для стабільних або застарілих функцій](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features). Наприклад:
 
 {{< highlight yaml "linenos=false,hl_lines=10-15" >}}
 stages:
@@ -107,7 +107,7 @@ stages:
     toVersion: "1.27"
 {{< / highlight >}}
 
-Зрештою, Kubernetes взагалі перестане включати функціональну можливість. Щоб вказати на видалення функціональної можливості, включіть `removed: true` у front matter відповідного файлу опису. Ця дія викликає перехід функціональної можливості з розділу [Функціональні можливості для стабільних або застарілих функцій](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features) до окремої сторінки з назвою [Функціональні можливості (вилучені)](/docs/reference/command-line-tools-reference/feature-gates-removed/), включаючи його опис.
+Зрештою, Kubernetes взагалі перестане включати функціональну можливість. Щоб вказати на видалення функціональної можливості, включіть `removed: true` у front matter відповідного файлу опису. Ця дія викликає перехід функціональної можливості з розділу [Функціональні можливості для стабільних або застарілих функцій](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features) до окремої сторінки з назвою [Функціональні можливості (вилучені)](/uk/docs/reference/command-line-tools-reference/feature-gates-removed/), включаючи його опис.
 
 ### Усі PR рецензовані та готові до злиття {#all-prs-reviewed-and-ready-to-merge}
 

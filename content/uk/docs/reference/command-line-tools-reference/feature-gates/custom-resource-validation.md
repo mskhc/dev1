@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Вмикає перевірку на основі схеми для ресурсів, створених з [CustomResourceDefinition](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Вмикає перевірку на основі схеми для ресурсів, створених з [CustomResourceDefinition](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).

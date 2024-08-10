@@ -84,7 +84,7 @@ validationActions: [Warn, Audit]
 
 `validation`, який оцінюється як false, завжди застосовується відповідно до цих дій. Невдачі, визначені полем `failurePolicy`, застосовуються відповідно до цих дій тільки у випадку, якщо `failurePolicy` встановлено на `Fail` (або не вказано), інакше невдачі ігноруються.
 
-Див. [Анотації аудиту: невдалий результат валідації](/docs/reference/labels-annotations-taints/audit-annotations/#validation-policy-admission-k8s-io-validation-failure) для отримання додаткових відомостей щодо аудиту невдалих результатів валідації.
+Див. [Анотації аудиту: невдалий результат валідації](/uk/docs/reference/labels-annotations-taints/audit-annotations/#validation-policy-admission-k8s-io-validation-failure) для отримання додаткових відомостей щодо аудиту невдалих результатів валідації.
 
 ### Ресурси параметрів {#parameter-resources}
 
@@ -189,7 +189,7 @@ validationActions: [Warn, Audit]
 
 - 'object' — Обʼєкт з вхідного запиту. Значення null для запитів DELETE.
 - 'oldObject' — Наявний обʼєкт. Значення null для запитів CREATE.
-- 'request' — Атрибути [запиту допуску](/docs/reference/config-api/apiserver-admission.v1/#admission-k8s-io-v1-AdmissionRequest).
+- 'request' — Атрибути [запиту допуску](/uk/docs/reference/config-api/apiserver-admission.v1/#admission-k8s-io-v1-AdmissionRequest).
 - 'params' — Ресурс параметра, на який посилається привʼязка правила, яке оцінюється. Значення null, якщо `ParamKind` не вказано.
 - `namespaceObject` — Простір імен, як ресурс Kubernetes, до якого належить вхідний обʼєкт. Значення null, якщо вхідний обʼєкт має область видимості кластера.
 - `authorizer` — Авторизатор CEL. Може використовуватися для виконання перевірок авторизації для принципала (автентифікованого користувача) запиту. Див. [Authz](https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz) в документації бібліотеки Kubernetes CEL для отримання додаткових відомостей.
@@ -228,7 +228,7 @@ validationActions: [Warn, Audit]
 
 ### Відповідність запитів: `matchConditions`
 
-Ви можете визначити _умови відповідності_ для `ValidatingAdmissionPolicy`, якщо вам потрібно дотримуватися детального фільтрування запитів. Ці умови корисні, якщо ви виявите, що правила відповідності, `objectSelectors` та `namespaceSelectors` все ще не забезпечують потрібного фільтрування. Умови відповідності — це [вирази CEL](/docs/reference/using-api/cel/). Усі умови відповідності повинні оцінюватися як true для ресурсу, який має бути оцінений.
+Ви можете визначити _умови відповідності_ для `ValidatingAdmissionPolicy`, якщо вам потрібно дотримуватися детального фільтрування запитів. Ці умови корисні, якщо ви виявите, що правила відповідності, `objectSelectors` та `namespaceSelectors` все ще не забезпечують потрібного фільтрування. Умови відповідності — це [вирази CEL](/uk/docs/reference/using-api/cel/). Усі умови відповідності повинні оцінюватися як true для ресурсу, який має бути оцінений.
 
 Нижче наведено приклад, що ілюструє кілька різних використань умов відповідності:
 

@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє призупиняти та поновлювати виконання Jobs. Докладнішу інформацію дивіться у [документації про Job](/docs/concepts/workloads/controllers/job/).
+Дозволяє призупиняти та поновлювати виконання Jobs. Докладнішу інформацію дивіться у [документації про Job](/uk/docs/concepts/workloads/controllers/job/).

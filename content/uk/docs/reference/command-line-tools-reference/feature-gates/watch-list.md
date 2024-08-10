@@ -11,4 +11,4 @@ stages:
     fromVersion: "1.27"
 ---
 
-Вмикання підтримки [потокового передавання початкового стану обʼєктів у запитах на спостереження](/docs/reference/using-api/api-concepts/#streaming-lists).
+Вмикання підтримки [потокового передавання початкового стану обʼєктів у запитах на спостереження](/uk/docs/reference/using-api/api-concepts/#streaming-lists).

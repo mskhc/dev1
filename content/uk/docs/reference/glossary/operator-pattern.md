@@ -2,7 +2,7 @@
 title: Шаблон Operator
 id: operator-pattern
 date: 2019-05-21
-full_link: /docs/concepts/extend-kubernetes/operator/
+full_link: /uk/docs/concepts/extend-kubernetes/operator/
 short_description: >
   Спеціалізований контролер, призначений для управління власним ресурсом.
 
@@ -13,7 +13,7 @@ tags:
 - architecture
 ---
 
-[Шаблон Operator](/docs/concepts/extend-kubernetes/operator/) — це системний дизайн, який повʼязує контролер з одним чи кількома власними ресурсами.
+[Шаблон Operator](/uk/docs/concepts/extend-kubernetes/operator/) — це системний дизайн, який повʼязує контролер з одним чи кількома власними ресурсами.
 
 <!--more-->
 

@@ -14,21 +14,21 @@ weight: 40
 
 <!-- overview -->
 
-Цей посібник демонструє як запускати [Apache Zookeeper](https://zookeeper.apache.org) в Kubernetes, використовуючи [StatefulSets](/docs/concepts/workloads/controllers/statefulset/), [PodDisruptionBudgets](/docs/concepts/workloads/pods/disruptions/#pod-disruption-budget), та [PodAntiAffinity](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity).
+Цей посібник демонструє як запускати [Apache Zookeeper](https://zookeeper.apache.org) в Kubernetes, використовуючи [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/), [PodDisruptionBudgets](/uk/docs/concepts/workloads/pods/disruptions/#pod-disruption-budget), та [PodAntiAffinity](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity).
 
 ## {{% heading "prerequisites" %}}
 
 Перед тим як розпочати, переконайтеся, що ви маєте уявлення про:
 
-- [Podʼи](/docs/concepts/workloads/pods/)
-- [DNS кластера](/docs/concepts/services-networking/dns-pod-service/)
-- [Headless Services](/docs/concepts/services-networking/service/#headless-services)
-- [PersistentVolumes](/docs/concepts/storage/persistent-volumes/) 
+- [Podʼи](/uk/docs/concepts/workloads/pods/)
+- [DNS кластера](/uk/docs/concepts/services-networking/dns-pod-service/)
+- [Headless Services](/uk/docs/concepts/services-networking/service/#headless-services)
+- [PersistentVolumes](/uk/docs/concepts/storage/persistent-volumes/) 
 - [PersistentVolume Provisioning](https://github.com/kubernetes/examples/tree/master/staging/persistent-volume-provisioning/)
-- [StatefulSets](/docs/concepts/workloads/controllers/statefulset/)
-- [PodDisruptionBudgets](/docs/concepts/workloads/pods/disruptions/#pod-disruption-budget)
-- [PodAntiAffinity](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
-- [kubectl CLI](/docs/reference/kubectl/kubectl/)
+- [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/)
+- [PodDisruptionBudgets](/uk/docs/concepts/workloads/pods/disruptions/#pod-disruption-budget)
+- [PodAntiAffinity](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
+- [kubectl CLI](/uk/docs/reference/kubectl/kubectl/)
 
 Вам необхідно мати кластер із щонайменше чотирма вузлами, і кожен вузол повинен мати щонайменше 2 ЦП та 4 ГБ памʼяті. У цьому посібнику ви будете закривати (cordon) та очищувати для обслуговування (drain) вузли кластера. **Це означає, що кластер припинить роботу та виселить всі Podʼи зі своїх вузлів, і вузли тимчасово стануть не придатними до розміщення Podʼів.** Вам слід використовувати окремий кластер для цього посібника, або ви повинні забезпечити, що порушення, яке ви викличете, не нашкодить іншим мешканцям кластера.
 
@@ -57,14 +57,14 @@ weight: 40
 
 Маніфест нижче містить:
 
-- [Headless Service](/docs/concepts/services-networking/service/#headless-services),
-- [Service](/docs/concepts/services-networking/service/),
-- [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets),
-- [StatefulSet](/docs/concepts/workloads/controllers/statefulset/).
+- [Headless Service](/uk/docs/concepts/services-networking/service/#headless-services),
+- [Service](/uk/docs/concepts/services-networking/service/),
+- [PodDisruptionBudget](/uk/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets),
+- [StatefulSet](/uk/docs/concepts/workloads/controllers/statefulset/).
 
 {{% code_sample file="application/zookeeper/zookeeper.yaml" %}}
 
-Відкрийте термінал і скористайтеся командою [`kubectl apply`](/docs/reference/generated/kubectl/kubectl-commands/#apply), щоб створити маніфест.
+Відкрийте термінал і скористайтеся командою [`kubectl apply`](/uk/docs/reference/generated/kubectl/kubectl-commands/#apply), щоб створити маніфест.
 
 ```shell
 kubectl apply -f https://k8s.io/examples/application/zookeeper/zookeeper.yaml
@@ -79,7 +79,7 @@ poddisruptionbudget.policy/zk-pdb створено
 statefulset.apps/zk створено
 ```
 
-Скористайтеся [`kubectl get`](/docs/reference/generated/kubectl/kubectl-commands/#get), щоб спостерігати за створенням StatefulSet контролером Podʼів StatefulSet.
+Скористайтеся [`kubectl get`](/uk/docs/reference/generated/kubectl/kubectl-commands/#get), щоб спостерігати за створенням StatefulSet контролером Podʼів StatefulSet.
 
 ```shell
 kubectl get pods -w -l app=zk
@@ -112,7 +112,7 @@ zk-2      1/1       Running   0         40s
 
 Оскільки в анонімній мережі немає алгоритму завершення для вибору лідера, Zab вимагає явної конфігурації членства для виконання виборів лідера. Кожен сервер в ансамблі повинен мати унікальний ідентифікатор, всі сервери повинні знати глобальний набір ідентифікаторів, і кожен ідентифікатор повинен бути повʼязаний з мережевою адресою.
 
-Використовуйте [`kubectl exec`](/docs/reference/generated/kubectl/kubectl-commands/#exec), щоб отримати імена хостів Podʼів у StatefulSet `zk`.
+Використовуйте [`kubectl exec`](/uk/docs/reference/generated/kubectl/kubectl-commands/#exec), щоб отримати імена хостів Podʼів у StatefulSet `zk`.
 
 ```shell
 for i in 0 1 2; do kubectl exec zk-$i -- hostname; done
@@ -159,7 +159,7 @@ zk-1.zk-hs.default.svc.cluster.local
 zk-2.zk-hs.default.svc.cluster.local
 ```
 
-Записи A в [DNS Kubernetes](/docs/concepts/services-networking/dns-pod-service/) перетворюють FQDN в IP-адреси Podʼів. Якщо Kubernetes переплановує Podʼи, він оновлює записи A із новими IP-адресами Podʼів, але імена записів A не змінюються.
+Записи A в [DNS Kubernetes](/uk/docs/concepts/services-networking/dns-pod-service/) перетворюють FQDN в IP-адреси Podʼів. Якщо Kubernetes переплановує Podʼи, він оновлює записи A із новими IP-адресами Podʼів, але імена записів A не змінюються.
 
 ZooKeeper зберігає свою конфігурацію застосунку в файлі з іменем `zoo.cfg`. Використовуйте `kubectl exec`, щоб переглянути вміст файлу `zoo.cfg` у Поді `zk-0`.
 
@@ -278,7 +278,7 @@ numChildren = 0
 
 Як зазначено в розділі [Основи ZooKeeper](#zookeeper), ZooKeeper фіксує всі записи в стійкому журналі (WAL) та періодично записує знімки стану памʼяті на носії. Використання WAL для забезпечення стійкості є поширеною технікою для застосунків, які використовують протоколи консенсусу для досягнення реплікованої машини станів.
 
-Використовуйте команду [`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити обʼєкт `StatefulSet` `zk`.
+Використовуйте команду [`kubectl delete`](/uk/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити обʼєкт `StatefulSet` `zk`.
 
 ```shell
 kubectl delete statefulset zk
@@ -476,7 +476,7 @@ log4j.appender.CONSOLE.layout.ConversionPattern=%d{ISO8601} [myid:%X{myid}] - %-
 
 Це найпростіший спосіб безпечного логування всередині контейнера. Тому що програми записують логи у стандартний вивід, Kubernetes буде відповідальним за ротацію логів для вас. Kubernetes також реалізує розумну політику зберігання, яка гарантує, що логи застосунків, записані у потоки стандартного виводу та помилок, не виснажують локальні носії інформації.
 
-Використайте [`kubectl logs`](/docs/reference/generated/kubectl/kubectl-commands/#logs), щоб отримати останні 20 рядків логів з одного з контейнерів.
+Використайте [`kubectl logs`](/uk/docs/reference/generated/kubectl/kubectl-commands/#logs), щоб отримати останні 20 рядків логів з одного з контейнерів.
 
 ```shell
 kubectl logs zk-0 --tail 20
@@ -507,11 +507,11 @@ kubectl logs zk-0 --tail 20
 2016-12-06 19:34:46,230 [myid:1] - INFO  [Thread-1142:NIOServerCnxn@1008] - Closed socket connection for client /127.0.0.1:52768 (no session established for client)
 ```
 
-Kubernetes інтегрується з багатьма рішеннями для логування. Ви можете вибрати рішення для логування, яке найкраще підходить для вашого кластера та застосунків. Для логування та агрегації на рівні кластера розгляньте розгортання [sidecar контейнера](/docs/concepts/cluster-administration/logging#sidecar-container-with-logging-agent), для ротації та надсилання ваших логів.
+Kubernetes інтегрується з багатьма рішеннями для логування. Ви можете вибрати рішення для логування, яке найкраще підходить для вашого кластера та застосунків. Для логування та агрегації на рівні кластера розгляньте розгортання [sidecar контейнера](/uk/docs/concepts/cluster-administration/logging#sidecar-container-with-logging-agent), для ротації та надсилання ваших логів.
 
 ### Налаштування не привілейованого користувача {#configuring-a-non-privileged-user}
 
-Найкращі практики дозволити застосунку працювати як привілейований користувач всередині контейнера — це предмет для обговорення. Якщо ваша організація вимагає, щоб застосунки працювали як непривілейований користувач, ви можете використовувати [SecurityContext](/docs/tasks/configure-pod-container/security-context/) для контролю над користувачем, під яким запускається точка входу.
+Найкращі практики дозволити застосунку працювати як привілейований користувач всередині контейнера — це предмет для обговорення. Якщо ваша організація вимагає, щоб застосунки працювали як непривілейований користувач, ви можете використовувати [SecurityContext](/uk/docs/tasks/configure-pod-container/security-context/) для контролю над користувачем, під яким запускається точка входу.
 
 У `template` Podʼів `StatefulSet` `zk` є `SecurityContext`.
 
@@ -619,7 +619,7 @@ statefulset.apps/zk повернувся до попереднього стан�
 
 ### Обробка відмови процесу {#handling-process-failure}
 
-[Політики перезапуску](/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy) контролюють, як Kubernetes обробляє відмови процесів для вхідної точки контейнера в Pod. Для Podʼів у `StatefulSet` єдине припустиме значення `RestartPolicy` — це Always, і це є стандартним значенням. Для StatefulSet застосунків ви **ніколи** не повинні змінювати стандартні значення.
+[Політики перезапуску](/uk/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy) контролюють, як Kubernetes обробляє відмови процесів для вхідної точки контейнера в Pod. Для Podʼів у `StatefulSet` єдине припустиме значення `RestartPolicy` — це Always, і це є стандартним значенням. Для StatefulSet застосунків ви **ніколи** не повинні змінювати стандартні значення.
 
 Використовуйте наступну команду, щоб переглянути дерево процесів сервера ZooKeeper, який працює в поді `zk-0`.
 
@@ -791,7 +791,7 @@ affinity:
 kubectl get nodes
 ```
 
-У цьому посібнику передбачається наявність кластера з щонайменше чотирма вузлами. Якщо в кластері є більше чотирьох вузлів, використовуйте [`kubectl cordon`](/docs/reference/generated/kubectl/kubectl-commands/#cordon), щоб заборонити доступ до всіх вузлів, окрім чотирьох. Обмеження до чотирьох вузлів гарантуватиме, що Kubernetes врахує обмеження подібності та PodDisruptionBudget при плануванні Podʼів zookeeper у наступній симуляції обслуговування.
+У цьому посібнику передбачається наявність кластера з щонайменше чотирма вузлами. Якщо в кластері є більше чотирьох вузлів, використовуйте [`kubectl cordon`](/uk/docs/reference/generated/kubectl/kubectl-commands/#cordon), щоб заборонити доступ до всіх вузлів, окрім чотирьох. Обмеження до чотирьох вузлів гарантуватиме, що Kubernetes врахує обмеження подібності та PodDisruptionBudget при плануванні Podʼів zookeeper у наступній симуляції обслуговування.
 
 ```shell
 kubectl cordon <імʼя-вузла>
@@ -830,7 +830,7 @@ kubernetes-node-ixsl
 kubernetes-node-i4c4
 ```
 
-Використовуйте [`kubectl drain`](/docs/reference/generated/kubectl/kubectl-commands/#drain), щоб заблокувати та вивести з використання вузол, на якому запланований Pod `zk-0`.
+Використовуйте [`kubectl drain`](/uk/docs/reference/generated/kubectl/kubectl-commands/#drain), щоб заблокувати та вивести з використання вузол, на якому запланований Pod `zk-0`.
 
 ```shell
 kubectl drain $(kubectl get pod zk-0 --template {{.spec.nodeName}}) --ignore-daemonsets --force --delete-emptydir-data
@@ -956,7 +956,7 @@ dataLength = 5
 numChildren = 0
 ```
 
-Використовуйте [`kubectl uncordon`](/docs/reference/generated/kubectl/kubectl-commands/#uncordon), щоб розблокувати вузол.
+Використовуйте [`kubectl uncordon`](/uk/docs/reference/generated/kubectl/kubectl-commands/#uncordon), щоб розблокувати вузол.
 
 ```shell
 kubectl uncordon kubernetes-node-pb41

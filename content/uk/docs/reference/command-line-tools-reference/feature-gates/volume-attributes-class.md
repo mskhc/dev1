@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.29"
 ---
-Вмикання підтримки класів VolumeAttributesClasses. Докладні відомості див. у статті [Класи атрибутів томів](/docs/concepts/storage/volume-attributes-classes/).
+Вмикання підтримки класів VolumeAttributesClasses. Докладні відомості див. у статті [Класи атрибутів томів](/uk/docs/concepts/storage/volume-attributes-classes/).

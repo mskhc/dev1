@@ -2,7 +2,7 @@
 title: Контейнер
 id: container
 date: 2018-04-12
-full_link: /docs/concepts/containers/
+full_link: /uk/docs/concepts/containers/
 short_description: >
   Легкий та переносний виконуваний образ, який містить програмне забезпечення та всі його залежності.
 

@@ -27,7 +27,7 @@ weight: 40
 | TCP      | Вхідний  | 10256           | kube-proxy             | Власний, Балансувальники навантаження |
 | TCP      | Вхідний  | 30000-32767     | NodePort Сервіси†      | Усі                       |
 
-† Типовий діапазон портів для [NodePort Services](/docs/concepts/services-networking/service/).
+† Типовий діапазон портів для [NodePort Services](/uk/docs/concepts/services-networking/service/).
 
 Усі типові номери портів можуть бути змінені. Коли використовуються власні порти, ці порти повинні бути відкриті замість вказаних тут типових.
 

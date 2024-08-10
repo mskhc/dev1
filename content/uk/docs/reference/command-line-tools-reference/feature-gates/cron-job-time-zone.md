@@ -21,4 +21,4 @@ stages:
 
 removed: true  
 ---
-Дозволити використання необовʼязкового поля `timeZone` у [CronJobs](/docs/concepts/workloads/controllers/cron-jobs/)
+Дозволити використання необовʼязкового поля `timeZone` у [CronJobs](/uk/docs/concepts/workloads/controllers/cron-jobs/)

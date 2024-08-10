@@ -27,7 +27,7 @@ weight: 170
 {{% code_sample file="admin/dns/dnsutils.yaml" %}}
 
 {{< note >}}
-У цьому прикладі створюється Pod у просторі імен `default`. Розпізнавання DNS-імені для сервісів залежить від простору імен Podʼа. Для отримання додаткової інформації перегляньте [DNS для Service and Pod](/docs/concepts/services-networking/dns-pod-service/#what-things-get-dns-names).
+У цьому прикладі створюється Pod у просторі імен `default`. Розпізнавання DNS-імені для сервісів залежить від простору імен Podʼа. Для отримання додаткової інформації перегляньте [DNS для Service and Pod](/uk/docs/concepts/services-networking/dns-pod-service/#what-things-get-dns-names).
 {{< /note >}}
 
 Використайте цей маніфест, щоб створити Pod:
@@ -69,7 +69,7 @@ Address 1: 10.0.0.1
 
 ### Спочатку перевірте локальну конфігурацію DNS {#check-the-local-dns-configuration-first}
 
-Подивіться всередину файлу resolv.conf. (Див. [Налаштування служби DNS](/docs/tasks/administer-cluster/dns-custom-nameservers) та [Відомі проблеми](#known-issues) нижче для отримання додаткової інформації)
+Подивіться всередину файлу resolv.conf. (Див. [Налаштування служби DNS](/uk/docs/tasks/administer-cluster/dns-custom-nameservers) та [Відомі проблеми](#known-issues) нижче для отримання додаткової інформації)
 
 ```shell
 kubectl exec -ti dnsutils -- cat /etc/resolv.conf
@@ -173,7 +173,7 @@ kube-dns     ClusterIP   10.0.0.10      <none>        53/UDP,53/TCP        1h
 Назва служби — `kube-dns` як для розгортання CoreDNS, так і для kube-dns.
 {{< /note >}}
 
-Якщо ви створили Service або у випадку, якщо вона повинна типово створюватися, але вона не зʼявляється, див. [налагодження Service](/docs/tasks/debug/debug-application/debug-service/) для отримання додаткової інформації.
+Якщо ви створили Service або у випадку, якщо вона повинна типово створюватися, але вона не зʼявляється, див. [налагодження Service](/uk/docs/tasks/debug/debug-application/debug-service/) для отримання додаткової інформації.
 
 ### Чи відкриті точки доступу DNS? {#are-dns-endpoints-exposed}
 
@@ -188,7 +188,7 @@ NAME       ENDPOINTS                       AGE
 kube-dns   10.180.3.17:53,10.180.3.17:53    1h
 ```
 
-Якщо ви не бачите точки доступу, дивіться розділ про точки доступу у документації [налагодження Service](/docs/tasks/debug/debug-application/debug-service/).
+Якщо ви не бачите точки доступу, дивіться розділ про точки доступу у документації [налагодження Service](/uk/docs/tasks/debug/debug-application/debug-service/).
 
 Для додаткових прикладів DNS Kubernetes дивіться [приклади dns в кластері](https://github.com/kubernetes/examples/tree/master/staging/cluster-dns) у репозиторії Kubernetes GitHub.
 
@@ -314,7 +314,7 @@ kubectl exec -i -t dnsutils -- nslookup <service-name>
 kubectl exec -i -t dnsutils -- nslookup <service-name>.<namespace>
 ```
 
-Щоб дізнатися більше про розпізнавання імен, дивіться [DNS для Service та Pod](/docs/concepts/services-networking/dns-pod-service/#what-things-get-dns-names).
+Щоб дізнатися більше про розпізнавання імен, дивіться [DNS для Service та Pod](/uk/docs/concepts/services-networking/dns-pod-service/#what-things-get-dns-names).
 
 ## Відомі проблеми {#known-issues}
 
@@ -328,5 +328,5 @@ kubectl exec -i -t dnsutils -- nslookup <service-name>.<namespace>
 
 ## {{% heading "whatsnext" %}}
 
-- Дивіться [Автомасштабування служби DNS в кластері](/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
-- Читайте [DNS для Service та Pod](/docs/concepts/services-networking/dns-pod-service/)
+- Дивіться [Автомасштабування служби DNS в кластері](/uk/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
+- Читайте [DNS для Service та Pod](/uk/docs/concepts/services-networking/dns-pod-service/)

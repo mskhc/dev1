@@ -6,10 +6,10 @@ weight: 50
 
 <!-- overview -->
 
-Кожен {{< glossary_tooltip term_id="node" text="вузол" >}} у кластері {{< glossary_tooltip term_id="cluster" text="Kubernetes" >}} запускає компонент [kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/)
+Кожен {{< glossary_tooltip term_id="node" text="вузол" >}} у кластері {{< glossary_tooltip term_id="cluster" text="Kubernetes" >}} запускає компонент [kube-proxy](/uk/docs/reference/command-line-tools-reference/kube-proxy/)
 (якщо ви не розгорнули власний альтернативний компонент замість `kube-proxy`).
 
-Компонент `kube-proxy` відповідає за реалізацію механізму _віртуальних IP_ для {{< glossary_tooltip term_id="service" text="Service" >}} типу відмінного від [`ExternalName`](/docs/concepts/services-networking/service/#externalname). Кожен екземпляр kube-proxy відстежує додавання та видалення  {{< glossary_tooltip term_id="object" text="обʼєктів" >}} Service and EndpointSlice у {{< glossary_tooltip term_id="control-plane" text="панелі управління" >}}. Для кожного сервісу kube-proxy викликає відповідні API (залежно від режиму kube-proxy) для налаштування вузла для перехоплення трафіку на `clusterIP` та `port` сервісу, і перенаправляє цей трафік на одну з точок доступу Service (зазвичай це Pod, але можливо також будь-яка інша IP-адреса, надана користувачем). Цикл керування забезпечує, що правила на кожному вузлі надійно синхронізуються зі станом Service та EndpointSlice, вказаним API сервером.
+Компонент `kube-proxy` відповідає за реалізацію механізму _віртуальних IP_ для {{< glossary_tooltip term_id="service" text="Service" >}} типу відмінного від [`ExternalName`](/uk/docs/concepts/services-networking/service/#externalname). Кожен екземпляр kube-proxy відстежує додавання та видалення  {{< glossary_tooltip term_id="object" text="обʼєктів" >}} Service and EndpointSlice у {{< glossary_tooltip term_id="control-plane" text="панелі управління" >}}. Для кожного сервісу kube-proxy викликає відповідні API (залежно від режиму kube-proxy) для налаштування вузла для перехоплення трафіку на `clusterIP` та `port` сервісу, і перенаправляє цей трафік на одну з точок доступу Service (зазвичай це Pod, але можливо також будь-яка інша IP-адреса, надана користувачем). Цикл керування забезпечує, що правила на кожному вузлі надійно синхронізуються зі станом Service та EndpointSlice, вказаним API сервером.
 
 {{< figure src="/images/docs/services-iptables-overview.svg" title="Механізм віртуальних IP для Service, використовуючи режим iptables" class="diagram-medium" >}}
 
@@ -66,7 +66,7 @@ _Цей режим проксі доступний лише на вузлах Li
 
 #### Оптимізація продуктивності режиму iptables {#optimizing-iptables-mode-performance}
 
-У режимі iptables, kube-proxy створює кілька правил iptables для кожного Service та кілька правил iptables для кожної IP-адреси точки доступу. У кластерах з десятками тисяч Podʼів та Service це означає десятки тисяч правил iptables, і kube-proxy може потребувати багато часу на оновлення правил у ядрі, коли Service (або їх EndpointSlices) змінюються. Ви можете налаштувати поведінку синхронізації kube-proxy за допомогою параметрів у [розділі `iptables`](/docs/reference/config-api/kube-proxy-config.v1alpha1/#kubeproxy-config-k8s-io-v1alpha1-KubeProxyIPTablesConfiguration) файлу [конфігурації kube-proxy](/docs/reference/config-api/kube-proxy-config.v1alpha1/) (який ви вказуєте через `kube-proxy --config <path>`):
+У режимі iptables, kube-proxy створює кілька правил iptables для кожного Service та кілька правил iptables для кожної IP-адреси точки доступу. У кластерах з десятками тисяч Podʼів та Service це означає десятки тисяч правил iptables, і kube-proxy може потребувати багато часу на оновлення правил у ядрі, коли Service (або їх EndpointSlices) змінюються. Ви можете налаштувати поведінку синхронізації kube-proxy за допомогою параметрів у [розділі `iptables`](/uk/docs/reference/config-api/kube-proxy-config.v1alpha1/#kubeproxy-config-k8s-io-v1alpha1-KubeProxyIPTablesConfiguration) файлу [конфігурації kube-proxy](/uk/docs/reference/config-api/kube-proxy-config.v1alpha1/) (який ви вказуєте через `kube-proxy --config <path>`):
 
 ```yaml
 ...
@@ -160,7 +160,7 @@ kube-proxy налаштовує правила фільтрації пакеті
 
 Як альтернативу базовому способу роботи, вузол, на якому розміщено бекенд Pod для Service, може застосовувати пряме переписування пакетів безпосередньо, а не покладати це завдання на вузол, на якому працює клієнтський Pod. Це називається _прямим виводом сервера_.
 
-Для використання цієї можливості вам необхідно запускати kube-proxy з аргументом командного рядка `--enable-dsr` **і** включити [функціональних можливостей](/docs/reference/command-line-tools-reference/feature-gates/)`WinDSR`.
+Для використання цієї можливості вам необхідно запускати kube-proxy з аргументом командного рядка `--enable-dsr` **і** включити [функціональних можливостей](/uk/docs/reference/command-line-tools-reference/feature-gates/)`WinDSR`.
 
 Прямий вивід сервера також оптимізує випадок зворотного трафіку для Pod, навіть коли обидва Pod працюють на одному вузлі.
 
@@ -201,14 +201,14 @@ kube-proxy налаштовує правила фільтрації пакеті
 
 {{< feature-state for_k8s_version="v1.27" state="alpha" >}}
 
-Якщо ви включите [функціональні можливості](/docs/reference/command-line-tools-reference/feature-gates/) `MultiCIDRServiceAllocator` та
-API-групу [`networking.k8s.io/v1alpha1`](/docs/tasks/administer-cluster/enable-disable-api/), панель управління замінить наявний розподілювач etcd переглянутою реалізацією, яка використовує обʼєкти IPAddress та ServiceCIDR замість внутрішнього глобального map призначення. Кожен IP-адрес кластера, повʼязаний з Service, посилається на обʼєкт IPAddress.
+Якщо ви включите [функціональні можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MultiCIDRServiceAllocator` та
+API-групу [`networking.k8s.io/v1alpha1`](/uk/docs/tasks/administer-cluster/enable-disable-api/), панель управління замінить наявний розподілювач etcd переглянутою реалізацією, яка використовує обʼєкти IPAddress та ServiceCIDR замість внутрішнього глобального map призначення. Кожен IP-адрес кластера, повʼязаний з Service, посилається на обʼєкт IPAddress.
 
 Увімкнення функціональних можливостей також замінює фоновий контролер альтернативою, яка обробляє обʼєкти IPAddress та підтримує міграцію зі старої моделі розподілювача. Kubernetes {{< skew currentVersion >}} не підтримує міграцію з обʼєктів IPAddress до внутрішнього map призначення.
 
 Однією з основних переваг переглянутого розподілювача є видалення обмежень розміру для діапазону IP-адрес, який може бути використаний для IP-адрес кластера Service. З увімкненою `MultiCIDRServiceAllocator`, для IPv4 відсутні обмеження, а для IPv6 ви можете використовувати маски підмереж, що є /64 або менше (на відміну від /108 зі старої реалізації).
 
-Доступ до призначень IP-адрес через API означає, що ви, як адміністратор кластера, можете дозволяти користувачам переглядати призначені їх Service IP-адреси. Розширення Kubernetes, такі як [Gateway API](/docs/concepts/services-networking/gateway/), можуть використовувати IPAddress API для розширення вбудованих мережевих можливостей Kubernetes.
+Доступ до призначень IP-адрес через API означає, що ви, як адміністратор кластера, можете дозволяти користувачам переглядати призначені їх Service IP-адреси. Розширення Kubernetes, такі як [Gateway API](/uk/docs/concepts/services-networking/gateway/), можуть використовувати IPAddress API для розширення вбудованих мережевих можливостей Kubernetes.
 
 Нижче наведений короткий приклад того, як користувач може запитувати IP-адреси:
 
@@ -325,7 +325,7 @@ Kubernetes віддає перевагу виділенню динамічних
 
 {{< feature-state for_k8s_version="v1.28" state="stable" >}}
 
-Якщо в kube-proxy включений [функціоналу](/docs/reference/command-line-tools-reference/feature-gates/) `ProxyTerminatingEndpoints` і політика трафіку встановлена на `Local`, `kube-proxy` на даному вузлі використовує більш складний алгоритм для вибору точок доступу доступу Service. З цим включеним функціоналом, `kube-proxy` перевіряє наявність локальних точок доступу доступу і те, чи всі локальні кінцеві точки позначені як термінальні. Якщо всі локальні кінцеві точки позначені як термінальні, тоді `kube-proxy` направлятиме трафік на ці термінальні кінцеві точки. В іншому випадку `kube-proxy` завжди віддає перевагу направленню трафіку на кінцеві точки, які не є термінальними.
+Якщо в kube-proxy включений [функціоналу](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ProxyTerminatingEndpoints` і політика трафіку встановлена на `Local`, `kube-proxy` на даному вузлі використовує більш складний алгоритм для вибору точок доступу доступу Service. З цим включеним функціоналом, `kube-proxy` перевіряє наявність локальних точок доступу доступу і те, чи всі локальні кінцеві точки позначені як термінальні. Якщо всі локальні кінцеві точки позначені як термінальні, тоді `kube-proxy` направлятиме трафік на ці термінальні кінцеві точки. В іншому випадку `kube-proxy` завжди віддає перевагу направленню трафіку на кінцеві точки, які не є термінальними.
 
 Це поведінка направлення для терміналних точок доступу доступу існує для того, щоб `NodePort` і `LoadBalancer` сервіси могли відповідно завершувати зʼєднання при використанні `externalTrafficPolicy: Local`.
 
@@ -346,7 +346,7 @@ Kubernetes віддає перевагу виділенню динамічних
 
 Поле `trafficDistribution` зі значенням `PreferClose` і анотація `service.kubernetes.io/topology-mode: Auto` спрямовані на пріоритет маршрутизації трафіку в межах однієї зони. Однак, є ключові відмінності у їхніх підходах:
 
-* `service.kubernetes.io/topology-mode: Auto`: Спробує розподілити трафік пропорціонально між зонами на основі ресурсів CPU, які можна виділити. Цей евристичний метод включає захисні заходи (такі як [поведінка відкату](/docs/concepts/services-networking/topology-aware-routing/#three-or-more-endpoints-per-zone) для малих кількостей точок доступу) і може призвести до вимкнення функціоналу в певних сценаріях з причин навантаження балансування. Цей підхід жертвує деякою передбачуваністю на користь можливості балансування навантаження.
+* `service.kubernetes.io/topology-mode: Auto`: Спробує розподілити трафік пропорціонально між зонами на основі ресурсів CPU, які можна виділити. Цей евристичний метод включає захисні заходи (такі як [поведінка відкату](/uk/docs/concepts/services-networking/topology-aware-routing/#three-or-more-endpoints-per-zone) для малих кількостей точок доступу) і може призвести до вимкнення функціоналу в певних сценаріях з причин навантаження балансування. Цей підхід жертвує деякою передбачуваністю на користь можливості балансування навантаження.
 
 * `trafficDistribution: PreferClose`: Цей підхід спрямований на більш простоту і передбачуваність: "Якщо є точки доступу в зоні, вони отримають весь трафік для цієї зони; якщо точок доступу у зоні немає, трафік буде розподілено на інші зони". Хоча цей підхід може пропонувати більшу передбачуваність, він означає, що вам потрібно керувати можливим перевантаженням.
 
@@ -364,7 +364,7 @@ Kubernetes віддає перевагу виділенню динамічних
 
 * **Збільшена ймовірність перевантаження точок доступу:** Евристичний підхід `PreferClose` буде намагатися маршрутизувати трафік до найближчих справних точок доступу замість рівномірного розподілу цього трафіку між усіма точками доступу. Якщо у вас недостатня кількість точок доступу у зоні, вони можуть стати перевантаженими. Це особливо ймовірно, якщо вхідний трафік не розподіляється пропорційно між зонами. Для зменшення цього ризику варто розглянути наступні стратегії:
 
-  * [Обмеження розподілу топології Pod](/docs/concepts/scheduling-eviction/topology-spread-constraints/): Використовуйте обмеження розподілу топології Pod для рівномірнішого розподілу ваших Podʼів по зонам.
+  * [Обмеження розподілу топології Pod](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/): Використовуйте обмеження розподілу топології Pod для рівномірнішого розподілу ваших Podʼів по зонам.
 
   * Розгортання з врахуванням зон: Якщо очікуєте нерівномірних патернів трафіку, створюйте окреме розгортання для кожної зони. Цей підхід дозволяє окремим робочим навантаженням масштабуватися незалежно. Також в екосистемі, поза проектом Kubernetes, доступні надбудови для управління робочими навантаженнями, які можуть допомогти у цьому.
 
@@ -372,10 +372,10 @@ Kubernetes віддає перевагу виділенню динамічних
 
 ## {{% heading "whatsnext" %}}
 
-Щоб дізнатися більше про Service, читайте [Підключення застосунків до Service](/docs/tutorials/services/connect-applications-service/).
+Щоб дізнатися більше про Service, читайте [Підключення застосунків до Service](/uk/docs/tutorials/services/connect-applications-service/).
 
 Також ви можете:
 
-* Дізнатись про [Services](/docs/concepts/services-networking/service/) як концепцію
-* Дізнатись про [Ingresses](/docs/concepts/services-networking/ingress/) як концепцію
-* Ознайомитися з [API-довідкою](/docs/reference/kubernetes-api/service-resources/service-v1/) для API Service
+* Дізнатись про [Services](/uk/docs/concepts/services-networking/service/) як концепцію
+* Дізнатись про [Ingresses](/uk/docs/concepts/services-networking/ingress/) як концепцію
+* Ознайомитися з [API-довідкою](/uk/docs/reference/kubernetes-api/service-resources/service-v1/) для API Service

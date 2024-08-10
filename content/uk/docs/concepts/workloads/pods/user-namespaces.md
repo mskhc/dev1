@@ -139,7 +139,7 @@ kubelet:65536:7208960
 
 {{< feature-state state="alpha" for_k8s_version="v1.29" >}}
 
-Для Podʼів Linux, які увімкнули простори користувачів, Kubernetes послаблює застосування [Стандартів безпеки Podʼа](/docs/concepts/security/pod-security-standards) контрольованим способом. Цю поведінку можна контролювати за допомогою [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
+Для Podʼів Linux, які увімкнули простори користувачів, Kubernetes послаблює застосування [Стандартів безпеки Podʼа](/uk/docs/concepts/security/pod-security-standards) контрольованим способом. Цю поведінку можна контролювати за допомогою [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/)
 `UserNamespacesPodSecurityStandards`, що дозволяє раннє включення для кінцевих користувачів. Адміністраторам слід забезпечити увімкнення просторів користувачів на всіх вузлах в межах кластера при використанні feature gate.
 
 Якщо ви увімкнете відповідний feature gate та створите Pod, який використовує простори користувачів, yfcnegys поля не будуть обмежені навіть в контекстах, які застосовують _Baseline_ чи _Restricted_ Podʼа. Це не становить проблему безпеки, оскільки `root` всередині Podʼа з просторами користувачів фактично посилається на користувача всередині контейнера, який ніколи не зіставляється з привілейованим користувачем на хості. Ось список полів, які **не** перевіряються для Podʼів в цих обставинах:
@@ -163,4 +163,4 @@ kubelet:65536:7208960
 
 ## {{% heading "whatsnext" %}}
 
-* Подивіться [Використання простору користувача в Podʼах](/docs/tasks/configure-pod-container/user-namespaces/)
+* Подивіться [Використання простору користувача в Podʼах](/uk/docs/tasks/configure-pod-container/user-namespaces/)

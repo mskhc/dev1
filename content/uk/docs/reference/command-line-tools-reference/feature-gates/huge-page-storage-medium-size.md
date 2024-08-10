@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Увімкніть підтримку декількох розмірів попередньо виділених [величезних сторінок](/docs/tasks/manage-hugepages/scheduling-hugepages/).
+Увімкніть підтримку декількох розмірів попередньо виділених [величезних сторінок](/uk/docs/tasks/manage-hugepages/scheduling-hugepages/).

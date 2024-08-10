@@ -18,22 +18,22 @@ weight: 10
 
 Перш ніж розпочати цей підручник, вам слід ознайомитися з наступними концепціями Kubernetes:
 
-* [Podʼи](/docs/concepts/workloads/pods/)
-* [Cluster DNS](/docs/concepts/services-networking/dns-pod-service/)
-* [Headless Services](/docs/concepts/services-networking/service/#headless-services)
-* [PersistentVolumes](/docs/concepts/storage/persistent-volumes/)
+* [Podʼи](/uk/docs/concepts/workloads/pods/)
+* [Cluster DNS](/uk/docs/concepts/services-networking/dns-pod-service/)
+* [Headless Services](/uk/docs/concepts/services-networking/service/#headless-services)
+* [PersistentVolumes](/uk/docs/concepts/storage/persistent-volumes/)
 * [PersistentVolume Provisioning](https://github.com/kubernetes/examples/tree/master/staging/persistent-volume-provisioning/)
-* Інструмент командного рядка [kubectl](/docs/reference/kubectl/kubectl/)
+* Інструмент командного рядка [kubectl](/uk/docs/reference/kubectl/kubectl/)
 
 {{% include "task-tutorial-prereqs.md" %}}
 Вам слід налаштувати `kubectl` для використання контексту, який використовує простір імен `default`. Якщо ви використовуєте наявний кластер, переконайтеся, що можна використовувати
 простір імен цього кластера для практики. Ідеальною буде практика в кластері, де не запущені реальні робочі навантаження.
 
-Також корисно прочитати сторінку з концепціями про [StatefulSets](/docs/concepts/workloads/controllers/statefulset/).
+Також корисно прочитати сторінку з концепціями про [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/).
 
 {{< note >}}
 Цей підручник передбачає, що ваш кластер налаштований на динамічне забезпечення
-PersistentVolumes. Вам також потрібно мати [типовий StorageClass](/docs/concepts/storage/storage-classes/#default-storageclass). Якщо ваш кластер не налаштований для динамічного забезпечення сховища, вам доведеться вручну забезпечити два томи по 1 GiB перед початком цього уроку та налаштувати ваш кластер так, щоб ці PersistentVolumes відповідали шаблонам PersistentVolumeClaim, які визначає StatefulSet.
+PersistentVolumes. Вам також потрібно мати [типовий StorageClass](/uk/docs/concepts/storage/storage-classes/#default-storageclass). Якщо ваш кластер не налаштований для динамічного забезпечення сховища, вам доведеться вручну забезпечити два томи по 1 GiB перед початком цього уроку та налаштувати ваш кластер так, щоб ці PersistentVolumes відповідали шаблонам PersistentVolumeClaim, які визначає StatefulSet.
 {{< /note >}}
 
 ## {{% heading "objectives" %}}
@@ -53,11 +53,11 @@ StatefulSets призначені для використання з засто�
 ## Створення StatefulSet {#creating-a-statefulset}
 
 Почніть зі створення StatefulSet (і Service, на який він спирається) за допомогою
-наведеного нижче прикладу. Він схожий на приклад, наведений у концепції [StatefulSets](/docs/concepts/workloads/controllers/statefulset/). Він створює [headless Service](/docs/concepts/services-networking/service/#headless-services), `nginx`, щоб опублікувати IP-адреси Podʼів у StatefulSet, `web`.
+наведеного нижче прикладу. Він схожий на приклад, наведений у концепції [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/). Він створює [headless Service](/uk/docs/concepts/services-networking/service/#headless-services), `nginx`, щоб опублікувати IP-адреси Podʼів у StatefulSet, `web`.
 
 {{% code_sample file="application/web/web.yaml" %}}
 
-Вам знадобляться принаймні два термінали. У першому терміналі використовуйте [`kubectl get`](/docs/reference/generated/kubectl/kubectl-commands/#get) для спостереження за створенням Podʼів StatefulSet.
+Вам знадобляться принаймні два термінали. У першому терміналі використовуйте [`kubectl get`](/uk/docs/reference/generated/kubectl/kubectl-commands/#get) для спостереження за створенням Podʼів StatefulSet.
 
 ```shell
 # використовуйте цей термінал для виконання команд із зазначенням --watch
@@ -65,7 +65,7 @@ StatefulSets призначені для використання з засто�
 kubectl get pods --watch -l app=nginx
 ```
 
-У другому терміналі використовуйте [`kubectl apply`](/docs/reference/generated/kubectl/kubectl-commands/#apply) для створення headless Service та StatefulSet:
+У другому терміналі використовуйте [`kubectl apply`](/uk/docs/reference/generated/kubectl/kubectl-commands/#apply) для створення headless Service та StatefulSet:
 
 ```shell
 kubectl apply -f https://k8s.io/examples/application/web/web.yaml
@@ -122,12 +122,12 @@ web-1     0/1       ContainerCreating   0         0s
 web-1     1/1       Running   0         18s
 ```
 
-Зверніть увагу, що Pod `web-1` не запускається, поки Pod `web-0` не буде _Running_ (див. [Фази Pod](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)) та _Ready_ (див. `type` у [Стани Pod](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions)).
+Зверніть увагу, що Pod `web-1` не запускається, поки Pod `web-0` не буде _Running_ (див. [Фази Pod](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)) та _Ready_ (див. `type` у [Стани Pod](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions)).
 
 Пізніше в цьому підручнику ви будете практикувати [паралельний запуск](#parallel-pod-management).
 
 {{< note >}}
-Щоб налаштувати цілочисельний порядковий номер, призначений кожному Pod у StatefulSet, дивіться [Початковий порядковий номер](/docs/concepts/workloads/controllers/statefulset/#start-ordinal).
+Щоб налаштувати цілочисельний порядковий номер, призначений кожному Pod у StatefulSet, дивіться [Початковий порядковий номер](/uk/docs/concepts/workloads/controllers/statefulset/#start-ordinal).
 {{< /note >}}
 
 ## Podʼи в StatefulSet {#pods-in-a-statefulset}
@@ -148,11 +148,11 @@ web-0     1/1       Running   0          1m
 web-1     1/1       Running   0          1m
 ```
 
-Як зазначено в концепції [StatefulSets](/docs/concepts/workloads/controllers/statefulset/), Podʼи в StatefulSet мають фіксовану, унікальну ідентичність. Ця ідентичність базується на унікальному порядковому індексі, який призначається кожному Podʼу контролером StatefulSet {{< glossary_tooltip term_id="controller" text="controller">}}. Імена Podʼів приймають форму `<імʼя statefulset>-<порядковий індекс>`. Оскільки StatefulSet `web` має дві репліки, він створює два Podʼи, `web-0` та `web-1`.
+Як зазначено в концепції [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/), Podʼи в StatefulSet мають фіксовану, унікальну ідентичність. Ця ідентичність базується на унікальному порядковому індексі, який призначається кожному Podʼу контролером StatefulSet {{< glossary_tooltip term_id="controller" text="controller">}}. Імена Podʼів приймають форму `<імʼя statefulset>-<порядковий індекс>`. Оскільки StatefulSet `web` має дві репліки, він створює два Podʼи, `web-0` та `web-1`.
 
 ### Використання стабільних мережевих ідентичностей {#using-stable-network-identities}
 
-Кожен Pod має стабільне імʼя хосту на основі свого порядкового індексу. Використовуйте [`kubectl exec`](/docs/reference/generated/kubectl/kubectl-commands/#exec) для виконання команди `hostname` в кожному Podʼі:
+Кожен Pod має стабільне імʼя хосту на основі свого порядкового індексу. Використовуйте [`kubectl exec`](/uk/docs/reference/generated/kubectl/kubectl-commands/#exec) для виконання команди `hostname` в кожному Podʼі:
 
 ```shell
 for i in 0 1; do kubectl exec "web-$i" -- sh -c 'hostname'; done
@@ -163,7 +163,7 @@ web-0
 web-1
 ```
 
-Використайте [`kubectl run`](/docs/reference/generated/kubectl/kubectl-commands/#run) для запуску контейнера, який надає команду `nslookup` з пакунка `dnsutils`. Використовуючи `nslookup` з іменами хостів Podʼів, ви можете переглянути їх внутрішні адреси DNS:
+Використайте [`kubectl run`](/uk/docs/reference/generated/kubectl/kubectl-commands/#run) для запуску контейнера, який надає команду `nslookup` з пакунка `dnsutils`. Використовуючи `nslookup` з іменами хостів Podʼів, ви можете переглянути їх внутрішні адреси DNS:
 
 ```shell
 kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm
@@ -205,7 +205,7 @@ CNAME headless сервісу вказує на SRV записи (один дл�
 kubectl get pod --watch -l app=nginx
 ```
 
-У другому терміналі використовуйте [`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands/#delete) для видалення всіх Podʼів у StatefulSet:
+У другому терміналі використовуйте [`kubectl delete`](/uk/docs/reference/generated/kubectl/kubectl-commands/#delete) для видалення всіх Podʼів у StatefulSet:
 
 ```shell
 kubectl delete pod -l app=nginx
@@ -384,7 +384,7 @@ web-1
 
 ## Масштабування StatefulSet {#scaling-a-statefulset}
 
-Масштабування StatefulSet передбачає збільшення або зменшення кількості реплік (горизонтальне масштабування). Це досягається шляхом оновлення поля `replicas`. Ви можете використовувати або [`kubectl scale`](/docs/reference/generated/kubectl/kubectl-commands/#scale), або [`kubectl patch`](/docs/reference/generated/kubectl/kubectl-commands/#patch), щоб масштабувати StatefulSet.
+Масштабування StatefulSet передбачає збільшення або зменшення кількості реплік (горизонтальне масштабування). Це досягається шляхом оновлення поля `replicas`. Ви можете використовувати або [`kubectl scale`](/uk/docs/reference/generated/kubectl/kubectl-commands/#scale), або [`kubectl patch`](/uk/docs/reference/generated/kubectl/kubectl-commands/#patch), щоб масштабувати StatefulSet.
 
 ### Збільшення масштабу {#scaling-up}
 
@@ -598,7 +598,7 @@ registry.k8s.io/nginx-slim:0.24
 
 Ви можете розбити оновлення StatefulSet, який використовує стратегію `RollingUpdate`, на _розділи_, вказавши `.spec.updateStrategy.rollingUpdate.partition`.
 
-Для отримання додаткового контексту ви можете прочитати [Поточні оновлення частинами](/docs/concepts/workloads/controllers/statefulset/#partitions) на сторінці концепції StatefulSet.
+Для отримання додаткового контексту ви можете прочитати [Поточні оновлення частинами](/uk/docs/concepts/workloads/controllers/statefulset/#partitions) на сторінці концепції StatefulSet.
 
 Ви можете підготувати оновлення StatefulSet, використовуючи поле `partition` всередині `.spec.updateStrategy.rollingUpdate`. Для цього оновлення ви залишите наявні Podʼи в StatefulSet без змін, поки змінюєте шаблон Podʼа для StatefulSet. Потім ви (або, це поза цим навчальним посібником, якась зовнішня автоматизація) можете запустити це підготовлене оновлення.
 
@@ -827,7 +827,7 @@ statefulset.apps/web patched
 
 StatefulSet підтримує як _не каскадне_, так і _каскадне_ видалення. При не каскадному **видаленні** Podʼи StatefulSet не видаляються при видаленні самого StatefulSet. При каскадному **видаленні** видаляються як StatefulSet, так і його Podʼи.
 
-Прочитайте [Використання каскадного видалення у кластері](/docs/tasks/administer-cluster/use-cascading-deletion/), щоб дізнатися про каскадне видалення загалом.
+Прочитайте [Використання каскадного видалення у кластері](/uk/docs/tasks/administer-cluster/use-cascading-deletion/), щоб дізнатися про каскадне видалення загалом.
 
 ### Некаскадне видалення {#non-cascading-delete}
 
@@ -838,7 +838,7 @@ StatefulSet підтримує як _не каскадне_, так і _каск
 kubectl get pods --watch -l app=nginx
 ```
 
-Використовуйте [`kubectl delete`](/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити StatefulSet. Переконайтеся, що ви передали параметр `--cascade=orphan` до команди. Цей параметр повідомляє Kubernetes видаляти лише StatefulSet, і **не** видаляти жодного з його Podʼів.
+Використовуйте [`kubectl delete`](/uk/docs/reference/generated/kubectl/kubectl-commands/#delete), щоб видалити StatefulSet. Переконайтеся, що ви передали параметр `--cascade=orphan` до команди. Цей параметр повідомляє Kubernetes видаляти лише StatefulSet, і **не** видаляти жодного з його Podʼів.
 
 ```shell
 kubectl delete statefulset web --cascade=orphan
@@ -1046,7 +1046,7 @@ statefulset "web" deleted
 
 Для деяких розподілених систем порядок, гарантований StatefulSet, є непотрібним або небажаним. Ці системи потребують лише унікальності та ідентичності.
 
-Ви можете вказати [політику управління Podʼами](/docs/concepts/workloads/controllers/statefulset/#pod-management-policies), щоб уникнути цього строгого порядку; або `OrderedReady` (типово), або `Parallel`.
+Ви можете вказати [політику управління Podʼами](/uk/docs/concepts/workloads/controllers/statefulset/#pod-management-policies), щоб уникнути цього строгого порядку; або `OrderedReady` (типово), або `Parallel`.
 
 ### Політика управління Podʼами OrderedReady {#orderedready-pod-management}
 

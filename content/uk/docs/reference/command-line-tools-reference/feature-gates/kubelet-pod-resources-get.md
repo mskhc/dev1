@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.27"
 ---
-Вмикає точку доступу `Get` gRPC в kubeletʼах для ресурсів Pod. Цей API доповнює [звіт про розподіл ресурсів] (/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
+Вмикає точку доступу `Get` gRPC в kubeletʼах для ресурсів Pod. Цей API доповнює [звіт про розподіл ресурсів](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).

@@ -950,14 +950,14 @@ imagefs.available: &quot;15%&quot;</pre></p>
 <code>map[string]string</code>
 </td>
 <td>
-   <p>systemReserved - це набір пар ResourceName=ResourceQuantity (наприклад, cpu=200m,memory=150G), які описують ресурси, зарезервовані для компонентів, що не належать до kubernetes. Наразі підтримуються лише процесор і памʼять. Дивіться <a href="/docs/user-guide/compute-resources">http://kubernetes.io/docs/user-guide/compute-resources</a> для більш детальної інформації. Стандартно: nil</p>
+   <p>systemReserved - це набір пар ResourceName=ResourceQuantity (наприклад, cpu=200m,memory=150G), які описують ресурси, зарезервовані для компонентів, що не належать до kubernetes. Наразі підтримуються лише процесор і памʼять. Дивіться <a href="/uk/docs/user-guide/compute-resources">http://kubernetes.io/docs/user-guide/compute-resources</a> для більш детальної інформації. Стандартно: nil</p>
 </td>
 </tr>
 <tr><td><code>kubeReserved</code><br/>
 <code>map[string]string</code>
 </td>
 <td>
-   <p>kubeReserved — це набір пар ResourceName=ResourceQuantity (наприклад, cpu=200m,memory=150G), які описують ресурси, зарезервовані для компонентів системи kubernetes. Наразі підтримуються процесор, памʼять та локальне сховище для кореневої файлової системи. Більш детальну інформацію можна знайти на сторінці <a href="/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a>. Стандартно: nil</p>
+   <p>kubeReserved — це набір пар ResourceName=ResourceQuantity (наприклад, cpu=200m,memory=150G), які описують ресурси, зарезервовані для компонентів системи kubernetes. Наразі підтримуються процесор, памʼять та локальне сховище для кореневої файлової системи. Більш детальну інформацію можна знайти на сторінці <a href="/uk/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a>. Стандартно: nil</p>
 </td>
 </tr>
 <tr><td><code>reservedSystemCPUs</code> <b>[Обовʼязково]</b><br/>
@@ -978,21 +978,21 @@ imagefs.available: &quot;15%&quot;</pre></p>
 <code>string</code>
 </td>
 <td>
-   <p>systemReservedCgroup допомагає kubelet ідентифікувати абсолютну назву верхнього рівня CGroup, який використовується для забезпечення <code>systemReserved</code> обчислювального резервування ресурсів для системних демонів ОС. Дивіться <a href="/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> документацію для отримання додаткової інформації. Стандартно: &quot;&quot;</p>
+   <p>systemReservedCgroup допомагає kubelet ідентифікувати абсолютну назву верхнього рівня CGroup, який використовується для забезпечення <code>systemReserved</code> обчислювального резервування ресурсів для системних демонів ОС. Дивіться <a href="/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> документацію для отримання додаткової інформації. Стандартно: &quot;&quot;</p>
 </td>
 </tr>
 <tr><td><code>kubeReservedCgroup</code><br/>
 <code>string</code>
 </td>
 <td>
-   <p>kubeReservedCgroup допомагає kubelet ідентифікувати абсолютну назву верхнього рівня CGroup, який використовується для забезпечення <code>KubeReserved</code> обчислювального резервування ресурсів для системних демонів вузла Kubernetes. Дивіться <a href="/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> документацію для отримання додаткової інформації. Стандартно: &quot;&quot;</p>
+   <p>kubeReservedCgroup допомагає kubelet ідентифікувати абсолютну назву верхнього рівня CGroup, який використовується для забезпечення <code>KubeReserved</code> обчислювального резервування ресурсів для системних демонів вузла Kubernetes. Дивіться <a href="/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> документацію для отримання додаткової інформації. Стандартно: &quot;&quot;</p>
 </td>
 </tr>
 <tr><td><code>enforceNodeAllocatable</code><br/>
 <code>[]string</code>
 </td>
 <td>
-   <p>Цей прапорець визначає різні примусові дії Node Allocatable, які Kubelet повинен виконувати. Цей прапорець приймає список опцій. Прийнятні опції: <code>none</code>, <code>pods</code>, <code>system-reserved</code> і <code>kube-reserved</code>. Якщо вказано <code>none</code>, інші опції не можуть бути вказані. Коли <code>system-reserved</code> є в списку, має бути вказано systemReservedCgroup. Коли <code>kube-reserved</code> є в списку, має бути вказано kubeReservedCgroup. Це поле підтримується тільки тоді, коли <code>cgroupsPerQOS</code> встановлено на true. Дивіться <a href=/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> для отримання додаткової інформації. Стандартно: [&quot;pods&quot;]</p>
+   <p>Цей прапорець визначає різні примусові дії Node Allocatable, які Kubelet повинен виконувати. Цей прапорець приймає список опцій. Прийнятні опції: <code>none</code>, <code>pods</code>, <code>system-reserved</code> і <code>kube-reserved</code>. Якщо вказано <code>none</code>, інші опції не можуть бути вказані. Коли <code>system-reserved</code> є в списку, має бути вказано systemReservedCgroup. Коли <code>kube-reserved</code> є в списку, має бути вказано kubeReservedCgroup. Це поле підтримується тільки тоді, коли <code>cgroupsPerQOS</code> встановлено на true. Дивіться <a href="/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">Node Allocatable</a> для отримання додаткової інформації. Стандартно: [&quot;pods&quot;]</p>
 </td>
 </tr>
 <tr><td><code>allowedUnsafeSysctls</code><br/>
@@ -1078,7 +1078,7 @@ shutdownGracePeriodSeconds: 30</li>
 <a href="#kubelet-config-k8s-io-v1beta1-MemoryReservation"><code>[]MemoryReservation</code></a>
 </td>
 <td>
-   <p>reservedMemory визначає список резервувань памʼяті для NUMA-вузлів, розділений комами. Цей параметр має сенс лише в контексті функції керування памʼяттю. Менеджер памʼяті не виділятиме зарезервовану памʼять для робочих навантажень контейнерів. Наприклад, якщо у вас є NUMA0 з 10Gi памʼяті, і reservedMemory було вказано для резервування 1Gi памʼяті на NUMA0, менеджер памʼяті передбачатиме, що лише 9Gi доступні для виділення. Ви можете вказати різну кількість вузлів NUMA та типів памʼяті. Ви можете взагалі опустити цей параметр, але повинні знати, що кількість зарезервованої памʼяті з усіх вузлів NUMA повинна бути рівною кількості памʼяті, вказаній у <a href="/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">node allocatable</a>. Якщо хоча б один параметр node allocatable має ненульове значення, вам потрібно буде вказати принаймні один вузол NUMA. Також уникайте вказування:</p>
+   <p>reservedMemory визначає список резервувань памʼяті для NUMA-вузлів, розділений комами. Цей параметр має сенс лише в контексті функції керування памʼяттю. Менеджер памʼяті не виділятиме зарезервовану памʼять для робочих навантажень контейнерів. Наприклад, якщо у вас є NUMA0 з 10Gi памʼяті, і reservedMemory було вказано для резервування 1Gi памʼяті на NUMA0, менеджер памʼяті передбачатиме, що лише 9Gi доступні для виділення. Ви можете вказати різну кількість вузлів NUMA та типів памʼяті. Ви можете взагалі опустити цей параметр, але повинні знати, що кількість зарезервованої памʼяті з усіх вузлів NUMA повинна бути рівною кількості памʼяті, вказаній у <a href="/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable">node allocatable</a>. Якщо хоча б один параметр node allocatable має ненульове значення, вам потрібно буде вказати принаймні один вузол NUMA. Також уникайте вказування:</p>
 <ol>
 <li>Дублікати, той самий вузол NUMA і тип пам’яті, але з іншим значенням.</li>
 <li>нульові обмеження для будь-якого типу памʼяті.</li>
@@ -1120,7 +1120,7 @@ shutdownGracePeriodSeconds: 30</li>
 </td>
 </tr>
 <tr><td><code>registerWithTaints</code><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p>registerWithTaints — це масив "taints" (міток) для додавання до обʼєкта вузла під час реєстрації kubelet. Набирає чинності лише тоді, коли параметр registerNode встановлено в значення true і під час початкової реєстрації вузла. Стандартно: nil</p>
@@ -1180,7 +1180,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
 <tr><td><code>kind</code><br/>string</td><td><code>SerializedNodeConfigSource</code></td></tr>
     
 <tr><td><code>source</code><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
 </td>
 <td>
    <p>source є джерелом, яке ми серіалізуємо.</p>
@@ -1475,7 +1475,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
    <span class="text-muted">Номер NUMA вузла, для якого задається резервування памʼяті.</span></td>
 </tr>
 <tr><td><code>limits</code> <b>[Обовʼязково]</b><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
 </td>
 <td>
    <span class="text-muted">Список ресурсів для резервування, які визначають обмеження памʼяті.</span></td>

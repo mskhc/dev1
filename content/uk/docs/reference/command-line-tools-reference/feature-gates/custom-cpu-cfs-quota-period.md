@@ -11,4 +11,4 @@ stages:
     fromVersion: "1.12"
 ---
 Дозволяє вузлам змінювати `cpuCFSQuotaPeriod` в
-[конфігурації kubelet](/docs/tasks/administer-cluster/kubelet-config-file/).
+[конфігурації kubelet](/uk/docs/tasks/administer-cluster/kubelet-config-file/).

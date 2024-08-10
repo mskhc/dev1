@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Якщо увімкнено, kube-proxy, що працює на Windows, використовуватиме EndpointSlices як основне джерело даних замість Endpoints, що забезпечує масштабованість і покращення продуктивності. Див. статтю [Увімкнення Endpoint Slices](/docs/concepts/services-networking/endpoint-slices/).
+Якщо увімкнено, kube-proxy, що працює на Windows, використовуватиме EndpointSlices як основне джерело даних замість Endpoints, що забезпечує масштабованість і покращення продуктивності. Див. статтю [Увімкнення Endpoint Slices](/uk/docs/concepts/services-networking/endpoint-slices/).

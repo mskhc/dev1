@@ -9,7 +9,7 @@ weight: 30
 
 <!-- overview -->
 
-Часто в розподілених системах є потреба в _лізингу_, яка забезпечує механізм блокування спільних ресурсів та координації дій між членами групи. В Kubernetes концепцію лізингу представлено обʼєктами [Lease](/docs/reference/kubernetes-api/cluster-resources/lease-v1/) в {{< glossary_tooltip text="API Group" term_id="api-group" >}} `coordination.k8s.io`, які використовуються для критичних для системи можливостей, таких як час роботи вузлів та вибір лідера на рівні компонентів.
+Часто в розподілених системах є потреба в _лізингу_, яка забезпечує механізм блокування спільних ресурсів та координації дій між членами групи. В Kubernetes концепцію лізингу представлено обʼєктами [Lease](/uk/docs/reference/kubernetes-api/cluster-resources/lease-v1/) в {{< glossary_tooltip text="API Group" term_id="api-group" >}} `coordination.k8s.io`, які використовуються для критичних для системи можливостей, таких як час роботи вузлів та вибір лідера на рівні компонентів.
 
 <!-- body -->
 
@@ -17,7 +17,7 @@ weight: 30
 
 Kubernetes використовує API Lease для звʼязку з пульсом kubelet вузла з  API сервером Kubernetes. Для кожного `Node` існує обʼєкт `Lease` з відповідним імʼям в просторі імен `kube-node-lease`. Під капотом кожен сигнал пульсу kubelet — це запит на **оновлення** цього обʼєкта `Lease`, який оновлює поле `spec.renewTime` для оренди. Панель управління Kubernetes використовує відмітку часу цього поля для визначення доступності цього вузла.
 
-Дивіться [Обʼєкти Lease вузлів](/docs/concepts/architecture/nodes/#node-heartbeats) для отримання додаткових деталей.
+Дивіться [Обʼєкти Lease вузлів](/uk/docs/concepts/architecture/nodes/#node-heartbeats) для отримання додаткових деталей.
 
 ## Вибір лідера {#leader-election}
 
@@ -70,7 +70,7 @@ spec:
 Прострочені лізинги від kube-apiservers, які вже не існують, прибираються новими kube-apiservers через 1 годину.
 
 Ви можете вимкнути лізинги ідентичності API сервера, вимкнувши
-[feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `APIServerIdentity`.
+[feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `APIServerIdentity`.
 
 ## Робочі навантаження {#custom-workload}
 

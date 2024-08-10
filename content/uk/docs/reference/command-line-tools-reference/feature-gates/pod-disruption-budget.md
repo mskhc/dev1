@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає [PodDisruptionBudget](/docs/tasks/run-application/configure-pdb/).
+Вмикає [PodDisruptionBudget](/uk/docs/tasks/run-application/configure-pdb/).

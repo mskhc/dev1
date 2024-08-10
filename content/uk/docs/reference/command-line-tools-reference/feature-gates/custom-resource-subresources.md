@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Вмикає субресурси `/status` та `/scale` для ресурсів, створених з [CustomResourceDefinition](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+Вмикає субресурси `/status` та `/scale` для ресурсів, створених з [CustomResourceDefinition](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).

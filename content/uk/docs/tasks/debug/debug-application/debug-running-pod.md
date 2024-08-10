@@ -12,7 +12,7 @@ content_type: task
 
 ## {{% heading "prerequisites" %}}
 
-* Ваш {{< glossary_tooltip text="Pod" term_id="pod" >}} вже повинен бути запланований та запущений. Якщо ваш Pod ще не запущений, почніть з [Налагодження Podʼів](/docs/tasks/debug/debug-application/).
+* Ваш {{< glossary_tooltip text="Pod" term_id="pod" >}} вже повинен бути запланований та запущений. Якщо ваш Pod ще не запущений, почніть з [Налагодження Podʼів](/uk/docs/tasks/debug/debug-application/).
 * Для деяких з розширених кроків налагодження вам потрібно знати, на якому вузлі запущений Pod, і мати доступ до оболонки для виконання команд на цьому вузлі. Вам не потрібен такий доступ для виконання стандартних кроків налагодження, що використовують `kubectl`.
 
 ## Використання `kubectl describe pod` для отримання деталей про Podʼи {#using-kubectl-describe-pod-to-fetch-details-about-pods}
@@ -362,7 +362,7 @@ kubectl exec cassandra -- cat /var/log/cassandra/system.log
 kubectl exec -it cassandra -- sh
 ```
 
-Для отримання додаткових відомостей дивіться [Отримання оболонки до запущеного контейнера](/docs/tasks/debug/debug-application/get-shell-running-container/).
+Для отримання додаткових відомостей дивіться [Отримання оболонки до запущеного контейнера](/uk/docs/tasks/debug/debug-application/get-shell-running-container/).
 
 ## Налагодження за допомогою ефемерного контейнера {#ephemeral-container}
 
@@ -402,7 +402,7 @@ If you don't see a command prompt, try pressing enter.
 / #
 ```
 
-Ця команда додає новий контейнер busybox і приєднується до нього. Параметр `--target` спрямовує простір імен процесу до іншого контейнера. Це необхідно тут, оскільки `kubectl run` не ввімкнув [процес спільного використання простору імен](/docs/tasks/configure-pod-container/share-process-namespace/) у Pod, який він створює.
+Ця команда додає новий контейнер busybox і приєднується до нього. Параметр `--target` спрямовує простір імен процесу до іншого контейнера. Це необхідно тут, оскільки `kubectl run` не ввімкнув [процес спільного використання простору імен](/uk/docs/tasks/configure-pod-container/share-process-namespace/) у Pod, який він створює.
 
 {{< note >}}
 Параметр `--target` повинен підтримуватись {{< glossary_tooltip text="середовищем виконання контейнерів" term_id="container-runtime" >}}. Якщо не підтримується, то ефемерний контейнер не може бути запущений, або він може бути запущений з ізольованим простором імен процесу, так що команда `ps` не відображатиме процеси в інших контейнерах.
@@ -468,7 +468,7 @@ root@myapp-debug:/#
 
 * `kubectl debug` автоматично генерує назву контейнера, якщо ви не вибрали одну за допомогою прапорця `--container`.
 * Прапорець `-i` стандартно призводить до приєднання `kubectl debug` до нового контейнера. Ви можете запобігти цьому, вказавши `--attach=false`. Якщо ваша сесія розірвана, ви можете повторно приєднатися за допомогою `kubectl attach`.
-* `--share-processes` дозволяє контейнерам в цьому Podʼі бачити процеси з інших контейнерів у Podʼі. Для отримання додаткової інформації про те, як це працює, див. [Спільне використання простору імен процесу між контейнерами в Podʼі](/docs/tasks/configure-pod-container/share-process-namespace/).
+* `--share-processes` дозволяє контейнерам в цьому Podʼі бачити процеси з інших контейнерів у Podʼі. Для отримання додаткової інформації про те, як це працює, див. [Спільне використання простору імен процесу між контейнерами в Podʼі](/uk/docs/tasks/configure-pod-container/share-process-namespace/).
 {{< /note >}}
 
 Не забудьте прибрати Pod для налагодження, коли ви закінчите:
@@ -581,7 +581,7 @@ kubectl delete pod node-debugger-mynode-pdx84
 
 ## Профілі налагодження {#debugging-profiles}
 
-Коли ви використовуєте `kubectl debug` для налагодження вузла за допомогою Podʼа налагодження, Pod за ефемерним контейнером або скопійованого Pod, ви можете застосувати до них профіль налагодження за допомогою прапорця `--profile`. Застосовуючи профіль, встановлюються конкретні властивості, такі як [securityContext](/docs/tasks/configure-pod-container/security-context/), що дозволяє адаптуватися до різних сценаріїв.
+Коли ви використовуєте `kubectl debug` для налагодження вузла за допомогою Podʼа налагодження, Pod за ефемерним контейнером або скопійованого Pod, ви можете застосувати до них профіль налагодження за допомогою прапорця `--profile`. Застосовуючи профіль, встановлюються конкретні властивості, такі як [securityContext](/uk/docs/tasks/configure-pod-container/security-context/), що дозволяє адаптуватися до різних сценаріїв.
 
 Доступні наступні профілі:
 
@@ -589,8 +589,8 @@ kubectl delete pod node-debugger-mynode-pdx84
 | ------------ | ------------------------------------------------------------------ |
 | legacy       | Набір властивостей для зворотної сумісності з поведінкою 1.22      |
 | general      | Розумний набір загальних властивостей для кожного завдання налагодження |
-| baseline     | Набір властивостей, сумісних з [Політикою базової безпеки PodSecurityStandard](/docs/concepts/security/pod-security-standards/#baseline) |
-| restricted   | Набір властивостей, сумісних з [Політикою обмеженої безпеки PodSecurityStandard](/docs/concepts/security/pod-security-standards/#restricted) |
+| baseline     | Набір властивостей, сумісних з [Політикою базової безпеки PodSecurityStandard](/uk/docs/concepts/security/pod-security-standards/#baseline) |
+| restricted   | Набір властивостей, сумісних з [Політикою обмеженої безпеки PodSecurityStandard](/uk/docs/concepts/security/pod-security-standards/#restricted) |
 | netadmin     | Набір властивостей, включаючи привілеї адміністратора мережі       |
 | sysadmin     | Набір властивостей, включаючи привілеї системного адміністратора (root) |
 
@@ -630,7 +630,7 @@ CapEff:	000001ffffffffff
 ...
 ```
 
-Це означає, що процес контейнера наділений усіма можливостями як привілейований контейнер завдяки застосуванню профілю `sysadmin`. Дивіться більше деталей про [можливості](/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container).
+Це означає, що процес контейнера наділений усіма можливостями як привілейований контейнер завдяки застосуванню профілю `sysadmin`. Дивіться більше деталей про [можливості](/uk/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container).
 
 Ви також можете перевірити, що ефемерний контейнер був створений як привілейований контейнер:
 

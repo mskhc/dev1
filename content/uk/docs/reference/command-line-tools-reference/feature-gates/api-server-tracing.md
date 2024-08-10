@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"  
 ---
-Додає підтримку розподіленого трасування у сервері API. Докладні відомості наведено у статті [Трасування системних компонентів Kubernetes](/docs/concepts/cluster-administration/system-traces).
+Додає підтримку розподіленого трасування у сервері API. Докладні відомості наведено у статті [Трасування системних компонентів Kubernetes](/uk/docs/concepts/cluster-administration/system-traces).

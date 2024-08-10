@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.28"
 ---
-Проксі-запити ресурсів до правильного однорангового kube-apiserver, коли існує декілька kube-апісерверів у різних версіях. Докладнішу інформацію наведено у статті [Проксі змішаних версій](/docs/concepts/architecture/mixed-version-proxy/).
+Проксі-запити ресурсів до правильного однорангового kube-apiserver, коли існує декілька kube-апісерверів у різних версіях. Докладнішу інформацію наведено у статті [Проксі змішаних версій](/uk/docs/concepts/architecture/mixed-version-proxy/).

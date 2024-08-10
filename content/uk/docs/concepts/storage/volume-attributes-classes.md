@@ -9,13 +9,13 @@ weight: 45
 
 {{< feature-state for_k8s_version="v1.29" state="alpha" >}}
 
-Ця сторінка передбачає, що ви знайомі з [StorageClasses](/docs/concepts/storage/storage-classes/), [томами](/docs/concepts/storage/volumes/) та [постійними томами](/docs/concepts/storage/persistent-volumes/) в Kubernetes.
+Ця сторінка передбачає, що ви знайомі з [StorageClasses](/uk/docs/concepts/storage/storage-classes/), [томами](/uk/docs/concepts/storage/volumes/) та [постійними томами](/uk/docs/concepts/storage/persistent-volumes/) в Kubernetes.
 
 Клас VolumeAttributesClass надає адміністраторам можливість описати змінні "класи" сховищ, які вони пропонують. Різні класи можуть відповідати різним рівням якості обслуговування. Kubernetes сам по собі не виражає думки про те, що представляють ці класи.
 
 Це експериментальна функція, її типово вимкнено.
 
-Якщо ви хочете протестувати функцію, поки вона альфа, вам потрібно ввімкнути [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
+Якщо ви хочете протестувати функцію, поки вона альфа, вам потрібно ввімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
 
 ```shell
 --feature-gates="...,VolumeAttributesClass=true"

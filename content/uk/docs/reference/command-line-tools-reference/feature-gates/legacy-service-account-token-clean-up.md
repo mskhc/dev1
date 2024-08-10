@@ -18,4 +18,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Вмикає очищення [токенів службових облікових записів](/docs/concepts/security/service-accounts/#get-a-token), що базуються на Secret, коли вони не використовуються протягом певного часу (стандартно — один рік).
+Вмикає очищення [токенів службових облікових записів](/uk/docs/concepts/security/service-accounts/#get-a-token), що базуються на Secret, коли вони не використовуються протягом певного часу (стандартно — один рік).

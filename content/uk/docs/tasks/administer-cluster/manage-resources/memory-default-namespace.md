@@ -10,7 +10,7 @@ description: >-
 
 Ця сторінка показує, як налаштувати типові запити та обмеження памʼяті для {{< glossary_tooltip text="простору імен" term_id="namespace" >}}.
 
-Кластер Kubernetes може бути розділений на простори імен. Якщо у вас є простір імен, в якому вже є типове обмеження памʼяті [limit](/docs/concepts/configuration/manage-resources-containers/#requests-and-limits), і ви спробуєте створити Pod з контейнером, який не вказує своє власне обмеження памʼяті, то {{< glossary_tooltip text="панель управління" term_id="control-plane" >}} назначає типове обмеження памʼяті цьому контейнеру.
+Кластер Kubernetes може бути розділений на простори імен. Якщо у вас є простір імен, в якому вже є типове обмеження памʼяті [limit](/uk/docs/concepts/configuration/manage-resources-containers/#requests-and-limits), і ви спробуєте створити Pod з контейнером, який не вказує своє власне обмеження памʼяті, то {{< glossary_tooltip text="панель управління" term_id="control-plane" >}} назначає типове обмеження памʼяті цьому контейнеру.
 
 Kubernetes назначає типовий запит памʼяті за певних умов, які будуть пояснені пізніше в цій темі.
 
@@ -140,7 +140,7 @@ resources:
 
 {{< note >}}
 
-`LimitRange` **не** перевіряє відповідність типових значень, які він застосовує. Це означає, що типове значення для _обмеження_, встановлене за допомогою `LimitRange`, може бути меншим за значення _запиту_, вказане для контейнера в специфікації, яку клієнт подає на сервер API. Якщо це станеться, остаточний Pod не буде можливим для розміщення. Дивіться [Обмеження на ресурси лімітів та запитів](/docs/concepts/policy/limit-range/#constraints-on-resource-limits-and-requests) для отримання додаткової інформації.
+`LimitRange` **не** перевіряє відповідність типових значень, які він застосовує. Це означає, що типове значення для _обмеження_, встановлене за допомогою `LimitRange`, може бути меншим за значення _запиту_, вказане для контейнера в специфікації, яку клієнт подає на сервер API. Якщо це станеться, остаточний Pod не буде можливим для розміщення. Дивіться [Обмеження на ресурси лімітів та запитів](/uk/docs/concepts/policy/limit-range/#constraints-on-resource-limits-and-requests) для отримання додаткової інформації.
 
 {{< /note >}}
 
@@ -168,22 +168,22 @@ kubectl delete namespace default-mem-example
 
 ### Для адміністраторів кластера {#for-cluster-administrators}
 
-* [Налаштування типових запитів та обмежень CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
+* [Налаштування типових запитів та обмежень CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/)
 
-* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
+* [Налаштування мінімальних та максимальних обмежень памʼяті для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/)
 
-* [Налаштування мінімальних та максимальних обмежень CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
+* [Налаштування мінімальних та максимальних обмежень CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/)
 
-* [Налаштування квот памʼяті та CPU для простору імен](/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
+* [Налаштування квот памʼяті та CPU для простору імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/)
 
-* [Налаштування квоти для Podʼів у просторі імен](/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
+* [Налаштування квоти для Podʼів у просторі імен](/uk/docs/tasks/administer-cluster/manage-resources/quota-pod-namespace/)
 
-* [Налаштування квот для обʼєктів API](/docs/tasks/administer-cluster/quota-api-object/)
+* [Налаштування квот для обʼєктів API](/uk/docs/tasks/administer-cluster/quota-api-object/)
 
 ### Для розробників додатків
 
-* [Призначення ресурсів памʼяті для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-memory-resource/)
+* [Призначення ресурсів памʼяті для контейнерів та Podʼів](/uk/docs/tasks/configure-pod-container/assign-memory-resource/)
 
-* [Призначення ресурсів CPU для контейнерів та Podʼів](/docs/tasks/configure-pod-container/assign-cpu-resource/)
+* [Призначення ресурсів CPU для контейнерів та Podʼів](/uk/docs/tasks/configure-pod-container/assign-cpu-resource/)
 
-* [Налаштування якості обслуговування для Podʼів](/docs/tasks/configure-pod-container/quality-service-pod/)
+* [Налаштування якості обслуговування для Podʼів](/uk/docs/tasks/configure-pod-container/quality-service-pod/)

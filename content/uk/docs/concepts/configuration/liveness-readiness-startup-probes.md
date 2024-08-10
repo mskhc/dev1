@@ -38,4 +38,4 @@ Kubernetes має різні типи проб:
 
 Цей тип проби виконується лише при запуску, на відміну від проб готовності, які виконуються періодично.
 
-* Докладніше про [Налаштування проб життєздатності, готовності та запуску](/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes).
+* Докладніше про [Налаштування проб життєздатності, готовності та запуску](/uk/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes).

@@ -2,7 +2,7 @@
 title: Pod
 id: pod
 date: 2018-04-12
-full_link: /docs/concepts/workloads/pods/
+full_link: /uk/docs/concepts/workloads/pods/
 short_description: >
   Pod являє собою групу контейнерів, що запущені у вашому кластері.
 

@@ -61,7 +61,7 @@ HorizontalPodAutoscalerSpec описує бажану функціональні
 
   - **scaleTargetRef.name** (string), обовʼязково
 
-    name — назва вказаного ресурсу; Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+    name — назва вказаного ресурсу; Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
   - **scaleTargetRef.apiVersion** (string)
 
@@ -277,7 +277,7 @@ HorizontalPodAutoscalerSpec описує бажану функціональні
 
       - **metrics.object.describedObject.name** (string), обовʼязково
 
-        name — це імʼя посилання; Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/docs/concepts/overview/working-with-objects/names/#names)
+        name — це імʼя посилання; Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **metrics.object.describedObject.apiVersion** (string)
 
@@ -571,7 +571,7 @@ HorizontalPodAutoscalerStatus описує поточний стан гориз�
 
       - **currentMetrics.object.describedObject.name** (string), обовʼязково
 
-        name — це імʼя посилання; Більше інформації: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+        name — це імʼя посилання; Більше інформації: [https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names](/uk/docs/concepts/overview/working-with-objects/names/#names)
 
       - **currentMetrics.object.describedObject.apiVersion** (string)
 

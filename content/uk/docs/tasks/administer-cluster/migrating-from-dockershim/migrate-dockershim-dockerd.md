@@ -18,7 +18,7 @@ content_type: task
 У Kubernetes 1.23 та раніше ви могли використовувати Docker Engine з Kubernetes, покладаючись на вбудований компонент Kubernetes, що називався _dockershim_. Компонент dockershim було вилучено у випуску Kubernetes 1.24; проте доступний сторонній замінник, `cri-dockerd`. Адаптер `cri-dockerd` дозволяє використовувати Docker Engine через {{<glossary_tooltip term_id="cri" text="інтерфейс середовища виконання контейнерів">}}.
 
 {{<note>}}
-Якщо ви вже використовуєте `cri-dockerd`, вас не торкнеться видалення dockershim. Перш ніж почати, [перевірте, чи використовує ваші вузли dockershim](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/).
+Якщо ви вже використовуєте `cri-dockerd`, вас не торкнеться видалення dockershim. Перш ніж почати, [перевірте, чи використовує ваші вузли dockershim](/uk/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/).
 {{</note>}}
 
 Якщо ви хочете мігрувати на `cri-dockerd`, щоб продовжувати використовувати Docker Engine як своє середовище виконання контейнерів, вам слід виконати наступне для кожного вузла:
@@ -36,7 +36,7 @@ content_type: task
 ## {{% heading "prerequisites" %}}
 
 * [`cri-dockerd`](https://mirantis.github.io/cri-dockerd/usage/install) встановлений і запущений на кожному вузлі.
-* [Мережевий втулок](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/).
+* [Мережевий втулок](/uk/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/).
 
 ## Відключіть та вимкніть вузол {#cordon-and-drain-the-node}
 
@@ -87,7 +87,7 @@ systemctl restart kubelet
 
 ## Перевірте, що вузол справний {#verify-that-the-node-is-healthy}
 
-Щоб перевірити, чи використовує вузол точку доступу `cri-dockerd`, слідувати інструкціям [Дізнайтеся, яке середовище виконання контейнерів використовується](/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/). Прапорець `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
+Щоб перевірити, чи використовує вузол точку доступу `cri-dockerd`, слідувати інструкціям [Дізнайтеся, яке середовище виконання контейнерів використовується](/uk/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/). Прапорець `--container-runtime-endpoint` для kubelet повинен бути `unix:///var/run/cri-dockerd.sock`.
 
 ## Введення вузла в експлуатацію {#uncordon-the-node}
 
@@ -100,4 +100,4 @@ kubectl uncordon <NODE_NAME>
 ## {{% heading "whatsnext" %}}
 
 * Прочитайте [ЧаПи з видалення dockershim](/dockershim/).
-* [Дізнайтеся, як мігрувати з Docker Engine з dockershim на containerd](/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/).
+* [Дізнайтеся, як мігрувати з Docker Engine з dockershim на containerd](/uk/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/).

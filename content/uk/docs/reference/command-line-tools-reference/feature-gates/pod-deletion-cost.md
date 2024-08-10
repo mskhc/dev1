@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.22"
 ---
-Вмикає функцію [Pod Deletion Cost](/docs/concepts/workloads/controllers/replicaset/#pod-deletion-cost), яка дозволяє користувачам впливати на порядок зменшення масштабу ReplicaSet.
+Вмикає функцію [Pod Deletion Cost](/uk/docs/concepts/workloads/controllers/replicaset/#pod-deletion-cost), яка дозволяє користувачам впливати на порядок зменшення масштабу ReplicaSet.

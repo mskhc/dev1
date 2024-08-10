@@ -135,5 +135,5 @@ providers:
 
 ## {{% heading "whatsnext" %}}
 
-* Ознайомтесь із деталями `CredentialProviderConfig` в [довідці API конфігурації kubelet (v1)](/docs/reference/config-api/kubelet-config.v1/).
-* Прочитайте [довідник API постачальника облікових даних kubelet (v1)](/docs/reference/config-api/kubelet-credentialprovider.v1/).
+* Ознайомтесь із деталями `CredentialProviderConfig` в [довідці API конфігурації kubelet (v1)](/uk/docs/reference/config-api/kubelet-config.v1/).
+* Прочитайте [довідник API постачальника облікових даних kubelet (v1)](/uk/docs/reference/config-api/kubelet-credentialprovider.v1/).

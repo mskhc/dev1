@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає параметр `shareProcessNamespace` у Pod для спільного використання єдиного простору імен процесів між контейнерами, запущеними у Pod. Більш детальну інформацію можна знайти у статті [Спільний простір імен процесів між контейнерами у Pod](/docs/tasks/configure-pod-container/share-process-namespace/).
+Вмикає параметр `shareProcessNamespace` у Pod для спільного використання єдиного простору імен процесів між контейнерами, запущеними у Pod. Більш детальну інформацію можна знайти у статті [Спільний простір імен процесів між контейнерами у Pod](/uk/docs/tasks/configure-pod-container/share-process-namespace/).

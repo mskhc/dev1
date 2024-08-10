@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикає використання [локального ефемерного сховища](/docs/concepts/configuration/manage-resources-containers/), а також властивість `sizeLimit` тома [emptyDir](/docs/concepts/storage/volumes/#emptydir).
+Вмикає використання [локального ефемерного сховища](/uk/docs/concepts/configuration/manage-resources-containers/), а також властивість `sizeLimit` тома [emptyDir](/uk/docs/concepts/storage/volumes/#emptydir).

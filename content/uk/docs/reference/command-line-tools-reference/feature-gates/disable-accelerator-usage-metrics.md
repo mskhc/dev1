@@ -21,4 +21,4 @@ stages:
 
 removed: true  
 ---
-[Вимкнути метрики акселератора, що збираються kubelet](/docs/concepts/cluster-administration/system-metrics/#disable-accelerator-metrics).
+[Вимкнути метрики акселератора, що збираються kubelet](/uk/docs/concepts/cluster-administration/system-metrics/#disable-accelerator-metrics).

@@ -137,7 +137,7 @@ resources:
 
 Переконайтеся, що виключення перераховане _до_ позначки символу підстановки '`*.*`' в масиві ресурсів, щоб надати йому пріоритет.
 
-Для отримання більш детальної інформації про структуру `EncryptionConfiguration`, зверніться до [API конфігурації шифрування](/docs/reference/config-api/apiserver-encryption.v1/).
+Для отримання більш детальної інформації про структуру `EncryptionConfiguration`, зверніться до [API конфігурації шифрування](/uk/docs/reference/config-api/apiserver-encryption.v1/).
 
 {{< caution >}}
 Якщо будь-який ресурс не може бути прочитаний через конфігурацію шифрування (через зміну ключів) та ви не можете відновити робочу конфігурацію, єдиним виходом буде видалити цей ключ безпосередньо з підтримуваного etcd.
@@ -211,7 +211,7 @@ resources:
     Просте оновлення ключа, з новим DEK, що генерується для кожного шифрування, та
     оновлення KEK, контрольоване користувачем.
     <br />
-    Прочитайте, як <a href="/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v1">налаштувати постачальника KMS V1</a>.
+    Прочитайте, як <a href="/uk/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v1">налаштувати постачальника KMS V1</a>.
     </td>
   </tr>
   <tr>
@@ -231,7 +231,7 @@ resources:
     Добрий вибір, якщо використовується сторонній інструмент для управління ключами.
     Доступний як стабільний з Kubernetes v1.29.
     <br />
-    Прочитайте, як <a href="/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v2">налаштувати постачальника KMS V2</a>.
+    Прочитайте, як <a href="/uk/docs/tasks/administer-cluster/kms-provider#configuring-the-kms-provider-kms-v2">налаштувати постачальника KMS V2</a>.
     </td>
   </tr>
   <tr>
@@ -278,7 +278,7 @@ resources:
 
 Для додаткової секретності розгляньте використання постачальника `kms`, оскільки це ґрунтується на ключах, що зберігаються поза вашим кластером Kubernetes. Реалізації `kms` можуть працювати з модулями апаратного забезпечення для збереження ключів або з службами шифрування, які керуються вашим постачальником хмарних послуг.
 
-Щоб дізнатися, як налаштувати шифрування в стані спокою з використанням KMS, див. [Використання постачальника KMS для шифрування даних](/docs/tasks/administer-cluster/kms-provider/). Втулок постачальника KMS, який ви використовуєте, також може постачатися з додатковою конкретною документацією.
+Щоб дізнатися, як налаштувати шифрування в стані спокою з використанням KMS, див. [Використання постачальника KMS для шифрування даних](/uk/docs/tasks/administer-cluster/kms-provider/). Втулок постачальника KMS, який ви використовуєте, також може постачатися з додатковою конкретною документацією.
 {{< /caution >}}
 
 Розпочніть з генерації нового ключа шифрування, а потім закодуйте його за допомогою base64:
@@ -476,7 +476,7 @@ resources:
    kubectl get secret secret1 -n default -o yaml
    ```
 
-   Вивід повинен містити `mykey: bXlkYXRh`, з вмістом `mydata`, закодованим за допомогою base64; прочитайте [декодування Secret](/docs/tasks/configmap-secret/managing-secret-using-kubectl/#decoding-secret), щоб дізнатися, як повністю декодувати Secret.
+   Вивід повинен містити `mykey: bXlkYXRh`, з вмістом `mydata`, закодованим за допомогою base64; прочитайте [декодування Secret](/uk/docs/tasks/configmap-secret/managing-secret-using-kubectl/#decoding-secret), щоб дізнатися, як повністю декодувати Secret.
 
 ### Забезпечте шифрування всіх відповідних даних {#ensure-all-secrets-are-encrypted}
 
@@ -580,5 +580,5 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [розшифрування даних, які вже збережені у спокої](/docs/tasks/administer-cluster/decrypt-data/)
-- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/docs/reference/config-api/apiserver-config.v1/).
+- Дізнайтеся більше про [розшифрування даних, які вже збережені у спокої](/uk/docs/tasks/administer-cluster/decrypt-data/)
+- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/uk/docs/reference/config-api/apiserver-config.v1/).

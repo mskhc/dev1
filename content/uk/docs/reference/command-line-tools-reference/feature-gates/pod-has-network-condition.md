@@ -13,4 +13,4 @@ stages:
 
 removed: true
 ---
-Дозволити kubelet позначати стан [PodHasNetwork](/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network) для контейнерів. Його було перейменовано на `PodReadyToStartContainersCondition` у версії 1.28.
+Дозволити kubelet позначати стан [PodHasNetwork](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-has-network) для контейнерів. Його було перейменовано на `PodReadyToStartContainersCondition` у версії 1.28.

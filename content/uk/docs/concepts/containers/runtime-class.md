@@ -37,7 +37,7 @@ RuntimeClass — це функція для вибору конфігураці
 Стандартно RuntimeClass передбачає однорідну конфігурацію вузла в усьому кластері (що означає, що всі вузли налаштовані однаковим чином щодо контейнерних середовищ). Щоб підтримувати різнорідні конфігурації вузлів, див. [Планування](#scheduling) нижче.
 {{< /note >}}
 
-Кожна конфігурація має відповідний `handler`, на який посилається RuntimeClass. Handler повинен бути дійсним [імʼям DNS-мітки](/docs/concepts/overview/working-with-objects/names/#dns-label-names).
+Кожна конфігурація має відповідний `handler`, на який посилається RuntimeClass. Handler повинен бути дійсним [імʼям DNS-мітки](/uk/docs/concepts/overview/working-with-objects/names/#dns-label-names).
 
 ### 2. Створіть відповідні ресурси RuntimeClass {#2-create-the-corresponding-runtimeclass-resources}
 
@@ -57,10 +57,10 @@ metadata:
 handler: myconfiguration 
 ```
 
-Імʼя обʼєкта RuntimeClass повинно бути дійсним [імʼям DNS-піддомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Імʼя обʼєкта RuntimeClass повинно бути дійсним [імʼям DNS-піддомену](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 {{< note >}}
-Рекомендується обмежити операції запису RuntimeClass (create/update/patch/delete), щоб вони були доступні тільки адміністраторам кластера. Це, як правило, типове значення. Докладніше див. [Огляд авторизації](/docs/reference/access-authn-authz/authorization/).
+Рекомендується обмежити операції запису RuntimeClass (create/update/patch/delete), щоб вони були доступні тільки адміністраторам кластера. Це, як правило, типове значення. Докладніше див. [Огляд авторизації](/uk/docs/reference/access-authn-authz/authorization/).
 {{< /note >}}
 
 ## Використання {#usage}
@@ -77,13 +77,13 @@ spec:
   # ...
 ```
 
-Це доручить kubelet використовувати названий RuntimeClass для запуску цього Podʼа. Якщо зазначений RuntimeClass не існує або CRI не може виконати відповідний handler, Pod увійде в термінальну [фазу](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) `Failed`. Шукайте відповідну [подію](/docs/tasks/debug/debug-application/debug-running-pod/) для отримання повідомлення про помилку.
+Це доручить kubelet використовувати названий RuntimeClass для запуску цього Podʼа. Якщо зазначений RuntimeClass не існує або CRI не може виконати відповідний handler, Pod увійде в термінальну [фазу](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) `Failed`. Шукайте відповідну [подію](/uk/docs/tasks/debug/debug-application/debug-running-pod/) для отримання повідомлення про помилку.
 
 Якщо `runtimeClassName` не вказано, буде використовуватися стандартний обробник, що еквівалентно поведінці при вимкненні функції RuntimeClass.
 
 ### Конфігурація CRI {#cri-configuration}
 
-Докладніше про налаштування CRI див. в [Інсталяції CRI](/docs/setup/production-environment/container-runtimes/).
+Докладніше про налаштування CRI див. в [Інсталяції CRI](/uk/docs/setup/production-environment/container-runtimes/).
 
 #### {{< glossary_tooltip term_id="containerd" >}}
 
@@ -118,7 +118,7 @@ spec:
 
 Якщо підтримувані вузли позначені, щоб завадити запуску інших Podʼів з іншим RuntimeClass на вузлі, ви можете додати `tolerations` до RuntimeClass. Як із `nodeSelector`, tolerations обʼєднуються з tolerations Pod у доступі, фактично беручи обʼєднання множини вузлів, які влаштовують всіх.
 
-Щоб дізнатися більше про налаштування селектора вузла і tolerations, див. [Призначення Podʼів вузлам](/docs/concepts/scheduling-eviction/assign-pod-node/).
+Щоб дізнатися більше про налаштування селектора вузла і tolerations, див. [Призначення Podʼів вузлам](/uk/docs/concepts/scheduling-eviction/assign-pod-node/).
 
 ### Надмірність Pod {#pod-overhead}
 
@@ -132,5 +132,5 @@ spec:
 
 - [Дизайн RuntimeClass](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/585-runtime-class/README.md)
 - [Дизайн планування RuntimeClass](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/585-runtime-class/README.md#runtimeclass-scheduling)
-- Читайте про концепцію [Надмірності Pod](/docs/concepts/scheduling-eviction/pod-overhead/)
+- Читайте про концепцію [Надмірності Pod](/uk/docs/concepts/scheduling-eviction/pod-overhead/)
 - [Дизайн функції PodOverhead](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/688-pod-overhead)

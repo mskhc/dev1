@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволяє випередження та зміну планування Podʼів на основі їх [пріоритетів](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
+Дозволяє випередження та зміну планування Podʼів на основі їх [пріоритетів](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/).

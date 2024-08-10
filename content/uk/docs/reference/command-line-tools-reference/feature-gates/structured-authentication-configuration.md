@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"  
 ---
-Вмикає [конфігурацію структурованої автентифікації](/docs/reference/access-authn-authz/authentication/#configuring-the-api-server) для сервера API.
+Вмикає [конфігурацію структурованої автентифікації](/uk/docs/reference/access-authn-authz/authentication/#configuring-the-api-server) для сервера API.

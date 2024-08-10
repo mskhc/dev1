@@ -131,7 +131,7 @@ kind: KubeProxyConfiguration
 
 Тип KubeProxyConfiguration слід використовувати для зміни конфігурації, що передається екземплярам kube-proxy, розгорнутим у кластері. Якщо цей обʼєкт не надано або надано лише частково, kubeadm застосовує стандартні значення.
 
-Офіційну документацію про kube-proxy можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/](/docs/reference/command-line-tools-reference/kube-proxy/) або https://pkg.go.dev/k8s.io/kube-proxy/config/v1alpha1#KubeProxyConfiguration.
+Офіційну документацію про kube-proxy можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/](/uk/docs/reference/command-line-tools-reference/kube-proxy/) або https://pkg.go.dev/k8s.io/kube-proxy/config/v1alpha1#KubeProxyConfiguration.
 
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -143,7 +143,7 @@ kind: KubeletConfiguration
 
 Тип KubeletConfiguration слід використовувати для зміни конфігурацій, які буде передано всім екземплярам kubelet, розгорнутим у кластері. Якщо цей обʼєкт не надано або надано лише частково, kubeadm застосовує стандартні налаштування.
 
-Офіційну документацію про kubelet можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/](/docs/reference/command-line-tools-reference/kubelet/) або https://pkg.go.dev/k8s.io/kubelet/config/v1beta1#KubeletConfiguration.
+Офіційну документацію про kubelet можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/](/uk/docs/reference/command-line-tools-reference/kubelet/) або https://pkg.go.dev/k8s.io/kubelet/config/v1beta1#KubeletConfiguration.
 
 Ось повністю заповнений приклад одного YAML-файлу, що містить декілька типів конфігурації для використання під час запуску `kubeadm init`.
 
@@ -328,7 +328,7 @@ BootstrapToken описує один bootstrap token, зберігається �
 </td>
 </tr>
 <tr><td><code>expires</code><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#time-v1-meta"><code>meta/v1.Time</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#time-v1-meta"><code>meta/v1.Time</code></a>
 </td>
 <td>
    <p><code>expires</code> вказує на момент, коли цей токен закінчує свою дію. Стандартно встановлюється динамічно під час виконання на основі <code>ttl</code>.
@@ -996,7 +996,7 @@ EnvVar представляє змінну середовища, присутн�
 <thead><tr><th width="30%">Поле</th><th>Опис</th></tr></thead>
 <tbody>
 <tr><td><code>EnvVar</code> <b>[Обовʼязкове]</b><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#envvar-v1-core"><code>core/v1.EnvVar</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#envvar-v1-core"><code>core/v1.EnvVar</code></a>
 </td>
 <td>(Члени <code>EnvVar</code> вбудовані в цей тип.)
    <span class="text-muted">Опис не надано.</span></td>
@@ -1137,7 +1137,7 @@ HostPathMount містить елементи, що описують томи, �
 </td>
 </tr>
 <tr><td><code>pathType</code><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#hostpathtype-v1-core"><code>core/v1.HostPathType</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#hostpathtype-v1-core"><code>core/v1.HostPathType</code></a>
 </td>
 <td>
    <p><code>pathType</code> — це тип <code>hostPath</code>.</p>
@@ -1324,7 +1324,7 @@ NodeRegistrationOptions містить поля, що стосуються ре�
 </td>
 </tr>
 <tr><td><code>taints</code> <b>[Обовʼязкове]</b><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p><code>taints</code><p><code>taints</code> вказує на taints, з якими обʼєкт Node API повинен бути зареєстрований. Якщо це поле не встановлено, тобто nil, воно буде стандартно з control-plane taint для вузлів control-plane. Якщо ви не хочете taint для вашого вузла control-plane, встановіть в це поле порожній список, тобто <code>taints: []</code> у YAML файлі. Це поле використовується виключно для реєстрації вузлів.</p>
@@ -1345,7 +1345,7 @@ NodeRegistrationOptions містить поля, що стосуються ре�
 </td>
 </tr>
 <tr><td><code>imagePullPolicy</code><br/>
-<a href="/docs/reference/generated/kubernetes-api/v1.30/#pullpolicy-v1-core"><code>core/v1.PullPolicy</code></a>
+<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#pullpolicy-v1-core"><code>core/v1.PullPolicy</code></a>
 </td>
 <td>
    <p><code>imagePullPolicy</code> вказує політику витягування образів під час <code>kubeadm init</code> та <code>join</code> операцій. Значення цього поля має бути одне з &quot;Always&quot;, &quot;IfNotPresent&quot; або &quot;Never&quot;. Якщо це поле не задане, kubeadm стандартно встановить його в &quot;IfNotPresent&quot;, або витягне необхідні образи, якщо вони не присутні на хості.</p>

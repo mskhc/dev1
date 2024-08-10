@@ -42,7 +42,7 @@ Secret зберігає секретні дані певного типу. За�
 
 - **type** (string)
 
-  Використовується для полегшення програмної обробки секретних даних. Більше інформації: [https://kubernetes.io/docs/concepts/configuration/secret/#secret-types](/docs/concepts/configuration/secret/#secret-types).
+  Використовується для полегшення програмної обробки секретних даних. Більше інформації: [https://kubernetes.io/docs/concepts/configuration/secret/#secret-types](/uk/docs/concepts/configuration/secret/#secret-types).
 
 ## SecretList {#SecretList}
 
@@ -60,7 +60,7 @@ SecretList — це список обʼєктів Secret.
 
 - **items** ([][Secret](../config-and-storage-resources/secret-v1#Secret)), обовʼязково
 
-  Items — це список секретних обʼєктів. Більше інформації: [https://kubernetes.io/docs/concepts/configuration/secret](/docs/concepts/configuration/secret)
+  Items — це список секретних обʼєктів. Більше інформації: [https://kubernetes.io/docs/concepts/configuration/secret](/uk/docs/concepts/configuration/secret)
 
 ## Операції {#operations}
 

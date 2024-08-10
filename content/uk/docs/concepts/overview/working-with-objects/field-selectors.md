@@ -10,7 +10,7 @@ _Селектори полів_ дозволяють вам вибирати о�
 * `metadata.namespace!=default`
 * `status.phase=Pending`
 
-Ця команда `kubectl` вибирає всі Podʼи, для яких значення поля [`status.phase`](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) дорівнює `Running`:
+Ця команда `kubectl` вибирає всі Podʼи, для яких значення поля [`status.phase`](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase) дорівнює `Running`:
 
 ```shell
 kubectl get pods --field-selector status.phase=Running
@@ -55,13 +55,13 @@ kubectl get services  --all-namespaces --field-selector metadata.namespace!=defa
 ```
 
 {{< note >}}
-[Оператори на основі множини](/docs/concepts/overview/working-with-objects/labels/#set-based-requirement)
+[Оператори на основі множини](/uk/docs/concepts/overview/working-with-objects/labels/#set-based-requirement)
 (`in`, `notin`, `exists`) не підтримуються для селекторів полів.
 {{< /note >}}
 
 ## Ланцюжки селекторів {#chained-selectors}
 
-Як і з [мітками](/docs/concepts/overview/working-with-objects/labels) та іншими селекторами, селектори полів можна складати у список, розділений комами. Ця команда `kubectl` вибирає всі Podʼи, для яких значення `status.phase` не дорівнює `Running`, а поле `spec.restartPolicy` дорівнює `Always`:
+Як і з [мітками](/uk/docs/concepts/overview/working-with-objects/labels) та іншими селекторами, селектори полів можна складати у список, розділений комами. Ця команда `kubectl` вибирає всі Podʼи, для яких значення `status.phase` не дорівнює `Running`, а поле `spec.restartPolicy` дорівнює `Always`:
 
 ```shell
 kubectl get pods --field-selector=status.phase!=Running,spec.restartPolicy=Always

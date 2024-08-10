@@ -2,7 +2,7 @@
 title: Minikube
 id: minikube
 date: 2018-04-12
-full_link: /docs/setup/learning-environment/minikube/
+full_link: /uk/docs/setup/learning-environment/minikube/
 short_description: >
   Інструмент для локального запуску Kubernetes.
 
@@ -16,4 +16,4 @@ tags:
 
 <!--more-->
 
-Minikube запускає кластер з одного вузла всередині віртуальної машини на вашому компʼютері. Ви можете використовувати Minikube для того, щоб [ознайомитись з Kubernetes у навчальному середовищі](/docs/setup/learning-environment/).
+Minikube запускає кластер з одного вузла всередині віртуальної машини на вашому компʼютері. Ви можете використовувати Minikube для того, щоб [ознайомитись з Kubernetes у навчальному середовищі](/uk/docs/setup/learning-environment/).

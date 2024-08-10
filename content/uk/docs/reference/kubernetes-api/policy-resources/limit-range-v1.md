@@ -85,7 +85,7 @@ LimitRangeList — це список елементів LimitRange.
 
 - **items** ([]<a href="{{< ref "../policy-resources/limit-range-v1#LimitRange" >}}">LimitRange</a>), обовʼязкове
 
-  Items — це список обʼєктів LimitRange. Докладніше: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+  Items — це список обʼєктів LimitRange. Докладніше: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](/uk/docs/concepts/configuration/manage-resources-containers/)
 
 ## Операції {#operations}
 

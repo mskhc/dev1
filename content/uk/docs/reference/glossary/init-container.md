@@ -2,7 +2,7 @@
 title: Контейнер ініціалізації
 id: init-container
 date: 2018-04-12
-full_link: /docs/concepts/workloads/pods/init-containers/
+full_link: /uk/docs/concepts/workloads/pods/init-containers/
 short_description: >
   Один чи кілька контейнерів ініціалізації, які повинні повністю виконати та завершити дію, перед тим як будь-які контейнери застосунків почнуть виконуватися.
 
@@ -20,4 +20,4 @@ tags:
 
 На відміну від {{<glossary_tooltip text="sidecar контейнерів" term_id="sidecar-container">}} контейнери ініціалізації не залишаються працювати після запуску Podʼа.
 
-Докладніше дивіться [контейнери ініціалізації](/docs/concepts/workloads/pods/init-containers/).
+Докладніше дивіться [контейнери ініціалізації](/uk/docs/concepts/workloads/pods/init-containers/).

@@ -17,4 +17,4 @@ stages:
 
 removed: true
 ---
-Припиняє автоматичне створення [токенів службових облікових записів](/docs/concepts/security/service-accounts/#get-a-token) на основі Secret.
+Припиняє автоматичне створення [токенів службових облікових записів](/uk/docs/concepts/security/service-accounts/#get-a-token) на основі Secret.

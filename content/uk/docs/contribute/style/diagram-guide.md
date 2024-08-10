@@ -57,10 +57,10 @@ click V "https://mermaid-js.github.io/mermaid-live-editor/edit/#pako:eNqNkkFr2zA
 
 * Знання основ markdown.
 * Користуватись онлайн редактором Mermaid.
-* Користуватись [Hugo shortcodes](/docs/contribute/style/hugo-shortcodes/).
+* Користуватись [Hugo shortcodes](/uk/docs/contribute/style/hugo-shortcodes/).
 * Користуватись [Hugo shortcode {{</* figure */>}}](https://gohugo.io/content-management/shortcodes/#figure).
-* Виконувати [локальний перегляд в Hugo](/docs/contribute/new-content/open-a-pr/#preview-locally).
-* Знати як брати участь у [створенні нового контенту](/docs/contribute/new-content/).
+* Виконувати [локальний перегляд в Hugo](/uk/docs/contribute/new-content/open-a-pr/#preview-locally).
+* Знати як брати участь у [створенні нового контенту](/uk/docs/contribute/new-content/).
 
 {{< note >}}
 Ви можете клацнути на будь-яку діаграму в цьому розділі, щоб перейти до онлайн редактора Mermaid для ознайомлення з нею та редагування
@@ -227,7 +227,7 @@ more text
 * Відсутність необхідності окремої обробки файлів зображень `.svg`.
 * Текст контенту, код діаграми та підпис до діаграми знаходяться в одному файлі `.md`.
 
-Ви повинні використовувати [локальний](/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд для перевірки правильного показу діаграми.
+Ви повинні використовувати [локальний](/uk/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд для перевірки правильного показу діаграми.
 
 {{< caution >}}
 Набір функцій в онлайн редакторі Mermaid може не підтримувати набір функцій Mermaid в проєкті [kubernetes/website](https://github.com/kubernetes/website). Також слід зазначити, що учасники можуть згадувати `kubernetes/website` як `k/website`. Якщо ви бачите синтаксичну помилку або пустий екран після побудови Hugo, розгляньте можливість використання методу Mermaid+SVG.
@@ -307,7 +307,7 @@ Shortcode "\{\{< figure >}}" є рекомендованим методом дл
 * Використання існуючих методів [kubernetes/website](https://github.com/kubernetes/website) для обробки файлів зображень `.svg`.
 * Середовище не вимагає підтримки Mermaid.
 
-Переконайтеся, що ваша діаграма правильно відображається, використовуючи [локальний](/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
+Переконайтеся, що ваша діаграма правильно відображається, використовуючи [локальний](/uk/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
 
 ### Зовнішні інструменти {#extrenal-tool}
 
@@ -362,7 +362,7 @@ click E "https://mermaid-js.github.io/mermaid-live-editor/edit/#pako:eNp9kttu00A
 
 Якщо ваш зовнішній інструмент малювання дозволяє:
 
-* Ви можете включати кілька логотипів `.svg` або `.png`, іконок та зображень у свою діаграму. Однак, переконайтеся, що ви дотримуєтеся авторських прав і дотримуєтесь [керівництва](/docs/contribute/style/content-guide/) Kubernetes щодо використання контенту третіх сторін.
+* Ви можете включати кілька логотипів `.svg` або `.png`, іконок та зображень у свою діаграму. Однак, переконайтеся, що ви дотримуєтеся авторських прав і дотримуєтесь [керівництва](/uk/docs/contribute/style/content-guide/) Kubernetes щодо використання контенту третіх сторін.
 * Ви повинні зберегти координати діаграми для подальшого доступу інших учасників. Наприклад, ваш інструмент може надати посилання на зображення діаграми, або ви можете зберегти файл з вихідним кодом, наприклад `.xml`, для доступу інших учасників.
 
 Для отримання додаткової інформації про логотипи та зображення K8s і CNCF, зверніться до розділу [CNCF Artwork](https://github.com/cncf/artwork).
@@ -372,7 +372,7 @@ click E "https://mermaid-js.github.io/mermaid-live-editor/edit/#pako:eNp9kttu00A
 * Учасники добре знайомі з зовнішнім інструментом.
 * Діаграми потребують більше деталей, ніж може надати Mermaid.
 
-Не забудьте перевірити, чи правильно відображається ваша діаграма, використовуючи [локальний](/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
+Не забудьте перевірити, чи правильно відображається ваша діаграма, використовуючи [локальний](/uk/docs/contribute/new-content/open-a-pr/#preview-locally) та Netlify попередній перегляд.
 
 ## Приклади {#examples}
 
@@ -384,7 +384,7 @@ click E "https://mermaid-js.github.io/mermaid-live-editor/edit/#pako:eNp9kttu00A
 
 ### Приклад 1 — Обмеження на поширення топології Podʼів {#example-1-pod-topology-spread-constraints}
 
-Схема 6 показує діаграму зі сторінки [Обмеження на поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels)
+Схема 6 показує діаграму зі сторінки [Обмеження на поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels)
 
 {{< mermaid >}}
     graph TB
@@ -437,7 +437,7 @@ graph TB
 
 ### Приклад 2 – Ingress {#example-2-ingress}
 
-Схема 7 показує діаграму, що зʼявляється на сторінці [Що таке Ingress](/docs/concepts/services-networking/ingress/#what-is-ingress).
+Схема 7 показує діаграму, що зʼявляється на сторінці [Що таке Ingress](/uk/docs/concepts/services-networking/ingress/#what-is-ingress).
 
 {{< mermaid >}}
 graph LR;
@@ -636,7 +636,7 @@ click C "https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNptkctOwkAY
 {{</* figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="/docs/concepts/overview/components/" */>}}
 ```
 
-{{< figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="/docs/concepts/overview/components/" >}}
+{{< figure src="/images/docs/components-of-kubernetes.svg" alt="Kubernetes pod running inside a cluster" class="diagram-large" caption="Схема 10. Архітектура Kubernetes." link="/uk/docs/concepts/overview/components/" >}}
 
 ## Поради {#tips}
 

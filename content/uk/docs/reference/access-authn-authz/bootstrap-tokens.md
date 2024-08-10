@@ -10,7 +10,7 @@ weight: 20
 
 {{< feature-state for_k8s_version="v1.18" state="stable" >}}
 
-Bootstrap-токени — це простий токен на предʼявника, який призначений для використання під час створення нових кластерів або приєднання нових вузлів до наявного кластера. Він був створений для підтримки [kubeadm](/docs/reference/setup-tools/kubeadm/), але може використовуватися в інших контекстах для користувачів, які бажають створювати кластери без `kubeadm`. Також він призначений для роботи, через політику RBAC, з [kubelet TLS Bootstrapping](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/).
+Bootstrap-токени — це простий токен на предʼявника, який призначений для використання під час створення нових кластерів або приєднання нових вузлів до наявного кластера. Він був створений для підтримки [kubeadm](/uk/docs/reference/setup-tools/kubeadm/), але може використовуватися в інших контекстах для користувачів, які бажають створювати кластери без `kubeadm`. Також він призначений для роботи, через політику RBAC, з [kubelet TLS Bootstrapping](/uk/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/).
 
 <!-- body -->
 
@@ -92,7 +92,7 @@ stringData:
 
 ## Управління токенами за допомогою kubeadm {#managing-tokens-with-kubeadm}
 
-Ви можете використовувати інструмент `kubeadm` для управління токенами на запущеному кластері. Деталі дивіться в документації [kubeadm token](/docs/reference/setup-tools/kubeadm/kubeadm-token/).
+Ви можете використовувати інструмент `kubeadm` для управління токенами на запущеному кластері. Деталі дивіться в документації [kubeadm token](/uk/docs/reference/setup-tools/kubeadm/kubeadm-token/).
 
 ## Підпис ConfigMap {#configmap-signing}
 
@@ -138,4 +138,4 @@ data:
 Будь-яка сторона з токеном завантаження може створити дійсний підпис для цього токена. Коли використовується підпис ConfigMap, не рекомендується ділитися одним токеном з багатьма клієнтами, оскільки скомпрометований клієнт може потенційно провести атаку "людина посередині" на іншого клієнта, який покладається на підпис для завантаження довіри TLS.
 {{< /warning >}}
 
-Додаткову інформацію можна знайти в розділі [докладні відомості про реалізацію kubeadm](/docs/reference/setup-tools/kubeadm/implementation-details/).
+Додаткову інформацію можна знайти в розділі [докладні відомості про реалізацію kubeadm](/uk/docs/reference/setup-tools/kubeadm/implementation-details/).

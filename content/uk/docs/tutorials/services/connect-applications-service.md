@@ -50,7 +50,7 @@ kubectl get pods -l run=my-nginx -o custom-columns=POD_IP:.status.podIPs
 
 Ви повинні мати можливість увійти у будь-який вузол у своєму кластері за допомогою SSH і використовувати інструмент, такий як `curl`, щоб робити запити до обох IP-адрес. Зверніть увагу, що контейнери *не* використовують порт 80 на вузлі, і немає жодних спеціальних правил NAT для маршрутизації трафіку до Podʼів. Це означає, що ви можете запустити кілька Podʼів nginx на одному й тому ж вузлі, використовуючи той же `containerPort`, і отримувати доступ до них з будь-якого іншого Podʼа або вузла у вашому кластері, використовуючи призначену IP адресу Podʼа. Якщо ви хочете організувати перенаправлення певного порту на хості Вузла на резервні Podʼи, ви можете це зробити — але модель мережі повинна передбачати, що вам не потрібно цього робити.
 
-Ви можете прочитати більше про [Модель мережі Kubernetes](/docs/concepts/cluster-administration/networking/) якщо вас це цікавить.
+Ви можете прочитати більше про [Модель мережі Kubernetes](/uk/docs/concepts/cluster-administration/networking/) якщо вас це цікавить.
 
 ## Створення Service {#creating-a-service}
 
@@ -117,14 +117,14 @@ NAME             ADDRESSTYPE   PORTS   ENDPOINTS               AGE
 my-nginx-7vzhx   IPv4          80      10.244.2.5,10.244.3.4   21s
 ```
 
-Тепер ви повинні бути в змозі звертатися до nginx Service на `<CLUSTER-IP>:<PORT>` з будь-якого вузла у вашому кластері. Зауважте, що IP-адреса Service є повністю віртуальною, вона ніколи не передається мережею. Якщо вам цікаво, як це працює, ви можете прочитати більше про [сервіс-проксі](/docs/reference/networking/virtual-ips/).
+Тепер ви повинні бути в змозі звертатися до nginx Service на `<CLUSTER-IP>:<PORT>` з будь-якого вузла у вашому кластері. Зауважте, що IP-адреса Service є повністю віртуальною, вона ніколи не передається мережею. Якщо вам цікаво, як це працює, ви можете прочитати більше про [сервіс-проксі](/uk/docs/reference/networking/virtual-ips/).
 
 ## Доступ до Service {#accessing-the-service}
 
 Kubernetes підтримує два основні режими знаходження Service — змінні середовища та DNS. Перший режим працює "з коробки", тоді як другий вимагає додаткового модуля [CoreDNS cluster addon](https://releases.k8s.io/v{{< skew currentPatchVersion >}}/cluster/addons/dns/coredns).
 
 {{< note >}}
-Якщо змінні середовища для сервісів не потрібні (через можливі конфлікти з очікуваннями програмам, занадто багато змінних для обробки, використання лише DNS тощо), ви можете вимкнути цей режим, встановивши прапорець `enableServiceLinks` у значення `false` в [pod spec](/docs/reference/generated/kubernetes-api/v{{< skew latestVersion >}}/#pod-v1-core).
+Якщо змінні середовища для сервісів не потрібні (через можливі конфлікти з очікуваннями програмам, занадто багато змінних для обробки, використання лише DNS тощо), ви можете вимкнути цей режим, встановивши прапорець `enableServiceLinks` у значення `false` в [pod spec](/uk/docs/reference/generated/kubernetes-api/v{{< skew latestVersion >}}/#pod-v1-core).
 {{< /note >}}
 
 ### Змінні середовища {#environment-variables}
@@ -182,7 +182,7 @@ NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)         AGE
 kube-dns   ClusterIP   10.0.0.10    <none>        53/UDP,53/TCP   8m
 ```
 
-Далі в цьому розділі ми будемо вважати, що у вас є Service із довготривалою IP-адресою (my-nginx), і DNS-сервер, який присвоїв цій IP-адресі імʼя. Ми використовуємо надбудову CoreDNS (назва застосунку `kube-dns`), тому ви можете звертатися до Service з будь-якого Pod у вашому кластері, використовуючи стандартні методи (наприклад, `gethostbyname()`). Якщо CoreDNS не працює, ви можете увімкнути його, звірившись з [README CoreDNS](https://github.com/coredns/deployment/tree/master/kubernetes) або інформацією з [Встановлення CoreDNS](/docs/tasks/administer-cluster/coredns/#installing-coredns). Запустімо ще один застосунок curl для перевірки цього:
+Далі в цьому розділі ми будемо вважати, що у вас є Service із довготривалою IP-адресою (my-nginx), і DNS-сервер, який присвоїв цій IP-адресі імʼя. Ми використовуємо надбудову CoreDNS (назва застосунку `kube-dns`), тому ви можете звертатися до Service з будь-якого Pod у вашому кластері, використовуючи стандартні методи (наприклад, `gethostbyname()`). Якщо CoreDNS не працює, ви можете увімкнути його, звірившись з [README CoreDNS](https://github.com/coredns/deployment/tree/master/kubernetes) або інформацією з [Встановлення CoreDNS](/uk/docs/tasks/administer-cluster/coredns/#installing-coredns). Запустімо ще один застосунок curl для перевірки цього:
 
 ```shell
 kubectl run curl --image=radial/busyboxplus:curl -i --tty --rm
@@ -210,7 +210,7 @@ Address 1: 10.0.162.149
 
 * Самопідписні сертифікати для https (якщо у вас немає ідентифікаційного сертифіката)
 * Сервер nginx, налаштований для використання сертифікатів
-* [Secret](/docs/concepts/configuration/secret/), що робить сертифікати доступними для Pod
+* [Secret](/uk/docs/concepts/configuration/secret/), що робить сертифікати доступними для Pod
 
 Ви можете отримати все це з [прикладу nginx https](https://github.com/kubernetes/examples/tree/master/staging/https-nginx/). Це вимагає встановлення інструментів go та make. Якщо ви не хочете їх встановлювати, тоді дотримуйтесь ручних кроків, описаних нижче. Коротко:
 
@@ -453,6 +453,6 @@ LoadBalancer Ingress:   a320587ffd19711e5a37606cf4a74574-1142138393.us-east-1.el
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Використання Service для доступу до застосунку в кластері](/docs/tasks/access-application-cluster/service-access-application-cluster/)
-* Дізнайтеся більше про [Зʼєднання фронтенду з бекендом за допомогою Service](/docs/tasks/access-application-cluster/connecting-frontend-backend/)
-* Дізнайтеся більше про [Створення зовнішнього балансувальника навантаження](/docs/tasks/access-application-cluster/create-external-load-balancer/)
+* Дізнайтеся більше про [Використання Service для доступу до застосунку в кластері](/uk/docs/tasks/access-application-cluster/service-access-application-cluster/)
+* Дізнайтеся більше про [Зʼєднання фронтенду з бекендом за допомогою Service](/uk/docs/tasks/access-application-cluster/connecting-frontend-backend/)
+* Дізнайтеся більше про [Створення зовнішнього балансувальника навантаження](/uk/docs/tasks/access-application-cluster/create-external-load-balancer/)

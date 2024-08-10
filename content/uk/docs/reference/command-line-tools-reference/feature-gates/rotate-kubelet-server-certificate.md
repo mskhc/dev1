@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.12"
 ---
-Вмикає ротацію серверного TLS-сертифікату в kubelet. Дивіться [kubelet configuration](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/#kubelet-configuration) для більш детальної інформації.
+Вмикає ротацію серверного TLS-сертифікату в kubelet. Дивіться [kubelet configuration](/uk/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/#kubelet-configuration) для більш детальної інформації.

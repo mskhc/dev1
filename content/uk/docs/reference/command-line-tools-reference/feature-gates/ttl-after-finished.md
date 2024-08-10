@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Дозволити [TTL-контролеру](/docs/concepts/workloads/controllers/ttlafterfinished/) очищати ресурси після завершення їх виконання.
+Дозволити [TTL-контролеру](/uk/docs/concepts/workloads/controllers/ttlafterfinished/) очищати ресурси після завершення їх виконання.

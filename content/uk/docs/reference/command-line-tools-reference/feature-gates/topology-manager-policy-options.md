@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.28"
 ---
-Вмикає [тонке налаштування](/docs/tasks/administer-cluster/topology-manager/#topology-manager-policy-options) політик менеджера топології.
+Вмикає [тонке налаштування](/uk/docs/tasks/administer-cluster/topology-manager/#topology-manager-policy-options) політик менеджера топології.

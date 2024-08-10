@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє автоматичне позначення вузлів taints на основі [станів вузлів](/docs/concepts/architecture/nodes/#condition).
+Дозволяє автоматичне позначення вузлів taints на основі [станів вузлів](/uk/docs/concepts/architecture/nodes/#condition).

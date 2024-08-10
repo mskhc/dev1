@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.26"  
 ---
-Присвоює кожному серверу API ідентифікатор у кластері, використовуючи [Lease](/docs/concepts/architecture/leases).
+Присвоює кожному серверу API ідентифікатор у кластері, використовуючи [Lease](/uk/docs/concepts/architecture/leases).

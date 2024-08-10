@@ -2,7 +2,7 @@
 title: API Kubernetes 
 id: kubernetes-api
 date: 2018-04-12
-full_link: /docs/concepts/overview/kubernetes-api/
+full_link: /uk/docs/concepts/overview/kubernetes-api/
 short_description: >
   Застосунок, який обслуговує функціонал Kubernetes через RESTful інтерфейс та зберігає стан кластера.
 

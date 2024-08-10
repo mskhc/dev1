@@ -138,7 +138,7 @@ ResourceClaims можуть бути виділені відразу після 
 
 ## Моніторинг ресурсів {#monitoring-resources}
 
-Kubelet надає службу gRPC для забезпечення виявлення динамічних ресурсів запущених Podʼів. Для отримання додаткової інформації про точки доступу gRPC дивіться [звіт про виділення ресурсів](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
+Kubelet надає службу gRPC для забезпечення виявлення динамічних ресурсів запущених Podʼів. Для отримання додаткової інформації про точки доступу gRPC дивіться [звіт про виділення ресурсів](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
 
 ## Попередньо заплановані Podʼи {#pre-scheduled-pods}
 
@@ -167,7 +167,7 @@ spec:
 
 ## Увімкнення динамічного виділення ресурсів {#enabling-dynamic-resource-allocation}
 
-Динамічне виділення ресурсів є *альфа-функцією* та увімкнуто лише тоді, коли увімкнуто [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `DynamicResourceAllocation` та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `resource.k8s.io/v1alpha2`. Для отримання деталей щодо цього дивіться параметри [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/) `--feature-gates` та `--runtime-config`. Також варто увімкнути цю функцію в kube-scheduler, kube-controller-manager та kubelet.
+Динамічне виділення ресурсів є *альфа-функцією* та увімкнуто лише тоді, коли увімкнуто [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `DynamicResourceAllocation` та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `resource.k8s.io/v1alpha2`. Для отримання деталей щодо цього дивіться параметри [kube-apiserver](/uk/docs/reference/command-line-tools-reference/kube-apiserver/) `--feature-gates` та `--runtime-config`. Також варто увімкнути цю функцію в kube-scheduler, kube-controller-manager та kubelet.
 
 Швидка перевірка того, чи підтримує кластер Kubernetes цю функцію, полягає у виведенні обʼєктів ResourceClass за допомогою наступної команди:
 

@@ -54,4 +54,4 @@ kubeadm статично розгортає кластер etcd. Ознайом�
 
 ## {{% heading "whatsnext" %}}
 
-- [Встановлення високодоступного кластера з kubeadm](/docs/setup/production-environment/tools/kubeadm/high-availability/)
+- [Встановлення високодоступного кластера з kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/high-availability/)

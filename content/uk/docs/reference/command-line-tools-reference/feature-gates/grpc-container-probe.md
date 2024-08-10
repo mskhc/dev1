@@ -21,4 +21,4 @@ stages:
 
 removed: true  
 ---
-Вмикає метод gRPC для {Liveness,Readiness,Startup}Probe. Див. розділ [Налаштування проб життєздатності, готовності та запуску](/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-grpc-liveness-probe).
+Вмикає метод gRPC для {Liveness,Readiness,Startup}Probe. Див. розділ [Налаштування проб життєздатності, готовності та запуску](/uk/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-grpc-liveness-probe).

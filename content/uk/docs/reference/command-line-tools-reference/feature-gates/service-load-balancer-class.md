@@ -24,4 +24,4 @@ stages:
 removed: true
 ---
 Вмикає поле `loadBalancerClass` у Services. Див.
-[Вказання класу реалізації балансувальника навантаження](/docs/concepts/services-networking/service/#load-balancer-class)
+[Вказання класу реалізації балансувальника навантаження](/uk/docs/concepts/services-networking/service/#load-balancer-class)

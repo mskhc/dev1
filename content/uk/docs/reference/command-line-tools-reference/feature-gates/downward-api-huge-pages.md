@@ -25,4 +25,4 @@ stages:
 
 removed: true  
 ---
-Вмикає використання великих сторінок (hugepages) у [downward API](/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information).
+Вмикає використання великих сторінок (hugepages) у [downward API](/uk/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information).

@@ -173,12 +173,12 @@ rules:
 
 ## {{% heading "whatsnext" %}}
 
-- [Адміністрування менеджера контролера хмар](/docs/tasks/administer-cluster/running-cloud-controller/#cloud-controller-manager) містить інструкції щодо запуску та управління менеджером контролера хмар.
+- [Адміністрування менеджера контролера хмар](/uk/docs/tasks/administer-cluster/running-cloud-controller/#cloud-controller-manager) містить інструкції щодо запуску та управління менеджером контролера хмар.
 
-- Щодо оновлення панелі управління з розділеною доступністю для використання менеджера контролера хмар, див. [Міграція реплікованої панелі управління для використання менеджера контролера хмар](/docs/tasks/administer-cluster/controller-manager-leader-migration/).
+- Щодо оновлення панелі управління з розділеною доступністю для використання менеджера контролера хмар, див. [Міграція реплікованої панелі управління для використання менеджера контролера хмар](/uk/docs/tasks/administer-cluster/controller-manager-leader-migration/).
 
 - Хочете знати, як реалізувати свій власний менеджер контролера хмар або розширити поточний проєкт?
 
   - Менеджер контролера хмар використовує інтерфейси Go, зокрема, інтерфейс `CloudProvider`, визначений у [`cloud.go`](https://github.com/kubernetes/cloud-provider/blob/release-1.21/cloud.go#L42-L69) з [kubernetes/cloud-provider](https://github.com/kubernetes/cloud-provider), щоб дозволити використовувати імплементації з будь-якої хмари.
   - Реалізація загальних контролерів, виділених у цьому документі (Node, Route та Service), разом із загальним інтерфейсом хмарного постачальника, є частиною ядра Kubernetes. Реалізації, специфічні для постачальників хмари, знаходяться поза ядром Kubernetes і реалізують інтерфейс `CloudProvider`.
-  - Для отримання додаткової інформації щодо розробки втулків, див. [Розробка менеджера контролера хмар](/docs/tasks/administer-cluster/developing-cloud-controller-manager/).
+  - Для отримання додаткової інформації щодо розробки втулків, див. [Розробка менеджера контролера хмар](/uk/docs/tasks/administer-cluster/developing-cloud-controller-manager/).

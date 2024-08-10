@@ -2,7 +2,7 @@
 title: Kubelet
 id: kubelet
 date: 2018-04-12
-full_link: /docs/reference/generated/kubelet
+full_link: /uk/docs/reference/generated/kubelet
 short_description: >
   Агент, запущений на кожному вузлі кластера. Забезпечує запуск і роботу контейнерів у Podʼах.
 
@@ -16,4 +16,4 @@ tags:
 
 <!--more-->
 
-[kubelet](/docs/reference/command-line-tools-reference/kubelet/) використовує специфікації PodSpecs, які надаються за допомогою різних механізмів, і забезпечує працездатність і справність усіх контейнерів, що описані у PodSpecs. kubelet керує лише тими контейнерами, що були створені Kubernetes.
+[kubelet](/uk/docs/reference/command-line-tools-reference/kubelet/) використовує специфікації PodSpecs, які надаються за допомогою різних механізмів, і забезпечує працездатність і справність усіх контейнерів, що описані у PodSpecs. kubelet керує лише тими контейнерами, що були створені Kubernetes.

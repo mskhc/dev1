@@ -18,4 +18,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Дозволяє встановлювати поле `SchedulingGates` для керування [готовністю до виселення за розкладом] (/docs/concepts/scheduling-eviction/pod-scheduling-readiness).
+Дозволяє встановлювати поле `SchedulingGates` для керування [готовністю до виселення за розкладом](/uk/docs/concepts/scheduling-eviction/pod-scheduling-readiness).

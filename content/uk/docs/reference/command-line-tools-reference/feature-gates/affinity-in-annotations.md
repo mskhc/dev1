@@ -18,4 +18,4 @@ stages:
 
 removed: true
 ---
-Вмикає встановлення [Спорідненість та антиспорідненість Podʼів](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity).
+Вмикає встановлення [Спорідненість та антиспорідненість Podʼів](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity).

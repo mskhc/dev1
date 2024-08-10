@@ -6,7 +6,7 @@ weight: 60
 
 <!-- overview -->
 
-Коли ви підʼєднали свій застосунок до Service, дотримуючись кроків, схожих на ті, що описані в [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/), у вас є постійно працюючий, реплікований застосунок, який викритий в мережі. Цей посібник допоможе вам розглянути процес завершення роботи для Podʼів та дослідити способи впровадження належного припинення зʼєднань.
+Коли ви підʼєднали свій застосунок до Service, дотримуючись кроків, схожих на ті, що описані в [Підключення застосунків за допомогою Service](/uk/docs/tutorials/services/connect-applications-service/), у вас є постійно працюючий, реплікований застосунок, який викритий в мережі. Цей посібник допоможе вам розглянути процес завершення роботи для Podʼів та дослідити способи впровадження належного припинення зʼєднань.
 
 <!-- body -->
 
@@ -20,7 +20,7 @@ weight: 60
 
 ## Приклад процесу з завершенням роботи точки доступу {#example-flow-with-endpoint-termination}
 
-Наведений нижче приклад показує описаний у документі [Завершення роботи Podʼів](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) процес.
+Наведений нижче приклад показує описаний у документі [Завершення роботи Podʼів](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) процес.
 
 Допустимо, у вас є Deployment, яка складається з одної репліки `nginx` (для демонстраційних цілей) та Service:
 
@@ -151,7 +151,7 @@ kubectl get endpointslice -o json nginx-service-6tjbr
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся, як [Підключати застосунки за допомогою Service](/docs/tutorials/services/connect-applications-service/)
-* Дізнайтеся більше про [Використання Service для доступу до застосунку у кластері](/docs/tasks/access-application-cluster/service-access-application-cluster/)
-* Дізнайтеся більше про [Зʼєднання фронтенду з бекендом за допомогою Service](/docs/tasks/access-application-cluster/connecting-frontend-backend/)
-* Дізнайтеся більше про [Створення зовнішнього балансувальника навантаження](/docs/tasks/access-application-cluster/create-external-load-balancer/)
+* Дізнайтеся, як [Підключати застосунки за допомогою Service](/uk/docs/tutorials/services/connect-applications-service/)
+* Дізнайтеся більше про [Використання Service для доступу до застосунку у кластері](/uk/docs/tasks/access-application-cluster/service-access-application-cluster/)
+* Дізнайтеся більше про [Зʼєднання фронтенду з бекендом за допомогою Service](/uk/docs/tasks/access-application-cluster/connecting-frontend-backend/)
+* Дізнайтеся більше про [Створення зовнішнього балансувальника навантаження](/uk/docs/tasks/access-application-cluster/create-external-load-balancer/)

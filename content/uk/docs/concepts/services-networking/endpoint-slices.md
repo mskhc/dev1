@@ -16,13 +16,13 @@ description: >-
 
 {{< feature-state for_k8s_version="v1.21" state="stable" >}}
 
-EndpointSlice API Kubernetes надає можливість відстежувати мережеві точки доступу в межах кластера Kubernetes. EndpointSlices пропонують більш масштабований та розширюваний альтернативний варіант [Endpoints](/docs/concepts/services-networking/service/#endpoints).
+EndpointSlice API Kubernetes надає можливість відстежувати мережеві точки доступу в межах кластера Kubernetes. EndpointSlices пропонують більш масштабований та розширюваний альтернативний варіант [Endpoints](/uk/docs/concepts/services-networking/service/#endpoints).
 
 <!-- body -->
 
 ## EndpointSlice API {#endpointslice-resource}
 
-У Kubernetes, EndpointSlice містить посилання на набір мережевих точок доступу. Панель управління автоматично створює EndpointSlices для будь-якої служби Kubernetes, яка має вказаний {{<glossary_tooltip text="селектор" term_id="selector">}}. Ці EndpointSlices містять посилання на всі Podʼи, які відповідають селектору Service. EndpointSlices групують мережеві точки доступу за унікальними комбінаціями протоколу, номеру порту та імені Service. Імʼя обʼєкта EndpointSlice повинно бути дійсним [імʼям піддомену DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+У Kubernetes, EndpointSlice містить посилання на набір мережевих точок доступу. Панель управління автоматично створює EndpointSlices для будь-якої служби Kubernetes, яка має вказаний {{<glossary_tooltip text="селектор" term_id="selector">}}. Ці EndpointSlices містять посилання на всі Podʼи, які відповідають селектору Service. EndpointSlices групують мережеві точки доступу за унікальними комбінаціями протоколу, номеру порту та імені Service. Імʼя обʼєкта EndpointSlice повинно бути дійсним [імʼям піддомену DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 Наприклад, ось приклад обʼєкта EndpointSlice, яким володіє Service Kubernetes з імʼям `example`.
 
@@ -173,6 +173,6 @@ EndpointSlices також включили інновації щодо нови�
 
 ## {{% heading "whatsnext" %}}
 
-* Ознайомтесь з [Підключенням застосунків до Service](/docs/tutorials/services/connect-applications-service/)
-* Прочитайте [довідку](/docs/reference/kubernetes-api/service-resources/endpoint-slice-v1/) API EndpointSlice
-* Прочитайте [довідку](/docs/reference/kubernetes-api/service-resources/endpoints-v1/) API Endpoints
+* Ознайомтесь з [Підключенням застосунків до Service](/uk/docs/tutorials/services/connect-applications-service/)
+* Прочитайте [довідку](/uk/docs/reference/kubernetes-api/service-resources/endpoint-slice-v1/) API EndpointSlice
+* Прочитайте [довідку](/uk/docs/reference/kubernetes-api/service-resources/endpoints-v1/) API Endpoints

@@ -18,19 +18,19 @@ Kubernetes покладається на активне переписуванн
 
 ## {{% heading "prerequisites" %}}
 
-Встановіть [`kubectl`](/docs/tasks/tools/#kubectl).
+Встановіть [`kubectl`](/uk/docs/tasks/tools/#kubectl).
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Переконайтеся, що у вашому кластері увімкнено [функціональні можливості](/docs/reference/command-line-tools-reference/feature-gates/) `StorageVersionMigrator` та `InformerResourceVersion`. Для внесення цих змін вам знадобиться доступ адміністратора панелі управління.
+Переконайтеся, що у вашому кластері увімкнено [функціональні можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `StorageVersionMigrator` та `InformerResourceVersion`. Для внесення цих змін вам знадобиться доступ адміністратора панелі управління.
 
-Увімкніть REST API для міграції версій сховища, встановивши параметр конфігурації `storagemigration.k8s.io/v1alpha1` на `true` для API-сервера. Для отримання додаткової інформації про те, як це зробити, прочитайте [увімкнення або вимкнення API Kubernetes](/docs/tasks/administer-cluster/enable-disable-api/).
+Увімкніть REST API для міграції версій сховища, встановивши параметр конфігурації `storagemigration.k8s.io/v1alpha1` на `true` для API-сервера. Для отримання додаткової інформації про те, як це зробити, прочитайте [увімкнення або вимкнення API Kubernetes](/uk/docs/tasks/administer-cluster/enable-disable-api/).
 
 <!-- steps -->
 
 ## Перешифрування Secret Kubernetes за допомогою міграції версій сховища {#re-encrypt-kubernetes-secrets-using-storage-version-migration}
 
-- Для початку, [налаштуйте постачальника KMS](/docs/tasks/administer-cluster/kms-provider/) для шифрування даних у спокої в etcd, використовуючи наступну конфігурацію шифрування.
+- Для початку, [налаштуйте постачальника KMS](/uk/docs/tasks/administer-cluster/kms-provider/) для шифрування даних у спокої в etcd, використовуючи наступну конфігурацію шифрування.
 
   ```yaml
   kind: EncryptionConfiguration
@@ -53,7 +53,7 @@ Kubernetes покладається на активне переписуванн
   kubectl create secret generic my-secret --from-literal=key1=supersecret
   ```
 
-- [Перевірте](/docs/tasks/administer-cluster/kms-provider/#verifying-that-the-data-is-encrypted) серіалізовані дані для цього обʼєкта Secret, що починаються з `k8s:enc:aescbc:v1:key1`.
+- [Перевірте](/uk/docs/tasks/administer-cluster/kms-provider/#verifying-that-the-data-is-encrypted) серіалізовані дані для цього обʼєкта Secret, що починаються з `k8s:enc:aescbc:v1:key1`.
 
 - Оновіть файл конфігурації шифрування наступним чином, щоб виконати ротацію ключа шифрування.
 
@@ -130,7 +130,7 @@ Kubernetes покладається на активне переписуванн
     resourceVersion: "84"
   ```
 
-- [Перевірте](/docs/tasks/administer-cluster/kms-provider/#verifying-that-the-data-is-encrypted)
+- [Перевірте](/uk/docs/tasks/administer-cluster/kms-provider/#verifying-that-the-data-is-encrypted)
   збережений Secret тепер починається з `k8s:enc:aescbc:v1:key2`.
 
 ## Оновлення бажаної схеми зберігання CRD {#update-preferred-storage-schema-crd}

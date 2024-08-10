@@ -9,7 +9,7 @@ weight: 60
 
 <!-- overview -->
 
-Цей документ показує, як використовувати [політику збоїв Pod](/docs/concepts/workloads/controllers/job#pod-failure-policy), у поєднанні з типовою [політикою відмови Podʼа](/docs/concepts/workloads/controllers/job#pod-backoff-failure-policy), для покращення контролю над обробкою збоїв на рівні контейнера або Pod у {{<glossary_tooltip text="Job" term_id="job">}}.
+Цей документ показує, як використовувати [політику збоїв Pod](/uk/docs/concepts/workloads/controllers/job#pod-failure-policy), у поєднанні з типовою [політикою відмови Podʼа](/uk/docs/concepts/workloads/controllers/job#pod-backoff-failure-policy), для покращення контролю над обробкою збоїв на рівні контейнера або Pod у {{<glossary_tooltip text="Job" term_id="job">}}.
 
 Визначення політики збоїв Pod може допомогти вам:
 
@@ -18,11 +18,11 @@ weight: 60
 
 ## {{% heading "prerequisites" %}}
 
-Ви повинні вже бути знайомі з основним використанням [Job](/docs/concepts/workloads/controllers/job/).
+Ви повинні вже бути знайомі з основним використанням [Job](/uk/docs/concepts/workloads/controllers/job/).
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Переконайтеся, що [feature gates](/docs/reference/command-line-tools-reference/feature-gates/)
+Переконайтеся, що [feature gates](/uk/docs/reference/command-line-tools-reference/feature-gates/)
 `PodDisruptionConditions` і `JobPodFailurePolicy` увімкнені у вашому кластері.
 
 ## Використання політики збоїв Pod для уникнення непотрібних повторних запусків Pod {#using-pod-failure-policy-to-avoid-unnecessary-pod-retries}
@@ -120,7 +120,7 @@ kubectl delete jobs/job-pod-failure-policy-ignore
 В наступному прикладі ви можете навчитися використовувати політику збоїв Pod, щоб уникати непотрібних перезапусків Pod на основі власних умов Pod.
 
 {{< note >}}
-Наведений нижче приклад працює з версії 1.27, оскільки він базується на переході видалених Pod з фази `Pending` до термінальної фази (див. [Фази Pod](/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)).
+Наведений нижче приклад працює з версії 1.27, оскільки він базується на переході видалених Pod з фази `Pending` до термінальної фази (див. [Фази Pod](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)).
 {{< /note >}}
 
 1. Спочатку створіть Job на основі конфігурації:
@@ -218,4 +218,4 @@ kubectl delete jobs/job-pod-failure-policy-config-issue
 
 ## Альтернативи {#alternatives}
 
-Ви можете покладатись виключно на [політику відмови Pod backoff](/docs/concepts/workloads/controllers/job#pod-backoff-failure-policy), вказавши поле `.spec.backoffLimit` завдання. Однак у багатьох ситуаціях важко знайти баланс між встановленням низького значення для `.spec.backoffLimit` для уникнення непотрібних повторних спроб виконання Podʼів, але достатньо великого, щоб забезпечити, що Job не буде припинено через втручання у роботу Podʼів.
+Ви можете покладатись виключно на [політику відмови Pod backoff](/uk/docs/concepts/workloads/controllers/job#pod-backoff-failure-policy), вказавши поле `.spec.backoffLimit` завдання. Однак у багатьох ситуаціях важко знайти баланс між встановленням низького значення для `.spec.backoffLimit` для уникнення непотрібних повторних спроб виконання Podʼів, але достатньо великого, щоб забезпечити, що Job не буде припинено через втручання у роботу Podʼів.

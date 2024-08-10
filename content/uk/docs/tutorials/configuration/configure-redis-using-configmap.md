@@ -9,7 +9,7 @@ weight: 30
 
 <!-- overview -->
 
-Ця сторінка надає реальний приклад конфігурування Redis за допомогою ConfigMap і базується на завданні [Конфігурування Pod для використання ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/).
+Ця сторінка надає реальний приклад конфігурування Redis за допомогою ConfigMap і базується на завданні [Конфігурування Pod для використання ConfigMap](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
 ## {{% heading "objectives" %}}
 
@@ -22,7 +22,7 @@ weight: 30
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
 * Приклад, показаний на цій сторінці, працює з `kubectl` версії 1.14 і вище.
-* Розуміння [Конфігурування Pod для використання ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/).
+* Розуміння [Конфігурування Pod для використання ConfigMap](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/).
 
 <!-- lessoncontent -->
 
@@ -238,5 +238,5 @@ kubectl delete pod/redis configmap/example-redis-config
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [ConfigMaps](/docs/tasks/configure-pod-container/configure-pod-configmap/).
-* Ознайомтеся з прикладом [Оновлення конфігурації через ConfigMap](/docs/tutorials/configuration/updating-configuration-via-a-configmap/).
+* Дізнайтеся більше про [ConfigMaps](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/).
+* Ознайомтеся з прикладом [Оновлення конфігурації через ConfigMap](/uk/docs/tutorials/configuration/updating-configuration-via-a-configmap/).

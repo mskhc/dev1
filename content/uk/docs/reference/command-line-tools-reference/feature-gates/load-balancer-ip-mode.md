@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.30"
 ---
-Дозволяє встановити `ipMode` для сервісів, де `type` встановлено у `LoadBalancer`. Докладнішу інформацію наведено у статті [Визначення IPMode статусу балансувальника навантаження](/docs/concepts/services-networking/service/#load-balancer-ip-mode).
+Дозволяє встановити `ipMode` для сервісів, де `type` встановлено у `LoadBalancer`. Докладнішу інформацію наведено у статті [Визначення IPMode статусу балансувальника навантаження](/uk/docs/concepts/services-networking/service/#load-balancer-ip-mode).

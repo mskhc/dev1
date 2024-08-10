@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє розширювати постійні томи. Див. статтю ["Розширення Persistent Volumes Claims"](/docs/concepts/storage/persistent-volumes/#expanding-persistent-volume-claims).
+Дозволяє розширювати постійні томи. Див. статтю ["Розширення Persistent Volumes Claims"](/uk/docs/concepts/storage/persistent-volumes/#expanding-persistent-volume-claims).

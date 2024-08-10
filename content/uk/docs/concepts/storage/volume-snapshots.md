@@ -13,7 +13,7 @@ weight: 60
 
 <!-- overview -->
 
-У Kubernetes _VolumeSnapshot_ представляє знімок тому в системі зберігання. Цей документ передбачає, що ви вже знайомі з постійними томами Kubernetes — [persistent volumes](/docs/concepts/storage/persistent-volumes/).
+У Kubernetes _VolumeSnapshot_ представляє знімок тому в системі зберігання. Цей документ передбачає, що ви вже знайомі з постійними томами Kubernetes — [persistent volumes](/uk/docs/concepts/storage/persistent-volumes/).
 
 <!-- body -->
 
@@ -52,7 +52,7 @@ weight: 60
 
 #### Динамічне {#dynamic}
 
-Замість використання попередньо наявного знімку, можна запросити динамічне створення знімка з PersistentVolumeClaim. [VolumeSnapshotClass](/docs/concepts/storage/volume-snapshot-classes/) вказує параметри, специфічні для постачальника зберігання, які слід використовувати при створенні знімка.
+Замість використання попередньо наявного знімку, можна запросити динамічне створення знімка з PersistentVolumeClaim. [VolumeSnapshotClass](/uk/docs/concepts/storage/volume-snapshot-classes/) вказує параметри, специфічні для постачальника зберігання, які слід використовувати при створенні знімка.
 
 ### Звʼязування {#binding}
 
@@ -87,7 +87,7 @@ spec:
 
 `persistentVolumeClaimName` — це назва обʼєкта `PersistentVolumeClaim`, який є джерелом даних для знімка. Це поле є обовʼязковим для динамічного створення знімка.
 
-Обʼєкт знімка тому може запитати певний клас, вказавши назву [VolumeSnapshotClass](/docs/concepts/storage/volume-snapshot-classes/) за допомогою атрибута `volumeSnapshotClassName`. Якщо нічого не встановлено, то використовується типовий клас, якщо він доступний.
+Обʼєкт знімка тому може запитати певний клас, вказавши назву [VolumeSnapshotClass](/uk/docs/concepts/storage/volume-snapshot-classes/) за допомогою атрибута `volumeSnapshotClassName`. Якщо нічого не встановлено, то використовується типовий клас, якщо він доступний.
 
 Для знімків, що були створені наперед, вам потрібно вказати `volumeSnapshotContentName` як джерело для знімка, як показано в наступному прикладі. Поле `volumeSnapshotContentName` як джерело є обовʼязковим для наперед створених знімків.
 
@@ -187,4 +187,4 @@ spec:
 
 Ви можете створити новий том, наперед заповнений даними зі знімка, використовуючи поле _dataSource_ в обʼєкті `PersistentVolumeClaim`.
 
-Докладніше дивіться в [Знімок тому та відновлення тому зі знімка](/docs/concepts/storage/persistent-volumes/#volume-snapshot-and-restore-volume-from-snapshot-support).
+Докладніше дивіться в [Знімок тому та відновлення тому зі знімка](/uk/docs/concepts/storage/persistent-volumes/#volume-snapshot-and-restore-volume-from-snapshot-support).

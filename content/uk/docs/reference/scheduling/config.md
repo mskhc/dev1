@@ -15,7 +15,7 @@ weight: 20
 
 Профіль планування дозволяє налаштувати різні етапи планування в {{< glossary_tooltip text="kube-scheduler" term_id="kube-scheduler" >}}. Кожен етап відображається в точці розширення. Втулки забезпечують поведінку планування, реалізуючи одну або кілька таких точок розширення.
 
-Ви можете вказати профілі планування, запустивши `kube-scheduler --config <filename>`, використовуючи структуру KubeSchedulerConfiguration [v1](/docs/reference/config-api/kube-scheduler-config.v1/).
+Ви можете вказати профілі планування, запустивши `kube-scheduler --config <filename>`, використовуючи структуру KubeSchedulerConfiguration [v1](/uk/docs/reference/config-api/kube-scheduler-config.v1/).
 
 Мінімальна конфігурація виглядає наступним чином:
 
@@ -27,7 +27,7 @@ clientConnection:
 ```
 
 {{< note >}}
-KubeSchedulerConfiguration v1beta3 є застарілим у v1.26 і видалений у v1.29. Будь ласка, перейдіть на KubeSchedulerConfiguration [v1](/docs/reference/config-api/kube-scheduler-config.v1/).
+KubeSchedulerConfiguration v1beta3 є застарілим у v1.26 і видалений у v1.29. Будь ласка, перейдіть на KubeSchedulerConfiguration [v1](/uk/docs/reference/config-api/kube-scheduler-config.v1/).
 {{< /note >}}
 
 ## Профілі {#profiles}
@@ -78,12 +78,12 @@ profiles:
 
 - `ImageLocality`: Віддає перевагу вузлам, які вже мають образи контейнерів, що запускаються Podʼом. Точки розширення: `score`.
 - `TaintToleration`: Реалізує
-  [taints and tolerations](/docs/concepts/scheduling-eviction/taint-and-toleration/). Реалізує точки розширення: `filter`, `preScore`, `score`.
+  [taints and tolerations](/uk/docs/concepts/scheduling-eviction/taint-and-toleration/). Реалізує точки розширення: `filter`, `preScore`, `score`.
 - `NodeName`: Перевіряє, чи відповідає імʼя вузла у специфікації Podʼа поточному вузлу. Точки розширення: `filter`.
 - `NodePorts`: Перевіряє, чи має вузол вільні порти для запитуваних портів Podʼа. Точки розширення: `preFilter`, `filter`.
-- `NodeAffinity`: Реалізує [node selectors](/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)
-  та [node affinity](/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity). Точки розширення: `filter`, `score`.
-- `PodTopologySpread`: Реалізує [обмеження поширення топології Podʼів](/docs/concepts/scheduling-eviction/topology-spread-constraints/). Точки розширення: `preFilter`, `filter`, `preScore`, `score`.
+- `NodeAffinity`: Реалізує [node selectors](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)
+  та [node affinity](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity). Точки розширення: `filter`, `score`.
+- `PodTopologySpread`: Реалізує [обмеження поширення топології Podʼів](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/). Точки розширення: `preFilter`, `filter`, `preScore`, `score`.
 - `NodeUnschedulable`: Відфільтровує вузли, які мають `.spec.unschedulable` встановлений на true. Точки розширення: `filter`.
 - `NodeResourcesFit`: Перевіряє, чи має вузол усі ресурси, які запитує Pod. Оцінка може використовувати одну з трьох стратегій: `LeastAllocated` (стандартно), `MostAllocated` та  `RequestedToCapacityRatio`. Точки розширення: `preFilter`, `filter`, `score`.
 - `NodeResourcesBalancedAllocation`: Віддає перевагу вузлам, які отримають більш збалансоване використання ресурсів, якщо Pod буде заплановано на них. Точки розширення: `score`.
@@ -97,7 +97,7 @@ profiles:
 - `EBSLimits`: Перевіряє, чи можуть бути задоволені ліміти томів AWS EBS для вузла. Точки розширення: `filter`.
 - `GCEPDLimits`: Перевіряє, чи можуть бути задоволені ліміти томів GCP-PD для вузла. Точки розширення: `filter`.
 - `AzureDiskLimits`: Перевіряє, чи можуть бути задоволені ліміти томів дисків Azure для вузла. Точки розширення: `filter`.
-- `InterPodAffinity`: Реалізує [між-Podʼову спорідненість та антиспорідненість](/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity). Точки розширення: `preFilter`, `filter`, `preScore`, `score`.
+- `InterPodAffinity`: Реалізує [між-Podʼову спорідненість та антиспорідненість](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity). Точки розширення: `preFilter`, `filter`, `preScore`, `score`.
 - `PrioritySort`: Забезпечує стандартне сортування за пріоритетами. Точки розширення: `queueSort`.
 - `DefaultBinder`: Забезпечує стандартний механізм привʼязки. Точки розширення: `bind`.
 - `DefaultPreemption`: Забезпечує стандартний механізм попередження. Точки розширення: `postFilter`.
@@ -136,7 +136,7 @@ Podʼи, які хочуть бути заплановані відповідн�
 {{< note >}}
 Події планування Podʼа мають `.spec.schedulerName` як свій `reportingController`. Події для вибору лідера використовують імʼя планувальника з першого профілю в списку.
 
-Для отримання додаткової інформації, будь ласка, зверніться до розділу `reportingController` в [Довідці API Event](/docs/reference/kubernetes-api/cluster-resources/event-v1/).
+Для отримання додаткової інформації, будь ласка, зверніться до розділу `reportingController` в [Довідці API Event](/uk/docs/reference/kubernetes-api/cluster-resources/event-v1/).
 {{< /note >}}
 
 {{< note >}}
@@ -326,11 +326,11 @@ profiles:
       name: NodeResourcesFit
   ```
 
-- Втулок планувальника `NodeLabel` застарілий; натомість використовуйте втулок [`NodeAffinity`](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) (стандартно увімкнено), щоб досягти схожої поведінки.
+- Втулок планувальника `NodeLabel` застарілий; натомість використовуйте втулок [`NodeAffinity`](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) (стандартно увімкнено), щоб досягти схожої поведінки.
 
-- Втулок планувальника `ServiceAffinity` застарілий; натомість використовуйте втулок [`InterPodAffinity`](/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) (стандартно увімкнено), щоб досягти схожої поведінки.
+- Втулок планувальника `ServiceAffinity` застарілий; натомість використовуйте втулок [`InterPodAffinity`](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) (стандартно увімкнено), щоб досягти схожої поведінки.
 
-- Втулок планувальника `NodePreferAvoidPods` застарілий; натомість використовуйте [node taints](/docs/concepts/scheduling-eviction/taint-and-toleration/), щоб досягти схожої поведінки.
+- Втулок планувальника `NodePreferAvoidPods` застарілий; натомість використовуйте [node taints](/uk/docs/concepts/scheduling-eviction/taint-and-toleration/), щоб досягти схожої поведінки.
 
 - Втулок, увімкнений у конфігураційному файлі v1beta2, має пріоритет над стандартною конфігурацією для цього втулка.
 
@@ -354,6 +354,6 @@ profiles:
 
 ## {{% heading "whatsnext" %}}
 
-- Прочитайте [документації kube-scheduler](/docs/reference/command-line-tools-reference/kube-scheduler/)
-- Ознайомтеся з [плануванням](/docs/concepts/scheduling-eviction/kube-scheduler/)
-- Прочитайте довідку з конфігурації [kube-scheduler (v1)](/docs/reference/config-api/kube-scheduler-config.v1/)
+- Прочитайте [документації kube-scheduler](/uk/docs/reference/command-line-tools-reference/kube-scheduler/)
+- Ознайомтеся з [плануванням](/uk/docs/concepts/scheduling-eviction/kube-scheduler/)
+- Прочитайте довідку з конфігурації [kube-scheduler (v1)](/uk/docs/reference/config-api/kube-scheduler-config.v1/)

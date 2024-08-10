@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Вмикає міграцію лідерів для [kube-controller-manager](/docs/tasks/administer-cluster/controller-manager-leader-migration/#initial-leader-migration-configuration) та [cloud-controller-manager](/docs/tasks/administer-cluster/controller-manager-leader-migration/#deploy-cloud-controller-manager) що дозволяє оператору кластера в реальному часі мігрувати контролери з kube-controller-manager у зовнішній контролер-менеджер (наприклад, cloud-controller-manager) у кластері HA без простоїв.
+Вмикає міграцію лідерів для [kube-controller-manager](/uk/docs/tasks/administer-cluster/controller-manager-leader-migration/#initial-leader-migration-configuration) та [cloud-controller-manager](/uk/docs/tasks/administer-cluster/controller-manager-leader-migration/#deploy-cloud-controller-manager) що дозволяє оператору кластера в реальному часі мігрувати контролери з kube-controller-manager у зовнішній контролер-менеджер (наприклад, cloud-controller-manager) у кластері HA без простоїв.

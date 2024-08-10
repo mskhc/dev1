@@ -327,7 +327,7 @@ INFO OpenShift file "foo-buildconfig.yaml" created
 
 ## Альтернативні конвертації {#alternative-conversions}
 
-Типово `kompose` перетворює файли у форматі yaml на обʼєкти Kubernetes [Deployments](/docs/concepts/workloads/controllers/deployment/) та [Services](/docs/concepts/services-networking/service/). У вас є альтернативна опція для генерації json за допомогою `-j`. Також, ви можете альтернативно згенерувати обʼєкти [Replication Controllers](/docs/concepts/workloads/controllers/replicationcontroller/), [Daemon Sets](/docs/concepts/workloads/controllers/daemonset/), або [Helm](https://github.com/helm/helm) чарти.
+Типово `kompose` перетворює файли у форматі yaml на обʼєкти Kubernetes [Deployments](/uk/docs/concepts/workloads/controllers/deployment/) та [Services](/uk/docs/concepts/services-networking/service/). У вас є альтернативна опція для генерації json за допомогою `-j`. Також, ви можете альтернативно згенерувати обʼєкти [Replication Controllers](/uk/docs/concepts/workloads/controllers/replicationcontroller/), [Daemon Sets](/uk/docs/concepts/workloads/controllers/daemonset/), або [Helm](https://github.com/helm/helm) чарти.
 
 ```sh
 kompose convert -j

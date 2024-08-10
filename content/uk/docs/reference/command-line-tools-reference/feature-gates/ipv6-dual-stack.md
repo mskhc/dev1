@@ -23,4 +23,4 @@ stages:
 
 removed: true 
 ---
-Вмикає підтримку [подвійного стека](/docs/concepts/services-networking/dual-stack/) для IPv6.
+Вмикає підтримку [подвійного стека](/uk/docs/concepts/services-networking/dual-stack/) для IPv6.

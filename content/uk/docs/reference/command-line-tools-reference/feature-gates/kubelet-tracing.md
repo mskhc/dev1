@@ -14,4 +14,4 @@ stages:
     defaultValue: true
     fromVersion: "1.27"
 ---
-Додавання підтримки розподіленого трасування в kubelet. Якщо увімкнено, інтерфейс CRI kubelet та автентифіковані http-сервери використовуються для генерації відрізків трасування OpenTelemetry. Дивіться [Трасування для системних компонентів Kubernetes](/docs/concepts/cluster-administration/system-traces) для більш детальної інформації.
+Додавання підтримки розподіленого трасування в kubelet. Якщо увімкнено, інтерфейс CRI kubelet та автентифіковані http-сервери використовуються для генерації відрізків трасування OpenTelemetry. Дивіться [Трасування для системних компонентів Kubernetes](/uk/docs/concepts/cluster-administration/system-traces) для більш детальної інформації.

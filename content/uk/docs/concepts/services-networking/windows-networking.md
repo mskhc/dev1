@@ -17,7 +17,7 @@ Kubernetes підтримує використання як вузлів Linux, 
 
 ## Мережева взаємодія контейнерів у Windows {#networking}
 
-Мережевий стек для контейнерів у Windows використовує [CNI-втулки](/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/). Контейнери у Windows працюють схоже до віртуальних машин з погляду мережі. Кожен контейнер має віртуальний мережевий адаптер (vNIC), який підключений до віртуального комутатора Hyper-V (vSwitch). Host Networking Service (HNS) та Host Compute Service (HCS) спільно працюють для створення контейнерів і підключення віртуальних мережевих адаптерів контейнера до мереж. HCS відповідає за управління контейнерами, тоді як HNS відповідає за управління ресурсами мережі, такими як:
+Мережевий стек для контейнерів у Windows використовує [CNI-втулки](/uk/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/). Контейнери у Windows працюють схоже до віртуальних машин з погляду мережі. Кожен контейнер має віртуальний мережевий адаптер (vNIC), який підключений до віртуального комутатора Hyper-V (vSwitch). Host Networking Service (HNS) та Host Compute Service (HCS) спільно працюють для створення контейнерів і підключення віртуальних мережевих адаптерів контейнера до мереж. HCS відповідає за управління контейнерами, тоді як HNS відповідає за управління ресурсами мережі, такими як:
 
 * Віртуальні мережі (включаючи створення vSwitches)
 * Endpoint / vNIC
@@ -82,7 +82,7 @@ Windows підтримує пʼять різних драйверів/режим
 | Подібність сесій <br> (Session affinity) | Забезпечує, що підключення від певного клієнта передається тому самому Podʼу кожен раз. | Windows Server 2022 | Встановіть у `service.spec.sessionAffinity` значення "ClientIP" |
 | Direct Server Return (DSR) | Режим балансування навантаження, де виправлення IP-адреси та LBNAT відбуваються на порту vSwitch контейнера напряму; трафік служби приходить з набору вихідних IP, встановленого як IP походження Podʼа. | Windows Server 2019 | Встановіть наступні прапорці в kube-proxy: `--feature-gates="WinDSR=true" --enable-dsr=true` |
 | Збереження-Призначення | Пропускає DNAT-трафік Servicʼу, тим самим зберігаючи віртуальну IP цільового Service в пакетах, що досягають фронтенду Podʼа. Також вимикає пересилання вузол-вузол. | Windows Server, версія 1903 | Встановіть `"preserve-destination": "true"` в анотаціях служби та увімкніть DSR в kube-proxy. |
-| Подвійний мережевий стек IPv4/IPv6 | Нативна підтримка IPv4-до-IPv4 поряд з IPv6-до-IPv6 комунікацією до, з і всередині кластера | Windows Server 2019 | Див. [Підтримка подвійного стеку IPv4/IPv6](/docs/concepts/services-networking/dual-stack/#windows-support) |
+| Подвійний мережевий стек IPv4/IPv6 | Нативна підтримка IPv4-до-IPv4 поряд з IPv6-до-IPv6 комунікацією до, з і всередині кластера | Windows Server 2019 | Див. [Підтримка подвійного стеку IPv4/IPv6](/uk/docs/concepts/services-networking/dual-stack/#windows-support) |
 | Збереження IP клієнта | Забезпечує збереження джерела ingress трафіку. Також вимикає пересилання вузол-вузол. | Windows Server 2019  | Встановіть `service.spec.externalTrafficPolicy` у "Local" та увімкніть DSR в kube-proxy |
 {{< /table >}}
 

@@ -21,7 +21,7 @@ REST API є фундаментальною основою Kubernetes. Усі о�
 
 [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/) містить список API для версії Kubernetes {{< param "version" >}}.
 
-Для отримання загальної інформації, читайте [API Kubernetes](/docs/concepts/overview/kubernetes-api/). [Керування доступом до API Kubernetes](/docs/concepts/security/controlling-access/) описує, як клієнти можуть автентифікуватися до сервера API Kubernetes, та як їхні запити авторизуються.
+Для отримання загальної інформації, читайте [API Kubernetes](/uk/docs/concepts/overview/kubernetes-api/). [Керування доступом до API Kubernetes](/uk/docs/concepts/security/controlling-access/) описує, як клієнти можуть автентифікуватися до сервера API Kubernetes, та як їхні запити авторизуються.
 
 ## Версіювання API {#api-versioning}
 

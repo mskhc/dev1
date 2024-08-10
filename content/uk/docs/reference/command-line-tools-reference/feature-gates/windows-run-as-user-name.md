@@ -23,4 +23,4 @@ stages:
 
 removed: true
 ---
-Вмикання підтримки запуску програм у контейнерах Windows від імені не типового користувача. Докладні відомості наведено у статті [Налаштування RunAsUserName](/docs/tasks/configure-pod-container/configure-runasusername).
+Вмикання підтримки запуску програм у контейнерах Windows від імені не типового користувача. Докладні відомості наведено у статті [Налаштування RunAsUserName](/uk/docs/tasks/configure-pod-container/configure-runasusername).

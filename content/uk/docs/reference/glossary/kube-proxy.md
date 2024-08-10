@@ -2,7 +2,7 @@
 title: kube-proxy
 id: kube-proxy
 date: 2018-04-12
-full_link: /docs/reference/command-line-tools-reference/kube-proxy/
+full_link: /uk/docs/reference/command-line-tools-reference/kube-proxy/
 short_description: >
   `kube-proxy` — це мережевий проксі, що запущений на кожному вузлі кластера.
 
@@ -16,6 +16,6 @@ kube-proxy є мережевим проксі, що запущений на ко
 
 <!--more-->
 
-[kube-proxy](/docs/reference/command-line-tools-reference/kube-proxy/) забезпечує підтримання мережевих правил на вузлах. Ці правила обумовлюють підключення мережею до ваших Podʼів всередині чи поза межами кластера.
+[kube-proxy](/uk/docs/reference/command-line-tools-reference/kube-proxy/) забезпечує підтримання мережевих правил на вузлах. Ці правила обумовлюють підключення мережею до ваших Podʼів всередині чи поза межами кластера.
 
 kube-proxy використовує шар фільтрації пакетів операційної системи, за його наявності. В іншому випадку kube-proxy скеровує трафік самостійно.

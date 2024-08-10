@@ -53,7 +53,7 @@ StatefulSetSpec — це специфікація StatefulSet.
 
 - **selector** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>), обовʼязково
 
-  selector — це запит міток для Podʼів, які повинні відповідати кількості реплік. Він повинен відповідати міткам шаблону Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors](/docs/concepts/overview/working-with-objects/labels/#label-selectors)
+  selector — це запит міток для Podʼів, які повинні відповідати кількості реплік. Він повинен відповідати міткам шаблону Podʼа. Додаткова інформація: [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors](/uk/docs/concepts/overview/working-with-objects/labels/#label-selectors)
 
 - **template** (<a href="{{< ref "../workload-resources/pod-template-v1#PodTemplateSpec" >}}">PodTemplateSpec</a>), обовʼязково
 

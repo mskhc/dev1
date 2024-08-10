@@ -8,16 +8,16 @@ weight: 20
 Цей посібник застосовується лише для нових кластерів.
 {{% /alert %}}
 
-Pod Security Admission — це контролер допуску, який застосовує [Стандарти безпеки Pod](/docs/concepts/security/pod-security-standards/) при створенні Podʼів. Це функція, яка є загально доступною з v1.25. У цьому посібнику ви будете застосовувати Стандарт безпеки Pod `baseline`, по одному простору імен за раз.
+Pod Security Admission — це контролер допуску, який застосовує [Стандарти безпеки Pod](/uk/docs/concepts/security/pod-security-standards/) при створенні Podʼів. Це функція, яка є загально доступною з v1.25. У цьому посібнику ви будете застосовувати Стандарт безпеки Pod `baseline`, по одному простору імен за раз.
 
-Ви також можете застосовувати Стандарти безпеки Pod до кількох просторів імен одночасно на рівні кластера. Щоб дізнатися більше, перейдіть за посиланням [Застосування Стандартів безпеки Pod на рівні кластера](/docs/tutorials/security/cluster-level-pss/).
+Ви також можете застосовувати Стандарти безпеки Pod до кількох просторів імен одночасно на рівні кластера. Щоб дізнатися більше, перейдіть за посиланням [Застосування Стандартів безпеки Pod на рівні кластера](/uk/docs/tutorials/security/cluster-level-pss/).
 
 ## {{% heading "prerequisites" %}}
 
 Встановіть на ваш компʼютер наступне:
 
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
-- [kubectl](/docs/tasks/tools/)
+- [kubectl](/uk/docs/tasks/tools/)
 
 ## Створення кластера {#create-cluster}
 
@@ -142,6 +142,6 @@ kind delete cluster --name psa-ns-level
   3. Застосуйте стандарт безпеки підсистеми `baseline` в режимі `enforce`, при цьому застосовуючи стандарт безпеки підсистеми `restricted` також у режимі `warn` та `audit`.
   4. Створіть новий Pod з застосованими стандартами безпеки Podʼів.
 
-- [Pod Security Admission](/docs/concepts/security/pod-security-admission/)
-- [Стандарти безпеки Pod](/docs/concepts/security/pod-security-standards/)
-- [Застосування Стандартів безпеки Pod на рівні кластера](/docs/tutorials/security/cluster-level-pss/)
+- [Pod Security Admission](/uk/docs/concepts/security/pod-security-admission/)
+- [Стандарти безпеки Pod](/uk/docs/concepts/security/pod-security-standards/)
+- [Застосування Стандартів безпеки Pod на рівні кластера](/uk/docs/tutorials/security/cluster-level-pss/)

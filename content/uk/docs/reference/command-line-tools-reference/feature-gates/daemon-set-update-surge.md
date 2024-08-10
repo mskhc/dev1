@@ -22,4 +22,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє робочим навантаженням DaemonSet зберігати доступність під час оновлення на кожному вузлі. Див. [Виконання поетапного оновлення DaemonSet](/docs/tasks/manage-daemon/update-daemon-set/).
+Дозволяє робочим навантаженням DaemonSet зберігати доступність під час оновлення на кожному вузлі. Див. [Виконання поетапного оновлення DaemonSet](/uk/docs/tasks/manage-daemon/update-daemon-set/).

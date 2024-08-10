@@ -127,7 +127,7 @@ ValidatingWebhookConfiguration описує конфігурацію вебху�
 
       Expression представляє вираз, який буде оцінено CEL. Результат обробки — bool. Вирази CEL мають доступ до вмісту AdmissionRequest і Authorizer, організованих у змінні CEL:
 
-      'object' — Обʼєкт із вхідного запиту. Значення null для запитів DELETE. 'oldObject' — Наявний обʼєкт. Значення null для запитів CREATE. 'request' — Атрибути запиту допуску (/pkg/apis/admission/types.go#AdmissionRequest). 'authorizer' — CEL Authorizer. Може бути використано для виконання перевірок авторизації для виконавця (користувач або службового облікового запису) запиту. Див. https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz  'authorizer.requestResource' — CEL ResourceCheck, створений з 'authorizer' і налаштований із ресурсом запиту. Документація щодо CEL: [https://kubernetes.io/docs/reference/using-api/cel/](/docs/reference/using-api/cel/)
+      'object' — Обʼєкт із вхідного запиту. Значення null для запитів DELETE. 'oldObject' — Наявний обʼєкт. Значення null для запитів CREATE. 'request' — Атрибути запиту допуску (/pkg/apis/admission/types.go#AdmissionRequest). 'authorizer' — CEL Authorizer. Може бути використано для виконання перевірок авторизації для виконавця (користувач або службового облікового запису) запиту. Див. https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz  'authorizer.requestResource' — CEL ResourceCheck, створений з 'authorizer' і налаштований із ресурсом запиту. Документація щодо CEL: [https://kubernetes.io/docs/reference/using-api/cel/](/uk/docs/reference/using-api/cel/)
 
       Обовʼязково.
 
@@ -185,7 +185,7 @@ ValidatingWebhookConfiguration описує конфігурацію вебху�
     }
     ```
 
-    Див. [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/](/docs/concepts/overview/working-with-objects/labels/) для отримання додаткових прикладів селекторів міток.
+    Див. [https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/](/uk/docs/concepts/overview/working-with-objects/labels/) для отримання додаткових прикладів селекторів міток.
 
     Типове значення — порожній LabelSelector, який має збіг зі всім.
 

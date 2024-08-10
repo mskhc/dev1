@@ -20,4 +20,4 @@ stages:
     toVersion: "1.29" 
 removed: true
 ---
-Вмикає функцію `GetAllocatableResources` для ресурсів pod у kubelet. Цей API доповнює [звіт про розподіл ресурсів](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources)
+Вмикає функцію `GetAllocatableResources` для ресурсів pod у kubelet. Цей API доповнює [звіт про розподіл ресурсів](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources)

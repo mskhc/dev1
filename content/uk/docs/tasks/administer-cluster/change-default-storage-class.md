@@ -17,7 +17,7 @@ weight: 91
 
 ## Чому змінювати типовий StorageClass? {#why-change-the-default-storage-class}
 
-Залежно від методу встановлення, ваш кластер Kubernetes може бути розгорнутий з наявним StorageClass, який позначений як типовий. Цей типовий StorageClass потім використовується для динамічного створення сховищ для PersistentVolumeClaims, які не вимагають будь-якого конкретного класу сховища. Див. [документацію по PersistentVolumeClaim](/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) для деталей.
+Залежно від методу встановлення, ваш кластер Kubernetes може бути розгорнутий з наявним StorageClass, який позначений як типовий. Цей типовий StorageClass потім використовується для динамічного створення сховищ для PersistentVolumeClaims, які не вимагають будь-якого конкретного класу сховища. Див. [документацію по PersistentVolumeClaim](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) для деталей.
 
 Попередньо встановлений типовий StorageClass може не відповідати вашим очікуваним навантаженням; наприклад, він може створювати занадто дороге сховище. У цьому випадку ви можете змінити типовий StorageClass або повністю вимкнути його, щоб уникнути динамічного створення сховища.
 
@@ -80,4 +80,4 @@ weight: 91
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [PersistentVolumes](/docs/concepts/storage/persistent-volumes/).
+* Дізнайтеся більше про [PersistentVolumes](/uk/docs/concepts/storage/persistent-volumes/).

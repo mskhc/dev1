@@ -27,7 +27,7 @@ Windows HostProcess контейнери дозволяють вам запус�
 
 Цей посібник стосується конкретно Kubernetes v{{< skew currentVersion >}}. Якщо ви використовуєте іншу версію Kubernetes, перевірте документацію для цієї версії Kubernetes.
 
-У Kubernetes {{< skew currentVersion >}} контейнери HostProcess є типово увімкненими. kubelet буде спілкуватися з containerd безпосередньо, передаючи прапорець hostprocess через CRI. Ви можете використовувати останню версію containerd (v1.6+) для запуску контейнерів HostProcess. [Як встановити containerd](/docs/setup/production-environment/container-runtimes/#containerd).
+У Kubernetes {{< skew currentVersion >}} контейнери HostProcess є типово увімкненими. kubelet буде спілкуватися з containerd безпосередньо, передаючи прапорець hostprocess через CRI. Ви можете використовувати останню версію containerd (v1.6+) для запуску контейнерів HostProcess. [Як встановити containerd](/uk/docs/setup/production-environment/container-runtimes/#containerd).
 
 ## Обмеження {#limitations}
 
@@ -43,7 +43,7 @@ Windows HostProcess контейнери дозволяють вам запус�
 
 ## Вимоги до конфігурації HostProcess Pod {#hostprocess-pod-configuration-requirements}
 
-Для активації Windows HostProcess Pod необхідно встановити відповідні конфігурації у конфігурації безпеки Podʼа. З усіх політик, визначених у [Стандартах безпеки Pod](/docs/concepts/security/pod-security-standards), HostProcess Podʼи заборонені за базовою та обмеженою політиками. Тому рекомендується, щоб HostProcess Podʼи працювали відповідно до привілейованого профілю.
+Для активації Windows HostProcess Pod необхідно встановити відповідні конфігурації у конфігурації безпеки Podʼа. З усіх політик, визначених у [Стандартах безпеки Pod](/uk/docs/concepts/security/pod-security-standards), HostProcess Podʼи заборонені за базовою та обмеженою політиками. Тому рекомендується, щоб HostProcess Podʼи працювали відповідно до привілейованого профілю.
 
 Під час роботи з привілейованою політикою, ось конфігурації, які потрібно встановити для активації створення HostProcess Pod:
 
@@ -57,9 +57,9 @@ Windows HostProcess контейнери дозволяють вам запус�
   </thead>
   <tbody>
     <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>securityContext.windowsOptions.hostProcess</tt></a></td>
+      <td style="white-space: nowrap"><a href="/uk/docs/concepts/security/pod-security-standards"><tt>securityContext.windowsOptions.hostProcess</tt></a></td>
       <td>
-        <p>Windows Podʼи надають можливість запуску <a href="/docs/tasks/configure-pod-container/create-hostprocess-pod"> контейнерів HostProcess</a>, які дозволяють привілейований доступ до вузла Windows. </p>
+        <p>Windows Podʼи надають можливість запуску <a href="/uk/docs/tasks/configure-pod-container/create-hostprocess-pod"> контейнерів HostProcess</a>, які дозволяють привілейований доступ до вузла Windows. </p>
         <p><strong>Дозволені значення</strong></p>
         <ul>
           <li><code>true</code></li>
@@ -67,7 +67,7 @@ Windows HostProcess контейнери дозволяють вам запус�
       </td>
     </tr>
     <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>hostNetwork</tt></a></td>
+      <td style="white-space: nowrap"><a href="/uk/docs/concepts/security/pod-security-standards"><tt>hostNetwork</tt></a></td>
       <td>
         <p>Контейнери HostProcess Podʼи повинні використовувати мережевий простір хоста.</p>
         <p><strong>Дозволені значення</strong></p>
@@ -77,7 +77,7 @@ Windows HostProcess контейнери дозволяють вам запус�
       </td>
     </tr>
     <tr>
-      <td style="white-space: nowrap"><a href="/docs/tasks/configure-pod-container/configure-runasusername/"><tt>securityContext.windowsOptions.runAsUserName</tt></a></td>
+      <td style="white-space: nowrap"><a href="/uk/docs/tasks/configure-pod-container/configure-runasusername/"><tt>securityContext.windowsOptions.runAsUserName</tt></a></td>
       <td>
         <p>Необхідно вказати, яким користувачем має виконуватися контейнер HostProcess в специфікації Podʼа.</p>
         <p><strong>Дозволені значення</strong></p>
@@ -90,7 +90,7 @@ Windows HostProcess контейнери дозволяють вам запус�
       </td>
     </tr>
     <tr>
-      <td style="white-space: nowrap"><a href="/docs/concepts/security/pod-security-standards"><tt>runAsNonRoot</tt></a></td>
+      <td style="white-space: nowrap"><a href="/uk/docs/concepts/security/pod-security-standards"><tt>runAsNonRoot</tt></a></td>
       <td>
         <p>Оскільки контейнери HostProcess мають привілейований доступ до хоста, поле <tt>runAsNonRoot</tt> не може бути встановлене в true.</p>
         <p><strong>Дозволені значення</strong></p>

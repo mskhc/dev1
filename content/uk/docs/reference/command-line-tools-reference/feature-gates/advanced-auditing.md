@@ -21,4 +21,4 @@ stages:
 
 removed: true  
 ---
-Вмикає [розширений аудит](/docs/tasks/debug/debug-cluster/audit/#advanced-audit)
+Вмикає [розширений аудит](/uk/docs/tasks/debug/debug-cluster/audit/#advanced-audit)

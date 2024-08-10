@@ -11,7 +11,7 @@ weight: 20
 
 {{< feature-state for_k8s_version="v1.29" state="stable" >}}
 
-Типово Kubernetes {{< skew currentVersion >}} публікує метрики Індикаторів Рівня Обслуговування (SLI) для кожного компонентного бінарного файлу Kubernetes. Ця точка доступу метрики відкривається на порту HTTPS кожного компонента за шляхом `/metrics/slis`. [Функціональна можливість](/docs/reference/command-line-tools-reference/feature-gates/) `ComponentSLIs` типово увімкнена для кожного компонента Kubernetes починаючи з версії v1.27.
+Типово Kubernetes {{< skew currentVersion >}} публікує метрики Індикаторів Рівня Обслуговування (SLI) для кожного компонентного бінарного файлу Kubernetes. Ця точка доступу метрики відкривається на порту HTTPS кожного компонента за шляхом `/metrics/slis`. [Функціональна можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ComponentSLIs` типово увімкнена для кожного компонента Kubernetes починаючи з версії v1.27.
 
 <!-- body -->
 

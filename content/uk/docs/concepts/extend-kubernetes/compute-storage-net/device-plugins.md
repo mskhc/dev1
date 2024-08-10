@@ -30,11 +30,11 @@ service Registration {
 
 * Назву свого Unix сокету.
 * Версію API втулка пристрою, під яку він був зібраний.
-* `ResourceName`, яке він хоче оголошувати. Тут `ResourceName` повинно відповідати [розширеній схемі найменування ресурсів](/docs/concepts/configuration/manage-resources-containers/#extended-resources) у вигляді `vendor-domain/resourcetype`. (Наприклад, NVIDIA GPU рекламується як `nvidia.com/gpu`.)
+* `ResourceName`, яке він хоче оголошувати. Тут `ResourceName` повинно відповідати [розширеній схемі найменування ресурсів](/uk/docs/concepts/configuration/manage-resources-containers/#extended-resources) у вигляді `vendor-domain/resourcetype`. (Наприклад, NVIDIA GPU рекламується як `nvidia.com/gpu`.)
 
 Після успішної реєстрації втулок пристрою надсилає kubelet список пристроїв, якими він керує, і тоді kubelet стає відповідальним за оголошення цих ресурсів на сервері API як частини оновлення стану вузла. Наприклад, після того, як втулок пристрою зареєструє `hardware-vendor.example/foo` в kubelet і повідомить про наявність двох пристроїв на вузлі, статус вузла оновлюється для оголошення того, що на вузлі встановлено 2 пристрої "Foo" і вони доступні для використання.
 
-Після цього користувачі можуть запитувати пристрої як частину специфікації Podʼа (див. [`container`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container)). Запит розширених ресурсів схожий на те, як ви керуєте запитами та лімітами для інших ресурсів, з такими відмінностями:
+Після цього користувачі можуть запитувати пристрої як частину специфікації Podʼа (див. [`container`](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#Container)). Запит розширених ресурсів схожий на те, як ви керуєте запитами та лімітами для інших ресурсів, з такими відмінностями:
 
 * Розширені ресурси підтримуються лише як цілочисельні ресурси та не можуть бути перевищені.
 * Пристрої не можуть бути спільно використані між контейнерами.
@@ -117,14 +117,14 @@ spec:
    `AllocateResponse` містить нуль або більше обʼєктів `ContainerAllocateResponse`. У цих обʼєктах втулок визначає зміни, які потрібно внести в опис контейнера для забезпечення
    доступу до пристрою. Ці зміни включають:
 
-   * [анотації](/docs/concepts/overview/working-with-objects/annotations/)
+   * [анотації](/uk/docs/concepts/overview/working-with-objects/annotations/)
    * вузли пристроїв
    * змінні середовища
    * монтування
    * повні імена пристроїв CDI
 
    {{< note >}}
-   Обробка повних імен пристроїв CDI Менеджером пристроїв потребує, щоб [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) `DevicePluginCDIDevices` було увімкнено як для kubelet, так і для kube-apiserver. Це було додано як альфа-функція в Kubernetes v1.28 і було підняте до бета в v1.29.
+   Обробка повних імен пристроїв CDI Менеджером пристроїв потребує, щоб [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `DevicePluginCDIDevices` було увімкнено як для kubelet, так і для kube-apiserver. Це було додано як альфа-функція в Kubernetes v1.28 і було підняте до бета в v1.29.
    {{< /note >}}
 
 ### Обробка перезапусків kubelet {#handling-kubelet-restarts}
@@ -144,7 +144,7 @@ spec:
 Раніше схема керування версіями вимагала, щоб версія API втулка пристрою точно відповідала версії Kubelet. З моменту переходу цієї функції до бета-версії у версії 1.12 це більше не є жорсткою вимогою. API має версію і є стабільним з моменту випуску бета-версії цієї функції. Через це оновлення kubelet повинні бути безперебійними, але все ще можуть бути зміни в API до стабілізації, що робить оновлення не гарантовано непорушними.
 
 {{< note >}}
-Хоча компонент Kubernetes, Device Manager, є загальнодоступною функцією, _API втулка пристроїв_ не є стабільним. Щоб отримати інформацію про API втулка пристрою та сумісність версій, прочитайте [Версії API втулка пристрою](/docs/reference/node/device-plugin-api-versions/).
+Хоча компонент Kubernetes, Device Manager, є загальнодоступною функцією, _API втулка пристроїв_ не є стабільним. Щоб отримати інформацію про API втулка пристрою та сумісність версій, прочитайте [Версії API втулка пристрою](/uk/docs/reference/node/device-plugin-api-versions/).
 {{< /note >}}
 
 Як проєкт, Kubernetes рекомендує розробникам втулка пристрою:
@@ -267,7 +267,7 @@ cpu_ids у `ContainerResources` у точці доступу `List` відпов
 Точка доступу `GetAllocatableResources` надає інформацію про ресурси, що спочатку доступні на робочому вузлі. Вона надає більше інформації, ніж kubelet експортує в APIServer.
 
 {{< note >}}
-`GetAllocatableResources` слід використовувати лише для оцінки [виділених](/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) ресурсів на вузлі. Якщо мета - оцінити вільні/невикористані ресурси, її слід використовувати разом з точкою доступу List(). Результат, отриманий за допомогою `GetAllocatableResources`, залишиться таким самим, якщо ресурси, які експонуються для kubelet, не змінюються. Це відбувається рідко, але коли це відбувається (наприклад: hotplug/hotunplug, зміни стану пристроїв), очікується, що клієнт викличе точку доступу `GetAllocatableResources`.
+`GetAllocatableResources` слід використовувати лише для оцінки [виділених](/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable) ресурсів на вузлі. Якщо мета - оцінити вільні/невикористані ресурси, її слід використовувати разом з точкою доступу List(). Результат, отриманий за допомогою `GetAllocatableResources`, залишиться таким самим, якщо ресурси, які експонуються для kubelet, не змінюються. Це відбувається рідко, але коли це відбувається (наприклад: hotplug/hotunplug, зміни стану пристроїв), очікується, що клієнт викличе точку доступу `GetAllocatableResources`.
 
 Однак виклик точки доступу `GetAllocatableResources` не є достатнім у випадку оновлення ЦП та/або памʼяті, і для відображення правильної кількості та виділення ресурсів Kubelet повинен бути перезавантажений.
 {{< /note >}}
@@ -281,7 +281,7 @@ message AllocatableResourcesResponse {
 }
 ```
 
-`ContainerDevices` дійсно викладають інформацію про топологію, що вказує, до яких NUMA-клітин пристрій прикріплений. NUMA-клітини ідентифікуються за допомогою прихованого цілочисельного ідентифікатора, значення якого відповідає тому, що втулки пристроїв повідомляють [коли вони реєструються у kubelet](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#device-plugin-integration-with-the-topology-manager).
+`ContainerDevices` дійсно викладають інформацію про топологію, що вказує, до яких NUMA-клітин пристрій прикріплений. NUMA-клітини ідентифікуються за допомогою прихованого цілочисельного ідентифікатора, значення якого відповідає тому, що втулки пристроїв повідомляють [коли вони реєструються у kubelet](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#device-plugin-integration-with-the-topology-manager).
 
 Сервіс gRPC обслуговується через unix-сокет за адресою `/var/lib/kubelet/pod-resources/kubelet.sock`. Агенти моніторингу для ресурсів втулків пристроїв можуть бути розгорнуті як демони, або як DaemonSet. Канонічна тека `/var/lib/kubelet/pod-resources` вимагає привілейованого доступу, тому агенти моніторингу повинні працювати у привілейованому контексті безпеки. Якщо агент моніторингу пристроїв працює як DaemonSet, `/var/lib/kubelet/pod-resources` має бути підключена як {{< glossary_tooltip term_id="volume" >}} у PodSpec агента моніторингу пристроїв [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
 
@@ -367,7 +367,7 @@ pluginapi.Device{ID: "25102017", Health: pluginapi.Healthy, Topology:&pluginapi.
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся про [планування ресурсів GPU](/docs/tasks/manage-gpus/scheduling-gpus/) за допомогою втулків пристроїв
-* Дізнайтеся про [оголошення розширених ресурсів](/docs/tasks/administer-cluster/extended-resource-node/) на вузлі
-* Дізнайтеся про [Менеджер Топології](/docs/tasks/administer-cluster/topology-manager/)
+* Дізнайтеся про [планування ресурсів GPU](/uk/docs/tasks/manage-gpus/scheduling-gpus/) за допомогою втулків пристроїв
+* Дізнайтеся про [оголошення розширених ресурсів](/uk/docs/tasks/administer-cluster/extended-resource-node/) на вузлі
+* Дізнайтеся про [Менеджер Топології](/uk/docs/tasks/administer-cluster/topology-manager/)
 * Прочитайте про використання [апаратного прискорення для TLS ingress](/blog/2019/04/24/hardware-accelerated-ssl/tls-termination-in-ingress-controllers-using-kubernetes-device-plugins-and-runtimeclass/) з Kubernetes

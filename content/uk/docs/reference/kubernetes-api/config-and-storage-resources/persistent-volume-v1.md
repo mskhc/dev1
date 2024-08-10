@@ -16,7 +16,7 @@ auto_generated: false
 
 ## PersistentVolume {#PersistentVolume}
 
-PersistentVolume (PV) — це ресурс зберігання, який впроваджується адміністратором. Він є аналогом ресурсу Node. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes](/docs/concepts/storage/persistent-volumes).
+PersistentVolume (PV) — це ресурс зберігання, який впроваджується адміністратором. Він є аналогом ресурсу Node. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes](/uk/docs/concepts/storage/persistent-volumes).
 
 ---
 
@@ -30,11 +30,11 @@ PersistentVolume (PV) — це ресурс зберігання, який вп
 
 - **spec** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolumeSpec" >}}">PersistentVolumeSpec</a>)
 
-  spec визначає специфікацію постійного тому, що належить кластеру. Впроваджується адміністратором. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes](/docs/concepts/storage/persistent-volumes#persistent-volumes)
+  spec визначає специфікацію постійного тому, що належить кластеру. Впроваджується адміністратором. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes](/uk/docs/concepts/storage/persistent-volumes#persistent-volumes)
 
 - **status** (<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolumeStatus" >}}">PersistentVolumeStatus</a>)
 
-  status представляє поточну інформацію/статус для постійного тому. Заповнюється системою. Лише для читання. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes](/docs/concepts/storage/persistent-volumes#persistent-volumes)
+  status представляє поточну інформацію/статус для постійного тому. Заповнюється системою. Лише для читання. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes](/uk/docs/concepts/storage/persistent-volumes#persistent-volumes)
 
 ## PersistentVolumeSpec {#PersistentVolumeSpec}
 
@@ -44,19 +44,19 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **accessModes** ([]string)
 
-  accessModes містить всі способи, якими том може бути змонтований. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes](/docs/concepts/storage/persistent-volumes#access-modes)
+  accessModes містить всі способи, якими том може бути змонтований. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes](/uk/docs/concepts/storage/persistent-volumes#access-modes)
 
 - **capacity** (map[string]<a href="{{< ref "../common-definitions/quantity#Quantity" >}}">Quantity</a>)
 
-  capacity — це опис ресурсів та місткості постійного тому. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity](/docs/concepts/storage/persistent-volumes#capacity)
+  capacity — це опис ресурсів та місткості постійного тому. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity](/uk/docs/concepts/storage/persistent-volumes#capacity)
 
 - **claimRef** (<a href="{{< ref "../common-definitions/object-reference#ObjectReference" >}}">ObjectReference</a>)
 
-  claimRef є частиною двостороннього звʼязування між PersistentVolume та PersistentVolumeClaim. Очікується, що він буде ненульовим при звʼязуванні. claim.VolumeName є офіційним звʼязуванням між PV та PVC. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding](/docs/concepts/storage/persistent-volumes#binding)
+  claimRef є частиною двостороннього звʼязування між PersistentVolume та PersistentVolumeClaim. Очікується, що він буде ненульовим при звʼязуванні. claim.VolumeName є офіційним звʼязуванням між PV та PVC. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding](/uk/docs/concepts/storage/persistent-volumes#binding)
 
 - **mountOptions** ([]string)
 
-  mountOptions — це список опцій монтування, наприклад ["ro", "soft"]. Не перевіряється — монтування просто завершиться з помилкою, якщо одна з опцій недійсна. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options](/docs/concepts/storage/persistent-volumes#mount-options)
+  mountOptions — це список опцій монтування, наприклад ["ro", "soft"]. Не перевіряється — монтування просто завершиться з помилкою, якщо одна з опцій недійсна. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options](/uk/docs/concepts/storage/persistent-volumes#mount-options)
 
 - **nodeAffinity** (VolumeNodeAffinity)
 
@@ -89,7 +89,7 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **persistentVolumeReclaimPolicy** (string)
 
-  persistentVolumeReclaimPolicy визначає, що відбувається з постійним томом після його звільнення від заявки. Валідні варіанти: Retain (стандартно для створених вручну PersistentVolumes), Delete (стандартно для динамічно наданих PersistentVolumes) та Recycle (застаріле). Recycle повинен підтримуватися втулком тому, що забезпечує роботу цього PersistentVolume. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming](/docs/concepts/storage/persistent-volumes#reclaiming)
+  persistentVolumeReclaimPolicy визначає, що відбувається з постійним томом після його звільнення від заявки. Валідні варіанти: Retain (стандартно для створених вручну PersistentVolumes), Delete (стандартно для динамічно наданих PersistentVolumes) та Recycle (застаріле). Recycle повинен підтримуватися втулком тому, що забезпечує роботу цього PersistentVolume. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming](/uk/docs/concepts/storage/persistent-volumes#reclaiming)
 
 - **storageClassName** (string)
 
@@ -103,18 +103,18 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **hostPath** (HostPathVolumeSource)
 
-  hostPath представляє теку на хості. Надається розробником або тестувальником. Це корисно лише для одновузлової розробки та тестування! Зберігання на хості жодним чином не підтримується та НЕ ПРАЦЮВАТИМЕ у багатовузловому кластері. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+  hostPath представляє теку на хості. Надається розробником або тестувальником. Це корисно лише для одновузлової розробки та тестування! Зберігання на хості жодним чином не підтримується та НЕ ПРАЦЮВАТИМЕ у багатовузловому кластері. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
   <a name="HostPathVolumeSource"></a>
   *Представляє шлях на хості, зіставлений зі шляхом у Podʼі. Шляхи томів хосту не підтримують управління власністю або перепризначення міток SELinux.*
 
   - **hostPath.path** (string), обовʼязково
 
-    path — шлях до теки на хості. Якщо шлях є символічним посиланням, він буде слідувати за посиланням до реального шляху. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+    path — шлях до теки на хості. Якщо шлях є символічним посиланням, він буде слідувати за посиланням до реального шляху. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
   - **hostPath.type** (string)
 
-    тип для HostPath Volume. Стандартне значення — "". Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/docs/concepts/storage/volumes#hostpath)
+    тип для HostPath Volume. Стандартне значення — "". Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#hostpath](/uk/docs/concepts/storage/volumes#hostpath)
 
 - **local** (LocalVolumeSource)
 
@@ -135,18 +135,18 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **awsElasticBlockStore** (AWSElasticBlockStoreVolumeSource)
 
-  awsElasticBlockStore представляє ресурс AWS Disk, який приєднано до машини хосту kubelet і пізніше надано доступ поду. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+  awsElasticBlockStore представляє ресурс AWS Disk, який приєднано до машини хосту kubelet і пізніше надано доступ поду. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   <a name="AWSElasticBlockStoreVolumeSource"></a>
   *Представляє постійний диск AWS.*
 
   - **awsElasticBlockStore.volumeID** (string), обовʼязково
 
-    volumeID — це унікальний ідентифікатор ресурсу постійного диска в AWS (Amazon EBS volume). Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    volumeID — це унікальний ідентифікатор ресурсу постійного диска в AWS (Amazon EBS volume). Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   - **awsElasticBlockStore.fsType** (string)
 
-    fsType — це тип файлової системи тому, який ви хочете монтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хосту. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    fsType — це тип файлової системи тому, який ви хочете монтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хосту. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
   - **awsElasticBlockStore.partition** (int32)
 
@@ -154,7 +154,7 @@ PersistentVolumeSpec — це специфікація постійного т�
 
   - **awsElasticBlockStore.readOnly** (boolean)
 
-    readOnly значення true змусить використовувати параметр readOnly в VolumeMounts. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/docs/concepts/storage/volumes#awselasticblockstore)
+    readOnly значення true змусить використовувати параметр readOnly в VolumeMounts. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore](/uk/docs/concepts/storage/volumes#awselasticblockstore)
 
 - **azureDisk** (AzureDiskVolumeSource)
 
@@ -474,7 +474,7 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **gcePersistentDisk** (GCEPersistentDiskVolumeSource)
 
-  gcePersistentDisk представляє ресурс GCE Disk, який приєднується до хост-машини kubelet і потім експонується для використання в Podʼі. Впроваджується адміністратором. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/docs/concepts/storage/volumes#gcepersistentdisk)
+  gcePersistentDisk представляє ресурс GCE Disk, який приєднується до хост-машини kubelet і потім експонується для використання в Podʼі. Впроваджується адміністратором. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk](/uk/docs/concepts/storage/volumes#gcepersistentdisk)
 
   <a name="GCEPersistentDiskVolumeSource"></a>
   *Представляє постійний диск в Google Compute Engine.*
@@ -549,7 +549,7 @@ PersistentVolumeSpec — це специфікація постійного т�
 
   - **iscsi.fsType** (string)
 
-    fsType — тип файлової системи тому, який ви хочете монтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#iscsi](/docs/concepts/storage/volumes#iscsi)
+    fsType — тип файлової системи тому, який ви хочете монтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#iscsi](/uk/docs/concepts/storage/volumes#iscsi)
 
   - **iscsi.initiatorName** (string)
 
@@ -584,22 +584,22 @@ PersistentVolumeSpec — це специфікація постійного т�
 
 - **nfs** (NFSVolumeSource)
 
-  nfs представляє монтування NFS на хості. Впроваджується адміністратором. Докладніше: https://kubernetes.io/docs/concepts/storage/volumes#nfs
+  nfs представляє монтування NFS на хості. Впроваджується адміністратором. Докладніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   <a name="NFSVolumeSource"></a>
   *Представляє монтування NFS, яке існує протягом життєвого циклу Podʼа. NFS томи не підтримують управління власниками або перевизначення міток SELinux.*
 
   - **nfs.path** (string), обовʼязково
 
-    path — шлях, який експортується сервером NFS. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+    path — шлях, який експортується сервером NFS. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   - **nfs.server** (string), обовʼязково
 
-    server — імʼя хоста або IP-адреса сервера NFS. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/docs/concepts/storage/volumes#nfs)
+    server — імʼя хоста або IP-адреса сервера NFS. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
   - **nfs.readOnly** (boolean)
 
-    readOnly — встановлює, чи має монтуватися NFS експорт тільки для читання. Стандартне значення — false. Детальніше: https://kubernetes.io/docs/concepts/storage/volumes#nfs
+    readOnly — встановлює, чи має монтуватися NFS експорт тільки для читання. Стандартне значення — false. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#nfs](/uk/docs/concepts/storage/volumes#nfs)
 
 - **photonPersistentDisk** (PhotonPersistentDiskVolumeSource)
 
@@ -683,7 +683,7 @@ PersistentVolumeSpec — це специфікація постійного т�
 
   - **rbd.fsType** (string)
 
-    fsType — тип файлової системи тому, який ви хочете змонтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Детальніше: https://kubernetes.io/docs/concepts/storage/volumes#rbd
+    fsType — тип файлової системи тому, який ви хочете змонтувати. Переконайтеся, що тип файлової системи підтримується операційною системою хоста. Приклади: "ext4", "xfs", "ntfs". Передбачається "ext4", якщо не вказано інше. Детальніше: [https://kubernetes.io/docs/concepts/storage/volumes#rbd](/uk/docs/concepts/storage/volumes#rbd)
 
   - **rbd.keyring** (string)
 
@@ -843,7 +843,7 @@ PersistentVolumeStatus — це поточний стан постійного 
 
 - **phase** (string)
 
-  phase — вказує, чи доступний том, звʼязаний із заявкою або звільнений від заявки. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase](/docs/concepts/storage/persistent-volumes#phase)
+  phase — вказує, чи доступний том, звʼязаний із заявкою або звільнений від заявки. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase](/uk/docs/concepts/storage/persistent-volumes#phase)
 
 - **reason** (string)
 
@@ -865,7 +865,7 @@ PersistentVolumeList — це список елементів PersistentVolume.
 
 - **items** ([]<a href="{{< ref "../config-and-storage-resources/persistent-volume-v1#PersistentVolume" >}}">PersistentVolume</a>), обовʼязково
 
-  items — це список постійних томів. Докладніше: https://kubernetes.io/docs/concepts/storage/persistent-volumes
+  items — це список постійних томів. Докладніше: [https://kubernetes.io/docs/concepts/storage/persistent-volumes](/uk/docs/concepts/storage/persistent-volumes)
 
 ## Операції {#operations}
 

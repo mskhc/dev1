@@ -9,13 +9,13 @@ weight: 110
 Ви можете ініціювати виселення, викликавши Eviction API безпосередньо або програмно,
 використовуючи клієнт {{<glossary_tooltip term_id="kube-apiserver" text="API-сервера">}}, наприклад, команду `kubectl drain`. Це створює обʼєкт `Eviction`, що призводить до завершення роботи Podʼа через API-сервер.
 
-Виселення ініційовані API дотримуються вашого налаштованого [`PodDisruptionBudgets`](/docs/tasks/run-application/configure-pdb/) та [`terminationGracePeriodSeconds`](/docs/concepts/workloads/pods/pod-lifecycle#pod-termination).
+Виселення ініційовані API дотримуються вашого налаштованого [`PodDisruptionBudgets`](/uk/docs/tasks/run-application/configure-pdb/) та [`terminationGracePeriodSeconds`](/uk/docs/concepts/workloads/pods/pod-lifecycle#pod-termination).
 
-Використання API для створення обʼєкта Eviction для Podʼа схоже на виконання контрольованої політикою операції [`DELETE`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#delete-delete-a-pod) на Podʼі.
+Використання API для створення обʼєкта Eviction для Podʼа схоже на виконання контрольованої політикою операції [`DELETE`](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#delete-delete-a-pod) на Podʼі.
 
 ## Виклик Eviction API {#calling-the-eviction-api}
 
-Ви можете використовувати [клієнт кластера Kubernetes](/docs/tasks/administer-cluster/access-cluster-api/#programmatic-access-to-the-api), щоб отримати доступ до API Kubernetes та створити обʼєкт `Eviction`. Для цього ви надсилаєте POST-запит на виконання операції, схожий на наступний приклад:
+Ви можете використовувати [клієнт кластера Kubernetes](/uk/docs/tasks/administer-cluster/access-cluster-api/#programmatic-access-to-the-api), щоб отримати доступ до API Kubernetes та створити обʼєкт `Eviction`. Для цього ви надсилаєте POST-запит на виконання операції, схожий на наступний приклад:
 
 {{< tabs name="Приклад виселення" >}}
 {{% tab name="policy/v1" %}}
@@ -92,6 +92,6 @@ curl -v -H 'Content-type: application/json' https://your-cluster-api-endpoint.ex
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся, як захистити ваші застосунки за допомогою [Бюджету відмови Podʼів](/docs/tasks/run-application/configure-pdb/).
-* Дізнайтеся про [Виселення внаслідок тиску на вузол](/docs/concepts/scheduling-eviction/node-pressure-eviction/).
-* Дізнайтеся про [Пріоритет та випередження Podʼів](/docs/concepts/scheduling-eviction/pod-priority-preemption/).
+* Дізнайтеся, як захистити ваші застосунки за допомогою [Бюджету відмови Podʼів](/uk/docs/tasks/run-application/configure-pdb/).
+* Дізнайтеся про [Виселення внаслідок тиску на вузол](/uk/docs/concepts/scheduling-eviction/node-pressure-eviction/).
+* Дізнайтеся про [Пріоритет та випередження Podʼів](/uk/docs/concepts/scheduling-eviction/pod-priority-preemption/).

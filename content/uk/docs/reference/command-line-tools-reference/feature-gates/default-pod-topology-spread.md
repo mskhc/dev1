@@ -23,4 +23,4 @@ stages:
 
 removed: true  
 ---
-Дозволяє використовувати втулок планування `PodTopologySpread` для виконання [стандартного розподілу](/docs/concepts/scheduling-eviction/topology-spread-constraints/#internal-default-constraints).
+Дозволяє використовувати втулок планування `PodTopologySpread` для виконання [стандартного розподілу](/uk/docs/concepts/scheduling-eviction/topology-spread-constraints/#internal-default-constraints).
