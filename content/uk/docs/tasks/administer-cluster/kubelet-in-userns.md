@@ -27,7 +27,7 @@ weight: 300
 * [Увімкніть systemd з сеансом користувача](https://rootlesscontaine.rs/getting-started/common/login/)
 * [Налаштуйте кілька значень sysctl, залежно від розподілу Linux хосту](https://rootlesscontaine.rs/getting-started/common/sysctl/)
 * [Переконайтеся, що ваш не привілейований користувач вказаний у `/etc/subuid` та `/etc/subgid`](https://rootlesscontaine.rs/getting-started/common/subuid/)
-* Увімкніть [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `KubeletInUserNamespace`
+* Увімкніть [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `KubeletInUserNamespace`
 
 <!-- steps -->
 

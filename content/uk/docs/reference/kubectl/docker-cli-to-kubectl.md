@@ -16,6 +16,7 @@ weight: 50
 ## docker run
 
 Щоб запустити Deployment nginx і експонувати Deployment, див. [kubectl create deployment](/uk/docs/reference/generated/kubectl/kubectl-commands#-em-deployment-em-).
+
 docker:
 
 ```shell

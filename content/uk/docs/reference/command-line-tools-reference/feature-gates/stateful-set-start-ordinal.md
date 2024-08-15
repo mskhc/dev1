@@ -13,5 +13,9 @@ stages:
   - stage: beta
     defaultValue: true
     fromVersion: "1.27"
+    toVersion: "1.30"
+  - stage: stable
+    defaultValue: true
+    fromVersion: "1.31"
 ---
-Дозволити налаштування порядкового номера старту у StatefulSet. Дивіться [Start ordinal](/uk/docs/concepts/workloads/controllers/statefulset/#start-ordinal) для більш детальної інформації.
+Дозволити налаштування порядкового номера старту у StatefulSet. Дивіться [Початковий порядковий номер](/uk/docs/concepts/workloads/controllers/statefulset/#start-ordinal) для більш детальної інформації.

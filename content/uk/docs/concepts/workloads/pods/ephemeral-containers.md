@@ -28,7 +28,7 @@ weight: 60
 
 - У ефемерних контейнерів не може бути портів, тому такі поля, як `ports`, `livenessProbe`, `readinessProbe`, заборонені.
 - Виділення ресурсів для Podʼа незмінне, тому встановлення `resources` заборонене.
-- Для повного списку дозволених полів дивіться [документацію по ефемерним контейнерам (EphemeralContainer)](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ephemeralcontainer-v1-core).
+- Для повного списку дозволених полів дивіться [документацію по ефемерним контейнерам (EphemeralContainer)](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ephemeralcontainer-v1-core).
 
 Ефемерні контейнери створюються за допомогою спеціального обробника `ephemeralcontainers` в API замість того, щоб додавати їх безпосередньо до `pod.spec`, тому не можна додавати ефемерний контейнер за допомогою `kubectl edit`.
 

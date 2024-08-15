@@ -214,7 +214,7 @@ Error from server: Get https://10.19.0.41:10250/containerLogs/default/mysql-ddc6
   curl http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/address
   ```
 
-  Обхідним рішенням є повідомлення `kubelet`, яку IP використовувати за допомогою `--node-ip`. Коли використовується DigitalOcean, це може бути публічний IP (призначений `eth0`) або приватний IP (призначений `eth1`), якщо ви хочете використовувати додаткову приватну мережу. Розділ `kubeletExtraArgs` структури kubeadm [`NodeRegistrationOptions`](/uk/docs/reference/config-api/kubeadm-config.v1beta3/#kubeadm-k8s-io-v1beta3-NodeRegistrationOptions) може бути використаний для цього.
+  Обхідним рішенням є повідомлення `kubelet`, яку IP використовувати за допомогою `--node-ip`. Коли використовується DigitalOcean, це може бути публічний IP (призначений `eth0`) або приватний IP (призначений `eth1`), якщо ви хочете використовувати додаткову приватну мережу. Розділ `kubeletExtraArgs` структури kubeadm [`NodeRegistrationOptions`](/uk/docs/reference/config-api/kubeadm-config.v1beta4/#kubeadm-k8s-io-v1beta4-NodeRegistrationOptions) може бути використаний для цього.
 
   Потім перезапустіть `kubelet`:
 
@@ -278,7 +278,7 @@ rpc error: code = 2 desc = oci runtime error: exec failed: container_linux.go:24
 
 У іншому випадку ви можете спробувати розділити пари `key=value` так: `--apiserver-extra-args "enable-admission-plugins=LimitRanger,enable-admission-plugins=NamespaceExists"`, але це призведе до того, що ключ `enable-admission-plugins` матиме лише значення `NamespaceExists`.
 
-Відомий обхід цього — використання [файлу конфігурації](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm.
+Відомий обхід цього — використання [файлу конфігурації](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) kubeadm.
 
 ## kube-proxy плануєтья до того, як вузол ініціалізовано cloud-controller-manager {#kube-proxy-scheduled-before-node-is-initialized-by-cloud-controller-manager}
 
@@ -324,32 +324,35 @@ kubectl -n kube-system patch ds kube-proxy -p='{
 У випуску Kubernetes v1.23 функцію FlexVolume було визнано застарілою.
 {{< /note >}}
 
-Для усунення цієї проблеми ви можете налаштувати теку flex-volume, використовуючи [файл конфігурації](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm.
+Для усунення цієї проблеми ви можете налаштувати теку flex-volume, використовуючи [файл конфігурації](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) kubeadm.
 
 На основному вузлі панелі управління (створеному за допомогою `kubeadm init`) передайте наступний файл, використовуючи параметр `--config`:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: InitConfiguration
 nodeRegistration:
   kubeletExtraArgs:
-    volume-plugin-dir: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
+  - name: "volume-plugin-dir"
+    value: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
 ---
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 controllerManager:
   extraArgs:
-    flex-volume-plugin-dir: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
+  - name: "flex-volume-plugin-dir"
+    value: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
 ```
 
 При долученні вузлів:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: JoinConfiguration
 nodeRegistration:
   kubeletExtraArgs:
-    volume-plugin-dir: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
+  - name: "volume-plugin-dir"
+    value: "/opt/libexec/kubernetes/kubelet-plugins/volume/exec/"
 ```
 
 Альтернативно ви можете змінити файл `/etc/fstab`, щоб зробити монтування `/usr` доступним для запису, проте будьте обізнані, що це змінює принцип дизайну дистрибутиву Linux.

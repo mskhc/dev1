@@ -124,18 +124,34 @@ spec:
    * повні імена пристроїв CDI
 
    {{< note >}}
-   Обробка повних імен пристроїв CDI Менеджером пристроїв потребує, щоб [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `DevicePluginCDIDevices` було увімкнено як для kubelet, так і для kube-apiserver. Це було додано як альфа-функція в Kubernetes v1.28 і було підняте до бета в v1.29.
+   Обробка повних імен пристроїв CDI Менеджером пристроїв потребує, щоб [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `DevicePluginCDIDevices` було увімкнено як для kubelet, так і для kube-apiserver. Це було додано як альфа-функція в Kubernetes v1.28 і було підняте до бета у v1.29 та GA у v1.31.
    {{< /note >}}
 
 ### Обробка перезапусків kubelet {#handling-kubelet-restarts}
 
 Очікується, що втулок пристрою виявлятиме перезапуски kubelet і повторно реєструватиметься з новим екземпляром kubelet. Новий екземпляр kubelet видаляє всі наявні Unix-сокети під `/var/lib/kubelet/device-plugins`, коли він стартує. Втулок пристрою може відстежувати вилучення своїх Unix-сокетів та повторно реєструватися після цієї події.
 
+### Втулок пристроїв та несправні пристрої {#device-plugin-and-unhealthy-devices}
+
+Існують випадки, коли пристрої виходять з ладу або вимикаються. Відповідальність втулку пристроїв у такому випадку полягає в тому, щоб повідомити kubelet про ситуацію за допомогою API `ListAndWatchResponse`.
+
+Після того, як пристрій позначено як несправний, kubelet зменшить кількість виділених ресурсів для цього ресурсу на Вузлі, щоб відобразити, скільки пристроїв можна використовувати для планування нових Podʼів. Загальна величина кількості для ресурсу не змінюватиметься.
+
+Podʼи, які були призначені несправним пристроям, залишаться призначеними до цього пристрою. Зазвичай код, що покладається на пристрій, почне виходити з ладу, і Pod може перейти у фазу Failed, якщо `restartPolicy` для Podʼа не був `Always`, або увійти в цикл збоїв в іншому випадку.
+
+До Kubernetes v1.31, щоб дізнатися, чи повʼязаний Pod із несправним пристроєм, потрібно було використовувати [PodResources API](#monitoring-device-plugin-resources).
+
+{{< feature-state feature_gate_name="ResourceHealthStatus" >}}
+
+Увімкнувши функціональну можливість `ResourceHealthStatus`, до кожного статусу контейнера в полі `.status` для кожного Pod буде додано поле `allocatedResourcesStatus`. Поле `allocatedResourcesStatus` надає інформацію про стан справності для кожного пристрою, призначеного контейнеру.
+
+Для несправного Pod або коли ви підозрюєте несправність, ви можете використовувати цей статус, щоб зрозуміти, чи може поведінка Podʼа бути повʼязаною з несправністю пристрою. Наприклад, якщо прискорювач повідомляє про подію перегріву, поле `allocatedResourcesStatus` може відобразити цю інформацію.
+
 ## Розгортання втулка пристрою {#device-plugin-deployment}
 
 Ви можете розгорнути втулок пристрою як DaemonSet, як пакунок для операційної системи вузла або вручну.
 
-Канонічна тека `/var/lib/kubelet/device-plugins` потребує привілейованого доступу, тому втулок пристрою повинен працювати у привілейованому контексті безпеки. Якщо ви розгортаєте втулок пристрою як DaemonSet, тека `/var/lib/kubelet/device-plugins` має бути змонтована як {{< glossary_tooltip term_id="volume" >}} у [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core) втулка.
+Канонічна тека `/var/lib/kubelet/device-plugins` потребує привілейованого доступу, тому втулок пристрою повинен працювати у привілейованому контексті безпеки. Якщо ви розгортаєте втулок пристрою як DaemonSet, тека `/var/lib/kubelet/device-plugins` має бути змонтована як {{< glossary_tooltip term_id="volume" >}} у [PodSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core) втулка.
 
 Якщо ви обираєте підхід з використанням DaemonSet, ви можете розраховувати на Kubernetes щодо: розміщення Podʼа втулка пристрою на Вузлах, перезапуску Podʼа демона після відмови та автоматизації оновлень.
 
@@ -283,7 +299,7 @@ message AllocatableResourcesResponse {
 
 `ContainerDevices` дійсно викладають інформацію про топологію, що вказує, до яких NUMA-клітин пристрій прикріплений. NUMA-клітини ідентифікуються за допомогою прихованого цілочисельного ідентифікатора, значення якого відповідає тому, що втулки пристроїв повідомляють [коли вони реєструються у kubelet](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#device-plugin-integration-with-the-topology-manager).
 
-Сервіс gRPC обслуговується через unix-сокет за адресою `/var/lib/kubelet/pod-resources/kubelet.sock`. Агенти моніторингу для ресурсів втулків пристроїв можуть бути розгорнуті як демони, або як DaemonSet. Канонічна тека `/var/lib/kubelet/pod-resources` вимагає привілейованого доступу, тому агенти моніторингу повинні працювати у привілейованому контексті безпеки. Якщо агент моніторингу пристроїв працює як DaemonSet, `/var/lib/kubelet/pod-resources` має бути підключена як {{< glossary_tooltip term_id="volume" >}} у PodSpec агента моніторингу пристроїв [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+Сервіс gRPC обслуговується через unix-сокет за адресою `/var/lib/kubelet/pod-resources/kubelet.sock`. Агенти моніторингу для ресурсів втулків пристроїв можуть бути розгорнуті як демони, або як DaemonSet. Канонічна тека `/var/lib/kubelet/pod-resources` вимагає привілейованого доступу, тому агенти моніторингу повинні працювати у привілейованому контексті безпеки. Якщо агент моніторингу пристроїв працює як DaemonSet, `/var/lib/kubelet/pod-resources` має бути підключена як {{< glossary_tooltip term_id="volume" >}} у PodSpec агента моніторингу пристроїв [PodSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
 
 {{< note >}}
 

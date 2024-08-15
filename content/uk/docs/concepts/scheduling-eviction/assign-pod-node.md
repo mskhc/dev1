@@ -222,8 +222,8 @@ podAntiAffinity` в специфікації Podʼа.
 {{< feature-state feature_gate_name="MatchLabelKeysInPodAffinity" >}}
 
 {{< note >}}
-<!-- UPDATE THIS WHEN PROMOTING TO BETA -->
-Поле `matchLabelKeys` знаходиться на рівні альфа-версії та є стандартно вимкненим в Kubernetes {{< skew currentVersion >}}. Для його використання потрібно активувати його за допомогою [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/)  `MatchLabelKeysInPodAffinity`.
+<!-- UPDATE THIS WHEN PROMOTING TO STABLE -->
+Поле `matchLabelKeys` знаходиться на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення [функціональної можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/)  `MatchLabelKeysInPodAffinity`.
 {{< /note >}}
 
 У Kubernetes є опціональне поле `matchLabelKeys` для спорідненості або антиспорідненості Podʼа. Це поле вказує ключі для міток, які повинні відповідати міткам вхідного Podʼа під час задоволення спорідненості (антиспорідненості) Podʼа.
@@ -263,8 +263,8 @@ spec:
 {{< feature-state feature_gate_name="MatchLabelKeysInPodAffinity" >}}
 
 {{< note >}}
-<!-- UPDATE THIS WHEN PROMOTING TO BETA -->
-Поле `mismatchLabelKeys` є полем альфа-рівня та типово є вимкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви хочете його використовувати, вам потрібно активувати його через [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodAffinity`.
+<!-- UPDATE THIS WHEN PROMOTING TO STABLE -->
+Поле `mismatchLabelKeys` знаходиться на рівні бета-версії та є стандартно увімкненим в Kubernetes {{< skew currentVersion >}}. Якщо ви бажаєте його вимкнути, вам потрібно зробити це явним чином за допомогою вимкнення [функціональної можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodAffinity`.
 {{< /note >}}
 
 Kubernetes включає додаткове поле `mismatchLabelKeys` для спорідненості або антиспорідненості Podʼа. Це поле вказує ключі для міток, які **не** повинні мати збігу з мітками вхідного Podʼа, при задоволенні спорідненості чи антиспорідненості Podʼа.

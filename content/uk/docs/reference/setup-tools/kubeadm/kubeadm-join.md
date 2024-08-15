@@ -253,7 +253,7 @@ kubectl delete clusterrolebinding kubeadm:node-autoapprove-bootstrap
 
 Якщо ваша конфігурація не використовує останню версію, **рекомендується** перейти на неї за допомогою команди [kubeadm config migrate](/uk/docs/reference/setup-tools/kubeadm/kubeadm-config/#cmd-config-migrate).
 
-Для отримання додаткової інформації щодо полів та використання конфігурації ви можете перейти до нашого [довідника API](/uk/docs/reference/config-api/kubeadm-config.v1beta3/).
+Для отримання додаткової інформації щодо полів та використання конфігурації ви можете перейти до нашого [довідника API](/uk/docs/reference/config-api/kubeadm-config.v1beta4/).
 
 ## {{% heading "whatsnext" %}}
 

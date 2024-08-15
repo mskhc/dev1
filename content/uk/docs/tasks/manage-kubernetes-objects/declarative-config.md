@@ -918,4 +918,4 @@ template:
 * [Керування обʼєктами Kubernetes за допомогою імперативних команд](/uk/docs/tasks/manage-kubernetes-objects/imperative-command/)
 * [Імперативне керування обʼєктами Kubernetes за допомогою конфігураційних файлів](/uk/docs/tasks/manage-kubernetes-objects/imperative-config/)
 * [Довідник команд kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
-* [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Довідник API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

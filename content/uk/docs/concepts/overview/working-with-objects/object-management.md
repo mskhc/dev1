@@ -53,7 +53,7 @@ kubectl create deployment nginx --image nginx
 
 У імперативній конфігурації обʼєктів команда `kubectl` вказує операцію (створити, замінити інше), необовʼязкові прапорці та принаймні одне імʼя файлу. Зазначений файл повинен містити повне визначення обʼєкта у форматі YAML або JSON.
 
-Див. [API-довідник](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/) для отримання докладніших відомостей щодо визначення обʼєктів.
+Див. [API-довідник](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/) для отримання докладніших відомостей щодо визначення обʼєктів.
 
 {{< warning >}}
 Імперативна команда `replace` замінює поточну специфікацію на нову, вилучаючи всі зміни обʼєкта, які відсутні в файлі конфігурації. Цей підхід не повинен використовуватися із типами ресурсів, специфікації яких оновлюються незалежно від файлу конфігурації. Наприклад, у служб типу `LoadBalancer` поле `externalIPs` оновлюється незалежно від конфігурації кластера.
@@ -146,4 +146,4 @@ kubectl apply -R -f configs/
 - [Декларативне управління обʼєктами Kubernetes за допомогою Kustomize](/uk/docs/tasks/manage-kubernetes-objects/kustomization/)
 - [Довідник команд Kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
 - [Книга Kubectl](https://kubectl.docs.kubernetes.io)
-- [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+- [Довідник API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

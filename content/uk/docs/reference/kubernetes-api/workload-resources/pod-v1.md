@@ -661,7 +661,7 @@ PodSpec — це опис Pod.
 
 - **command** ([]string)
 
-  Масив точок входу. Виконується безпосередньо, не у середовищі оболонки. Якщо не надано, буде використано ENTRYPOINT образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
+  Масив точок входу. Виконується безпосередньо, не у середовищі оболонки. Якщо не надано, буде використано ENTRYPOINT образу контейнера. Змінні $(VAR_NAME) розширюються за допомогою середовища контейнера. Якщо змінну не вдасться розгорнути, посилання у вхідному рядку залишиться без змін. Подвійні $$ зменшуються до одного $, що дозволяє екранувати синтаксис $(VAR_NAME): наприклад, "$$(VAR_NAME)" виведе літеральний рядок "$(VAR_NAME)". Екрановані посилання ніколи не будуть розгортатися, незалежно від того, чи існує змінна, чи ні. Не може бути оновлено. Докладніше: [https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell](/uk/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell)
 
 - **args** ([]string)
 

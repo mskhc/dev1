@@ -7,18 +7,28 @@ content_type: concept
 weight: 45
 ---
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+<!-- overview -->
+
+{{< feature-state feature_gate_name="VolumeAttributesClass" >}}
 
 Ця сторінка передбачає, що ви знайомі з [StorageClasses](/uk/docs/concepts/storage/storage-classes/), [томами](/uk/docs/concepts/storage/volumes/) та [постійними томами](/uk/docs/concepts/storage/persistent-volumes/) в Kubernetes.
 
+<!-- body -->
+
 Клас VolumeAttributesClass надає адміністраторам можливість описати змінні "класи" сховищ, які вони пропонують. Різні класи можуть відповідати різним рівням якості обслуговування. Kubernetes сам по собі не виражає думки про те, що представляють ці класи.
 
-Це експериментальна функція, її типово вимкнено.
+Це бета-функція, її типово вимкнено.
 
-Якщо ви хочете протестувати функцію, поки вона альфа, вам потрібно ввімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
+Якщо ви хочете протестувати функцію, поки вона бета, вам потрібно ввімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
 
 ```shell
 --feature-gates="...,VolumeAttributesClass=true"
+```
+
+Вам також потрібно буде увімкнути API групу `storage.k8s.io/v1beta1` через `kube-apiserver` [runtime-config](https://kubernetes.io/docs/tasks/administer-cluster/enable-disable-api/). Для цього використовуйте наступний аргумент командного рядка:
+
+```shell
+--runtime-config=storage.k8s.io/v1beta1=true
 ```
 
 Ви також можете використовувати VolumeAttributesClass лише зі сховищем, підтримуваним {{< glossary_tooltip text="Container Storage Interface" term_id="csi" >}}, і лише там, де відповідний драйвер CSI реалізує API `ModifyVolume`.
@@ -30,7 +40,7 @@ weight: 45
 Назва обʼєкта VolumeAttributesClass має значення, і вона використовується користувачами для запиту конкретного класу. Адміністратори встановлюють імʼя та інші параметри класу при створенні обʼєктів VolumeAttributesClass. Хоча імʼя обʼєкта VolumeAttributesClass в `PersistentVolumeClaim` може змінюватися, параметри в наявному класі є незмінними.
 
 ```yaml
-apiVersion: storage.k8s.io/v1alpha1
+apiVersion: storage.k8s.io/v1beta1
 kind: VolumeAttributesClass
 metadata:
   name: silver
@@ -70,7 +80,7 @@ spec:
 В кластері доступний новий клас VolumeAttributesClass з імʼям gold:
 
 ```yaml
-apiVersion: storage.k8s.io/v1alpha1
+apiVersion: storage.k8s.io/v1beta1
 kind: VolumeAttributesClass
 metadata:
   name: gold

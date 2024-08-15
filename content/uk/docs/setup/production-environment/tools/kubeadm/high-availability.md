@@ -139,7 +139,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
    - Прапорець `--upload-certs` використовується для завантаження сертифікатів, які слід використовувати на всіх екземплярах панелі управління. Якщо натомість ви віддаєте перевагу копіюванню сертифікатів між вузлами панелі управління вручну або за допомогою засобів автоматизації, видаліть цей прапорець та зверніться до розділу [Розподіл сертифікатів вручну](#manual-certs) нижче.
 
    {{< note >}}
-   Прапорці `kubeadm init` `--config` та `--certificate-key` не можна змішувати, тому якщо ви хочете використовувати [конфігурацію kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) вам слід додати поле `certificateKey` у відповідні місця конфігурації (під `InitConfiguration` та `JoinConfiguration: controlPlane`).
+   Прапорці `kubeadm init` `--config` та `--certificate-key` не можна змішувати, тому якщо ви хочете використовувати [конфігурацію kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) вам слід додати поле `certificateKey` у відповідні місця конфігурації (під `InitConfiguration` та `JoinConfiguration: controlPlane`).
    {{< /note >}}
 
    {{< note >}}
@@ -238,7 +238,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
 
    ```yaml
    ---
-   apiVersion: kubeadm.k8s.io/v1beta3
+   apiVersion: kubeadm.k8s.io/v1beta4
    kind: ClusterConfiguration
    kubernetesVersion: stable
    controlPlaneEndpoint: "LOAD_BALANCER_DNS:LOAD_BALANCER_PORT" # змініть це (див. нижче)

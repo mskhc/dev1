@@ -915,6 +915,16 @@ Kubernetes асоціює [EndpointSlices](/uk/docs/concepts/services-networking
 
 Якщо ресурс IngressClass має цю анотацію встановлену на значення `"true"`, новий ресурс Ingress без вказаного класу буде призначено цей стандартний клас.
 
+### nginx.ingress.kubernetes.io/configuration-snippet
+
+Тип: Annotation
+
+Приклад: `nginx.ingress.kubernetes.io/configuration-snippet: "  more_set_headers \"Request-Id: $req_id\";\nmore_set_headers \"Example: 42\";\n"`
+
+Використовується для: Ingress
+
+Ви можете використовувати цю анотацію для налаштування додаткових параметрів Ingress, що використовує [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx/). Анотація `configuration-snippet` стандартно ігнорується, починаючи з версії 1.9.0 контролера ingress. Щоб використовувати цю анотацію, потрібно явно увімкнути налаштування контролера NGINX ingress `allow-snippet-annotations.` Увімкнення цієї анотації може бути небезпечним у кластері з декількома орендарями, оскільки це може дозволити людям з обмеженими правами доступу отримувати всі Secrets у кластері.
+
 ### kubernetes.io/ingress.class (deprecated)
 
 Тип: Annotation

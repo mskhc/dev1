@@ -135,7 +135,7 @@ kind delete cluster --name psa-ns-level
 
 ## {{% heading "whatsnext" %}}
 
-- Виконайте [скрипт](/examples/security/kind-with-namespace-level-baseline-pod-security.sh) для виконання всіх попередніх кроків одночасно.
+- Виконайте [скрипт](/uk/examples/security/kind-with-namespace-level-baseline-pod-security.sh) для виконання всіх попередніх кроків одночасно.
 
   1. Створіть кластер kind.
   2. Створіть новий простір імен.

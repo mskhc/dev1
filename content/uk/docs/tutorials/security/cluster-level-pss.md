@@ -300,7 +300,7 @@ kind delete cluster --name psa-wo-cluster-pss
 ## {{% heading "whatsnext" %}}
 
 - Виконайте
-  [скрипт оболонки](/examples/security/kind-with-cluster-level-baseline-pod-security.sh) для виконання всіх попередніх кроків одночасно:
+  [скрипт оболонки](/uk/examples/security/kind-with-cluster-level-baseline-pod-security.sh) для виконання всіх попередніх кроків одночасно:
   1. Створіть конфігурацію на рівні кластера на основі Стандартів безпеки Pod.
   2. Створіть файл для того, щоб API-сервер міг використовувати цю конфігурацію.
   3. Створіть кластер, який створює API-сервер з цією конфігурацією.

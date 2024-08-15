@@ -62,7 +62,7 @@ default   Active    13m
 
 Створімо два нових простори імен для зберігання нашої роботи.
 
-Використовуйте файл [`namespace-dev.yaml`](/examples/admin/namespace-dev.yaml), який описує простір імен `development`:
+Використовуйте файл [`namespace-dev.yaml`](/uk/examples/admin/namespace-dev.yaml), який описує простір імен `development`:
 
 {{% code_sample language="yaml" file="admin/namespace-dev.yaml" %}}
 
@@ -72,7 +72,7 @@ default   Active    13m
 kubectl create -f https://k8s.io/examples/admin/namespace-dev.yaml
 ```
 
-Збережіть наступний вміст у файл [`namespace-prod.yaml`](/examples/admin/namespace-prod.yaml), який описує простір імен `production`:
+Збережіть наступний вміст у файл [`namespace-prod.yaml`](/uk/examples/admin/namespace-prod.yaml), який описує простір імен `production`:
 
 {{% code_sample language="yaml" file="admin/namespace-prod.yaml" %}}
 

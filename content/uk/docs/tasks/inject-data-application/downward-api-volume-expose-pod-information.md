@@ -168,7 +168,7 @@ cat /etc/podinfo/cpu_limit
 
 Дізнайтеся про томи в легасі довідці API:
 
-* Перегляньте [`Volume`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core) API-визначення, яке визначає загальний том у Pod для доступу контейнерів.
-* Перегляньте [`DownwardAPIVolumeSource`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumesource-v1-core) API-визначення, яке визначає том, який містить інформацію Downward API.
-* Перегляньте [`DownwardAPIVolumeFile`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumefile-v1-core) API-визначення, яке містить посилання на обʼєкт або поля ресурсу для заповнення файлу у томі Downward API.
-* Перегляньте [`ResourceFieldSelector`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core) API-визначення, яке вказує ресурси контейнера та їх формат виведення.
+* Перегляньте [`Volume`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core) API-визначення, яке визначає загальний том у Pod для доступу контейнерів.
+* Перегляньте [`DownwardAPIVolumeSource`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumesource-v1-core) API-визначення, яке визначає том, який містить інформацію Downward API.
+* Перегляньте [`DownwardAPIVolumeFile`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#downwardapivolumefile-v1-core) API-визначення, яке містить посилання на обʼєкт або поля ресурсу для заповнення файлу у томі Downward API.
+* Перегляньте [`ResourceFieldSelector`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core) API-визначення, яке вказує ресурси контейнера та їх формат виведення.

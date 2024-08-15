@@ -138,13 +138,27 @@ IPVS надає більше опцій для балансування траф
 
 ### Режим проксі `nftables` {#proxy-mode-nftables}
 
-{{< feature-state for_k8s_version="v1.29" state="alpha" >}}
+{{< feature-state feature_gate_name="NFTablesProxyMode" >}}
 
-_Цей режим проксі доступний лише на вузлах Linux._
+_Цей режим проксі доступний лише на вузлах Linux, він потребує ядра версії 5.13 чи новіщої._
 
 У цьому режимі kube-proxy налаштовує правила пересилання пакетів за допомогою API nftables ядра підсистеми netfilter. Для кожної точки доступу встановлюються правила nftables, які стандартно вибирають бекенд Pod випадковим чином.
 
-API nftables є наступником API iptables і, хоча воно призначене для забезпечення кращої продуктивності та масштабованості, режим nftables kube-proxy все ще перебуває в активній стадії розробки на момент версії {{< skew currentVersion >}} і, ймовірно, наразі не очікується, що він перевищить інші режими Linux за продуктивністю.
+API nftables є наступником API iptables і призначений для забезпечення кращої продуктивності та масштабованості порівняно з iptables. Режим проксі `nftables` може обробляти зміни в точках доступу сервісу швидше та ефективніше, ніж режим `iptables`, і також може ефективніше обробляти пакети в ядрі (хоча це стає помітним лише в кластерах з десятками тисяч сервісів).
+
+В Kubernetes {{< skew currentVersion >}}, режим `nftables` все ще відносно новий і може бути несумісний з усіма мережевими втулками; ознайомтесь з документацією до вашого мережевого втулка.
+
+#### Міграція з `iptables` на `nftables` {#migrating-from-iptables-mode-to-nftables}
+
+Користувачі, які хочуть перейти зі стандартного режиму `iptables` на режим `nftables`, повинні знати, що деякі функції в режимі `nftables` працюють трохи інакше:
+
+* **Інтерфейси NodePort**: У режимі `iptables`, стандартно, [сервіси NodePort](/uk/docs/concepts/services-networking/service/#type-nodeport) доступні на всіх локальних IP-адресах. Це зазвичай не те, чого хочуть користувачі, тому режим `nftables` стандартно використовує параметр `--nodeport-addresses primary`, що означає, що сервіси NodePort доступні лише на основних IPv4 та/або IPv6 адресах вузла. Ви можете змінити це, вказавши явне значення для цієї опції: наприклад, `--nodeport-addresses 0.0.0.0/0`, щоб слухати на всіх (локальних) IP-адресах IPv4.
+
+* **Сервіси NodePort на `127.0.0.1`**: У режимі `iptables`, якщо діапазон `--nodeport-addresses` включає `127.0.0.1` (і не передано опцію `--iptables-localhost-nodeports false`), тоді сервіси NodePort будуть доступні навіть на "localhost" (`127.0.0.1`). У режимі `nftables` (та режимі `ipvs`) це не працюватиме. Якщо ви не впевнені, чи залежите від цієї функціональності, ви можете перевірити метрику kube-proxy `iptables_localhost_nodeports_accepted_packets_total`; якщо вона не дорівнює 0, це означає, що якийсь клієнт підключився до сервісу NodePort через `127.0.0.1`.
+
+* **Взаємодія NodePort з брандмауерами**: Режим `iptables` kube-proxy намагається бути сумісним із занадто агресивними брандмауерами; для кожного сервісу NodePort він додаватиме правила для прийому вхідного трафіку на цьому порту, на випадок, якщо цей трафік буде заблокований брандмауером. Цей підхід не працює з брандмауерами на основі nftables, тому режим `nftables` kube-proxy не робить нічого в цьому напрямку; якщо у вас є локальний брандмауер, ви повинні переконатися, що він належним чином налаштований для пропуску трафіку Kubernetes (наприклад, дозволивши вхідний трафік на весь діапазон NodePort).
+
+* **Обхід помилок Conntrack**: Ядра Linux версій до 6.1 мають помилку, яка може призвести до закриття довготривалих TCP-зʼєднань до IP-адрес сервісів з помилкою "Connection reset by peer". Режим `iptables` kube-proxy встановлює обхід для цієї помилки, але пізніше було виявлено, що цей обхід викликає інші проблеми в деяких кластерах. Режим `nftables` стандартно не встановлює жодного обходу, але ви можете перевірити метрику kube-proxy `iptables_ct_state_invalid_dropped_packets_total`, щоб зʼясувати, чи залежить ваш кластер від цього обходу, і якщо це так, ви можете запустити kube-proxy з опцією `--conntrack-tcp-be-liberal`, щоб оминути цю проблему в режимі `nftables`.
 
 ### Режим проксі `kernelspace` {#proxy-mode-kernelspace}
 
@@ -199,7 +213,7 @@ kube-proxy налаштовує правила фільтрації пакеті
 
 #### Відстеження призначення IP-адрес за допомогою Kubernetes API {#ip-address-objects}
 
-{{< feature-state for_k8s_version="v1.27" state="alpha" >}}
+{{< feature-state feature_gate_name="MultiCIDRServiceAllocator" >}}
 
 Якщо ви включите [функціональні можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MultiCIDRServiceAllocator` та
 API-групу [`networking.k8s.io/v1alpha1`](/uk/docs/tasks/administer-cluster/enable-disable-api/), панель управління замінить наявний розподілювач etcd переглянутою реалізацією, яка використовує обʼєкти IPAddress та ServiceCIDR замість внутрішнього глобального map призначення. Кожен IP-адрес кластера, повʼязаний з Service, посилається на обʼєкт IPAddress.
@@ -246,7 +260,7 @@ kubernetes   10.96.0.0/28  17m
 
 ```shell
 cat <<'EOF' | kubectl apply -f -
-apiVersion: networking.k8s.io/v1alpha1
+apiVersion: networking.k8s.io/v1beta1
 kind: ServiceCIDR
 metadata:
   name: newservicecidr

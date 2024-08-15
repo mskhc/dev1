@@ -31,7 +31,7 @@ min-kubernetes-server-version: v1.25
 * ОС вузла повинна бути Linux
 * Ви повинні мати можливість виконувати команди на хості
 * Ви повинні мати можливість виконувати команди у Podʼах
-* Вам потрібно увімкнути `UserNamespacesSupport` [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/)
+* Вам потрібно увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `UserNamespacesSupport`
 
 {{< note >}}
 Feature gate для увімкнення просторів імен користувача раніше називався `UserNamespacesStatelessPodsSupport`, коли підтримувалися лише Podʼи без збереження стану. Тільки Kubernetes v1.25 по v1.27 визнають `UserNamespacesStatelessPodsSupport`.

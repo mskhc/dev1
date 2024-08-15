@@ -167,14 +167,15 @@ spec:
 
 ### Завершувач захисту від видалення PersistentVolume {#persistentvolume-deletion-protection-finalizer}
 
-{{< feature-state for_k8s_version="v1.23" state="alpha" >}}
+{{< feature-state feature_gate_name="HonorPVReclaimPolicy" >}}
 
 До PersistentVolume можна додавати завершувачі, щоб забезпечити, що PersistentVolume з політикою відновлення `Delete` буде видалено лише після видалення сховища, яке він забезпечував.
 
-Введені нові завершувачі `kubernetes.io/pv-controller` та `external-provisioner.volume.kubernetes.io/finalizer` додаються лише до томів, що виділені динамічно.
+Завершувач `external-provisioner.volume.kubernetes.io/finalizer` (введений у v1.31) додається як до динамічно, так і до статично виділених томів CSI.
 
-Завершувач `kubernetes.io/pv-controller` додається до томів внутрішніх втулків.
-Наприклад:
+Завершувач `kubernetes.io/pv-controller` (введений у v1.31) додається до динамічно виділених томів внутрішнього втулка і пропускається для статично виділених томів внутрішнього втулка.
+
+Ось приклад динамічно виділеного тому внутрішнього втулка:
 
 ```shell
 kubectl describe pv pvc-74a498d6-3929-47e8-8c02-078c1ece4d78
@@ -229,6 +230,8 @@ Events:                <none>
 ```
 
 Коли прапорець функції `CSIMigration{provider}` увімкнено для конкретного внутрішнього втулка, завершувач `kubernetes.io/pv-controller` замінюється завершувачем `external-provisioner.volume.kubernetes.io/finalizer`.
+
+Завершувачі забезпечують, що обʼєкт PV видаляється лише після того, як том буде видалений з бекенду зберігання, якщо політика відновлення PV є `Delete`. Це також гарантує, що том буде видалений з бекенду зберігання незалежно від порядку видалення PV і PVC.
 
 ### Резервування PersistentVolume {#reserving-persistentvolume}
 
@@ -372,20 +375,20 @@ FlexVolumes (застарілий починаючи з Kubernetes v1.23) доз
 * [`awsElasticBlockStore`](/uk/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**міграція типово увімкнена** починаючи з v1.23)
 * [`azureDisk`](/uk/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**міграція типово увімкнена** починаючи з v1.23)
 * [`azureFile`](/uk/docs/concepts/storage/volumes/#azurefile) — Azure File (**міграція типово увімкнена** починаючи з v1.24)
-* [`cephfs`](/uk/docs/concepts/storage/volumes/#cephfs) — CephFS volume (**застаріло** починаючи з v1.28, план міграції відсутній, підтримка буде видалена у майбутньому випуску)
 * [`cinder`](/uk/docs/concepts/storage/volumes/#cinder) — Cinder (блочне сховище OpenStack) (**міграція типово увімкнена** починаючи з v1.21)
 * [`flexVolume`](/uk/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** починаючи з версії v1.23, план міграції відсутній, планів припинення підтримки немає)
 * [`gcePersistentDisk`](/uk/docs/concepts/storage/volumes/#gcePersistentDisk) — GCE Persistent Disk (**застаріло** починаючи з v1.23, план міграції відсутній, планів припинення підтримки немає)
-* [`portworxVolume`](/uk/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**застаріло**  починаючи з версії версії v1.25)
-* [`rbd`](/uk/docs/concepts/storage/volumes/#rbd) — Том Rados Block Device (RBD) (**застаріло**  починаючи з версії v1.28, план міграції відсутній, підтримку буде видалено у майбутньому випуску)
+* [`portworxVolume`](/uk/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**міграція типово увімкнена** починаючи з v1.31)
 * [`vsphereVolume`](/uk/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**міграція типово увімкнена** починаючи з v1.25)
 
 Старші версії Kubernetes також підтримували наступні типи вбудованих PersistentVolume:
 
-* `photonPersistentDisk` — Постійний диск Photon controller. (**недоступно** починаючи з версії v1.15)
-* `scaleIO` — Том ScaleIO. (**недоступно** починаючи з версії v1.21)
-* `flocker` — Сховище Flocker. (**недоступно** починаючи з версії v1.25)
+* [`cephfs`](/uk/docs/concepts/storage/volumes/#cephfs) (**недоступно** починаючи з версії v1.31)
+* `flocker` — Flocker storage. (**недоступно** починаючи з версії v1.25)
+* `photonPersistentDisk` — Photon controller persistent disk. (**недоступно** починаючи з версії v1.15)
 * `quobyte` — Том Quobyte. (**недоступно** починаючи з версії v1.25)
+* [`rbd`](/uk/docs/concepts/storage/volumes/#rbd) — Rados Block Device (RBD) volume  (**недоступно** починаючи з версії v1.31)
+* `scaleIO` — Том ScaleIO. (**недоступно** починаючи з версії v1.21)
 * `storageos` — Том StorageOS. (**недоступно** починаючи з версії v1.25)
 
 ## Persistent Volumes
@@ -556,13 +559,9 @@ PersistentVolume може перебувати в одній з наступни
 
 #### Час переходу фази {#phase-transition-timestamp}
 
-{{< feature-state for_k8s_version="v1.29" state="beta" >}}
+{{< feature-state feature_gate_name="PersistentVolumeLastPhaseTransitionTime" >}}
 
 Поле `.status` для PersistentVolume може включати альфа-поле `lastPhaseTransitionTime`. Це поле фіксує відмітку часу, коли том востаннє перейшов у свою фазу. Для новостворених томів фаза встановлюється як `Pending`, а `lastPhaseTransitionTime` встановлюється на поточний час.
-
-{{< note >}}
-Вам потрібно увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `PersistentVolumeLastPhaseTransitionTime`, щоб використовувати або переглядати поле `lastPhaseTransitionTime`.
-{{< /note >}}
 
 ## PersistentVolumeClaims
 
@@ -823,7 +822,7 @@ spec:
 
 {{< feature-state for_k8s_version="v1.24" state="beta" >}}
 
-Kubernetes підтримує користувацькі заповнювачі томів. Для використання користувацьких заповнювачів томів слід увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` для kube-apiserver та kube-controller-manager.
+Kubernetes підтримує користувацькі заповнювачі томів. Для використання користувацьких заповнювачів томів слід увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` для kube-apiserver та kube-controller-manager.
 
 Наповнювачі томів використовують поле специфікації PVC, що називається `dataSourceRef`. На відміну від поля `dataSource`, яке може містити тільки посилання на інший PersistentVolumeClaim або на VolumeSnapshot, поле `dataSourceRef` може містити посилання на будь-який обʼєкт у тому ж просторі імен, за винятком основних обʼєктів, окрім PVC. Для кластерів, які мають увімкнутий feature gate, використання `dataSourceRef` бажано перед `dataSource`.
 
@@ -831,7 +830,7 @@ Kubernetes підтримує користувацькі заповнювачі 
 
 {{< feature-state for_k8s_version="v1.26" state="alpha" >}}
 
-Kubernetes підтримує джерела даних томів зі змішаними просторами імен. Для використання джерел даних томів із змішаними просторами імен слід увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` та `CrossNamespaceVolumeDataSource` для kube-apiserver та kube-controller-manager. Також вам слід увімкнути `CrossNamespaceVolumeDataSource` для csi-provisioner.
+Kubernetes підтримує джерела даних томів зі змішаними просторами імен. Для використання джерел даних томів із змішаними просторами імен слід увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` та `CrossNamespaceVolumeDataSource` для kube-apiserver та kube-controller-manager. Також вам слід увімкнути `CrossNamespaceVolumeDataSource` для csi-provisioner.
 
 Увімкнення `CrossNamespaceVolumeDataSource` дозволяє вам вказати простір імен у полі `dataSourceRef`.
 

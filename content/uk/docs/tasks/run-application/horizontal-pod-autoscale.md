@@ -110,7 +110,7 @@ class pod1,pod2,pod3 pod
 
 Horizontal Pod Autoscaler є ресурсом API в групі API Kubernetes `autoscaling`. Поточна стабільна версія знаходиться в версії API `autoscaling/v2`, яка включає підтримку масштабування за памʼяттю та власними метриками. Нові поля, введені в `autoscaling/v2`, зберігаються як анотації при роботі з `autoscaling/v1`.
 
-При створенні обʼєкта API HorizontalPodAutoscaler переконайтеся, що вказане імʼя є дійсним [піддоменом DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names). Більше деталей про обʼєкт API можна знайти на сторінці [Обʼєкт HorizontalPodAutoscaler](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#horizontalpodautoscaler-v2-autoscaling).
+При створенні обʼєкта API HorizontalPodAutoscaler переконайтеся, що вказане імʼя є дійсним [піддоменом DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names). Більше деталей про обʼєкт API можна знайти на сторінці [Обʼєкт HorizontalPodAutoscaler](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#horizontalpodautoscaler-v2-autoscaling).
 
 ## Стабільність масштабування робочого навантаження {#flapping}
 

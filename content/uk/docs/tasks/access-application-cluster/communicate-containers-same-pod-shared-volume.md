@@ -128,6 +128,6 @@ Hello from the debian container
 
 * Перегляньте [Налаштування Pod для спільного використання простору процесів між контейнерами](/uk/docs/tasks/configure-pod-container/share-process-namespace/).
 
-* Перегляньте [Том](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
+* Перегляньте [Том](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
 
-* Перегляньте [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).
+* Перегляньте [Pod](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).

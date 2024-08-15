@@ -40,7 +40,7 @@ SIG Docs вітає контент та рецензування від усіх
 
 ### Файли OWNERS та front-matter {#owners-files-and-front-matter}
 
-Проєкт Kubernetes використовує автоматизаційний інструмент під назвою prow для автоматизації, повʼязаної з тікетами та pull requestʼами на GitHub. [Репозиторій вебсайту Kubernetes](https://github.com/kubernetes/website) використовує два [втулки prow](https://github.com/kubernetes/test-infra/tree/master/prow/plugins):
+Проєкт Kubernetes використовує автоматизаційний інструмент під назвою prow для автоматизації, повʼязаної з тікетами та pull requestʼами на GitHub. [Репозиторій вебсайту Kubernetes](https://github.com/kubernetes/website) використовує два [втулки prow](https://github.com/kubernetes-sigs/prow/tree/main/pkg/plugins):
 
 - blunderbuss
 - approve

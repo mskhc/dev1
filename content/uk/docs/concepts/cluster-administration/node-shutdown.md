@@ -20,7 +20,7 @@ Kubelet забезпечує виконання нормального [проц
 
 Можливість відповідного вимикання вузла (Graceful node shutdown) залежить від systemd, оскільки вона використовує [блокування інгібіторів systemd](https://www.freedesktop.org/wiki/Software/systemd/inhibit/) для затримки вимкнення вузла на певний час.
 
-Вимикання вузла керується властивістю [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdown`, що є типово увімкненим з версії 1.21.
+Вимикання вузла керується [функціональною можливістю](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdown`, що є типово увімкненим з версії 1.21.
 
 Зауважте, що типово обидва налаштування конфігурації, описані нижче, `shutdownGracePeriod` та `shutdownGracePeriodCriticalPods`, встановлені на нуль, таким чином, не активуючи функціональність відповідного вимикання вузла. Для активації цієї функції, два налаштування конфігурації kubelet повинні бути належним чином налаштовані та встановлені на значення, відмінні від нуля.
 
@@ -116,7 +116,7 @@ shutdownGracePeriodByPodPriority:
 
 Якщо ця функція увімкнена, а жодна конфігурація не надана, то дії з упорядкування не будуть виконані.
 
-Використання цієї функції передбачає активацію [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdownBasedOnPodPriority`, та встановлення `ShutdownGracePeriodByPodPriority` в [kubelet config](/uk/docs/reference/config-api/kubelet-config.v1beta1/) до потрібної конфігурації, яка містить значення класу пріоритету Podʼа та відповідні періоди вимкнення.
+Використання цієї функції передбачає активацію [функціональної можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `GracefulNodeShutdownBasedOnPodPriority`, та встановлення `ShutdownGracePeriodByPodPriority` в [kubelet config](/uk/docs/reference/config-api/kubelet-config.v1beta1/) до потрібної конфігурації, яка містить значення класу пріоритету Podʼа та відповідні періоди вимкнення.
 
 {{< note >}}
 Можливість враховування пріоритетів Podʼів під час відповідного вимикання вузла була введена як альфа-функція в Kubernetes v1.23. У Kubernetes {{< skew currentVersion >}} функція є бета-версією та є типово активованою.
@@ -132,7 +132,7 @@ shutdownGracePeriodByPodPriority:
 
 Коли вузол вимикається, але це не виявляється Node Shutdown Manager вузла kubelet, Podʼи, які є частиною {{< glossary_tooltip text="StatefulSet" term_id="statefulset" >}}, залишаться в стані завершення на вимкненому вузлі та не зможуть перейти до нового робочого вузла. Це тому, що kubelet на вимкненому вузлі недоступний для видалення Podʼів, і StatefulSet не може створити новий Pod із такою ж назвою. Якщо є томи, які використовуються Podʼами, то VolumeAttachments не буде видалено з оригінального вимкненого вузла, і тому томи використовувані цими Podʼами не можуть бути приєднані до нового робочого вузла. В результаті застосунок, що виконується з StatefulSet, не може працювати належним чином. Якщо оригінальний вимкнений вузол вмикається, Podʼи будуть видалені kubelet, і нові Podʼи будуть створені на іншому робочому вузлі. Якщо оригінальний вимкнений вузол не повертається, ці Podʼи залишаться в стані завершення на вимкненому вузлі назавжди.
 
-Для помʼякшення вищезазначеної ситуації користувач може вручну додати позначку (taint) `node.kubernetes.io/out-of-service` з ефектом `NoExecute` чи `NoSchedule` до вузла, вказавши, що він вийшов із ладу. Якщо у {{< glossary_tooltip text="kube-controller-manager" term_id="kube-controller-manager" >}} увімкнено [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeOutOfServiceVolumeDetach`, і вузол відзначений як такий, що вийшов з ладу з такою позначкою, Podʼи на вузлі будуть примусово видалені, якщо на них немає відповідних toleration, і операції відʼєднання томів для завершення Podʼів на вузлі відбудуться негайно. Це дозволяє Podʼам на вузлі, що вийшов з ладу, швидко відновитися на іншому вузлі.
+Для помʼякшення вищезазначеної ситуації користувач може вручну додати позначку (taint) `node.kubernetes.io/out-of-service` з ефектом `NoExecute` чи `NoSchedule` до вузла, вказавши, що він вийшов із ладу. Якщо у {{< glossary_tooltip text="kube-controller-manager" term_id="kube-controller-manager" >}} увімкнено [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeOutOfServiceVolumeDetach`, і вузол відзначений як такий, що вийшов з ладу з такою позначкою, Podʼи на вузлі будуть примусово видалені, якщо на них немає відповідних toleration, і операції відʼєднання томів для завершення Podʼів на вузлі відбудуться негайно. Це дозволяє Podʼам на вузлі, що вийшов з ладу, швидко відновитися на іншому вузлі.
 
 Під час такого (non-graceful) вимикання робота Podʼів завершується у дві фази:
 

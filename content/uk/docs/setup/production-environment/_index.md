@@ -115,7 +115,7 @@ no_list: true
 
 ## {{% heading "whatsnext" %}}
 
-- Вирішить, чи хочете ви будувати свій власний промисловий кластер Kubernetes чи отримати його від доступних [хмарних рішень під ключ](/uk/docs/setup/production-environment/turnkey-solutions/) чи [партнерів Kubernetes](/partners/).
+- Вирішить, чи хочете ви будувати свій власний промисловий кластер Kubernetes чи отримати його від доступних [хмарних рішень під ключ](/uk/docs/setup/production-environment/turnkey-solutions/) чи [партнерів Kubernetes](/uk/partners/).
 - Якщо ви вибираєте створення власного кластера, сплануйте, як ви хочете розвʼязувати питання [сертифікатів](/uk/docs/setup/best-practices/certificates/) та налаштувати високу доступність для функцій, таких як [etcd](/uk/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/) та [API сервера](/uk/docs/setup/production-environment/tools/kubeadm/ha-topology/).
 - Виберіть методи розгортання з [kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/), [kops](https://kops.sigs.k8s.io/) чи [Kubespray](https://kubespray.io/).
 - Налаштуйте управління користувачами, визначивши свої методи [автентифікації](/uk/docs/reference/access-authn-authz/authentication/) та [авторизації](/uk/docs/reference/access-authn-authz/authorization/).

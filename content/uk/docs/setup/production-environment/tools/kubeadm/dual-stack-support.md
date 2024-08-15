@@ -38,24 +38,25 @@ Serviceʼів, які ви плануєте запускати.
 kubeadm init --pod-network-cidr=10.244.0.0/16,2001:db8:42:0::/56 --service-cidr=10.96.0.0/16,2001:db8:42:1::/112
 ```
 
-Щоб зробити це більш зрозумілим, ось приклад [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm `kubeadm-config.yaml` для основного вузла панелі управління з подвійним стеком.
+Щоб зробити це більш зрозумілим, ось приклад [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) kubeadm `kubeadm-config.yaml` для основного вузла панелі управління з подвійним стеком.
 
 ```yaml
 ---
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 networking:
   podSubnet: 10.244.0.0/16,2001:db8:42:0::/56
   serviceSubnet: 10.96.0.0/16,2001:db8:42:1::/112
 ---
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: InitConfiguration
 localAPIEndpoint:
   advertiseAddress: "10.100.0.1"
   bindPort: 6443
 nodeRegistration:
   kubeletExtraArgs:
-    node-ip: 10.100.0.2,fd00:1:2:3::2
+  - name: "node-ip"
+    value: "10.100.0.2,fd00:1:2:3::2"
 ```
 
 `advertiseAddress` в InitConfiguration вказує IP-адресу, яку API Server оголошує як адресу, на якій він очікує трафік. Значення `advertiseAddress` дорівнює значенню
@@ -80,7 +81,7 @@ kubeadm init --config=kubeadm-config.yaml
 Ось приклад [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm `kubeadm-config.yaml` для приєднання робочого вузла до кластера.
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
@@ -91,13 +92,14 @@ discovery:
     # змініть інформацію про автентифікацію вище, щоб відповідати фактичному токену та хешу сертифіката CA для вашого кластера
 nodeRegistration:
   kubeletExtraArgs:
-    node-ip: 10.100.0.3,fd00:1:2:3::3
+  - name: "node-ip"
+    value: "10.100.0.2,fd00:1:2:3::3"
 ```
 
-Також ось приклад [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm `kubeadm-config.yaml` для приєднання іншого вузла панелі управління до кластера.
+Також ось приклад [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) kubeadm `kubeadm-config.yaml` для приєднання іншого вузла панелі управління до кластера.
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: JoinConfiguration
 controlPlane:
   localAPIEndpoint:
@@ -112,8 +114,8 @@ discovery:
     # змініть інформацію про автентифікацію вище, щоб відповідати фактичному токену та хешу сертифіката CA для вашого кластера
 nodeRegistration:
   kubeletExtraArgs:
-    node-ip: 10.100.0.4,fd00:1:2:3::4
-
+  - name: "node-ip"
+    value: "10.100.0.2,fd00:1:2:3::4"
 ```
 
 `advertiseAddress` в JoinConfiguration.controlPlane вказує IP-адресу, яку API Server оголошує як адресу, на якій він слухає. Значення `advertiseAddress` дорівнює прапорцю `--apiserver-advertise-address` команди `kubeadm join`.
@@ -128,10 +130,10 @@ kubeadm join --config=kubeadm-config.yaml
 Підтримка подвійного стека не означає, що вам потрібно використовувати подвійні адреси. Ви можете розгорнути кластер з одним стеком, в якому увімкнена функція роботи з мережею з подвійним стеком.
 {{< /note >}}
 
-Щоб зробити речі більш зрозумілими, [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) kubeadm `kubeadm-config.yaml` для панелі управління з одним стеком.
+Щоб зробити речі більш зрозумілими, [конфігураційного файлу](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) kubeadm `kubeadm-config.yaml` для панелі управління з одним стеком.
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 networking:
   podSubnet: 10.244.0.0/16
@@ -142,4 +144,4 @@ networking:
 
 * [Перевірка мережевої взаємодії в подвійному стеку IPv4/IPv6](/uk/docs/tasks/network/validate-dual-stack)
 * Дізнайтеся більше про [підтримку подвійного стека](/uk/docs/concepts/services-networking/dual-stack/)
-* Дізнайтеся більше про [формат конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3/)
+* Дізнайтеся більше про [формат конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4/)

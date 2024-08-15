@@ -13,7 +13,7 @@ min-kubernetes-server-version: 1.27
 
 Ця сторінка показує, як змінити обсяги CPU та памʼяті, призначені для контейнерів працюючого Podʼа без перезапуску самого Podʼа або його контейнерів. Вузол Kubernetes виділяє ресурси для Podʼа на основі його `запитів`, і обмежує використання ресурсів Podʼа на основі `лімітів`, вказаних у контейнерах Podʼа.
 
-Зміна розподілу ресурсів для запущеного Podʼа вимагає [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` має бути увімкнено. Альтернативою може бути видалення Podʼа і ввімкнення параметра, щоб [workload controller](/uk/docs/concepts/workloads/controllers/) створив новий Pod з іншими вимогами до ресурсів.
+Зміна розподілу ресурсів для запущеного Podʼа вимагає, що [функціональна можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` має бути увімкнено. Альтернативою може бути видалення Podʼа і ввімкнення параметра, щоб [workload controller](/uk/docs/concepts/workloads/controllers/) створив новий Pod з іншими вимогами до ресурсів.
 
 Для зміни ресурсів Podʼа на місці:
 
@@ -30,7 +30,7 @@ min-kubernetes-server-version: 1.27
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Має бути увімкнено [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling`для вашої панелі управління і для всіх вузлів вашого кластера.
+Має бути увімкнено [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `InPlacePodVerticalScaling` для вашої панелі управління і для всіх вузлів вашого кластера.
 
 ## Політики зміни розміру контейнера {#container-resize-policies}
 

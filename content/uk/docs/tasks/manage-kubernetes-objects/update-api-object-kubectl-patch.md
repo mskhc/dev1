@@ -140,7 +140,7 @@ type PodSpec struct {
 ```
 <!-- для редакторів: спеціально використовуйте yaml замість json тут, щоб уникнути помилки підсвітки синтаксису. -->
 
-І ви можете побачити стратегію патча в [документації Kubernetes API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+І ви можете побачити стратегію патча в [документації Kubernetes API](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
 
 Створіть файл з іменем `patch-file-tolerations.yaml` із таким вмістом:
 
@@ -354,7 +354,7 @@ type DeploymentSpec struct {
 ```
 <!-- для редакторів: спеціально використовуйте yaml замість json тут, щоб уникнути помилки підсвітки синтаксису. -->
 
-І ви можете дізнатись більше про стратегію `retainKeys` в [документації Kubernetes API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deploymentspec-v1-apps).
+І ви можете дізнатись більше про стратегію `retainKeys` в [документації Kubernetes API](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deploymentspec-v1-apps).
 
 ### Альтернативні форми команди kubectl patch {#alternative-forms-of-the-kubectl-patch-command}
 

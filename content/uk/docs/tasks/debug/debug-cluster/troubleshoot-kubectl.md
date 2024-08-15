@@ -80,6 +80,8 @@ kubectl config use-context <context-name>
 
 ## Проблеми з TLS {#tls-problems}
 
+* Потрібні додаткові інструменти — `base64` та `openssl` версії 3.0 або вище.
+
 Сервер API Kubernetes типово обслуговує лише HTTPS запити. У цьому випадку можуть виникнути проблеми з TLS з різних причин, таких як закінчення строку дії сертифіката або дійсність ланцюга довіри.
 
 Ви можете знайти TLS сертифікат у файлі kubeconfig, який знаходиться у теці `~/.kube/config`. Атрибут `certificate-authority` містить сертифікат ЦА, а атрибут `client-certificate` містить клієнтський сертифікат.
@@ -87,25 +89,25 @@ kubectl config use-context <context-name>
 Перевірте строк дії цих сертифікатів:
 
 ```shell
-openssl x509 -noout -dates -in $(kubectl config view --minify --output 'jsonpath={.clusters[0].cluster.certificate-authority}')
+kubectl config view --flatten --output 'jsonpath={.clusters[0].cluster.certificate-authority-data}' | base64 -d | openssl x509 -noout -dates
 ```
 
 вивід:
 
 ```console
-notBefore=Sep  2 08:34:12 2023 GMT
-notAfter=Aug 31 08:34:12 2033 GMT
+notBefore=Feb 13 05:57:47 2024 GMT
+notAfter=Feb 10 06:02:47 2034 GMT
 ```
 
 ```shell
-openssl x509 -noout -dates -in $(kubectl config view --minify --output 'jsonpath={.users[0].user.client-certificate}')
+kubectl config view --flatten --output 'jsonpath={.users[0].user.client-certificate-data}'| base64 -d | openssl x509 -noout -dates
 ```
 
 вивід:
 
 ```console
-notBefore=Sep  2 08:34:12 2023 GMT
-notAfter=Sep  2 08:34:12 2026 GMT
+notBefore=Feb 13 05:57:47 2024 GMT
+notAfter=Feb 12 06:02:50 2025 GMT
 ```
 
 ## Перевірка допоміжних інструментів kubectl {#verify-kubectl-helpers}

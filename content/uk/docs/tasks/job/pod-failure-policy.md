@@ -22,9 +22,6 @@ weight: 60
 
 {{< include "task-tutorial-prereqs.md" >}} {{< version-check >}}
 
-Переконайтеся, що [feature gates](/uk/docs/reference/command-line-tools-reference/feature-gates/)
-`PodDisruptionConditions` і `JobPodFailurePolicy` увімкнені у вашому кластері.
-
 ## Використання політики збоїв Pod для уникнення непотрібних повторних запусків Pod {#using-pod-failure-policy-to-avoid-unnecessary-pod-retries}
 
 В наступному прикладі ви можете навчитися використовувати політику збоїв Pod, щоб уникати непотрібних перезапусків Pod, коли збій Pod вказує на неповторювану помилку програмного забезпечення.
@@ -45,7 +42,10 @@ kubectl create -f job-pod-failure-policy-failjob.yaml
 kubectl get jobs -l job-name=job-pod-failure-policy-failjob -o yaml
 ```
 
-У статусі Job побачите умову `Failed` із полем `reason` рівним `PodFailurePolicy`. Крім того, поле `message` містить детальнішу інформацію про завершення Job, наприклад: `Container main for pod default/job-pod-failure-policy-failjob-8ckj8 failed with exit code 42 matching FailJob rule at index 0`.
+У статусі Job відображаються такі умови:
+
+* Умова `FailureTarget`: має поле `reason`, встановлене в `PodFailurePolicy`, і поле `message` з додатковою інформацією про завершення, наприклад, `Container main for pod default/job-pod-failure-policy-failjob-8ckj8 failed with exit code 42 matching FailJob rule at index 0`. Контролер Job додає цю умову, як тільки Job вважається невдалим. Для отримання деталей дивіться [Завершення Job Podʼів](/uk/docs/concepts/workloads/controllers/job/#termination-of-job-pods).
+* Умова `Failed`: те ж саме значення для `reason` і `message`, що й в умови `FailureTarget`. Контролер Job додає цю умову після того, як усі Podʼи Job завершено.
 
 Для порівняння, якщо політика збоїв Pod була вимкнена, це б зайняло 6 спроб повторного запуску Pod, на що треба щонайменше 2 хвилини.
 

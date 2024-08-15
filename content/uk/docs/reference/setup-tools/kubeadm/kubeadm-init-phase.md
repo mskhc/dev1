@@ -135,7 +135,7 @@ content_type: concept
 {{< tab name="kube-proxy" include="generated/kubeadm_init_phase_addon_kube-proxy.md" />}}
 {{< /tabs >}}
 
-Для отримання більш детальної інформації про кожне поле в конфігурації `v1beta3` ви можете перейти на нашу [сторінки довідки API.](/uk/docs/reference/config-api/kubeadm-config.v1beta3/)
+Для отримання більш детальної інформації про кожне поле в конфігурації `v1beta4` ви можете перейти на нашу [сторінки довідки API](/uk/docs/reference/config-api/kubeadm-config.v1beta4/).
 
 ## {{% heading "whatsnext" %}}
 

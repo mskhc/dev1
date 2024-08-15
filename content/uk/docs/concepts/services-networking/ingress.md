@@ -36,7 +36,7 @@ Ingress заморожений. Нові функції додаються до 
 
 ## Що таке Ingress? {#what-is-ingress}
 
-[Ingress](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ingress-v1-networking-k8s-io) відкриває маршрути HTTP та HTTPS із зовні кластера до {{< link text="Services" url="/uk/docs/concepts/services-networking/service/" >}} всередині кластера. Маршрутизацію трафіку контролюють правила, визначені в ресурсі Ingress.
+[Ingress](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ingress-v1-networking-k8s-io) відкриває маршрути HTTP та HTTPS із зовні кластера до {{< link text="Services" url="/uk/docs/concepts/services-networking/service/" >}} всередині кластера. Маршрутизацію трафіку контролюють правила, визначені в ресурсі Ingress.
 
 Ось простий приклад, де Ingress спрямовує весь свій трафік на один Service:
 {{< mermaid >}}

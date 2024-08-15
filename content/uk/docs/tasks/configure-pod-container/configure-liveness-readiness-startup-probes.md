@@ -287,7 +287,7 @@ readinessProbe:
 
 <!--Eventually, some of this section could be moved to a concept topic.-->
 
-[Проби](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core) мають кілька полів, які можна використовувати для більш точного керування поведінкою перевірок запуску, життєздатності та готовності:
+[Проби](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#probe-v1-core) мають кілька полів, які можна використовувати для більш точного керування поведінкою перевірок запуску, життєздатності та готовності:
 
 - `initialDelaySeconds`: Кількість секунд після запуску контейнера, перед тим як будуть запущені перевірки запуску, життєздатності або готовності. Якщо визначено пробу запуску, проби життєздатності та готовності не починаються, поки проба запуску не вдалася. Якщо значення `periodSeconds` більше, ніж `initialDelaySeconds`, то значення `initialDelaySeconds` буде проігнороване. Стандартно — 0 секунд. Мінімальне значення — 0.
 - `periodSeconds`: Як часто (у секундах) виконувати пробу. Стандартно — 10 секунд. Мінімальне значення — 1.
@@ -302,7 +302,7 @@ readinessProbe:
 
 ### HTTP проби {#http-probes}
 
-[HTTP проби](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#httpgetaction-v1-core) мають додаткові поля, які можна встановити в `httpGet`:
+[HTTP проби](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#httpgetaction-v1-core) мають додаткові поля, які можна встановити в `httpGet`:
 
 - `host`: Імʼя хосту для підключення, стандартно — IP-адреса Podʼа. Ймовірно, ви захочете встановити "Host" в `httpHeaders` замість цього.
 - `scheme`: Схема для підключення до хосту (HTTP або HTTPS). Стандартно — "HTTP".

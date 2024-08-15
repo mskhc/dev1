@@ -24,7 +24,7 @@ card:
 
 {{< include "task-tutorial-prereqs.md" >}}
 
-Щоб перевірити, чи встановлений {{< glossary_tooltip text="kubectl" term_id="kubectl" >}}, виконайте команду `kubectl version --client`. Версія kubectl повинна бути в межах [однієї мінорної](/releases/version-skew-policy/#kubectl) версії API сервера вашого кластера.
+Щоб перевірити, чи встановлений {{< glossary_tooltip text="kubectl" term_id="kubectl" >}}, виконайте команду `kubectl version --client`. Версія kubectl повинна бути в межах [однієї мінорної](/uk/releases/version-skew-policy/#kubectl) версії API сервера вашого кластера.
 
 <!-- steps -->
 

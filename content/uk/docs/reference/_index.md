@@ -20,7 +20,7 @@ no_list: true
 * [Глосарій](/uk/docs/reference/glossary/) — докладний, стандартизований перелік термінології Kubernetes
 
 * [Довідник API Kubernetes](/uk/docs/reference/kubernetes-api/)
-* [Довідник API Kubernetes {{< param "version" >}}](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/), все на одній сторінці
+* [Довідник API Kubernetes {{< param "version" >}}](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/), все на одній сторінці
 * [Використання API Kubernetes](/uk/docs/reference/using-api/) — огляд API для Kubernetes.
 * [API керування доступом](/uk/docs/reference/access-authn-authz/) — докладно про те, як Kubernetes контролює доступи API
 * [Добре відомі мітки (labels), анотації (annotations) та позначення (taints).](/uk/docs/reference/labels-annotations-taints/)

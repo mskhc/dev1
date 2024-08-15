@@ -63,7 +63,7 @@ spec:
 
   <!-- OK to remove this note once v1.29 Kubernetes is out of support -->
   {{< note >}}
-  До Kubernetes v1.30 поле `minDomains` було доступним, якщо `MinDomainsInPodTopologySpread` [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) було увімкнено (типово увімкнено починаючи з v1.28). В старіших кластерах Kubernetes воно може бути явно відключеним або поле може бути недоступним.
+  До Kubernetes v1.30 поле `minDomains` було доступним, якщо [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MinDomainsInPodTopologySpread` було увімкнено (типово увімкнено починаючи з v1.28). В старіших кластерах Kubernetes воно може бути явно відключеним або поле може бути недоступним.
   {{< /note >}}
 
   - Значення `minDomains` повинно бути більше ніж 0, коли вказано. Ви можете вказати `minDomains` лише разом з `whenUnsatisfiable: DoNotSchedule`.
@@ -98,7 +98,7 @@ spec:
   ```
 
   {{< note >}}
-  Поле `matchLabelKeys` є полем на рівні бета-версії та включено стандартно у 1.27. Ви можете відключити його, вимкнувши [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpread`.
+  Поле `matchLabelKeys` є полем на рівні бета-версії та включено стандартно у 1.27. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpread`.
   {{< /note >}}
 
 - **nodeAffinityPolicy** вказує, як ми будемо обробляти nodeAffinity/nodeSelector Pod, коли розраховуємо розрив поширення топології Podʼів. Опції:
@@ -108,7 +108,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Honor.
 
   {{< note >}}
-  Поле `nodeAffinityPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeAffinityPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
   {{< /note >}}
 
 - **nodeTaintsPolicy** вказує, як ми будемо обробляти заплямованість вузлів при розрахунку
@@ -119,7 +119,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Ignore.
 
   {{< note >}}
-  Поле `nodeTaintsPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeTaintsPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
   {{< /note >}}
 
 Коли Pod визначає більше одного `topologySpreadConstraint`, ці обмеження комбінуються за допомогою операції AND: kube-scheduler шукає вузол для вхідного Podʼа, який задовольняє всі налаштовані обмеження.

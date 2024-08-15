@@ -10,4 +10,4 @@ stages:
     defaultValue: false
     fromVersion: "1.20"
 ---
-Вмикає [API версії зберігання](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageversion-v1alpha1-internal-apiserver-k8s-io).
+Вмикає [API версії зберігання](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageversion-v1alpha1-internal-apiserver-k8s-io).

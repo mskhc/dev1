@@ -190,11 +190,6 @@ status:
 
 {{< feature-state feature_gate_name="PDBUnhealthyPodEvictionPolicy" >}}
 
-{{< note >}}
-Ця функція є стандартно увімкненою. Ви можете вимкнути її, вимкнувши [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `PDBUnhealthyPodEvictionPolicy`
-на [API-сервері](/uk/docs/reference/command-line-tools-reference/kube-apiserver/).
-{{< /note >}}
-
 PodDisruptionBudget, який охороняє застосунок, забезпечує, що кількість Podʼів зі статусом `.status.currentHealthy` не опуститься нижче, ніж кількість, вказана у `.status.desiredHealthy`, не дозволяючи видалення справних Podʼів. Використовуючи `.spec.unhealthyPodEvictionPolicy`, ви також можете визначити критерії, коли несправні Podʼи повинні розглядатися для видалення. Стандартна поведінка, коли політика не вказана, відповідає політиці `IfHealthyBudget`.
 
 Політики:

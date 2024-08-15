@@ -234,10 +234,7 @@ CRD завжди використовують ту саму автентифік
 
 {{< feature-state feature_gate_name="CustomResourceFieldSelectors" >}}
 
-Для використання цієї функції вам потрібно активувати 
-[feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors`, після чого ця функція буде застосовуватися до всіх CustomResourceDefinitions у вашому кластері.
-
-Поле `spec.versions[*].selectableFields` в {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для вказівки, які інші поля в власному ресурсі можуть бути використані в полях селекторах. Наступний приклад додає поля `.spec.color` та `.spec.size` як поля для селекторів.
+Поле `spec.versions[*].selectableFields` в {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для вказівки, які інші поля в власному ресурсі можуть бути використані в полях селекторах за допомоги [функціональної можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors` (яка є увімкенною починаючи з Kubernetes v1.31). Наступний приклад додає поля `.spec.color` та `.spec.size` як поля для селекторів.
 
 {{% code_sample file="customresourcedefinition/shirt-resource-definition.yaml" %}}
 

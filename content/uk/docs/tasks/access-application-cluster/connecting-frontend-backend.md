@@ -129,7 +129,7 @@ service/frontend created
 ```
 
 {{< note >}}
-Конфігурація nginx вбудована в [образ контейнера](/examples/service/access/Dockerfile). Кращий спосіб зробити її — скористатись [ConfigMap](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/), щоб ви могли легше змінювати конфігурацію.
+Конфігурація nginx вбудована в [образ контейнера](/uk/examples/service/access/Dockerfile). Кращий спосіб зробити її — скористатись [ConfigMap](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/), щоб ви могли легше змінювати конфігурацію.
 {{< /note >}}
 
 ## Взаємодія з Service фронтенду {#interacting-with-the-frontend-service}

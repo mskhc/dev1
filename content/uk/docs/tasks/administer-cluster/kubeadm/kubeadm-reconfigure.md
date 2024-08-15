@@ -48,7 +48,7 @@ KUBECONFIG=/etc/kubernetes/admin.conf KUBE_EDITOR=nano kubectl edit <парам�
 
 #### Оновлення `ClusterConfiguration` {#updating-the-clusterconfiguration}
 
-Під час створення кластера та його оновлення, kubeadm записує [`ClusterConfiguration`](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) у ConfigMap, з назвою `kubeadm-config` у просторі імен `kube-system`.
+Під час створення кластера та його оновлення, kubeadm записує [`ClusterConfiguration`](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) у ConfigMap, з назвою `kubeadm-config` у просторі імен `kube-system`.
 
 Щоб змінити певну опцію у `ClusterConfiguration`, ви можете редагувати ConfigMap за допомогою цієї команди:
 

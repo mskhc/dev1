@@ -115,9 +115,8 @@ Podʼи, ресурси робочого навантаження та Service �
 * Параметр `--windows-priorityclass` дозволяє встановлювати пріоритет планування процесу kubelet (див. [Управління ресурсами процесора](/uk/docs/concepts/configuration/windows-resource-management/#resource-management-cpu))
 * Прапорці `--kube-reserved`, `--system-reserved` та `--eviction-hard` оновлюють [NodeAllocatable](/uk/docs/tasks/administer-cluster/reserve-compute-resources/#node-allocatable)
 * Виселення за допомогою `--enforce-node-allocable` не реалізовано
-* Виселення за допомогою `--eviction-hard` та `--eviction-soft` не реалізовано
 * При запуску на вузлі Windows kubelet не має обмежень памʼяті або процесора. `--kube-reserved` та `--system-reserved` віднімаються лише від `NodeAllocatable` і не гарантують ресурсів для навантаження. Дивіться [Управління ресурсами для вузлів Windows](/uk/docs/concepts/configuration/windows-resource-management/#resource-reservation) для отримання додаткової інформації.
-* Умова `MemoryPressure` не реалізована
+* Умова `PIDPressure` не реалізована
 * Kubelet не вживає дій щодо виселення з приводу OOM (Out of memory)
 
 ### Сумісність API {#api}

@@ -173,15 +173,17 @@ Kubernetes Certificate Authority не працює зразу. Ви можете
 
 Для активації вбудованого підписувача вам необхідно передати прапорці `--cluster-signing-cert-file` та `--cluster-signing-key-file`.
 
-Якщо ви створюєте новий кластер, ви можете використовувати [файл конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3/):
+Якщо ви створюєте новий кластер, ви можете використовувати [файл конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4/):
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 controllerManager:
   extraArgs:
-    cluster-signing-cert-file: /etc/kubernetes/pki/ca.crt
-    cluster-signing-key-file: /etc/kubernetes/pki/ca.key
+  - name: "cluster-signing-cert-file"
+    value: "/etc/kubernetes/pki/ca.crt"
+  - name: "cluster-signing-key-file"
+    value: "/etc/kubernetes/pki/ca.key"
 ```
 
 ### Створення запитів на підпис сертифікатів (CSR) {#create-certificate-signing-requests-csr}
@@ -211,7 +213,7 @@ Kubeadm не підтримує автоматичне оновлення або
 Щоб налаштувати kubelet в новому кластері kubeadm для отримання належно підписаних службових сертифікатів, ви повинні передати наступну мінімальну конфігурацію до `kubeadm init`:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 ---
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -260,13 +262,13 @@ kubectl certificate approve <CSR-name>
 
 Під час створення кластера, kubeadm підписує сертифікат у `admin.conf`, щоб мати `Subject: O = system:masters, CN = kubernetes-admin`. [`system:masters`](/uk/docs/reference/access-authn-authz/rbac/#user-facing-roles) є групою суперкористувачів, яка обходить рівень авторизації (наприклад, [RBAC](/uk/docs/reference/access-authn-authz/rbac/)). **Не рекомендується** ділитися `admin.conf` з додатковими користувачами!
 
-Замість цього, ви можете використовувати команду [`kubeadm kubeconfig user`](/uk/docs/reference/setup-tools/kubeadm/kubeadm-kubeconfig) для генерації файлів kubeconfig для додаткових користувачів. Команда приймає змішаний набір параметрів командного рядка та опцій конфігурації [kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3/). Згенерований kubeconfig буде записаний до stdout і може бути перенаправлений у файл за допомогою `kubeadm kubeconfig user ... > somefile.conf`.
+Замість цього, ви можете використовувати команду [`kubeadm kubeconfig user`](/uk/docs/reference/setup-tools/kubeadm/kubeadm-kubeconfig) для генерації файлів kubeconfig для додаткових користувачів. Команда приймає змішаний набір параметрів командного рядка та опцій конфігурації [kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4/). Згенерований kubeconfig буде записаний до stdout і може бути перенаправлений у файл за допомогою `kubeadm kubeconfig user ... > somefile.conf`.
 
 Приклад конфігураційного файлу, який можна використовувати з `--config`:
 
 ```yaml
 # example.yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 # Буде використано як цільовий "кластер" у kubeconfig
 clusterName: "kubernetes"
@@ -302,7 +304,7 @@ kubeadm kubeconfig user --config example.yaml --client-name admin --validity-per
 
 Типовою текою для сертифікатів є `/etc/kubernetes/pki`, тоді як типова тека для файлів kubeconfig є `/etc/kubernetes`. Ці стандартні значення можна змінити за допомогою прапорців `--cert-dir` та `--kubeconfig-dir`, відповідно.
 
-Для передачі власних параметрів команді `kubeadm certs generate-csr` використовуйте прапорець `--config`, який приймає файл [конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3/), так само як і команди, такі як `kubeadm init`. Будь-яка специфікація, така як додаткові SAN та власні IP-адреси, повинна зберігатися в тому ж файлі конфігурації та використовуватися для всіх відповідних команд kubeadm, передаючи його як `--config`.
+Для передачі власних параметрів команді `kubeadm certs generate-csr` використовуйте прапорець `--config`, який приймає файл [конфігурації kubeadm](/uk/docs/reference/config-api/kubeadm-config.4/), так само як і команди, такі як `kubeadm init`. Будь-яка специфікація, така як додаткові SAN та власні IP-адреси, повинна зберігатися в тому ж файлі конфігурації та використовуватися для всіх відповідних команд kubeadm, передаючи його як `--config`.
 
 {{< note >}}
 У цьому керівництві буде описане використання команди `openssl` для підпису CSRs, але ви можете використовувати свої улюблені інструменти.

@@ -42,9 +42,9 @@ card:
 
 Завантажте наступні конфігураційні файли:
 
-1. [mysql-deployment.yaml](/examples/application/wordpress/mysql-deployment.yaml)
+1. [mysql-deployment.yaml](/uk/examples/application/wordpress/mysql-deployment.yaml)
 
-1. [wordpress-deployment.yaml](/examples/application/wordpress/wordpress-deployment.yaml)
+1. [wordpress-deployment.yaml](/uk/examples/application/wordpress/wordpress-deployment.yaml)
 
 <!-- lessoncontent -->
 

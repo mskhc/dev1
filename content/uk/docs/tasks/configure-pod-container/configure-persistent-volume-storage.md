@@ -64,7 +64,7 @@ Hello from Kubernetes storage
 
 У цьому завданні ви створюєте *hostPath* PersistentVolume. Kubernetes підтримує hostPath для розробки та тестування на одновузловому кластері. PersistentVolume типу hostPath використовує файл або теку на вузлі для емуляції мережевого сховища.
 
-В операційному кластері ви не використовували б hostPath. Замість цього адміністратор кластера створив би мережевий ресурс, такий як постійний диск Google Compute Engine, розділ NFS або том Amazon Elastic Block Store. Адміністратори кластера також можуть використовувати [StorageClasses](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageclass-v1-storage-k8s-io) для [динамічного налаштування](/uk/docs/concepts/storage/dynamic-provisioning/).
+В операційному кластері ви не використовували б hostPath. Замість цього адміністратор кластера створив би мережевий ресурс, такий як постійний диск Google Compute Engine, розділ NFS або том Amazon Elastic Block Store. Адміністратори кластера також можуть використовувати [StorageClasses](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageclass-v1-storage-k8s-io) для [динамічного налаштування](/uk/docs/concepts/storage/dynamic-provisioning/).
 
 Ось файл конфігурації для PersistentVolume типу hostPath:
 
@@ -247,7 +247,7 @@ metadata:
 
 ### Довідка {#reference}
 
-* [PersistentVolume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolume-v1-core)
-* [PersistentVolumeSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumespec-v1-core)
-* [PersistentVolumeClaim](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaim-v1-core)
-* [PersistentVolumeClaimSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaimspec-v1-core)
+* [PersistentVolume](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolume-v1-core)
+* [PersistentVolumeSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumespec-v1-core)
+* [PersistentVolumeClaim](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaim-v1-core)
+* [PersistentVolumeClaimSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#persistentvolumeclaimspec-v1-core)

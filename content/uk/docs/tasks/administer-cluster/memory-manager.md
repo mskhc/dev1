@@ -31,7 +31,7 @@ weight: 410
 - Менеджер CPU повинен бути увімкнений, і на вузлі повинна бути налаштована відповідна політика Менеджера CPU. Див. [управління політиками керування CPU](/uk/docs/tasks/administer-cluster/cpu-management-policies/);
 - Менеджер топології повинен бути увімкнений, і на вузлі повинна бути налаштована відповідна політика Менеджера топології. Див. [управління політиками керування топологією](/uk/docs/tasks/administer-cluster/topology-manager/).
 
-Починаючи з версії v1.22, Менеджер памʼяті типово увімкнено за допомоги `MemoryManager` [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/).
+Починаючи з версії v1.22, Менеджер памʼяті типово увімкнено за допомогою [функціональної можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MemoryManager`.
 
 Для версій до v1.22, `kubelet` повинен бути запущений з наступним прапорцем:
 

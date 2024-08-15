@@ -181,7 +181,7 @@ kubectl describe node <вставте-назву-вузла-тут>
 
 {{< feature-state feature_gate_name="TopologyManager" >}}
 
-Якщо ви увімкнули [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) ресурсу `TopologyManager`, то kubelet може використовувати підказки топології при прийнятті рішень щодо призначення ресурсів. Див. [Керування політиками топології на вузлі](/uk/docs/tasks/administer-cluster/topology-manager/)
+Якщо ви увімкнули [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) ресурсу `TopologyManager`, то kubelet може використовувати підказки топології при прийнятті рішень щодо призначення ресурсів. Див. [Керування політиками топології на вузлі](/uk/docs/tasks/administer-cluster/topology-manager/)
 для отримання додаткової інформації.
 
 ## Керування swapʼом {#swap-memory}
@@ -228,7 +228,7 @@ Swap підтримується тільки з **cgroup v2**, cgroup v1 не п
 Дізнайтеся більше про наступне:
 
 - [Компоненти](/uk/docs/concepts/overview/components/#node-components), з яких складається вузол.
-- [Визначення API для вузла](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
+- [Визначення API для вузла](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
 - [Node](https://git.k8s.io/design-proposals-archive/architecture/architecture.md#the-kubernetes-node) у документі з дизайну архітектури.
 - [Відповідне/невідповідне вимкнення вузлів](/uk/docs/concepts/cluster-administration/node-shutdown/).
 - [Автомаштабування кластера](/uk/docs/concepts/cluster-administration/cluster-autoscaling/) для керування кількістю та розміром возлів у вашому кластері.

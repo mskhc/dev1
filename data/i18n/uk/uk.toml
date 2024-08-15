@@ -198,24 +198,19 @@ other = "Остаточний патч-випуск"
 other = ","
 
 [input_placeholder_email_address]
-other = "електронна адреса"
+other = "адреса електроної пошти"
 
 [javascript_required]
 other = "Вам потрібно [увімкнути](https://www.enable-javascript.com/) JavaScript, щоб переглядати цей вміст"
 
 [katacoda_message]
 other = """<h4>Закриття інтерактивних посібників</h4>
-<p>Роботу інтерактивних посібників на цьому сайті призупинено. Проєкт Kubernetes 
-сподівається відновити подібний варіант інтерактивного навчання в 
-довгостроковій перспективі.</p>
-<p>Зупинка роботи посібників спричинена <a
-href="https://www.oreilly.com/content/oreilly-acquires-katacoda-and-a-new-way-for-2-5m-customers-to-learn/">поглинанням </a> Katacoda з боку O'Reilly Media 
-у 2019 році.</p>
-<p>Проєкт Kubernetes висловлює безмежну вдячність O'Reilly та Katacoda 
-за багаторічну допомогу в бажаючим зробити їх перший крок у вивчені Kubernetes.</p>
-<p>Ці настанови припянять функціонування після <b>31<sup>st</sup> березня,
-2023</b>. За докладною інформацією звертайтесь до "<a href="/blog/2023/02/14/kubernetes-katacoda-tutorials-stop-from-2023-03-31/">Free Katacoda Kubernetes Tutorials Are Shutting
-Down</a>."</p>"""
+<p>Інтерактивні навчальні посібники, які раніше були на цьому веб-сайті, були закриті.</p>
+<p>Kubernetes вдячний O'Reilly та Katacoda за багаторічну допомогу людям у перших кроках у навчанні Kubernetes.</p>
+<p>Закриття відбулося після того, як O'Reilly Media у 2019 році <a href="https://www.oreilly.com/content/oreilly-acquires-katacoda-and-a-new-way-for-2-5m-customers-to-learn/">придбала</a>
+Katacoda.</p>
+<hr />
+<p>Посібники припинили свою роботу після <b>31<sup>го</sup> березня 2023</b>. Ви бачите це повідомлення, тому що ця конкретна сторінка ще не була оновлена після цього закриття.</p>"""
 
 [latest_release]
 other = "Останній Випуск:"

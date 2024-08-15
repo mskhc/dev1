@@ -12,7 +12,7 @@ weight: 20
 ---
 
 <!-- огляд -->
-Ця сторінка показує, як встановити [власний ресурс](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+Ця сторінка показує, як встановити [власний ресурс](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 ## {{% heading "prerequisites" %}}
 
@@ -652,7 +652,7 @@ crontab "my-new-cron-object" created
 
 {{< feature-state feature_gate_name="CRDValidationRatcheting" >}}
 
-Якщо ви використовуєте версію Kubernetes старше v1.30, вам потрібно явно ввімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CRDValidationRatcheting`, щоб використовувати цю поведінку, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.
+Якщо ви використовуєте версію Kubernetes старше v1.30, вам потрібно явно ввімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CRDValidationRatcheting`, щоб використовувати цю поведінку, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.
 
 За умови увімкнення feature gate, Kubernetes реалізує _проковзування валідації_ для CustomResourceDefinitions. API сервер готовий прийняти оновлення ресурсів, які є недійсними після оновлення, за умови, що кожна частина ресурсу, яка не пройшла валідацію, не була змінена операцією оновлення. Іншими словами, будь-яка недійсна частина ресурсу, яка залишається недійсною, вже повинна була бути неправильною. Ви не можете використовувати цей механізм для оновлення дійсного ресурсу, щоб він став недійсним.
 
@@ -1447,9 +1447,7 @@ my-new-cron-object   * * * * *   1          7s
 
 {{< feature-state feature_gate_name="CustomResourceFieldSelectors" >}}
 
-Вам потрібно увімкнути `CustomResourceFieldSelectors` [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/), щоб використовувати цю функцію, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.
-
-Поле `spec.versions[*].selectableFields` {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для оголошення того, які інші поля у власному ресурсі можуть бути використані у селекторі полів. Наступний приклад додає поля `.spec.color` та `.spec.size` як поля селектора.
+Для Kubernetes {{< skew currentVersion >}} можливість визначати селектори полів для власних ресурсів доступна стандартно (стандартно увімкнена з Kubernetes v1.31); ви можете вимкнути цю функцію для вашого кластера, відключивши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors`. Поле `spec.versions[*].selectableFields` у {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для оголошення, які інші поля у власному ресурсі можуть бути використані у селекторах полів з [функціональною можливісюь](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors` (Ця функція є стандартно увімкненою з Kubernetes v1.31). Ось приклад, який додає поля `.spec.color` та `.spec.size` як доступні для вибору.
 
 Збережіть CustomResourceDefinition у файл `shirt-resource-definition.yaml`:
 
@@ -1775,6 +1773,6 @@ crontabs/my-new-cron-object   3s
 
 * Прочитайте про [власні ресурси](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-* Дивіться [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+* Дивіться [CustomResourceDefinition](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 * Обслуговуйте [кілька версій](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) CustomResourceDefinition.

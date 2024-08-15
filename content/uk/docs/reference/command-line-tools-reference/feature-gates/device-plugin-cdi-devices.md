@@ -10,9 +10,12 @@ stages:
     defaultValue: false
     fromVersion: "1.28"
     toVersion: "1.28"
-  - stage: beta 
+  - stage: beta
     defaultValue: true
     fromVersion: "1.29"
-    
+    toVersion: "1.30"
+  - stage: stable
+    defaultValue: true
+    fromVersion: "1.31"
 ---
 Вмикає підтримку ідентифікаторів пристроїв CDI в API [Device Plugin](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/).

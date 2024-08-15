@@ -144,9 +144,9 @@ Podʼи StatefulSet мають унікальну ідентичність, як
 
 ### Початковий порядковий номер {#start-ordinal}
 
-{{< feature-state for_k8s_version="v1.27" state="beta" >}}
+{{< feature-state feature_gate_name="StatefulSetStartOrdinal" >}}
 
-`.spec.ordinals` — це необовʼязкове поле, яке дозволяє налаштовувати цілі числові порядкові номери, призначені кожному Podʼу. Стандартно це поле дорівнює nil. Вам потрібно увімкнути власний [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `StatefulSetStartOrdinal`, щоб використовувати це поле. Після увімкнення ви можете налаштувати наступні параметри:
+`.spec.ordinals` — це необовʼязкове поле, яке дозволяє налаштувати цілочисельні порядкові номери, призначені кожному Pod. Стандартно воно встановлено в `nil`. В межах цього поля ви можете налаштувати наступні параметри:
 
 * `.spec.ordinals.start`: Якщо встановлено поле `.spec.ordinals.start`, Podʼам будуть призначені порядкові номери від `.spec.ordinals.start` до
   `.spec.ordinals.start + .spec.replicas - 1`.
@@ -253,7 +253,7 @@ StatefulSet дозволяє зменшити його гарантії посл
 Це поле застосовується до всіх Podʼів у діапазоні від `0` до `replicas - 1`. Якщо є будь-який недоступний Pod у діапазоні від `0` до `replicas - 1`, він буде враховуватися в `maxUnavailable`.
 
 {{< note >}}
-Поле `maxUnavailable` знаходиться на етапі альфа-тестування і враховується тільки API-серверами, які працюють з увімкненим [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MaxUnavailableStatefulSet`
+Поле `maxUnavailable` знаходиться на етапі альфа-тестування і враховується тільки API-серверами, які працюють з увімкненою [функціональною можливістю](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MaxUnavailableStatefulSet`
 {{< /note >}}
 
 ### Примусовий відкат {#forced-rollback}
@@ -270,7 +270,7 @@ StatefulSet дозволяє зменшити його гарантії посл
 
 {{< feature-state for_k8s_version="v1.27" state="beta" >}}
 
-Необовʼязкове поле `.spec.persistentVolumeClaimRetentionPolicy` контролює, чи і як видаляються PVC під час життєвого циклу StatefulSet. Вам потрібно увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `StatefulSetAutoDeletePVC` на сервері API та менеджері контролера, щоб використовувати це поле. Після активації ви можете налаштувати дві політики для кожного StatefulSet:
+Необовʼязкове поле `.spec.persistentVolumeClaimRetentionPolicy` контролює, чи і як видаляються PVC під час життєвого циклу StatefulSet. Вам потрібно увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `StatefulSetAutoDeletePVC` на сервері API та менеджері контролера, щоб використовувати це поле. Після активації ви можете налаштувати дві політики для кожного StatefulSet:
 
 `whenDeleted`
 : налаштовує поведінку зберігання тому, яке застосовується при видаленні StatefulSet

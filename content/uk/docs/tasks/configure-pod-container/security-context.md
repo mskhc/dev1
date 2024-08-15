@@ -31,7 +31,7 @@ weight: 110
 
 * `readOnlyRootFilesystem`: Підключає кореневу файлову систему контейнера тільки для читання.
 
-Вищевказані пункти не є повним набором налаштувань контексту безпеки,докладну інформацію див. у [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core) для повного переліку.
+Вищевказані пункти не є повним набором налаштувань контексту безпеки,докладну інформацію див. у [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core) для повного переліку.
 
 ## {{% heading "prerequisites" %}}
 
@@ -41,11 +41,11 @@ weight: 110
 
 ## Встановлення контексту безпеки для Pod {#set-the-security-context-for-a-pod}
 
-Щоб вказати параметри безпеки для Podʼа, включіть поле `securityContext` в специфікацію Pod. Поле `securityContext` є обʼєктом [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core). Параметри безпеки, які ви вказуєте для Pod, застосовуються до всіх контейнерів в Podʼі. Ось файл конфігурації для Podʼа з `securityContext` та томом `emptyDir`:
+Щоб вказати параметри безпеки для Podʼа, включіть поле `securityContext` в специфікацію Pod. Поле `securityContext` є обʼєктом [PodSecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core). Параметри безпеки, які ви вказуєте для Pod, застосовуються до всіх контейнерів в Podʼі. Ось файл конфігурації для Podʼа з `securityContext` та томом `emptyDir`:
 
 {{% code_sample file="pods/security/security-context.yaml" %}}
 
-У файлі конфігурації поле `runAsUser` вказує, що для будь-яких контейнерів в Podʼі, всі процеси виконуються з ідентифікатором користувача 1000. Поле `runAsGroup` вказує основний ідентифікатор групи 3000 для усіх процесів у контейнерах Pod. Якщо це поле відсутнє, основний ідентифікатор групи контейнерів буде root(0). Будь-які створені файли також належатимуть користувачу 1000 та групі 3000 при вказанні `runAsGroup`. Оскільки вказано поле `fsGroup`, всі процеси контейнера також належать до додаткової групи ідентифікатора 2000. Власником тому `/data/demo` та всіх створених файлів у цьому томі буде груповий ідентифікатор 2000.
+У файлі конфігурації поле `runAsUser` вказує, що для будь-яких контейнерів в Podʼі, всі процеси виконуються з ідентифікатором користувача 1000. Поле `runAsGroup` вказує основний ідентифікатор групи 3000 для усіх процесів у контейнерах Pod. Якщо це поле відсутнє, основний ідентифікатор групи контейнерів буде root(0). Будь-які створені файли також належатимуть користувачу 1000 та групі 3000 при вказанні `runAsGroup`. Оскільки вказано поле `fsGroup`, всі процеси контейнера також належать до додаткової групи ідентифікатора 2000. Власником тому `/data/demo` та всіх створених файлів у цьому томі буде груповий ідентифікатор 2000. Додатково, коли вказане поле `supplementalGroups`, всі процеси контейнера також є частиною вказаних груп. Якщо це поле пропущене, це означає, що воно порожнє.
 
 Створіть Pod:
 
@@ -121,15 +121,171 @@ id
 Результат буде схожий на цей:
 
 ```none
-uid=1000 gid=3000 groups=2000
+uid=1000 gid=3000 groups=2000,3000,4000
 ```
 
-З результату видно, що `gid` дорівнює 3000, що є таким самим, як поле `runAsGroup`. Якби поле `runAsGroup` було пропущено, `gid` залишився б 0 (root), і процес зміг би взаємодіяти з файлами, які належать групі root(0) та групам, які мають необхідні права групи для групи root (0).
+З результату видно, що `gid` дорівнює 3000, що є таким самим, як поле `runAsGroup`. Якби поле `runAsGroup` було пропущено, `gid` залишився б 0 (root), і процес зміг би взаємодіяти з файлами, які належать групі root(0) та групам, які мають необхідні права групи для групи root (0). Ви також можете побачити, що `groups` містить ідентифікатори груп, які вказані в `fsGroup` і `supplementalGroups`, поряд з `gid`.
 
 Вийдіть з оболонки:
 
 ```shell
 exit
+```
+
+### Неявні членства груп, визначені в `/etc/group` в контейнерному образі {#implicit-group-membership-defined-in-etc-group-in-the-container-image}
+
+Стандартно Kubernetes обʼєднує інформацію про групи з Podʼа з інформацією, визначеною в `/etc/group` в контейнерному образі.
+
+{{% code_sample file="pods/security/security-context-5.yaml" %}}
+
+Цей контекст безпеки Podʼа містить `runAsUser`, `runAsGroup` та `supplementalGroups`. Проте ви можете побачити, що фактичні додаткові групи, що прикріплені до процесу контейнера, включатимуть ідентифікатори груп, які походять з `/etc/group` всередині контейнерного образу.
+
+Створіть Pod:
+
+```shell
+kubectl apply -f https://k8s.io/examples/pods/security/security-context-5.yaml
+```
+
+Перевірте, чи контейнер Pod запущений:
+
+```shell
+kubectl get pod security-context-demo
+```
+
+Отримайте оболонку для запущеного контейнера:
+
+```shell
+kubectl exec -it security-context-demo -- sh
+```
+
+Перевірте ідентичність процесу:
+
+```shell
+$ id
+```
+
+Вивід буде схожий на:
+
+```none
+uid=1000 gid=3000 groups=3000,4000,50000
+```
+
+Ви можете побачити, що `groups` включає ідентифікатор групи `50000`. Це тому, що користувач (`uid=1000`), який визначений в образі, належить до групи (`gid=50000`), яка визначена в `/etc/group` всередині контейнерного образу.
+
+Перевірте `/etc/group` в контейнерному образі:
+
+```shell
+$ cat /etc/group
+```
+
+Ви побачите, що `uid 1000` належить до групи `50000`.
+
+```none
+...
+user-defined-in-image:x:1000:
+group-defined-in-image:x:50000:user-defined-in-image
+```
+
+Вийдіть з оболонки:
+
+```shell
+exit
+```
+
+{{<note>}}
+_Неявно обʼєднані_ додаткові групи можуть викликати проблеми з безпекою, особливо при доступі до томів (див. [kubernetes/kubernetes#112879](https://issue.k8s.io/112879) для деталей). Щоб уникнути цього, перегляньте розділ нижче.
+{{</note>}}
+
+## Налаштування SupplementalGroups для Podʼа {#supplementalgroupspolicy}
+
+{{< feature-state feature_gate_name="SupplementalGroupsPolicy" >}}
+
+Цю функцію можна увімкнути, встановивши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `SupplementalGroupsPolicy` для kubelet та kube-apiserver, а також налаштувавши поле `.spec.securityContext.supplementalGroupsPolicy` для Podʼа.
+
+Поле `supplementalGroupsPolicy` визначає політику для розрахунку додаткових груп для процесів контейнера в Podʼі. Для цього поля є два дійсних
+значення:
+
+* `Merge`: Членство в групах, визначене в `/etc/group` для основного користувача контейнера, буде обʼєднано. Це є стандартною політикою, якщо не зазначено інше.
+
+* `Strict`: Тільки ідентифікатори груп у полях `fsGroup`, `supplementalGroups` або `runAsGroup` прикріплюються як додаткові групи для процесів контейнера. Це означає, що жодне членство в групах з `/etc/group` для основного користувача контейнера не буде обʼєднано.
+
+Коли функція увімкнена, вона також надає ідентичність процесу, прикріплену до першого процесу контейнера в полі `.status.containerStatuses[].user.linux`. Це буде корисно для виявлення, чи прикріплені неявні ідентифікатори груп.
+
+{{% code_sample file="pods/security/security-context-6.yaml" %}}
+
+Цей маніфест Podʼа визначає `supplementalGroupsPolicy=Strict`. Ви можете побачити, що жодне членство в групах, визначене в `/etc/group`, не обʼєднується в додаткові групи для процесів контейнера.
+
+Створіть Pod:
+
+```shell
+kubectl apply -f https://k8s.io/examples/pods/security/security-context-6.yaml
+```
+
+Перевірте, що контейнер Podʼа працює:
+
+```shell
+kubectl get pod security-context-demo
+```
+
+Перевірте ідентичність процесу:
+
+```shell
+kubectl exec -it security-context-demo -- id
+```
+
+Вивід буде подібним до цього:
+
+```none
+uid=1000 gid=3000 groups=3000,4000
+```
+
+Перегляньте статус Podʼа:
+
+```shell
+kubectl get pod security-context-demo -o yaml
+```
+
+Ви можете побачити, що поле `status.containerStatuses[].user.linux` надає ідентичність процесу, прикріплену до першого процесу контейнера.
+
+```yaml
+...
+status:
+  containerStatuses:
+  - name: sec-ctx-demo
+    user:
+      linux:
+        gid: 3000
+        supplementalGroups:
+        - 3000
+        - 4000
+        uid: 1000
+...
+```
+
+{{<note>}}
+Зверніть увагу, що значення в полі `status.containerStatuses[].user.linux` є _першою прикріпленою_ ідентичністю процесу до першого процесу контейнера в контейнері. Якщо контейнер має достатні привілеї для здійснення системних викликів, повʼязаних з ідентичністю процесу (наприклад, [`setuid(2)`](https://man7.org/linux/man-pages/man2/setuid.2.html), [`setgid(2)`](https://man7.org/linux/man-pages/man2/setgid.2.html) або [`setgroups(2)`](https://man7.org/linux/man-pages/man2/setgroups.2.html) та ін.), процес контейнера може змінити свою ідентичність. Отже, _реальна_ ідентичність процесу буде динамічною.
+{{</note>}}
+
+### Реалізації {#implementations-supplementalgroupspolicy}
+
+{{% thirdparty-content %}}
+
+Відомо, що наступні середовища виконання контейнерів підтримують контроль додаткових груп з тонкою настройкою.
+
+На рівні CRI:
+
+* [containerd](https://containerd.io/), починаючи з v2.0
+* [CRI-O](https://cri-o.io/), починаючи з v1.31
+
+Ви можете перевірити, чи підтримується функція в статусі вузла.
+
+```yaml
+apiVersion: v1
+kind: Node
+...
+status:
+  features:
+    supplementalGroupsPolicy: true
 ```
 
 ## Налаштування політики зміни дозволів та прав власності тому для Pod {#configure-volume-permission-and-ownership-change-policy-for-pods}
@@ -165,7 +321,7 @@ securityContext:
 
 ## Встановлення контексту безпеки для контейнера {#set-the-security-context-for-a-container}
 
-Для вказання параметрів безпеки для контейнера, включіть поле `securityContext` в маніфест контейнера. Поле `securityContext` є обʼєктом [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core). Параметри безпеки, які ви вказуєте для контейнера, застосовуються тільки до окремого контейнера, і вони перевизначають налаштування, зроблені на рівні Podʼа, коли є перетин. Налаштування контейнера не впливають на томи Podʼів.
+Для вказання параметрів безпеки для контейнера, включіть поле `securityContext` в маніфест контейнера. Поле `securityContext` є обʼєктом [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core). Параметри безпеки, які ви вказуєте для контейнера, застосовуються тільки до окремого контейнера, і вони перевизначають налаштування, зроблені на рівні Podʼа, коли є перетин. Налаштування контейнера не впливають на томи Podʼів.
 
 Ось файл конфігурації для Podʼа з одним контейнером. Як Pod, так і контейнер мають поле `securityContext`:
 
@@ -322,7 +478,7 @@ CapEff:	00000000aa0435fb
 
 ## Встановлення профілю Seccomp для контейнера {#set-the-seccomp-profile-for-a-container}
 
-Щоб встановити профіль Seccomp для контейнера, включіть поле `seccompProfile` в розділ `securityContext` вашого маніфесту Pod або контейнера. Поле `seccompProfile` є обʼєктом [SeccompProfile](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#seccompprofile-v1-core), який складається з `type` та `localhostProfile`. Допустимі варіанти для `type` включають `RuntimeDefault`, `Unconfined` та `Localhost`. `localhostProfile` повинен бути встановлений лише якщо `type: Localhost`. Він вказує шлях до попередньо налаштованого профілю на вузлі, повʼязаного з розташуванням налаштованого профілю Seccomp kubelet (налаштованого за допомогою прапорця `--root-dir`).
+Щоб встановити профіль Seccomp для контейнера, включіть поле `seccompProfile` в розділ `securityContext` вашого маніфесту Pod або контейнера. Поле `seccompProfile` є обʼєктом [SeccompProfile](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#seccompprofile-v1-core), який складається з `type` та `localhostProfile`. Допустимі варіанти для `type` включають `RuntimeDefault`, `Unconfined` та `Localhost`. `localhostProfile` повинен бути встановлений лише якщо `type: Localhost`. Він вказує шлях до попередньо налаштованого профілю на вузлі, повʼязаного з розташуванням налаштованого профілю Seccomp kubelet (налаштованого за допомогою прапорця `--root-dir`).
 
 Ось приклад, який встановлює профіль Seccomp до стандартного профілю контейнера вузла:
 
@@ -343,9 +499,41 @@ securityContext:
     localhostProfile: my-profiles/profile-allow.json
 ```
 
+## Налаштування профілю AppArmor для контейнера {#set-the-apparmor-profile-for-a-container}
+
+Щоб налаштувати профіль AppArmor для контейнера, включіть поле `appArmorProfile` в секцію `securityContext` вашого контейнера. Поле `appArmorProfile` є [обʼєктом AppArmorProfile](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#apparmorprofile-v1-core), що складається з `type` та `localhostProfile`. Дійсні опції для `type` включають `RuntimeDefault` (стандартно), `Unconfined` і `Localhost`. `localhostProfile` слід встановлювати тільки якщо `type` є `Localhost`. Це вказує на назву попередньо налаштованого профілю на вузлі. Профіль повинен бути завантажений на всіх вузлах, які підходять для Podʼа, оскільки ви не знаєте, де буде розгорнуто Pod. Підходи до налаштування власних профілів обговорюються в [Налаштування вузлів з профілями](/uk/docs/tutorials/security/apparmor/#setting-up-nodes-with-profiles).
+
+Примітка: Якщо `containers[*].securityContext.appArmorProfile.type` явно встановлено на `RuntimeDefault`, то Pod не буде допущено, якщо AppArmor не включено на вузлі. Однак, якщо `containers[*].securityContext.appArmorProfile.type` не зазначено, то стандартне значення (що також є `RuntimeDefault`) буде застосовано тільки якщо вузол має увімкнений AppArmor. Якщо вузол має вимкнений AppArmor, Pod буде допущено, але контейнер не буде обмежено профілем `RuntimeDefault`.
+
+Ось приклад, який встановлює профіль AppArmor на стандартний профіль контейнерного середовища вузла:
+
+```yaml
+...
+containers:
+- name: container-1
+  securityContext:
+    appArmorProfile:
+      type: RuntimeDefault
+```
+
+Ось приклад, який встановлює профіль AppArmor на попередньо налаштований профіль
+з назвою `k8s-apparmor-example-deny-write`:
+
+```yaml
+...
+containers:
+- name: container-1
+  securityContext:
+    appArmorProfile:
+      type: Localhost
+      localhostProfile: k8s-apparmor-example-deny-write
+```
+
+Для отримання додаткової інформації дивіться [Обмеження доступу контейнера до ресурсів з AppArmor](/uk/docs/tutorials/security/apparmor/).
+
 ## Призначення міток SELinux контейнеру {#assign-selinux-labels-to-a-container}
 
-Щоб призначити мітки SELinux контейнеру, включіть поле `seLinuxOptions` в розділ `securityContext` вашого маніфесту Podʼа або контейнера. Поле `seLinuxOptions` є обʼєктом [SELinuxOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#selinuxoptions-v1-core). Ось приклад, який застосовує рівень SELinux:
+Щоб призначити мітки SELinux контейнеру, включіть поле `seLinuxOptions` в розділ `securityContext` вашого маніфесту Podʼа або контейнера. Поле `seLinuxOptions` є обʼєктом [SELinuxOptions](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#selinuxoptions-v1-core). Ось приклад, який застосовує рівень SELinux:
 
 ```yaml
 ...
@@ -365,15 +553,15 @@ securityContext:
 {{< note >}}
 У Kubernetes v1.27 було введено обмежену ранню форму такої поведінки, яка була застосовна тільки до томів (та PersistentVolumeClaims), які використовують режим доступу `ReadWriteOncePod`.
 
-Як альфа-функціонал, ви можете увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `SELinuxMount`, щоб розширити це поліпшення продуктивності на інші види PersistentVolumeClaims, як пояснено докладніше нижче.
+Як альфа-функціонал, ви можете увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `SELinuxMount`, щоб розширити це поліпшення продуктивності на інші види PersistentVolumeClaims, як пояснено докладніше нижче.
 {{< /note >}}
 
 Стандартно, контейнерне середовище рекурсивно призначає мітку SELinux для всіх файлів на всіх томах Pod. Щоб прискорити цей процес, Kubernetes може миттєво змінити мітку SELinux тому за допомогою параметра монтування `-o context=<мітка>`.
 
 Щоб скористатися цим прискоренням, мають бути виконані всі ці умови:
 
-* [Feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ReadWriteOncePod` та `SELinuxMountReadWriteOncePod` повинні бути увімкнені.
-* Pod повинен використовувати PersistentVolumeClaim з відповідними `accessModes` та [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/):
+* [Функціональні можливості](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ReadWriteOncePod` та `SELinuxMountReadWriteOncePod` повинні бути увімкнені.
+* Pod повинен використовувати PersistentVolumeClaim з відповідними `accessModes` та [функціональною можливстю](/uk/docs/reference/command-line-tools-reference/feature-gates/):
   * Або том має `accessModes: ["ReadWriteOncePod"]`, і властивість включення `SELinuxMountReadWriteOncePod` увімкнена.
   * Або том може використовувати будь-які інші режими доступу та обидва `SELinuxMountReadWriteOncePod` та `SELinuxMount` повинні бути увімкнені.
 * Pod (або всі його контейнери, які використовують PersistentVolumeClaim) повинні мати встановлені параметри `seLinuxOptions`.
@@ -449,8 +637,8 @@ kubectl delete pod security-context-demo-4
 
 ## {{% heading "whatsnext" %}}
 
-* [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)
-* [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
+* [PodSecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)
+* [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
 * [Посібник з налаштування втулків CRI](https://github.com/containerd/containerd/blob/main/docs/cri/config.md)
 * [Документ проєктування контекстів безпеки](https://git.k8s.io/design-proposals-archive/auth/security_context.md)
 * [Документ проєктування управління власністю](https://git.k8s.io/design-proposals-archive/storage/volume-ownership-management.md)

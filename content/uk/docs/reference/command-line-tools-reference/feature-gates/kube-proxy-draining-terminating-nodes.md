@@ -13,5 +13,9 @@ stages:
   - stage: beta
     defaultValue: true
     fromVersion: "1.30"
+    toVersion: "1.30"
+  - stage: stable
+    defaultValue: true
+    fromVersion: "1.31"
 ---
 Реалізація очищення зʼєднань для термінальних вузлів для сервісів `externalTrafficPolicy: Cluster`.

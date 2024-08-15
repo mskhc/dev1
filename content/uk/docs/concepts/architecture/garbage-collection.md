@@ -86,9 +86,9 @@ Kubernetes керує життєвим циклом всіх образів че
 
 Як бета-функцію, ви можете вказати максимальний час, протягом якого локальний образ може бути невикористаний, незалежно від використання дискового простору. Це налаштування kubelet, яке ви вказуєте для кожного вузла.
 
-Щоб налаштувати параметр, увімкніть [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `imageMaximumGCAge` для kubelet, а також встановіть значення поля `imageMaximumGCAge` в файлі конфігурації kubelet.
+Щоб налаштувати параметр, увімкніть [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `imageMaximumGCAge` для kubelet, а також встановіть значення поля `imageMaximumGCAge` в файлі конфігурації kubelet.
 
-Значення вказується як _duration_ Kubernetes; Допустимі одиниці часу для поля `imageMaximumGCAge` у файлі конфігурації kubelet:
+Значення вказується як *duration* Kubernetes; Допустимі одиниці часу для поля `imageMaximumGCAge` у файлі конфігурації kubelet:
 
 * «ns» для наносекунд
 * «us» або «µs» для мікросекунд

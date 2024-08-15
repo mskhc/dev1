@@ -144,6 +144,41 @@ contexts:
 }
 ```
 
-Нересурсні шляхи включають: `/api`, `/apis`, `/metrics`, `/logs`, `/debug`, `/healthz`, `/livez`, `/openapi/v2`, `/readyz` та  `/version.` Клієнти потребують доступу до `/api`, `/api/*`, `/apis`, `/apis/*`, та `/version` для визначення, які ресурси та версії присутні на сервері. Доступ до інших нересурсних шляхів може бути заборонений без обмеження доступу до REST API.
+{{< feature-state feature_gate_name="AuthorizeWithSelectors" >}}
 
-За подальшою документацією звертайтеся до обʼєктів API authorization.v1beta1 та [webhook.go](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apiserver/plugin/pkg/authorizer/webhook/webhook.go).
+З увімкненою функцією `AuthorizeWithSelectors` поля та мітки селекторів у запиті передаються до вебхуку авторизації. Вебхук може приймати рішення про авторизацію, орієнтуючися на обмежені селектори полів і міток, якщо бажає.
+
+[Документація API SubjectAccessReview](/uk/docs/reference/kubernetes-api/authorization-resources/subject-access-review-v1/) надає вказівки щодо того, як ці поля мають інтерпретуватися і оброблятися вебхуками авторизації, зокрема використанням розібраних вимог замість сирих рядків селекторів та як безпечно обробляти невідомі оператори.
+
+```json
+{
+  "apiVersion": "authorization.k8s.io/v1beta1",
+  "kind": "SubjectAccessReview",
+  "spec": {
+    "resourceAttributes": {
+      "verb": "list",
+      "group": "",
+      "resource": "pods",
+      "fieldSelector": {
+        "requirements": [
+          {"key":"spec.nodeName", "operator":"In", "values":["mynode"]}
+        ]
+      },
+      "labelSelector": {
+        "requirements": [
+          {"key":"example.com/mykey", "operator":"In", "values":["myvalue"]}
+        ]
+      }
+    },
+    "user": "jane",
+    "group": [
+      "group1",
+      "group2"
+    ]
+  }
+}
+```
+
+Нересурсні шляхи включають: `/api`, `/apis`, `/metrics`, `/logs`, `/debug`, `/healthz`, `/livez`, `/openapi/v2`, `/readyz` та `/version.` Клієнти потребують доступу до `/api`, `/api/*`, `/apis`, `/apis/*`, та `/version` для визначення, які ресурси та версії присутні на сервері. Доступ до інших нересурсних шляхів може бути заборонений без обмеження доступу до REST API.
+
+За подальшою інформацією звертайтеся до [документації SubjectAccessReview API](/uk/docs/reference/kubernetes-api/authorization-resources/subject-access-review-v1/) та [імплементації webhook.go](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apiserver/plugin/pkg/authorizer/webhook/webhook.go).

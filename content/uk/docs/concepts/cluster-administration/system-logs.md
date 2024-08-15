@@ -102,7 +102,7 @@ second line.}
 
 Якщо розробники використовують додаткові функції, такі як `WithValues` або `WithName`, у своїх компонентах, то записи в журнал міститимуть додаткову інформацію, яка передається у функції своїм абонентам.
 
-Для Kubernetes Kubernetes {{< skew currentVersion >}}, це керується через `ContextualLogging`[feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/), що є типово увімкненим. Інфраструктура для цього була додана в 1.24 без модифікації компонентів. Команда [`component-base/logs/example`](https://github.com/kubernetes/kubernetes/blob/v1.24.0-beta.0/staging/src/k8s.io/component-base/logs/example/cmd/logger.go) показує, як використовувати нові виклики ведення логів та як компонент поводиться, якщо він підтримує контекстне ведення логів.
+Для Kubernetes Kubernetes {{< skew currentVersion >}}, це керується через [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ContextualLogging`, що є типово увімкненою. Інфраструктура для цього була додана в 1.24 без модифікації компонентів. Команда [`component-base/logs/example`](https://github.com/kubernetes/kubernetes/blob/v1.24.0-beta.0/staging/src/k8s.io/component-base/logs/example/cmd/logger.go) показує, як використовувати нові виклики ведення логів та як компонент поводиться, якщо він підтримує контекстне ведення логів.
 
 ```console
 $ cd $GOPATH/src/k8s.io/kubernetes/staging/src/k8s.io/component-base/logs/example/cmd/
@@ -187,7 +187,7 @@ I0222 15:14:40.497346  198174 example.go:55] "another runtime" duration="1h0m0s"
 
 {{< feature-state feature_gate_name="NodeLogQuery" >}}
 
-Для допомоги у розвʼязанні проблем на вузлах Kubernetes версії v1.27 введено функцію, яка дозволяє переглядати логи служб, що працюють на вузлі. Щоб скористатися цією функцією, переконайтеся, що для цього вузла увімкнути [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeLogQuery`, а також що параметри конфігурації kubelet `enableSystemLogHandler` та `enableSystemLogQuery` обидва встановлені в значення true. На Linux ми припускаємо, що логи служб доступні через journald. На Windows ми припускаємо, що логи служб доступні в постачальнику логів застосунків. В обох операційних системах логи також доступні за допомогою читання файлів у теці `/var/log/`.
+Для допомоги у розвʼязанні проблем на вузлах Kubernetes версії v1.27 введено функцію, яка дозволяє переглядати логи служб, що працюють на вузлі. Щоб скористатися цією функцією, переконайтеся, що для цього вузла увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeLogQuery`, а також що параметри конфігурації kubelet `enableSystemLogHandler` та `enableSystemLogQuery` обидва встановлені в значення true. На Linux ми припускаємо, що логи служб доступні через journald. На Windows ми припускаємо, що логи служб доступні в постачальнику логів застосунків. В обох операційних системах логи також доступні за допомогою читання файлів у теці `/var/log/`.
 
 Якщо у вас є дозвіл на взаємодію з обʼєктами Node, ви можете спробувати цю функцію на всіх ваших вузлах або лише на їх підмножині. Ось приклад отримання логу служби kubelet з вузла:
 

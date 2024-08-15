@@ -85,7 +85,7 @@ ip route show # Перегляньте рядок, який починаєтьс
 компоненту Kubernetes, робота компонента може завершитися з помилкою.
 {{< /note >}}
 
-Для налаштування IP-адреси оголошення API-сервера для вузлів панелі управління, створених із `init` та `join`, можна використовувати прапорець `--apiserver-advertise-address`. Переважно, варто встановлювати цю опцію в [API-інтерфейсі kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta3)
+Для налаштування IP-адреси оголошення API-сервера для вузлів панелі управління, створених із `init` та `join`, можна використовувати прапорець `--apiserver-advertise-address`. Переважно, варто встановлювати цю опцію в [API-інтерфейсі kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4)
 як `InitConfiguration.localAPIEndpoint` та `JoinConfiguration.controlPlane.localAPIEndpoint`.
 
 Для kubelet на всіх вузлах опцію `--node-ip` можна передати в `.nodeRegistration.kubeletExtraArgs` всередині конфігураційного файлу kubeadm (`InitConfiguration` або `JoinConfiguration`).
@@ -423,7 +423,7 @@ kubectl delete node <імʼя вузла>
 
 ### Відхилення версії kubeadm від версії Kubernetes {#kubeadm-s-skew-against-the-kubernetes-version}
 
-kubeadm можна використовувати із компонентами Kubernetes, які мають таку саму версію, як і kubeadm, або на одну версію застаріше. Версію Kubernetes можна вказати для kubeadm, використовуючи прапорець `--kubernetes-version` команди `kubeadm init` або поле [`ClusterConfiguration.kubernetesVersion`](/uk/docs/reference/config-api/kubeadm-config.v1beta3/) при використанні `--config`. Ця опція буде контролювати версії kube-apiserver, kube-controller-manager, kube-scheduler та kube-proxy.
+kubeadm можна використовувати із компонентами Kubernetes, які мають таку саму версію, як і kubeadm, або на одну версію застаріше. Версію Kubernetes можна вказати для kubeadm, використовуючи прапорець `--kubernetes-version` команди `kubeadm init` або поле [`ClusterConfiguration.kubernetesVersion`](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) при використанні `--config`. Ця опція буде контролювати версії kube-apiserver, kube-controller-manager, kube-scheduler та kube-proxy.
 
 Приклад:
 
@@ -457,7 +457,7 @@ kubeadm можна використовувати із компонентами 
 - версія kubeadm {{< skew currentVersionAddMinor -1 >}} використовувалася для створення або оновлення вузла
 - Версія kubeadm, використана для оновлення вузла, повинна бути на {{< skew currentVersionAddMinor -1 >}} або {{< skew currentVersion >}}
 
-Щоб дізнатися більше про різницю версій між різними компонентами Kubernetes, див. [Політику відхилень версій](/releases/version-skew-policy/).
+Щоб дізнатися більше про різницю версій між різними компонентами Kubernetes, див. [Політику відхилень версій](/uk/releases/version-skew-policy/).
 
 ### Обмеження {#limitations}
 

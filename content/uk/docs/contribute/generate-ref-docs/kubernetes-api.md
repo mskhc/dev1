@@ -59,7 +59,7 @@ git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes
 
 ## Генерація документації API {#generate-the-api-reference-docs}
 
-Цей розділ демонструє, як згенерувати [опубліковану документацію API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
+Цей розділ демонструє, як згенерувати [опубліковану документацію API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
 
 ### Встановлення змінних для зборки {#set-build-variables}
 

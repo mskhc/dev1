@@ -38,6 +38,8 @@ kubectl get pods/<імʼя_пода> -o yaml
 
 Коли Pod автентифікується як Службовий обліковий запис, його рівень доступу залежить від [втулка авторизації та політики](/uk/docs/reference/access-authn-authz/authorization/#authorization-modules), які використовуються.
 
+Облікові дані API автоматично відкликаються, коли Pod видаляється, навіть якщо є завершувачі. Зокрема, облікові дані API відкликаються через 60 секунд після встановленого на Pod значення `.metadata.deletionTimestamp` (час видалення зазвичай дорівнює часу, коли запит на **видалення** був прийнятий плюс період належного завершення роботи Pod).
+
 ### Відмова від автоматичного монтування облікових даних API {#opt-out-of-api-credentials-automounting}
 
 Якщо ви не бажаєте, щоб {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} автоматично монтував облікові дані API ServiceAccount, ви можете відмовитися від такої стандартної поведінки. Ви можете відмовитися від автоматичного монтування облікових даних API у `/var/run/secrets/kubernetes.io/serviceaccount/token` для службового облікового запису, встановивши значення `automountServiceAccountToken: false` у ServiceAccount:
@@ -145,13 +147,15 @@ kubectl create token build-robot
 
 Вихідні дані з цієї команди — це токен, який ви можете використовувати для автентифікації цього ServiceAccount. Ви можете запросити певний час дії токена, використовуючи аргумент командного рядка `--duration` для `kubectl create token` (фактичний час дії виданого токену може бути коротшим або навіть довшим).
 
-Коли включені функції `ServiceAccountTokenNodeBinding` і `ServiceAccountTokenNodeBindingValidation`, а змінна середовища `KUBECTL_NODE_BOUND_TOKENS` встановлена в `true`, можна створити токен службового облікового запису, який безпосередньо повʼязаний з `Node`:
+{{< feature-state feature_gate_name="ServiceAccountTokenNodeBinding" >}}
+
+Коли увімкнено функції `ServiceAccountTokenNodeBinding` і `ServiceAccountTokenNodeBindingValidation`, а також використовується `kubectl` версії 1.31 або пізнішої, можна створити токен службового облікового запису, який безпосередньо привʼязаний до Node.
 
 ```shell
-KUBECTL_NODE_BOUND_TOKENS=true kubectl create token build-robot --bound-object-kind Node --bound-object-name node-001 --bound-object-uid 123...456
+kubectl create token build-robot --bound-object-kind Node --bound-object-name node-001 --bound-object-uid 123...456
 ```
 
-Токен буде чинним до тих пір, поки він не закінчиться або не буде видалений або обʼєкт, який повʼязаний з ним, не буде видалений.
+Токен буде чинний до закінчення його терміну дії або до видалення відповідного вузла чи службового облікового запису.
 
 {{< note >}}
 У версіях Kubernetes до v1.22 автоматично створювалися довгострокові облікові дані для доступу до API Kubernetes. Цей старий механізм базувався на створенні Secret токенів, які потім можна було монтувати в запущені контейнери. У більш пізніх версіях, включаючи Kubernetes v{{< skew currentVersion >}}, облікові дані API отримуються безпосередньо за допомогою [TokenRequest](/uk/docs/reference/kubernetes-api/authentication-resources/token-request-v1/) API, і вони монтуються в контейнери за допомогою [projected тому](/uk/docs/reference/access-authn-authz/service-accounts-admin/#bound-service-account-token-volume). Токени, отримані за допомогою цього методу, мають обмежений термін дії та автоматично анулюються, коли контейнер, у який вони монтувалися, видаляється.

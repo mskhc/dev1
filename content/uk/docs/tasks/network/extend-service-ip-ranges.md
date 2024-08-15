@@ -24,8 +24,7 @@ weight: 20
 
 ## API
 
-Кластери Kubernetes з kube-apiservers, у яких увімкнено 
-[feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MultiCIDRServiceAllocator` та API `networking.k8s.io/v1alpha1`, створюватимуть новий обʼєкт ServiceCIDR, який має відоме імʼя `kubernetes`, та використовуватимуть діапазон IP-адрес, заснований на значенні аргументу командного рядка `--service-cluster-ip-range` для kube-apiserver.
+Кластери Kubernetes з kube-apiservers, у яких увімкнено [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MultiCIDRServiceAllocator` та API `networking.k8s.io/v1alpha1`, створюватимуть новий обʼєкт ServiceCIDR, який має відоме імʼя `kubernetes`, та використовуватимуть діапазон IP-адрес, заснований на значенні аргументу командного рядка `--service-cluster-ip-range` для kube-apiserver.
 
 ```shell
 kubectl get servicecidr

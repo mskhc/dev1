@@ -44,7 +44,7 @@ weight: 60
 
 * [Застосування стандартів безпеки Pod на рівні кластера](/uk/docs/tutorials/security/cluster-level-pss/)
 * [Застосування стандартів безпеки Pod на рівні простору імен (namespace)](/uk/docs/tutorials/security/ns-level-pss/)
-* [AppArmor](/uk/docs/tutorials/security/apparmor/)
+* [Обмеження доступу контейнера до ресурсів за допомогою AppArmor](/uk/docs/tutorials/security/apparmor/)
 * [Seccomp](/uk/docs/tutorials/security/seccomp/)
 
 ## {{% heading "whatsnext" %}}

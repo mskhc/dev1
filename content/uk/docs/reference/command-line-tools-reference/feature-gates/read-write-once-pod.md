@@ -17,5 +17,8 @@ stages:
   - stage: stable
     defaultValue: true
     fromVersion: "1.29" 
+    toVersion: "1.30"
+
+removed: true
 ---
 Дозволяє використовувати `ReadWriteOncePod` режим доступу до PersistentVolume.

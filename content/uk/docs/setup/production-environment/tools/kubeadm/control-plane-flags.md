@@ -31,7 +31,7 @@ weight: 40
 - `scheduler`
 - `etcd`
 
-Ці структури містять спільне поле `extraArgs`, яке складається з пар `ключ: значення`. Щоб перевизначити прапорець для компонента панелі управління:
+Ці структури містять спільне поле `extraArgs`, яке складається з пар `name` / `value`. Щоб перевизначити прапорець для компонента панелі управління:
 
 1. Додайте відповідні `extraArgs` до вашої конфігурації.
 2. Додайте прапорці до поля `extraArgs`.
@@ -56,14 +56,33 @@ weight: 40
 Приклад використання:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 kubernetesVersion: v1.16.0
 apiServer:
   extraArgs:
-    anonymous-auth: "false"
-    enable-admission-plugins: AlwaysPullImages,DefaultStorageClass
-    audit-log-path: /home/johndoe/audit.log
+  - name: "enable-admission-plugins"
+    value: "AlwaysPullImages,DefaultStorageClass"
+  - name: "audit-log-path"
+    value: "/home/johndoe/audit.log"
+```
+
+### Прапорці ControllerManager {#controllermanager-flags}
+
+Докладну інформацію див. у [довідковій документації для kube-controller-manager](/uk/docs/reference/command-line-tools-reference/kube-controller-manager/).
+
+Приклад використання:
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+kubernetesVersion: v1.16.0
+controllerManager:
+  extraArgs:
+  - name: "cluster-signing-key-file"
+    value: "/home/johndoe/keys/ca.key"
+  - name: "deployment-controller-sync-period"
+    value: "50"
 ```
 
 ### Прапорці планувальника {#scheduler-flags}
@@ -73,12 +92,13 @@ apiServer:
 Приклад використання:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 kubernetesVersion: v1.16.0
 scheduler:
   extraArgs:
-    config: /etc/kubernetes/scheduler-config.yaml
+  - name: "config"
+    value: "/etc/kubernetes/scheduler-config.yaml"
   extraVolumes:
     - name: schedulerconfig
       hostPath: /home/johndoe/schedconfig.yaml
@@ -94,12 +114,13 @@ scheduler:
 Приклад використання:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
 etcd:
   local:
     extraArgs:
-      election-timeout: 1000
+    - name: "election-timeout"
+      value: 1000
 ```
 
 ### Налаштування за допомогою патчів {#patches}
@@ -111,7 +132,7 @@ Kubeadm дозволяє передавати теку з файлами пат�
 Ви можете передати цей файл в `kubeadm init` за допомогою `--config <ВАШ КОНФІГ YAML>`:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: InitConfiguration
 patches:
   directory: /home/user/somedir
@@ -124,7 +145,7 @@ patches:
 Ви можете передати цей файл в `kubeadm join` за допомогою `--config <ВАШ КОНФІГ YAML>`:
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 kind: JoinConfiguration
 patches:
   directory: /home/user/somedir
@@ -157,7 +178,7 @@ patches:
 
 Щоб налаштувати kube-proxy, ви можете передати `KubeProxyConfiguration` поруч з `ClusterConfiguration` або `InitConfiguration` до `kubeadm init`, розділені `---`.
 
-Для отримання докладнішої інформації ви можете перейти на наші [сторінки API-посилань](/uk/docs/reference/config-api/kubeadm-config.v1beta3/).
+Для отримання докладнішої інформації ви можете перейти на наші [сторінки API-посилань](/uk/docs/reference/config-api/kubeadm-config.v1beta4/).
 
 {{< note >}}
 kubeadm розгортає kube-proxy як {{< glossary_tooltip text="DaemonSet" term_id="daemonset" >}}, що означає, що `KubeProxyConfiguration` буде застосовуватися до всіх екземплярів kube-proxy в кластері.

@@ -192,7 +192,7 @@ validationActions: [Warn, Audit]
 - 'request' — Атрибути [запиту допуску](/uk/docs/reference/config-api/apiserver-admission.v1/#admission-k8s-io-v1-AdmissionRequest).
 - 'params' — Ресурс параметра, на який посилається привʼязка правила, яке оцінюється. Значення null, якщо `ParamKind` не вказано.
 - `namespaceObject` — Простір імен, як ресурс Kubernetes, до якого належить вхідний обʼєкт. Значення null, якщо вхідний обʼєкт має область видимості кластера.
-- `authorizer` — Авторизатор CEL. Може використовуватися для виконання перевірок авторизації для принципала (автентифікованого користувача) запиту. Див. [Authz](https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz) в документації бібліотеки Kubernetes CEL для отримання додаткових відомостей.
+- `authorizer` — Авторизатор CEL. Може використовуватися для виконання перевірок авторизації для принципала (автентифікованого користувача) запиту. Див. [AuthzSelectors](https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#AuthzSelectors) та [Authz](https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz) в документації бібліотеки Kubernetes CEL для отримання додаткових відомостей.
 - `authorizer.requestResource` — Скорочення для перевірки авторизації, налаштоване з ресурсом запиту (група, ресурс, (субресурс), простір імен, імʼя).
 
 `apiVersion`, `kind`, `metadata.name` і `metadata.generateName` завжди доступні з кореня обʼєкта. Інші властивості метаданих не доступні.

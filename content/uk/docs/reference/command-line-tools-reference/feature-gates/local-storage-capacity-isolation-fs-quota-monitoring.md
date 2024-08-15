@@ -9,5 +9,9 @@ stages:
   - stage: alpha
     defaultValue: false
     fromVersion: "1.15"
+    toVersion: "1.30"
+  - stage: beta 
+    defaultValue: false
+    fromVersion: "1.31"
 ---
-Якщо `LocalStorageCapacityIsolation` увімкнено для [локального ефемерного сховища](/uk/docs/concepts/configuration/manage-resources-containers/) і резервна файлова система для [томів emptyDir](/uk/docs/concepts/storage/volumes/#emptydir) підтримує квоти проєктів і їх увімкнено, використовуйте квоти проєктів для моніторингу споживання місця у сховищі [emptyDir volume](/uk/docs/concepts/storage/volumes/#emptydir), а не обхід файлової системи для кращої продуктивності і точності.
+Якщо `LocalStorageCapacityIsolation` увімкнено для [локального ефемерного сховища](/uk/docs/concepts/configuration/manage-resources-containers/), резервна файлова система для [томів emptyDir](/uk/docs/concepts/storage/volumes/#emptydir) підтримує квоти проєктів і `UserNamespacesSupport` увімкнено, квоти проєктів використовуються для моніторингу споживання сховища томів `emptyDir`, а не шляхом проходу файловою системою, що забезпечує кращу продуктивність і точність.

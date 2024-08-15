@@ -16,6 +16,9 @@ stages:
     toVersion: "1.28" 
   - stage: stable
     defaultValue: true
-    fromVersion: "1.29"  
+    fromVersion: "1.29"
+    toVersion: "1.30"
+
+removed: true
 ---
 Вмикає передачу секретних даних автентифікації до втулка CSI для використання під час операції `NodeExpandVolume` CSI.

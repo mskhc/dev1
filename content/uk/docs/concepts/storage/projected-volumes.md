@@ -60,7 +60,7 @@ Pod в прикладі має project том, що містить впрова�
 {{< feature-state for_k8s_version="v1.29" state="alpha" >}}
 
 {{< note >}}
-Для використання цієї функції в Kubernetes {{ skew currentVersion }} вам потрібно увімкнути підтримку обʼєктів ClusterTrustBundle з [feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ClusterTrustBundle` та прапорець `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` в kube-apiserver, а потім увімкнути функцію `ClusterTrustBundleProjection`.
+Для використання цієї функції в Kubernetes {{ skew currentVersion }} вам потрібно увімкнути підтримку обʼєктів ClusterTrustBundle з [функціональною можливістю](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ClusterTrustBundle` та прапорецем `--runtime-config=certificates.k8s.io/v1alpha1/clustertrustbundles=true` в kube-apiserver, а потім увімкнути функцію `ClusterTrustBundleProjection`.
 {{< /note >}}
 
 Спроєцьований том `clusterTrustBundle` дозволяє впроваджувати контент одного чи більше обʼєктів [ClusterTrustBundle](/uk/docs/reference/access-authn-authz/certificate-signing-requests/#cluster-trust-bundles) як автоматично оновлюваний файл у файловій системі контейнера.

@@ -475,16 +475,6 @@ allowVolumeExpansion: true
 
 Для отримання додаткової інформації про persistent volume claims, дивіться [PersistentVolumeClaims](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).
 
-### PersistentVolumeLabel {#persistentvolumelabel}
-
-{{< feature-state for_k8s_version="v1.13" state="deprecated" >}}
-
-**Тип**: Модифікуючий.
-
-Цей контролер допуску автоматично додає мітки регіону або зони до PersistentVolumes як визначено постачальником хмарних послуг (наприклад, Azure або GCP). Він допомагає забезпечити, щоб Podʼи і PersistentVolumes, що монтуються, були в одному регіоні та/або зоні. Якщо контролер допуску не підтримує автоматичне додавання міток до ваших PersistentVolumes, вам може знадобитися додати мітки вручну, щоб запобігти монтуванню томів у Podʼи з іншої зони. PersistentVolumeLabel **застарілий**, оскільки позначення мітками для постіних томів було передано до {{< glossary_tooltip text="cloud-controller-manager" term_id="cloud-controller-manager" >}}.
-
-Цей контролер допуску стандартно вимкнено.
-
 ### PodNodeSelector {#podnodeselector}
 
 {{< feature-state for_k8s_version="v1.5" state="alpha" >}}

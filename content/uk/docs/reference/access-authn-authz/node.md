@@ -24,8 +24,11 @@ weight: 34
 * endpoints
 * nodes
 * pods
-* secrets, configmaps, persistent volume claims та persistent volumes, що стосуються
-  Podʼів, привʼязаних до вузла kubelet-а
+* secrets, configmaps, persistent volume claims та persistent volumes, що стосуються Podʼів, привʼязаних до вузла kubelet-а
+
+{{< feature-state feature_gate_name="AuthorizeNodeWithSelectors" >}}
+
+Коли функціональну можливість `AuthorizeNodeWithSelectors` увімкнено (разом із передумовою `AuthorizeWithSelectors`), kubelets можуть читати лише власні обʼєкти Node і можуть читати лише Podʼи, привʼязані до їхнього вузла.
 
 Операції запису:
 

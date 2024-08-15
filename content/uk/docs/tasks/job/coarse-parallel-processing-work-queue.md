@@ -196,7 +196,7 @@ Job буде використовувати утиліту `amqp-consume` для
 chmod +x worker.py
 ```
 
-Тепер створіть образ. Створіть тимчасову теку, перейдіть в неї, завантажте [Dockerfile](/examples/application/job/rabbitmq/Dockerfile), і [worker.py](/examples/application/job/rabbitmq/worker.py). У будь-якому випадку, створіть образ за допомогою цієї команди:
+Тепер створіть образ. Створіть тимчасову теку, перейдіть в неї, завантажте [Dockerfile](/uk/examples/application/job/rabbitmq/Dockerfile), і [worker.py](/uk/examples/application/job/rabbitmq/worker.py). У будь-якому випадку, створіть образ за допомогою цієї команди:
 
 ```shell
 docker build -t job-wq-1 .

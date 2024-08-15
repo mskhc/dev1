@@ -36,12 +36,12 @@ In цьому прикладі ви запустите Job Kubernetes, яке в
 
 Ви також можете завантажити наступні файли безпосередньо:
 
-- [`redis-pod.yaml`](/examples/application/job/redis/redis-pod.yaml)
-- [`redis-service.yaml`](/examples/application/job/redis/redis-service.yaml)
-- [`Dockerfile`](/examples/application/job/redis/Dockerfile)
-- [`job.yaml`](/examples/application/job/redis/job.yaml)
-- [`rediswq.py`](/examples/application/job/redis/rediswq.py)
-- [`worker.py`](/examples/application/job/redis/worker.py)
+- [`redis-pod.yaml`](/uk/examples/application/job/redis/redis-pod.yaml)
+- [`redis-service.yaml`](/uk/examples/application/job/redis/redis-service.yaml)
+- [`Dockerfile`](/uk/examples/application/job/redis/Dockerfile)
+- [`job.yaml`](/uk/examples/application/job/redis/job.yaml)
+- [`rediswq.py`](/uk/examples/application/job/redis/rediswq.py)
+- [`worker.py`](/uk/examples/application/job/redis/worker.py)
 
 Для запуску одного екземпляра Redis вам потрібно створити Pod Redis та Service Redis:
 
@@ -112,13 +112,13 @@ redis:6379> lrange job2 0 -1
 
 Ви будете використовувати робочу програму на Python з клієнтом Redis для читання повідомлень з черги повідомлень.
 
-Надається проста бібліотека клієнтів черги роботи Redis, яка називається `rediswq.py` ([Завантажити](/examples/application/job/redis/rediswq.py)).
+Надається проста бібліотека клієнтів черги роботи Redis, яка називається `rediswq.py` ([Завантажити](/uk/examples/application/job/redis/rediswq.py)).
 
 Програма "робітник" в кожному Pod Job використовує бібліотеку клієнтів черги роботи, щоб отримати роботу. Ось вона:
 
 {{% code_sample language="python" file="application/job/redis/worker.py" %}}
 
-Ви також можете завантажити файли [`worker.py`](/examples/application/job/redis/worker.py), [`rediswq.py`](/examples/application/job/redis/rediswq.py) та [`Dockerfile`](/examples/application/job/redis/Dockerfile), а потім побудувати контейнерний образ. Ось приклад використання Docker для побудови образу:
+Ви також можете завантажити файли [`worker.py`](/uk/examples/application/job/redis/worker.py), [`rediswq.py`](/uk/examples/application/job/redis/rediswq.py) та [`Dockerfile`](/uk/examples/application/job/redis/Dockerfile), а потім побудувати контейнерний образ. Ось приклад використання Docker для побудови образу:
 
 ```shell
 docker build -t job-wq-2 .

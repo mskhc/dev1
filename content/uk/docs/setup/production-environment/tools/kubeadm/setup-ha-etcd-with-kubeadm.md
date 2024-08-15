@@ -111,14 +111,14 @@ kubeadm містить усі необхідні криптографічні м
    NAME=${NAMES[$i]}
    cat << EOF > /tmp/${HOST}/kubeadmcfg.yaml
    ---
-   apiVersion: "kubeadm.k8s.io/v1beta3"
+   apiVersion: "kubeadm.k8s.io/v1beta4"
    kind: InitConfiguration
    nodeRegistration:
        name: ${NAME}
    localAPIEndpoint:
        advertiseAddress: ${HOST}
    ---
-   apiVersion: "kubeadm.k8s.io/v1beta3"
+   apiVersion: "kubeadm.k8s.io/v1beta4"
    kind: ClusterConfiguration
    etcd:
        local:
