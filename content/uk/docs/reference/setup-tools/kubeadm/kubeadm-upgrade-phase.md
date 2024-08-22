@@ -11,10 +11,10 @@ content_type: concept
 Використовуючи цю фазу, ви можете вибрати виконання окремих кроків оновлення вторинних вузлів панелі управління або робочих вузлів. Зверніть увагу, що `kubeadm upgrade apply` все ще потрібно викликати на первинному вузлі панелі управління.
 
 {{< tabs name="tab-phase" >}}
-{{< tab name="phase" include="generated/kubeadm_upgrade_node_phase.md" />}}
-{{< tab name="preflight" include="generated/kubeadm_upgrade_node_phase_preflight.md" />}}
-{{< tab name="control-plane" include="generated/kubeadm_upgrade_node_phase_control-plane.md" />}}
-{{< tab name="kubelet-config" include="generated/kubeadm_upgrade_node_phase_kubelet-config.md" />}}
+{{< tab name="phase" include="generated/kubeadm_upgrade/kubeadm_upgrade_node_phase.md" />}}
+{{< tab name="preflight" include="generated/kubeadm_upgrade/kubeadm_upgrade_node_phase_preflight.md" />}}
+{{< tab name="control-plane" include="generated/kubeadm_upgrade/kubeadm_upgrade_node_phase_control-plane.md" />}}
+{{< tab name="kubelet-config" include="generated/kubeadm_upgrade/kubeadm_upgrade_node_phase_kubelet-config.md" />}}
 {{< /tabs >}}
 
 ## {{% heading "whatsnext" %}}

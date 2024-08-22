@@ -86,7 +86,7 @@ Podʼи, які видаляються або недоступні через п
 
 Рекомендується встановлювати [політику виселення несправних Podʼів](/uk/docs/tasks/run-application/configure-pdb/#unhealthy-pod-eviction-policy) `AlwaysAllow` у ваших PodDisruptionBudgets для підтримки виселення неправильно працюючих застосунків під час виведення вузла. Стандартна поведінка полягає в тому, що очікується, коли Podʼи застосунку стануть [справними](/uk/docs/tasks/run-application/configure-pdb/#healthiness-of-a-pod) перед тим, як виведення може продовжитися.
 
-Коли Pod виводиться за допомогою API виселення, він [завершується](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) відповідним чином, з урахуванням налаштувань `terminationGracePeriodSeconds` його [PodSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
+Коли Pod виводиться за допомогою API виселення, він [завершується](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) відповідним чином, з урахуванням налаштувань `terminationGracePeriodSeconds` його [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core).
 
 ## Приклад бюджету розладів поди {#pdb-example}
 

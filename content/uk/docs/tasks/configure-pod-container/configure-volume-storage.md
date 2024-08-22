@@ -88,7 +88,7 @@ weight: 80
    redis     1/1       Running    1         6m
    ```
 
-На цьому етапі контейнер завершився та перезапустився. Це тому, що Pod Redis має [restartPolicy](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core) `Always`.
+На цьому етапі контейнер завершився та перезапустився. Це тому, що Pod Redis має [restartPolicy](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core) `Always`.
 
 1. Отримайте доступ до оболонки в перезапущеному контейнері:
 
@@ -112,8 +112,8 @@ weight: 80
 
 ## {{% heading "whatsnext" %}}
 
-- Дивіться [Volume](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
+- Дивіться [Volume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core).
 
-- Дивіться [Pod](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).
+- Дивіться [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core).
 
 - Крім локального сховища на диску, яке надає `emptyDir`, Kubernetes підтримує багато різних рішень для мережевого сховища, включаючи PD на GCE та EBS на EC2, які бажані для критичних даних та будуть обробляти деталі, такі як монтування та розмонтування пристроїв на вузлах. Дивіться [Volumes](/uk/docs/concepts/storage/volumes/) для отримання додаткової інформації.

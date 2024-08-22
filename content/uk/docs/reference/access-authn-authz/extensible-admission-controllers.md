@@ -48,14 +48,14 @@ weight: 45
 
 ### Розгортання служби вебхуків допуску {#deploy-an-admission-webhook-service}
 
-Сервер вебхуків у е2е-тесті розгортається в кластері Kubernetes за допомогою [API deployment](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deployment-v1-apps). Тест також створює [службу](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core) як фронтенд сервера вебхуків. Дивіться [код](https://github.com/kubernetes/kubernetes/blob/v1.22.0/test/e2e/apimachinery/webhook.go#L748).
+Сервер вебхуків у е2е-тесті розгортається в кластері Kubernetes за допомогою [API deployment](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#deployment-v1-apps). Тест також створює [службу](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core) як фронтенд сервера вебхуків. Дивіться [код](https://github.com/kubernetes/kubernetes/blob/v1.22.0/test/e2e/apimachinery/webhook.go#L748).
 
 Ви також можете розгортати свої вебхуки поза кластером. Вам потрібно буде оновити відповідно ваші конфігурації вебхуків.
 
 ### Налаштування вебхуків допуску на льоту {#configure-admission-webhooks-on-the-fly}
 
 Ви можете динамічно налаштовувати, які ресурси підлягають обробки яким вебхукам допуску через
-[ValidatingWebhookConfiguration](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#validatingwebhookconfiguration-v1-admissionregistration-k8s-io) або [MutatingWebhookConfiguration](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#mutatingwebhookconfiguration-v1-admissionregistration-k8s-io).
+[ValidatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#validatingwebhookconfiguration-v1-admissionregistration-k8s-io) або [MutatingWebhookConfiguration](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#mutatingwebhookconfiguration-v1-admissionregistration-k8s-io).
 
 Приклад `ValidatingWebhookConfiguration`, конфігурація модифікуючого вебхуку подібна. Дивіться розділ [конфігурації вебхуку](#webhook-configuration) для деталей про кожне поле конфігурації.
 
@@ -354,7 +354,7 @@ request:
 }
 ```
 
-При відхиленні запиту вебхук може налаштувати HTTP-код та повідомлення, яке повертається користувачеві, використовуючи поле `status`. Вказаний об’єкт статусу повертається користувачеві. Див. [Довідник API](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#status-v1-meta) для деталей про тип `status`. Приклад відповіді для заборони запиту з налаштуванням HTTP-коду та повідомлення, яке буде представлено користувачеві:
+При відхиленні запиту вебхук може налаштувати HTTP-код та повідомлення, яке повертається користувачеві, використовуючи поле `status`. Вказаний об’єкт статусу повертається користувачеві. Див. [Довідник API](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#status-v1-meta) для деталей про тип `status`. Приклад відповіді для заборони запиту з налаштуванням HTTP-коду та повідомлення, яке буде представлено користувачеві:
 
 ```json
 {

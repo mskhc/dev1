@@ -1497,29 +1497,11 @@ HPAControllerConfiguration містить елементи, що описуют�
         </tr>
         <tr>
             <td>
-                <code>HorizontalPodAutoscalerUpscaleForbiddenWindow</code> <b>[Обовʼязкове]</b><br/>
-                <a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
-            </td>
-            <td>
-                <p>HorizontalPodAutoscalerUpscaleForbiddenWindow — період, після якого дозволено наступний масштабування вгору.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <code>HorizontalPodAutoscalerDownscaleStabilizationWindow</code> <b>[Обовʼязкове]</b><br/>
                 <a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
             </td>
             <td>
                 <p>HorizontalPodAutoscalerDownscaleStabilizationWindow — період, протягом якого автомасштабувальник буде переглядати і не зменшувати кількість Podʼів нижче будь-яких рекомендацій, зроблених протягом цього періоду.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <code>HorizontalPodAutoscalerDownscaleForbiddenWindow</code> <b>[Обовʼязкове]</b><br/>
-                <a href="https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"><code>meta/v1.Duration</code></a>
-            </td>
-            <td>
-                <p>HorizontalPodAutoscalerDownscaleForbiddenWindow — період, після якого дозволено наступне масштабування вниз.</p>
             </td>
         </tr>
         <tr>
@@ -1824,24 +1806,6 @@ PersistentVolumeBinderControllerConfiguration містить елементи, �
             </td>
             <td>
                 <p>volumeConfiguration містить конфігурацію для функцій, повʼязаних з томами.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <code>VolumeHostCIDRDenylist</code> <b>[Обовʼязкове]</b><br/>
-                <code>[]string</code>
-            </td>
-            <td>
-                <p>ЗАСТАРІЛО: VolumeHostCIDRDenylist — список CIDR, які повинні бути не доступні контролеру з втулка.</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <code>VolumeHostAllowLocalLoopback</code> <b>[Обовʼязкове]</b><br/>
-                <code>bool</code>
-            </td>
-            <td>
-                <p>ЗАСТАРІЛО: VolumeHostAllowLocalLoopback вказує, чи дозволено локальне зворотне зʼєднання (127.0.0.1 тощо) з втулків.</p>
             </td>
         </tr>
     </tbody>

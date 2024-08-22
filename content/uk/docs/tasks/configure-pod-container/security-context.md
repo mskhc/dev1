@@ -31,7 +31,7 @@ weight: 110
 
 * `readOnlyRootFilesystem`: Підключає кореневу файлову систему контейнера тільки для читання.
 
-Вищевказані пункти не є повним набором налаштувань контексту безпеки,докладну інформацію див. у [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core) для повного переліку.
+Вищевказані пункти не є повним набором налаштувань контексту безпеки,докладну інформацію див. у [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core) для повного переліку.
 
 ## {{% heading "prerequisites" %}}
 
@@ -41,7 +41,7 @@ weight: 110
 
 ## Встановлення контексту безпеки для Pod {#set-the-security-context-for-a-pod}
 
-Щоб вказати параметри безпеки для Podʼа, включіть поле `securityContext` в специфікацію Pod. Поле `securityContext` є обʼєктом [PodSecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core). Параметри безпеки, які ви вказуєте для Pod, застосовуються до всіх контейнерів в Podʼі. Ось файл конфігурації для Podʼа з `securityContext` та томом `emptyDir`:
+Щоб вказати параметри безпеки для Podʼа, включіть поле `securityContext` в специфікацію Pod. Поле `securityContext` є обʼєктом [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core). Параметри безпеки, які ви вказуєте для Pod, застосовуються до всіх контейнерів в Podʼі. Ось файл конфігурації для Podʼа з `securityContext` та томом `emptyDir`:
 
 {{% code_sample file="pods/security/security-context.yaml" %}}
 
@@ -321,7 +321,7 @@ securityContext:
 
 ## Встановлення контексту безпеки для контейнера {#set-the-security-context-for-a-container}
 
-Для вказання параметрів безпеки для контейнера, включіть поле `securityContext` в маніфест контейнера. Поле `securityContext` є обʼєктом [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core). Параметри безпеки, які ви вказуєте для контейнера, застосовуються тільки до окремого контейнера, і вони перевизначають налаштування, зроблені на рівні Podʼа, коли є перетин. Налаштування контейнера не впливають на томи Podʼів.
+Для вказання параметрів безпеки для контейнера, включіть поле `securityContext` в маніфест контейнера. Поле `securityContext` є обʼєктом [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core). Параметри безпеки, які ви вказуєте для контейнера, застосовуються тільки до окремого контейнера, і вони перевизначають налаштування, зроблені на рівні Podʼа, коли є перетин. Налаштування контейнера не впливають на томи Podʼів.
 
 Ось файл конфігурації для Podʼа з одним контейнером. Як Pod, так і контейнер мають поле `securityContext`:
 
@@ -478,7 +478,7 @@ CapEff:	00000000aa0435fb
 
 ## Встановлення профілю Seccomp для контейнера {#set-the-seccomp-profile-for-a-container}
 
-Щоб встановити профіль Seccomp для контейнера, включіть поле `seccompProfile` в розділ `securityContext` вашого маніфесту Pod або контейнера. Поле `seccompProfile` є обʼєктом [SeccompProfile](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#seccompprofile-v1-core), який складається з `type` та `localhostProfile`. Допустимі варіанти для `type` включають `RuntimeDefault`, `Unconfined` та `Localhost`. `localhostProfile` повинен бути встановлений лише якщо `type: Localhost`. Він вказує шлях до попередньо налаштованого профілю на вузлі, повʼязаного з розташуванням налаштованого профілю Seccomp kubelet (налаштованого за допомогою прапорця `--root-dir`).
+Щоб встановити профіль Seccomp для контейнера, включіть поле `seccompProfile` в розділ `securityContext` вашого маніфесту Pod або контейнера. Поле `seccompProfile` є обʼєктом [SeccompProfile](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#seccompprofile-v1-core), який складається з `type` та `localhostProfile`. Допустимі варіанти для `type` включають `RuntimeDefault`, `Unconfined` та `Localhost`. `localhostProfile` повинен бути встановлений лише якщо `type: Localhost`. Він вказує шлях до попередньо налаштованого профілю на вузлі, повʼязаного з розташуванням налаштованого профілю Seccomp kubelet (налаштованого за допомогою прапорця `--root-dir`).
 
 Ось приклад, який встановлює профіль Seccomp до стандартного профілю контейнера вузла:
 
@@ -501,7 +501,7 @@ securityContext:
 
 ## Налаштування профілю AppArmor для контейнера {#set-the-apparmor-profile-for-a-container}
 
-Щоб налаштувати профіль AppArmor для контейнера, включіть поле `appArmorProfile` в секцію `securityContext` вашого контейнера. Поле `appArmorProfile` є [обʼєктом AppArmorProfile](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#apparmorprofile-v1-core), що складається з `type` та `localhostProfile`. Дійсні опції для `type` включають `RuntimeDefault` (стандартно), `Unconfined` і `Localhost`. `localhostProfile` слід встановлювати тільки якщо `type` є `Localhost`. Це вказує на назву попередньо налаштованого профілю на вузлі. Профіль повинен бути завантажений на всіх вузлах, які підходять для Podʼа, оскільки ви не знаєте, де буде розгорнуто Pod. Підходи до налаштування власних профілів обговорюються в [Налаштування вузлів з профілями](/uk/docs/tutorials/security/apparmor/#setting-up-nodes-with-profiles).
+Щоб налаштувати профіль AppArmor для контейнера, включіть поле `appArmorProfile` в секцію `securityContext` вашого контейнера. Поле `appArmorProfile` є [обʼєктом AppArmorProfile](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#apparmorprofile-v1-core), що складається з `type` та `localhostProfile`. Дійсні опції для `type` включають `RuntimeDefault` (стандартно), `Unconfined` і `Localhost`. `localhostProfile` слід встановлювати тільки якщо `type` є `Localhost`. Це вказує на назву попередньо налаштованого профілю на вузлі. Профіль повинен бути завантажений на всіх вузлах, які підходять для Podʼа, оскільки ви не знаєте, де буде розгорнуто Pod. Підходи до налаштування власних профілів обговорюються в [Налаштування вузлів з профілями](/uk/docs/tutorials/security/apparmor/#setting-up-nodes-with-profiles).
 
 Примітка: Якщо `containers[*].securityContext.appArmorProfile.type` явно встановлено на `RuntimeDefault`, то Pod не буде допущено, якщо AppArmor не включено на вузлі. Однак, якщо `containers[*].securityContext.appArmorProfile.type` не зазначено, то стандартне значення (що також є `RuntimeDefault`) буде застосовано тільки якщо вузол має увімкнений AppArmor. Якщо вузол має вимкнений AppArmor, Pod буде допущено, але контейнер не буде обмежено профілем `RuntimeDefault`.
 
@@ -533,7 +533,7 @@ containers:
 
 ## Призначення міток SELinux контейнеру {#assign-selinux-labels-to-a-container}
 
-Щоб призначити мітки SELinux контейнеру, включіть поле `seLinuxOptions` в розділ `securityContext` вашого маніфесту Podʼа або контейнера. Поле `seLinuxOptions` є обʼєктом [SELinuxOptions](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#selinuxoptions-v1-core). Ось приклад, який застосовує рівень SELinux:
+Щоб призначити мітки SELinux контейнеру, включіть поле `seLinuxOptions` в розділ `securityContext` вашого маніфесту Podʼа або контейнера. Поле `seLinuxOptions` є обʼєктом [SELinuxOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#selinuxoptions-v1-core). Ось приклад, який застосовує рівень SELinux:
 
 ```yaml
 ...
@@ -637,8 +637,8 @@ kubectl delete pod security-context-demo-4
 
 ## {{% heading "whatsnext" %}}
 
-* [PodSecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)
-* [SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
+* [PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)
+* [SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)
 * [Посібник з налаштування втулків CRI](https://github.com/containerd/containerd/blob/main/docs/cri/config.md)
 * [Документ проєктування контекстів безпеки](https://git.k8s.io/design-proposals-archive/auth/security_context.md)
 * [Документ проєктування управління власністю](https://git.k8s.io/design-proposals-archive/storage/volume-ownership-management.md)

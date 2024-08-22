@@ -122,4 +122,4 @@ kubectl create --edit -f /tmp/srv.yaml
 * [Імперативне керування обʼєктами Kubernetes за допомогою файлів конфігурації](/uk/docs/tasks/manage-kubernetes-objects/imperative-config/)
 * [Декларативне керування обʼєктами Kubernetes за допомогою файлів конфігурації](/uk/docs/tasks/manage-kubernetes-objects/declarative-config/)
 * [Довідник команд Kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
-* [Довідник API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

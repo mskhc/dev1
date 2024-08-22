@@ -64,11 +64,25 @@ kubectl kustomize https://github.com/kubernetes-sigs/kustomize.git/examples/hell
             <td style="line-height: 130%; word-wrap: break-word;"><p>список змінних оточення, які будуть використовуватися функціями</p></td>
         </tr>
         <tr>
+            <td colspan="2">--helm-api-versions strings</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Версії Kubernetes api, що використовуються Helm для Capabilities.APIVersions</p></td>
+        </tr>
+        <tr>
             <td colspan="2">--helm-command string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: "helm"</td>
         </tr>
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>команда helm (шлях до виконавчого файлу)</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--helm-kube-version string</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Версія Kubernetes, що використовується Helm для Capabilities.KubeVersion</p></td>
         </tr>
         <tr>
             <td colspan="2">-h, --help</td>
@@ -171,20 +185,6 @@ kubectl kustomize https://github.com/kubernetes-sigs/kustomize.git/examples/hell
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

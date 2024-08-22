@@ -1083,7 +1083,7 @@ shutdownGracePeriodSeconds: 30</li>
 <li>Дублікати, той самий вузол NUMA і тип пам’яті, але з іншим значенням.</li>
 <li>нульові обмеження для будь-якого типу памʼяті.</li>
 <li>Ідентифікатори вузлів NUMAs, які не існують на машині.</li>
-<li>типи пам’яті, крім пам’яті та hugepages-&lt;size&gt;</li>
+<li>типи пам’яті, крім пам’яті та hugepages-<!-- raw HTML omitted --></li>
 </ol>
 <p>Стандартно: nil</p>
 </td>
@@ -1120,7 +1120,7 @@ shutdownGracePeriodSeconds: 30</li>
 </td>
 </tr>
 <tr><td><code>registerWithTaints</code><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p>registerWithTaints — це масив "taints" (міток) для додавання до обʼєкта вузла під час реєстрації kubelet. Набирає чинності лише тоді, коли параметр registerNode встановлено в значення true і під час початкової реєстрації вузла. Стандартно: nil</p>
@@ -1154,7 +1154,6 @@ shutdownGracePeriodSeconds: 30</li>
 </td>
 <td>
    <p>ContainerRuntimeEndpoint є точкою доступу середовища виконання контейнерів. В Linux підтримуються Unix Domain Sockets, а у Windows підтримуються точки npipe та tcp. Приклади: 'unix:///path/to/runtime.sock', 'npipe:////./pipe/runtime'</p>
-
 </td>
 </tr>
 <tr><td><code>imageServiceEndpoint</code><br/>
@@ -1162,7 +1161,13 @@ shutdownGracePeriodSeconds: 30</li>
 </td>
 <td>
    <p>ImageServiceEndpoint є точкою доступу сервісу контейнерних образів. Unix Domain Socket підтримуються в Linux, а npipe та tcp точки підтримуються у Windows. Приклади: 'unix:///path/to/runtime.sock', 'npipe:////./pipe/runtime'. Якщо не вказано, використовується значення з containerRuntimeEndpoint.</p>
-
+</td>
+</tr>
+<tr><td><code>failCgroupV1</code><br/>
+<code>bool</code>
+</td>
+<td>
+   <p>FailCgroupV1 забороняє запуск kubelet на хостах, які використовують cgroup v1. Стандартно цей параметр має значення false, що означає, що kubelet дозволяється запускати на хостах cgroup v1, якщо цей параметр явно не ввімкнено. Стандартно: false</p>
 </td>
 </tr>
 </tbody>
@@ -1180,7 +1185,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
 <tr><td><code>kind</code><br/>string</td><td><code>SerializedNodeConfigSource</code></td></tr>
     
 <tr><td><code>source</code><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#nodeconfigsource-v1-core"><code>core/v1.NodeConfigSource</code></a>
 </td>
 <td>
    <p>source є джерелом, яке ми серіалізуємо.</p>
@@ -1475,7 +1480,7 @@ SerializedNodeConfigSource дозволяє серіалізувати v1.NodeCo
    <span class="text-muted">Номер NUMA вузла, для якого задається резервування памʼяті.</span></td>
 </tr>
 <tr><td><code>limits</code> <b>[Обовʼязково]</b><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a>
 </td>
 <td>
    <span class="text-muted">Список ресурсів для резервування, які визначають обмеження памʼяті.</span></td>

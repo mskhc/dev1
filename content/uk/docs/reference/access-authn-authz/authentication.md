@@ -380,7 +380,7 @@ jwt:
 
 - Вираз правила валідації користувача
 
-  `jwt.userValidationRules[i].expression` представляє вираз, який буде оцінений CEL. Вирази CEL мають доступ до вмісту `userInfo`, організованого у змінну CEL `user`. Зверніться до [UserInfo](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}//#userinfo-v1-authentication-k8s-io) API документації для отримання схеми `user`.
+  `jwt.userValidationRules[i].expression` представляє вираз, який буде оцінений CEL. Вирази CEL мають доступ до вмісту `userInfo`, організованого у змінну CEL `user`. Зверніться до [UserInfo](/docs/reference/generated/kubernetes-api/{{< param "version" >}}//#userinfo-v1-authentication-k8s-io) API документації для отримання схеми `user`.
 
 - Вираз зіставлення твердження
 

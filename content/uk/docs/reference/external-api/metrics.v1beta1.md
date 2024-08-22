@@ -26,12 +26,12 @@ NodeMetrics встановлює метрики використання рес�
 <tbody>
 <tr><td><code>apiVersion</code><br/>string</td><td><code>metrics.k8s.io/v1beta1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>NodeMetrics</code></td></tr>
-<tr><td><code>metadata</code><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a></td>
+<tr><td><code>metadata</code><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a></td>
 <td>
    <p>Стандартні метадані обʼєкта. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</p>
    Звіряйтесь з документацією Kubernetes API для полів <code>metadata</code>.</td>
 </tr>
-<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
+<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
 <td>
    <p>Наступні поля визначають інтервал часу, з якого метрики були зібрані, з інтервалу [Timestamp-Window, Timestamp].</p>
 </td>
@@ -40,7 +40,7 @@ NodeMetrics встановлює метрики використання рес�
 <td>
    <span class="text-muted">Опис відсутній.</span></td>
 </tr>
-<tr><td><code>usage</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a></td>
+<tr><td><code>usage</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a></td>
 <td>
    <p>Використання памʼяті — це робочий набір памʼяті.</p>
 </td>
@@ -57,7 +57,7 @@ NodeMetricsList — це список NodeMetrics.
 <tbody>
 <tr><td><code>apiVersion</code><br/>string</td><td><code>metrics.k8s.io/v1beta1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>NodeMetricsList</code></td></tr>
-<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
+<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
 <td>
    <p>Стандартні метадані списку. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</p>
 </td>
@@ -83,12 +83,12 @@ PodMetrics встановлює метрики використання ресу
 <tbody>
 <tr><td><code>apiVersion</code><br/>string</td><td><code>metrics.k8s.io/v1beta1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>PodMetrics</code></td></tr>
-<tr><td><code>metadata</code><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a></td>
+<tr><td><code>metadata</code><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#objectmeta-v1-meta"><code>meta/v1.ObjectMeta</code></a></td>
 <td>
    <p>Стандартні метадані обʼєкта. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</p>
    Звіряйтесь з документацією Kubernetes API для полів <code>metadata</code>.</td>
 </tr>
-<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
+<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
 <td>
    <p>Наступні поля визначають інтервал часу, з якого метрики були зібрані, з інтервалу [Timestamp-Window, Timestamp].</p>
 </td>
@@ -114,7 +114,7 @@ PodMetricsList — це список PodMetrics.
 <tbody>
 <tr><td><code>apiVersion</code><br/>string</td><td><code>metrics.k8s.io/v1beta1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>PodMetricsList</code></td></tr>
-<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
+<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
 <td>
    <p>Стандартні метадані списку. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</p>
 </td>
@@ -143,7 +143,7 @@ ContainerMetrics встановлює метрики використання р
    <p>Назва контейнера відповідає тій, що з pod.spec.containers.</p>
 </td>
 </tr>
-<tr><td><code>usage</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a></td>
+<tr><td><code>usage</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#resourcelist-v1-core"><code>core/v1.ResourceList</code></a></td>
 <td>
    <p>Використання памʼяті — це робочий набір памʼяті.</p>
 </td>

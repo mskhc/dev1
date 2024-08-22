@@ -89,4 +89,4 @@ args: ["-c", "while true; do echo hello; sleep 10;done"]
 
 * Дізнайтеся більше про [налаштування Podʼів та контейнерів](/uk/docs/tasks/).
 * Дізнайтеся більше про [виконання команд у контейнері](/uk/docs/tasks/debug/debug-application/get-shell-running-container/).
-* Дивіться [Контейнер](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).
+* Дивіться [Контейнер](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).

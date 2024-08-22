@@ -67,8 +67,14 @@ AuthenticationConfiguration надає версійні налаштування
 &quot;iss&quot;: &quot;https://issuer.example.com&quot;,
 &quot;aud&quot;: [&quot;audience&quot;],
 &quot;exp&quot;: 1234567890,
-&quot;&lt;username claim&gt;&quot;: &quot;username&quot;
+&quot;<!-- raw HTML omitted -->&quot;: &quot;username&quot;
 }</code></pre></p></td>
+        </tr>
+        <tr>
+            <td><code>anonymous</code> <b>[Обовʼязково]</b><br/>
+                <a href="#apiserver-k8s-io-v1beta1-AnonymousAuthConfig"><code>AnonymousAuthConfig</code></a>
+            </td>
+            <td><p>Якщо присутній --anonymous-auth не повинен бути встановлений</p></td>
         </tr>
     </tbody>
 </table>
@@ -145,6 +151,52 @@ TracingConfiguration надає версійні налаштування для
     </tbody>
 </table>
 
+## `AnonymousAuthCondition` {#apiserver-k8s-io-v1beta1-AnonymousAuthCondition}
+
+**З’являється в:**
+
+- [AnonymousAuthConfig](#apiserver-k8s-io-v1beta1-AnonymousAuthConfig)
+
+AnonymousAuthCondition описує стан, за якого анонімні автентифікації мають бути увімкнені.
+
+<table class="table">
+    <thead><tr><th width="30%">Поле</th><th>Опис</th></tr></thead>
+    <tbody>
+        <tr>
+            <td><code>path</code> <b>[Обовʼязково]</b><br/>
+                <code>string</code>
+            </td>
+            <td><p>Шлях для якого увімкнено анонімну автентифікацію.</p></td>
+        </tr>
+    </tbody>
+</table>
+
+## `AnonymousAuthConfig`{#apiserver-k8s-io-v1beta1-AnonymousAuthConfig}
+
+**З’являється в:**
+
+- [AuthenticationConfiguration](#apiserver-k8s-io-v1beta1-AuthenticationConfiguration)
+
+AnonymousAuthConfig надає конфігурацію для анонімного автентифікатора.
+
+<table class="table">
+    <thead><tr><th width="30%">Поле</th><th>Опис</th></tr></thead>
+    <tbody>
+        <tr>
+            <td><code>enabled</code> <b>[Обовʼязково]</b><br/>
+                <code>bool</code>
+            </td>
+            <td><span class="text-muted">Опис не надано.</span></td>
+        </tr>
+        <tr>
+            <td><code>conditions</code> <b>[Обовʼязково]</b><br/>
+                <a href="#apiserver-k8s-io-v1beta1-AnonymousAuthCondition"><code>[]AnonymousAuthCondition</code></a>
+            </td>
+            <td><p>Якщо встановлено, анонімна автентифікація дозволена, тільки якщо запит відповідає одній з умов.</p></td>
+        </tr>
+    </tbody>
+</table>
+
 ## `AudienceMatchPolicyType` {#apiserver-k8s-io-v1beta1-AudienceMatchPolicyType}
 
 (Аліас  `string`)
@@ -200,8 +252,8 @@ ClaimMappings надає налаштування для мапінгу claims.
             <td><code>username</code> <b>[Обовʼязково]</b><br/>
                 <a href="#apiserver-k8s-io-v1beta1-PrefixedClaimOrExpression"><code>PrefixedClaimOrExpression</code></a>
             </td>
-            <td><p>username представляє опцію для атрибуту username. Значення claim має бути одним рядком. Те ж саме, що й прапори --oidc-username-claim та --oidc-username-prefix. Якщо встановлено username.expression, вираз повинен видавати значення рядка. Якщо username.expression використовує 'claims.email', тоді 'claims.email_verified' повинен використовуватися в username.expression або extra[&ast;].valueExpression або claimValidationRules[&ast;].expression. Приклад виразу правила валідації claims, який відповідає валідації, що автоматично застосовується, коли username.claim встановлено на 'email', — це 'claims.?email_verified.orValue(true)'.</p>
-            <p>У підході на основі прапорів, прапорці --oidc-username-claim та --oidc-username-prefix є необовʼязковими. Якщо --oidc-username-claim не встановлено, стандартне значення — &quot;sub&quot;. Для конфігурації автентифікації стандартне значення для claim або prefix відсутні. Claim та prefix повинні бути встановлені явно. Для claim, якщо прапорець --oidc-username-claim не було встановлено за допомогою старого підходу, налаштуйте username.claim=&quot;sub&quot; у конфігурації автентифікації. Для prefix: (1) --oidc-username-prefix=&quot;-&quot;, префікс не додавався до імені користувача. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;&quot; (2) --oidc-username-prefix=&quot;&quot; та  --oidc-username-claim != &quot;email&quot;, префікс був &quot;&lt;значення --oidc-issuer-url&gt;#&quot;. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;&lt;значення issuer.url&gt;#&quot; (3) --oidc-username-prefix=&quot;&lt;значення&gt;&quot;. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;&lt;значення&gt;&quot;</p></td>
+            <td><p>username представляє опцію для атрибуту username. Значення claim має бути одним рядком. Те ж саме, що й прапори --oidc-username-claim та --oidc-username-prefix. Якщо встановлено username.expression, вираз повинен видавати значення рядка. Якщо username.expression використовує 'claims.email', тоді 'claims.email_verified' повинен використовуватися в username.expression або extra[<em>].valueExpression or claimValidationRules[</em>].expression. Приклад виразу правила валідації claims, який відповідає валідації, що автоматично застосовується, коли username.claim встановлено на 'email', — це 'claims.?email_verified.orValue(true)'.</p>
+            <p>У підході на основі прапорів, прапорці --oidc-username-claim та --oidc-username-prefix є необовʼязковими. Якщо --oidc-username-claim не встановлено, стандартне значення — &quot;sub&quot;. Для конфігурації автентифікації стандартне значення для claim або prefix відсутні. Claim та prefix повинні бути встановлені явно. Для claim, якщо прапорець --oidc-username-claim не було встановлено за допомогою старого підходу, налаштуйте username.claim=&quot;sub&quot; у конфігурації автентифікації. Для prefix: (1) --oidc-username-prefix=&quot;-&quot;, префікс не додавався до імені користувача. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;&quot; (2) --oidc-username-prefix=&quot;&quot; та  --oidc-username-claim != &quot;email&quot;, префікс був &quot;&lt;значення --oidc-issuer-url&gt;#&quot;. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;<!-- raw HTML omitted -->#&quot; (3) --oidc-username-prefix=&quot;<!-- raw HTML omitted -->&quot;. Для такої ж поведінки за допомогою конфігурації автентифікації, встановіть username.prefix=&quot;<!-- raw HTML omitted -->&quot;</p></td>
         </tr>
         <tr>
             <td><code>groups</code><br/>

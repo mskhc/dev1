@@ -88,6 +88,14 @@ kubectl debug node/mynode -it --image=busybox
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Створіює копію цільового Pod з цією назвою.</p></td>
         </tr>
+        </tr>
+        <tr>
+            <td colspan="2">--custom string</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до JSON або YAML-файлу, що містить часткову специфікацію контейнера для налаштування вбудованих профілів налагодження.</p></td>
+        </tr>
         <tr>
             <td colspan="2">--env stringToString&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: []</td>
         </tr>
@@ -122,6 +130,49 @@ kubectl debug node/mynode -it --image=busybox
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Політика отримання образів для контейнера. Якщо залишити порожнім, це значення не буде вказано клієнтом і буде стандартно визначене сервером.</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-annotations</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, зберігати оригінальні анотації p
+            Podʼів (цей прапорець працює лише при використанні '--copy-to').</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-init-containers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default: true</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Запустити ініціалізаційні контейнери для pod. Стандартно дорівнює true (цей прапорець працює лише у випадку використання з '--copy-to').</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-labels</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, зберігати оригінальні мітки Podʼів (цей прапорець працює лише при використанні '--copy-to').</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-liveness</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, зберегти оригінальні проби життєздатності Podʼа. (Цей прапорець працює лише при використанні '--copy-to').</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-readiness</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, зберегти оригінальні проби готовності Podʼа. (Цей прапорець працює лише при використанні '--copy-to').</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--keep-startup</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, зберігати оригінальні проби запуску (цей прапорець працює лише при використанні '--copy-to').</p></td>
         </tr>
         <tr>
             <td colspan="2">--profile string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: "legacy"</td>
@@ -245,20 +296,6 @@ kubectl debug node/mynode -it --image=busybox
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

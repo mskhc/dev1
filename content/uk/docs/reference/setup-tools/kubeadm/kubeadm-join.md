@@ -13,7 +13,7 @@ weight: 30
 
 <!-- body -->
 
-{{< include "generated/kubeadm_join.md" >}}
+{{< include "generated/kubeadm_join/_index.md" >}}
 
 ### Процес приєднання {#join-workflow}
 

@@ -58,7 +58,7 @@ kube-apiserver \
 
 ### Як це працює під капотом {#how-it-works-under-the-hood}
 
-Коли API-сервер отримує запит ресурсу, він спочатку перевіряє, які API-сервери можуть обслуговувати затребуваний ресурс. Ця перевірка відбувається за допомогою внутрішнього [API зберігання версії](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}//#storageversioncondition-v1alpha1-internal-apiserver-k8s-io).
+Коли API-сервер отримує запит ресурсу, він спочатку перевіряє, які API-сервери можуть обслуговувати затребуваний ресурс. Ця перевірка відбувається за допомогою внутрішнього [API зберігання версії](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#storageversioncondition-v1alpha1-internal-apiserver-k8s-io).
 
 * Якщо ресурс відомий API-серверу, що отримав запит (наприклад, `GET /api/v1/pods/some-pod`), запит обробляється локально.
 

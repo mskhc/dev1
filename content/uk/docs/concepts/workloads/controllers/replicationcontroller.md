@@ -208,7 +208,7 @@ ReplicationController призначений бути базовим примі�
 
 ## Обʼєкт API {#api-object}
 
-ReplicationController є ресурсом верхнього рівня в Kubernetes REST API. Докладніша інформація про обʼєкт API може бути знайдена за посиланням: [Обʼєкт API ReplicationController](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replicationcontroller-v1-core).
+ReplicationController є ресурсом верхнього рівня в Kubernetes REST API. Докладніша інформація про обʼєкт API може бути знайдена за посиланням: [Обʼєкт API ReplicationController](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replicationcontroller-v1-core).
 
 ## Альтернативи ReplicationController {#alternatives-to-replicationcontroller}
 

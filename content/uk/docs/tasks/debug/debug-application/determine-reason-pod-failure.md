@@ -100,7 +100,7 @@ spec:
 
 ## {{% heading "whatsnext" %}}
 
-* Перегляньте поле `terminationMessagePath` в [Контейнері](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).
+* Перегляньте поле `terminationMessagePath` в [Контейнері](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core).
 * Перегляньте [ImagePullBackOff](/uk/docs/concepts/containers/images/#imagepullbackoff) в [Образах](/uk/docs/concepts/containers/images/).
 * Дізнайтеся про [отримання логів](/uk/docs/concepts/cluster-administration/logging/).
 * Дізнайтеся про [шаблони Go](https://pkg.go.dev/text/template).

@@ -20,4 +20,4 @@ short_description: >
 
 <!--more--> 
 
-[Життєвий цикл Podа](/uk/docs/concepts/workloads/pods/pod-lifecycle/) визначається станами або фазами Podʼа. Існує пʼять можливих фаз Podʼа: Pending, Running, Succeeded, Failed та Unknown. Високорівневий опис стану Podʼа знаходиться в полі `phase` [PodStatus](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podstatus-v1-core).
+[Життєвий цикл Podа](/uk/docs/concepts/workloads/pods/pod-lifecycle/) визначається станами або фазами Podʼа. Існує пʼять можливих фаз Podʼа: Pending, Running, Succeeded, Failed та Unknown. Високорівневий опис стану Podʼа знаходиться в полі `phase` [PodStatus](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podstatus-v1-core).

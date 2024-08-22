@@ -11,7 +11,7 @@ weight: 90
 ## kubeadm kubeconfig {#cmd-kubeconfig}
 
 {{< tabs name="tab-kubeconfig" >}}
-{{< tab name="overview" include="generated/kubeadm_kubeconfig.md" />}}
+{{< tab name="overview" include="generated/kubeadm_kubeconfig/_index.md" />}}
 {{< /tabs >}}
 
 ## kubeadm kubeconfig user {#cmd-kubeconfig-user}
@@ -19,5 +19,5 @@ weight: 90
 За допомогою цієї команди можна вивести файл kubeconfig для додаткового користувача.
 
 {{< tabs name="tab-kubeconfig-user" >}}
-{{< tab name="user" include="generated/kubeadm_kubeconfig_user.md" />}}
+{{< tab name="user" include="generated/kubeadm_kubeconfig/kubeadm_kubeconfig_user.md" />}}
 {{< /tabs >}}

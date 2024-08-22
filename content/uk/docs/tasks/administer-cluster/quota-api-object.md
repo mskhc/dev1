@@ -6,7 +6,7 @@ weight: 130
 
 <!-- overview -->
 
-Ця сторінка показує, як налаштувати квоти для обʼєктів API, включаючи PersistentVolumeClaims та Services. Квота обмежує кількість обʼєктів певного типу, які можуть бути створені в просторі імен. Ви вказуєте квоти в обʼєкті [ResourceQuota](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core).
+Ця сторінка показує, як налаштувати квоти для обʼєктів API, включаючи PersistentVolumeClaims та Services. Квота обмежує кількість обʼєктів певного типу, які можуть бути створені в просторі імен. Ви вказуєте квоти в обʼєкті [ResourceQuota](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcequota-v1-core).
 
 ## {{% heading "prerequisites" %}}
 

@@ -12,7 +12,7 @@ content_type: concept
 ## kubeadm reset phase {#cmd-reset-phase}
 
 {{< tabs name="tab-phase" >}}
-{{< tab name="phase" include="generated/kubeadm_reset_phase.md" />}}
+{{< tab name="phase" include="generated/kubeadm_reset/kubeadm_reset_phase.md" />}}
 {{< /tabs >}}
 
 ## kubeadm reset phase preflight {#cmd-reset-phase-preflight}
@@ -20,7 +20,7 @@ content_type: concept
 За допомогою цієї фази ви можете виконати передпольотну перевірку вузла, який скидається.
 
 {{< tabs name="tab-preflight" >}}
-{{< tab name="preflight" include="generated/kubeadm_reset_phase_preflight.md" />}}
+{{< tab name="preflight" include="generated/kubeadm_reset/kubeadm_reset_phase_preflight.md" />}}
 {{< /tabs >}}
 
 ## kubeadm reset phase remove-etcd-member {#cmd-reset-phase-remove-etcd-member}
@@ -28,7 +28,7 @@ content_type: concept
 За допомогою цієї фази ви можете вилучити члена etcd цього вузла панелі управління з кластера etcd.
 
 {{< tabs name="tab-remove-etcd-member" >}}
-{{< tab name="remove-etcd-member" include="generated/kubeadm_reset_phase_remove-etcd-member.md" />}}
+{{< tab name="remove-etcd-member" include="generated/kubeadm_reset/kubeadm_reset_phase_remove-etcd-member.md" />}}
 {{< /tabs >}}
 
 ## kubeadm reset phase cleanup-node {#cmd-reset-phase-cleanup-node}
@@ -36,7 +36,7 @@ content_type: concept
 За допомогою цієї фази ви можете виконати очищення на цьому вузлі.
 
 {{< tabs name="tab-cleanup-node" >}}
-{{< tab name="cleanup-node" include="generated/kubeadm_reset_phase_cleanup-node.md" />}}
+{{< tab name="cleanup-node" include="generated/kubeadm_reset/kubeadm_reset_phase_cleanup-node.md" />}}
 {{< /tabs >}}
 
 ## {{% heading "whatsnext" %}}

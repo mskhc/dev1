@@ -199,7 +199,7 @@ API Kubernetes (та код Go, який реалізує це API для Kubern
 
 Стандартно, Server-Side Apply обробляє власні ресурси користувачів як неструктуровані дані. Усі ключі розглядаються як поля структури, а всі списки вважаються атомарними.
 
-Якщо у визначенні CustomResourceDefinition міститься [схема](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}#jsonschemaprops-v1-apiextensions-k8s-io), яка містить анотації, визначені у попередньому розділі [Стратегія злиття](#merge-strategy), ці анотації будуть використовуватись під час злиття обʼєктів цього типу.
+Якщо у визначенні CustomResourceDefinition міститься [схема](/docs/reference/generated/kubernetes-api/{{< param "version" >}}#jsonschemaprops-v1-apiextensions-k8s-io), яка містить анотації, визначені у попередньому розділі [Стратегія злиття](#merge-strategy), ці анотації будуть використовуватись під час злиття обʼєктів цього типу.
 
 ### Сумісність при зміні топології {#compatibility-accross-topology-changes}
 

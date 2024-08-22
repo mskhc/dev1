@@ -10,7 +10,7 @@ no_list: true
 
 Показати один або декілька ресурсів.
 
-Виводить таблицю з найважливішою інформацією про вказані ресурси. Ви можете відфільтрувати список за допомогою селектора міток і прапорця `--selector`. Якщо потрібний тип ресурсу є простором назв, ви побачите результати лише у поточному просторі назв, якщо не вказати `--all-namespaces`.
+Виводить таблицю з найважливішою інформацією про вказані ресурси. Ви можете відфільтрувати список за допомогою селектора міток і прапорця `--selector`. Якщо потрібний тип ресурсу є простором назв, ви побачите результати лише у поточному просторі назв, якщо не вказати якийсь namespaces.
 
 Зазначивши виведення як "template" і надавши шаблон Go як значення прапорця `--template`, ви можете відфільтрувати атрибути отриманих ресурсів.
 
@@ -58,6 +58,12 @@ kubectl get rc/web service/frontend pods/web-pod-13je7
 
 # Вивести перелік субресурс 'status' для одного Pod
 kubectl get pod web-pod-13je7 --subresource status
+
+# Вивести перелік всіх deployments в namespace 'backend'
+kubectl get deployments.apps --namespace backend
+
+# Вивести перелік всіх pods пристуніх в усіх namespaces
+kubectl get pods --all-namespaces
 ```
 
 ## {{% heading "options" %}}
@@ -295,20 +301,6 @@ kubectl get pod web-pod-13je7 --subresource status
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

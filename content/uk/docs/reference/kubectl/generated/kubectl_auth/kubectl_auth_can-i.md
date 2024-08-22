@@ -25,8 +25,8 @@ kubectl auth can-i create pods --all-namespaces
 kubectl auth can-i list deployments.apps
 
 # Перевірити, чи може служюовий обліковий запис "foo" у просторі імен "dev" переглядати перелік Podʼів
-# у просторі імен "prod".
-# Ви повинні мати дозвіл на використання імперсонації для глобальної опції "--as".
+# у просторі імен "prod"
+# Ви повинні мати дозвіл на використання імперсонації для глобальної опції "--as"
 kubectl auth can-i list pods --as=system:serviceaccount:dev:foo -n prod
 
 # Перевірити, чи можу я виконувати всі дії в моєму поточному просторі імен ("*" означає все)
@@ -40,6 +40,9 @@ kubectl auth can-i get pods --subresource=log
 
 # Перевірити, чи можу я отримати доступ до URL /logs/
 kubectl auth can-i get /logs/
+
+# Перевірити, чи можу я затвердити certificates.k8s.io
+kubectl auth can-i approve certificates.k8s.io
 
 # Переглянути всі дозволені дії в просторі імен "foo"
 kubectl auth can-i --list --namespace=foo
@@ -154,20 +157,6 @@ kubectl auth can-i --list --namespace=foo
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

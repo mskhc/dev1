@@ -72,6 +72,6 @@ Kubernetes надсилає подію preStop лише тоді, коли Pod �
 
 ### Довідка {#reference}
 
-* [Життєвий цикл](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#lifecycle-v1-core)
-* [Контейнер](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
-* Дивіться `terminationGracePeriodSeconds` в [Spec Podʼа](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
+* [Життєвий цикл](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#lifecycle-v1-core)
+* [Контейнер](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
+* Дивіться `terminationGracePeriodSeconds` в [Spec Podʼа](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)

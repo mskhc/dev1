@@ -19,7 +19,7 @@ weight: 45
 
 Це бета-функція, її типово вимкнено.
 
-Якщо ви хочете протестувати функцію, поки вона бета, вам потрібно ввімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
+Якщо ви хочете протестувати функцію, поки вона бета, вам потрібно ввімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `VolumeAttributesClass` для kube-controller-manager, kube-scheduler та kube-apiserver. Використовуйте аргумент командного рядка `--feature-gates`:
 
 ```shell
 --feature-gates="...,VolumeAttributesClass=true"

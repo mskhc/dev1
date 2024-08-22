@@ -12,8 +12,7 @@ auto_generated: false
 - [AdmissionConfiguration](#apiserver-config-k8s-io-v1-AdmissionConfiguration)
 - [EncryptionConfiguration](#apiserver-config-k8s-io-v1-EncryptionConfiguration)
 
-## `AdmissionConfiguration`     {#apiserver-config-k8s-io-v1-AdmissionConfiguration}
-    
+## `AdmissionConfiguration` {#apiserver-config-k8s-io-v1-AdmissionConfiguration}
 
 <p>AdmissionConfiguration надає версійовану конфігурацію для контролерів допуску.</p>
 

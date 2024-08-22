@@ -118,7 +118,7 @@ AdmissionRequest описує атрибути доступу для запит�
         </tr>
         <tr>
             <td><code>userInfo</code> <b>[Обовʼязкове]</b><br/>
-                <a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#userinfo-v1-authentication-k8s-io"><code>authentication/v1.UserInfo</code></a>
+                <a href="/docs/reference/generated/kubernetes-api/v1.31/#userinfo-v1-authentication-k8s-io"><code>authentication/v1.UserInfo</code></a>
             </td>
             <td><p>UserInfo — це інформація про користувача, який виконує запит</p></td>
         </tr>
@@ -175,7 +175,7 @@ AdmissionResponse описує відповідь на перегляд дост
         </tr>
         <tr>
             <td><code>status</code><br/>
-                <a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#status-v1-meta"><code>meta/v1.Status</code></a>
+                <a href="/docs/reference/generated/kubernetes-api/v1.31/#status-v1-meta"><code>meta/v1.Status</code></a>
             </td>
             <td><p>Result містить додаткові деталі щодо причин відхилення запиту на перегляд доступу. Це поле НЕ враховується, якщо &quot;Allowed&quot; є &quot;true&quot;.</p></td>
         </tr>

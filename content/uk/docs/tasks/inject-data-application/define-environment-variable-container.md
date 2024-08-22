@@ -113,4 +113,4 @@ spec:
 
 * Дізнайтеся більше про [змінні середовища](/uk/docs/tasks/inject-data-application/environment-variable-expose-pod-information/).
 * Дізнайтеся про [використання secret як змінних середовища](/uk/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
-* Дивіться [EnvVarSource](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core).
+* Дивіться [EnvVarSource](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core).

@@ -735,7 +735,7 @@ Kubernetes не керує виділенням `externalIPs`; це відпов
 
 ## API Обʼєкт {#api-object}
 
-Сервіс — це ресурс верхнього рівня в Kubernetes REST API. Ви можете знайти більше деталей про [обʼєкт API Service](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core).
+Сервіс — це ресурс верхнього рівня в Kubernetes REST API. Ви можете знайти більше деталей про [обʼєкт API Service](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core).
 
 ## {{% heading "whatsnext" %}}
 

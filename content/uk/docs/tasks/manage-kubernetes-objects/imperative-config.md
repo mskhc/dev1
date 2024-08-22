@@ -27,7 +27,7 @@ weight: 40
 
 ## Як створювати обʼєкти {#how-to-create-objects}
 
-Ви можете використовувати `kubectl create -f` для створення обʼєкта з файлу конфігурації. Дивіться [Довідник API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/) для отримання деталей.
+Ви можете використовувати `kubectl create -f` для створення обʼєкта з файлу конфігурації. Дивіться [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/) для отримання деталей.
 
 * `kubectl create -f <filename|url>`
 
@@ -126,4 +126,4 @@ template:
 * [Управління обʼєктами Kubernetes за допомогою імперативних команд](/uk/docs/tasks/manage-kubernetes-objects/imperative-command/)
 * [Декларативне керування обʼєктами Kubernetes за допомогою файлів конфігурації](/uk/docs/tasks/manage-kubernetes-objects/declarative-config/)
 * [Довідник команд Kubectl](/uk/docs/reference/generated/kubectl/kubectl-commands/)
-* [Довідник API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)
+* [Довідник API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/)

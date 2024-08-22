@@ -50,7 +50,7 @@ kubeadm: легке розгортання захищеного кластера
         </tr>
         <tr>
             <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>[EXPERIMENTAL] Шлях до реальної кореневої файлової системи хоста.</p></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до реальної кореневої файлової системи хоста. Це призведе до зміни корення (chroot) kubeadm на вказаних шлях</p></td>
         </tr>
     </tbody>
 </table>

@@ -154,7 +154,7 @@ On branch master
 
 Попередній розділ показав, як редагувати вихідний файл і потім згенерувати декілька файлів, включаючи `api/openapi-spec/swagger.json` у репозиторії `kubernetes/kubernetes`. Файл `swagger.json` є файлом визначення OpenAPI, який використовується для генерації документації API.
 
-Тепер ви готові слідувати посібнику [Генерація довідкової документації для API Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-api/), щоб згенерувати [опубліковану довідкову документацію API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
+Тепер ви готові слідувати посібнику [Генерація довідкової документації для API Kubernetes](/uk/docs/contribute/generate-ref-docs/kubernetes-api/), щоб згенерувати [опубліковану довідкову документацію API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
 
 ## {{% heading "whatsnext" %}}
 

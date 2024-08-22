@@ -453,9 +453,9 @@ spec:
 
 ### Довідка {#reference}
 
-- [Secret](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#secret-v1-core)
-- [Volume](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core)
-- [Pod](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
+- [Secret](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#secret-v1-core)
+- [Volume](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#volume-v1-core)
+- [Pod](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#pod-v1-core)
 
 ## {{% heading "whatsnext" %}}
 

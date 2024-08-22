@@ -12,7 +12,7 @@ weight: 20
 ---
 
 <!-- огляд -->
-Ця сторінка показує, як встановити [власний ресурс](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+Ця сторінка показує, як встановити [власний ресурс](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 ## {{% heading "prerequisites" %}}
 
@@ -1773,6 +1773,6 @@ crontabs/my-new-cron-object   3s
 
 * Прочитайте про [власні ресурси](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
-* Дивіться [CustomResourceDefinition](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+* Дивіться [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 * Обслуговуйте [кілька версій](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) CustomResourceDefinition.

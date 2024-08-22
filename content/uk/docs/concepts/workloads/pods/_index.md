@@ -132,7 +132,7 @@ spec:
 
 Як зазначено в попередньому розділі, коли template Podʼа для ресурсу робочого навантаження змінюється, контролер створює нові Podʼи на основі оновленого template замість оновлення або латання наявних Podʼів.
 
-Kubernetes не забороняє вам керувати Pod напряму. Ви можете оновлювати деякі поля запущеного Pod, на місці. Однак операції оновлення Pod, такі як [`patch`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#patch-pod-v1-core) та [`replace`](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replace-pod-v1-core), мають деякі обмеження:
+Kubernetes не забороняє вам керувати Pod напряму. Ви можете оновлювати деякі поля запущеного Pod, на місці. Однак операції оновлення Pod, такі як [`patch`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#patch-pod-v1-core) та [`replace`](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#replace-pod-v1-core), мають деякі обмеження:
 
 * Більшість метаданих про Pod є незмінними. Наприклад, ви не можете змінити поля `namespace`, `name`, `uid` або `creationTimestamp`; поле `generation` є унікальним. Воно приймає лише оновлення, які збільшують поточне значення поля.
 * Якщо `metadata.deletionTimestamp` встановлено, новий запис не може бути доданий до списку `metadata.finalizers`.

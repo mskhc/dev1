@@ -10,7 +10,7 @@ weight: 20
 
 <!-- body -->
 
-{{< include "generated/kubeadm_init.md" >}}
+{{< include "generated/kubeadm_init/_index.md" >}}
 
 ### Процес Init {#init-workflow}
 

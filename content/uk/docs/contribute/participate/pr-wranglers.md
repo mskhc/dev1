@@ -88,10 +88,8 @@ SIG Docs [затверджувачі](/uk/docs/contribute/participate/roles-and-
 
 ### Як стати тіньовим відповідальним за PR {#become-a-shadow}
 
-- Якщо ви зацікавлені у тому, щоби стати тіньовим відповідальним за PR, будь ласка, відвідайте [сторінку Wiki PR Wrangler'ів](https://github.com/kubernetes/website/wiki/PR-Wranglers) щоб побачити графік управління PR на цей рік та зареєструватися.
+- Якщо ви зацікавлені у тому, щоби стати тіньовим відповідальним за PR, будь ласка, відвідайте [сторінку Wiki PR Wrangler'ів](https://github.com/kubernetes/website/wiki/PR-Wranglers), щоб побачити графік управління PR на цей рік та зареєструватися.
 
-- Члени організації Kubernetes можуть редагувати [сторінку Wiki PR Wrangler'ів](https://github.com/kubernetes/website/wiki/PR-Wranglers) та зареєструватися для підтримки поточного відповідального за PR на тиждень.
-
-- Інші можуть звернутися до [Slack-каналу #sig-docs](https://kubernetes.slack.com/messages/sig-docs) для запиту на участьт у підтриці відповідальних за PR на конкретний тиждень. Не соромтеся звертатися до Бреда Топола (`@bradtopol`) або одного з [співголів/лідерів SIG Docs](https://github.com/kubernetes/community/tree/master/sig-docs#leadership).
+- Інші можуть звернутися до [Slack-каналу #sig-docs](https://kubernetes.slack.com/messages/sig-docs) для запиту на участь у підтримці відповідальних за PR на конкретний тиждень. Не соромтеся звертатися до Бреда Топола (`@bradtopol`) або одного зі [співголів/лідерів SIG Docs](https://github.com/kubernetes/community/tree/master/sig-docs#leadership).
 
 - Після реєстрації на підтримку відповідального за PR, представте себе відповідальному за PR у [Kubernetes Slack](https://slack.k8s.io).

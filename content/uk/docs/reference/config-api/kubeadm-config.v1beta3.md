@@ -12,11 +12,11 @@ auto_generated: false
 Список змін з версії v1beta2:
 
 - Видалено застаріле поле "ClusterConfiguration.useHyperKubeImage". Kubeadm більше не підтримує образ hyperkube.
-- Поле "ClusterConfiguration.DNS.Type" було видалено, оскільки CoreDNS є єдиним типом DNS-сервера, який підтримується kubeadm.
+- Поле "ClusterConfiguration.dns.type" було видалено, оскільки CoreDNS є єдиним типом DNS-сервера, який підтримується kubeadm.
 - Додано теги "datapolicy" до полів, які містять секрети. Це призведе до того, що значення полів буде пропущено, коли структури API буде надруковано за допомогою klog.
-- Додано "InitConfiguration.SkipPhases", "JoinConfiguration.SkipPhases", щоб дозволити пропустити список фаз під час виконання команд kubeadm init/join.
-- Додано "InitConfiguration.NodeRegistration.ImagePullPolicy" та "JoinConfiguration.NodeRegistration.ImagePullPolicy", щоб дозволити вказати політику отримання образів під час kubeadm "init" та "join". Значення має бути одним з "Always", "Never" або "IfNotPresent". "IfNotPresent" — це стандартне значення, яке використовувалося до цього оновлення.
-- Додано "InitConfiguration.Patches.Directory", "JoinConfiguration.Patches.Directory", щоб дозволити користувачеві конфігурувати теку, з якої буде братися патч для компонентів, розгорнутих за допомогою kubeadm.
+- Додано "InitConfiguration.skipPhases", "JoinConfiguration.SkipPhases", щоб дозволити пропустити список фаз під час виконання команд kubeadm init/join.
+- Додано "InitConfiguration.nodeRegistration.imagePullPolicy" та "JoinConfiguration.nodeRegistration.imagePullPolicy", щоб дозволити вказати політику отримання образів під час kubeadm "init" та "join". Значення має бути одним з "Always", "Never" або "IfNotPresent". "IfNotPresent" — це стандартне значення, яке використовувалося до цього оновлення.
+- Додано "InitConfiguration.patches.directory", "JoinConfiguration.patches.directory", щоб дозволити користувачеві конфігурувати теку, з якої буде братися патч для компонентів, розгорнутих за допомогою kubeadm.
 - Перенесено API BootstrapToken* та повʼязані з ним утиліти з групи API "kubeadm" до нової групи "bootstraptoken". API kubeadm версії v1beta3 більше не містить структур BootstrapToken*.
 
 Міграція зі старих версій конфігурації kubeadm
@@ -304,7 +304,7 @@ BootstrapToken описує один bootstrap токен, збережений 
 </td>
 </tr>
 <tr><td><code>expires</code><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#time-v1-meta"><code>meta/v1.Time</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#time-v1-meta"><code>meta/v1.Time</code></a>
 </td>
 <td>
    <p><code>expires</code> вказує на мітку часу, коли цей токен закінчується. Стандартно встановлюється динамічно під час виконання на основі <code>ttl</code>. <code>expires</code> та <code>ttl</code> взаємовиключні.</p>
@@ -891,7 +891,7 @@ HostPathMount містить елементи, що описують томи, �
 </td>
 </tr>
 <tr><td><code>pathType</code><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#hostpathtype-v1-core"><code>core/v1.HostPathType</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#hostpathtype-v1-core"><code>core/v1.HostPathType</code></a>
 </td>
 <td>
    <p><code>pathType</code> — це тип <code>hostPath</code>.</p>
@@ -1073,7 +1073,7 @@ NodeRegistrationOptions містить поля, що стосуються ре�
 </td>
 </tr>
 <tr><td><code>taints</code> <b>[Обовʼязково]</b><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#taint-v1-core"><code>[]core/v1.Taint</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#taint-v1-core"><code>[]core/v1.Taint</code></a>
 </td>
 <td>
    <p><code>taints</code> вказує на taints, з якими обʼєкт Node API повинен бути зареєстрований. Якщо це поле не встановлено, тобто nil, воно буде стандартно з control-plane taint для вузлів control-plane. Якщо ви не хочете taint для вашого вузла control-plane, встановіть в це поле порожній список, тобто <code>taints: []</code> у YAML файлі. Це поле використовується виключно для реєстрації вузлів.</p>
@@ -1094,7 +1094,7 @@ NodeRegistrationOptions містить поля, що стосуються ре�
 </td>
 </tr>
 <tr><td><code>imagePullPolicy</code><br/>
-<a href="/uk/docs/reference/generated/kubernetes-api/v1.30/#pullpolicy-v1-core"><code>core/v1.PullPolicy</code></a>
+<a href="/docs/reference/generated/kubernetes-api/v1.31/#pullpolicy-v1-core"><code>core/v1.PullPolicy</code></a>
 </td>
 <td>
    <p><code>imagePullPolicy</code> вказує політику для витягування образів під час операцій kubeadm &quot;init&quot; та &quot;join&quot;. Значення цього поля повинно бути одне з &quot;Always&quot;, &quot;IfNotPresent&quot; або &quot;Never&quot;. Якщо це поле не встановлено, kubeadm стандартно встановить його в &quot;IfNotPresent&quot;, або витягне необхідні образи, якщо вони не присутні на хості.</p>

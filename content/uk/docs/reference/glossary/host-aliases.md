@@ -15,4 +15,4 @@ HostAliases — це зіставлення між IP-адресою та ім�
 
 <!--more-->
 
-[HostAliases](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#hostalias-v1-core) — це опціональний список імен хостів та IP-адрес, які будуть вставлені в файл hosts {{< glossary_tooltip text="Podʼа" term_id="pod" >}}, якщо вказано. Це є дійсним лише для Podʼів non-hostNetwork.
+[HostAliases](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#hostalias-v1-core) — це опціональний список імен хостів та IP-адрес, які будуть вставлені в файл hosts {{< glossary_tooltip text="Podʼа" term_id="pod" >}}, якщо вказано. Це є дійсним лише для Podʼів non-hostNetwork.

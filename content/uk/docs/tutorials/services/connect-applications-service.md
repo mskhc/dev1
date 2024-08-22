@@ -72,7 +72,7 @@ service/my-nginx exposed
 
 {{% code_sample file="service/networking/nginx-svc.yaml" %}}
 
-Ця специфікація створить Service, який буде спрямований на TCP порт 80 на будь-якому Podʼі з міткою `run: my-nginx` і відкриє його на абстрактному порті Service (`targetPort`: це порт, на якому контейнер приймає трафік, `port` — це абстрактний порт Service, який може бути будь-яким портом, що використовується іншими Podʼами для доступу до Service). Перегляньте [Service](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core) API обʼєкт, щоб побачити список підтримуваних полів у визначенні Service. Перевірте ваш Service:
+Ця специфікація створить Service, який буде спрямований на TCP порт 80 на будь-якому Podʼі з міткою `run: my-nginx` і відкриє його на абстрактному порті Service (`targetPort`: це порт, на якому контейнер приймає трафік, `port` — це абстрактний порт Service, який може бути будь-яким портом, що використовується іншими Podʼами для доступу до Service). Перегляньте [Service](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#service-v1-core) API обʼєкт, щоб побачити список підтримуваних полів у визначенні Service. Перевірте ваш Service:
 
 ```shell
 kubectl get svc my-nginx

@@ -129,7 +129,7 @@ spec:
 
 ### Життєвий цикл та PersistentVolumeClaim {#lifecycle-and-persistentvolumeclaim}
 
-Ключова концепція дизайну полягає в тому, що [параметри для вимог тому](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ephemeralvolumesource-v1-core) дозволені всередині джерела тому Podʼа. Підтримуються мітки, анотації та весь набір полів для PersistentVolumeClaim. Коли такий Pod створюється, контролер ефемерних томів створює фактичний обʼєкт PersistentVolumeClaim в тому ж просторі імен, що і Pod, та забезпечує видалення PersistentVolumeClaim
+Ключова концепція дизайну полягає в тому, що [параметри для вимог тому](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#ephemeralvolumesource-v1-core) дозволені всередині джерела тому Podʼа. Підтримуються мітки, анотації та весь набір полів для PersistentVolumeClaim. Коли такий Pod створюється, контролер ефемерних томів створює фактичний обʼєкт PersistentVolumeClaim в тому ж просторі імен, що і Pod, та забезпечує видалення PersistentVolumeClaim
 при видаленні Podʼа.
 
 Це викликає привʼязку та/або резервування тому, або негайно, якщо {{< glossary_tooltip text="StorageClass" term_id="storage-class" >}} використовує негайне звʼязування тому, або коли Pod тимчасово запланований на вузол (`WaitForFirstConsumer` volume binding mode). Останній варіант рекомендований для загальних ефемерних томів, оскільки тоді планувальник може вибрати відповідний вузол для Podʼа. При негайному звʼязуванні планувальник змушений вибрати вузол, який має доступ до тому, якщо він доступний.

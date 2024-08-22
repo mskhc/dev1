@@ -75,6 +75,13 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо значення true, дочекайтеся запуску Pod, а потім приєднайтеся до нього так, ніби було викликано команду 'kubectl attach ...'.  Стандартно має значення false, якщо не задано параметр '-i/--stdin', у цьому випадку значення буде true. За допомогою '--restart=Never' повертається код завершення процесу контейнера.</p></td>
         </tr>
         <tr>
+            <td colspan="2">--cascade string[="background"]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default: "background"</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Має бути &quot;background&quot;, &quot;orphan&quot; або &quot;foreground&quot;. Вибирає стратегію каскадного видалення для залежних елементів (наприклад, Pods, створених ReplicationController). Стандартно — background.</p></td>
+        </tr>
+        <tr>
             <td colspan="2">--command</td>
         </tr>
         <tr>
@@ -110,6 +117,27 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Імʼя менеджера, що використовується для відстеження права власності на поле.</p></td>
         </tr>
         <tr>
+            <td colspan="2">-f, --filename strings</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>імʼя файлу для заміни ресурсу.</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--force</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо true, негайно видалити ресурси з API і обійти належне видалення. Зверніть увагу, що негайне видалення деяких ресурсів може призвести до неузгодженості або втрати даних і потребує підтвердження.</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--grace-period int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default: -1</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Період часу в секундах, який дається ресурсу для належного завершення роботи. Ігнорується, якщо значення відʼємне. Встановлюється у 1 для негайного завершення роботи. Може бути встановлено у 0, тільки якщо --force має значення true (примусове видалення).</p></td>
+        </tr>
+        <tr>
             <td colspan="2">-h, --help</td>
         </tr>
         <tr>
@@ -129,6 +157,13 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Політика отримання образів для контейнера. Якщо залишити порожнім, це значення не буде вказано клієнтом і буде використано сервером стандартна поведінка.</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">-k, --kustomize string</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Обробити теку kustomization. Цей прапорець не можна використовувати разом з -f або -R.</p></td>
         </tr>
         <tr>
             <td colspan="2">-l, --labels string</td>
@@ -194,6 +229,13 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо true, не виводити повідомлення.</p></td>
         </tr>
         <tr>
+            <td colspan="2">-R, --recursive</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Рекурсивно обробити теку, вказану у -f, --filename. Корисно, якщо ви хочете керувати повʼязаними маніфестами, організованими в одній теці.</p></td>
+        </tr>
+        <tr>
             <td colspan="2">--restart string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: "Always"</td>
         </tr>
         <tr>
@@ -236,11 +278,25 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Рядок шаблону або шлях до файлу шаблону для використання з -o=go-template, -o=go-template-file. Формат шаблону — golang-шаблони [http://golang.org/pkg/text/template/#pkg-overview].</p></td>
         </tr>
         <tr>
+            <td colspan="2">--timeout duration</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Час очікування перед прийнятям рішення про відмову видалення, нуль означає визначення таймауту залежно від розміру обʼєкта</p></td>
+        </tr>
+        <tr>
             <td colspan="2">-t, --tty</td>
         </tr>
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Призначити TTY для контейнера в pod.</p></td>
+        </tr>
+        <tr>
+            <td colspan="2">--wait</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо true, очікувати, поки ресурси зникнуть, перш ніж повернутися.  Очікує фіналізаторів.</p></td>
         </tr>
     </tbody>
 </table>
@@ -301,20 +357,6 @@ kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

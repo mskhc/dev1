@@ -142,94 +142,87 @@ kube-proxy [flags]
          APIResponseCompression=true|false (BETA — default=true)<br/>
          APIServerIdentity=true|false (BETA — default=true)<br/>
          APIServerTracing=true|false (BETA — default=true)<br/>
-         APIServingWithRoutine=true|false (BETA — default=true)<br/>
+         APIServingWithRoutine=true|false (ALPHA — default=false)<br/>
          AllAlpha=true|false (ALPHA — default=false)<br/>
          AllBeta=true|false (BETA — default=false)<br/>
+         AnonymousAuthConfigurableEndpoints=true|false (ALPHA — default=false)<br/>
          AnyVolumeDataSource=true|false (BETA — default=true)<br/>
-         AppArmor=true|false (BETA — default=true)<br/>
-         AppArmorFields=true|false (BETA — default=true)<br/>
+         AuthorizeNodeWithSelectors=true|false (ALPHA — default=false)<br/>
+         AuthorizeWithSelectors=true|false (ALPHA — default=false)<br/>
          CPUManagerPolicyAlphaOptions=true|false (ALPHA — default=false)<br/>
          CPUManagerPolicyBetaOptions=true|false (BETA — default=true)<br/>
          CPUManagerPolicyOptions=true|false (BETA — default=true)<br/>
          CRDValidationRatcheting=true|false (BETA — default=true)<br/>
-         CSIMigrationPortworx=true|false (BETA — default=false)<br/>
+         CSIMigrationPortworx=true|false (BETA — default=true)<br/>
          CSIVolumeHealth=true|false (ALPHA — default=false)<br/>
          CloudControllerManagerWebhook=true|false (ALPHA — default=false)<br/>
          ClusterTrustBundle=true|false (ALPHA — default=false)<br/>
          ClusterTrustBundleProjection=true|false (ALPHA — default=false)<br/>
          ComponentSLIs=true|false (BETA — default=true)<br/>
-         ConsistentListFromCache=true|false (ALPHA — default=false)<br/>
+         ConcurrentWatchObjectDecode=true|false (BETA — default=false)<br/>
+         ConsistentListFromCache=true|false (BETA — default=true)<br/>
          ContainerCheckpoint=true|false (BETA — default=true)<br/>
          ContextualLogging=true|false (BETA — default=true)<br/>
+         CoordinatedLeaderElection=true|false (ALPHA — default=false)<br/>
          CronJobsScheduledAnnotation=true|false (BETA — default=true)<br/>
          CrossNamespaceVolumeDataSource=true|false (ALPHA — default=false)<br/>
          CustomCPUCFSQuotaPeriod=true|false (ALPHA — default=false)<br/>
-         CustomResourceFieldSelectors=true|false (ALPHA — default=false)<br/>
-         DevicePluginCDIDevices=true|false (BETA — default=true)<br/>
-         DisableCloudProviders=true|false (BETA — default=true)<br/>
-         DisableKubeletCloudCredentialProviders=true|false (BETA — default=true)<br/>
-         DisableNodeKubeProxyVersion=true|false (ALPHA — default=false)<br/>
+         CustomResourceFieldSelectors=true|false (BETA — default=true)<br/>
+         DRAControlPlaneController=true|false (ALPHA — default=false)<br/>
+         DisableAllocatorDualWrite=true|false (ALPHA — default=false)<br/>
+         DisableNodeKubeProxyVersion=true|false (BETA — default=true)<br/>
          DynamicResourceAllocation=true|false (ALPHA — default=false)<br/>
-         ElasticIndexedJob=true|false (BETA — default=true)<br/>
          EventedPLEG=true|false (ALPHA — default=false)<br/>
          GracefulNodeShutdown=true|false (BETA — default=true)<br/>
          GracefulNodeShutdownBasedOnPodPriority=true|false (BETA — default=true)<br/>
          HPAScaleToZero=true|false (ALPHA — default=false)<br/>
-         HonorPVReclaimPolicy=true|false (ALPHA — default=false)<br/>
+         HonorPVReclaimPolicy=true|false (BETA — default=true)<br/>
          ImageMaximumGCAge=true|false (BETA — default=true)<br/>
+         ImageVolume=true|false (ALPHA — default=false)<br/>
          InPlacePodVerticalScaling=true|false (ALPHA — default=false)<br/>
-         InTreePluginAWSUnregister=true|false (ALPHA — default=false)<br/>
-         InTreePluginAzureDiskUnregister=true|false (ALPHA — default=false)<br/>
-         InTreePluginAzureFileUnregister=true|false (ALPHA — default=false)<br/>
-         InTreePluginGCEUnregister=true|false (ALPHA — default=false)<br/>
-         InTreePluginOpenStackUnregister=true|false (ALPHA — default=false)<br/>
          InTreePluginPortworxUnregister=true|false (ALPHA — default=false)<br/>
-         InTreePluginvSphereUnregister=true|false (ALPHA — default=false)<br/>
          InformerResourceVersion=true|false (ALPHA — default=false)<br/>
          JobBackoffLimitPerIndex=true|false (BETA — default=true)<br/>
          JobManagedBy=true|false (ALPHA — default=false)<br/>
-         JobPodFailurePolicy=true|false (BETA — default=true)<br/>
          JobPodReplacementPolicy=true|false (BETA — default=true)<br/>
-         JobSuccessPolicy=true|false (ALPHA — default=false)<br/>
-         KubeProxyDrainingTerminatingNodes=true|false (BETA — default=true)<br/>
-         KubeletCgroupDriverFromCRI=true|false (ALPHA — default=false)<br/>
+         JobSuccessPolicy=true|false (BETA — default=true)<br/>
+         KubeletCgroupDriverFromCRI=true|false (BETA — default=true)<br/>
          KubeletInUserNamespace=true|false (ALPHA — default=false)<br/>
          KubeletPodResourcesDynamicResources=true|false (ALPHA — default=false)<br/>
          KubeletPodResourcesGet=true|false (ALPHA — default=false)<br/>
-         KubeletSeparateDiskGC=true|false (ALPHA — default=false)<br/>
+         KubeletSeparateDiskGC=true|false (BETA — default=true)<br/>
          KubeletTracing=true|false (BETA — default=true)<br/>
          LoadBalancerIPMode=true|false (BETA — default=true)<br/>
-         LocalStorageCapacityIsolationFSQuotaMonitoring=true|false (ALPHA — default=false)<br/>
-         LogarithmicScaleDown=true|false (BETA — default=true)<br/>
+         LocalStorageCapacityIsolationFSQuotaMonitoring=true|false (BETA — default=false)<br/>
          LoggingAlphaOptions=true|false (ALPHA — default=false)<br/>
          LoggingBetaOptions=true|false (BETA — default=true)<br/>
-         MatchLabelKeysInPodAffinity=true|false (ALPHA — default=false)<br/>
+         MatchLabelKeysInPodAffinity=true|false (BETA — default=true)<br/>
          MatchLabelKeysInPodTopologySpread=true|false (BETA — default=true)<br/>
          MaxUnavailableStatefulSet=true|false (ALPHA — default=false)<br/>
          MemoryManager=true|false (BETA — default=true)<br/>
          MemoryQoS=true|false (ALPHA — default=false)<br/>
-         MultiCIDRServiceAllocator=true|false (ALPHA — default=false)<br/>
+         MultiCIDRServiceAllocator=true|false (BETA — default=false)<br/>
          MutatingAdmissionPolicy=true|false (ALPHA — default=false)<br/>
-         NFTablesProxyMode=true|false (ALPHA — default=false)<br/>
+         NFTablesProxyMode=true|false (BETA — default=true)<br/>
          NodeInclusionPolicyInPodTopologySpread=true|false (BETA — default=true)<br/>
          NodeLogQuery=true|false (BETA — default=false)<br/>
          NodeSwap=true|false (BETA — default=true)<br/>
          OpenAPIEnums=true|false (BETA — default=true)<br/>
-         PDBUnhealthyPodEvictionPolicy=true|false (BETA — default=true)<br/>
-         PersistentVolumeLastPhaseTransitionTime=true|false (BETA — default=true)<br/>
          PodAndContainerStatsFromCRI=true|false (ALPHA — default=false)<br/>
          PodDeletionCost=true|false (BETA — default=true)<br/>
-         PodDisruptionConditions=true|false (BETA — default=true)<br/>
          PodIndexLabel=true|false (BETA — default=true)<br/>
          PodLifecycleSleepAction=true|false (BETA — default=true)<br/>
          PodReadyToStartContainersCondition=true|false (BETA — default=true)<br/>
-         PortForwardWebsockets=true|false (ALPHA — default=false)<br/>
-         ProcMountType=true|false (ALPHA — default=false)<br/>
+         PortForwardWebsockets=true|false (BETA — default=true)<br/>
+         ProcMountType=true|false (BETA — default=false)<br/>
          QOSReserved=true|false (ALPHA — default=false)<br/>
          RecoverVolumeExpansionFailure=true|false (ALPHA — default=false)<br/>
-         RecursiveReadOnlyMounts=true|false (ALPHA — default=false)<br/>
+         RecursiveReadOnlyMounts=true|false (BETA — default=true)<br/>
          RelaxedEnvironmentVariableValidation=true|false (ALPHA — default=false)<br/>
-         RetryGenerateName=true|false (ALPHA — default=false)<br/>
+         ReloadKubeletServerCertificateFile=true|false (BETA — default=true)<br/>
+         ResilientWatchCacheInitialization=true|false (BETA — default=true)<br/>
+         ResourceHealthStatus=true|false (ALPHA — default=false)<br/>
+         RetryGenerateName=true|false (BETA — default=true)<br/>
          RotateKubeletServerCertificate=true|false (BETA — default=true)<br/>
          RuntimeClassInImageCriApi=true|false (ALPHA — default=false)<br/>
          SELinuxMount=true|false (ALPHA — default=false)<br/>
@@ -238,20 +231,22 @@ kube-proxy [flags]
          SeparateCacheWatchRPC=true|false (BETA — default=true)<br/>
          SeparateTaintEvictionController=true|false (BETA — default=true)<br/>
          ServiceAccountTokenJTI=true|false (BETA — default=true)<br/>
-         ServiceAccountTokenNodeBinding=true|false (ALPHA — default=false)<br/>
+         ServiceAccountTokenNodeBinding=true|false (BETA — default=true)<br/>
          ServiceAccountTokenNodeBindingValidation=true|false (BETA — default=true)<br/>
          ServiceAccountTokenPodNodeInfo=true|false (BETA — default=true)<br/>
-         ServiceTrafficDistribution=true|false (ALPHA — default=false)<br/>
+         ServiceTrafficDistribution=true|false (BETA — default=true)<br/>
          SidecarContainers=true|false (BETA — default=true)<br/>
          SizeMemoryBackedVolumes=true|false (BETA — default=true)<br/>
          StatefulSetAutoDeletePVC=true|false (BETA — default=true)<br/>
-         StatefulSetStartOrdinal=true|false (BETA — default=true)<br/>
          StorageNamespaceIndex=true|false (BETA — default=true)<br/>
          StorageVersionAPI=true|false (ALPHA — default=false)<br/>
          StorageVersionHash=true|false (BETA — default=true)<br/>
          StorageVersionMigrator=true|false (ALPHA — default=false)<br/>
+         StrictCostEnforcementForVAP=true|false (BETA — default=false)<br/>
+         StrictCostEnforcementForWebhooks=true|false (BETA — default=false)<br/>
          StructuredAuthenticationConfiguration=true|false (BETA — default=true)<br/>
          StructuredAuthorizationConfiguration=true|false (BETA — default=true)<br/>
+         SupplementalGroupsPolicy=true|false (ALPHA — default=false)<br/>
          TopologyAwareHints=true|false (BETA — default=true)<br/>
          TopologyManagerPolicyAlphaOptions=true|false (ALPHA — default=false)<br/>
          TopologyManagerPolicyBetaOptions=true|false (BETA — default=true)<br/>
@@ -261,22 +256,23 @@ kube-proxy [flags]
          UnknownVersionInteroperabilityProxy=true|false (ALPHA — default=false)<br/>
          UserNamespacesPodSecurityStandards=true|false (ALPHA — default=false)<br/>
          UserNamespacesSupport=true|false (BETA — default=false)<br/>
-         VolumeAttributesClass=true|false (ALPHA — default=false)<br/>
+         VolumeAttributesClass=true|false (BETA — default=false)<br/>
          VolumeCapacityPriority=true|false (ALPHA — default=false)<br/>
+         WatchCacheInitializationPostStartHook=true|false (BETA — default=false)<br/>
          WatchFromStorageWithoutResourceVersion=true|false (BETA — default=false)<br/>
          WatchList=true|false (ALPHA — default=false)<br/>
          WatchListClient=true|false (BETA — default=false)<br/>
          WinDSR=true|false (ALPHA — default=false)<br/>
          WinOverlay=true|false (BETA — default=true)<br/>
          WindowsHostNetwork=true|false (ALPHA — default=true)<br/>
-         This parameter is ignored if a config file is specified by --config.</p></td>
+         Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
       </tr>
       <tr>
          <td colspan="2">--healthz-bind-address ipport&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 0.0.0.0:10256</td>
       </tr>
       <tr>
          <td></td>
-         <td style="line-height: 130%; word-wrap: break-word;"><p>IP-адреса та порт для сервера перевірки справності, стандартно &quot;0.0.0.0:10256&quot; (якщо --bind-address не встановлено або IPv4), або &quot;[::]:10256&quot; (якщо --bind-address має значення IPv6). Встановіть порожнє значення, щоб вимкнути. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
+         <td style="line-height: 130%; word-wrap: break-word;"><p>IP-адреса та порт для сервера перевірки справності, стандартно &quot;0.0.0.0:10256&quot;. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
       </tr>
       <tr>
          <td colspan="2">-h, --help</td>
@@ -335,7 +331,7 @@ kube-proxy [flags]
          <td style="line-height: 130%; word-wrap: break-word;"><p>Список CIDR, розділених комами, які ipvs-проксі-сервер не повинен торкатися під час очищення правил IPVS.</p></td>
       </tr>
       <tr>
-         <td colspan="2">--ipvs-min-sync-period duration</td>
+         <td colspan="2">--ipvs-min-sync-period duration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 1s</td>
       </tr>
       <tr>
          <td></td>
@@ -480,7 +476,7 @@ kube-proxy [flags]
       </tr>
       <tr>
          <td></td>
-         <td style="line-height: 130%; word-wrap: break-word;"><p>Якщо використовується режим проксі iptables або ipvs, SNAT для всього трафіку, що надсилається через IP-кластера сервісу. Це може бути необхідним для деяких плагінів CNI.</p></td>
+         <td style="line-height: 130%; word-wrap: break-word;"><p>SNAT для всього трафіку, що надсилається через IP-кластера сервісу. Це може бути необхідним для деяких втулків CNI. Підтримується лише в Linux.</p></td>
       </tr>
       <tr>
          <td colspan="2">--master string</td>
@@ -494,14 +490,14 @@ kube-proxy [flags]
       </tr>
       <tr>
          <td></td>
-         <td style="line-height: 130%; word-wrap: break-word;"><p>IP-адреса та порт для сервера метрик, типове значення: &quot;127.0.0.1:10249&quot; (якщо --bind-address не встановлено або IPv4), або &quot;[::1]:10249&quot; (якщо --bind-address - IPv6). (Встановіть значення &quot;0.0.0.0:10249&quot; / &quot;[::]:10249&quot; для привʼязки на всіх інтерфейсах). Встановіть пусте значення, щоб вимкнути. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
+         <td style="line-height: 130%; word-wrap: break-word;"><p>IP-адреса та порт для сервера метрик, типове значення: &quot;127.0.0.1:10249&quot;. (Встановіть значення &quot;0.0.0.0:10249&quot; / &quot;[::]:10249&quot; для привʼязки на всіх інтерфейсах). Встановіть пусте значення, щоб вимкнути. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
       </tr>
       <tr>
          <td colspan="2">--nodeport-addresses strings</td>
       </tr>
       <tr>
          <td></td>
-         <td style="line-height: 130%; word-wrap: break-word;"><p>Список діапазонів CIDR, які містять допустимі IP-адреси вузлів. Якщо встановлено, зʼєднання з сервісами NodePort будуть прийматися лише з IP-адрес вузла в одному із зазначених діапазонів. Якщо не встановлено, зʼєднання до NodePort будуть прийматися на всіх локальних IP-адресах. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
+         <td style="line-height: 130%; word-wrap: break-word;"><p>Список діапазонів CIDR, які містять допустимі IP-адреси вузлів,  або, як варіант, єдиний рядок 'primary'. Якщо встановлено перелік CIDRs, зʼєднання з сервісами NodePort будуть прийматися лише з IP-адрес вузла в одному із зазначених діапазонів. Якщо встановлено значення 'primary', сервіси NodePort будуть прийматися лише на основну IP-адресу вузла згідно з обʼєктом Node. Якщо не встановлено, зʼєднання до NodePort будуть прийматися на всіх локальних IP-адресах. Цей параметр ігнорується, якщо конфігураційний файл вказано за допомогою --config.</p></td>
       </tr>
       <tr>
          <td colspan="2">--one_output</td>

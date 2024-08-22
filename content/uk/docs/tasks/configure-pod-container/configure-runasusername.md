@@ -18,7 +18,7 @@ weight: 40
 
 ## Встановлення імені користувача для Podʼа {#set-the-username-for-a-pod}
 
-Щоб вказати імʼя користувача, з яким потрібно виконати процеси контейнера Podʼа, включіть поле `securityContext` ([PodSecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)) в специфікацію Podʼа, а всередині нього — поле `windowsOptions` ([WindowsSecurityContextOptions](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)), що містить поле `runAsUserName`.
+Щоб вказати імʼя користувача, з яким потрібно виконати процеси контейнера Podʼа, включіть поле `securityContext` ([PodSecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podsecuritycontext-v1-core)) в специфікацію Podʼа, а всередині нього — поле `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)), що містить поле `runAsUserName`.
 
 Опції безпеки Windows, які ви вказуєте для Podʼа, застосовуються до всіх контейнерів та контейнерів ініціалізації у Podʼі.
 
@@ -58,7 +58,7 @@ ContainerUser
 
 ## Встановлення імені користувача для контейнера {#set-the-username-for-a-container}
 
-Щоб вказати імʼя користувача, з яким потрібно виконати процеси контейнера, включіть поле `securityContext` ([SecurityContext](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)) у маніфесті контейнера, а всередині нього — поле `windowsOptions` ([WindowsSecurityContextOptions](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)), що містить поле `runAsUserName`.
+Щоб вказати імʼя користувача, з яким потрібно виконати процеси контейнера, включіть поле `securityContext` ([SecurityContext](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#securitycontext-v1-core)) у маніфесті контейнера, а всередині нього — поле `windowsOptions` ([WindowsSecurityContextOptions](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#windowssecuritycontextoptions-v1-core)), що містить поле `runAsUserName`.
 
 Опції безпеки Windows, які ви вказуєте для контейнера, застосовуються тільки до цього окремого контейнера, і вони перевизначають налаштування, зроблені на рівні Podʼа.
 

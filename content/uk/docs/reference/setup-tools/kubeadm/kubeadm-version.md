@@ -10,4 +10,4 @@ weight: 80
 
 <!-- body -->
 
-{{< include "generated/kubeadm_version.md" >}}
+{{< include "generated/kubeadm_version/_index.md" >}}

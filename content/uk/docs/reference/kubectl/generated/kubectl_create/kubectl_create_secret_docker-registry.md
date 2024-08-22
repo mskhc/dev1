@@ -30,7 +30,7 @@ kubectl create secret docker-registry NAME --docker-username=user --docker-passw
 kubectl create secret docker-registry my-secret --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL
 
 # Створити новий секрет з назвою my-secret з ~/.docker/config.json
-kubectl create secret docker-registry my-secret --from-file=.dockerconfigjson=path/to/.docker/config.json
+kubectl create secret docker-registry my-secret --from-file=path/to/.docker/config.json
 ```
 
 ## {{% heading "options" %}}
@@ -102,7 +102,7 @@ kubectl create secret docker-registry my-secret --from-file=.dockerconfigjson=pa
         </tr>
         <tr>
             <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>Файл ключа можна вказати за допомогою шляху до файлу, у цьому випадку імʼя файлу буде використано як ключ, або за допомогою ключа і шляху до файлу, у цьому випадку буде використано заданий ключ.  Якщо вказати теку, буде виконано ітерацію для кожного названого файлу у цій теці, імʼя якого є допустимим ключем secret.</p></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Файли ключів можна вказати за допомогою шляху до файлу, у цьому випадку їм буде присвоєно стандартне імʼя.dockerconfigjson, або за бажанням за допомогою імені та шляху до файлу, у цьому випадку буде використано вказане імʼя. Якщо вказати теку, буде виконано ітераційний пошук кожного файлу з іменем, що є дійсним секретним ключем. Для цієї команди ключем завжди має бути .dockerconfigjson.</p></td>
         </tr>
         <tr>
             <td colspan="2">-h, --help</td>
@@ -208,20 +208,6 @@ kubectl create secret docker-registry my-secret --from-file=.dockerconfigjson=pa
         <tr>
             <td></td>
             <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до файлу ключа клієнта для TLS</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-l7lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L7 LB та перевірок стану</p></td>
-        </tr>
-        <tr>
-            <td colspan="2">--cloud-provider-gce-lb-src-cidrs cidrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Типово: 130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="line-height: 130%; word-wrap: break-word;"><p>CIDR, відкриті в фаєврволі GCE для трафіку L4 LB та перевірок стану</p></td>
         </tr>
         <tr>
             <td colspan="2">--cluster string</td>

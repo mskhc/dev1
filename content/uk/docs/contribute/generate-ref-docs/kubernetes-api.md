@@ -59,7 +59,7 @@ git clone https://github.com/kubernetes/kubernetes $GOPATH/src/k8s.io/kubernetes
 
 ## Генерація документації API {#generate-the-api-reference-docs}
 
-Цей розділ демонструє, як згенерувати [опубліковану документацію API Kubernetes](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
+Цей розділ демонструє, як згенерувати [опубліковану документацію API Kubernetes](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/).
 
 ### Встановлення змінних для зборки {#set-build-variables}
 
@@ -138,7 +138,7 @@ static/docs/reference/generated/kubernetes-api/{{< param "version" >}}/js/scroll
   title: v1.17
   ---
 
-  [Kubernetes API v1.17](/uk/docs/reference/generated/kubernetes-api/v1.17/)
+  [Kubernetes API v1.17](/docs/reference/generated/kubernetes-api/v1.17/)
   ```
 
 * Відкрийте `<web-base>/content/en/docs/reference/_index.md` для редагування, і додайте нове посилання на найновішу документацію API. Видаліть найстаріше посилання на версію документації API. Має бути пʼять посилань на найновіші версії документації API.

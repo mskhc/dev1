@@ -141,9 +141,9 @@ kubectl logs dapi-envars-resourcefieldref
 
 Дізнайтеся про Pod, контейнери та змінні середовища в легасі довідці API:
 
-* [PodSpec](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
-* [Container](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
-* [EnvVar](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvar-v1-core)
-* [EnvVarSource](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core)
-* [ObjectFieldSelector](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#objectfieldselector-v1-core)
-* [ResourceFieldSelector](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core)
+* [PodSpec](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#podspec-v1-core)
+* [Container](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#container-v1-core)
+* [EnvVar](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvar-v1-core)
+* [EnvVarSource](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core)
+* [ObjectFieldSelector](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#objectfieldselector-v1-core)
+* [ResourceFieldSelector](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#resourcefieldselector-v1-core)

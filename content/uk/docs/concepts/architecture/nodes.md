@@ -228,7 +228,7 @@ Swap підтримується тільки з **cgroup v2**, cgroup v1 не п
 Дізнайтеся більше про наступне:
 
 - [Компоненти](/uk/docs/concepts/overview/components/#node-components), з яких складається вузол.
-- [Визначення API для вузла](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
+- [Визначення API для вузла](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
 - [Node](https://git.k8s.io/design-proposals-archive/architecture/architecture.md#the-kubernetes-node) у документі з дизайну архітектури.
 - [Відповідне/невідповідне вимкнення вузлів](/uk/docs/concepts/cluster-administration/node-shutdown/).
 - [Автомаштабування кластера](/uk/docs/concepts/cluster-administration/cluster-autoscaling/) для керування кількістю та розміром возлів у вашому кластері.

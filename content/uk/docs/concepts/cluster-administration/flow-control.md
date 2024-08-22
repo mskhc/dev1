@@ -81,7 +81,7 @@ API Priority та Fairness керує запитами **watch**, але це п
 
 ## Ресурси {#resources}
 
-API керування потоком включає два види ресурсів. [Конфігурації рівня пріоритету](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#prioritylevelconfiguration-v1-flowcontrol-apiserver-k8s-io) визначають доступні рівні пріоритету, частку доступного бюджету паралелізму, яку кожен може обробити, та дозволяють налаштовувати поведінку черги. [FlowSchemas](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#flowschema-v1-flowcontrol-apiserver-k8s-io) використовуються для класифікації окремих вхідних запитів, відповідність кожного з PriorityLevelConfiguration.
+API керування потоком включає два види ресурсів. [Конфігурації рівня пріоритету](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#prioritylevelconfiguration-v1-flowcontrol-apiserver-k8s-io) визначають доступні рівні пріоритету, частку доступного бюджету паралелізму, яку кожен може обробити, та дозволяють налаштовувати поведінку черги. [FlowSchemas](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#flowschema-v1-flowcontrol-apiserver-k8s-io) використовуються для класифікації окремих вхідних запитів, відповідність кожного з PriorityLevelConfiguration.
 
 ### PriorityLevelConfiguration
 

@@ -28,7 +28,7 @@ ExternalMetricValue — це значення метрики для зовні�
 <td><p>назва метрики</p></td></tr>
 <tr><td><code>metricLabels</code> <b>[Обовʼязково]</b><br/><code>map[string]string</code></td>
 <td><p>набір міток, які ідентифікують один часовий ряд для метрики</p></td></tr>
-<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
+<tr><td><code>timestamp</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#time-v1-meta"><code>meta/v1.Time</code></a></td>
 <td><p>вказує час, коли були створені метрики</p></td></tr>
 <tr><td><code>window</code> <b>[Обовʼязково]</b><br/><code>int64</code></td>
 <td><p>вказує на вікно ([Timestamp-Window, Timestamp]), з якого були розраховані ці метрики, при поверненні показника метрики, розраховані з кумулятивних метрик (або нуль для нерозрахованих миттєвих метрик).</p></td></tr>
@@ -46,7 +46,7 @@ ExternalMetricValueList — це список значень для даної 
 <tbody>
 <tr><td><code>apiVersion</code><br/>string</td><td><code>external.metrics.k8s.io/v1beta1</code></td></tr>
 <tr><td><code>kind</code><br/>string</td><td><code>ExternalMetricValueList</code></td></tr>
-<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/uk/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
+<tr><td><code>metadata</code> <b>[Обовʼязково]</b><br/><a href="/docs/reference/generated/kubernetes-api/v1.28/#listmeta-v1-meta"><code>meta/v1.ListMeta</code></a></td>
 <td><span class="text-muted">Опис відсутній.</span></td></tr>
 <tr><td><code>items</code> <b>[Обовʼязково]</b><br/><a href="#external-metrics-k8s-io-v1beta1-ExternalMetricValue"><code>[]ExternalMetricValue</code></a></td>
 <td><p>значення метрики для відповідного набору міток</p></td></tr>

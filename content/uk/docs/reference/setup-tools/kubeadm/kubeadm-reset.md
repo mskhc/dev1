@@ -13,7 +13,7 @@ weight: 60
 
 <!-- body -->
 
-{{< include "generated/kubeadm_reset.md" >}}
+{{< include "generated/kubeadm_reset/_index.md" >}}
 
 ### Робочий процес {#reset-workflow}
 

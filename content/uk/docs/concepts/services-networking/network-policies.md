@@ -48,7 +48,7 @@ description: >-
 
 ## Ресурс NetworkPolicy {#ресурс-networkpolicy}
 
-Для повного визначення ресурсу дивіться посилання на [NetworkPolicy](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#networkpolicy-v1-networking-k8s-io).
+Для повного визначення ресурсу дивіться посилання на [NetworkPolicy](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#networkpolicy-v1-networking-k8s-io).
 
 Приклад NetworkPolicy може виглядати наступним чином:
 

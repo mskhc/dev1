@@ -68,4 +68,4 @@ weight: 20
 ## {{% heading "whatsnext" %}}
 
 * Дізнайтеся більше про [змінні середовища](/uk/docs/tasks/inject-data-application/environment-variable-expose-pod-information/).
-* Перегляньте [EnvVarSource](/uk/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core).
+* Перегляньте [EnvVarSource](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#envvarsource-v1-core).
