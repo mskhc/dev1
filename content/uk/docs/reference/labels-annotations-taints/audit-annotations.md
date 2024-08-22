@@ -53,7 +53,7 @@ PodSecurity "restricted:latest": allowPrivilegeEscalation != false (container "e
 
 Приклад: `authorization.k8s.io/decision: "forbid"`
 
-Ця анотація вказує, чи був запит авторизований в логах аудиту Kubernetes.
+Значення має бути **forbid** або **allow**. Ця анотація вказує на те, чи було дозволено запит у логах аудиту Kubernetes.
 
 Див. [Аудит](/uk/docs/tasks/debug/debug-cluster/audit/) для отримання додаткової інформації.
 

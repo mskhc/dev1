@@ -48,7 +48,7 @@ NAME    SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 hello   */1 * * * *   False     0        <none>          10s
 ```
 
-Як видно з результатів команди, CronJob ще не планував або не запускав жодних завдань. Спостерігайте за створенням завдання протягом хвилини:
+Як видно з результатів команди, CronJob ще не планував або не запускав жодних завдань. Спостерігайте ({{< glossary_tooltip text="watch" term_id="watch" >}}) за створенням завдання протягом хвилини:
 
 ```shell
 kubectl get jobs --watch
