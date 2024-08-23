@@ -96,7 +96,8 @@ kubeadm upgrade node [flags]
             <td colspan="2">--rootfs string</td>
         </tr>
         <tr>
-            <td></td><td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до реальної кореневої файлової системи хоста. Це призведе до зміни корення (chroot) kubeadm на вказаних шлях</p></td>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до реальної кореневої файлової системи хоста. Це призведе до зміни корення (chroot) kubeadm на вказаних шлях</p></td>
         </tr>
     </tbody>
 </table>

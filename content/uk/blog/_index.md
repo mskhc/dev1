@@ -1,5 +1,5 @@
 ---
-title: Блог Kubernetes
+title: Блог
 linkTitle: Блог
 menu:
   main:

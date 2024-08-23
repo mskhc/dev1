@@ -84,7 +84,8 @@ kubeadm kubeconfig user --client-name=foo --config=bar
             <td colspan="2">--rootfs string</td>
         </tr>
         <tr>
-            <td></td><td style="line-height: 130%; word-wrap: break-word;"><p>[ЕКСПЕРИМЕНТАЛЬНО] Шлях до "справжньої" кореневої файлової системи хоста.</p></td>
+            <td></td>
+            <td style="line-height: 130%; word-wrap: break-word;"><p>Шлях до реальної кореневої файлової системи хоста. Це призведе до зміни корення (chroot) kubeadm на вказаних шлях</p></td>
         </tr>
     </tbody>
 </table>
