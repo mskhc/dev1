@@ -1,6 +1,4 @@
 ---
-reviewers:
-- freehan
 title: EndpointSlices
 api_metadata:
 - apiVersion: "discovery.k8s.io/v1"

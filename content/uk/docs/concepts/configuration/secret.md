@@ -1,6 +1,4 @@
 ---
-reviewers:
-  - mikedanese
 title: Secrets
 api_metadata:
 - apiVersion: "v1"

@@ -1,12 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title:  Запуск ZooKeeper, розподіленого системного координатора
 content_type: tutorial
 weight: 40

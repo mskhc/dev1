@@ -1,6 +1,4 @@
 ---
-reviewers:
-- janetkuo
 title: Deployment
 api_metadata:
 - apiVersion: "apps/v1"

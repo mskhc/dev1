@@ -1,7 +1,4 @@
 ---
-reviewers:
-- piosz
-- x13n
 title: Архітектура логування
 content_type: concept
 weight: 60

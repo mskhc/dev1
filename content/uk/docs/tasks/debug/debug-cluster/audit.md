@@ -1,7 +1,4 @@
 ---
-reviewers:
-- soltysh
-- sttts
 content_type: task
 title: Аудит
 weight: 35

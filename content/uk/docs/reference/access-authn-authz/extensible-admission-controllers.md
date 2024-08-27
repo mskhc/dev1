@@ -1,11 +1,4 @@
 ---
-reviewers:
-- smarterclayton
-- lavalamp
-- caesarxuchao
-- deads2k
-- liggitt
-- jpbetz
 title: Динамічне керування допуском
 content_type: concept
 weight: 45

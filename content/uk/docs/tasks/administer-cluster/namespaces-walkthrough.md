@@ -1,7 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
-- janetkuo
 title: Посібник з роботи з просторами імен
 content_type: task
 weight: 260

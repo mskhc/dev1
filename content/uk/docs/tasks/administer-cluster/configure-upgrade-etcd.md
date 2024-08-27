@@ -1,8 +1,4 @@
 ---
-reviewers:
-- mml
-- wojtek-t
-- jpbetz
 title: Управління кластерами etcd для Kubernetes
 content_type: task
 weight: 270

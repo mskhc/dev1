@@ -1,8 +1,5 @@
 ---
 title: "Розширення kubectl за допомогою втулків"
-reviewers:
-- juanvallejo
-- soltysh
 description: "Дізнайтеся, як розширити kubectl за допомогою втулків."
 content_type: task
 weight: 150

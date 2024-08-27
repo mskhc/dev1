@@ -1,8 +1,4 @@
 ---
-reviewers:
-- caesarxuchao
-- lavalamp
-- thockin
 title: Підключення застосунків за допомогою Service
 content_type: tutorial
 weight: 20

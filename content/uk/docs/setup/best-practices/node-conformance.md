@@ -1,6 +1,4 @@
 ---
-reviewers:
-- Random-Liu
 title: Перевірка налаштувань вузла
 weight: 30
 ---

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- luxas
-- jbeda
 title: kubeadm config
 content_type: concept
 weight: 50

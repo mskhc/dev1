@@ -1,8 +1,6 @@
 ---
 title: Міграція агентів телеметрії та безпеки з dockershim
 content_type: task
-reviewers:
-- SergeyKanzhelev
 weight: 60
 ---
 

@@ -1,6 +1,4 @@
 ---
-reviewers:
-- stclair
 title: Обмежте доступ контейнера до ресурсів за допомогою AppArmor
 content_type: tutorial
 weight: 30

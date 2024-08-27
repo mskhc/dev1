@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jayunit100
-- jsturtevant
-- marosset
-- perithompson
 title: Управління ресурсами для вузлів Windows
 content_type: concept
 weight: 75

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- thockin
-- bowei
 content_type: task
 title: Налагодження Service
 weight: 20

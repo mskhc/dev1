@@ -1,9 +1,6 @@
 ---
 title: kubectl для користувачів Docker
 content_type: concept
-reviewers:
-- brendandburns
-- thockin
 weight: 50
 ---
 

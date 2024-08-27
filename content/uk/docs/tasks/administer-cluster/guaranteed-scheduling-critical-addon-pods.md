@@ -1,8 +1,4 @@
 ---
-reviewers:
-- davidopp
-- filipg
-- piosz
 title: Гарантоване планування для критичних Podʼів надбудов
 content_type: task
 weight: 220

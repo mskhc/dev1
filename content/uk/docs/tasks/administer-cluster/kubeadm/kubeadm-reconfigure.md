@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Переконфігурація кластера за допомогою kubeadm
 content_type: task
 weight: 30

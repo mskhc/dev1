@@ -1,6 +1,4 @@
 ---
-reviewers:
-- bsalamat
 title: Налаштування продуктивності планувальника
 content_type: concept
 weight: 70

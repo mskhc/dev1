@@ -1,7 +1,4 @@
 ---
-reviewers:
-- vincepri
-- bart0sh
 title: Середовище виконання контейнерів
 content_type: concept
 weight: 20

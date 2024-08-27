@@ -1,7 +1,5 @@
 ---
 title: "Приклад: Розгортання Cassandra з використанням StatefulSet"
-reviewers:
-- ahmetb
 content_type: tutorial
 weight: 30
 ---

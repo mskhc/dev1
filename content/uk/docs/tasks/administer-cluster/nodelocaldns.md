@@ -1,8 +1,4 @@
 ---
-reviewers:
-- bowei
-- zihongz
-- sftim
 title: Використання NodeLocal DNSCache в кластерах Kubernetes
 content_type: task
 weight: 390

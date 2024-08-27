@@ -1,8 +1,4 @@
 ---
-reviewers:
-- erictune
-- mikedanese
-- thockin
 title: Налаштування контексту безпеки для Podʼа або контейнера
 content_type: task
 weight: 110

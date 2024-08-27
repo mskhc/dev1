@@ -1,9 +1,4 @@
 ---
-reviewers:
-- erictune
-- lavalamp
-- deads2k
-- liggitt
 title: Режим Webhook
 content_type: concept
 weight: 36

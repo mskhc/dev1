@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- msau42
-- xing-yang
 title: Моніторинг справності томів
 content_type: concept
 weight: 100

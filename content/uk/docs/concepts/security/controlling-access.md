@@ -1,7 +1,4 @@
 ---
-reviewers:
-- erictune
-- lavalamp
 title: Керування доступом до API Kubernetes
 content_type: concept
 weight: 50

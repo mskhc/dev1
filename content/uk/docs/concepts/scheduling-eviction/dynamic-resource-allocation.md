@@ -1,7 +1,4 @@
 ---
-reviewers:
-- klueska
-- pohly
 title: Динамічне виділення ресурсів
 content_type: concept
 weight: 65

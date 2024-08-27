@@ -1,10 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- erictune
-- foxish
-- janetkuo
-- smarterclayton
 title: Видалення StatefulSet
 content_type: task
 weight: 60

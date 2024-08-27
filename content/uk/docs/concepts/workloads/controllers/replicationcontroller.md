@@ -1,7 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- janetkuo
 title: ReplicationController
 api_metadata:
 - apiVersion: "v1"

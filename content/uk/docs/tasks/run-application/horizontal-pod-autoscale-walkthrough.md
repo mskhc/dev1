@@ -1,9 +1,4 @@
 ---
-reviewers:
-- fgrzadkowski
-- jszczepkowski
-- justinsb
-- directxman12
 title: Покрокове керівництво HorizontalPodAutoscaler
 content_type: task
 weight: 100

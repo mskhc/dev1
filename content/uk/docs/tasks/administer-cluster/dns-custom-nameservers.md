@@ -1,7 +1,4 @@
 ---
-reviewers:
-- bowei
-- zihongz
 title: Налаштування служби DNS
 content_type: task
 min-kubernetes-server-version: v1.12

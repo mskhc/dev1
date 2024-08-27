@@ -1,10 +1,5 @@
 ---
 title: Міграція обʼєктів Kubernetes за допомогою міграції версій сховища
-reviewers:
-- deads2k
-- jpbetz
-- enj
-- nilekhc
 reviewers: task
 min-kubernetes-server-version: v1.30
 weight: 60

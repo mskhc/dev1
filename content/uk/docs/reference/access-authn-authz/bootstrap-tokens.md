@@ -1,6 +1,4 @@
 ---
-reviewers:
-- jbeda
 title: Автентифікація за допомогою Bootstrap-токенів
 content_type: concept
 weight: 20

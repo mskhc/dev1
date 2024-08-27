@@ -1,8 +1,5 @@
 ---
 title: "Приклад: Розгортання PHP застосунку гостьової книги з Redis"
-reviewers:
-- ahmetb
-- jimangel
 content_type: tutorial
 weight: 20
 card:

@@ -1,8 +1,4 @@
 ---
-reviewers:
-- thockin
-- caseydavenport
-- danwinship
 title: Мережеві політики 
 aka: Network Policies
 content_type: concept

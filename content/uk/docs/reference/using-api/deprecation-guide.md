@@ -1,9 +1,4 @@
 ---
-reviewers:
-- liggitt
-- lavalamp
-- thockin
-- smarterclayton
 title: "Посібник з міграції від застарілих API"
 weight: 45
 content_type: reference

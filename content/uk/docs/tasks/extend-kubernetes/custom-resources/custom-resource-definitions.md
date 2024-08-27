@@ -1,11 +1,5 @@
 ---
 title: Розширення API Kubernetes за допомогою CustomResourceDefinitions
-reviewers:
-- deads2k
-- jpbetz
-- liggitt
-- roycaihw
-- sttts
 content_type: task
 min-kubernetes-server-version: 1.16
 weight: 20

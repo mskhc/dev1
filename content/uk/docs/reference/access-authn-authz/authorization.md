@@ -1,9 +1,4 @@
 ---
-reviewers:
-- erictune
-- lavalamp
-- deads2k
-- liggitt
 title: Авторизація
 content_type: concept
 weight: 30

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- luxas
-- jbeda
 title: kubeadm upgrade
 content_type: concept
 weight: 40

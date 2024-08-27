@@ -1,9 +1,5 @@
 ---
 title: Швидкий довідник kubectl
-reviewers:
-- erictune
-- krousey
-- clove
 content_type: concept
 weight: 10 # highlight it
 card:

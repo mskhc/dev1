@@ -1,9 +1,5 @@
 ---
 title: Концепції API Kubernetes
-reviewers:
-- smarterclayton
-- lavalamp
-- liggitt
 content_type: concept
 weight: 20
 ---

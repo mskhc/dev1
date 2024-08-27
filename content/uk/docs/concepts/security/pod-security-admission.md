@@ -1,7 +1,4 @@
 ---
-reviewers:
-- tallclair
-- liggitt
 title: Pod Security Admission
 description: >
   Огляд контролера Pod Security Admission, який може застосовувати Стандарти Безпеки Podʼів.

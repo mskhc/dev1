@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Оновлення кластерів з kubeadm
 content_type: task
 weight: 40

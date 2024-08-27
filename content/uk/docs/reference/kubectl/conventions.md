@@ -1,7 +1,5 @@
 ---
 title: Правила використання kubectl
-reviewers:
-- janetkuo
 content_type: concept
 weight: 60
 ---

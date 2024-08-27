@@ -1,7 +1,4 @@
 ---
-reviewers:
-- danwent
-- aanm
 title: Використання Cilium для NetworkPolicy
 content_type: task
 weight: 30

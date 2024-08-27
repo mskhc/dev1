@@ -1,7 +1,4 @@
 ---
-reviewers:
-- davidopp
-- madhusudancs
 title: Налаштування кількох планувальників
 content_type: task
 weight: 20

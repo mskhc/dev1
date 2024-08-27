@@ -1,12 +1,5 @@
 ---
 
-reviewers:
-- lavalamp
-- davidopp
-- derekwaynecarr
-- erictune
-- janetkuo
-- thockin
 title: Контролери допуску
 linkTitle: Контролери допуску
 content_type: concept

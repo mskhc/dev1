@@ -1,8 +1,4 @@
 ---
-reviewers:
-- fgrzadkowski
-- jszczepkowski
-- directxman12
 title: Горизонтальне автомасштабування Podʼів
 feature:
   title: Горизонтальне масштабування

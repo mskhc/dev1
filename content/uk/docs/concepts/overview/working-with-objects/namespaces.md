@@ -1,10 +1,6 @@
 ---
-reviewers:
-- derekwaynecarr
-- mikedanese
-- thockin
-title: Простори імен 
-aka: 
+title: Простори імен
+aka:
   - Namespaces
 api_metadata:
 - apiVersion: "v1"

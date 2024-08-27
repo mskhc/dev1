@@ -1,7 +1,5 @@
 ---
 title: Використання sysctl в кластері Kubernetes
-reviewers:
-- sttts
 content_type: task
 weight: 400
 ---

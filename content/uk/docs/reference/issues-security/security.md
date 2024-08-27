@@ -1,11 +1,6 @@
 ---
 title: Процес розкриття інформації про безпеку в Kubernetes
 aliases: [/security/]
-reviewers:
-- eparis
-- erictune
-- philips
-- jessfraz
 content_type: concept
 weight: 20
 ---

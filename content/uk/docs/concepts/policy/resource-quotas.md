@@ -1,6 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
 title: Квоти ресурсів
 api_metadata:
 - apiVersion: "v1"

@@ -1,9 +1,4 @@
 ---
-reviewers:
-- aravindhp
-- jayunit100
-- jsturtevant
-- marosset
 title: Мережеві аспекти Windows
 content_type: concept
 weight: 110

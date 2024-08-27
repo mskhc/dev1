@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- thockin
-- msau42
 title: Обмеження томів на вузлі
 content_type: concept
 weight: 90

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- erictune
-- thockin
 title: Образ контейнера
 content_type: concept
 weight: 10

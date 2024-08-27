@@ -1,9 +1,4 @@
 ---
-reviewers:
-- aravindhp
-- jayunit100
-- jsturtevant
-- marosset
 title: Поради щодо налагодження Windows
 content_type: task
 ---

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- rickypai
-- thockin
 title: Додавання записів до файлу /etc/hosts у Pod за допомогою HostAliases
 content_type: task
 weight: 10

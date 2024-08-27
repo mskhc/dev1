@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jayunit100
-- jsturtevant
-- marosset
-- perithompson
 title: Захист для вузлів з операційною системою Windows
 content_type: concept
 weight: 40

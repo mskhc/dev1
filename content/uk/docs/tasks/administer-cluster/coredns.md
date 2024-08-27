@@ -1,6 +1,4 @@
 ---
-reviewers:
-- johnbelamaric
 title: Використання CoreDNS для виявлення Service
 min-kubernetes-server-version: v1.9
 content_type: task

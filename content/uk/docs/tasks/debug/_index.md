@@ -2,9 +2,6 @@
 title: Моніторинг, логування та налагодження
 description: Налаштуйте моніторинг та логування для розвʼязання проблем кластера або налагодження контейнеризованих застосунків.
 weight: 40
-reviewers:
-- brendandburns
-- davidopp
 content_type: concept
 no_list: true
 card:

@@ -1,8 +1,4 @@
 ---
-reviewers:
-- luxas
-- thockin
-- wlan0
 title: Адміністрування менеджера хмарного контролера
 content_type: concept
 weight: 110

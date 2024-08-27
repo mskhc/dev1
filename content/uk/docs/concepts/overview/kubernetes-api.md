@@ -1,6 +1,4 @@
 ---
-reviewers:
-- chenopis
 title: API Kubernetes
 content_type: concept
 weight: 40

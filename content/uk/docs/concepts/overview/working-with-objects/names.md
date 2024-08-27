@@ -1,7 +1,4 @@
 ---
-reviewers:
-- mikedanese
-- thockin
 title: Назви та Ідентифікатори Обʼєктів
 content_type: concept
 weight: 30

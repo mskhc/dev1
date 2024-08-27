@@ -1,6 +1,4 @@
 ---
-reviewers:
-- liggitt
 title: Автентифікація/авторизація kubelet
 weight: 110
 ---

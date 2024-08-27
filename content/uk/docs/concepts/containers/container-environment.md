@@ -1,7 +1,4 @@
 ---
-reviewers:
-- mikedanese
-- thockin
 title: Середовище контейнера
 content_type: concept
 weight: 20

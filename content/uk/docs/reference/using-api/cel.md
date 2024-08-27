@@ -1,8 +1,5 @@
 ---
 title: Загальна мова виразів у Kubernetes
-reviewers:
-- jpbetz
-- cici37
 content_type: concept
 weight: 35
 min-kubernetes-server-version: 1.25

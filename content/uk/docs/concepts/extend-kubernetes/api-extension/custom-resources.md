@@ -1,8 +1,5 @@
 ---
 title: Власні Ресурси
-reviewers:
-- enisoc
-- deads2k
 api_metadata:
 - apiVersion: "apiextensions.k8s.io/v1"
   kind: "CustomResourceDefinition"

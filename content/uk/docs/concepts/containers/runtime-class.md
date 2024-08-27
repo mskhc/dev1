@@ -1,7 +1,4 @@
 ---
-reviewers:
-  - tallclair
-  - dchen1107
 title: Клас виконання
 content_type: concept
 weight: 30

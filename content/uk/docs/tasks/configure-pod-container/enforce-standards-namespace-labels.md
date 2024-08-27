@@ -1,8 +1,5 @@
 ---
 title: Забезпечення стандартів безпеки Podʼів за допомогою міток простору імен
-reviewers:
-- tallclair
-- liggitt
 content_type: task
 weight: 250
 ---

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- jcbsmpsn
-- mikedanese
 title: Налаштування ротації сертифікатів для Kubelet
 content_type: task
 ---

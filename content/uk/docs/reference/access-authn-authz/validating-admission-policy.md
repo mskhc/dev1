@@ -1,8 +1,4 @@
 ---
-reviewers:
-- liggitt
-- jpbetz
-- cici37
 title: Правила перевірки допуску
 content_type: concept
 ---

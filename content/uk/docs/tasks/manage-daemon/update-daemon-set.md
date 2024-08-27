@@ -1,6 +1,4 @@
 ---
-reviewers:
-- janetkuo
 title: Виконання поетапного оновлення DaemonSet
 content_type: task
 weight: 10

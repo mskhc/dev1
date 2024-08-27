@@ -1,8 +1,4 @@
 ---
-reviewers:
-- luxas
-- thockin
-- wlan0
 title: Розробка Cloud Controller Manager
 content_type: concept
 weight: 190

@@ -1,8 +1,4 @@
 ---
-reviewers:
-- davidopp
-- kevin-wangzefeng
-- alculquicondor
 title: Призначення Podʼів до Вузлів
 content_type: concept
 weight: 20

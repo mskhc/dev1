@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 title: Встановлення та налаштування kubectl у macOS
 content_type: task
 weight: 10

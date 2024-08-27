@@ -1,8 +1,4 @@
 ---
-reviewers:
-- alculquicondor
-- erictune
-- soltysh
 title: Job
 api_metadata:
 - apiVersion: "batch/v1"

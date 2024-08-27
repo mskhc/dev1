@@ -1,11 +1,4 @@
 ---
-reviewers:
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title: Запуск реплікованого застосунку зі збереженням стану
 content_type: task
 weight: 30

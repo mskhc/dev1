@@ -1,13 +1,5 @@
 ---
 title: Керування політиками топології на вузлі
-
-reviewers:
-- ConnorDoyle
-- klueska
-- lmdaly
-- nolancon
-- bg-chun
-
 content_type: task
 min-kubernetes-server-version: v1.18
 weight: 150

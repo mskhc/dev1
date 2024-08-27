@@ -1,10 +1,4 @@
 ---
-reviewers:
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
 title: DaemonSet
 api_metadata:
 - apiVersion: "apps/v1"

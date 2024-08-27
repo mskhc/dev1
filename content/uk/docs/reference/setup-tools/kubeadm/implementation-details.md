@@ -1,7 +1,4 @@
 ---
-reviewers:
-- luxas
-- jbeda
 title: Деталі реалізації
 content_type: concept
 weight: 100

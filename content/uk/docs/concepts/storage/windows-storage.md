@@ -1,11 +1,4 @@
 ---
-reviewers:
-- jingxu97
-- mauriciopoppe
-- jayunit100
-- jsturtevant
-- marosset
-- aravindhp
 title: Зберігання у Windows
 content_type: concept
 weight: 110

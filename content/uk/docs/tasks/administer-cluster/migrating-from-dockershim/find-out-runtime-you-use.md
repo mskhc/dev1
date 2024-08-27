@@ -1,8 +1,6 @@
 ---
 title: Перевірте, яке середовище виконання контейнерів використовується на вузлі
 content_type: task
-reviewers:
-- SergeyKanzhelev
 weight: 30
 ---
 

@@ -7,11 +7,6 @@ feature:
   description: >
     Виділення адрес IPv4 та IPv6 для Podʼів та Serviceʼів
 content_type: concept
-reviewers:
-  - lachie83
-  - khenidak
-  - aramase
-  - bridgetkromhout
 weight: 90
 ---
 

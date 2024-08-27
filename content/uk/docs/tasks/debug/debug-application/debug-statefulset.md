@@ -1,12 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title: Налагодження StatefulSet
 content_type: task
 weight: 30

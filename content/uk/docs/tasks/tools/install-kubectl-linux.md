@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 title: Встановлення та налаштування kubectl у Linux
 content_type: task
 weight: 10

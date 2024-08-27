@@ -1,9 +1,5 @@
 ---
 title: Метрики для компонентів системи Kubernetes
-reviewers:
-- brancz
-- logicalhan
-- RainbowMango
 content_type: concept
 weight: 70
 ---

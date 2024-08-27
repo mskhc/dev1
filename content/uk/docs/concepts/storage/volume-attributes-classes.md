@@ -1,7 +1,4 @@
 ---
-reviewers:
-- msau42
-- xing-yang
 title: Класи атрибутів тома
 content_type: concept
 weight: 45

@@ -1,6 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
 title: Керування HugePages
 content_type: task
 description: Налаштування та керування великими сторінками як запланованим ресурсом в кластері.

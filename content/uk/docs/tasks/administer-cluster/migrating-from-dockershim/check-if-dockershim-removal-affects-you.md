@@ -1,8 +1,6 @@
 ---
 title: Перевірка впливу видалення dockershim на ваш кластер
 content_type: task
-reviewers:
-- SergeyKanzhelev
 weight: 50
 ---
 

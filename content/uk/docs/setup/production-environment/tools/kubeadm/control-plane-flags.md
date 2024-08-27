@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Налаштування компонентів за допомогою kubeadm API
 content_type: concept
 weight: 40

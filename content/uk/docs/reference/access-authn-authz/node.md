@@ -1,8 +1,4 @@
 ---
-reviewers:
-- timstclair
-- deads2k
-- liggitt
 title: Використання авторизації вузлів
 content_type: concept
 weight: 34

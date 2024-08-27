@@ -1,9 +1,4 @@
 ---
-reviewers:
-- davidopp
-- mml
-- foxish
-- kow3ns
 title: Безпечне очищення вузла
 content_type: task
 weight: 310

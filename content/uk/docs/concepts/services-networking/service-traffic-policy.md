@@ -1,6 +1,4 @@
 ---
-reviewers:
-- maplain
 title: Політики внутрішнього трафіку Service
 content_type: concept
 weight: 120

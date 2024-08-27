@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 title: Встановлення та налаштування kubectl у Windows
 content_type: task
 weight: 10

@@ -1,6 +1,4 @@
 ---
-reviewers:
-- jpbetz
 title: Mixed Version Proxy
 content_type: concept
 weight: 220

@@ -1,6 +1,4 @@
 ---
-reviewers:
-- thockin
 title: Мережа в кластері
 content_type: concept
 weight: 50

@@ -1,12 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title: Налагодження контейнерів ініціалізації
 content_type: task
 weight: 40

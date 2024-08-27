@@ -1,6 +1,4 @@
 ---
-reviewers:
-- ahg-g
 title: Фреймворк планування
 content_type: concept
 weight: 60

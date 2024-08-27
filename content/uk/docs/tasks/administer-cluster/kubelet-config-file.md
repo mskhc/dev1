@@ -1,7 +1,4 @@
 ---
-reviewers:
-- mtaufen
-- dawnchen
 title: Встановлення параметрів Kubelet через файл конфігурації
 content_type: task
 weight: 330

@@ -1,11 +1,4 @@
 ---
-reviewers:
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title: StatefulSets
 api_metadata:
 - apiVersion: "apps/v1"

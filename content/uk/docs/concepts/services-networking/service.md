@@ -1,6 +1,4 @@
 ---
-reviewers:
-- bprashanth
 title: Service
 api_metadata:
 - apiVersion: "v1"

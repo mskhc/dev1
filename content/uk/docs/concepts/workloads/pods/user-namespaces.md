@@ -2,7 +2,6 @@
 title: Простори імен користувачів 
 aka:
   - User Namespaces
-reviewers:
 content_type: concept
 weight: 160
 min-kubernetes-server-version: v1.25

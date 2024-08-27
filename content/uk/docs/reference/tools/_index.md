@@ -1,7 +1,5 @@
 ---
 title: Інші інструменти
-reviewers:
-- janetkuo
 content_type: concept
 weight: 150
 no_list: true

@@ -1,9 +1,5 @@
 ---
 title: Налаштування API сервера розширення
-reviewers:
-- lavalamp
-- cheftako
-- chenopis
 content_type: task
 weight: 15
 ---

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- caesarxuchao
-- dchen1107
 title: Вузли
 api_metadata:
 - apiVersion: "v1"

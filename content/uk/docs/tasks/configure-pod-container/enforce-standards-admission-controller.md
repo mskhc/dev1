@@ -1,8 +1,5 @@
 ---
 title: Забезпечення стандартів безпеки Podʼів шляхом конфігурування вбудованого контролера допуску
-reviewers:
-- tallclair
-- liggitt
 content_type: task
 weight: 240
 ---

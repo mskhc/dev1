@@ -1,7 +1,4 @@
 ---
-reviewers:
-- luxas
-- jbeda
 title: kubeadm reset
 content_type: concept
 weight: 60

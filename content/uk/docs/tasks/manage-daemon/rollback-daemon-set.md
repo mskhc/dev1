@@ -1,6 +1,4 @@
 ---
-reviewers:
-- janetkuo
 title: Виконання відкату DaemonSet
 content_type: task
 weight: 20

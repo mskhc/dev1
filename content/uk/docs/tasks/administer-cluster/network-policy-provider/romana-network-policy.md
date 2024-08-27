@@ -1,6 +1,4 @@
 ---
-reviewers:
-- chrismarino
 title: Використання Romana для NetworkPolicy
 content_type: task
 weight: 50

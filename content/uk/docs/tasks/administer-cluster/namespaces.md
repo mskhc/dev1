@@ -1,7 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
-- janetkuo
 title: Спільне використання кластера з просторами імен
 content_type: task
 weight: 340

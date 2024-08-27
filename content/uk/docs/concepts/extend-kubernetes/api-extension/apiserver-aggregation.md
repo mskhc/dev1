@@ -1,9 +1,5 @@
 ---
 title: Шар агрегації API Kubernetes
-reviewers:
-- lavalamp
-- cheftako
-- chenopis
 content_type: concept
 weight: 20
 ---

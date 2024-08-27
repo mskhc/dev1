@@ -1,7 +1,4 @@
 ---
-reviewers:
-- thockin
-- dwinship
 min-kubernetes-server-version: v1.29
 title: Розширення діапазонів IP Service
 content_type: task

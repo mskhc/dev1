@@ -1,6 +1,4 @@
 ---
-reviewers:
-- cdrage
 title: Конвертація файлу Docker Compose в ресурси Kubernetes
 content_type: task
 weight: 230

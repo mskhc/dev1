@@ -1,8 +1,4 @@
 ---
-reviewers:
-- hasheddan
-- pjbgf
-- saschagrunert
 title: Обмеження системних викликів контейнера за допомогою seccomp
 content_type: tutorial
 weight: 40

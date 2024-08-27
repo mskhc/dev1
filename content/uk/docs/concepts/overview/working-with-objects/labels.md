@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 title: Мітки та Селектори
 content_type: concept
 weight: 40

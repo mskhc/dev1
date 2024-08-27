@@ -1,8 +1,5 @@
 ---
 title: Версії у CustomResourceDefinitions
-reviewers:
-- sttts
-- liggitt
 content_type: task
 weight: 30
 min-kubernetes-server-version: v1.16

@@ -1,6 +1,4 @@
 ---
-reviewers:
-- nelvadas
 title: Обмеження діапазонів
 api_metadata:
 - apiVersion: "v1"

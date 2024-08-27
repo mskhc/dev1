@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- thockin
-- msau42
 title: Класи сховищ
 content_type: concept
 weight: 40

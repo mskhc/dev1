@@ -1,6 +1,4 @@
 ---
-reviewers:
-- bboreham
 title: Використання Weave Net для NetworkPolicy
 content_type: task
 weight: 60

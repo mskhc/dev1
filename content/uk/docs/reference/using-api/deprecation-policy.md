@@ -1,8 +1,4 @@
 ---
-reviewers:
-- bgrant0607
-- lavalamp
-- thockin
 title: Політика застарівання Kubernetes
 content_type: concept
 weight: 40

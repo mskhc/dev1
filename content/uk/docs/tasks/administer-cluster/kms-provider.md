@@ -1,7 +1,4 @@
 ---
-reviewers:
-- smarterclayton
-- enj
 title: Використання постачальника KMS для шифрування даних
 content_type: task
 weight: 370

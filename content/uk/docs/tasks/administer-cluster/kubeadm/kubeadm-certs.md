@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Управління сертифікатами з kubeadm
 content_type: task
 weight: 10

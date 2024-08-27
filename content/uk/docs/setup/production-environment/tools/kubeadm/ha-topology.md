@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Варіанти топології високої доступності (HA)
 content_type: concept
 weight: 50

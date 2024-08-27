@@ -1,8 +1,4 @@
 ---
-reviewers:
-- dchen1107
-- egernst
-- tallclair
 title: Накладні витрати, повʼязані з роботою Podʼів
 content_type: concept
 weight: 30

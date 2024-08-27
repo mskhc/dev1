@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- thockin
-- msau42
 title: Томи
 api_metadata:
 - apiVersion: ""

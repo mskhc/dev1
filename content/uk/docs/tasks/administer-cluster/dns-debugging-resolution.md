@@ -1,7 +1,4 @@
 ---
-reviewers:
-- bowei
-- zihongz
 title: Налагодження розвʼязання імен DNS
 content_type: task
 min-kubernetes-server-version: v1.6

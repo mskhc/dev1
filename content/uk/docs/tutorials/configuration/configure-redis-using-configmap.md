@@ -1,7 +1,4 @@
 ---
-reviewers:
-- eparis
-- pmorie
 title: Конфігурування Redis за допомогою ConfigMap
 content_type: tutorial
 weight: 30

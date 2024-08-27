@@ -1,6 +1,4 @@
 ---
-reviewers:
-- robscott
 title: Маршрутизація з урахуванням топології
 content_type: concept
 weight: 100

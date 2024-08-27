@@ -1,9 +1,4 @@
 ---
-reviewers:
-- saad-ali
-- jsafrane
-- thockin
-- msau42
 title: Динамічне впровадження томів
 content_type: concept
 weight: 50

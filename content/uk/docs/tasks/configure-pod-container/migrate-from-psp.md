@@ -1,8 +1,5 @@
 ---
 title: Міграція з PodSecurityPolicy до вбудованого контролера допуску PodSecurity
-reviewers:
-- tallclair
-- liggitt
 content_type: task
 min-kubernetes-server-version: v1.22
 weight: 260

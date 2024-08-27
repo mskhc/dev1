@@ -1,7 +1,4 @@
 ---
-reviewers:
-- fgrzadkowski
-- piosz
 title: Конвеєер метрик ресурсів
 content_type: task
 weight: 15

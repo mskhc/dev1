@@ -1,8 +1,4 @@
 ---
-reviewers:
-- jbelamaric
-- bowei
-- thockin
 title: DNS для Service та Podʼів
 content_type: concept
 weight: 80

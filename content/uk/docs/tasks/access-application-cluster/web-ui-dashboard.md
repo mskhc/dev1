@@ -1,9 +1,4 @@
 ---
-reviewers:
-- floreks
-- maciaszczykm
-- shu-mutou
-- mikedanese
 title: Розгортання та доступ до Інфопанелі Kubernetes
 description: >-
   Розгорніть вебінтерфейс (Kubernetes Dashboard) та отримайте до нього доступ.

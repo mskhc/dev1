@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Налаштування високодоступного кластера etcd за допомогою kubeadm
 content_type: task
 weight: 70

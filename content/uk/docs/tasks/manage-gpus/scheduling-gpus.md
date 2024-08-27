@@ -1,6 +1,4 @@
 ---
-reviewers:
-- vishh
 content_type: concept
 title: Планування GPU
 description: Налаштування та планування GPU для використання як ресурсу вузлів у кластері.

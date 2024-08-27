@@ -1,7 +1,4 @@
 ---
-reviewers:
-- davidopp
-- wojtek-t
 title: Пріоритет та Випередження Podʼів
 content_type: concept
 weight: 90

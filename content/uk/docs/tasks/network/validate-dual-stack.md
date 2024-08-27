@@ -1,8 +1,4 @@
 ---
-reviewers:
-- lachie83
-- khenidak
-- bridgetkromhout
 min-kubernetes-server-version: v1.23
 title: Перевірка наявності підтримки подвійного стеку IPv4/IPv6
 content_type: task

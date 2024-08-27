@@ -1,6 +1,4 @@
 ---
-reviewers:
-- jsafrane
 title: Створення статичних Podʼів
 weight: 220
 content_type: task

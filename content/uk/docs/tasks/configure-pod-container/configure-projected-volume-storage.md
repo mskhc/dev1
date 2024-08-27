@@ -1,7 +1,4 @@
 ---
-reviewers:
-- jpeeler
-- pmorie
 title: Налаштування Pod для використання projected тому для зберігання
 content_type: task
 weight: 100

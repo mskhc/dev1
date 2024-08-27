@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 content_type: concept
 title: Інструменти для моніторингу ресурсів
 weight: 17

@@ -1,7 +1,5 @@
 ---
 title: Сертифікати PKI та вимоги 
-reviewers:
-- sig-cluster-lifecycle
 content_type: concept
 weight: 50
 ---

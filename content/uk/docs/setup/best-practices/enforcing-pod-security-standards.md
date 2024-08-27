@@ -1,7 +1,4 @@
 ---
-reviewers:
-- tallclair
-- liggitt
 title: Запровадження стандартів безпеки для Podʼів
 weight: 40
 ---

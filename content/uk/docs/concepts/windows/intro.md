@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jayunit100
-- jsturtevant
-- marosset
-- perithompson
 title: Контейнери Windows у Kubernetes
 content_type: concept
 weight: 65

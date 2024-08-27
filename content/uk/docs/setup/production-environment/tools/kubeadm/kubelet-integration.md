@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Налаштування кожного kubelet у кластері за допомогою kubeadm
 content_type: concept
 weight: 80

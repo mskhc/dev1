@@ -1,6 +1,4 @@
 ---
-reviewers:
-- erictune
 title: Podʼи
 api_metadata:
 - apiVersion: "v1"

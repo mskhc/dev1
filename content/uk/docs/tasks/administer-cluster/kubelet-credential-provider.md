@@ -1,8 +1,5 @@
 ---
 title: Налаштування постачальника облікових даних образів в kubelet
-reviewers:
-- liggitt
-- cheftako
 content_type: task
 min-kubernetes-server-version: v1.26
 weight: 120

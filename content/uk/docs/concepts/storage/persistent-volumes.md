@@ -1,10 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- thockin
-- msau42
-- xing-yang
 title: Постійні томи
 api_metadata:
 - apiVersion: "v1"

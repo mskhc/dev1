@@ -1,7 +1,4 @@
 ---
-reviewers:
-- caesarxuchao
-- mikedanese
 title: Отримання доступу до оболонки запущеного контейнера
 content_type: task
 ---

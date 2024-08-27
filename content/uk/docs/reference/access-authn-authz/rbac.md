@@ -1,8 +1,4 @@
 ---
-reviewers:
-- erictune
-- deads2k
-- liggitt
 title: Використання RBAC авторизації
 content_type: concept
 aliases: [/rbac/]

@@ -1,7 +1,5 @@
 ---
 title: Точки доступу для моніторингу стану API Kubernetes
-reviewers:
-- logicalhan
 content_type: concept
 weight: 50
 ---

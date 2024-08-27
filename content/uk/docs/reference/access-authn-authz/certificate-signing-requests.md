@@ -1,9 +1,4 @@
 ---
-reviewers:
-- liggitt
-- mikedanese
-- munnerz
-- enj
 title: Сертифікати та запити на їх підписування
 api_metadata:
 - apiVersion: "certificates.k8s.io/v1"

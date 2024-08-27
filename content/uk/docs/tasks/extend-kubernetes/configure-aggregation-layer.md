@@ -1,9 +1,5 @@
 ---
 title: Налаштування шару агрегації
-reviewers:
-- lavalamp
-- cheftako
-- chenopis
 content_type: task
 weight: 10
 ---

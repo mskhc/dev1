@@ -1,9 +1,6 @@
 ---
 title: Відстеження стану вузлів
 content_type: завдання
-reviewers:
-- Random-Liu
-- dchen1107
 weight: 20
 ---
 

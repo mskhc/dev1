@@ -1,6 +1,4 @@
 ---
-reviewers:
-- janetkuo
 title: Автоматичне очищення завершених задач
 content_type: concept
 weight: 70

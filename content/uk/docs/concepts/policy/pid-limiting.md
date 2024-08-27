@@ -1,6 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
 title: Обмеження та резервування ID процесів
 content_type: concept
 weight: 40

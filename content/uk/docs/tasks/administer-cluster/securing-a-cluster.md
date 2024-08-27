@@ -1,8 +1,4 @@
 ---
-reviewers:
-- smarterclayton
-- liggitt
-- enj
 title: Захист кластера
 content_type: task
 weight: 320

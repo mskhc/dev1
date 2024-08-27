@@ -1,7 +1,4 @@
 ---
-reviewers:
-- davidopp
-- lavalamp
 title: Міркування щодо великих кластерів
 weight: 10
 ---

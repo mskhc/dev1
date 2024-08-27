@@ -1,7 +1,4 @@
 ---
-reviewers:
-- dims
-- 44past4
 title: Системні логи
 content_type: concept
 weight: 80

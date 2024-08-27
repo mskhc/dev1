@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Створення кластера за допомогою kubeadm
 content_type: task
 weight: 30

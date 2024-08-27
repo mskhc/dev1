@@ -1,6 +1,5 @@
 ---
 title: Використання простору імен користувача з Podʼом
-reviewers:
 content_type: task
 weight: 210
 min-kubernetes-server-version: v1.25

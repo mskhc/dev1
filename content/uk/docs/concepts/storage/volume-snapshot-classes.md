@@ -1,11 +1,4 @@
 ---
-reviewers:
-- saad-ali
-- thockin
-- msau42
-- jingxu97
-- xing-yang
-- yuxiangqian
 title: Класи знімків томів
 content_type: concept
 weight: 61 # just after volume snapshots

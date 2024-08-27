@@ -1,8 +1,4 @@
 ---
-reviewers:
-- vishh
-- derekwaynecarr
-- dashpole
 title: Резервування обчислювальних ресурсів для системних служб
 content_type: task
 weight: 290

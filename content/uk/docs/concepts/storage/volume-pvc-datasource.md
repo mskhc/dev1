@@ -1,9 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- thockin
-- msau42
 title: Клонування CSI-томів
 content_type: concept
 weight: 70

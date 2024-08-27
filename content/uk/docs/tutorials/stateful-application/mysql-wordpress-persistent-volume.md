@@ -1,7 +1,5 @@
 ---
 title: "Приклад: Розгортання WordPress та MySQL з постійними томами"
-reviewers:
-- ahmetb
 content_type: tutorial
 weight: 20
 card: 

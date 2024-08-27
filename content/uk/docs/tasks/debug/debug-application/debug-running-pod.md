@@ -1,7 +1,4 @@
 ---
-reviewers:
-- verb
-- soltysh
 title: Налагодження запущених Podʼів
 content_type: task
 ---

@@ -1,9 +1,5 @@
 ---
 title: Поділ простору імен процесів між контейнерами у Podʼі
-reviewers:
-- verb
-- yujuhong
-- dchen1107
 content_type: task
 weight: 200
 ---

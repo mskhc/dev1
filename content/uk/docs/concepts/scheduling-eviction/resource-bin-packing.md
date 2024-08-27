@@ -1,8 +1,4 @@
 ---
-reviewers:
-- bsalamat
-- k82cn
-- ahg-g
 title: Пакування ресурсів
 content_type: concept
 weight: 80

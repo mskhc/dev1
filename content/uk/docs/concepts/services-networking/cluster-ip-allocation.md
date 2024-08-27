@@ -1,7 +1,4 @@
 ---
-reviewers:
-- sftim
-- thockin
 title: Виділення IP-адрес ClusterIP Serviceʼам
 content_type: concept
 weight: 120

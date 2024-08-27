@@ -1,8 +1,4 @@
 ---
-reviewers:
-- Random-Liu
-- feiskyer
-- mrunalp
 title: Налагодження вузлів Kubernetes за допомогою crictl
 content_type: task
 weight: 30

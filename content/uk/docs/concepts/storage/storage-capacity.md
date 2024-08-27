@@ -1,10 +1,4 @@
 ---
-reviewers:
-- jsafrane
-- saad-ali
-- msau42
-- xing-yang
-- pohly
 title: Обсяг сховища
 content_type: concept
 weight: 80

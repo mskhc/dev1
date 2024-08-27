@@ -1,7 +1,4 @@
 ---
-reviewers:
-- mikedanese
-- thockin
 title: Налагодження Podʼів
 content_type: task
 weight: 10

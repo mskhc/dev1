@@ -1,7 +1,4 @@
 ---
-reviewers:
-- dchen1107
-- liggitt
 title: Звʼязок між Вузлами та Панеллю управління
 content_type: concept
 weight: 20

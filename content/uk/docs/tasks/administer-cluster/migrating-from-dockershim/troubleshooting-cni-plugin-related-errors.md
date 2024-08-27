@@ -1,9 +1,6 @@
 ---
 title: Виправлення помилок, повʼязаних з втулками CNI
 content_type: task
-reviewers:
-- mikebrow
-- divya-mohan0209
 weight: 40
 ---
 

@@ -1,7 +1,4 @@
 ---
-reviewers:
-- tallclair
-- liggitt
 title: Зіставлення PodSecurityPolicies зі стандартами безпеки Podʼів
 content_type: concept
 weight: 95

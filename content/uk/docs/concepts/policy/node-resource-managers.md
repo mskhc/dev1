@@ -1,7 +1,4 @@
 ---
-reviewers:
-- derekwaynecarr
-- klueska
 title: Менеджери ресурсів вузлів
 content_type: concept
 weight: 50

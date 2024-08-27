@@ -1,7 +1,4 @@
 ---
-reviewers:
-  - liggitt
-  - enj
 title: Управління службовими обліковими записами
 content_type: concept
 weight: 50

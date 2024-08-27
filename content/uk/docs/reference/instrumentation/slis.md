@@ -1,6 +1,4 @@
 ---
-reviewers:
-- logicalhan
 title: Метрики SLI компонентів Kubernetes
 linkTitle: Метрики Індикаторів Рівня Обслуговування
 content_type: reference

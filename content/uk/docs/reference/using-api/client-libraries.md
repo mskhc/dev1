@@ -1,7 +1,5 @@
 ---
 title: Бібліотеки клієнтів
-reviewers:
-- ahmetb
 content_type: concept
 weight: 30
 ---

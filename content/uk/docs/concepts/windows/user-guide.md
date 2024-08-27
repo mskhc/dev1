@@ -1,8 +1,4 @@
 ---
-reviewers:
-- jayunit100
-- jsturtevant
-- marosset
 title: Посібник з запуску контейнерів Windows у Kubernetes
 content_type: tutorial
 weight: 75

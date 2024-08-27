@@ -1,9 +1,4 @@
 ---
-reviewers:
-- mikedanese
-- liggitt
-- smarterclayton
-- awly
 title: Початкове завантаження TLS
 content_type: concept
 weight: 120

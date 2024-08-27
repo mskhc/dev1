@@ -1,8 +1,4 @@
 ---
-reviewers:
-- erictune
-- soltysh
-- janetkuo
 title: CronJob
 api_metadata:
 - apiVersion: "batch/v1"

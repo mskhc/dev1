@@ -1,6 +1,4 @@
 ---
-reviewers:
-- murali-reddy
 title: Використання Kube-router для NetworkPolicy
 content_type: task
 weight: 40

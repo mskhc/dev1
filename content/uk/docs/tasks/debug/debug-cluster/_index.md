@@ -1,6 +1,4 @@
 ---
-reviewers:
-- davidopp
 title: Налагодження кластера
 description: Виправлення загальних проблем з кластером Kubernetes.
 weight: 20

@@ -1,8 +1,4 @@
 ---
-reviewers:
-- jlowdermilk
-- justinsb
-- quinton-hoole
 title: Запуск у кількох зонах
 weight: 20
 content_type: concept

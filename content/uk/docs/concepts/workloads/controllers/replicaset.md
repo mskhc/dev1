@@ -1,8 +1,4 @@
 ---
-reviewers:
-- Kashomon
-- bprashanth
-- madhusudancs
 title: ReplicaSet
 api_metadata:
 - apiVersion: "apps/v1"

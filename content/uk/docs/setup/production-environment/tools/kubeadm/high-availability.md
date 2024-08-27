@@ -1,6 +1,4 @@
 ---
-reviewers:
-- sig-cluster-lifecycle
 title: Створення високодоступних кластерів за допомогою kubeadm
 content_type: task
 weight: 60

@@ -1,9 +1,4 @@
 ---
-reviewers:
-- bprashanth
-- erictune
-- foxish
-- smarterclayton
 title: Примусове видалення Podʼів StatefulSet
 content_type: task
 weight: 70

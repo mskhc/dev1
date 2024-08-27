@@ -1,6 +1,4 @@
 ---
-reviewers:
-- caseydavenport
 title: Використання Calico для NetworkPolicy
 content_type: task
 weight: 20

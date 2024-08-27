@@ -1,11 +1,4 @@
 ---
-reviewers:
-- sig-api-machinery
-- sig-architecture
-- sig-cli
-- sig-cluster-lifecycle
-- sig-node
-- sig-release
 title: Політика версійної розбіжності
 type: docs
 description: >

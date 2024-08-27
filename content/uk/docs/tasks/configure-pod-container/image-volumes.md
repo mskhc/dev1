@@ -1,6 +1,5 @@
 ---
 title: Використання тому Image в Pod
-reviewers:
 content_type: task
 weight: 210
 min-kubernetes-server-version: v1.31

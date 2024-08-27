@@ -1,6 +1,4 @@
 ---
-reviewers:
-- erictune
 title: Контейнери ініціалізації
 content_type: concept
 weight: 40

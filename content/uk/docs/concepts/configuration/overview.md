@@ -1,6 +1,4 @@
 ---
-reviewers:
-- mikedanese
 title: Поради щодо конфігурації
 content_type: concept
 weight: 10

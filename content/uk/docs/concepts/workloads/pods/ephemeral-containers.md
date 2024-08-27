@@ -1,7 +1,4 @@
 ---
-reviewers:
-- verb
-- yujuhong
 title: Ефемерні контейнери
 content_type: concept
 weight: 60

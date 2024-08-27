@@ -1,9 +1,5 @@
 ---
 title: Огляд API
-reviewers:
-- erictune
-- lavalamp
-- jbeda
 content_type: concept
 weight: 20
 no_list: true

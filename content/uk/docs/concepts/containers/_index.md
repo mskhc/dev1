@@ -2,9 +2,6 @@
 title: Контейнери
 weight: 40
 description: Технологія для упаковки застосунку разом з його залежностями оточення виконання.
-reviewers:
-- erictune
-- thockin
 content_type: concept
 card:
   name: concepts

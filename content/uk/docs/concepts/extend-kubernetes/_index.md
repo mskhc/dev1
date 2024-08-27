@@ -2,11 +2,6 @@
 title: Розширення можливостей Kubernetes
 weight: 999 # this section should come last
 description: Різні способи зміни поведінки вашого кластера Kubernetes.
-reviewers:
-- erictune
-- lavalamp
-- cheftako
-- chenopis
 feature:
   title: Створенно щоб розширюватись
   description: >

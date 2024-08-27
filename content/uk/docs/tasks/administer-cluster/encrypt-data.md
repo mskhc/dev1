@@ -1,8 +1,5 @@
 ---
 title: Шифрування конфіденційних даних у спокої
-reviewers:
-- smarterclayton
-- enj
 content_type: task
 weight: 210
 ---

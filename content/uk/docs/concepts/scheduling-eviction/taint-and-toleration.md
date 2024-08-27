@@ -1,8 +1,4 @@
 ---
-reviewers:
-- davidopp
-- kevin-wangzefeng
-- bsalamat
 title: Заплямованість та Толерантність
 content_type: concept
 weight: 50

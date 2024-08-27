@@ -1,8 +1,4 @@
 ---
-reviewers:
-- dcbw
-- freehan
-- thockin
 title: Мережеві втулки
 content_type: concept
 weight: 10

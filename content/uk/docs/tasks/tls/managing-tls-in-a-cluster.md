@@ -1,10 +1,6 @@
 ---
 title: Управління TLS сертифікатами в кластері
 content_type: task
-reviewers:
-- mikedanese
-- beacham
-- liggit
 ---
 
 <!-- overview -->

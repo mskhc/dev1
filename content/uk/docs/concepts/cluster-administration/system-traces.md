@@ -1,8 +1,5 @@
 ---
 title: Трейси для системних компонентів Kubernetes
-reviewers:
-- logicalhan
-- lilic
 content_type: concept
 weight: 90
 ---

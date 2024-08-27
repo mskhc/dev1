@@ -1,6 +1,4 @@
 ---
-reviewers:
-- bprashanth
 title: Ingress
 api_metadata:
 - apiVersion: "networking.k8s.io/v1"

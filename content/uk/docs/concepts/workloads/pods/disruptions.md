@@ -1,8 +1,4 @@
 ---
-reviewers:
-- erictune
-- foxish
-- davidopp
 title: Розлади
 content_type: concept
 weight: 70

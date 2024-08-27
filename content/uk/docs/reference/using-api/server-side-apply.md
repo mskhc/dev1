@@ -1,9 +1,4 @@
 ---
-reviewers:
-- smarterclayton
-- apelisse
-- lavalamp
-- liggitt
 title: Server-Side Apply
 content_type: concept
 weight: 25

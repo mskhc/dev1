@@ -1,6 +1,4 @@
 ---
-reviewers:
-- jpbetz
 title: Координовані вибори лідера
 content_type: concept
 weight: 200

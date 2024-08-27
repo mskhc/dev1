@@ -1,11 +1,4 @@
 ---
-reviewers:
-- enisoc
-- erictune
-- foxish
-- janetkuo
-- kow3ns
-- smarterclayton
 title: Основи StatefulSet
 content_type: tutorial
 weight: 10

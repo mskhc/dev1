@@ -1,8 +1,4 @@
 ---
-reviewers:
-- enj
-- liggitt
-- thockin
 title: Налаштування службових облікових записів для Podʼів
 content_type: task
 weight: 120

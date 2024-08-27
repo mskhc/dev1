@@ -1,7 +1,4 @@
 ---
-reviewers:
-- mikedanese
-- thockin
 title: Хуки життєвого циклу контейнера
 content_type: concept
 weight: 40

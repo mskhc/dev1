@@ -1,7 +1,4 @@
 ---
-reviewers:
-- caseydavenport
-- danwinship
 title: Оголошення мережевої політики
 min-kubernetes-server-version: v1.8
 content_type: task
