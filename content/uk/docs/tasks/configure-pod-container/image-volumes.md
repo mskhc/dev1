@@ -19,7 +19,7 @@ min-kubernetes-server-version: v1.31
 - Середовище виконання контейнерів має підтримувати функцію томів image.
 - Вам потрібно мати можливість виконувати команди на хості.
 - Вам потрібно мати можливість підключатися до pod.
-- Вам потрібно увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `ImageVolume`.
+- Вам потрібно увімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `ImageVolume`.
 
 <!-- steps -->
 
@@ -41,30 +41,30 @@ min-kubernetes-server-version: v1.31
    kubectl attach -it image-volume bash
    ```
 
-Виконайте цю команду:
+1. Перевірте вміст файлу в томі:
 
-```shell
-cat /volume/dir/file
-```
+   ```shell
+   cat /volume/dir/file
+   ```
 
-Вивід буде подібний до:
+   Вивід буде подібний до:
 
-```shell
-1
-```
+   ```shell
+   1
+   ```
 
-Також виконайте:
+   Ви також можете перевірити інший файл з іншим шляхом:
 
-```shell
-cat /volume/file
-```
+   ```shell
+   cat /volume/file
+   ```
 
-Вивід буде подібний до:
+   Вивід буде подібний до:
 
-```shell
-2
-```
+   ```shell
+   2
+   ```
 
 ## Додатково {#further-reading}
 
-- [Томи `image`](/uk/docs/concepts/storage/volumes/#image)
+- [Томи `image`](/docs/concepts/storage/volumes/#image)

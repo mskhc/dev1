@@ -14,18 +14,24 @@ weight: 10
 
 Існують наступні методи встановлення kubectl у Windows:
 
-- [Встановлення бінарника kubectl з curl у Windows](#install-kubectl-binary-with-curl-on-windows)
+- [Встановлення бінарника kubectl у Windows (за допомогою прямого завантаження або за допомогою curl)](#install-kubectl-binary-on-windows-via-direct-download-or-curl)
 - [Встановлення за допомогою Chocolatey, Scoop або winget у Windows](#install-nonstandard-package-tools)
 
-### Встановлення бінарника kubectl з curl у Windows {#install-kubectl-binary-with-curl-on-windows}
+### Встановлення бінарника kubectl у Windows (за допомогою прямого завантаження або за допомогою curl) {#install-kubectl-binary-on-windows-via-direct-download-or-curl}
 
-1. Завантажте останній випуск {{< skew currentVersion >}}: [kubectl {{< skew currentPatchVersion >}}](https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/windows/amd64/kubectl.exe).
+1. У вас є два варіанти встановлення kubectl на вашому пристрої з Windows
 
-   Або, якщо у вас встановлено `curl`, використовуйте цю команду:
+   - Безпосереднє завантаження:
 
-   ```powershell
-   curl.exe -LO "https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/windows/amd64/kubectl.exe"
-   ```
+     Завантажте останню версію {{< skew currentVersion >}} патчу безпосередньо для вашої архітектури, відвідавши [сторінку випуску Kubernetes](https://kubernetes.io/releases/download/#binaries). Переконайтеся, що вибрано правильний двійковий файл для вашої архітектури (наприклад, amd64, arm64 тощо).
+
+   - Використовуючи curl
+
+     Або, якщо у вас встановлено `curl`, використовуйте цю команду:
+
+     ```powershell
+     curl.exe -LO "https://dl.k8s.io/release/v{{< skew currentPatchVersion >}}/bin/windows/amd64/kubectl.exe"
+     ```
 
    {{< note >}}
    Щоб дізнатися останню стабільну версію (наприклад, для скриптів), перегляньте [https://dl.k8s.io/release/stable.txt](https://dl.k8s.io/release/stable.txt).

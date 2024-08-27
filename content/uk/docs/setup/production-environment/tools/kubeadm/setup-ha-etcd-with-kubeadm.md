@@ -14,7 +14,7 @@ weight: 70
 {{< /note >}}
 
 Типово kubeadm запускає локальний екземпляр etcd на кожному вузлі панелі управління Також можливо розглядати кластер etcd як зовнішній та розгортати екземпляри etcd на окремих хостах. Відмінності між цими підходами описано на сторінці
-[Варіанти топології високої доступності](/uk/docs/setup/production-environment/tools/kubeadm/ha-topology).
+[Варіанти топології високої доступності](/docs/setup/production-environment/tools/kubeadm/ha-topology).
 
 Це завдання веде через процес створення кластера високої доступності з зовнішньою базою etcd із трьох членів, який може використовувати kubeadm під час створення кластера.
 
@@ -24,8 +24,8 @@ weight: 70
   документ вважає, що це стандартні порти. Однак їх можна налаштувати через
   файл конфігурації kubeadm.
 - На кожному хості повинен бути встановлений systemd та сумісна з bash оболонка.
-- На кожному хості повинно бути встановлене [середовище виконання контейнерів, kubelet та kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm/).
-- Кожен хост повинен мати доступ до реєстру образів контейнерів Kubernetes (`registry.k8s.io`) або ви можете отримати перелік та/або витягти необхідний образ etcd, використовуючи `kubeadm config images list/pull`. У цьому посібнику екземпляри etcd налаштовані як [статичні Podʼи](/uk/docs/tasks/configure-pod-container/static-pod/), керовані kubelet.
+- На кожному хості повинно бути встановлене [середовище виконання контейнерів, kubelet та kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/).
+- Кожен хост повинен мати доступ до реєстру образів контейнерів Kubernetes (`registry.k8s.io`) або ви можете отримати перелік та/або витягти необхідний образ etcd, використовуючи `kubeadm config images list/pull`. У цьому посібнику екземпляри etcd налаштовані як [статичні Podʼи](/docs/tasks/configure-pod-container/static-pod/), керовані kubelet.
 - Є якась інфраструктура для копіювання файлів між хостами. Наприклад, `ssh` та `scp` можуть відповідати цьому вимогу.
 
 <!-- steps -->
@@ -40,7 +40,7 @@ kubeadm містить усі необхідні криптографічні м
 
 {{< note >}}
 У прикладах нижче використовуються адреси IPv4, але ви також можете налаштувати kubeadm, kubelet та etcd на використання адрес IPv6. Підтримка подвійного стека передбачена для деяких параметрів Kubernetes, але не для etcd. Докладніше
-щодо підтримки подвійного стека Kubernetes дивіться [Підтримка подвійного стека з kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/dual-stack-support/).
+щодо підтримки подвійного стека Kubernetes дивіться [Підтримка подвійного стека з kubeadm](/docs/setup/production-environment/tools/kubeadm/dual-stack-support/).
 {{< /note >}}
 
 1. Налаштуйте kubelet як менеджер служб для etcd.
@@ -127,13 +127,20 @@ kubeadm містить усі необхідні криптографічні м
            peerCertSANs:
            - "${HOST}"
            extraArgs:
-               initial-cluster: ${NAMES[0]}=https://${HOSTS[0]}:2380,${NAMES[1]}=https://${HOSTS[1]}:2380,${NAMES[2]}=https://${HOSTS[2]}:2380
-               initial-cluster-state: new
-               name: ${NAME}
-               listen-peer-urls: https://${HOST}:2380
-               listen-client-urls: https://${HOST}:2379
-               advertise-client-urls: https://${HOST}:2379
-               initial-advertise-peer-urls: https://${HOST}:2380
+           - name: initial-cluster
+             value: ${NAMES[0]}=https://${HOSTS[0]}:2380,${NAMES[1]}=https://${HOSTS[1]}:2380,${NAMES[2]}=https://${HOSTS[2]}:2380
+           - name: initial-cluster-state
+             value: new
+           - name: name
+             value: ${NAME}
+           - name: listen-peer-urls
+             value: https://${HOST}:2380
+           - name: listen-client-urls
+             value: https://${HOST}:2379
+           - name: advertise-client-urls
+             value: https://${HOST}:2379
+           - name: initial-advertise-peer-urls
+             value: https://${HOST}:2380
    EOF
    done
    ```
@@ -286,4 +293,4 @@ kubeadm містить усі необхідні криптографічні м
 
 ## {{% heading "whatsnext" %}}
 
-Коли у вас є кластер etcd з 3 робочими учасниками, ви можете продовжити налаштування високодоступного вузла панелі управління, використовуючи [метод зовнішнього etcd з kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/high-availability/).
+Коли у вас є кластер etcd з 3 робочими учасниками, ви можете продовжити налаштування високодоступного вузла панелі управління, використовуючи [метод зовнішнього etcd з kubeadm](/docs/setup/production-environment/tools/kubeadm/high-availability/).

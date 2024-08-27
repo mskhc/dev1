@@ -23,19 +23,19 @@ weight: 60
 
 Версії Kubernetes позначаються як **x.y.z**, де **x** — основна версія, **y** — мінорна версія, а **z** — патч-версія, згідно з термінологією [Семантичного Версіонування](https://semver.org/). Для отримання додаткової інформації дивіться [Kubernetes Release Versioning](https://git.k8s.io/sig-release/release-engineering/versioning.md#kubernetes-release-versioning).
 
-Проєкт Kubernetes підтримує гілки випусків для останніх трьох мінорних випусків ({{< skew latestVersion >}}, {{< skew prevMinorVersion >}}, {{< skew oldestMinorVersion >}}). Kubernetes 1.19 та новіші версії отримують [приблизно 1 рік патч-підтримки](/uk/releases/patch-releases/#support-period). Kubernetes 1.18 та старіші отримували приблизно 9 місяців патч-підтримки.
+Проєкт Kubernetes підтримує гілки випусків для останніх трьох мінорних випусків ({{< skew latestVersion >}}, {{< skew prevMinorVersion >}}, {{< skew oldestMinorVersion >}}). Kubernetes 1.19 та новіші версії отримують [приблизно 1 рік патч-підтримки](/releases/patch-releases/#support-period). Kubernetes 1.18 та старіші отримували приблизно 9 місяців патч-підтримки.
 
-Відповідні виправлення, включаючи виправлення безпеки, можуть бути перенесені на ці три гілки випусків залежно від серйозності та здійсненності. Патч-випуски вирізаються з цих гілок на [регулярній основі](/uk/releases/patch-releases/#cadence), а також додаткові термінові випуски, коли це необхідно.
+Відповідні виправлення, включаючи виправлення безпеки, можуть бути перенесені на ці три гілки випусків залежно від серйозності та здійсненності. Патч-випуски вирізаються з цих гілок на [регулярній основі](/releases/patch-releases/#cadence), а також додаткові термінові випуски, коли це необхідно.
 
-Група [Менеджерів Релізів](/uk/releases/release-managers/) володіє цим рішенням.
+Група [Менеджерів Релізів](/releases/release-managers/) володіє цим рішенням.
 
-Для отримання додаткової інформації дивіться сторінку [Патч-випуски](/uk/releases/patch-releases/) Kubernetes.
+Для отримання додаткової інформації дивіться сторінку [Патч-випуски](/releases/patch-releases/) Kubernetes.
 
-## Підтримувана версійне розбіжність {#supported-version-skew}
+## Підтримувана версійна розбіжність {#supported-version-skew}
 
 ### kube-apiserver
 
-У [кластері з високою доступністю (HA)](/uk/docs/setup/production-environment/tools/kubeadm/high-availability/), найновіші та найстаріші екземпляри `kube-apiserver` повинні бути в межах однієї мінорної версії.
+У [кластері з високою доступністю (HA)](/docs/setup/production-environment/tools/kubeadm/high-availability/), найновіші та найстаріші екземпляри `kube-apiserver` повинні бути в межах однієї мінорної версії.
 
 Приклад:
 
@@ -140,13 +140,13 @@ weight: 60
 * Екземпляри `kube-controller-manager`, `kube-scheduler` та `cloud-controller-manager`, які взаємодіють з цим сервером, мають версію **{{< skew currentVersionAddMinor -1 >}}** (це забезпечує, що вони не новіші за поточну версію API сервера і знаходяться в межах 1 мінорної версії від нової версії API сервера)
 * Екземпляри `kubelet` на всіх вузлах мають версії **{{< skew currentVersionAddMinor -1 >}}** або **{{< skew currentVersionAddMinor -2 >}}** (це забезпечує, що вони не новіші за поточну версію API сервера і знаходяться в межах 2 мінорних версій від нової версії API сервера)
 * Зареєстровані вебхуки допуску здатні обробляти дані, які новий екземпляр `kube-apiserver` буде їм надсилати:
-  * Обʼєкти `ValidatingWebhookConfiguration` та `MutatingWebhookConfiguration` оновлені для включення будь-яких нових версій REST ресурсів, доданих у **{{< skew currentVersion >}}** (або використовують опцію [`matchPolicy: Equivalent`](/uk/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-matchpolicy), доступну у версії v1.15+)
+  * Обʼєкти `ValidatingWebhookConfiguration` та `MutatingWebhookConfiguration` оновлені для включення будь-яких нових версій REST ресурсів, доданих у **{{< skew currentVersion >}}** (або використовують опцію [`matchPolicy: Equivalent`](/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-matchpolicy), доступну у версії v1.15+)
   * Вебхуки здатні обробляти будь-які нові версії REST ресурсів, які будуть їм надсилатися, і будь-які нові поля, додані до поточних версій у **{{< skew currentVersion >}}**
 
 Оновіть `kube-apiserver` до **{{< skew currentVersion >}}**
 
 {{< note >}}
-Політики проєкту щодо [застарівання API](/uk/docs/reference/using-api/deprecation-policy/) та
+Політики проєкту щодо [застарівання API](/docs/reference/using-api/deprecation-policy/) та
 [рекомендацій щодо змін API](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api_changes.md) вимагають, щоб `kube-apiserver` не пропускав мінорні версії під час оновлення, навіть у кластерах, що складаються з одного екземпляру.
 {{< /note >}}
 
@@ -167,7 +167,7 @@ weight: 60
 За бажанням, оновіть екземпляри `kubelet` до **{{< skew currentVersion >}}** (або їх можна залишити на версіях **{{< skew currentVersionAddMinor -1 >}}**, **{{< skew currentVersionAddMinor -2 >}}**, або **{{< skew currentVersionAddMinor -3 >}}**)
 
 {{< note >}}
-Перед виконанням мінорного оновлення `kubelet`, [виселіть](/uk/docs/tasks/administer-cluster/safely-drain-node/) Podʼи з цього вузла. Оновлення `kubelet` на місці до іншої мінорної версії не підтримується.
+Перед виконанням мінорного оновлення `kubelet`, [виселіть](/docs/tasks/administer-cluster/safely-drain-node/) Podʼи з цього вузла. Оновлення `kubelet` на місці до іншої мінорної версії не підтримується.
 {{</ note >}}
 
 {{< warning >}}
