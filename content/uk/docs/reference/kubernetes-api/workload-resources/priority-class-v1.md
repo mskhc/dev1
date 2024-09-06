@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "`PriorityClass` визначає зіставлення імені класу пріоритету з цілим значенням пріоритету."
 title: "PriorityClass"
-weight: 13
+weight: 14
 auto_generated: true
 ---
 

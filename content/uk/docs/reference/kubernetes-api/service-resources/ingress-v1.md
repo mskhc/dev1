@@ -175,6 +175,8 @@ IngressStatus описує поточний стан Ingress.
 
   - **loadBalancer.ingress** ([]IngressLoadBalancerIngress)
 
+    *Atomic: буде замінено під час злиття*
+
     ingress — це список точок входу для балансувальника навантаження.
 
     <a name="IngressLoadBalancerIngress"></a>

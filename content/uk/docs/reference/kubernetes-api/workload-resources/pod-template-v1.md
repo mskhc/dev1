@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "PodTemplate описує шаблон для створення копій наперед визначеного Podʼа."
 title: "PodTemplate"
-weight: 2
+weight: 3
 auto_generated: false
 ---
 

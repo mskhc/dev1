@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "ComponentStatus (і ComponentStatusList) містить інформацію про валідацію кластера."
 title: "ComponentStatus"
-weight: 10
+weight: 2
 auto_generated: false
 ---
 
@@ -31,6 +31,8 @@ ComponentStatus (і ComponentStatusList) містить інформацію п�
 - **conditions** ([]ComponentCondition)
 
   *Patch strategy: обʼєднання за ключем `type`*
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
 
   Список спостережуваних станів компонента
 

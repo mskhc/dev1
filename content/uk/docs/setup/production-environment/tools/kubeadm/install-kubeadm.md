@@ -12,7 +12,7 @@ card:
 
 <img src="/images/kubeadm-stacked-color.png" align="right" width="150px"></img>
 
-Ця сторінка показує, як встановити інструменти `kubeadm`. Для отримання інформації щодо того, як створити кластер за допомогою kubeadm після виконання цього процесу встановлення, див. сторінку [Створення кластера за допомогою kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/).
+Ця сторінка показує, як встановити інструменти `kubeadm`. Для отримання інформації щодо того, як створити кластер за допомогою kubeadm після виконання цього процесу встановлення, див. сторінку [Створення кластера за допомогою kubeadm](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/).
 
 {{< doc-versions-list "installation guide" >}}
 
@@ -24,8 +24,6 @@ card:
 * Повноцінне мережеве зʼєднання між усіма машинами в кластері (публічна чи приватна мережа підходить).
 * Унікальні імена хостів, MAC-адреси та product_uuid для кожного вузла. Див. [тут](#verify-mac-address) для отримання докладнішої інформації.
 * Відкриті певні порти на ваших машинах. Див. [тут](#check-required-ports) для отримання докладнішої інформації.
-* Конфігурація swap. Стандартно kubelet не запускався, якщо на вузлі було виявлено swap. Докладніші відомості наведено у статті [Керування swap](/uk/docs/concepts/architecture/nodes/#swap-memory).
-  * Ви **ПОВИННІ** вимкнути swap, якщо kubelet не налаштований на використання swap. Наприклад, `sudo swapoff -a` вимкне обмін тимчасово. Щоб зробити ці зміни постійними після перезавантаження, переконайтеся, що swap вимкнено у файлах конфігурації, таких як `/etc/fstab`, `systemd.swap`, залежно від того, як він був налаштований у вашій системі.
 
 {{< note >}}
 Встановлення за допомогою `kubeadm` виконується за допомогою бінарних файлів, які використовують динамічне звʼязування та передбачають, що ваша цільова система надає бібліотеку `glibc`. Це припущення стосується багатьох дистрибутивів Linux (включаючи Debian, Ubuntu, Fedora, CentOS і т. д.), але не завжди відповідає дійсності у випадку власних та легких дистрибутивів, які типово не включають `glibc`, наприклад, Alpine Linux. Очікується, що дистрибутив включає або [шар сумісності](https://wiki.alpinelinux.org/wiki/Running_glibc_programs), який забезпечує необхідні символи, або `glibc`.
@@ -46,13 +44,21 @@ card:
 
 ## Перевірка необхідних портів {#check-required-ports}
 
-Ці [необхідні порти](/uk/docs/reference/networking/ports-and-protocols/) повинні бути відкриті для взаємодії компонентів Kubernetes між собою. Ви можете використовувати інструменти, такі як [netcat](https://netcat.sourceforge.net), щоб перевірити, чи відкритий порт. Наприклад:
+Ці [необхідні порти](/docs/reference/networking/ports-and-protocols/) повинні бути відкриті для взаємодії компонентів Kubernetes між собою. Ви можете використовувати інструменти, такі як [netcat](https://netcat.sourceforge.net), щоб перевірити, чи відкритий порт. Наприклад:
 
 ```shell
 nc 127.0.0.1 6443 -v
 ```
 
 Мережевий втулок Podʼа, який ви використовуєте, також може вимагати, щоб певні порти були відкриті. Оскільки це відрізняється для кожного мережевого втулка, будь ласка, перегляньте їх документацію про те, які порти їм потрібні.
+
+## Конфігурація swap {#swap-configuration}
+
+Стандартно kubelet не запускається, якщо на вузлі виявлено swap-памʼять.
+Це означає, що swap слід або вимкнути, або дозволити його використання kubelet.
+
+* Щоб дозволити swap, додайте `failSwapOn: false` до конфігурації kubelet або як аргумент командного рядка. Примітка: навіть якщо вказано `failSwapOn: false`, робочі навантаження не матимуть стандартно доступу до swap. Це можна змінити, встановивши параметр `swapBehavior`, знову ж таки в конфігураційному файлі kubelet. Для використання swap, встановіть значення `swapBehavior` інше ніж стандартне налаштування `NoSwap`. Докладніше дивіться у розділі [Управління памʼяттю swap](/docs/concepts/architecture/nodes/#swap-memory).
+* Щоб вимкнути swap, можна використовувати команду `sudo swapoff -a` для тимчасового відключення swap. Щоб зробити цю зміну постійною після перезавантаження, переконайтеся, що swap вимкнено у конфігураційних файлах, таких як `/etc/fstab`, `systemd.swap`, залежно від того, як це налаштовано у вашій системі.
 
 ## Встановлення середовища виконання контейнерів {#installing-runtime}
 
@@ -64,10 +70,10 @@ nc 127.0.0.1 6443 -v
 
 Якщо виявлено кілька або жодного середовища виконання контейнерів, `kubeadm` повідомить про помилку та запросить вас вказати, яке середовище ви хочете використовувати.
 
-Дивіться [середовища виконання контейнерів](/uk/docs/setup/production-environment/container-runtimes/) для отримання додаткової інформації.
+Дивіться [середовища виконання контейнерів](/docs/setup/production-environment/container-runtimes/) для отримання додаткової інформації.
 
 {{< note >}}
-Рушій Docker не має реалізації [CRI](/uk/docs/concepts/architecture/cri/), що є вимогою для роботи контейнерного середовища в Kubernetes. З цього приводу слід встановити додатковий сервіс [cri-dockerd](https://mirantis.github.io/cri-dockerd/).
+Рушій Docker не має реалізації [CRI](/docs/concepts/architecture/cri/), що є вимогою для роботи контейнерного середовища в Kubernetes. З цього приводу слід встановити додатковий сервіс [cri-dockerd](https://mirantis.github.io/cri-dockerd/).
 `cri-dockerd` — це проєкт, побудований на основі колишньої вбудованої підтримки Docker Engine, яка була [вилучена](/dockershim) з kubelet у версії 1.24.
 {{< /note >}}
 
@@ -110,16 +116,16 @@ nc 127.0.0.1 6443 -v
 
 kubeadm **не буде** встановлювати або керувати `kubelet` або `kubectl` за вас, тому вам потрібно забезпечити відповідність їх версії панелі управління Kubernetes, яку ви хочете, щоб `kubeadm` встановив для вас. Якщо цього не зробити, існує ризик змішування версій, що може призвести до непередбачуваної та неправильної роботи. Однак _одина_ невелика розбіжність між `kubelet` та панеллю управління підтримується, але версія `kubelet` ніколи не повинна перевищувати версію API сервера. Наприклад, `kubelet` версії 1.7.0 буде повністю сумісний з API-сервером версії 1.8.0, але не навпаки.
 
-Щодо інформації про встановлення `kubectl`, див. [Встановлення та налаштування kubectl](/uk/docs/tasks/tools/).
+Щодо інформації про встановлення `kubectl`, див. [Встановлення та налаштування kubectl](/docs/tasks/tools/).
 
 {{< warning >}}
-Ці інструкції виключають усі пакунки Kubernetes з будь-яких оновлень системи. Це через те, що `kubeadm` та Kubernetes вимагають [спеціальної уваги під час оновлення](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
+Ці інструкції виключають усі пакунки Kubernetes з будь-яких оновлень системи. Це через те, що `kubeadm` та Kubernetes вимагають [спеціальної уваги під час оновлення](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
 {{</ warning >}}
 
 Докладніше про відмінності версій:
 
-* [Політика версій та відмінностей](/uk/docs/setup/release/version-skew-policy/) Kubernetes
-* [Політика відмінностей версій для kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#version-skew-policy)
+* [Політика версій та відмінностей](/docs/setup/release/version-skew-policy/) Kubernetes
+* [Політика відмінностей версій для kubeadm](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#version-skew-policy)
 
 {{% legacy-repos-deprecation %}}
 
@@ -272,7 +278,7 @@ curl -sSL "https://raw.githubusercontent.com/kubernetes/release/${RELEASE_VERSIO
 Звіртесь з примітками в розділі [Перш ніж ви розпочнете](#before-you-begin) для дистрибутивів Linux, які типово не містять `glibc`.
 {{< /note >}}
 
-Встановіть `kubectl`, відповідно до інструкцій на сторінці [Встановлення інструментів](/uk/docs/tasks/tools/#kubectl).
+Встановіть `kubectl`, відповідно до інструкцій на сторінці [Встановлення інструментів](/docs/tasks/tools/#kubectl).
 
 Опціонально, увімкніть службу `kubelet` перед запуском `kubeadm`:
 
@@ -281,7 +287,7 @@ sudo systemctl enable --now kubelet
 ```
 
 {{< note >}}
-Дистрибутив Flatcar Container Linux монтує теку `/usr` як файлову систему тільки для читання. Перед ініціалізацією кластера вам потрібно виконати додаткові кроки для налаштування теки для запису. Див. [Посібник з усунення несправностей kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#usr-mounted-read-only), щоб дізнатися, як налаштувати теку для запису.
+Дистрибутив Flatcar Container Linux монтує теку `/usr` як файлову систему тільки для читання. Перед ініціалізацією кластера вам потрібно виконати додаткові кроки для налаштування теки для запису. Див. [Посібник з усунення несправностей kubeadm](/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#usr-mounted-read-only), щоб дізнатися, як налаштувати теку для запису.
 {{< /note >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -290,18 +296,18 @@ Kubelet тепер перезавантажується кожні кілька 
 
 ## Налаштування драйвера cgroup {#configure-a-cgroup-driver}
 
-Як середовище виконання контейнерів, так і kubelet мають властивість, відому як ["cgroup driver"](/uk/docs/setup/production-environment/container-runtimes/#cgroup-drivers), яка є важливою для управління cgroup на машинах з операційною системою Linux.
+Як середовище виконання контейнерів, так і kubelet мають властивість, відому як ["cgroup driver"](/docs/setup/production-environment/container-runtimes/#cgroup-drivers), яка є важливою для управління cgroup на машинах з операційною системою Linux.
 
 {{< warning >}}
 Обовʼязково встановлюйте спільний драйвер cgroup для середовища виконання контейнерів та kubelet, інакше процес kubelet завершиться із помилкою.
 
-Докладніше дивіться в розділі [Налаштування драйвера cgroup](/uk/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/).
+Докладніше дивіться в розділі [Налаштування драйвера cgroup](/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/).
 {{< /warning >}}
 
 ## Розвʼязання проблем {#troubleshooting}
 
-Якщо у вас виникають труднощі з kubeadm, будь ласка, звертайтеся до наших [документів щодо розвʼязання проблем](/uk/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/).
+Якщо у вас виникають труднощі з kubeadm, будь ласка, звертайтеся до наших [документів щодо розвʼязання проблем](/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/).
 
 ## {{% heading "whatsnext" %}}
 
-* [Створення кластера за допомогою kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+* [Створення кластера за допомогою kubeadm](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)

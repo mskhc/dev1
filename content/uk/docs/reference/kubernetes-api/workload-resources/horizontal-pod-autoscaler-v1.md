@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "Конфігурація горизонтального автомасштабування Podʼів."
 title: "HorizontalPodAutoscaler"
-weight: 11
+weight: 12
 auto_generated: false
 ---
 

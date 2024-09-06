@@ -43,11 +43,15 @@ ServiceAccount повʼязує разом
 
 - **imagePullSecrets** ([]<a href="{{< ref "../common-definitions/local-object-reference#LocalObjectReference" >}}">LocalObjectReference</a>)
 
+  *Atomic: буде замінено під час злиття*
+
   imagePullSecrets — це список посилань на Sercretʼи в тому ж просторі імен для використання при завантаженні будь-яких образів у Podʼах, які використовують цей службовий обліковий запис. ImagePullSecrets відрізняються від Secrets тим, що Secrets можуть бути змонтовані в Pod, а ImagePullSecrets доступні лише для kubelet. Докладніше: [https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod](/uk/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod)
 
 - **secrets** ([]<a href="{{< ref "../common-definitions/object-reference#ObjectReference" >}}">ObjectReference</a>)
 
   *Patch strategy: обʼєднання за ключем `name`*
+
+  *Map: унікальні значення ключа name будуть збережені під час злиття*
 
   secrets — це список секретів у тому ж просторі імен, які Podʼи, що використовують цей службовий обліковий запис, можуть використовувати. Podʼи обмежуються цим списком лише у випадку, якщо цей службовий обліковий запис має анотацію "kubernetes.io/enforce-mountable-secrets" зі значенням "true". Це поле не слід використовувати для пошуку автоматично створених секретів токенів службових облікових записів для використання поза межами Podʼів. Натомість токени можна запитувати безпосередньо за допомогою API TokenRequest або секрети токенів службових облікових записів можна створювати вручну. Докладніше: [https://kubernetes.io/docs/concepts/configuration/secret](/uk/docs/concepts/configuration/secret)
 
@@ -89,7 +93,7 @@ GET /api/v1/namespaces/{namespace}/serviceaccounts/{name}
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -111,47 +115,47 @@ GET /api/v1/namespaces/{namespace}/serviceaccounts
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **allowWatchBookmarks** (*in query*): boolean
+- **allowWatchBookmarks** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
 
-- **continue** (*in query*): string
+- **continue** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
 
-- **fieldSelector** (*in query*): string
+- **fieldSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
 
-- **labelSelector** (*in query*): string
+- **labelSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
 
-- **limit** (*in query*): integer
+- **limit** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **resourceVersion** (*in query*): string
+- **resourceVersion** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
 
-- **resourceVersionMatch** (*in query*): string
+- **resourceVersionMatch** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
 
-- **sendInitialEvents** (*in query*): boolean
+- **sendInitialEvents** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
 
-- **timeoutSeconds** (*in query*): integer
+- **timeoutSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
 
-- **watch** (*in query*): boolean
+- **watch** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
 
@@ -169,47 +173,47 @@ GET /api/v1/serviceaccounts
 
 #### Параметри {#parameters-2}
 
-- **allowWatchBookmarks** (*in query*): boolean
+- **allowWatchBookmarks** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
 
-- **continue** (*in query*): string
+- **continue** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
 
-- **fieldSelector** (*in query*): string
+- **fieldSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
 
-- **labelSelector** (*in query*): string
+- **labelSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
 
-- **limit** (*in query*): integer
+- **limit** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **resourceVersion** (*in query*): string
+- **resourceVersion** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
 
-- **resourceVersionMatch** (*in query*): string
+- **resourceVersionMatch** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
 
-- **sendInitialEvents** (*in query*): boolean
+- **sendInitialEvents** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
 
-- **timeoutSeconds** (*in query*): integer
+- **timeoutSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
 
-- **watch** (*in query*): boolean
+- **watch** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
 
@@ -233,19 +237,19 @@ POST /api/v1/namespaces/{namespace}/serviceaccounts
 
 - **body**: <a href="{{< ref "../authentication-resources/service-account-v1#ServiceAccount" >}}">ServiceAccount</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -277,19 +281,19 @@ PUT /api/v1/namespaces/{namespace}/serviceaccounts/{name}
 
 - **body**: <a href="{{< ref "../authentication-resources/service-account-v1#ServiceAccount" >}}">ServiceAccount</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -319,23 +323,23 @@ PATCH /api/v1/namespaces/{namespace}/serviceaccounts/{name}
 
 - **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **force** (*in query*): boolean
+- **force** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -365,19 +369,19 @@ DELETE /api/v1/namespaces/{namespace}/serviceaccounts/{name}
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **gracePeriodSeconds** (*in query*): integer
+- **gracePeriodSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **propagationPolicy** (*in query*): string
+- **propagationPolicy** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
 
@@ -403,51 +407,51 @@ DELETE /api/v1/namespaces/{namespace}/serviceaccounts
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
-- **continue** (*in query*): string
+- **continue** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldSelector** (*in query*): string
+- **fieldSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
 
-- **gracePeriodSeconds** (*in query*): integer
+- **gracePeriodSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
 
-- **labelSelector** (*in query*): string
+- **labelSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
 
-- **limit** (*in query*): integer
+- **limit** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **propagationPolicy** (*in query*): string
+- **propagationPolicy** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
 
-- **resourceVersion** (*in query*): string
+- **resourceVersion** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
 
-- **resourceVersionMatch** (*in query*): string
+- **resourceVersionMatch** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
 
-- **sendInitialEvents** (*in query*): boolean
+- **sendInitialEvents** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
 
-- **timeoutSeconds** (*in query*): integer
+- **timeoutSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
 

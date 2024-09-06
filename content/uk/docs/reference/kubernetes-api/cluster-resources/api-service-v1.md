@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "APIService представляє сервер для певної GroupVersion."
 title: "APIService"
-weight: 4
+weight: 1
 auto_generated: false
 ---
 

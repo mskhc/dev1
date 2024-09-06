@@ -14,9 +14,9 @@ aliases:
 
 ## Звʼязок Вузла з Панеллю управління {#node-to-control-plane}
 
-У Kubernetes існує шаблон API "hub-and-spoke". Всі використання API вузлів (або Podʼів, які вони виконують) завершуються на API-сервері. Інші компоненти панелі управління не призначені для експонування віддалених служб. API-сервер налаштований для прослуховування віддалених підключень на захищеному порту HTTPS (зазвичай 443) з однією або декількома формами [автентифікації клієнта](/uk/docs/reference/access-authn-authz/authentication/). Рекомендується включити одну чи кілька форм [авторизації](/uk/docs/reference/access-authn-authz/authorization/), особливо якщо [анонімні запити](/uk/docs/reference/access-authn-authz/authentication/#anonymous-requests) або [токени облікового запису служби](/uk/docs/reference/access-authn-authz/authentication/#service-account-tokens) дозволені.
+У Kubernetes існує шаблон API "hub-and-spoke". Всі використання API вузлів (або Podʼів, які вони виконують) завершуються на API-сервері. Інші компоненти панелі управління не призначені для експонування віддалених служб. API-сервер налаштований для прослуховування віддалених підключень на захищеному порту HTTPS (зазвичай 443) з однією або декількома формами [автентифікації клієнта](/docs/reference/access-authn-authz/authentication/). Рекомендується включити одну чи кілька форм [авторизації](/docs/reference/access-authn-authz/authorization/), особливо якщо [анонімні запити](/docs/reference/access-authn-authz/authentication/#anonymous-requests) або [токени облікового запису служби](/docs/reference/access-authn-authz/authentication/#service-account-tokens) дозволені.
 
-Вузли повинні бути забезпечені загальним кореневим {{< glossary_tooltip text="сертифікатом" term_id="certificate" >}} для кластера, щоб вони могли безпечно підключатися до API-сервера разом з дійсними обліковими даними клієнта. Добрим підходом є те, що облікові дані клієнта, які надаються kubelet, мають форму сертифіката клієнта. Див. [завантаження TLS kubelet](/uk/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/) для автоматичного забезпечення облікових даних клієнта kubelet.
+Вузли повинні бути забезпечені загальним кореневим {{< glossary_tooltip text="сертифікатом" term_id="certificate" >}} для кластера, щоб вони могли безпечно підключатися до API-сервера разом з дійсними обліковими даними клієнта. Добрим підходом є те, що облікові дані клієнта, які надаються kubelet, мають форму сертифіката клієнта. Див. [завантаження TLS kubelet](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/) для автоматичного забезпечення облікових даних клієнта kubelet.
 
 {{< glossary_tooltip text="Podʼи" term_id="pod" >}}, які бажають підʼєднатися до API-сервера, можуть це зробити безпечно, використовуючи службовий обліковий запис (service account), так що Kubernetes автоматично вставлятиме загальний кореневий сертифікат та дійсний токен власника у Pod, коли він буде ініціалізований. Служба `kubernetes` (в просторі імен `default`) налаштована з віртуальною IP-адресою, яка перенаправляється (через `{{< glossary_tooltip text="kube-proxy" term_id="kube-proxy" >}}`) на точку доступу HTTPS на API-сервері.
 
@@ -44,7 +44,7 @@ aliases:
 
 Якщо це неможливо, скористайтеся [тунелюванням SSH](#ssh-tunnels) між API-сервером та kubelet, якщо необхідно, щоб уникнути підключення через ненадійну або публічну мережу.
 
-Нарешті, [автентифікацію та/або авторизацію Kubelet](/uk/docs/reference/access-authn-authz/kubelet-authn-authz/) потрібно ввімкнути, щоб захистити API kubelet.
+Нарешті, [автентифікацію та/або авторизацію Kubelet](/docs/reference/access-authn-authz/kubelet-authn-authz/) потрібно ввімкнути, щоб захистити API kubelet.
 
 ### Звʼязок API-сервера з вузлами, Podʼам та Service {#api-server-to-nodes-pods-and-services}
 
@@ -64,14 +64,14 @@ Kubernetes підтримує [тунелі SSH](https://www.ssh.com/academy/ssh
 
 Як заміна тунелям SSH, служба Konnectivity надає проксі на рівні TCP для звʼязку панелі управління з кластером. Служба Konnectivity складається з двох частин: сервера Konnectivity в мережі панелі управління та агентів Konnectivity в мережі вузлів. Агенти Konnectivity ініціюють зʼєднання з сервером Konnectivity та утримують мережеві підключення. Після ввімкнення служби Konnectivity весь трафік від панелі управління до вузлів прокладається через ці зʼєднання.
 
-Для налаштування служби Konnectivity у своєму кластері ознайомтесь із завданням [служби Konnectivity](/uk/docs/tasks/extend-kubernetes/setup-konnectivity/).
+Для налаштування служби Konnectivity у своєму кластері ознайомтесь із завданням [служби Konnectivity](/docs/tasks/extend-kubernetes/setup-konnectivity/).
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [компоненти панелі управління Kubernetes](/uk/docs/concepts/overview/components/#control-plane-components)
+* Дізнайтеся більше про [компоненти панелі управління Kubernetes](/docs/concepts/architecture/#control-plane-components)
 * Дізнайтеся більше про [модель "Hubs and Spoke"](https://book.kubebuilder.io/multiversion-tutorial/conversion-concepts.html#hubs-spokes-and-other-wheel-metaphors)
-* Дізнайтеся, як [захистити кластер](/uk/docs/tasks/administer-cluster/securing-a-cluster/)
-* Дізнайтеся більше про [API Kubernetes](/uk/docs/concepts/overview/kubernetes-api/)
-* [Налаштуйте службу Konnectivity](/uk/docs/tasks/extend-kubernetes/setup-konnectivity/)
-* [Використовуйте перенаправлення портів для доступу до застосунку у кластері](/uk/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
-* Дізнайтеся, як [отримати логи для Podʼів](/uk/docs/tasks/debug/debug-application/debug-running-pod/#examine-pod-logs), [використовуйте kubectl port-forward](/uk/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod)
+* Дізнайтеся, як [захистити кластер](/docs/tasks/administer-cluster/securing-a-cluster/)
+* Дізнайтеся більше про [API Kubernetes](/docs/concepts/overview/kubernetes-api/)
+* [Налаштуйте службу Konnectivity](/docs/tasks/extend-kubernetes/setup-konnectivity/)
+* [Використовуйте перенаправлення портів для доступу до застосунку у кластері](/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+* Дізнайтеся, як [отримати логи для Podʼів](/docs/tasks/debug/debug-application/debug-running-pod/#examine-pod-logs), [використовуйте kubectl port-forward](/docs/tasks/access-application-cluster/port-forward-access-application-cluster/#forward-a-local-port-to-a-port-on-the-pod)

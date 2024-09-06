@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "DaemonSet представляє налаштування набору фонових служб (демонів)."
 title: "DaemonSet"
-weight: 8
+weight: 9
 auto_generated: false
 ---
 
@@ -18,7 +18,7 @@ auto_generated: false
 
 DaemonSet представляє налаштування набору фонових служб (демонів).
 
-----
+---
 
 - **apiVersion**: apps/v1
 
@@ -131,6 +131,8 @@ DaemonSetStatus представляє поточний стан DaemonSet.
 - **conditions** ([]DaemonSetCondition)
 
   *Patch strategy: злиття за ключем `type`*
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
 
   Представляє останні доступні спостереження поточного стану DaemonSet.
 

@@ -1,122 +1,71 @@
 ---
 api_metadata:
-  apiVersion: "storage.k8s.io/v1"
-  import: "k8s.io/api/storage/v1"
-  kind: "StorageClass"
+  apiVersion: "storage.k8s.io/v1beta1"
+  import: "k8s.io/api/storage/v1beta1"
+  kind: "VolumeAttributesClass"
 content_type: "api_reference"
-description: "StorageClass описує параметри класу сховища, для якого PersistentVolumes можна динамічно виділяти."
-title: "StorageClass"
-weight: 8
+description: "VolumeAttributesClass представляє специфікацію змінних атрибутів тома, визначених драйвером CSI."
+title: "VolumeAttributesClass v1beta1"
+weight: 12
 auto_generated: false
 ---
 
-`apiVersion: storage.k8s.io/v1`
 
-`import "k8s.io/api/storage/v1"`
+`apiVersion: storage.k8s.io/v1beta1`
 
-## StorageClass {#StorageClass}
+`import "k8s.io/api/storage/v1beta1"`
 
-`StorageClass` описує параметри класу сховища, для якого `PersistentVolumes` можна динамічно виділяти.
+## VolumeAttributesClass {#VolumeAttributesClass}
 
-Класи сховищ не мають простору імен; імʼя класу сховища згідно з etcd знаходиться в ObjectMeta.Name.
+VolumeAttributesClass представляє специфікацію змінних атрибутів тома, визначених драйвером CSI. Клас можна вказати під час динамічного резервування PersistentVolumeClaims і змінити у специфікації PersistentVolumeClaim після резервування.
 
 ---
 
-- **apiVersion**: storage.k8s.io/v1
+- **apiVersion**: storage.k8s.io/v1beta1
 
-- **kind**: StorageClass
+- **kind**: VolumeAttributesClass
 
 - **metadata** (<a href="{{< ref "../common-definitions/object-meta#ObjectMeta" >}}">ObjectMeta</a>)
 
   Стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **provisioner** (string), обовʼязково
+- **driverName** (string), обовʼязково
 
-  provisioner вказує на тип провізора.
+  Імʼя драйвера CSI Це поле є незмінним.
 
-- **allowVolumeExpansion** (boolean)
+## VolumeAttributesClassList {#VolumeAttributesClassList}
 
-  allowVolumeExpansion показує, чи дозволяє клас зберігання розширення тому.
-
-- **allowedTopologies** ([]TopologySelectorTerm)
-
-  *Atomic: буде замінено під час обʼєднання*
-
-  allowedTopologies обмежує топологію вузлів, де томи можуть динамічно виділятися. Кожен втулок тому визначає свої власні специфікації топології. Порожній список TopologySelectorTerm означає, що обмежень по топології немає. Це поле враховується лише серверами, які включають функцію VolumeScheduling.
-
-  <a name="TopologySelectorTerm"></a>
-  *Термін селектора топології представляє результат запитів до міток. Нульовий або порожній термін селектора топології не відповідає жодному обʼєкту. Вимоги до них обʼєднуються за принципом AND. Він надає підмножину функціональності як NodeSelectorTerm. Це альфа-версія функції та в майбутньому вона може змінитися.*
-
-  - **allowedTopologies.matchLabelExpressions** ([]TopologySelectorLabelRequirement)
-
-    *Atomic: буде замінено під час злиття*
-
-    Список вимог до вибору топології за мітками.
-
-    <a name="TopologySelectorLabelRequirement"></a>
-    *Вимога вибору топології — це селектор, що відповідає заданій мітці. Це альфа-функція і може змінитися в майбутньому.*
-
-    - **allowedTopologies.matchLabelExpressions.key** (string), обовʼязково
-
-      Ключ мітки, до якого застосовується селектор.
-
-    - **allowedTopologies.matchLabelExpressions.values** ([]string), обовʼязково
-
-      *Atomic: буде замінено під час злиття*
-
-      Масив рядкових значень. Одне значення повинно відповідати мітці для вибору. Кожен запис у Values поєднується оператором OR.
-
-- **mountOptions** ([]string)
-
-  *Atomic: буде замінено під час злиття*
-
-  mountOptions контролює параметри монтування для динамічно виділених PersistentVolumes цього класу зберігання. Наприклад, ["ro", "soft"]. Не перевіряється — монтування PVs просто не вдасться, якщо один з них недійсний.
-
-- **parameters** (map[string]string)
-
-  parameters містить параметри для провайдера, який повинен створити томи цього класу зберігання.
-
-- **reclaimPolicy** (string)
-
-  reclaimPolicy контролює політику відновлення для динамічно виділених PersistentVolumes цього класу зберігання. Стандартне значення — Delete.
-
-- **volumeBindingMode** (string)
-
-  volumeBindingMode вказує, як PersistentVolumeClaims повинні виділятися та звʼязуватися. Якщо не встановлено, використовується VolumeBindingImmediate. Це поле враховується лише серверами, які включають функцію VolumeScheduling.
-
-## StorageClassList {#StorageClassList}
-
-StorageClassList — це колекція класів зберігання.
+VolumeAttributesClassList — це колекція обʼєктів VolumeAttributesClass.
 
 ---
 
-- **apiVersion**: storage.k8s.io/v1
+- **apiVersion**: storage.k8s.io/v1beta1
 
-- **kind**: StorageClassList
+- **kind**: VolumeAttributesClassList
 
 - **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
 
   Стандартні метадані списку. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>), обовʼязкове
+- **items** ([]<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>), обовʼязково
 
-  items — це список StorageClasses.
+  items — це список обʼєктів VolumeAttributesClass.
 
 ## Операції {#operations}
 
 ---
 
-### `get` отримати вказаний StorageClass {#get-read-the-specified-storageclass}
+### `get` отримати вказаний VolumeAttributesClass {#get-read-the-specified-volumeattributesalass}
 
 #### HTTP запит {#http-request}
 
-GET /apis/storage.k8s.io/v1/storageclasses/{name}
+GET /apis/storage.k8s.io/v1beta1/volumeattributesclasses/{name}
 
 #### Параметри {#parameters}
 
 - **name** (*в шляху*): string, обовʼязково
 
-  імʼя StorageClass
+  імʼя VolumeAttributesClass
 
 - **pretty** (*в запиті*): string
 
@@ -124,15 +73,15 @@ GET /apis/storage.k8s.io/v1/storageclasses/{name}
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): OK
 
 401: Unauthorized
 
-### `list` перелік або перегляд обʼєктів типу StorageClass {#list-list-or-watch-objects-of-kind-storageclass}
+### `list` перелік або перегляд обʼєктів типу VolumeAttributesClass {#list-or-watch-objects-of-kind-volumeattributesalass}
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/storage.k8s.io/v1/storageclasses
+GET /apis/storage.k8s.io/v1beta1/volumeattributesclasses
 
 #### Параметри {#parameters-1}
 
@@ -182,19 +131,19 @@ GET /apis/storage.k8s.io/v1/storageclasses
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClassList" >}}">StorageClassList</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClassList" >}}">VolumeAttributesClassList</a>): OK
 
 401: Unauthorized
 
-### `create` створення StorageClass {#create-create-a-storageclass}
+### `create` створення VolumeAttributesClass {#create-a-new-volumeattributesalass}
 
 #### HTTP запит {#http-request-2}
 
-POST /apis/storage.k8s.io/v1/storageclasses
+POST /apis/storage.k8s.io/v1beta1/volumeattributesclasses
 
 #### Параметри {#parameters-2}
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>, обовʼязково
+- **body**: <a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -214,27 +163,27 @@ POST /apis/storage.k8s.io/v1/storageclasses
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): Created
+201 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): Created
 
-202 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): Accepted
+202 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): Accepted
 
 401: Unauthorized
 
-### `update` заміна вказаного StorageClass {#update-replace-the-specified-storageclass}
+### `update` заміна вказаного VolumeAttributesClass {#update-replace-the-specified-volumeattributesalass}
 
 #### HTTP запит {#http-request-3}
 
-PUT /apis/storage.k8s.io/v1/storageclasses/{name}
+PUT /apis/storage.k8s.io/v1beta1/volumeattributesclasses/{name}
 
 #### Параметри {#parameters-3}
 
 - **name** (*в шляху*): string, обовʼязково
 
-  імʼя StorageClass
+  імʼя VolumeAttributesClass
 
-- **body**: <a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>, обовʼязково
+- **body**: <a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -254,23 +203,23 @@ PUT /apis/storage.k8s.io/v1/storageclasses/{name}
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): Created
+201 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): Created
 
 401: Unauthorized
 
-### `patch` часткове оновлення вказаного StorageClass {#patch-partially-update-the-specified-storageclass}
+### `patch` часткове оновлення вказаного VolumeAttributesClass {#patch-partially-update-the-specified-volumeattributesalass}
 
 #### HTTP запит {#http-request-4}
 
-PATCH /apis/storage.k8s.io/v1/storageclasses/{name}
+PATCH /apis/storage.k8s.io/v1beta1/volumeattributesclasses/{name}
 
 #### Параметри {#parameters-4}
 
 - **name** (*в шляху*): string, обовʼязково
 
-  імʼя StorageClass
+  імʼя VolumeAttributesClass
 
 - **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
@@ -296,23 +245,23 @@ PATCH /apis/storage.k8s.io/v1/storageclasses/{name}
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): OK
 
-201 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): Created
+201 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): Created
 
 401: Unauthorized
 
-### `delete` видалення StorageClass {#delete-delete-a-storageclass}
+### `delete` видалення VolumeAttributesClass {#delete-delete-a-volumeattributesalass}
 
 #### HTTP запит {#http-request-5}
 
-DELETE /apis/storage.k8s.io/v1/storageclasses/{name}
+DELETE /apis/storage.k8s.io/v1beta1/volumeattributesclasses/{name}
 
 #### Параметри {#parameters-5}
 
 - **name** (*в шляху*): string, обовʼязково
 
-  імʼя StorageClass
+  імʼя VolumeAttributesClass
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
@@ -334,17 +283,18 @@ DELETE /apis/storage.k8s.io/v1/storageclasses/{name}
 
 #### Відповідь {#response-5}
 
-200 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): OK
+200 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): OK
 
-202 (<a href="{{< ref "../config-and-storage-resources/storage-class-v1#StorageClass" >}}">StorageClass</a>): Accepted
+202 (<a href="{{< ref "../config-and-storage-resources/volume-attributes-class-v1beta1#VolumeAttributesClass" >}}">VolumeAttributesClass</a>): Accepted
 
 401: Unauthorized
 
-### `deletecollection` видалення колекції StorageClass {#deletecollection-delete-collection-of-storageclass}
+
+### `deletecollection` видалення колекції VolumeAttributesClass {#deletecollection-delete-collection-of-volumeattributesalass}
 
 #### HTTP запит {#http-request-6}
 
-DELETE /apis/storage.k8s.io/v1/storageclasses
+DELETE /apis/storage.k8s.io/v1beta1/volumeattributesclasses
 
 #### Параметри {#parameters-6}
 

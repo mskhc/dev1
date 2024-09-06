@@ -17,4 +17,4 @@ tags:
 
 <!--more-->
 
-Інтерфейс середовища виконання контейнерів Kubernetes (CRI) визначає основний протокол [gRPC](https://grpc.io) для взаємодії між [компонентами вузла](/uk/docs/concepts/overview/components/#node-components) {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} та {{< glossary_tooltip text="середовищем виконання контейнерів" term_id="container-runtime" >}}.
+Інтерфейс середовища виконання контейнерів Kubernetes (CRI) визначає основний протокол [gRPC](https://grpc.io) для взаємодії між [компонентами вузла](/docs/concepts/architecture/#node-components) {{< glossary_tooltip text="kubelet" term_id="kubelet" >}} та {{< glossary_tooltip text="середовищем виконання контейнерів" term_id="container-runtime" >}}.

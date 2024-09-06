@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "LimitRange встановлює обмеження на використання ресурсів для кожного типу ресурсу у просторі імен."
 title: "LimitRange"
-weight: 1
+weight: 2
 auto_generated: false
 ---
 
@@ -39,6 +39,8 @@ LimitRangeSpec визначає мінімальні та максимальні
 ---
 
 - **limits** ([]LimitRangeItem), обовʼязково
+
+  *Atomic: буде замінено під час злиття*
 
   Limits — це список обʼєктів LimitRangeItem, що застосовуються.
 

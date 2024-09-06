@@ -21,7 +21,7 @@ weight: 45
 
 Простори імен визначають область імен. Назви ресурсів повинні бути унікальними в межах простору імен, але не між просторами імен. Простори імен не можуть бути вкладені один в одного, і кожен ресурс Kubernetes може бути лише в одному просторі імен.
 
-Простори імен — це спосіб розділити ресурси кластера між кількома користувачами (за допомогою [квот ресурсів](/uk/docs/concepts/policy/resource-quotas/)).
+Простори імен — це спосіб розділити ресурси кластера між кількома користувачами (за допомогою [квот ресурсів](/docs/concepts/policy/resource-quotas/)).
 
 Не обовʼязково використовувати кілька просторів імен для відокремлення трохи відмінних ресурсів, таких як різні версії одного й того ж програмного забезпечення: використовуйте {{< glossary_tooltip text="мітки" term_id="label" >}} для розрізнення ресурсів в межах одного простору імен.
 
@@ -37,7 +37,7 @@ weight: 45
 : Kubernetes включає цей простір імен, щоб ви могли почати використовувати новий кластер без попереднього створення простору імен.
 
 `kube-node-lease`
-: Цей простір імен містить обʼєкти [Оренди](/uk/docs/concepts/architecture/leases/), повʼязані з кожним вузлом. Обʼєкти оренди дозволяють kubelet відправляти [імпульси](/uk/docs/concepts/architecture/nodes/#node-heartbeats), щоб панель управління могла виявити відмову вузла.
+: Цей простір імен містить обʼєкти [Оренди](/docs/concepts/architecture/leases/), повʼязані з кожним вузлом. Обʼєкти оренди дозволяють kubelet відправляти [імпульси](/docs/concepts/architecture/nodes/#node-heartbeats), щоб панель управління могла виявити відмову вузла.
 
 `kube-public`
 : Цей простір імен може бути прочитаний _усіма_ клієнтами (включаючи тих, які не автентифіковані). Цей простір імен в основному призначений для внутрішнього використання кластером, у випадку, коли деякі ресурси повинні бути видимими та доступними публічно по всьому кластеру. Публічний аспект цього простору імен — це лише домовленість, яка не є обовʼязковою.
@@ -47,10 +47,10 @@ weight: 45
 
 ## Робота з просторами імен {#working-with-namespaces}
 
-Створення та видалення просторів імен описано в [документації з адміністрування просторів імен](/uk/docs/tasks/administer-cluster/namespaces).
+Створення та видалення просторів імен описано в [документації з адміністрування просторів імен](/docs/tasks/administer-cluster/namespaces).
 
 {{< note >}}
-    Уникайте створення просторів імен із префіксом `kube-`, оскільки він зарезервований для системних просторів імен Kubernetes.
+Уникайте створення просторів імен із префіксом `kube-`, оскільки він зарезервований для системних просторів імен Kubernetes.
 {{< /note >}}
 
 ### Перегляд просторів імен {#viewing-namespaces}
@@ -93,21 +93,21 @@ kubectl config view --minify | grep namespace:
 
 ## Простори імен та DNS {#namespaces-and-dns}
 
-При створенні [Service](/uk/docs/concepts/services-networking/service/), створюється відповідний [DNS запис](/uk/docs/concepts/services-networking/dns-pod-service/). Цей запис має форму `<service-name>.<namespace-name>.svc.cluster.local`, що означає,
+При створенні [Service](/docs/concepts/services-networking/service/), створюється відповідний [DNS запис](/docs/concepts/services-networking/dns-pod-service/). Цей запис має форму `<service-name>.<namespace-name>.svc.cluster.local`, що означає,
 що якщо контейнер використовує тільки `<service-name>`, він буде звертатись до сервісу, який є локальним для простору імен. Це корисно для використання одного і того ж конфігураційного файлу в кількох просторах імен, таких як Development, Staging та Production. Якщо вам потрібно досягти обʼєкта в іншому просторі імен, вам слід використовувати повне кваліфіковане доменне імʼя (FQDN).
 
 Отже, всі імена просторів імен повинні бути дійсними
-[DNS-мітками згідно RFC 1123](/uk/docs/concepts/overview/working-with-objects/names/#dns-label-names).
+[DNS-мітками згідно RFC 1123](/docs/concepts/overview/working-with-objects/names/#dns-label-names).
 
 {{< warning >}}
 Створюючи простори імен із тими ж назвами, що і [публічні домени верхнього рівня (TLD)](https://data.iana.org/TLD/tlds-alpha-by-domain.txt), Serviceʼи в цих просторах імен можуть мати короткі імена DNS, які перетинаються з публічними записами DNS. Завдання з будь-якого простору імен, яке виконує DNS-запит без [крапки в кінці](https://datatracker.ietf.org/doc/html/rfc1034#page-8) буде перенаправлено на ці сервіси, отримуючи перевагу над публічним DNS.
 
-Для помʼякшення цього обмеження скоротіть привілеї для створення просторів імен довіреним користувачам. Якщо необхідно, ви можете додатково налаштувати сторонні перевірки на забезпечення безпеки, такі як [обробники доступу](/uk/docs/reference/access-authn-authz/extensible-admission-controllers/), щоб блокувати створення будь-якого простору імен з іменем [публічних TLD](https://data.iana.org/TLD/tlds-alpha-by-domain.txt).
+Для помʼякшення цього обмеження скоротіть привілеї для створення просторів імен довіреним користувачам. Якщо необхідно, ви можете додатково налаштувати сторонні перевірки на забезпечення безпеки, такі як [обробники доступу](/docs/reference/access-authn-authz/extensible-admission-controllers/), щоб блокувати створення будь-якого простору імен з іменем [публічних TLD](https://data.iana.org/TLD/tlds-alpha-by-domain.txt).
 {{< /warning >}}
 
 ## Не всі обʼєкти мають простори імен {#not-all-objects-are-in-a-namespace}
 
-Більшість ресурсів Kubernetes (наприклад, pods, services, replication controllers та інші) є в деяких просторах імен. Однак ресурси простору імен самі не перебувають в просторі імен. І ресурси низького рівня, такі як [nodes](/uk/docs/concepts/architecture/nodes/) та [persistentVolumes](/uk/docs/concepts/storage/persistent-volumes/), не перебувають в жодному просторі імен.
+Більшість ресурсів Kubernetes (наприклад, pods, services, replication controllers та інші) є в деяких просторах імен. Однак ресурси простору імен самі не перебувають в просторі імен. І ресурси низького рівня, такі як [nodes](/docs/concepts/architecture/nodes/) та [persistentVolumes](/docs/concepts/storage/persistent-volumes/), не перебувають в жодному просторі імен.
 
 Щоб переглянути, які ресурси Kubernetes є в просторі імен, а які — ні:
 
@@ -127,5 +127,5 @@ kubectl api-resources --namespaced=false
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [створення нового простору імен](/uk/docs/tasks/administer-cluster/namespaces/#creating-a-new-namespace).
-* Дізнайтеся більше про [видалення простору імен](/uk/docs/tasks/administer-cluster/namespaces/#deleting-a-namespace).
+* Дізнайтеся більше про [створення нового простору імен](/docs/tasks/administer-cluster/namespaces/#creating-a-new-namespace).
+* Дізнайтеся більше про [видалення простору імен](/docs/tasks/administer-cluster/namespaces/#deleting-a-namespace).

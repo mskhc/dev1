@@ -8,13 +8,13 @@ weight: 15
 
 Для Kubernetes _Metrics API_ пропонує базовий набір метрик для підтримки автоматичного масштабування та подібних випадків використання. Це API робить доступною інформацію про використання ресурсів для вузла та Podʼа, включаючи метрики для CPU та памʼяті. Якщо ви розгортаєте Metrics API у своєму кластері, клієнти API Kubernetes можуть запитувати цю інформацію, і ви можете використовувати механізми контролю доступу Kubernetes для управління дозволами на це.
 
-[HorizontalPodAutoscaler](/uk/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) та [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA) використовують дані з API метрик для налаштування реплік робочого навантаження та ресурсів для задоволення вимог користувачів.
+[HorizontalPodAutoscaler](/docs/tasks/run-application/horizontal-pod-autoscale/) (HPA) та [VerticalPodAutoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#readme) (VPA) використовують дані з API метрик для налаштування реплік робочого навантаження та ресурсів для задоволення вимог користувачів.
 
-Ви також можете переглядати метрики ресурсів, використовуючи команду [`kubectl top`](/uk/docs/reference/generated/kubectl/kubectl-commands#top).
+Ви також можете переглядати метрики ресурсів, використовуючи команду [`kubectl top`](/docs/reference/generated/kubectl/kubectl-commands#top).
 
 {{< note >}}
 Metrics API та конвеєр метрик, який він дозволяє, надають лише мінімальний набір метрик CPU та памʼяті для автоматичного масштабування за допомогою HPA та / або VPA. Якщо ви хочете надати повніший набір метрик, ви можете доповнити простіший Metrics API, розгорнувши другий
-[конвеєр метрик](/uk/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline) який використовує _Custom Metrics API_.
+[конвеєр метрик](/docs/tasks/debug/debug-cluster/resource-usage-monitoring/#full-metrics-pipeline) який використовує _Custom Metrics API_.
 {{< /note >}}
 
 Схема 1 ілюструє архітектуру конвеєра метрик ресурсів.
@@ -50,8 +50,8 @@ class A,L,C k8s
 Компоненти архітектури, справа наліво на схемі, включають наступне:
 
 * [cAdvisor](https://github.com/google/cadvisor): Демон для збору, агрегування та викладання метрик контейнера, включених в Kubelet.
-* [kubelet](/uk/docs/concepts/overview/components/#kubelet): Агент вузла для управління ресурсами контейнера. Метрики ресурсів доступні за допомогою точок доступу API kubelet `/metrics/resource` та `/stats`.
-* [метрики ресурсів на рівні вузла](/uk/docs/reference/instrumentation/node-metrics): API, наданий kubelet для виявлення та отримання підсумкових статистичних даних на рівні вузла, доступних через точку доступу `/metrics/resource`.
+* [kubelet](/docs/concepts/architecture/#kubelet): Агент вузла для управління ресурсами контейнера. Метрики ресурсів доступні за допомогою точок доступу API kubelet `/metrics/resource` та `/stats`.
+* [метрики ресурсів на рівні вузла](/docs/reference/instrumentation/node-metrics): API, наданий kubelet для виявлення та отримання підсумкових статистичних даних на рівні вузла, доступних через точку доступу `/metrics/resource`.
 * [сервер метрик](#metrics-server): Компонент надбудови кластера, який збирає та агрегує метрики ресурсів, витягнуті з кожного kubelet. Сервер API надає API метрик для використання HPA, VPA та команди `kubectl top`. Сервер метрик є посиланням на реалізацію Metrics API.
 * [Metrics API](#metrics-api): API Kubernetes, що підтримує доступ до CPU та памʼяті, використаних для автоматичного масштабування робочого навантаження. Щоб це працювало у вашому кластері, вам потрібен сервер розширення API, який надає API метрик.
 
@@ -137,7 +137,7 @@ curl http://localhost:8080/apis/metrics.k8s.io/v1beta1/namespaces/kube-system/po
 }
 ```
 
-Metrics API визначено в репозиторії [k8s.io/metrics](https://github.com/kubernetes/metrics). Вам потрібно увімкнути [шар агрегації API](/uk/docs/tasks/extend-kubernetes/configure-aggregation-layer/) та зареєструвати [APIService](/uk/docs/reference/kubernetes-api/cluster-resources/api-service-v1/) для API `metrics.k8s.io`.
+Metrics API визначено в репозиторії [k8s.io/metrics](https://github.com/kubernetes/metrics). Вам потрібно увімкнути [шар агрегації API](/docs/tasks/extend-kubernetes/configure-aggregation-layer/) та зареєструвати [APIService](/docs/reference/kubernetes-api/cluster-resources/api-service-v1/) для API `metrics.k8s.io`.
 
 Щоб дізнатися більше про Metrics API, див. [дизайн API метрик ресурсів](https://git.k8s.io/design-proposals-archive/instrumentation/resource-metrics-api.md), репозиторій [metrics-server](https://github.com/kubernetes-sigs/metrics-server) та [API метрик ресурсів](https://github.com/kubernetes/metrics#resource-metrics-api).
 
@@ -153,7 +153,7 @@ Metrics API визначено в репозиторії [k8s.io/metrics](https:
 
 Це значення обчислюється шляхом взяття швидкості над кумулятивним лічильником CPU, який надається ядром (як для Linux, так і для Windows ядер). Вікно часу, яке використовується для обчислення CPU, показано у полі window в Metrics API.
 
-Щоб дізнатися більше про те, як Kubernetes розподіляє та вимірює ресурси CPU, див. [значення CPU](/uk/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu).
+Щоб дізнатися більше про те, як Kubernetes розподіляє та вимірює ресурси CPU, див. [значення CPU](/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu).
 
 ### Памʼять {#memory}
 
@@ -163,7 +163,7 @@ Metrics API визначено в репозиторії [k8s.io/metrics](https:
 
 Модель Kubernetes для робочого набору контейнера передбачає, що робочий набір контейнера, що розглядається, підраховується відносно анонімної памʼяті, повʼязаної з цим контейнером. Зазвичай метрика робочого набору також включає деяку кешовану (файлоподібну) памʼять, оскільки операційна система хосту не завжди може повторно використовувати сторінки.
 
-Щоб дізнатися більше про те, як Kubernetes розподіляє та вимірює ресурси памʼяті, див. [значення памʼяті](/uk/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory).
+Щоб дізнатися більше про те, як Kubernetes розподіляє та вимірює ресурси памʼяті, див. [значення памʼяті](/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory).
 
 ## Metrics Server
 
@@ -173,7 +173,7 @@ Metrics-server використовує API Kubernetes для відстежен
 
 Наприклад, при запиті HPA metrics-server повинен визначити, які Podʼи відповідають селекторам міток у Deployment.
 
-Metrics-server викликає [API kubelet](/uk/docs/reference/command-line-tools-reference/kubelet/) для збору метрик з кожного вузла. Залежно від версії metrics-server використовується:
+Metrics-server викликає [API kubelet](/docs/reference/command-line-tools-reference/kubelet/) для збору метрик з кожного вузла. Залежно від версії metrics-server використовується:
 
 * Точка доступу ресурсів метрик `/metrics/resource` у версії v0.6.0+ або
 * Точка доступу Summary API `/stats/summary` у старших версіях
@@ -188,6 +188,6 @@ Metrics-server викликає [API kubelet](/uk/docs/reference/command-line-to
 * [часті запитання щодо metrics-server](https://github.com/kubernetes-sigs/metrics-server/blob/master/FAQ.md)
 * [відомі проблеми metrics-server](https://github.com/kubernetes-sigs/metrics-server/blob/master/KNOWN_ISSUES.md)
 * [випуски metrics-server](https://github.com/kubernetes-sigs/metrics-server/releases)
-* [Горизонтальне автомасштабування Podʼів](/uk/docs/tasks/run-application/horizontal-pod-autoscale/)
+* [Горизонтальне автомасштабування Podʼів](/docs/tasks/run-application/horizontal-pod-autoscale/)
 
-Щоб дізнатися про те, як kubelet надає метрики вузла, і як ви можете отримати до них доступ через API Kubernetes, прочитайте [Дані метрик вузлів](/uk/docs/reference/instrumentation/node-metrics).
+Щоб дізнатися про те, як kubelet надає метрики вузла, і як ви можете отримати до них доступ через API Kubernetes, прочитайте [Дані метрик вузлів](/docs/reference/instrumentation/node-metrics).

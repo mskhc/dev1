@@ -1,18 +1,18 @@
 ---
 api_metadata:
-  apiVersion: "admissionregistration.k8s.io/v1beta1"
-  import: "k8s.io/api/admissionregistration/v1beta1"
+  apiVersion: "admissionregistration.k8s.io/v1"
+  import: "k8s.io/api/admissionregistration/v1"
   kind: "ValidatingAdmissionPolicy"
 content_type: "api_reference"
 description: "ValidatingAdmissionPolicy описує визначення політики перевірки допуску, яка приймає або відхиляє обʼєкт, не змінюючи його."
-title: "ValidatingAdmissionPolicy v1beta1"
-weight: 4
+title: "ValidatingAdmissionPolicy"
+weight: 7
 auto_generated: false
 ---
 
-`apiVersion: admissionregistration.k8s.io/v1beta1`
+`apiVersion: admissionregistration.k8s.io/v1`
 
-`import "k8s.io/api/admissionregistration/v1beta1"`
+`import "k8s.io/api/admissionregistration/v1"`
 
 ## ValidatingAdmissionPolicy {#ValidatingAdmissionPolicy}
 
@@ -20,7 +20,7 @@ ValidatingAdmissionPolicy описує визначення політики п�
 
 ---
 
-- **apiVersion**: admissionregistration.k8s.io/v1beta1
+- **apiVersion**: admissionregistration.k8s.io/v1
 
 - **kind**: ValidatingAdmissionPolicy
 
@@ -122,7 +122,7 @@ ValidatingAdmissionPolicy описує визначення політики п�
       ExcludeResourceRules описує, які операції над якими ресурсами/субресурсами не повинні цікавити політику ValidatingAdmissionPolicy. Правила виключення мають пріоритет над правилами включення (якщо ресурс відповідає обом правилам, він виключається)
 
       <a name="NamedRuleWithOperations"></a>
-      *NamedRuleWithOperations — це кортеж Операцій і Ресурсів з Іменами Ресурсів.*
+      *NamedRuleWithOperations є кортежем Operations та Resources з ResourceNames.*
 
       - **spec.matchConstraints.excludeResourceRules.apiGroups** ([]string)
 
@@ -227,7 +227,7 @@ ValidatingAdmissionPolicy описує визначення політики п�
       ResourceRules описує, які операції з якими ресурсами/субресурсами відповідають ValidatingAdmissionPolicy. Політика цікавиться операцією, якщо вона відповідає будь-якому Правилу.
 
       <a name="NamedRuleWithOperations"></a>
-      *NamedRuleWithOperations — це кортеж Операцій і Ресурсів з Іменами Ресурсів.*
+      *NamedRuleWithOperations є кортежем Operations та Resources з ResourceNames.*
 
       - **spec.matchConstraints.resourceRules.apiGroups** ([]string)
 
@@ -436,13 +436,13 @@ ValidatingAdmissionPolicyList - це список ValidatingAdmissionPolicy.
 
 ---
 
+- **items** ([]<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>), обовʼязково
+
+  Список ValidatingAdmissionPolicy.
+
 - **apiVersion** (string)
 
   APIVersion визначає версійовану схему цього представлення обʼєкта. Сервери повинні перетворювати визнані схеми на останнє внутрішнє значення і можуть відхиляти невідомі значення. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources.
-
-- **items** ([]<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>)
-
-  Список ValidatingAdmissionPolicy.
 
 - **kind** (string)
 
@@ -495,7 +495,7 @@ CEL вирази політики повинні мати обчислену в�
       ExcludeResourceRules описує, які операції на яких ресурсах/субресурсах ValidatingAdmissionPolicy не повинна враховувати. Правила виключення мають пріоритет над правилами включення (якщо ресурс відповідає обом, він виключається).
 
       <a name="NamedRuleWithOperations"></a>
-      *NamedRuleWithOperations — це кортеж операцій та ресурсів з іменами ресурсів.*
+      *NamedRuleWithOperations є кортежем Operations та Resources з ResourceNames.*
 
       - **spec.matchResources.excludeResourceRules.apiGroups** ([]string)
 
@@ -600,7 +600,7 @@ CEL вирази політики повинні мати обчислену в�
       ResourceRules описує, які операції на яких ресурсах/субресурсах відповідають ValidatingAdmissionPolicy. Політика враховує операцію, якщо вона відповідає *будь-якому* правилу.
 
       <a name="NamedRuleWithOperations"></a>
-      *NamedRuleWithOperations — це кортеж операцій і ресурсів з ResourceNames.*
+      *NamedRuleWithOperations є кортежем Operations та Resources з ResourceNames.*
 
       - **spec.matchResources.resourceRules.apiGroups** ([]string)
 
@@ -725,7 +725,7 @@ CEL вирази політики повинні мати обчислену в�
 
 #### HTTP запит {#http-request}
 
-GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}
+GET /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}
 
 #### Параметри {#parameters}
 
@@ -739,7 +739,7 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
 401: Unauthorized
 
@@ -747,7 +747,7 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}/status
+GET /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}/status
 
 #### Параметри {#parameters-1}
 
@@ -761,7 +761,7 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
 401: Unauthorized
 
@@ -769,7 +769,7 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### HTTP запит {#http-request-2}
 
-GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
+GET /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies
 
 #### Параметри {#parameters-2}
 
@@ -819,7 +819,7 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicyList" >}}">ValidatingAdmissionPolicyList</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicyList" >}}">ValidatingAdmissionPolicyList</a>): OK
 
 401: Unauthorized
 
@@ -827,11 +827,11 @@ GET /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 
 #### HTTP запит {#http-request-3}
 
-POST /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
+POST /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies
 
 #### Параметри {#parameters-3}
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -851,11 +851,11 @@ POST /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
 
-202 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Accepted
+202 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Accepted
 
 401: Unauthorized
 
@@ -863,7 +863,7 @@ POST /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
 
 #### HTTP запит {#http-request-4}
 
-PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}
+PUT /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}
 
 #### Параметри {#parameters-4}
 
@@ -871,7 +871,7 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
   імʼя ValidatingAdmissionPolicy
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -891,9 +891,9 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
 
 401: Unauthorized
 
@@ -901,7 +901,7 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### HTTP запит {#http-request-5}
 
-PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}/status
+PUT /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}/status
 
 #### Параметри {#parameters-5}
 
@@ -909,7 +909,7 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
   імʼя ValidatingAdmissionPolicy
 
-- **body**: <a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -929,9 +929,9 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### Відповідь {#response-5}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
 
 401: Unauthorized
 
@@ -939,7 +939,7 @@ PUT /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name
 
 #### HTTP запит {#http-request-6}
 
-PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}
+PATCH /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}
 
 #### Параметри {#parameters-6}
 
@@ -971,9 +971,9 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
 
 #### Відповідь {#response-6}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
 
 401: Unauthorized
 
@@ -981,7 +981,7 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
 
 #### HTTP запит {#http-request-7}
 
-PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}/status
+PATCH /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}/status
 
 #### Параметри {#parameters-7}
 
@@ -1013,9 +1013,9 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
 
 #### Відповідь {#response-7}
 
-200 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
+200 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): OK
 
-201 (<a href="{{< ref "../extend-resources/validating-admission-policy-v1beta1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
+201 (<a href="{{< ref "../policy-resources/validating-admission-policy-binding-v1#ValidatingAdmissionPolicy" >}}">ValidatingAdmissionPolicy</a>): Created
 
 401: Unauthorized
 
@@ -1023,7 +1023,7 @@ PATCH /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{na
 
 #### HTTP запит {#http-request-8}
 
-DELETE /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{name}
+DELETE /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies/{name}
 
 #### Параметри {#parameters-8}
 
@@ -1061,7 +1061,7 @@ DELETE /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies/{n
 
 #### HTTP запит {#http-request-9}
 
-DELETE /apis/admissionregistration.k8s.io/v1beta1/validatingadmissionpolicies
+DELETE /apis/admissionregistration.k8s.io/v1/validatingadmissionpolicies
 
 #### Параметри {#parameters-9}
 

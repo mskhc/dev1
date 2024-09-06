@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "Deployment робить можливими декларативні оновлення для Podʼів та and ReplicaSet."
 title: "Deployment"
-weight: 5
+weight: 6
 auto_generated: false
 ---
 
@@ -137,7 +137,9 @@ DeploymentStatus — це найостанніший спостережуван
 - **conditions** ([]DeploymentCondition)
 
   *Patch strategy: злиття за ключем `type`*
-  
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
+
   Представляє останні доступні спостереження про поточний стан Deployment.
 
   <a name="DeploymentCondition"></a>

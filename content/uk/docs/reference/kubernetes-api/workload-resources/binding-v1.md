@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "Звʼязування привʼязує один обʼєкт до іншого; наприклад, Pod привʼязується до вузла планувальником."
 title: "Binding"
-weight: 9
+weight: 2
 auto_generated: false
 ---
 
@@ -48,7 +48,7 @@ POST /api/v1/namespaces/{namespace}/bindings
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -68,11 +68,11 @@ POST /api/v1/namespaces/{namespace}/bindings
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): OK
+200 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): Created
+201 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): Created
 
-202 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): Accepted
+202 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): Accepted
 
 401: Unauthorized
 
@@ -92,7 +92,7 @@ POST /api/v1/namespaces/{namespace}/pods/{name}/binding
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -112,10 +112,10 @@ POST /api/v1/namespaces/{namespace}/pods/{name}/binding
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): OK
+200 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): Created
+201 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): Created
 
-202 (<a href="{{< ref "../cluster-resources/binding-v1#Binding" >}}">Binding</a>): Accepted
+202 (<a href="{{< ref "../workload-resources/binding-v1#Binding" >}}">Binding</a>): Accepted
 
 401: Unauthorized

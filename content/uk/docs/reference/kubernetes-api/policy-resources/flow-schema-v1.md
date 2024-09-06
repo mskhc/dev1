@@ -1,18 +1,18 @@
 ---
 api_metadata:
-  apiVersion: "flowcontrol.apiserver.k8s.io/v1beta3"
-  import: "k8s.io/api/flowcontrol/v1beta3"
+  apiVersion: "flowcontrol.apiserver.k8s.io/v1"
+  import: "k8s.io/api/flowcontrol/v1"
   kind: "FlowSchema"
 content_type: "api_reference"
 description: "FlowSchema визначає схему групи потоків."
-title: "FlowSchema v1beta3"
-weight: 7
+title: "FlowSchema"
+weight: 1
 auto_generated: false
 ---
 
-`apiVersion: flowcontrol.apiserver.k8s.io/v1beta3`
+`apiVersion: flowcontrol.apiserver.k8s.io/v1`
 
-`import "k8s.io/api/flowcontrol/v1beta3"`
+`import "k8s.io/api/flowcontrol/v1"`
 
 ## FlowSchema {#FlowSchema}
 
@@ -20,7 +20,7 @@ FlowSchema визначає схему групи потоків. Зверніт
 
 ---
 
-- **apiVersion**: flowcontrol.apiserver.k8s.io/v1beta3
+- **apiVersion**: flowcontrol.apiserver.k8s.io/v1
 
 - **kind**: FlowSchema
 
@@ -28,11 +28,11 @@ FlowSchema визначає схему групи потоків. Зверніт
 
   `metadata` — стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchemaSpec" >}}">FlowSchemaSpec</a>)
+- **spec** (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchemaSpec" >}}">FlowSchemaSpec</a>)
 
   `spec` — специфікація бажаної поведінки FlowSchema. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
-- **status** (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchemaStatus" >}}">FlowSchemaStatus</a>)
+- **status** (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchemaStatus" >}}">FlowSchemaStatus</a>)
 
   `status` — поточний статус FlowSchema. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -41,17 +41,6 @@ FlowSchema визначає схему групи потоків. Зверніт
 FlowSchemaSpec описує вигляд специфікації FlowSchema.
 
 ---
-
-- **priorityLevelConfiguration** (PriorityLevelConfigurationReference), обовʼязково
-
-  `priorityLevelConfiguration` повинна посилатися на конфігурацію пріоритетів рівня в кластері. Якщо посилання не вдається вирішити, FlowSchema буде ігноруватися і позначатися як недійсна в її статусі. Обовʼязково.
-
-  <a name="PriorityLevelConfigurationReference"></a>
-  *PriorityLevelConfigurationReference містить інформацію, яка посилається на використання "request-priority".*
-
-  - **priorityLevelConfiguration.name** (string), обовʼязково
-
-    `name` — це імʼя конфігурації рівня пріоритетів, на яку є посилання. Обовʼязково.
 
 - **distinguisherMethod** (FlowDistinguisherMethod)
 
@@ -67,6 +56,17 @@ FlowSchemaSpec описує вигляд специфікації FlowSchema.
 - **matchingPrecedence** (int32)
 
   `matchingPrecedence` використовується для вибору серед FlowSchema, які відповідають заданому запиту. Обрана FlowSchema є серед тих, що мають чисельно найменший (який ми вважаємо логічно найвищим) MatchingPrecedence. Кожне значення MatchingPrecedence повинно бути в діапазоні [1, 10000]. Зауважте, що якщо пріоритет не вказано, він буде стандартно встановлений на 1000.
+
+- **priorityLevelConfiguration** (PriorityLevelConfigurationReference), обовʼязково
+
+  `priorityLevelConfiguration` повинна посилатися на PriorityLevelConfiguration в кластері. Якщо посилання не вдається вирішити, FlowSchema буде ігноруватися і позначатися як недійсна в її статусі. Обовʼязково.
+
+  <a name="PriorityLevelConfigurationReference"></a>
+  *PriorityLevelConfigurationReference містить інформацію, яка посилається на використання "request-priority".*
+
+  - **priorityLevelConfiguration.name** (string), обовʼязково
+
+    `name` — це імʼя конфігурації рівня пріоритетів, на яку є посилання. Обовʼязково.
 
 - **rules** ([]PolicyRulesWithSubjects)
 
@@ -237,7 +237,7 @@ FlowSchemaList - це список обʼєктів FlowSchema.
 
 ---
 
-- **apiVersion**: flowcontrol.apiserver.k8s.io/v1beta3
+- **apiVersion**: flowcontrol.apiserver.k8s.io/v1
 
 - **kind**: FlowSchemaList
 
@@ -245,7 +245,7 @@ FlowSchemaList - це список обʼєктів FlowSchema.
 
   `metadata` — стандартні метадані списку. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>), обовʼязково
+- **items** ([]<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>), обовʼязково
 
   `items` — список обʼєктів FlowSchema.
 
@@ -257,7 +257,7 @@ FlowSchemaList - це список обʼєктів FlowSchema.
 
 #### HTTP запит {#http-request}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
+GET /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}
 
 #### Параметри {#parameters}
 
@@ -271,7 +271,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
 401: Unauthorized
 
@@ -279,7 +279,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
+GET /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}/status
 
 #### Параметри {#parameters-1}
 
@@ -293,7 +293,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
 401: Unauthorized
 
@@ -301,7 +301,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### HTTP запит {#http-request-2}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
+GET /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas
 
 #### Параметри {#parameters-2}
 
@@ -351,7 +351,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchemaList" >}}">FlowSchemaList</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchemaList" >}}">FlowSchemaList</a>): OK
 
 401: Unauthorized
 
@@ -359,11 +359,11 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
 
 #### HTTP запит {#http-request-3}
 
-POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
+POST /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas
 
 #### Параметри {#parameters-3}
 
-- **body**: <a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -383,11 +383,11 @@ POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Created
+201 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Created
 
-202 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Accepted
+202 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Accepted
 
 401: Unauthorized
 
@@ -395,7 +395,7 @@ POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
 
 #### HTTP запит {#http-request-4}
 
-PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
+PUT /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}
 
 #### Параметри {#parameters-4}
 
@@ -403,7 +403,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
   імʼя FlowSchema
 
-- **body**: <a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -423,9 +423,9 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Created
+201 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Created
 
 401: Unauthorized
 
@@ -433,7 +433,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### HTTP запит {#http-request-5}
 
-PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
+PUT /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}/status
 
 #### Параметри {#parameters-5}
 
@@ -441,7 +441,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
   імʼя FlowSchema
 
-- **body**: <a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -461,9 +461,9 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### Відповідь {#response-5}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Created
+201 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Created
 
 401: Unauthorized
 
@@ -471,7 +471,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### HTTP запит {#http-request-6}
 
-PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
+PATCH /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}
 
 #### Параметри {#parameters-6}
 
@@ -503,9 +503,9 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### Відповідь {#response-6}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Created
+201 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Created
 
 401: Unauthorized
 
@@ -513,7 +513,7 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### HTTP запит {#http-request-7}
 
-PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
+PATCH /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}/status
 
 #### Параметри {#parameters-7}
 
@@ -545,9 +545,9 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### Відповідь {#response-7}
 
-200 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): OK
+200 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/flow-schema-v1beta3#FlowSchema" >}}">FlowSchema</a>): Created
+201 (<a href="{{< ref "../policy-resources/flow-schema-v1#FlowSchema" >}}">FlowSchema</a>): Created
 
 401: Unauthorized
 
@@ -555,7 +555,7 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}/status
 
 #### HTTP запит {#http-request-8}
 
-DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
+DELETE /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas/{name}
 
 #### Параметри {#parameters-8}
 
@@ -593,7 +593,7 @@ DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas/{name}
 
 #### HTTP запит {#http-request-9}
 
-DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/flowschemas
+DELETE /apis/flowcontrol.apiserver.k8s.io/v1/flowschemas
 
 #### Параметри {#parameters-9}
 

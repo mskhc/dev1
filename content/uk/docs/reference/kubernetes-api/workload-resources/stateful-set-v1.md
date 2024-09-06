@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "StatefulSet представляє набір Podʼів з постійною ідентичністю."
 title: "StatefulSet"
-weight: 6
+weight: 7
 auto_generated: false
 ---
 
@@ -102,6 +102,8 @@ StatefulSetSpec — це специфікація StatefulSet.
 
 - **volumeClaimTemplates** ([]<a href="{{< ref "../config-and-storage-resources/persistent-volume-claim-v1#PersistentVolumeClaim" >}}">PersistentVolumeClaim</a>)
 
+  *Atomic: буде замінено під час злиття*
+
   volumeClaimTemplates — це список запитів, до яких Podʼи можуть звертатися. Контролер StatefulSet відповідає за призначення мережевих ідентичностей запитам таким чином, щоб зберігати ідентичність Podʼа. Кожен запит у цьому списку повинен мати принаймні один відповідний (за імʼям) volumeMount в одному з контейнерів в шаблоні. Запит у цьому списку має пріоритет над будь-якими volumes у шаблоні з таким самим імʼям.
 
 - **minReadySeconds** (int32)
@@ -110,7 +112,7 @@ StatefulSetSpec — це специфікація StatefulSet.
 
 - **persistentVolumeClaimRetentionPolicy** (StatefulSetPersistentVolumeClaimRetentionPolicy)
 
-  persistentVolumeClaimRetentionPolicy описує життєвий цикл запитів на постійні томи, створених з volumeClaimTemplates. Стандартно усі запити на постійні томи створюються за необхідності та зберігаються до ручного видалення. Ця політика дозволяє змінювати життєвий цикл, наприклад, видаляючи запити на постійні томи під час видалення їх StatefulSet або при масштабуванні вниз Podʼів. Для цього потрібно включити функцію StatefulSetAutoDeletePVC, яка є альфа-рівнем. +optional
+  persistentVolumeClaimRetentionPolicy описує життєвий цикл запитів на постійні томи, створених з volumeClaimTemplates. Стандартно усі запити на постійні томи створюються за необхідності та зберігаються до ручного видалення. Ця політика дозволяє змінювати життєвий цикл, наприклад, видаляючи запити на постійні томи під час видалення їх StatefulSet або при масштабуванні вниз Podʼів. Для цього потрібно включити функцію StatefulSetAutoDeletePVC, яка є бета-рівнем.
 
   <a name="StatefulSetPersistentVolumeClaimRetentionPolicy"></a>
 
@@ -126,7 +128,7 @@ StatefulSetSpec — це специфікація StatefulSet.
 
 - **ordinals** (StatefulSetOrdinals)
 
-  ordinals контролює нумерацію індексів реплік у StatefulSet. Стандартна поведінка ordinals призначає індекс "0" першій репліці та збільшує індекс на одиницю для кожної додаткової запитаної репліки. Використання поля ordinals вимагає включення функції StatefulSetStartOrdinal, яка є бета-рівнем.
+  ordinals контролює нумерацію індексів реплік у StatefulSet. Стандартна поведінка ordinals призначає індекс "0" першій репліці та збільшує індекс на одиницю для кожної додаткової запитаної репліки.
 
   <a name="StatefulSetOrdinals"></a>
   *StatefulSetOrdinals описує політику, яка використовується для призначення порядкових номерів реплік у цьому StatefulSet.*
@@ -174,6 +176,8 @@ StatefulSetStatus представляє поточний стан StatefulSet.
 - **conditions** ([]StatefulSetCondition)
 
   *Patch strategy: злиття за ключем `type`*
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
 
   Представляє останні доступні спостереження поточного стану StatefulSet.
 

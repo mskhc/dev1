@@ -45,6 +45,8 @@ SelfSubjectRulesReview перелічує набір дій, які поточн
 
   - **status.nonResourceRules** ([]NonResourceRule), обовʼязково
 
+    *Atomic: буде замінено під час злиття*
+
     NonResourceRules — це список дій, які субʼєкт має право виконувати щодо не-ресурсів. Порядок у списку не є значущим, може містити дублікати та, можливо, бути неповним.
 
     <a name="NonResourceRule"></a>
@@ -52,13 +54,19 @@ SelfSubjectRulesReview перелічує набір дій, які поточн
 
     - **status.nonResourceRules.verbs** ([]string), обовʼязково
 
+      *Atomic: буде замінено під час злиття*
+
       Verb — це список дієслів API Kubernetes для не-ресурсів, таких як: get, post, put, delete, patch, head, options. "*" означає всі.
 
     - **status.nonResourceRules.nonResourceURLs** ([]string)
 
+      *Atomic: буде замінено під час злиття*
+
       NonResourceURLs — це набір часткових URL-адрес, до яких користувач повинен мати доступ. \* допускаються, але лише як повний, кінцевий крок у шляху. "*" означає всі.
 
   - **status.resourceRules** ([]ResourceRule), обовʼязково
+
+    *Atomic: буде замінено під час злиття*
 
     ResourceRules — це список дій, які субʼєкт має право виконувати щодо ресурсів. Порядок у списку не є значущим, може містити дублікати та, можливо, бути неповним.
 
@@ -67,17 +75,25 @@ SelfSubjectRulesReview перелічує набір дій, які поточн
 
     - **status.resourceRules.verbs** ([]string), обовʼязково
 
+      *Atomic: буде замінено під час злиття*
+
       Verb — це список дієслів API ресурсу Kubernetes, таких як: get, list, watch, create, update, delete, proxy. "*" означає всі.
 
     - **status.resourceRules.apiGroups** ([]string)
+
+      *Atomic: буде замінено під час злиття*
 
       APIGroups — це назва API-групи, яка містить ресурси. Якщо зазначено кілька API-груп, будь-яка дія, запитана для одного з перелічених ресурсів у будь-якій API-групі, буде дозволена. "*" означає всі.
 
     - **status.resourceRules.resourceNames** ([]string)
 
+      *Atomic: буде замінено під час злиття*
+
       ResourceNames — це необовʼязковий білий список імен, до яких застосовується правило. Порожній набір означає, що дозволено все. "*" означає всі.
 
     - **status.resourceRules.resources** ([]string)
+
+      *Atomic: буде замінено під час злиття*
 
       Resources — це список ресурсів, до яких застосовується це правило. "\*" означає всі в зазначених apiGroups. "\*/foo" представляє субресурс 'foo' для всіх ресурсів у зазначених apiGroups.
 

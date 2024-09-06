@@ -14,7 +14,7 @@ Kubernetes виконує ваше {{< glossary_tooltip text="навантаже
 
 Зазвичай в кластері є кілька вузлів; в умовах навчання чи обмежених ресурсів може бути всього один вузол.
 
-[Компоненти](/uk/docs/concepts/overview/components/#node-components) на вузлі включають {{< glossary_tooltip text="kubelet" term_id="kubelet" >}}, {{< glossary_tooltip text="середовище виконання контейнерів" term_id="container-runtime" >}} та
+[Компоненти](/docs/concepts/architecture/#node-components) на вузлі включають {{< glossary_tooltip text="kubelet" term_id="kubelet" >}}, {{< glossary_tooltip text="середовище виконання контейнерів" term_id="container-runtime" >}} та
 {{< glossary_tooltip text="kube-proxy" term_id="kube-proxy" >}}.
 
 <!-- body -->
@@ -49,11 +49,11 @@ Kubernetes зберігає обʼєкт для недійсного Вузла 
 Вам або {{< glossary_tooltip term_id="controller" text="контролер" >}} має явно видалити обʼєкт Node, щоб припинити цю перевірку його справності.
 {{< /note >}}
 
-Назва обʼєкта Node повинно бути дійсним [імʼям DNS-піддомену](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Назва обʼєкта Node повинно бути дійсним [імʼям DNS-піддомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ### Унікальність назв Вузлів {#node-name-uniqueness}
 
-[Назва](/uk/docs/concepts/overview/working-with-objects/names#names) ідентифікує Node. Два Вузли не можуть мати однакову назву одночасно. Kubernetes також припускає, що ресурс з такою ж назвою — це той самий обʼєкт. У випадку Вузла припускається неявно, що екземпляр, який використовує ту ж назву, матиме той самий стан (наприклад, мережеві налаштування, вміст кореневого диска) та атрибути, такі як мітки вузла. Це може призвести до невідповідностей, якщо екземпляр був змінений без зміни його назви. Якщо Вузол потрібно замінити або значно оновити, наявний обʼєкт Node повинен бути видалений з API-сервера спочатку і знову доданий після оновлення.
+[Назва](/docs/concepts/overview/working-with-objects/names#names) ідентифікує Node. Два Вузли не можуть мати однакову назву одночасно. Kubernetes також припускає, що ресурс з такою ж назвою — це той самий обʼєкт. У випадку Вузла припускається неявно, що екземпляр, який використовує ту ж назву, матиме той самий стан (наприклад, мережеві налаштування, вміст кореневого диска) та атрибути, такі як мітки вузла. Це може призвести до невідповідностей, якщо екземпляр був змінений без зміни його назви. Якщо Вузол потрібно замінити або значно оновити, наявний обʼєкт Node повинен бути видалений з API-сервера спочатку і знову доданий після оновлення.
 
 ### Самореєстрація Вузлів {#self-registration-of-nodes}
 
@@ -67,13 +67,13 @@ Kubernetes зберігає обʼєкт для недійсного Вузла 
 - `--register-with-taints` — Реєстрація вузла з заданим списком {{< glossary_tooltip text="позначок" term_id="taint" >}} (розділених комами `<ключ>=<значення>:<ефект>`).
 
   Нічого не відбувається, якщо `register-node` є false.
-- `--node-ip` — Необовʼязковий розділений комами список IP-адрес вузла. Можна вказати лише одну адресу для кожного роду адрес. Наприклад, у кластері з одним стеком IPv4 ви встановлюєте це значення як IPv4-адресу, яку повинен використовувати kubelet для вузла. Див. [налаштування подвійного стека IPv4/IPv6](/uk/docs/concepts/services-networking/dual-stack/#configure-ipv4-ipv6-dual-stack) для отримання відомостей з запуску кластера з подвійним стеком.
+- `--node-ip` — Необовʼязковий розділений комами список IP-адрес вузла. Можна вказати лише одну адресу для кожного роду адрес. Наприклад, у кластері з одним стеком IPv4 ви встановлюєте це значення як IPv4-адресу, яку повинен використовувати kubelet для вузла. Див. [налаштування подвійного стека IPv4/IPv6](/docs/concepts/services-networking/dual-stack/#configure-ipv4-ipv6-dual-stack) для отримання відомостей з запуску кластера з подвійним стеком.
 
   Якщо ви не вказали цей аргумент, kubelet використовує стандартну IPv4-адресу вузла, якщо є; якщо у вузла немає адреси IPv4, тоді kubelet використовує стандартну IPv6-адресу вузла.
-- `--node-labels` - {{< glossary_tooltip text="Мітки" term_id="label" >}} для додавання при реєстрації вузла в кластері (див. обмеження міток, що накладаються [втулком доступу NodeRestriction](/uk/docs/reference/access-authn-authz/admission-controllers/#noderestriction)).
+- `--node-labels` - {{< glossary_tooltip text="Мітки" term_id="label" >}} для додавання при реєстрації вузла в кластері (див. обмеження міток, що накладаються [втулком доступу NodeRestriction](/docs/reference/access-authn-authz/admission-controllers/#noderestriction)).
 - `--node-status-update-frequency` — Вказує, як часто kubelet публікує свій статус вузла на API-сервері.
 
-Коли увімкнено [режим авторизації Вузла](/uk/docs/reference/access-authn-authz/node/) та [втулок доступу NodeRestriction](/uk/docs/reference/access-authn-authz/admission-controllers/#noderestriction), kubelets мають право створювати/змінювати лише свій власний ресурс Node.
+Коли увімкнено [режим авторизації Вузла](/docs/reference/access-authn-authz/node/) та [втулок доступу NodeRestriction](/docs/reference/access-authn-authz/admission-controllers/#noderestriction), kubelets мають право створювати/змінювати лише свій власний ресурс Node.
 
 {{< note >}}
 Як зазначено в розділі [Унікальність назв Вузлів](#node-name-uniqueness), коли потрібно оновити конфігурацію Вузла, добре було б знову зареєструвати вузол в API-сервері. Наприклад, якщо kubelet перезапускається з новим набором `--node-labels`, але використовується та ж назва Node, зміна не відбудеться, оскільки мітки встановлюються при реєстрації вузла.
@@ -100,7 +100,7 @@ Podʼи, вже заплановані на Node, можуть погано по
 kubectl cordon $NODENAME
 ```
 
-Див. [Безпечне очищення вузла](/uk/docs/tasks/administer-cluster/safely-drain-node/) для деталей.
+Див. [Безпечне очищення вузла](/docs/tasks/administer-cluster/safely-drain-node/) для деталей.
 
 {{< note >}}
 Podʼи, які є частиною {{< glossary_tooltip term_id="daemonset" >}}, можуть працювати на незапланованому Вузлі. Зазвичай DaemonSets надають служби, що працюють локально на Вузлі, навіть якщо він очищується від робочих навантажень.
@@ -110,10 +110,10 @@ Podʼи, які є частиною {{< glossary_tooltip term_id="daemonset" >}}
 
 Статус Вузла містить наступну інформацію:
 
-- [Адреси](/uk/docs/reference/node/node-status/#addresses)
-- [Умови](/uk/docs/reference/node/node-status/#condition)
-- [Місткість та Розподіленість](/uk/docs/reference/node/node-status/#capacity)
-- [Інформація](/uk/docs/reference/node/node-status/#info)
+- [Адреси](/docs/reference/node/node-status/#addresses)
+- [Умови](/docs/reference/node/node-status/#condition)
+- [Місткість та Розподіленість](/docs/reference/node/node-status/#capacity)
+- [Інформація](/docs/reference/node/node-status/#info)
 
 Ви можете використовувати `kubectl`, щоб переглядати статус Вузла та інші деталі:
 
@@ -121,7 +121,7 @@ Podʼи, які є частиною {{< glossary_tooltip term_id="daemonset" >}}
 kubectl describe node <вставте-назву-вузла-тут>
 ```
 
-Див. [Статус Вузла](/uk/docs/reference/node/node-status/) для отримання додаткової інформації.
+Див. [Статус Вузла](/docs/reference/node/node-status/) для отримання додаткової інформації.
 
 ## Сигнали Вузлів {#node-heartbeats}
 
@@ -129,8 +129,8 @@ kubectl describe node <вставте-назву-вузла-тут>
 
 Для вузлів існують дві форми сигналів:
 
-- Оновлення в [`.status`](/uk/docs/reference/node/node-status/) Вузла.
-- Обʼєкти [Оренди (Lease)](/uk/docs/concepts/architecture/leases/) у просторі імен `kube-node-lease`. Кожен Вузол має асоційований обʼєкт Lease.
+- Оновлення в [`.status`](/docs/reference/node/node-status/) Вузла.
+- Обʼєкти [Оренди (Lease)](/docs/concepts/architecture/leases/) у просторі імен `kube-node-lease`. Кожен Вузол має асоційований обʼєкт Lease.
 
 ## Контролер вузлів {#node-controller}
 
@@ -143,7 +143,7 @@ kubectl describe node <вставте-назву-вузла-тут>
 По-третє, контролер відповідає за моніторинг стану вузлів і:
 
 - У випадку, якщо вузол стає недоступним, оновлення умови `Ready` у полі `.status` Вузла. У цьому випадку контролер вузла встановлює умову `Ready` в `Unknown`.
-- Якщо вузол залишається недоступним: запускає [виселення ініційоване API](/uk/docs/concepts/scheduling-eviction/api-eviction/) для всіх Podʼів на недосяжному вузлі. Типово контролер вузла чекає 5 хвилин між позначенням вузла як `Unknown` та поданням першого запиту на виселення.
+- Якщо вузол залишається недоступним: запускає [виселення ініційоване API](/docs/concepts/scheduling-eviction/api-eviction/) для всіх Podʼів на недосяжному вузлі. Типово контролер вузла чекає 5 хвилин між позначенням вузла як `Unknown` та поданням першого запиту на виселення.
 
 Стандартно контролер вузла перевіряє стан кожного вузла кожні 5 секунд. Цей період можна налаштувати за допомогою прапорця `--node-monitor-period` у компоненті `kube-controller-manager`.
 
@@ -171,21 +171,21 @@ kubectl describe node <вставте-назву-вузла-тут>
 
 {{< note >}}
 Якщо ви хочете явно зарезервувати ресурси для не-Pod процесів, дивіться
-[резервування ресурсів для системних служб](/uk/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved).
+[резервування ресурсів для системних служб](/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved).
 {{< /note >}}
 
 ## Топологія вузла {#node-topology}
 
 {{< feature-state feature_gate_name="TopologyManager" >}}
 
-Якщо ви увімкнули [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) ресурсу `TopologyManager`, то kubelet може використовувати підказки топології при прийнятті рішень щодо призначення ресурсів. Див. [Керування політиками топології на вузлі](/uk/docs/tasks/administer-cluster/topology-manager/)
+Якщо ви увімкнули [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) ресурсу `TopologyManager`, то kubelet може використовувати підказки топології при прийнятті рішень щодо призначення ресурсів. Див. [Керування політиками топології на вузлі](/docs/tasks/administer-cluster/topology-manager/)
 для отримання додаткової інформації.
 
 ## Керування swapʼом {#swap-memory}
 
 {{< feature-state feature_gate_name="NodeSwap" >}}
 
-Щоб увімкнути swap на вузлі, feature gate `NodeSwap` повинен бути активований у kubelet (типово так), і прапорець командного рядка `--fail-swap-on` або [параметр конфігурації](/uk/docs/reference/config-api/kubelet-config.v1beta1/)  `failSwapOn` повинен бути встановлений в значення false. Для того, щоб дозволити Podʼам використовувати swap, `swapBehavior` не повинен мати значення `NoSwap` (яке є стандартним) у конфігурації kubelet.
+Щоб увімкнути swap на вузлі, feature gate `NodeSwap` повинен бути активований у kubelet (типово так), і прапорець командного рядка `--fail-swap-on` або [параметр конфігурації](/docs/reference/config-api/kubelet-config.v1beta1/)  `failSwapOn` повинен бути встановлений в значення false. Для того, щоб дозволити Podʼам використовувати swap, `swapBehavior` не повинен мати значення `NoSwap` (яке є стандартним) у конфігурації kubelet.
 
 {{< warning >}}
 Коли увімкнено swap, дані Kubernetes, такі як вміст обʼєктів Secret, які були записані у tmpfs, тепер можуть переноситись на диск.
@@ -224,11 +224,11 @@ Swap підтримується тільки з **cgroup v2**, cgroup v1 не п
 
 Дізнайтеся більше про наступне:
 
-- [Компоненти](/uk/docs/concepts/overview/components/#node-components), з яких складається вузол.
+- [Компоненти](/docs/concepts/architecture/#node-components), з яких складається вузол.
 - [Визначення API для вузла](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#node-v1-core).
 - [Node](https://git.k8s.io/design-proposals-archive/architecture/architecture.md#the-kubernetes-node) у документі з дизайну архітектури.
-- [Відповідне/невідповідне вимкнення вузлів](/uk/docs/concepts/cluster-administration/node-shutdown/).
-- [Автомаштабування кластера](/uk/docs/concepts/cluster-administration/cluster-autoscaling/) для керування кількістю та розміром возлів у вашому кластері.
-- [Заплямованість та Толерантність](/uk/docs/concepts/scheduling-eviction/taint-and-toleration/).
-- [Менеджери ресурсів вузла](/uk/docs/concepts/policy/node-resource-managers/).
-- [Управління ресурсами для вузлів з операційною системою Windows](/uk/docs/concepts/configuration/windows-resource-management/).
+- [Відповідне/невідповідне вимкнення вузлів](/docs/concepts/cluster-administration/node-shutdown/).
+- [Автомасштабування кластера](/docs/concepts/cluster-administration/cluster-autoscaling/) для керування кількістю та розміром вузлів у вашому кластері.
+- [Заплямованість та Толерантність](/docs/concepts/scheduling-eviction/taint-and-toleration/).
+- [Менеджери ресурсів вузла](/docs/concepts/policy/node-resource-managers/).
+- [Управління ресурсами для вузлів з операційною системою Windows](/docs/concepts/configuration/windows-resource-management/).

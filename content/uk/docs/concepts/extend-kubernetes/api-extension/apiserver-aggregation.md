@@ -8,7 +8,7 @@ weight: 20
 
 Шар агрегації дозволяє розширювати можливості Kubernetes за допомогою додаткових API, поза тим, що пропонується ядром основних API Kubernetes. Додаткові API можуть бути як готові рішення, такі як [сервер метрик](https://github.com/kubernetes-sigs/metrics-server), так і API, які ви розробляєте самостійно.
 
-Шар агрегації відрізняється від [Власних ресурсів](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/), які є способом зробити так, щоб {{< glossary_tooltip term_id="kube-apiserver" text="kube-apiserver" >}} визнавав нові види обʼєктів.
+Шар агрегації відрізняється від [Custom Resource Definitions](/docs/concepts/extend-kubernetes/api-extension/custom-resources/), які є способом зробити так, щоб {{< glossary_tooltip term_id="kube-apiserver" text="kube-apiserver" >}} визнавав нові види обʼєктів.
 
 <!-- body -->
 
@@ -26,8 +26,8 @@ weight: 20
 
 ## {{% heading "whatsnext" %}}
 
-* Щоб отримати робочий агрегатор у вашому середовищі, [налаштуйте шар агрегації](/uk/docs/tasks/extend-kubernetes/configure-aggregation-layer/).
-* Потім, [налаштуйте розширений API-сервер](/uk/docs/tasks/extend-kubernetes/setup-extension-api-server/) для роботи з шаром агрегації.
-* Прочитайте про [APIService](/uk/docs/reference/kubernetes-api/cluster-resources/api-service-v1/) у довідці API.
+* Щоб отримати робочий агрегатор у вашому середовищі, [налаштуйте шар агрегації](/docs/tasks/extend-kubernetes/configure-aggregation-layer/).
+* Потім, [налаштуйте розширений API-сервер](/docs/tasks/extend-kubernetes/setup-extension-api-server/) для роботи з шаром агрегації.
+* Прочитайте про [APIService](/docs/reference/kubernetes-api/cluster-resources/api-service-v1/) у довідці API.
 
-Альтернативно: дізнайтеся, як [розширити API Kubernetes, використовуючи визначення власних ресурсів](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/).
+Альтернативно: дізнайтеся, як [розширити API Kubernetes, використовуючи визначення власних ресурсів](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/).

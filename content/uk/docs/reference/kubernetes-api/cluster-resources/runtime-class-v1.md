@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "RuntimeClass визначає клас середовища виконання контейнерів, підтримуваних у кластері."
 title: "RuntimeClass"
-weight: 6
+weight: 9
 auto_generated: false
 ---
 

@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "ControllerRevision впроваджує незмінюваний знімок даних стану."
 title: "ControllerRevision"
-weight: 7
+weight: 8
 auto_generated: false
 ---
 

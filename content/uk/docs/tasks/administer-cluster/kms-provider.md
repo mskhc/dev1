@@ -18,7 +18,6 @@ weight: 370
 
 Версія Kubernetes, яка вам потрібна, залежить від того, яку версію API KMS ви вибрали. Kubernetes рекомендує використовувати KMS v2.
 
-- Якщо ви вибрали KMS API v2, вам слід використовувати Kubernetes v{{< skew currentVersion >}} (якщо ви запускаєте іншу версію Kubernetes, яка також підтримує API v2 KMS, перейдіть до документації для цієї версії Kubernetes).
 - Якщо ви вибрали KMS API v1 для підтримки кластерів до версії v1.27 або якщо у вас є застарілий плагін KMS, який підтримує лише KMS v1, будь-яка підтримувана версія Kubernetes буде працювати. Цей API є застарілим починаючи з Kubernetes v1.28. Kubernetes не рекомендує використовувати цей API.
 
 {{< version-check >}}
@@ -72,7 +71,7 @@ weight: 370
 
 KMS v2 не підтримує властивість `cachesize`. Всі ключі шифрування даних (DEK) будуть збережені в кеші у відкритому вигляді, як тільки сервер розкриє їх за допомогою звертання до KMS. Після збереження в кеші, ключі DEK можуть бути використані для виконання розшифрування нескінченно довго без звертання до KMS.
 
-Дивіться [Розуміння налаштування шифрування в спокої](/uk/docs/tasks/administer-cluster/encrypt-data).
+Дивіться [Розуміння налаштування шифрування в спокої](/docs/tasks/administer-cluster/encrypt-data).
 
 ## Реалізація втулка KMS {#implementing-a-kms-plugin}
 
@@ -172,7 +171,7 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
 
 2. Встановіть прапорець `--encryption-provider-config` на kube-apiserver, щоб вказати місце розташування файлу конфігурації.
 
-3. Аргумент `--encryption-provider-config-automatic-reload` типу boolean визначає, чи слід [автоматично перезавантажувати](/uk/docs/tasks/administer-cluster/encrypt-data/#configure-automatic-reloading) файл, встановлений за допомогою `--encryption-provider-config`, у разі зміни вмісту на диску.
+3. Аргумент `--encryption-provider-config-automatic-reload` типу boolean визначає, чи слід [автоматично перезавантажувати](/docs/tasks/administer-cluster/encrypt-data/#configure-automatic-reloading) файл, встановлений за допомогою `--encryption-provider-config`, у разі зміни вмісту на диску.
 
 4. Перезапустіть свій API-сервер.
 
@@ -242,7 +241,7 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
 До виконання кроків, визначених у [Забезпечення шифрування всіх секретів](#ensuring-all-secrets-are-encrypted), список `providers` повинен закінчуватися постачальником `identity: {}`, щоб можна було читати незашифровані дані. Після шифрування всіх ресурсів постачальника `identity` слід видалити, щоб запобігти обробці незашифрованих даних сервером API.
 
 Для отримання деталей про формат `EncryptionConfiguration`, будь ласка, перегляньте
-[довідник API шифрування API сервера](/uk/docs/reference/config-api/apiserver-encryption.v1/).
+[довідник API шифрування API сервера](/docs/reference/config-api/apiserver-encryption.v1/).
 
 ## Перевірка того, що дані зашифровані {#verifying-that-the-data-is-encrypted}
 
@@ -318,4 +317,4 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 <!-- preserve legacy hyperlinks -->
 <a id="disabling-encryption-at-rest" />
 
-Якщо ви більше не хочете використовувати шифрування для даних, збережених в API Kubernetes, прочитайте [розшифровування даних, які вже зберігаються у спокої](/uk/docs/tasks/administer-cluster/decrypt-data/).
+Якщо ви більше не хочете використовувати шифрування для даних, збережених в API Kubernetes, прочитайте [розшифровування даних, які вже зберігаються у спокої](/docs/tasks/administer-cluster/decrypt-data/).

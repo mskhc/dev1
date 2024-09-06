@@ -2,7 +2,7 @@
 title: Інтерфейс середовища виконання контейнера (CRI)
 id: cri
 date: 2019-03-07
-full_link: /uk/docs/concepts/overview/components/#container-runtime
+full_link: /uk/docs/concepts/architecture/#container-runtime
 short_description: >
     API для інтеграції середовища виконання контейнерів з kubelet
 

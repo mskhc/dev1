@@ -1,18 +1,18 @@
 ---
 api_metadata:
-  apiVersion: "networking.k8s.io/v1alpha1"
-  import: "k8s.io/api/networking/v1alpha1"
+  apiVersion: "networking.k8s.io/v1beta1"
+  import: "k8s.io/api/networking/v1beta1"
   kind: "IPAddress"
 content_type: "api_reference"
 description: "IP-адреса являє собою одну IP-адресу з одного сімейства IP-адрес."
-title: "IPAddress v1alpha1"
-weight: 5
+title: "IPAddress v1beta1"
+weight: 4
 auto_generated: false
 ---
 
-`apiVersion: networking.k8s.io/v1alpha1`
+`apiVersion: networking.k8s.io/v1beta1`
 
-`import "k8s.io/api/networking/v1alpha1"`
+`import "k8s.io/api/networking/v1beta1"`
 
 ## IPAddress {#IPAddress}
 
@@ -20,7 +20,7 @@ IPAddress представляє одну IP-адресу одного сіме�
 
 ---
 
-- **apiVersion**: networking.k8s.io/v1alpha1
+- **apiVersion**: networking.k8s.io/v1beta1
 
 - **kind**: IPAddress
 
@@ -28,7 +28,7 @@ IPAddress представляє одну IP-адресу одного сіме�
 
   Стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddressSpec" >}}">IPAddressSpec</a>)
+- **spec** (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddressSpec" >}}">IPAddressSpec</a>)
 
   spec відображає бажаний стан IPAddress. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -38,32 +38,28 @@ IPAddressSpec описує атрибути IP-адреси.
 
 ---
 
-- **parentRef** (ParentReference)
+- **parentRef** (ParentReference), обовʼязково
 
   ParentRef посилається на ресурс, до якого приєднана IPAddress. IPAddress повинна мати посилання на батьківський обʼєкт.
 
   <a name="ParentReference"></a>
   *ParentReference описує посилання на батьківський обʼєкт.*
 
-  - **parentRef.group** (string)
-
-    Група є групою обʼєкта, на який посилаються.
-
   - **parentRef.name** (string)
 
     Імʼя є іменем обʼєкта, на який посилаються.
-
-  - **parentRef.namespace** (string)
-
-    Простір імен є простором імен обʼєкта, на який посилаються.
 
   - **parentRef.resource** (string)
 
     Ресурс є ресурсом обʼєкта, на який посилаються.
 
-  - **parentRef.uid** (string)
+  - **parentRef.group** (string)
 
-    UID є унікальним ідентифікатором обʼєкта, на який посилаються.
+    Група є групою обʼєкта, на який посилаються.
+
+  - **parentRef.namespace** (string)
+
+    Простір імен є простором імен обʼєкта, на який посилаються.
 
 ## IPAddressList {#IPAddressList}
 
@@ -71,7 +67,7 @@ IPAddressList містить список IPAddress.
 
 ---
 
-- **apiVersion**: networking.k8s.io/v1alpha1
+- **apiVersion**: networking.k8s.io/v1beta1
 
 - **kind**: IPAddressList
 
@@ -79,7 +75,7 @@ IPAddressList містить список IPAddress.
 
   Метадані стандартного обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>), обовʼязково
+- **items** ([]<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>), обовʼязково
 
   items є списком IP-адрес (IPAddress).
 
@@ -91,7 +87,7 @@ IPAddressList містить список IPAddress.
 
 #### HTTP запит {#http-request}
 
-GET /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
+GET /apis/networking.k8s.io/v1beta1/ipaddresses/{name}
 
 #### Параметри {#parameters}
 
@@ -105,7 +101,7 @@ GET /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): OK
+200 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): OK
 
 401: Unauthorized
 
@@ -113,7 +109,7 @@ GET /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/networking.k8s.io/v1alpha1/ipaddresses
+GET /apis/networking.k8s.io/v1beta1/ipaddresses
 
 #### Параметри {#parameters-1}
 
@@ -163,7 +159,7 @@ GET /apis/networking.k8s.io/v1alpha1/ipaddresses
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddressList" >}}">IPAddressList</a>): OK
+200 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddressList" >}}">IPAddressList</a>): OK
 
 401: Unauthorized
 
@@ -171,11 +167,11 @@ GET /apis/networking.k8s.io/v1alpha1/ipaddresses
 
 #### HTTP запит {#http-request-2}
 
-POST /apis/networking.k8s.io/v1alpha1/ipaddresses
+POST /apis/networking.k8s.io/v1beta1/ipaddresses
 
 #### Параметри {#parameters-2}
 
-- **body**: <a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>, обовʼязково
+- **body**: <a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -195,11 +191,11 @@ POST /apis/networking.k8s.io/v1alpha1/ipaddresses
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): OK
+200 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): OK
 
-201 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): Created
+201 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): Created
 
-202 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): Accepted
+202 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): Accepted
 
 401: Unauthorized
 
@@ -207,7 +203,7 @@ POST /apis/networking.k8s.io/v1alpha1/ipaddresses
 
 #### HTTP запит {#http-request-3}
 
-PUT /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
+PUT /apis/networking.k8s.io/v1beta1/ipaddresses/{name}
 
 #### Параметри {#parameters-3}
 
@@ -215,7 +211,7 @@ PUT /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
   імʼя IPAddress
 
-- **body**: <a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>, обовʼязково
+- **body**: <a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -235,9 +231,9 @@ PUT /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): OK
+200 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): OK
 
-201 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): Created
+201 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): Created
 
 401: Unauthorized
 
@@ -245,7 +241,7 @@ PUT /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### HTTP запит {#http-request-4}
 
-PATCH /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
+PATCH /apis/networking.k8s.io/v1beta1/ipaddresses/{name}
 
 #### Параметри {#parameters-4}
 
@@ -277,9 +273,9 @@ PATCH /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): OK
+200 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): OK
 
-201 (<a href="{{< ref "../policy-resources/ip-address-v1alpha1#IPAddress" >}}">IPAddress</a>): Created
+201 (<a href="{{< ref "../cluster-resources/ip-address-v1beta1#IPAddress" >}}">IPAddress</a>): Created
 
 401: Unauthorized
 
@@ -287,7 +283,7 @@ PATCH /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### HTTP запит {#http-request-5}
 
-DELETE /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
+DELETE /apis/networking.k8s.io/v1beta1/ipaddresses/{name}
 
 #### Параметри {#parameters-5}
 
@@ -325,7 +321,7 @@ DELETE /apis/networking.k8s.io/v1alpha1/ipaddresses/{name}
 
 #### HTTP запит {#http-request-6}
 
-DELETE /apis/networking.k8s.io/v1alpha1/ipaddresses
+DELETE /apis/networking.k8s.io/v1beta1/ipaddresses
 
 #### Параметри {#parameters-6}
 

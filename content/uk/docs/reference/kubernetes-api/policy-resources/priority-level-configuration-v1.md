@@ -1,18 +1,18 @@
 ---
 api_metadata:
-  apiVersion: "flowcontrol.apiserver.k8s.io/v1beta3"
-  import: "k8s.io/api/flowcontrol/v1beta3"
+  apiVersion: "flowcontrol.apiserver.k8s.io/v1"
+  import: "k8s.io/api/flowcontrol/v1"
   kind: "PriorityLevelConfiguration"
 content_type: "api_reference"
 description: "PriorityLevelConfiguration представляє конфігурацію рівня пріоритету."
-title: "PriorityLevelConfiguration v1beta3"
-weight: 8
+title: "PriorityLevelConfiguration"
+weight: 6
 auto_generated: false
 ---
 
-`apiVersion: flowcontrol.apiserver.k8s.io/v1beta3`
+`apiVersion: flowcontrol.apiserver.k8s.io/v1`
 
-`import "k8s.io/api/flowcontrol/v1beta3"`
+`import "k8s.io/api/flowcontrol/v1"`
 
 ## PriorityLevelConfiguration {#PriorityLevelConfiguration}
 
@@ -20,7 +20,7 @@ PriorityLevelConfiguration представляє конфігурацію рі�
 
 ---
 
-- **apiVersion**: flowcontrol.apiserver.k8s.io/v1beta3
+- **apiVersion**: flowcontrol.apiserver.k8s.io/v1
 
 - **kind**: PriorityLevelConfiguration
 
@@ -28,11 +28,11 @@ PriorityLevelConfiguration представляє конфігурацію рі�
 
   `metadata` — стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **spec** (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfigurationSpec" >}}">PriorityLevelConfigurationSpec</a>)
+- **spec** (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfigurationSpec" >}}">PriorityLevelConfigurationSpec</a>)
 
   `spec` — специфікація бажаної поведінки "request-priority". Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
-- **status** (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfigurationStatus" >}}">PriorityLevelConfigurationStatus</a>)
+- **status** (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfigurationStatus" >}}">PriorityLevelConfigurationStatus</a>)
 
   `status` — поточний статус "request-priority". Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 
@@ -41,10 +41,6 @@ PriorityLevelConfiguration представляє конфігурацію рі�
 PriorityLevelConfigurationSpec визначає конфігурацію рівня пріоритету.
 
 ---
-
-- **type** (string), обовʼязково
-
-  `type` вказує, чи підлягає цей рівень пріоритету обмеженням на виконання запитів. Значення `"Exempt"` означає, що запити цього рівня пріоритету не підлягають обмеженням (і, таким чином, ніколи не ставляться в чергу) і не зменшують обсяг, доступний для інших рівнів пріоритету. Значення `"Limited"` означає, що (а) запити цього рівня пріоритету *підлягають* обмеженням і (б) деяка обмежена пропускна здатність сервера доступна виключно цьому рівню пріоритету. Обовʼязковщ.
 
 - **exempt** (ExemptPriorityLevelConfiguration)
 
@@ -126,7 +122,15 @@ PriorityLevelConfigurationSpec визначає конфігурацію рів�
 
     NominalCL(i)  = ceil( ServerCL * NCS(i) / sum_ncs ) sum_ncs = sum[priority level k] NCS(k)
 
-    Більші значення означають більший номінальний ліміт конкурентності, за рахунок інших рівнів пріоритету. Стандартно це поле має значення 30.
+    Більші значення означають більший номінальний ліміт конкурентності, за рахунок інших рівнів пріоритету.
+
+    Якщо не вказано, стандартно це поле має значення 30.
+
+    Встановлення цього поля в нуль підтримує створення «вʼязниці» для цього рівня пріоритету, яка використовується для утримання деяких запитів
+
+- **type** (string), required
+
+  `type` вказує, чи підлягає цей рівень пріоритету обмеженням на виконання запитів. Значення `"Exempt"` означає, що запити цього рівня пріоритету не підлягають обмеженням (і, отже, ніколи не ставляться в чергу) і не впливають на потужність, доступну для інших рівнів пріоритету. Значення `"Limited"` означає, що (a) запити цього рівня пріоритету *підлягають* обмеженням і (b) частина обмеженої потужності сервера доступна виключно для цього рівня пріоритету. Обовʼязкове.
 
 ## PriorityLevelConfigurationStatus {#PriorityLevelConfigurationStatus}
 
@@ -174,7 +178,7 @@ PriorityLevelConfigurationList — це список обʼєктів PriorityL
 
 ---
 
-- **apiVersion**: flowcontrol.apiserver.k8s.io/v1beta3
+- **apiVersion**: flowcontrol.apiserver.k8s.io/v1
 
 - **kind**: PriorityLevelConfigurationList
 
@@ -182,7 +186,7 @@ PriorityLevelConfigurationList — це список обʼєктів PriorityL
 
   `metadata` — це стандартні метадані обʼєкта. Докладніше: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
-- **items** ([]<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>), обовʼязково
+- **items** ([]<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>), обовʼязково
 
   `items` — це список пріоритетів запитів.
 
@@ -194,7 +198,7 @@ PriorityLevelConfigurationList — це список обʼєктів PriorityL
 
 #### HTTP запит {#http-request}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}
+GET /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}
 
 #### Параметри {#parameters}
 
@@ -208,7 +212,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
 401: Unauthorized
 
@@ -216,7 +220,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}/status
+GET /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}/status
 
 #### Параметри {#parameters-1}
 
@@ -230,7 +234,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
 401: Unauthorized
 
@@ -238,7 +242,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### HTTP запит {#http-request-2}
 
-GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
+GET /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations
 
 #### Параметри {#parameters-2}
 
@@ -288,7 +292,7 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfigurationList" >}}">PriorityLevelConfigurationList</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfigurationList" >}}">PriorityLevelConfigurationList</a>): OK
 
 401: Unauthorized
 
@@ -296,11 +300,11 @@ GET /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
 
 #### HTTP запит {#http-request-3}
 
-POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
+POST /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations
 
 #### Параметри {#parameters-3}
 
-- **body**: <a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -320,11 +324,11 @@ POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
+201 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
 
-202 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Accepted
+202 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Accepted
 
 401: Unauthorized
 
@@ -332,7 +336,7 @@ POST /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
 
 #### HTTP запит {#http-request-4}
 
-PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}
+PUT /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}
 
 #### Параметри {#parameters-4}
 
@@ -340,7 +344,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
   імʼя PriorityLevelConfiguration
 
-- **body**: <a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -360,9 +364,9 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
+201 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
 
 401: Unauthorized
 
@@ -370,7 +374,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### HTTP запит {#http-request-5}
 
-PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}/status
+PUT /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}/status
 
 #### Параметри {#parameters-5}
 
@@ -378,7 +382,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
   імʼя PriorityLevelConfiguration
 
-- **body**: <a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
+- **body**: <a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -398,9 +402,9 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### Відповідь {#response-5}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
+201 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
 
 401: Unauthorized
 
@@ -408,7 +412,7 @@ PUT /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name
 
 #### HTTP запит {#http-request-6}
 
-PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}
+PATCH /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}
 
 #### Параметри {#parameters-6}
 
@@ -440,9 +444,9 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{na
 
 #### Відповідь {#response-6}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
+201 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
 
 401: Unauthorized
 
@@ -450,7 +454,7 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{na
 
 #### HTTP запит {#http-request-7}
 
-PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}/status
+PATCH /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}/status
 
 #### Параметри {#parameters-7}
 
@@ -482,9 +486,9 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{na
 
 #### Відповідь {#response-7}
 
-200 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
+200 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): OK
 
-201 (<a href="{{< ref "../cluster-resources/priority-level-configuration-v1beta3#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
+201 (<a href="{{< ref "../policy-resources/priority-level-configuration-v1#PriorityLevelConfiguration" >}}">PriorityLevelConfiguration</a>): Created
 
 401: Unauthorized
 
@@ -492,7 +496,7 @@ PATCH /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{na
 
 #### HTTP запит {#http-request-8}
 
-DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{name}
+DELETE /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations/{name}
 
 #### Параметри {#parameters-8}
 
@@ -530,7 +534,7 @@ DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations/{n
 
 #### HTTP запит {#http-request-9}
 
-DELETE /apis/flowcontrol.apiserver.k8s.io/v1beta3/prioritylevelconfigurations
+DELETE /apis/flowcontrol.apiserver.k8s.io/v1/prioritylevelconfigurations
 
 #### Параметри {#parameters-9}
 

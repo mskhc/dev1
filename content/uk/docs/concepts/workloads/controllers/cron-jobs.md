@@ -20,7 +20,7 @@ CronJob призначений для виконання регулярних з
 
 У CronJob є обмеження та особливості. Наприклад, в певних обставинах один CronJob може створювати кілька одночасних Jobs. Див. [обмеження](#cron-job-limitations) нижче.
 
-Коли планувальник створює нові Jobs і (відповідно) Podʼи для CronJob, `.metadata.name` CronJob є частиною основи для імені цих Podʼів. Назва CronJob повинна бути дійсним значенням [DNS-піддомену](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names), але це може призводити до неочікуваних результатів для імен хостів Podʼів. Для найкращої сумісності назва повинна відповідати більш обмеженим правилам [DNS-мітки](/uk/docs/concepts/overview/working-with-objects/names#dns-label-names). Навіть коли імʼя є DNS-піддоменом, імʼя не повинно бути довше 52 символів. Це тому, що контролер CronJob автоматично додає 11 символів до наданого вами імені, і існує обмеження на довжину імені Job, яке не повинно перевищувати 63 символи.
+Коли планувальник створює нові Jobs і (відповідно) Podʼи для CronJob, `.metadata.name` CronJob є частиною основи для імені цих Podʼів. Назва CronJob повинна бути дійсним значенням [DNS-піддомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names), але це може призводити до неочікуваних результатів для імен хостів Podʼів. Для найкращої сумісності назва повинна відповідати більш обмеженим правилам [DNS-мітки](/docs/concepts/overview/working-with-objects/names#dns-label-names). Навіть коли імʼя є DNS-піддоменом, імʼя не повинно бути довше 52 символів. Це тому, що контролер CronJob автоматично додає 11 символів до наданого вами імені, і існує обмеження на довжину імені Job, яке не повинно перевищувати 63 символи.
 
 <!-- body -->
 
@@ -30,7 +30,7 @@ CronJob призначений для виконання регулярних з
 
 {{% code_sample file="application/job/cronjob.yaml" %}}
 
-([Виконання автоматизованих завдань за допомогою CronJob](/uk/docs/tasks/job/automated-tasks-with-cron-jobs/) докладніше описує цей приклад).
+([Виконання автоматизованих завдань за допомогою CronJob](/docs/tasks/job/automated-tasks-with-cron-jobs/) докладніше описує цей приклад).
 
 ## Написання специфікації CronJob {#writing-a-cronjob-spec}
 
@@ -50,7 +50,7 @@ CronJob призначений для виконання регулярних з
 # * * * * *
 ```
 
-Наприклад, `0 0 13 * 5` вказує, що завдання повинно починатися кожної пʼятниці о півночі, а також 13-ого числа кожного місяця о півночі.
+Наприклад, `0 3 * * 1` означає, що це завдання планується запускати щотижня в понеділок о 3 ранку.
 
 Формат також включає розширені значення кроків "Vixie cron". Як пояснено в [документації FreeBSD](https://www.freebsd.org/cgi/man.cgi?crontab%285%29):
 
@@ -74,7 +74,7 @@ CronJob призначений для виконання регулярних з
 
 ### Шаблон завдання {#job-template}
 
-Поле `.spec.jobTemplate` визначає шаблон для завдань, які створює CronJob, і воно обовʼязкове. Воно має точно таку ж схему, як [Job](/uk/docs/concepts/workloads/controllers/job/), за винятком того, що воно вкладене і не має `apiVersion` або `kind`. Ви можете вказати загальні метадані для завдань, створених за шаблоном, такі як {{< glossary_tooltip text="labels" term_id="label" >}} або {{< glossary_tooltip text="annotations" term_id="annotation" >}}. Щодо інформації щодо написання `.spec` завдання, дивіться [Написання специфікації завдання](/uk/docs/concepts/workloads/controllers/job/#writing-a-job-spec).
+Поле `.spec.jobTemplate` визначає шаблон для завдань, які створює CronJob, і воно обовʼязкове. Воно має точно таку ж схему, як [Job](/docs/concepts/workloads/controllers/job/), за винятком того, що воно вкладене і не має `apiVersion` або `kind`. Ви можете вказати загальні метадані для завдань, створених за шаблоном, такі як {{< glossary_tooltip text="labels" term_id="label" >}} або {{< glossary_tooltip text="annotations" term_id="annotation" >}}. Щодо інформації щодо написання `.spec` завдання, дивіться [Написання специфікації завдання](/docs/concepts/workloads/controllers/job/#writing-a-job-spec).
 
 ### Термін відстрочення для відкладеного запуску завдання {#starting-deadline}
 
@@ -118,7 +118,7 @@ CronJob призначений для виконання регулярних з
 
 * `.spec.failedJobsHistoryLimit`: Це поле вказує кількість невдало завершених завдань, які слід зберігати. Стандартне значення — `1`. Встановлення цього поля на `0` не буде зберігати жодних невдало завершених завдань.
 
-Для іншого способу автоматичного прибирання завершених Завдань, дивіться [Автоматичне прибирання завершених завдань](/uk/docs/concepts/workloads/controllers/job/#clean-up-finished-jobs-automatically).
+Для іншого способу автоматичного прибирання завершених Завдань, дивіться [Автоматичне прибирання завершених завдань](/docs/concepts/workloads/controllers/job/#clean-up-finished-jobs-automatically).
 
 ### Часові пояси {#time-zones}
 
@@ -168,7 +168,7 @@ CronJob відповідає лише за створення Job, які від
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтесь про [Podʼи](/uk/docs/concepts/workloads/pods/) та [Job](/uk/docs/concepts/workloads/controllers/job/), два поняття, які використовуються в CronJobs.
+* Дізнайтесь про [Podʼи](/docs/concepts/workloads/pods/) та [Job](/docs/concepts/workloads/controllers/job/), два поняття, які використовуються в CronJobs.
 * Дізнайтеся більше про [формат](https://pkg.go.dev/github.com/robfig/cron/v3#hdr-CRON_Expression_Format) поля `.spec.schedule` в CronJob.
-* Щодо інструкцій зі створення та роботи з CronJobs, а також для прикладу маніфесту CronJob, дивіться [Виконання автоматизованих завдань за допомогою CronJobs](/uk/docs/tasks/job/automated-tasks-with-cron-jobs/).
+* Щодо інструкцій зі створення та роботи з CronJobs, а також для прикладу маніфесту CronJob, дивіться [Виконання автоматизованих завдань за допомогою CronJobs](/docs/tasks/job/automated-tasks-with-cron-jobs/).
 * `CronJob` є частиною Kubernetes REST API. Читайте {{< api-reference page="workload-resources/cron-job-v1" >}} API посилання для отримання докладних деталей.

@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "CSIStorageCapacity зберігає результат одного виклику CSI GetCapacity."
 title: "CSIStorageCapacity"
-weight: 10
+weight: 5
 auto_generated: false
 ---
 
@@ -61,7 +61,7 @@ CSIStorageCapacity зберігає результат одного виклик
 
   maximumVolumeSize — це значення, яке повідомляє драйвер CSI у своєму GetCapacityResponse для GetCapacityRequest з топологією і параметрами, що відповідають попереднім полям.
 
-  Це визначено починаючи з CSI spec 1.4.0 як найбільший розмір, який може бути використаний у полі CreateVolumeRequest.capacity_range.обовʼязково_bytes для створення тому з тими самими параметрами, що й у GetCapacityRequest. Відповідне значення в API Kubernetes — це ResourceRequirements.Requests у запиті на том.
+  Це визначено починаючи з CSI spec 1.4.0 як найбільший розмір, який може бути використаний у полі CreateVolumeRequest.capacity_range.required_bytes для створення тому з тими самими параметрами, що й у GetCapacityRequest. Відповідне значення в API Kubernetes — це ResourceRequirements.Requests у запиті на том.
 
 - **nodeTopology** (<a href="{{< ref "../common-definitions/label-selector#LabelSelector" >}}">LabelSelector</a>)
 
@@ -82,8 +82,6 @@ CSIStorageCapacityList — це колекція обʼєктів CSIStorageCap
   Стандартні метадані списку. Більше інформації: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 
 - **items** ([]<a href="{{< ref "../config-and-storage-resources/csi-storage-capacity-v1#CSIStorageCapacity" >}}">CSIStorageCapacity</a>), обовʼязково
-
-  *Map: унікальні значення за ключем name будуть збережені під час злиття*
 
   items — це список обʼєктів CSIStorageCapacity.
 

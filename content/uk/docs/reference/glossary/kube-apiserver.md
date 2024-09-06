@@ -2,7 +2,7 @@
 title: API server
 id: kube-apiserver
 date: 2018-04-12
-full_link: /uk/docs/concepts/overview/components/#kube-apiserver
+full_link: /uk/docs/concepts/architecture/#kube-apiserver
 short_description: >
   Компонент панелі управління, що обслуговує API Kubernetes.
 
@@ -17,4 +17,4 @@ tags:
 
 <!--more-->
 
-Основна реалізація сервера API Kubernetes — [kube-apiserver](/uk/docs/reference/generated/kube-apiserver/). kube-apiserver спроєктований для горизонтального масштабування, тобто масштабується за допомогою розгортання додаткових екземплярів. Ви можете запустити кілька екземплярів kube-apiserver та балансувати трафік між ними.
+Основна реалізація сервера API Kubernetes — [kube-apiserver](/docs/reference/generated/kube-apiserver/). kube-apiserver спроєктований для горизонтального масштабування, тобто масштабується за допомогою розгортання додаткових екземплярів. Ви можете запустити кілька екземплярів kube-apiserver та балансувати трафік між ними.

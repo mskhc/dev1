@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "VolumeAttachment фіксує намір приєднати або відʼєднати вказаний том до/від вказаного вузла."
 title: "VolumeAttachment"
-weight: 7
+weight: 11
 auto_generated: false
 ---
 
@@ -151,7 +151,7 @@ GET /apis/storage.k8s.io/v1/volumeattachments/{name}
 
   імʼя VolumeAttachment
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -173,7 +173,7 @@ GET /apis/storage.k8s.io/v1/volumeattachments/{name}/status
 
   імʼя VolumeAttachment
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -191,47 +191,47 @@ GET /apis/storage.k8s.io/v1/volumeattachments
 
 #### Параметри {#parameters-2}
 
-- **allowWatchBookmarks** (*in query*): boolean
+- **allowWatchBookmarks** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#allowWatchBookmarks" >}}">allowWatchBookmarks</a>
 
-- **continue** (*in query*): string
+- **continue** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
 
-- **fieldSelector** (*in query*): string
+- **fieldSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
 
-- **labelSelector** (*in query*): string
+- **labelSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
 
-- **limit** (*in query*): integer
+- **limit** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **resourceVersion** (*in query*): string
+- **resourceVersion** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
 
-- **resourceVersionMatch** (*in query*): string
+- **resourceVersionMatch** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
 
-- **sendInitialEvents** (*in query*): boolean
+- **sendInitialEvents** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
 
-- **timeoutSeconds** (*in query*): integer
+- **timeoutSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
 
-- **watch** (*in query*): boolean
+- **watch** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#watch" >}}">watch</a>
 
@@ -251,19 +251,19 @@ POST /apis/storage.k8s.io/v1/volumeattachments
 
 - **body**: <a href="{{< ref "../config-and-storage-resources/volume-attachment-v1#VolumeAttachment" >}}">VolumeAttachment</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -291,19 +291,19 @@ PUT /apis/storage.k8s.io/v1/volumeattachments/{name}
 
 - **body**: <a href="{{< ref "../config-and-storage-resources/volume-attachment-v1#VolumeAttachment" >}}">VolumeAttachment</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -329,19 +329,19 @@ PUT /apis/storage.k8s.io/v1/volumeattachments/{name}/status
 
 - **body**: <a href="{{< ref "../config-and-storage-resources/volume-attachment-v1#VolumeAttachment" >}}">VolumeAttachment</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -367,23 +367,23 @@ PATCH /apis/storage.k8s.io/v1/volumeattachments/{name}
 
 - **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **force** (*in query*): boolean
+- **force** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -409,23 +409,23 @@ PATCH /apis/storage.k8s.io/v1/volumeattachments/{name}/status
 
 - **body**: <a href="{{< ref "../common-definitions/patch#Patch" >}}">Patch</a>, обовʼязково
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldManager** (*in query*): string
+- **fieldManager** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldManager" >}}">fieldManager</a>
 
-- **fieldValidation** (*in query*): string
+- **fieldValidation** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldValidation" >}}">fieldValidation</a>
 
-- **force** (*in query*): boolean
+- **force** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#force" >}}">force</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
@@ -451,19 +451,19 @@ DELETE /apis/storage.k8s.io/v1/volumeattachments/{name}
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **gracePeriodSeconds** (*in query*): integer
+- **gracePeriodSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **propagationPolicy** (*in query*): string
+- **propagationPolicy** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
 
@@ -485,51 +485,51 @@ DELETE /apis/storage.k8s.io/v1/volumeattachments
 
 - **body**: <a href="{{< ref "../common-definitions/delete-options#DeleteOptions" >}}">DeleteOptions</a>
 
-- **continue** (*in query*): string
+- **continue** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#continue" >}}">continue</a>
 
-- **dryRun** (*in query*): string
+- **dryRun** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#dryRun" >}}">dryRun</a>
 
-- **fieldSelector** (*in query*): string
+- **fieldSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#fieldSelector" >}}">fieldSelector</a>
 
-- **gracePeriodSeconds** (*in query*): integer
+- **gracePeriodSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#gracePeriodSeconds" >}}">gracePeriodSeconds</a>
 
-- **labelSelector** (*in query*): string
+- **labelSelector** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#labelSelector" >}}">labelSelector</a>
 
-- **limit** (*in query*): integer
+- **limit** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#limit" >}}">limit</a>
 
-- **pretty** (*in query*): string
+- **pretty** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#pretty" >}}">pretty</a>
 
-- **propagationPolicy** (*in query*): string
+- **propagationPolicy** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#propagationPolicy" >}}">propagationPolicy</a>
 
-- **resourceVersion** (*in query*): string
+- **resourceVersion** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersion" >}}">resourceVersion</a>
 
-- **resourceVersionMatch** (*in query*): string
+- **resourceVersionMatch** (*в запиті*): string
 
   <a href="{{< ref "../common-parameters/common-parameters#resourceVersionMatch" >}}">resourceVersionMatch</a>
 
-- **sendInitialEvents** (*in query*): boolean
+- **sendInitialEvents** (*в запиті*): boolean
 
   <a href="{{< ref "../common-parameters/common-parameters#sendInitialEvents" >}}">sendInitialEvents</a>
 
-- **timeoutSeconds** (*in query*): integer
+- **timeoutSeconds** (*в запиті*): integer
 
   <a href="{{< ref "../common-parameters/common-parameters#timeoutSeconds" >}}">timeoutSeconds</a>
 

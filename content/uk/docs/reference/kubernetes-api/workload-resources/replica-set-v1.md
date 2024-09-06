@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "ReplicaSet забезпечує, що в будь-який момент часу задана кількість реплік Podʼів працює."
 title: "ReplicaSet"
-weight: 4
+weight: 5
 auto_generated: false
 ---
 
@@ -83,6 +83,8 @@ ReplicaSetStatus відображає поточний стан ReplicaSet.
 - **conditions** ([]ReplicaSetCondition)
 
   *Patch strategy: злиття за ключем `type`*
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
 
   Представляє останні доступні спостереження поточного стану набору реплік.
 

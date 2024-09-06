@@ -49,6 +49,8 @@ ClusterRoleBinding посилається на ClusterRole, але не міст
 
 - **subjects** ([]Subject)
 
+  *Atomic: буде замінено під час злиття*
+
   Subjects містить посилання на обʼєкти, до яких застосовується роль.
 
   <a name="Subject"></a>

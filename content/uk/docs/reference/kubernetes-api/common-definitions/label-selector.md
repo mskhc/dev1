@@ -18,6 +18,8 @@ auto_generated: false
 
 - **matchExpressions** ([]LabelSelectorRequirement)
 
+  *Atomic: буде замінено під час злиття*
+
   matchExpressions — це список вимог селектора міток. Вимоги зʼєднуються логічною операцією І (AND).
 
   <a name="LabelSelectorRequirement"></a>
@@ -33,9 +35,10 @@ auto_generated: false
 
   - **matchExpressions.values** ([]string)
 
+    *Atomic: буде замінено під час злиття*
+
     values — це масив рядкових значень. Якщо оператор — In або NotIn, масив значень повинен бути не пустим. Якщо оператор — Exists або DoesNotExist, масив значень повинен бути пустим. Цей масив замінюється під час стратегічного злиття патча.
 
 - **matchLabels** (map[string]string)
 
   matchLabels — це зіставлення пар {ключ, значення}. Один {ключ, значення} у зіставленні matchLabels еквівалентний елементу matchExpressions, де поле key — "key", оператор — "In", а масив значень містить лише "value". Вимоги зʼєднуються логічною операцією І (AND).
-  

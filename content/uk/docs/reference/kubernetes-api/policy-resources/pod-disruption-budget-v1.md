@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "PodDisruptionBudget — обʼєкт, який визначає максимальний розлад, який може бути завданий колекції Podʼів."
 title: "PodDisruptionBudget"
-weight: 4
+weight: 5
 auto_generated: false
 ---
 

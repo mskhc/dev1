@@ -1,28 +1,28 @@
 ---
 api_metadata:
-  apiVersion: "resource.k8s.io/v1alpha2"
-  import: "k8s.io/api/resource/v1alpha2"
+  apiVersion: "resource.k8s.io/v1alpha3"
+  import: "k8s.io/api/resource/v1alpha3"
   kind: "PodSchedulingContext"
 content_type: "api_reference"
 description: "Обʼєкти PodSchedulingContext містять інформацію, необхідну для планування Pod з ResourceClaims, що використовують режим виділення \"WaitForFirstConsumer\"."
-title: "PodSchedulingContext v1alpha2"
-weight: 14
+title: "PodSchedulingContext v1alpha3"
+weight: 15
 auto_generated: false
 ---
 
-`apiVersion: resource.k8s.io/v1alpha2`
+`apiVersion: resource.k8s.io/v1alpha3`
 
-`import "k8s.io/api/resource/v1alpha2"`
+`import "k8s.io/api/resource/v1alpha3"`
 
 ## PodSchedulingContext {#PodSchedulingContext}
 
 Обʼєкти PodSchedulingContext містять інформацію, необхідну для планування Pod з ResourceClaims, що використовують режим виділення "WaitForFirstConsumer".
 
-Це тип альфа-версії та потребує включення функціональних можливостей DynamicResourceAllocation.
+Це тип альфа-версії та потребує включення функціональних можливостей DRAControlPlaneController.
 
 ---
 
-- **apiVersion**: resource.k8s.io/v1alpha2
+- **apiVersion**: resource.k8s.io/v1alpha3
 
 - **kind**: PodSchedulingContext
 
@@ -30,11 +30,11 @@ auto_generated: false
 
   Метадані стандартного обʼєкта
 
-- **spec** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextSpec" >}}">PodSchedulingContextSpec</a>), обовʼязково
+- **spec** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContextSpec" >}}">PodSchedulingContextSpec</a>), обовʼязково
 
   Специфікація описує, де потрібні ресурси для Pod.
 
-- **status** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextStatus" >}}">PodSchedulingContextStatus</a>)
+- **status** (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContextStatus" >}}">PodSchedulingContextStatus</a>)
 
   Статус описує, де можуть бути виділені ресурси для Pod.
 
@@ -46,7 +46,7 @@ PodSchedulingContextSpec описує, де потрібні ресурси дл
 
 - **potentialNodes** ([]string)
 
-  *Set: унікальні значення зберігаються під час обʼєднання*
+  *Atomic: буде замінено під час злиття*
 
   PotentialNodes перелічує вузли, де можливий запуск Pod.
 
@@ -71,13 +71,13 @@ PodSchedulingContextStatus описує, де можуть бути виділе
   <a name="ResourceClaimSchedulingStatus"></a>
   *ResourceClaimSchedulingStatus містить інформацію про конкретний ResourceClaim з режимом виділення "WaitForFirstConsumer".*
 
-  - **resourceClaims.name** (string)
+  - **resourceClaims.name** (string), обовʼязково
 
     Імʼя відповідає полю pod.spec.resourceClaims[*].Name.
 
   - **resourceClaims.unsuitableNodes** ([]string)
 
-    *Set: унікальні значення зберігаються під час обʼєднання*
+    *Atomic: буде замінено під час злиття*
 
     UnsuitableNodes перелічує вузли, для яких ResourceClaim не може бути виділено.
 
@@ -89,7 +89,7 @@ PodSchedulingContextList є колекцією обʼєктів плануван
 
 ---
 
-- **apiVersion**: resource.k8s.io/v1alpha2
+- **apiVersion**: resource.k8s.io/v1alpha3
 
 - **kind**: PodSchedulingContextList
 
@@ -97,7 +97,7 @@ PodSchedulingContextList є колекцією обʼєктів плануван
 
   Стандартні метадані списку
 
-- **items** ([]<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>), обовʼязково
+- **items** ([]<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>), обовʼязково
 
   Items — це список обʼєктів PodSchedulingContext.
 
@@ -109,7 +109,7 @@ PodSchedulingContextList є колекцією обʼєктів плануван
 
 #### HTTP запит {#http-request}
 
-GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}
+GET /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}
 
 #### Параметри {#parameters}
 
@@ -127,7 +127,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### Відповідь {#response}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
 401: Unauthorized
 
@@ -135,7 +135,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### HTTP запит {#http-request-1}
 
-GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status
+GET /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}/status
 
 #### Параметри {#parameters-1}
 
@@ -153,7 +153,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### Відповідь {#response-1}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
 401: Unauthorized
 
@@ -161,7 +161,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### HTTP запит {#http-request-2}
 
-GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
+GET /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts
 
 #### Параметри {#parameters-2}
 
@@ -215,7 +215,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 #### Відповідь {#response-2}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
 
 401: Unauthorized
 
@@ -223,7 +223,7 @@ GET /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 #### HTTP запит {#http-request-3}
 
-GET /apis/resource.k8s.io/v1alpha2/podschedulingcontexts
+GET /apis/resource.k8s.io/v1alpha3/podschedulingcontexts
 
 #### Параметри {#parameters-3}
 
@@ -273,7 +273,7 @@ GET /apis/resource.k8s.io/v1alpha2/podschedulingcontexts
 
 #### Відповідь {#response-3}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContextList" >}}">PodSchedulingContextList</a>): OK
 
 401: Unauthorized
 
@@ -281,7 +281,7 @@ GET /apis/resource.k8s.io/v1alpha2/podschedulingcontexts
 
 #### HTTP запит {#http-request-4}
 
-POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
+POST /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts
 
 #### Параметри {#parameters-4}
 
@@ -289,7 +289,7 @@ POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -309,11 +309,11 @@ POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 #### Відповідь {#response-4}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
 
-202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
+202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
 
 401: Unauthorized
 
@@ -321,7 +321,7 @@ POST /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
 
 #### HTTP запит {#http-request-5}
 
-PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}
+PUT /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}
 
 #### Параметри {#parameters-5}
 
@@ -333,7 +333,7 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -354,9 +354,9 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### Відповідь {#response-5}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
 
 401: Unauthorized
 
@@ -365,7 +365,7 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### HTTP запит {#http-request-6}
 
-PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status
+PUT /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}/status
 
 #### Параметри {#parameters-6}
 
@@ -377,7 +377,7 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -397,9 +397,9 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### Відповідь {#response-6}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
 
 401: Unauthorized
 
@@ -407,7 +407,7 @@ PUT /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/
 
 #### HTTP запит {#http-request-7}
 
-PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}
+PATCH /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}
 
 #### Параметри {#parameters-7}
 
@@ -419,7 +419,7 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
   <a href="{{< ref "../common-parameters/common-parameters#namespace" >}}">namespace</a>
 
-- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
+- **body**: <a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>, обовʼязково
 
 - **dryRun** (*в запиті*): string
 
@@ -439,7 +439,7 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 #### Відповідь
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
 401: Unauthorized
 
@@ -448,7 +448,7 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 #### HTTP запит {#http-request-8}
 
-PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status
+PATCH /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}/status
 
 #### Параметри {#parameters-8}
 
@@ -484,9 +484,9 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 #### Відповідь {#response-8}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
-201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
+201 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Created
 
 401: Unauthorized
 
@@ -494,7 +494,7 @@ PATCH /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontext
 
 #### HTTP запит {#http-request-9}
 
-DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}
+DELETE /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts/{name}
 
 #### Параметри {#parameters-9}
 
@@ -527,9 +527,9 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontex
 
 #### Відповідь {#response-9}
 
-200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
+200 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): OK
 
-202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha2#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
+202 (<a href="{{< ref "../workload-resources/pod-scheduling-context-v1alpha3#PodSchedulingContext" >}}">PodSchedulingContext</a>): Accepted
 
 401: Unauthorized
 
@@ -537,7 +537,7 @@ DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontex
 
 #### HTTP запит {#http-request-10}
 
-DELETE /apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts
+DELETE /apis/resource.k8s.io/v1alpha3/namespaces/{namespace}/podschedulingcontexts
 
 #### Параметри {#parameters-10}
 

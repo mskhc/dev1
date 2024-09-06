@@ -64,9 +64,99 @@ SelfSubjectAccessReviewSpec є описом запиту на доступ. Ма
   <a name="ResourceAttributes"></a>
   *ResourceAttributes включає атрибути авторизації, доступні для запитів до інтерфейсу Authorizer, що стосуються ресурсів.*
 
+  - **resourceAttributes.fieldSelector** (FieldSelectorAttributes)
+
+    fieldSelector описує обмеження доступу на основі поля. Він може лише обмежувати доступ, але не розширювати його.
+
+    Це поле є на рівні альфа. Щоб використовувати це поле, ви повинні ввімкнути функціональну можливість `AuthorizeWithSelectors` (стандартно вимкнено).
+
+    <a name="FieldSelectorAttributes"></a>
+    *FieldSelectorAttributes вказує на доступ, обмежений за полем. Автори вебхуків заохочуються до таких дій:*
+    - *переконатися, що rawSelector і requirements не встановлені одночасно;*
+    - *розглядати поле requirements, якщо воно встановлене;*
+    - *не намагатися парсити або враховувати поле rawSelector, якщо воно встановлене. Це робиться для запобігання ще одній уразливості типу CVE-2022-2880 (тобто домогтися, щоб різні системи погодилися щодо того, як саме парсити запит, — це не те, чого ми прагнемо), більше деталей дивіться за посиланням https://www.oxeye.io/resources/golang-parameter-smuggling-attack.*
+
+    Для точок доступу *SubjectAccessReview* kube-apiserver:
+    - *Якщо rawSelector порожній, а requirements порожні, запит не обмежується.*
+    - *Якщо rawSelector присутній, а requirements порожні, rawSelector буде парситися та обмежуватися, якщо парсинг вдасться.*
+    - *Якщо rawSelector порожній, а requirements присутні, слід враховувати вимоги.*
+    - *Якщо rawSelector присутній і requirements присутні, запит є недійсним.*
+
+    - **resourceAttributes.fieldSelector.rawSelector** (string)
+
+      rawSelector — це серіалізація селектора поля, який буде включено в параметр запиту. Реалізаціям вебхуків рекомендується ігнорувати rawSelector. *SubjectAccessReview* у kube-apiserver буде парсити rawSelector, якщо поле requirements відсутнє.
+
+    - **resourceAttributes.fieldSelector.requirements** ([]FieldSelectorRequirement)
+
+      *Atomic: буде замінено під час злиття*
+
+      requirements — це інтерпретація селектора поля після парсингу. Усі вимоги повинні бути виконані, щоб ресурс відповідав селектору. Реалізації вебхуків повинні обробляти requirements, але як саме їх обробляти — залишається на розсуд вебхука. Оскільки requirements можуть лише обмежувати запит, безпечно авторизувати запит як необмежений, якщо вимоги не зрозумілі.
+
+      <a name="FieldSelectorRequirement"></a>
+      *FieldSelectorRequirement — це селектор, який містить значення, ключ та оператор, який повʼязує ключ та значення.*
+
+      - **resourceAttributes.fieldSelector.requirements.key** (string), обовʼязково
+
+        key — це ключ-селектор поля, до якого застосовується вимога.
+
+      - **resourceAttributes.fieldSelector.requirements.operator** (string), обовʼязково
+
+        operator представляє стосунок ключа до набору значень. Дійсні оператори: In, NotIn, Exists, DoesNotExist. Список операторів може розширюватися в майбутньому.
+
+      - **resourceAttributes.fieldSelector.requirements.values** ([]string)
+
+        *Atomic: буде замінено під час злиття*
+
+        values — це масив строкових значень. Якщо оператор — In або NotIn, масив values не може бути порожнім. Якщо ж оператор — Exists або DoesNotExist, масив values повинен бути порожнім.
+
   - **resourceAttributes.group** (string)
 
     Group — це API-група ресурсу. "*" означає всі.
+
+  - **resourceAttributes.labelSelector** (LabelSelectorAttributes)
+
+    labelSelector описує обмеження доступу на основі міток. Він може лише обмежувати доступ, але не розширювати його.
+
+    Це поле є на рівні альфа. Щоб використовувати це поле, потрібно ввімкнути функціональну можливість `AuthorizeWithSelectors` (стандартно вимкнено).
+
+    <a name="LabelSelectorAttributes"></a>
+    *LabelSelectorAttributes вказує на доступ, обмежений за мітками. Автори вебхуків заохочуються до таких дій:*
+    - *переконатися, що rawSelector і requirements не встановлені одночасно;*
+    - *розглядати поле requirements, якщо воно встановлене;*
+    - *не намагатися парсити або враховувати поле rawSelector, якщо воно встановлене. Це робиться для запобігання ще одній уразливості типу CVE-2022-2880 (тобто домогтися, щоб різні системи погодилися щодо того, як саме парсити запит, — це не те, чого ми прагнемо), більше деталей дивіться за посиланням https://www.oxeye.io/resources/golang-parameter-smuggling-attack.*
+
+    Для точок доступу *SubjectAccessReview* kube-apiserver:
+    - *Якщо rawSelector порожній, а requirements порожні, запит не обмежується.*
+    - *Якщо rawSelector присутній, а requirements порожні, rawSelector буде парситися та обмежуватися, якщо парсинг вдасться.*
+    - *Якщо rawSelector порожній, а requirements присутні, слід враховувати вимоги.*
+    - *Якщо rawSelector присутній і requirements присутні, запит є недійсним.*
+
+    - **resourceAttributes.labelSelector.rawSelector** (string)
+
+      rawSelector — це серіалізація селектора поля, яка буде включена в параметр запиту. Реалізаціям вебхуків рекомендується ігнорувати rawSelector. *SubjectAccessReview* у kube-apiserver буде парсити rawSelector, якщо поле requirements відсутнє.
+
+    - **resourceAttributes.labelSelector.requirements** ([]LabelSelectorRequirement)
+
+      *Atomic: буде замінено під час злиття*
+
+      requirements — це інтерпретація селектора мітки після парсингу. Усі вимоги повинні бути виконані, щоб ресурс відповідав селектору. Реалізації вебхуків повинні обробляти requirements, але спосіб обробки залишається на розсуд вебхука. Оскільки requirements можуть лише обмежувати запит, безпечно авторизувати запит як необмежений, якщо вимоги не зрозумілі.
+
+      <a name="LabelSelectorRequirement"></a>
+      *Вимога до селектора мітки — це селектор, який містить значення, ключ і оператор, який повʼязує ключ і значення.*
+
+      - **resourceAttributes.labelSelector.requirements.key** (string), обовʼязково
+
+        key — це ключ мітки, до якого застосовується селектор.
+
+      - **resourceAttributes.labelSelector.requirements.operator** (string), обовʼязково
+
+        operator представляє стосунок ключа до набору значень. Дійсні оператори: In, NotIn, Exists та DoesNotExist.
+
+      - **resourceAttributes.labelSelector.requirements.values** ([]string)
+
+        *Atomic: буде замінено під час злиття*
+
+        values — це масив строкових значень. Якщо оператор — In або NotIn, масив values не може бути порожнім. Якщо ж оператор — Exists або DoesNotExist, масив values повинен бути порожнім. Цей масив замінюється під час стратегічного злиття патчу.
 
   - **resourceAttributes.name** (string)
 

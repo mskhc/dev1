@@ -188,8 +188,6 @@ sudo systemctl restart containerd
 
 Можливо, вам доведеться також перезапустити `containerd`, якщо ви оновили файл конфігурації: `systemctl restart containerd`.
 
-Зверніть увагу, що це найкраща практика для `kubelet` оголошувати відповідний `pod-infra-container-image`. Якщо це не налаштовано, `kubelet` може намагатися прибрати образ `pause`. Триває робота над [закріпленням образу pause в containerd](https://github.com/containerd/containerd/issues/6352), щоб більше не вимагати цього налаштування в `kubelet`.
-
 ### CRI-O
 
 У цьому розділі наведено необхідні кроки для встановлення CRI-O як середовища виконання контейнерів.

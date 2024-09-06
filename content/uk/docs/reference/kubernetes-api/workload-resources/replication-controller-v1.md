@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "ReplicationController представляє конфігураці. контролера реплікації."
 title: "ReplicationController"
-weight: 3
+weight: 4
 auto_generated: false
 ---
 
@@ -83,6 +83,8 @@ ReplicationControllerStatus представляє поточний статус
 - **conditions** ([]ReplicationControllerCondition)
 
   *Patch strategy: обʼєднання за ключем `type`*
+
+  *Map: унікальні значення ключа type будуть збережені під час злиття*
 
   Представляє останні доступні спостереження поточного стану контролера реплікації.
 

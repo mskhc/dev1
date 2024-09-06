@@ -6,7 +6,7 @@ api_metadata:
 content_type: "api_reference"
 description: "HorizontalPodAutoscaler — це конфігурація для горизонтального автомасштабування, яка автоматично керує кількістю реплік будь-якого ресурсу, що реалізує субресурс масштабування, на основі вказаних метрик."
 title: "HorizontalPodAutoscaler"
-weight: 12
+weight: 13
 auto_generated: false
 ---
 

@@ -44,6 +44,8 @@ Subsets: [
 
 - **subsets** ([]EndpointSubset)
 
+  *Atomic: буде замінено під час злиття*
+
   Набір всіх точок доступу є обʼєднанням (union) всіх субнаборів. Адреси розміщуються в субнабори відповідно до IP-адрес, які вони поділяють. Одна адреса з кількома портами, деякі з яких готові, а деякі ні (тому що вони належать різним контейнерам), буде відображатися в різних субнаборах для різних портів. Жодна адреса не зʼявиться одночасно в Addresses і NotReadyAddresses в одному субнаборі. Набори адрес і портів, які складають Service.
 
   <a name="EndpointSubset"></a>
@@ -64,6 +66,8 @@ Subsets: [
   ```
 
   - **subsets.addresses** ([]EndpointAddress)
+
+    *Atomic: буде замінено під час злиття*
 
     IP-адреси, які пропонують відповідні порти, позначені як готові. Ці точки доступу повинні вважатися безпечними для використання балансувальниками навантаження та клієнтами.
 
@@ -88,6 +92,8 @@ Subsets: [
 
   - **subsets.notReadyAddresses** ([]EndpointAddress)
 
+    *Atomic: буде замінено під час злиття*
+
     IP-адреси, які пропонують відповідні порти, але наразі не позначені як готові, тому що вони ще не завершили запуск, нещодавно не пройшли перевірку готовності або нещодавно не пройшли перевірку на справність.
 
     <a name="EndpointAddress"></a>
@@ -110,6 +116,8 @@ Subsets: [
       Посилання на обʼєкт, що надає точку доступу.
 
   - **subsets.ports** ([]EndpointPort)
+
+    *Atomic: буде замінено під час злиття*
 
     Номери портів, доступні на відповідних IP-адресах.
 
@@ -135,9 +143,9 @@ Subsets: [
       - Непрефіксовані назви протоколів – зарезервовані для стандартних імен служб IANA (згідно RFC-6335 та https://www.iana.org/assignments/service-names).
       - Назви з префіксами, визначеними Kubernetes:
 
-        - 'kubernetes.io/h2c' – HTTP/2 over cleartext, як описано в https://www.rfc-editor.org/rfc/rfc7540
-        - 'kubernetes.io/ws' – WebSocket over cleartext, як описано в https://www.rfc-editor.org/rfc/rfc6455
-        - 'kubernetes.io/wss' – WebSocket over TLS, як описано в https://www.rfc-editor.org/rfc/rfc6455
+        - 'kubernetes.io/h2c' — HTTP/2 з попередніми знаннями без шифрування, як описано в https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
+        - 'kubernetes.io/ws' — WebSocket без шифрування, як описано в https://www.rfc-editor.org/rfc/rfc6455
+        - 'kubernetes.io/wss' — WebSocket через TLS, як описано в https://www.rfc-editor.org/rfc/rfc6455
 
       - Інші протоколи повинні використовувати назви з префіксами визначені реалізацією, такі як mycompany.com/my-custom-protocol.
 

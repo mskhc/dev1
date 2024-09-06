@@ -3,7 +3,7 @@ title: Компоненти Kubernetes
 content_type: concept
 description: >
   Огляд ключових компонентів, з яких складається кластер Kubernetes.
-weight: 30
+weight: 10
 card:
   title: Компоненти кластера
   name: concepts
