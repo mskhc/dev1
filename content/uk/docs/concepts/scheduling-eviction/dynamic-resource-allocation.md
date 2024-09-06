@@ -135,7 +135,7 @@ spec:
 
 ## Моніторинг ресурсів {#monitoring-resources}
 
-Kubelet надає службу gRPC для забезпечення виявлення динамічних ресурсів запущених Podʼів. Для отримання додаткової інформації про точки доступу gRPC дивіться [звіт про виділення ресурсів](/uk/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
+Kubelet надає службу gRPC для забезпечення виявлення динамічних ресурсів запущених Podʼів. Для отримання додаткової інформації про точки доступу gRPC дивіться [звіт про виділення ресурсів](/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources).
 
 ## Попередньо заплановані Podʼи {#pre-scheduled-pods}
 
@@ -164,7 +164,7 @@ spec:
 
 ## Увімкнення динамічного виділення ресурсів {#enabling-dynamic-resource-allocation}
 
-Динамічне виділення ресурсів є _альфа-функцією_ та увімкнуто лише тоді, коли увімкнуто [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `DynamicResourceAllocation` та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `resource.k8s.io/v1alpha3`. Для отримання деталей щодо цього дивіться параметри [kube-apiserver](/uk/docs/reference/command-line-tools-reference/kube-apiserver/) `--feature-gates` та `--runtime-config`. Також варто увімкнути цю функцію в kube-scheduler, kube-controller-manager та kubelet.
+Динамічне виділення ресурсів є _альфа-функцією_ та увімкнуто лише тоді, коли увімкнуто [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `DynamicResourceAllocation` та {{< glossary_tooltip text="групу API" term_id="api-group" >}} `resource.k8s.io/v1alpha3`. Для отримання деталей щодо цього дивіться параметри [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/) `--feature-gates` та `--runtime-config`. Також варто увімкнути цю функцію в kube-scheduler, kube-controller-manager та kubelet.
 
 Коли драйвер ресурсів використовує контролер панелі управління, крім `DynamicResourceAllocation`, також потрібно увімкнути функціональну можливість `DRAControlPlaneController`.
 
@@ -194,4 +194,4 @@ error: the server doesn't have a resource type "deviceclasses"
 
 ## {{% heading "whatsnext" %}}
 
-- Для отримання додаткової інформації про дизайн дивіться KEP: [Structured Parameters with Structured Parameters](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/4381-dra-structured-parameters) та [Dynamic Resource Allocation with Control Plane Controller](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/3063-dynamic-resource-allocation/README.md).
+- Для отримання додаткової інформації про дизайн дивіться KEP: [Dynamic Resource Allocation with Structured Parameters](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/4381-dra-structured-parameters) та [Dynamic Resource Allocation with Control Plane Controller](https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/3063-dynamic-resource-allocation/README.md).

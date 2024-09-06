@@ -194,7 +194,7 @@ ResourceSliceList — колекція класів ResourceSlices.
 
   Items is the list of resource ResourceSlices.
 
-- **listMeta** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
+- **metadata** (<a href="{{< ref "../common-definitions/list-meta#ListMeta" >}}">ListMeta</a>)
 
   Стандартні метадані списку
 
