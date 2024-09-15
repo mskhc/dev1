@@ -2,7 +2,7 @@
 layout: blog
 title: "DevSecOps in Action: Kubernetes Secrets"
 slug: devsecops-in-action-k8s-secrets
-date: 2024-05-09
+date: 2024-09-17
 author: >
   Evgenii Frikin
 ---
