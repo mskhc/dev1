@@ -4,9 +4,13 @@ title: "Kubernetes Legacy Package Repositories Will Be Frozen On September 13, 2
 date: 2023-08-31T15:30:00-07:00
 slug: legacy-package-repository-deprecation
 evergreen: true
+author: >
+  Bob Killen (Google),
+  Chris Short (AWS),
+  Jeremy Rickard (Microsoft),
+  Marko Mudrinić (Kubermatic),
+  Tim Bannister (The Scale Factory)
 ---
-
-**Authors**: Bob Killen (Google), Chris Short (AWS), Jeremy Rickard (Microsoft), Marko Mudrinić (Kubermatic), Tim Bannister (The Scale Factory)
 
 On August 15, 2023, the Kubernetes project announced the general availability of
 the community-owned package repositories for Debian and RPM packages available
@@ -47,7 +51,7 @@ generally using their own Kubernetes distributions and therefore they don't use
 packages provided by the Kubernetes project; more importantly, if someone else is
 managing Kubernetes for you, then they would usually take responsibility for that check.
 
-If you have a managed [control plane](/docs/concepts/overview/components/#control-plane-components)
+If you have a managed [control plane](/docs/concepts/architecture/#control-plane-components)
 but you are responsible for **managing the nodes yourself**, and any of those nodes run Linux,
 you should [check](#check-if-affected) whether you are affected.
 
