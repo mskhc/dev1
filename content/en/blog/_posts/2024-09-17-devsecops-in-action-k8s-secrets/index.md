@@ -372,7 +372,7 @@ PVHBD5I21osTOX9i
 Let's check process environment:
 
 ```bash
-# strings /proc/1/environ
+strings /proc/1/environ
 ```
 
 The output is similar to this:
@@ -389,9 +389,7 @@ during the deployment.
 Let's check the secret file:
 
 ```bash
-# cat /secrets/secret.file
-
-#
+cat /secrets/secret.file
 ```
 
 The file is empty! After readiness probe passed, the file was truncated.
@@ -400,7 +398,7 @@ If define `DEMO_SECRET__PASSWD=/secrets/secret.file` (without prefix) response
 will contain the file name which was defined in the environment variable:
 
 ```bash
-# curl -v localhost:8080
+curl -v localhost:8080
 ```
 
 The output is similar to this:
@@ -418,7 +416,7 @@ The output is similar to this:
 ```
 
 ```bash
-# strings /proc/1/environ
+strings /proc/1/environ
 ```
 
 ```text
@@ -428,7 +426,7 @@ DEMO_SECRET__PASSWD=/secrets/secret.file
 ```
 
 ```bash
-# cat /secrets/secret.file
+cat /secrets/secret.file
 ```
 
 ```text
