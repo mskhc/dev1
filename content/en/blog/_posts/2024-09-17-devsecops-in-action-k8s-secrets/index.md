@@ -449,7 +449,7 @@ DEMO_SECRET__PASSWD=file://secret.file gdb main
 
 Let's check current process environment:
 
-```bash
+```
 ...
 (gdb) show environment DEMO_SECRET__PASSWD
 DEMO_SECRET__PASSWD = file://secret.file
@@ -460,7 +460,7 @@ Let's set a breakpoint and run debug. In other terminal tab or web browser it's
 necessary to make request to `root`
 location (the request is supposed to get stuck):
 
-```bash
+```
 (gdb) break 48
 Breakpoint 1 at 0x784cf5: file ..., line 48.
 (gdb) run
@@ -469,7 +469,7 @@ Breakpoint 1 at 0x784cf5: file ..., line 48.
 Once the request is received, the process will be stopped (due to breakpoint).
 `os.LookupEnv` function returns environment variable value if it is defined.
 
-```bash
+```
 Thread 1 "main" hit Breakpoint 1, main.httpHandle (w=..., r=0xc0000c2000) at ...
 48                      if envVal, isExistEnv = os.LookupEnv(envVar); isExistEnv {
 ```
@@ -477,7 +477,7 @@ Thread 1 "main" hit Breakpoint 1, main.httpHandle (w=..., r=0xc0000c2000) at ...
 Next,let's move on to checking for the file existence the path to which is
 stored in the envVal variable:
 
-```bash
+```
 (gdb) next
 49                              if filePath, isExistFile = fileExist(envVal); isExistFile {
 (gdb) print main.envVal
@@ -488,7 +488,7 @@ Next, `os.ReadFile` read file, `os.Setenv` makes override value of the
 environment variable, but `os.Getenv` gets new value from recently-rewritten
 environment variable:
 
-```bash
+```
 (gdb) next
 50                                      body, err := os.ReadFile(filePath)
 ...
@@ -499,7 +499,7 @@ environment variable:
 
 In conclusion, let's make sure, that the same variable has different values:
 
-```bash
+```h
 (gdb) next
 56                                      changed = true
 (gdb) print main.envVal
