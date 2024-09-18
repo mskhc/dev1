@@ -28,8 +28,7 @@ cluster overall.
 In the modern world, unilateral solutions aren't effective enough and can hide
 security issues known as
 [Security through obscurity](https://en.m.wikipedia.org/wiki/Security_through_obscurity).
-To avoid it, it's necessary to integrate
-[DevSecOps methodology](https://www.redhat.com/en/topics/devops/what-is-devsecops)
+To avoid it, it's necessary to integrate DevSecOps methodology
 which implies integrated security as a shared responsibility throughout the
 entire IT lifecycle. In other words, security solutions must start with the
 development process and apply to all other levels correspondingly.
