@@ -55,18 +55,18 @@ simulate an injection agent for delivering secrets to Pod.
 Imagine there is a simple application which processes http requests. On request
 to `root` location client receives environment variable value
 `DEMO_SECRET__PASSWD` which is defined via
-[`spec.containers.0.envFrom.secretRef.name`](kustomization/patches/baseline.yaml)
+[`spec.containers.0.envFrom.secretRef.name`](assets/baseline/kustomization/overlays/demo/kustomization.yml)
 in Pod resource. On request `/readiness` receives status application
 (ready or not ready) and if the environment variable isn't defined Pod doesn't
 change status to `READY`.
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/14624762f1546e2bfd43e65cee26186c514fa351/cmd/main.go#L10-L53)
+[`cmd/main.go`](assets/baseline/cmd/main.go)
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD"
 )
 
-...
+<skipped>
 
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 
@@ -107,13 +107,13 @@ According to OWASP recommendation, it's necessary to use file instead of env.
 That's why it's necessary to make changes to implementation readiness probes
 and deployment manifests.
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/96afd59f8a391973a8ed5a9b410915b9e99d4bf4/cmd/main.go#L11-L67)
+[`cmd/main.go`](assets/stage-01/cmd/main.go)
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD_FILE"
 )
 
-...
+<skipped>
 
 func fileExist(path string) bool {
 	info, err := os.Stat(path)
@@ -128,7 +128,7 @@ func fileExist(path string) bool {
 
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 
-...
+<skipped>
 
 	if envVal, ok = os.LookupEnv(envVar); ok {
 		if fileExist(envVal) {
@@ -141,9 +141,11 @@ func httpHandle(w http.ResponseWriter, r *http.Request) {
 Now applications check `DEMO_SECRET__PASSWD_FILE` was defined then application
 checks whether the file exists by value from the environment variable.
 
-[`kustomization/patch`](kustomization/patches/stage-01.yaml)
+[`kustomization.yaml`](assets/stage-01/kustomization/overlays/demo/kustomization.yml)
 ```yaml
-...
+
+<skipped>
+
 spec:
   containers:
   - envFrom:
@@ -158,7 +160,8 @@ spec:
     secret:
       optional: true
       secretName: demo-secret
-...
+
+<skipped>
 ```
 
 `spec.containers.0.envFrom` defines all of the Secret's data as container
@@ -188,9 +191,11 @@ delivery to Pod will be done via `spec.initContainers` then
 of readiness probe in order to make file with sensitive data to Pod useless for
 attacker.
 
-[`kustomization/patch`](kustomization/patches/stage-02.yaml)
+[`kustomization.yaml`](assets/stage-02/kustomization/overlays/demo/kustomization.yml)
 ```yaml
-...
+
+<skipped>
+
   initContainers:
     - name: secret-injector
       image: alpine:3.19
@@ -204,7 +209,9 @@ attacker.
       volumeMounts:
         - mountPath: /secrets
           name: demo-secret
-...
+
+<skipped>
+
     lifecycle:
       postStart:
         exec:
@@ -223,7 +230,7 @@ So at the current moment, the application can be configured via the environment
 variable `DEMO_SECRET__PASSWD_FILE` containing a path to a secret file and if
 the file exists (checking via `/readianess` probe) then read it.
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L45-L91)
+[`cmd/main.go`](assets/stage-03/cmd/main.go)
 ```go
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 
@@ -291,7 +298,7 @@ this will allow you to use the same variable and follow OWASP recommendations.
 
 First let's define variables and constants:
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L12-L20)
+[`cmd/main.go`](assets/stage-03/cmd/main.go)
 ```go
 const (
 	envVar = "DEMO_SECRET__PASSWD"
@@ -307,7 +314,7 @@ var (
 Next, it's necessary to change the `fileExist` function. It's supposed to return
 a path to the file without a prefix if the file exists.
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L31-L43)
+[`cmd/main.go`](assets/stage-03/cmd/main.go)
 ```go
 func fileExist(path string) (string, bool) {
 	if strings.HasPrefix(path, filePrefix) {
@@ -328,7 +335,7 @@ Magic happens in the `httpHandle` function. Environment variable value is passed
 into function, if it's a file it will be read and current environment variable
 value will be overridden by a new value that was read from the file.
 
-[`cmd/main.go`](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/blob/8c8177b4955ce9cd9686c2746e5e2a810b9c2f62/cmd/main.go#L45-L59)
+[`cmd/main.go`](assets/stage-03/cmd/main.go)
 ```go
 func httpHandle(w http.ResponseWriter, r *http.Request) {
 	if !changed {
@@ -358,14 +365,18 @@ curl -v localhost:8080
 The output is similar to this:
 
 ```text
-...
+
+<skipped output>
+
 > GET / HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/8.5.0
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-...
+
+<skipped output>
+
 PVHBD5I21osTOX9i
 ```
 
@@ -378,9 +389,12 @@ strings /proc/1/environ
 The output is similar to this:
 
 ```text
-...
+
+<skipped output>
+
 DEMO_SECRET__PASSWD=file:///secrets/secret.file
-...
+
+<skipped output>
 ```
 
 Excellent! Environment variable still contains the value which was defined
@@ -404,14 +418,18 @@ curl -v localhost:8080
 The output is similar to this:
 
 ```text
-...
+
+<skipped output>
+
 > GET / HTTP/1.1
 > Host: localhost:8080
 > User-Agent: curl/8.5.0
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-...
+
+<skipped output>
+
 /secrets/secret.file
 ```
 
@@ -420,9 +438,12 @@ strings /proc/1/environ
 ```
 
 ```text
-...
+
+<skipped output>
+
 DEMO_SECRET__PASSWD=/secrets/secret.file
-...
+
+<skipped output>
 ```
 
 ```bash
@@ -462,7 +483,8 @@ Let's check current process environment:
 
 ```
 DEMO_SECRET__PASSWD = file://secret.file
-...
+
+<skipped output>
 ```
 
 Let's set a breakpoint and run debug. In other terminal tab or web browser it's
@@ -572,8 +594,7 @@ order to use debug tool.
 For more details please see [Debugging Go Code with GDB](https://go.dev/doc/gdb).
 
 All source code, deployment files and Installation guide to local environment
-can be found in the
-[GitHub project](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets).
+can be found in the [assets](assets/README.md).
 
 ## Next Stages
 
@@ -598,7 +619,7 @@ except the ones whose values start with prefix
 Fourthly, it's necessary to consider the possibility of using popular libraries,
 which allow us to work effectively with environment variables, flags, configs,
 etc. e.g this allows a faster
-[implementation of the described approach](https://github.com/efrikin/devsecops-in-action-kubernetes-secrets/tree/main/viper).
+[implementation of the described approach](assets/viper/main.go).
 
 ## Acknowledgement
 
