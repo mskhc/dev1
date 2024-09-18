@@ -585,7 +585,7 @@ $2 = 0xc0000ea014 "MySecret\n"
 DEMO_SECRET__PASSWD = file://secret.file
 ```
 
-As you can see debug process requires a few conditions such as: disabled
+As you can see, the debug process requires a few conditions such as: disabled
 compiler optimization, access to source code and debug tool existence, but if
 application runs into container and is managed by orchestrator such as:
 Kubernetes, then it generates additional problems which have to be solved in
