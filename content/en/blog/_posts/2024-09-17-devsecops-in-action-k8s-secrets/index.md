@@ -476,7 +476,6 @@ DEMO_SECRET__PASSWD=file://secret.file gdb main
 Let's check current process environment:
 
 ```
-...
 (gdb) show environment DEMO_SECRET__PASSWD
 ```
 
@@ -545,7 +544,9 @@ environment variable:
 
 ```
 50                                      body, err := os.ReadFile(filePath)
-...
+
+<skipped output>
+
 54                                      os.Setenv(envVar, string(body))
 
 ```
@@ -593,7 +594,8 @@ order to use debug tool.
 For more details please see [Debugging Go Code with GDB](https://go.dev/doc/gdb).
 
 All source code, deployment files and Installation guide to local environment
-can be found in the [assets](assets/README.md).
+can be found in the article folder to
+[kubernetes/website project](https://github.com/kubernetes/website/tree/main/content/en/blog/_posts).
 
 ## Next Stages
 
