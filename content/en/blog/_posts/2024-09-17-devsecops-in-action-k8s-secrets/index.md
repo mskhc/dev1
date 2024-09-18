@@ -443,7 +443,13 @@ build with disabled compiler optimization flags and run `gdb`:
 
 ```bash
 go build -gcflags=all="-N -l" cmd/stage-03/main.go
+```
+
+```bash
 echo 'MySecret' > secret.file
+```
+
+```bash
 DEMO_SECRET__PASSWD=file://secret.file gdb main
 ```
 
@@ -452,6 +458,9 @@ Let's check current process environment:
 ```
 ...
 (gdb) show environment DEMO_SECRET__PASSWD
+```
+
+```
 DEMO_SECRET__PASSWD = file://secret.file
 ...
 ```
@@ -462,7 +471,13 @@ location (the request is supposed to get stuck):
 
 ```
 (gdb) break 48
+```
+
+```
 Breakpoint 1 at 0x784cf5: file ..., line 48.
+```
+
+```
 (gdb) run
 ```
 
@@ -471,6 +486,9 @@ Once the request is received, the process will be stopped (due to breakpoint).
 
 ```
 Thread 1 "main" hit Breakpoint 1, main.httpHandle (w=..., r=0xc0000c2000) at ...
+```
+
+```
 48                      if envVal, isExistEnv = os.LookupEnv(envVar); isExistEnv {
 ```
 
@@ -479,8 +497,19 @@ stored in the envVal variable:
 
 ```
 (gdb) next
+```
+
+```
 49                              if filePath, isExistFile = fileExist(envVal); isExistFile {
+
+```
+
+```
 (gdb) print main.envVal
+
+```
+
+```
 $1 = 0xc00001e0d4 "file://secret.file"
 ```
 
@@ -490,21 +519,47 @@ environment variable:
 
 ```
 (gdb) next
+
+```
+
+```
 50                                      body, err := os.ReadFile(filePath)
 ...
 54                                      os.Setenv(envVar, string(body))
+
+```
+
+```
 (gdb) next
+```
+
+```
 55                                      envVal = os.Getenv(envVar)
 ```
 
 In conclusion, let's make sure, that the same variable has different values:
 
-```h
+```
 (gdb) next
+```
+
+```
 56                                      changed = true
+```
+
+```
 (gdb) print main.envVal
+```
+
+```
 $2 = 0xc0000ea014 "MySecret\n"
+```
+
+```
 (gdb) show environment DEMO_SECRET__PASSWD
+```
+
+```
 DEMO_SECRET__PASSWD = file://secret.file
 ```
 
