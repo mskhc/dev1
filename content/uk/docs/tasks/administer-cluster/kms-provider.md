@@ -241,7 +241,7 @@ KMS v2 не підтримує властивість `cachesize`. Всі клю
 До виконання кроків, визначених у [Забезпечення шифрування всіх секретів](#ensuring-all-secrets-are-encrypted), список `providers` повинен закінчуватися постачальником `identity: {}`, щоб можна було читати незашифровані дані. Після шифрування всіх ресурсів постачальника `identity` слід видалити, щоб запобігти обробці незашифрованих даних сервером API.
 
 Для отримання деталей про формат `EncryptionConfiguration`, будь ласка, перегляньте
-[довідник API шифрування API сервера](/docs/reference/config-api/apiserver-encryption.v1/).
+[довідник API шифрування API сервера](/docs/reference/config-api/apiserver-config.v1/).
 
 ## Перевірка того, що дані зашифровані {#verifying-that-the-data-is-encrypted}
 

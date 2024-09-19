@@ -1,7 +1,7 @@
 ---
 title: Налаштування драйвера cgroup
 content_type: task
-weight: 20
+weight: 50
 ---
 
 <!-- overview -->
@@ -10,13 +10,13 @@ weight: 20
 
 ## {{% heading "prerequisites" %}}
 
-Вам слід ознайомитися з [вимогами до контейнерних середовищ](/uk/docs/setup/production-environment/container-runtimes) Kubernetes.
+Вам слід ознайомитися з [вимогами до контейнерних середовищ](/docs/setup/production-environment/container-runtimes) Kubernetes.
 
 <!-- steps -->
 
 ## Налаштування драйвера cgroup середовища виконання контейнерів {#configure-the-container-runtime-cgroup-driver}
 
-Сторінка [Середовища виконання контейнерів](/uk/docs/setup/production-environment/container-runtimes) пояснює, що для налаштувань на основі kubeadm рекомендується використовувати драйвер `systemd` замість [типового](/uk/docs/reference/config-api/kubelet-config.v1beta1) драйвера `cgroupfs` kubelet, оскільки kubeadm керує kubelet як [сервісом systemd](/uk/docs/setup/production-environment/tools/kubeadm/kubelet-integration).
+Сторінка [Середовища виконання контейнерів](/docs/setup/production-environment/container-runtimes) пояснює, що для налаштувань на основі kubeadm рекомендується використовувати драйвер `systemd` замість [типового](/docs/reference/config-api/kubelet-config.v1beta1) драйвера `cgroupfs` kubelet, оскільки kubeadm керує kubelet як [сервісом systemd](/docs/setup/production-environment/tools/kubeadm/kubelet-integration).
 
 На сторінці також наведено деталі щодо того, як налаштувати різні контейнерні середовища зі стандартним використанням драйвера `systemd`.
 
@@ -27,7 +27,7 @@ kubeadm дозволяє передавати структуру `KubeletConfigu
 {{< note >}}
 Починаючи з v1.22, якщо користувач не встановить поле `cgroupDriver` у `KubeletConfiguration`, kubeadm стандартно задає його як `systemd`.
 
-У Kubernetes v1.28 можна увімкнути автоматичне виявлення драйвера cgroup як експериментальну функцію. Див. [Драйвер cgroup системи systemd](/uk/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) для отримання детальнішої інформації.
+У Kubernetes v1.28 можна увімкнути автоматичне виявлення драйвера cgroup як експериментальну функцію. Див. [Драйвер cgroup системи systemd](/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver) для отримання детальнішої інформації.
 {{< /note >}}
 
 Ось мінімальний приклад, який явним чином вказує значення поля `cgroupDriver`:
@@ -50,7 +50,7 @@ kubeadm init --config kubeadm-config.yaml
 ```
 
 {{< note >}}
-Kubeadm використовує ту саму конфігурацію `KubeletConfiguration` для всіх вузлів у кластері. `KubeletConfiguration` зберігається в обʼєкті [ConfigMap](/uk/docs/concepts/configuration/configmap) в просторі імен `kube-system`.
+Kubeadm використовує ту саму конфігурацію `KubeletConfiguration` для всіх вузлів у кластері. `KubeletConfiguration` зберігається в обʼєкті [ConfigMap](/docs/concepts/configuration/configmap) в просторі імен `kube-system`.
 
 Виконання підкоманд `init`, `join` та `upgrade` призведе до запису kubeadm `KubeletConfiguration` у файл під `/var/lib/kubelet/config.yaml` і передачі його до kubelet локального вузла.
 {{< /note >}}
@@ -86,14 +86,14 @@ Kubeadm використовує ту саму конфігурацію `Kubelet
 
 Для кожного вузла в кластері:
 
-- [Відключіть вузол](/uk/docs/tasks/administer-cluster/safely-drain-node) за допомогою `kubectl drain <імʼя-вузла> --ignore-daemonsets`
+- [Відключіть вузол](/docs/tasks/administer-cluster/safely-drain-node) за допомогою `kubectl drain <імʼя-вузла> --ignore-daemonsets`
 - Зупиніть kubelet за допомогою `systemctl stop kubelet`
 - Зупиніть середовище виконання контейнерів
 - Змініть драйвер cgroup середовища виконання контейнерів на `systemd`
 - Встановіть `cgroupDriver: systemd` у `/var/lib/kubelet/config.yaml`
 - Запустіть середовище виконання контейнерів
 - Запустіть kubelet за допомогою `systemctl start kubelet`
-- [Увімкніть вузол](/uk/docs/tasks/administer-cluster/safely-drain-node) за допомогою `kubectl uncordon <імʼя-вузла>`
+- [Увімкніть вузол](/docs/tasks/administer-cluster/safely-drain-node) за допомогою `kubectl uncordon <імʼя-вузла>`
 
 Виконайте ці кроки на вузлах по одному, щоб забезпечити достатній час для розміщення робочих навантажень на різних вузлах.
 

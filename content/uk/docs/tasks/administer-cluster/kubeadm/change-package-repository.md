@@ -1,7 +1,7 @@
 ---
 title: Зміна репозиторія пакунків Kubernetes
 content_type: task
-вага: 120
+вага: 150
 ---
 
 <!-- overview -->
@@ -9,7 +9,7 @@ content_type: task
 Ця сторінка пояснює, як увімкнути репозиторій пакунків для бажаного мінорного випуску Kubernetes під час оновлення кластера. Це потрібно лише для користувачів репозиторіїв пакунків, що підтримуються спільнотою та розміщені на `pkgs.k8s.io`. На відміну від застарілих репозиторіїв пакунків, репозиторії пакунків, що підтримуються спільнотою, структуровані таким чином, що для кожної мінорної версії Kubernetes є окремий репозиторій пакунків.
 
 {{< note >}}
-Цей посібник охоплює лише частину процесу оновлення Kubernetes. Для отримання додаткової інформації про оновлення кластерів Kubernetes див. [посібник з оновлення](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
+Цей посібник охоплює лише частину процесу оновлення Kubernetes. Для отримання додаткової інформації про оновлення кластерів Kubernetes див. [посібник з оновлення](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
 {{</ note >}}
 
 {{< note >}}
@@ -175,5 +175,5 @@ URL, використаний для репозиторіїв пакунків K
 
 ## {{% heading "whatsnext" %}}
 
-- Подивіться, як [оновити вузли Linux](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).
-- Подивіться, як [оновити вузли Windows](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/).
+- Подивіться, як [оновити вузли Linux](/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).
+- Подивіться, як [оновити вузли Windows](/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/).

@@ -2,7 +2,7 @@
 title: Оновлення вузлів Windows
 min-kubernetes-server-version: 1.17
 content_type: task
-weight: 110
+weight: 41
 ---
 
 <!-- overview -->
@@ -12,10 +12,10 @@ weight: 110
 Ця сторінка пояснює, як оновити вузол Windows, створений за допомогою kubeadm.
 
 ## {{% heading "prerequisites" %}}
- 
+
 {{< include "task-tutorial-prereqs-node-upgrade.md" >}} {{< version-check >}}
 
-* Ознайомтеся з [процесом оновлення інших вузлів вашого кластера kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам слід оновити вузли панелі управління перед оновленням вузлів Windows.
+* Ознайомтеся з [процесом оновлення інших вузлів вашого кластера kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам слід оновити вузли панелі управління перед оновленням вузлів Windows.
 
 <!-- steps -->
 
@@ -87,4 +87,4 @@ weight: 110
 
 ## {{% heading "whatsnext" %}}
 
-* Подивіться, як [оновити вузли Linux](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).
+* Подивіться, як [оновити вузли Linux](/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/).

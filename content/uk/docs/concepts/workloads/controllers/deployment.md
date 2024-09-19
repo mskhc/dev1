@@ -526,7 +526,7 @@ Podʼи `nginx:1.16.1`. Deployment не чекає, доки буде створ
    deployment.apps/nginx-deployment rolled back
    ```
 
-   Для отримання додаткових відомостей про команди, повʼязані з розгортаннями, читайте [`kubectl rollout`](/uk/docs/reference/generated/kubectl/kubectl-commands#rollout).
+   Для отримання додаткових відомостей про команди, повʼязані з розгортаннями, читайте [`kubectl rollout`](/docs/reference/generated/kubectl/kubectl-commands#rollout).
 
    Deployment тепер повернуто до попередньої стабільної ревізії. Як ви можете бачити, контролер розгортань генерує подію `DeploymentRollback` щодо відкату до ревізії 2.
 
@@ -609,7 +609,7 @@ kubectl scale deployment/nginx-deployment --replicas=10
 deployment.apps/nginx-deployment scaled
 ```
 
-Припускаючи, що [горизонтальне автомасштабування Pod](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) увімкнено у вашому кластері, ви можете налаштувати автомасштабування для вашого Deployment і вибрати мінімальну та максимальну кількість Podʼів, які ви хочете запустити на основі використання ЦП вашими поточними Podʼами.
+Припускаючи, що [горизонтальне автомасштабування Pod](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) увімкнено у вашому кластері, ви можете налаштувати автомасштабування для вашого Deployment і вибрати мінімальну та максимальну кількість Podʼів, які ви хочете запустити на основі використання ЦП вашими поточними Podʼами.
 
 ```shell
 kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
@@ -1065,13 +1065,13 @@ echo $?
 
 ## Canary Deployment
 
-Якщо ви хочете впроваджувати релізи для підмножини користувачів чи серверів, використовуючи Deployment, ви можете створити кілька Deployment, один для кожного релізу, слідуючи шаблону Canary, описаному в [управлінні ресурсами](/uk/docs/concepts/cluster-administration/manage-deployment/#canary-deployments).
+Якщо ви хочете впроваджувати релізи для підмножини користувачів чи серверів, використовуючи Deployment, ви можете створити кілька Deployment, один для кожного релізу, слідуючи шаблону Canary, описаному в [управлінні ресурсами](/docs/concepts/workloads/management/#canary-deployments).
 
 ## Написання специфікації Deployment {#writing-a-deployment-spec}
 
-Як і з усіма іншими конфігураціями Kubernetes, у Deployment потрібні поля `.apiVersion`, `.kind` і `.metadata`. Для загальної інформації щодо роботи з файлами конфігурацій дивіться документи [розгортання застосунків](/uk/docs/tasks/run-application/run-stateless-application-deployment/), [налаштування контейнерів](/uk/docs/tasks/run-application/configure-pod-container/) та [використання kubectl для управління ресурсами](/uk/docs/concepts/overview/working-with-objects/object-management/).
+Як і з усіма іншими конфігураціями Kubernetes, у Deployment потрібні поля `.apiVersion`, `.kind` і `.metadata`. Для загальної інформації щодо роботи з файлами конфігурацій дивіться документи [розгортання застосунків](/docs/tasks/run-application/run-stateless-application-deployment/), [налаштування контейнерів](/docs/tasks/run-application/configure-pod-container/) та [використання kubectl для управління ресурсами](/docs/concepts/overview/working-with-objects/object-management/).
 
-Коли панель управління створює нові Podʼи для Deployment, `.metadata.name` Deployment є частиною основи для найменування цих Podʼів. Назва Deployment повинна бути дійсним значенням [DNS-піддомену](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names), але це може призводити до неочікуваних результатів для імен хостів Podʼів. Для найкращої сумісності імʼя повинно відповідати більш обмеженим правилам [DNS-мітки](/uk/docs/concepts/overview/working-with-objects/names#dns-label-names).
+Коли панель управління створює нові Podʼи для Deployment, `.metadata.name` Deployment є частиною основи для найменування цих Podʼів. Назва Deployment повинна бути дійсним значенням [DNS-піддомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names), але це може призводити до неочікуваних результатів для імен хостів Podʼів. Для найкращої сумісності імʼя повинно відповідати більш обмеженим правилам [DNS-мітки](/docs/concepts/overview/working-with-objects/names#dns-label-names).
 
 Deployment також потребує розділу [`.spec`](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status).
 
@@ -1079,11 +1079,11 @@ Deployment також потребує розділу [`.spec`](https://git.k8s.
 
 `.spec.template` та `.spec.selector` — єдині обовʼязкові поля `.spec`.
 
-`.spec.template` — це [шаблон Pod](/uk/docs/concepts/workloads/pods/#pod-templates). Він має точно таку ж схему, як і {{< glossary_tooltip text="Pod" term_id="pod" >}}, за винятком того, що він вкладений і не має `apiVersion` або `kind`.
+`.spec.template` — це [шаблон Pod](/docs/concepts/workloads/pods/#pod-templates). Він має точно таку ж схему, як і {{< glossary_tooltip text="Pod" term_id="pod" >}}, за винятком того, що він вкладений і не має `apiVersion` або `kind`.
 
 Крім обовʼязкових полів для Pod, шаблон Pod в Deployment повинен вказати відповідні мітки та відповідну політику перезапуску. Щодо міток, переконайтеся, що вони не перекриваються з іншими контролерами. Дивіться [селектор](#selector).
 
-Дозволяється лише [`.spec.template.spec.restartPolicy`](/uk/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy), рівне `Always`, що є стандартним значенням, якщо не вказано інше.
+Дозволяється лише [`.spec.template.spec.restartPolicy`](/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy), рівне `Always`, що є стандартним значенням, якщо не вказано інше.
 
 ### Репліки {#replicas}
 
@@ -1091,13 +1091,13 @@ Deployment також потребує розділу [`.spec`](https://git.k8s.
 
 Якщо ви вручну масштабуєте Deployment, наприклад, через `kubectl scale deployment deployment --replicas=X`, а потім ви оновлюєте цей Deployment на основі маніфесту (наприклад: виконуючи `kubectl apply -f deployment.yaml`), то застосування цього маніфесту перезаписує ручне масштабування, яке ви раніше вказали.
 
-Якщо [HorizontalPodAutoscaler](/uk/docs/tasks/run-application/horizontal-pod-autoscale/) (або будь-який аналогічний API для горизонтального масштабування) відповідає за масштабування Deployment, не встановлюйте значення в `.spec.replicas`.
+Якщо [HorizontalPodAutoscaler](/docs/tasks/run-application/horizontal-pod-autoscale/) (або будь-який аналогічний API для горизонтального масштабування) відповідає за масштабування Deployment, не встановлюйте значення в `.spec.replicas`.
 
 Замість цього дозвольте панелі управління Kubernetes автоматично керувати полем `.spec.replicas`.
 
 ### Селектор {#selector}
 
-`.spec.selector` — обовʼязкове поле, яке вказує [селектор міток](/uk/docs/concepts/overview/working-with-objects/labels/) для Podʼів, які створює цей Deployment.
+`.spec.selector` — обовʼязкове поле, яке вказує [селектор міток](/docs/concepts/overview/working-with-objects/labels/) для Podʼів, які створює цей Deployment.
 
 `.spec.selector` повинно відповідати `.spec.template.metadata.labels`, або воно буде відхилено API.
 
@@ -1120,7 +1120,7 @@ Deployment може примусово завершити Podʼи, мітки я
 Всі поточні Podʼи примусово зупиняються та вилучаються, перш ніж створюються нові, коли `.spec.strategy.type==Recreate`.
 
 {{< note >}}
-Це гарантує тільки завершення роботи Podʼи до створення для оновлення. Якщо ви оновлюєте Deployment, всі Podʼи старої ревізії будуть негайно завершені. Успішне видалення очікується перед створенням будь-якого Podʼи нової ревізії. Якщо ви вручну видаляєте Pod, життєвий цикл керується ReplicaSet, і заміщення буде створено негайно (навіть якщо старий Pod все ще перебуває в стані Terminating). Якщо вам потрібна гарантія "at most" для ваших Podʼів, вам слід розглянути використання [StatefulSet](/uk/docs/concepts/workloads/controllers/statefulset/).
+Це гарантує тільки завершення роботи Podʼи до створення для оновлення. Якщо ви оновлюєте Deployment, всі Podʼи старої ревізії будуть негайно завершені. Успішне видалення очікується перед створенням будь-якого Podʼи нової ревізії. Якщо ви вручну видаляєте Pod, життєвий цикл керується ReplicaSet, і заміщення буде створено негайно (навіть якщо старий Pod все ще перебуває в стані Terminating). Якщо вам потрібна гарантія "at most" для ваших Podʼів, вам слід розглянути використання [StatefulSet](/docs/concepts/workloads/controllers/statefulset/).
 {{< /note >}}
 
 #### Оновлення Deployment {#rolling-update-deployment}
@@ -1247,7 +1247,7 @@ spec:
 
 ### Час Min Ready {#min-ready-seconds}
 
-`.spec.minReadySeconds` — це необовʼязкове поле, яке вказує мінімальну кількість секунд, протягом яких новий створений Pod повинен бути готовим, і жоден з його контейнерів не повинен виходити з ладу, щоб його вважалим доступним. Стандартно  це значення становить 0 (Pod буде вважатися доступним, як тільки він буде готовий). Щоб дізнатися більше про те, коли Pod вважається готовим, див. [Проби контейнерів](/uk/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
+`.spec.minReadySeconds` — це необовʼязкове поле, яке вказує мінімальну кількість секунд, протягом яких новий створений Pod повинен бути готовим, і жоден з його контейнерів не повинен виходити з ладу, щоб його вважалим доступним. Стандартно  це значення становить 0 (Pod буде вважатися доступним, як тільки він буде готовий). Щоб дізнатися більше про те, коли Pod вважається готовим, див. [Проби контейнерів](/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
 
 ### Ліміт історії ревізій {#revision-history-limit}
 
@@ -1263,8 +1263,8 @@ spec:
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Podʼи](/uk/docs/concepts/workloads/pods).
-* [Запустіть stateless застосунок за допомогою Deployment](/uk/docs/tasks/run-application/run-stateless-application-deployment/).
+* Дізнайтеся більше про [Podʼи](/docs/concepts/workloads/pods).
+* [Запустіть stateless застосунок за допомогою Deployment](/docs/tasks/run-application/run-stateless-application-deployment/).
 * Прочитайте {{< api-reference page="workload-resources/deployment-v1" >}}, щоб зрозуміти API Deployment.
-* Прочитайте про [PodDisruptionBudget](/uk/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для управління доступністю застосунку під час розладу.
-* Використовуйте kubectl для [створення Deployment](/uk/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).
+* Прочитайте про [PodDisruptionBudget](/docs/concepts/workloads/pods/disruptions/) та як ви можете використовувати його для управління доступністю застосунку під час розладу.
+* Використовуйте kubectl для [створення Deployment](/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/).

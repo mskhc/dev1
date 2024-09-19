@@ -28,10 +28,10 @@ weight: 40
 [Destination NAT](https://en.wikipedia.org/wiki/Network_address_translation#DNAT)
 : Заміна Destination IP в пакеті; у цьому документі це зазвичай означає заміну на IP-адресу {{< glossary_tooltip term_id="pod" >}}
 
-[VIP](/uk/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
+[VIP](/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
 : Віртуальна IP-адреса, така як та, що призначається кожному {{< glossary_tooltip text="Service" term_id="service" >}} у Kubernetes
 
-[kube-proxy](/uk/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
+[kube-proxy](/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies)
 : Мережевий демон, який оркеструє управління віртуальними IP Service на кожному вузлі
 
 ### Необхідні умови {#prerequisites}
@@ -45,7 +45,7 @@ weight: 40
 {{< /note >}}
 
 ```shell
-kubectl create deployment source-ip-app --image=registry.k8s.io/echoserver:1.4
+kubectl create deployment source-ip-app --image=registry.k8s.io/echoserver:1.10
 ```
 
 Результат:
@@ -64,7 +64,7 @@ deployment.apps/source-ip-app created
 
 ## Source IP для Service з `Type=ClusterIP` {#source-ip-for-services-with-type-clusterip}
 
-Пакети, надіслані на ClusterIP зсередини кластера, ніколи не обробляються Source NAT, якщо ви використовуєте kube-proxy в [iptables mode](/uk/docs/reference/networking/virtual-ips/#proxy-mode-iptables), (станартно). Ви можете запитати режим kube-proxy, отримавши `http://localhost:10249/proxyMode` на вузлі, де працює kube-proxy.
+Пакети, надіслані на ClusterIP зсередини кластера, ніколи не обробляються Source NAT, якщо ви використовуєте kube-proxy в [iptables mode](/docs/reference/networking/virtual-ips/#proxy-mode-iptables), (станартно). Ви можете запитати режим kube-proxy, отримавши `http://localhost:10249/proxyMode` на вузлі, де працює kube-proxy.
 
 ```console
 kubectl get nodes
@@ -169,7 +169,7 @@ command=GET
 
 ## Source IP для Service з `Type=NodePort` {#source-ip-for-services-with-type-nodeport}
 
-Пакети, надіслані на Serviceʼи з [`Type=NodePort`](/uk/docs/concepts/services-networking/service/#type-nodeport), типово обробляються Source NAT. Ви можете протестувати це, створивши Service `NodePort`:
+Пакети, надіслані на Serviceʼи з [`Type=NodePort`](/docs/concepts/services-networking/service/#type-nodeport), типово обробляються Source NAT. Ви можете протестувати це, створивши Service `NodePort`:
 
 ```shell
 kubectl expose deployment source-ip-app --name=nodeport --port=80 --target-port=8080 --type=NodePort
@@ -227,7 +227,7 @@ graph LR;
 
 Схема. Source IP Type=NodePort з використанням SNAT
 
-Щоб уникнути цього, Kubernetes має функцію [зберігати Source IP-адресу клієнта](/uk/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip). Якщо ви встановите для `service.spec.externalTrafficPolicy` значення `Local`, kube-proxy надсилає проксі-запити лише до локальних точок доступу та не пересилає трафік до інших вузлів. Цей підхід зберігає Source IP-адресу. Якщо немає локальних точок доступу, пакети, надіслані до вузла, відкидаються, тому ви можете покладатися на правильну Source IP-адресу в будь-яких правилах обробки пакетів, які ви можете застосувати до пакета, який проходить до точки доступу.
+Щоб уникнути цього, Kubernetes має функцію [зберігати Source IP-адресу клієнта](/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip). Якщо ви встановите для `service.spec.externalTrafficPolicy` значення `Local`, kube-proxy надсилає проксі-запити лише до локальних точок доступу та не пересилає трафік до інших вузлів. Цей підхід зберігає Source IP-адресу. Якщо немає локальних точок доступу, пакети, надіслані до вузла, відкидаються, тому ви можете покладатися на правильну Source IP-адресу в будь-яких правилах обробки пакетів, які ви можете застосувати до пакета, який проходить до точки доступу.
 
 Встановіть значення поля `service.spec.externalTrafficPolicy` наступним чином:
 
@@ -281,7 +281,7 @@ graph TD;
 
 ## Source IP для Service з `Type=LoadBalancer` {#source-ip-for-services-with-type-loadbalancer}
 
-Пакети, які надсилаються на Service з [`Type=LoadBalancer`](/uk/docs/concepts/services-networking/service/#loadbalancer), стандартно мають Source NAT адресацію, оскільки всі можливі для планування вузли Kubernetes у стані `Ready` мають право на навантаження рівномірного розподілу трафіку. Якщо пакети надходять на вузол без точки доступу, система передає їх на вузол *з* точкою доступу, замінюючи адресу Source IP на пакеті на IP-адресу вузла (як описано у попередньому розділі).
+Пакети, які надсилаються на Service з [`Type=LoadBalancer`](/docs/concepts/services-networking/service/#loadbalancer), стандартно мають Source NAT адресацію, оскільки всі можливі для планування вузли Kubernetes у стані `Ready` мають право на навантаження рівномірного розподілу трафіку. Якщо пакети надходять на вузол без точки доступу, система передає їх на вузол *з* точкою доступу, замінюючи адресу Source IP на пакеті на IP-адресу вузла (як описано у попередньому розділі).
 
 Ви можете перевірити це, експонувавши застосунок source-ip-app через балансувальник навантаження:
 
@@ -421,5 +421,5 @@ kubectl delete deployment source-ip-app
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [Підключення застосунків за допомогою Service](/uk/docs/tutorials/services/connect-applications-service/)
-* Прочитайте, як [Створення зовнішнього балансувальника навантаження](/uk/docs/tasks/access-application-cluster/create-external-load-balancer/)
+* Дізнайтеся більше про [Підключення застосунків за допомогою Service](/docs/tutorials/services/connect-applications-service/)
+* Прочитайте, як [Створення зовнішнього балансувальника навантаження](/docs/tasks/access-application-cluster/create-external-load-balancer/)

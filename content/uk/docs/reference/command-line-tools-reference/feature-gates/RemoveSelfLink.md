@@ -1,5 +1,4 @@
 ---
-removed: true
 title: RemoveSelfLink
 content_type: feature_gate
 _build:
@@ -19,5 +18,7 @@ stages:
     defaultValue: true
     fromVersion: "1.24"  
     toVersion: "1.29"
+
+removed: true
 ---
 Встановлює поле `.metadata.selfLink` порожнім (порожній рядок) для всіх обʼєктів і колекцій. Це поле застаріло з випуску Kubernetes v1.16. Коли цю можливість увімкнено, поле `.metadata.selfLink` залишається частиною API Kubernetes, але завжди не встановлене.

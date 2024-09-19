@@ -1,12 +1,12 @@
 ---
 title: Оновлення кластерів з kubeadm
 content_type: task
-weight: 40
+weight: 30
 ---
 
 <!-- overview -->
 
-Ця сторінка пояснює, як оновити кластер Kubernetes, створений за допомогою kubeadm, з версії {{< skew currentVersionAddMinor -1 >}}.x до версії {{< skew currentVersion >}}.x і з версії {{< skew currentVersion >}}.x до {{< skew currentVersion >}}.y (де `y > x`). Пропуск МІНОРНИХ версій при оновленні не підтримується. Для отримання додаткових відомостей відвідайте [Політику версій зміни](/uk/releases/version-skew-policy/).
+Ця сторінка пояснює, як оновити кластер Kubernetes, створений за допомогою kubeadm, з версії {{< skew currentVersionAddMinor -1 >}}.x до версії {{< skew currentVersion >}}.x і з версії {{< skew currentVersion >}}.x до {{< skew currentVersion >}}.y (де `y > x`). Пропуск МІНОРНИХ версій при оновленні не підтримується. Для отримання додаткових відомостей відвідайте [Політику версій зміни](/releases/version-skew-policy/).
 
 Щоб переглянути інформацію про оновлення кластерів, створених за допомогою старіших версій kubeadm, зверніться до наступних сторінок:
 
@@ -30,12 +30,12 @@ weight: 40
 
 ### Додаткова інформація {#additional-information}
 
-- Наведені нижче інструкції описують, коли потрібно вивести з експлуатації кожний вузол під час процесу оновлення. Якщо ви виконуєте оновлення для **мінорного** номера версії для будь-якого kubelet, ви **обовʼязково** спочатку повинні вивести вузол (або вузли) з експлуатації, які ви оновлюєте. У випадку вузлів панелі управління, на них можуть працювати контейнери CoreDNS або інші критичні робочі навантаження. Для отримання додаткової інформації дивіться [Виведення вузлів з експлуатації](/uk/docs/tasks/administer-cluster/safely-drain-node/).
-- Проєкт Kubernetes рекомендує щоб версії kubelet і kubeadm збігались. Замість цього ви можете використовувати версію kubelet, яка є старішою, ніж kubeadm, за умови, що вона знаходиться в межах підтримуваних версій. Для отримання додаткових відомостей, будь ласка, відвідайте [Відхилення kubeadm від kubelet](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#kubeadm-s-skew-against-the-kubelet).
+- Наведені нижче інструкції описують, коли потрібно вивести з експлуатації кожний вузол під час процесу оновлення. Якщо ви виконуєте оновлення для **мінорного** номера версії для будь-якого kubelet, ви **обовʼязково** спочатку повинні вивести вузол (або вузли) з експлуатації, які ви оновлюєте. У випадку вузлів панелі управління, на них можуть працювати контейнери CoreDNS або інші критичні робочі навантаження. Для отримання додаткової інформації дивіться [Виведення вузлів з експлуатації](/docs/tasks/administer-cluster/safely-drain-node/).
+- Проєкт Kubernetes рекомендує щоб версії kubelet і kubeadm збігались. Замість цього ви можете використовувати версію kubelet, яка є старішою, ніж kubeadm, за умови, що вона знаходиться в межах підтримуваних версій. Для отримання додаткових відомостей, будь ласка, відвідайте [Відхилення kubeadm від kubelet](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#kubeadm-s-skew-against-the-kubelet).
 - Всі контейнери перезавантажуються після оновлення, оскільки змінюється значення хешу специфікації контейнера.
 - Щоб перевірити, що служба kubelet успішно перезапустилась після оновлення kubelet, ви можете виконати `systemctl status kubelet` або переглянути логи служби за допомогою `journalctl -xeu kubelet`.
-- `kubeadm upgrade` підтримує параметр `--config` із [типом API `UpgradeConfiguration`](/uk/docs/reference/config-api/kubeadm-config.v1beta4), який можна використовувати для налаштування процесу оновлення.
-- `kubeadm upgrade` не підтримує переналаштування наявного кластера. Замість цього виконайте кроки, описані в [Переналаштування кластера kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-reconfigure).
+- `kubeadm upgrade` підтримує параметр `--config` із [типом API `UpgradeConfiguration`](/docs/reference/config-api/kubeadm-config.v1beta4), який можна використовувати для налаштування процесу оновлення.
+- `kubeadm upgrade` не підтримує переналаштування наявного кластера. Замість цього виконайте кроки, описані в [Переналаштування кластера kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-reconfigure).
 
 ### Що треба враховувати при оновленні etcd {#considerations-when-upgrading-etcd}
 
@@ -51,7 +51,7 @@ kubeadm upgrade ... # виконати команду оновлення kubeadm
 
 ## Зміна репозиторію пакунків {#change-the-package-repository}
 
-Якщо ви використовуєте репозиторії пакунків, що керуються спільнотою (`pkgs.k8s.io`), вам потрібно увімкнути репозиторій пакунків для бажаної мінорної версії Kubernetes. Як це зробити можна дізнатись з документа [Зміна репозиторію пакунків Kubernetes](/uk/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+Якщо ви використовуєте репозиторії пакунків, що керуються спільнотою (`pkgs.k8s.io`), вам потрібно увімкнути репозиторій пакунків для бажаної мінорної версії Kubernetes. Як це зробити можна дізнатись з документа [Зміна репозиторію пакунків Kubernetes](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 
 {{% legacy-repos-deprecation %}}
 
@@ -129,7 +129,7 @@ Here's the translation:
    Ця команда перевіряє можливість оновлення вашого кластера та отримує версії, на які ви можете оновитися. Також вона показує таблицю стану версій компонентів.
 
    {{< note >}}
-   `kubeadm upgrade` також автоматично оновлює сертифікати, якими він керує на цьому вузлі. Щоб відмовитися від оновлення сертифікатів, можна використовувати прапорець `--certificate-renewal=false`. Для отримання додаткової інформації див. [керівництво з керування сертифікатами](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-certs).
+   `kubeadm upgrade` також автоматично оновлює сертифікати, якими він керує на цьому вузлі. Щоб відмовитися від оновлення сертифікатів, можна використовувати прапорець `--certificate-renewal=false`. Для отримання додаткової інформації див. [керівництво з керування сертифікатами](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs).
    {{</ note >}}
 
 4. Виберіть версію для оновлення та запустіть відповідну команду. Наприклад:
@@ -155,7 +155,7 @@ Here's the translation:
 
 5. Вручну оновіть втулок постачальник мережевого інтерфейсу контейнера (CNI).
 
-   Ваш постачальник мережевого інтерфейсу контейнера (CNI) може мати власні інструкції щодо оновлення. Перевірте [надбудови](/uk/docs/concepts/cluster-administration/addons/) для знаходження вашого постачальника CNI та перегляньте, чи потрібні додаткові кроки оновлення.
+   Ваш постачальник мережевого інтерфейсу контейнера (CNI) може мати власні інструкції щодо оновлення. Перевірте [надбудови](/docs/concepts/cluster-administration/addons/) для знаходження вашого постачальника CNI та перегляньте, чи потрібні додаткові кроки оновлення.
 
    Цей крок не потрібен на додаткових вузлах панелі управління, якщо постачальник CNI працює як DaemonSet.
 
@@ -231,8 +231,8 @@ kubectl uncordon <node-to-uncordon>
 
 Наступні сторінки показують, як оновити робочі вузли у Linux та Windows:
 
-- [Оновлення вузлів Linux](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/)
-- [Оновлення вузлів Windows](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/)
+- [Оновлення вузлів Linux](/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/)
+- [Оновлення вузлів Windows](/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/)
 
 ## Перевірка стану кластера {#verify-the-status-of-the-cluster}
 

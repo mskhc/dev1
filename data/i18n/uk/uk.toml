@@ -34,8 +34,22 @@ other = "Очищення"
 [china_icp_license]
 other = "ICP license:"
 
-[community_events_calendar]
+[community_advice_guidelines]
+other = "Ви також можете дізантись про наші {{ .link }}."
+
+[community_calendar_name]
 other = "Календар подій"
+
+# Також додайте [community_contribute], якщо локалізуєте цей сайт
+[community_contribute]
+other = "Якщо ви хочете долучитися до розробки Kubernetes, приєднуйтесь до нас тут:"
+
+[community_contributor_site_name]
+other = "Вебсайт учасників"
+
+# Також додайте [community_develop], якщо локалізуєте цей сайт
+[community_develop]
+other = "Розвивай та роби внесок"
 
 [community_forum_name]
 other = "Форум"
@@ -43,8 +57,20 @@ other = "Форум"
 [community_github_name]
 other = "GitHub"
 
+# Також додайте [community_introduce], якщо локалізуєте цей сайт
+[community_introduce]
+other = "{{ .Site.Title }} — це проект з відкритим вихідним кодом, який кожен член спільноти може використовувати, покращувати та насолоджуватися ним. Ми будемо раді, якщо ви приєднаєтеся до нас! Ось кілька способів дізнатися про те, що відбувається, і долучитися до участі."
+
+# Також додайте [community_join], якщо локалізуєте цей сайт
+[community_join]
+other = "Приєднуйтесь до спільноти {{ .Site.Title }}"
+
+# Також додайте [community_learn], якщо локалізуєте цей сайт
+[community_learn]
+other = "Вивчай та спілкуйся"
+
 [community_server_fault_name]
-other = "Помилка сервера"
+other = "Помилки сервера"
 
 [community_slack_name]
 other = "Slack"
@@ -54,6 +80,10 @@ other = "Stack Overflow"
 
 [community_twitter_name]
 other = "X (колись Twitter)"
+
+# Також додайте [community_using], якщо локалізуєте цей сайт
+[community_using]
+other = "Користуєшся чи хотів би користуватись {{ .Site.Title }}? Дізнайся більше тут:"
 
 [community_x_name]
 other = "X (колись Twitter)"

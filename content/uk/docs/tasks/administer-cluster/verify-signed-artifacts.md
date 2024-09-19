@@ -13,7 +13,7 @@ weight: 420
 
 Вам знадобиться мати встановлені наступні інструменти:
 
-- `cosign` ([інструкція щодо встановлення](https://docs.sigstore.dev/cosign/installation/))
+- `cosign` ([інструкція щодо встановлення](https://docs.sigstore.dev/cosign/system_config/installation/))
 - `curl` (часто надається вашою операційною системою)
 - `jq` ([завантажте jq](https://jqlang.github.io/jq/download/))
 
@@ -49,7 +49,7 @@ cosign verify-blob "$BINARY" \
 {{< note >}}
 Cosign 2.0 вимагає опції `--certificate-identity` та `--certificate-oidc-issuer`.
 
-Для отримання додаткової інформації щодо безключового підписування, див. [Безключові Підписи](https://docs.sigstore.dev/signing/overview/).
+Для отримання додаткової інформації щодо безключового підписування, див. [Безключові Підписи](https://docs.sigstore.dev/cosign/signing/overview/).
 
 Попередні версії Cosign вимагали встановлення `COSIGN_EXPERIMENTAL=1`.
 

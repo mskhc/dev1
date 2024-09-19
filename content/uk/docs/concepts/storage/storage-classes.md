@@ -210,6 +210,28 @@ allowedTopologies:
     - us-east-2c
 ```
 
+### AWS EFS
+
+Щоб налаштувати сховище AWS EFS, можна використовувати сторонній драйвер [AWS_EFS_CSI_DRIVER](https://github.com/kubernetes-sigs/aws-efs-csi-driver).
+
+```yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: efs-sc
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-92107410
+  directoryPerms: "700"
+```
+
+- `provisioningMode`: Тип тому, що створюється за допомогою Amazon EFS. Наразі підтримується лише створення на основі точки доступу (`efs-ap`).
+- `fileSystemId`: Файлова система, під якою створюється точка доступу.
+- `directoryPerms`: Дозволи на теки для кореневої теки, створеної точкою доступу.
+
+Для отримання додаткової інформації зверніться до документації [AWS_EFS_CSI_Driver Dynamic Provisioning](https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/examples/kubernetes/dynamic_provisioning/README.md).
+
 ### NFS
 
 Для налаштування NFS-сховища можна використовувати вбудований драйвер або [драйвер CSI для NFS в Kubernetes](https://github.com/kubernetes-csi/csi-driver-nfs#readme)

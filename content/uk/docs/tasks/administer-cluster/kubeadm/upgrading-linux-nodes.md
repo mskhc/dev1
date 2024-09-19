@@ -1,7 +1,7 @@
 ---
 title: Оновлення вузлів Linux
 content_type: task
-weight: 100
+weight: 40
 ---
 
 <!-- overview -->
@@ -12,13 +12,13 @@ weight: 100
 
 {{< include "task-tutorial-prereqs-node-upgrade.md" >}} {{< version-check >}}
 
-* Ознайомтеся з [процесом оновлення решти вузлів панелі управління за допомогою kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам потрібно буде спочатку оновити вузли панелі управління перед оновленням вузлів робочих навантажень Linux.
+* Ознайомтеся з [процесом оновлення решти вузлів панелі управління за допомогою kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade). Вам потрібно буде спочатку оновити вузли панелі управління перед оновленням вузлів робочих навантажень Linux.
 
 <!-- steps -->
 
 ## Зміна репозиторію пакунків {#changing-the-package-repository}
 
-Якщо ви використовуєте репозиторії пакунків (`pkgs.k8s.io`), вам потрібно увімкнути репозиторій пакунків для потрібного мінорного релізу Kubernetes. Це пояснено в документі [Зміна репозиторію пакунків Kubernetes](/uk/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
+Якщо ви використовуєте репозиторії пакунків (`pkgs.k8s.io`), вам потрібно увімкнути репозиторій пакунків для потрібного мінорного релізу Kubernetes. Це пояснено в документі [Зміна репозиторію пакунків Kubernetes](/docs/tasks/administer-cluster/kubeadm/change-package-repository/).
 
 {{% legacy-repos-deprecation %}}
 
@@ -111,4 +111,4 @@ kubectl uncordon <node-to-uncordon>
 
 ## {{% heading "whatsnext" %}}
 
-* Подивіться, як [оновити вузли Windows](/uk/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/).
+* Подивіться, як [оновити вузли Windows](/docs/tasks/administer-cluster/kubeadm/upgrading-windows-nodes/).

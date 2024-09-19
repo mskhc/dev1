@@ -1,12 +1,12 @@
 ---
 title: Переконфігурація кластера за допомогою kubeadm
 content_type: task
-weight: 30
+weight: 90
 ---
 
 <!-- overview -->
 
-kubeadm не підтримує автоматизованих способів переконфігурації компонентів, що були розгорнуті на керованих вузлах. Один зі способів автоматизації цього — використання власного [оператора](/uk/docs/concepts/extend-kubernetes/operator/).
+kubeadm не підтримує автоматизованих способів переконфігурації компонентів, що були розгорнуті на керованих вузлах. Один зі способів автоматизації цього — використання власного [оператора](/docs/concepts/extend-kubernetes/operator/).
 
 Для зміни конфігурації компонентів вам потрібно вручну редагувати повʼязані обʼєкти кластера та файли на диску.
 
@@ -46,7 +46,7 @@ KUBECONFIG=/etc/kubernetes/admin.conf KUBE_EDITOR=nano kubectl edit <парам�
 
 #### Оновлення `ClusterConfiguration` {#updating-the-clusterconfiguration}
 
-Під час створення кластера та його оновлення, kubeadm записує [`ClusterConfiguration`](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) у ConfigMap, з назвою `kubeadm-config` у просторі імен `kube-system`.
+Під час створення кластера та його оновлення, kubeadm записує [`ClusterConfiguration`](/docs/reference/config-api/kubeadm-config.v1beta4/) у ConfigMap, з назвою `kubeadm-config` у просторі імен `kube-system`.
 
 Щоб змінити певну опцію у `ClusterConfiguration`, ви можете редагувати ConfigMap за допомогою цієї команди:
 
@@ -98,7 +98,7 @@ kubeadm init phase etcd local --config <config-file>
 
 #### Оновлення `KubeletConfiguration` {#updating-the-kubeletconfiguration}
 
-Під час створення кластера та оновлення, kubeadm записує [`KubeletConfiguration`](/uk/docs/reference/config-api/kubelet-config.v1beta1/) у ConfigMap з назвою `kubelet-config` в просторі імен `kube-system`.
+Під час створення кластера та оновлення, kubeadm записує [`KubeletConfiguration`](/docs/reference/config-api/kubelet-config.v1beta1/) у ConfigMap з назвою `kubelet-config` в просторі імен `kube-system`.
 
 Ви можете редагувати цей ConfigMap за допомогою такої команди:
 
@@ -129,7 +129,7 @@ kubectl edit cm -n kube-system kubelet-config
 
 #### Оновлення `KubeProxyConfiguration` {#updating-the-kubeproxyconfiguration}
 
-Під час створення кластера та оновлення, `kubeadm` записує [`KubeProxyConfiguration`](/uk/docs/reference/config-api/kube-proxy-config.v1alpha1/) у ConfigMap в просторі імен `kube-system` з назвою `kube-proxy`.
+Під час створення кластера та оновлення, `kubeadm` записує [`KubeProxyConfiguration`](/docs/reference/config-api/kube-proxy-config.v1alpha1/) у ConfigMap в просторі імен `kube-system` з назвою `kube-proxy`.
 
 Цей ConfigMap використовується DaemonSet `kube-proxy` в просторі імен `kube-system`.
 
@@ -210,7 +210,7 @@ kubeadm записує Labels, Taints, сокенти CRI та іншу інфо
 kubectl edit no <імʼя-вузла>
 ```
 
-Під час виконання `kubeadm upgrade` вміст такого Node може бути перезаписаний. Якщо ви бажаєте зберегти свої зміни в обʼєкті Node після оновлення, ви можете підготувати [команду патча для kubectl](/uk/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/) і застосувати її до обʼєкта Node:
+Під час виконання `kubeadm upgrade` вміст такого Node може бути перезаписаний. Якщо ви бажаєте зберегти свої зміни в обʼєкті Node після оновлення, ви можете підготувати [команду патча для kubectl](/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/) і застосувати її до обʼєкта Node:
 
 ```shell
 kubectl patch no <імʼя-вузла> --patch-file <файл-патча>
@@ -218,7 +218,7 @@ kubectl patch no <імʼя-вузла> --patch-file <файл-патча>
 
 #### Збереження переконфігурації компонента панелі управління {#persisting-control-plane-component-reconfiguration}
 
-Основним джерелом конфігурації панелі управління є обʼєкт `ClusterConfiguration`, збережений у кластері. Для розширення конфігурації статичних маніфестів Podʼів можна використовувати [патчі](/uk/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches).
+Основним джерелом конфігурації панелі управління є обʼєкт `ClusterConfiguration`, збережений у кластері. Для розширення конфігурації статичних маніфестів Podʼів можна використовувати [патчі](/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches).
 
 Ці файли патчів повинні залишатися як файли на вузлах панелі управління, щоб забезпечити можливість їх використання командою `kubeadm upgrade ... --patches <directory>`.
 
@@ -232,7 +232,7 @@ kubectl patch no <імʼя-вузла> --patch-file <файл-патча>
 
 ## {{% heading "whatsnext" %}}
 
-- [Оновлення кластерів з kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade)
-- [Налаштування компонентів за допомогою API kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/control-plane-flags)
-- [Управління сертифікатами з kubeadm](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-certs)
-- [Дізнайтеся більше про налаштування kubeadm](/uk/docs/reference/setup-tools/kubeadm/)
+- [Оновлення кластерів з kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade)
+- [Налаштування компонентів за допомогою API kubeadm](/docs/setup/production-environment/tools/kubeadm/control-plane-flags)
+- [Управління сертифікатами з kubeadm](/docs/tasks/administer-cluster/kubeadm/kubeadm-certs)
+- [Дізнайтеся більше про налаштування kubeadm](/docs/reference/setup-tools/kubeadm/)

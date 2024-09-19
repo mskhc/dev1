@@ -6,7 +6,7 @@ weight: 20
 ---
 
 <!-- огляд -->
-Ця сторінка показує, як встановити [власний ресурс](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
+Ця сторінка показує, як встановити [власний ресурс](/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 ## {{% heading "prerequisites" %}}
 
@@ -452,7 +452,7 @@ allOf:
 
 ### RawExtension
 
-RawExtensions (як у [`runtime.RawExtension`](/uk/docs/reference//kubernetes-api/workload-resources/controller-revision-v1#RawExtension)) містять повні обʼєкти Kubernetes, тобто з полями `apiVersion` і `kind`.
+RawExtensions (як у [`runtime.RawExtension`](/docs/reference//kubernetes-api/workload-resources/controller-revision-v1#RawExtension)) містять повні обʼєкти Kubernetes, тобто з полями `apiVersion` і `kind`.
 
 Можна задати ці вбудовані обʼєкти (як повністю без обмежень, так і частково задані), встановивши `x-kubernetes-embedded-resource: true`. Наприклад:
 
@@ -480,7 +480,7 @@ foo:
 
 ## Обслуговування декількох версій CRD {#serving-multiple-versions-of-a-crd}
 
-Дивіться [версіювання визначення власних ресурсів](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) для отримання додаткової інформації про обслуговування декількох версій вашого CustomResourceDefinition і міграцію ваших обʼєктів з однієї версії на іншу.
+Дивіться [версіювання визначення власних ресурсів](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) для отримання додаткової інформації про обслуговування декількох версій вашого CustomResourceDefinition і міграцію ваших обʼєктів з однієї версії на іншу.
 
 <!-- discussion -->
 
@@ -512,7 +512,7 @@ metadata:
 
 ### Валідація {#validation}
 
-Власні ресурси перевіряються за допомогою [схем OpenAPI v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject), за допомогою x-kubernetes-validations, коли функція [Правил валідації](#validation-rules) ввімкнена, і ви можете додати додаткову валідацію за допомогою [вебхуків допуску](/uk/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook).
+Власні ресурси перевіряються за допомогою [схем OpenAPI v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject), за допомогою x-kubernetes-validations, коли функція [Правил валідації](#validation-rules) ввімкнена, і ви можете додати додаткову валідацію за допомогою [вебхуків допуску](/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook).
 
 Крім того, до схеми застосовуються такі обмеження:
 
@@ -646,9 +646,9 @@ crontab "my-new-cron-object" created
 
 {{< feature-state feature_gate_name="CRDValidationRatcheting" >}}
 
-Якщо ви використовуєте версію Kubernetes старше v1.30, вам потрібно явно ввімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CRDValidationRatcheting`, щоб використовувати цю поведінку, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.
+Якщо ви використовуєте версію Kubernetes старше v1.30, вам потрібно явно ввімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `CRDValidationRatcheting`, щоб використовувати цю поведінку, яка потім застосовується до всіх CustomResourceDefinitions у вашому кластері.
 
-За умови увімкнення feature gate, Kubernetes реалізує _проковзування валідації_ для CustomResourceDefinitions. API сервер готовий прийняти оновлення ресурсів, які є недійсними після оновлення, за умови, що кожна частина ресурсу, яка не пройшла валідацію, не була змінена операцією оновлення. Іншими словами, будь-яка недійсна частина ресурсу, яка залишається недійсною, вже повинна була бути неправильною. Ви не можете використовувати цей механізм для оновлення дійсного ресурсу, щоб він став недійсним.
+За умови увімкнення функціональної можливості, Kubernetes реалізує _проковзування валідації_ для CustomResourceDefinitions. API сервер готовий прийняти оновлення ресурсів, які є недійсними після оновлення, за умови, що кожна частина ресурсу, яка не пройшла валідацію, не була змінена операцією оновлення. Іншими словами, будь-яка недійсна частина ресурсу, яка залишається недійсною, вже повинна була бути неправильною. Ви не можете використовувати цей механізм для оновлення дійсного ресурсу, щоб він став недійсним.
 
 Ця функція дозволяє авторам CRD впевнено додавати нові перевірки до схеми OpenAPIV3 за певних умов. Користувачі можуть безпечно оновлюватися до нової схеми без зміни версії обʼєкта або порушення робочих процесів.
 
@@ -954,7 +954,7 @@ The CronTab "my-new-cron-object" is invalid:
 
 посилання: [CEL types](https://github.com/google/cel-spec/blob/v0.6.0/doc/langdef.md#values),
 [OpenAPI types](https://swagger.io/specification/#data-types),
-[Структурні схемм Kubernetes](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#specifying-a-structural-schema).
+[Структурні схемм Kubernetes](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#specifying-a-structural-schema).
 
 #### Поле messageExpression {#the-messageexpression-field}
 
@@ -1012,7 +1012,7 @@ x-kubernetes-validations:
 
 У вищенаведеному прикладі перевіряється значення поля `x`, яке повинно бути менше значення `maxLimit`. Якщо не вказано `fieldPath`, коли результат перевірки негативний , `fieldPath` буде типово відповідати місцю розташування `self`. З вказаним `fieldPath` повернена помилка буде мати `fieldPath`, який належним чином посилатиметься на місце поля `x`.
 
-Значення `fieldPath` повинно бути відносним шляхом JSON, що обмежений місцем цього розширення x-kubernetes-validations у схемі. Крім того, воно повинно посилатися на існуюче поле в межах схеми. Наприклад, коли перевірка перевіряє, чи є певний атрибут `foo` у map `testMap`, ви можете встановити `fieldPath` на `".testMap.foo"` або `.testMap['foo']'`. Якщо для перевірки потрібно перевірити унікальні атрибути у двох списках, `fieldPath` можна встановити для будь-якого зі списків. Наприклад, його можна встановити на `.testList1` або `.testList2`. Наразі підтримується дочірня операція для посилання на існуюче поле. Для отримання додаткової інформації див. [Підтримка JSONPath у Kubernetes](/uk/docs/reference/kubectl/jsonpath/). Поле `fieldPath` не підтримує індексування масивів числовими значеннями.
+Значення `fieldPath` повинно бути відносним шляхом JSON, що обмежений місцем цього розширення x-kubernetes-validations у схемі. Крім того, воно повинно посилатися на існуюче поле в межах схеми. Наприклад, коли перевірка перевіряє, чи є певний атрибут `foo` у map `testMap`, ви можете встановити `fieldPath` на `".testMap.foo"` або `.testMap['foo']'`. Якщо для перевірки потрібно перевірити унікальні атрибути у двох списках, `fieldPath` можна встановити для будь-якого зі списків. Наприклад, його можна встановити на `.testList1` або `.testList2`. Наразі підтримується дочірня операція для посилання на існуюче поле. Для отримання додаткової інформації див. [Підтримка JSONPath у Kubernetes](/docs/reference/kubectl/jsonpath/). Поле `fieldPath` не підтримує індексування масивів числовими значеннями.
 
 Встановлення `fieldPath` є необовʼязковим.
 
@@ -1303,13 +1303,13 @@ spec:
 
 ### Публікація схеми валідації в OpenAPI {#publish-validation-schema-in-openapi}
 
-[Схеми валідації OpenAPI v3](#validation) CustomResourceDefinition, які є [структурованими](#specifying-a-structural-schema) та [дозволяють обрізку](#field-pruning), публікуються як [OpenAPI v3](/uk/docs/concepts/overview/kubernetes-api/#openapi-and-swagger-definitions) та OpenAPI v2 з сервера API Kubernetes. Рекомендується використовувати документ OpenAPI v3, оскільки він є представленням схеми валідації OpenAPI v3 для CustomResourceDefinition без втрат, тоді як OpenAPI v2 представляє перетворення з втратами.
+[Схеми валідації OpenAPI v3](#validation) CustomResourceDefinition, які є [структурованими](#specifying-a-structural-schema) та [дозволяють обрізку](#field-pruning), публікуються як [OpenAPI v3](/docs/concepts/overview/kubernetes-api/#openapi-and-swagger-definitions) та OpenAPI v2 з сервера API Kubernetes. Рекомендується використовувати документ OpenAPI v3, оскільки він є представленням схеми валідації OpenAPI v3 для CustomResourceDefinition без втрат, тоді як OpenAPI v2 представляє перетворення з втратами.
 
-[Kubectl](/uk/docs/reference/kubectl/) використовує опубліковану схему для виконання клієнтської валідації (`kubectl create` та `kubectl apply`), пояснення схеми (`kubectl explain`) для власних ресурсів. Опублікована схема також може бути використана для інших цілей, таких як генерація клієнтів або документації.
+[Kubectl](/docs/reference/kubectl/) використовує опубліковану схему для виконання клієнтської валідації (`kubectl create` та `kubectl apply`), пояснення схеми (`kubectl explain`) для власних ресурсів. Опублікована схема також може бути використана для інших цілей, таких як генерація клієнтів або документації.
 
 #### Сумісність з OpenAPI V2 {#compatibility-with-openapi-v2}
 
-Для сумісності з OpenAPI V2, схема валідації OpenAPI v3 виконує перетворення з втратамиу схему OpenAPI v2. Схема зʼявляється в полях `definitions` та `paths` у [специфікації OpenAPI v2](/uk/docs/concepts/overview/kubernetes-api/#openapi-and-swagger-definitions).
+Для сумісності з OpenAPI V2, схема валідації OpenAPI v3 виконує перетворення з втратамиу схему OpenAPI v2. Схема зʼявляється в полях `definitions` та `paths` у [специфікації OpenAPI v2](/docs/concepts/overview/kubernetes-api/#openapi-and-swagger-definitions).
 
 Під час перетворення застосовуються наступні зміни для збереження зворотної сумісності з kubectl версії 1.13. Ці зміни запобігають занадто строгій роботі kubectl та відхиленню дійсних схем OpenAPI, які він не розуміє. Перетворення не змінює схему валідації, визначену в CRD, і тому не впливає на [валідацію](#validation) на сервері API.
 
@@ -1431,7 +1431,7 @@ my-new-cron-object   * * * * *   1          7s
 
 ### Селектори полів {#field-selectors}
 
-[Селектори полів](/uk/docs/concepts/overview/working-with-objects/field-selectors/) дозволяють клієнтам вибирати власні ресурси на основі значення одного або декількох полів ресурсу.
+[Селектори полів](/docs/concepts/overview/working-with-objects/field-selectors/) дозволяють клієнтам вибирати власні ресурси на основі значення одного або декількох полів ресурсу.
 
 Усі власні ресурси підтримують вибір полів `metadata.name` та `metadata.namespace`.
 
@@ -1441,7 +1441,7 @@ my-new-cron-object   * * * * *   1          7s
 
 {{< feature-state feature_gate_name="CustomResourceFieldSelectors" >}}
 
-Для Kubernetes {{< skew currentVersion >}} можливість визначати селектори полів для власних ресурсів доступна стандартно (стандартно увімкнена з Kubernetes v1.31); ви можете вимкнути цю функцію для вашого кластера, відключивши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors`. Поле `spec.versions[*].selectableFields` у {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для оголошення, які інші поля у власному ресурсі можуть бути використані у селекторах полів з [функціональною можливісюь](/uk/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors` (Ця функція є стандартно увімкненою з Kubernetes v1.31). Ось приклад, який додає поля `.spec.color` та `.spec.size` як доступні для вибору.
+Для Kubernetes {{< skew currentVersion >}} можливість визначати селектори полів для власних ресурсів доступна стандартно (стандартно увімкнена з Kubernetes v1.31); ви можете вимкнути цю функцію для вашого кластера, відключивши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors`. Поле `spec.versions[*].selectableFields` у {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}} може бути використане для оголошення, які інші поля у власному ресурсі можуть бути використані у селекторах полів з [функціональною можливісюь](/docs/reference/command-line-tools-reference/feature-gates/) `CustomResourceFieldSelectors` (Ця функція є стандартно увімкненою з Kubernetes v1.31). Ось приклад, який додає поля `.spec.color` та `.spec.size` як доступні для вибору.
 
 Збережіть CustomResourceDefinition у файл `shirt-resource-definition.yaml`:
 
@@ -1676,7 +1676,7 @@ kubectl get crontabs my-new-cron-object -o jsonpath='{.spec.replicas}'
 5
 ```
 
-Ви можете використовувати [PodDisruptionBudget](/uk/docs/tasks/run-application/configure-pdb/), щоб захистити власні ресурси, які мають увімкнений субресурс масштабу.
+Ви можете використовувати [PodDisruptionBudget](/docs/tasks/run-application/configure-pdb/), щоб захистити власні ресурси, які мають увімкнений субресурс масштабу.
 
 ### Категорії {#categories}
 
@@ -1765,8 +1765,8 @@ crontabs/my-new-cron-object   3s
 
 ## {{% heading "whatsnext" %}}
 
-* Прочитайте про [власні ресурси](/uk/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
+* Прочитайте про [власні ресурси](/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
 
 * Дивіться [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
-* Обслуговуйте [кілька версій](/uk/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) CustomResourceDefinition.
+* Обслуговуйте [кілька версій](/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) CustomResourceDefinition.

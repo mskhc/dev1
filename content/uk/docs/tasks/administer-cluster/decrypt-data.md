@@ -41,7 +41,7 @@ weight: 215
 
 Процес `kube-apiserver` приймає аргумент `--encryption-provider-config`, який вказує шлях до файлу конфігурації. Вміст цього файлу, якщо ви вказали його, керує тим, як дані API Kubernetes шифруються в etcd. Якщо він не вказаний, у вас не увімкнене шифрування у спокої.
 
-Форматом цього файлу конфігурації є YAML, який представляє конфігурацію API-ресурсу під назвою [`EncryptionConfiguration`](/uk/docs/reference/config-api/apiserver-encryption.v1/). Приклад конфігурації ви можете побачити в [Шифрування конфіденційних даних у спокої](/uk/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration).
+Форматом цього файлу конфігурації є YAML, який представляє конфігурацію API-ресурсу під назвою [`EncryptionConfiguration`](/docs/reference/config-api/apiserver-config.v1/). Приклад конфігурації ви можете побачити в [Шифрування конфіденційних даних у спокої](/docs/tasks/administer-cluster/encrypt-data/#understanding-the-encryption-at-rest-configuration).
 
 Якщо встановлено `--encryption-provider-config`, перевірте, які ресурси (наприклад, `secrets`) налаштовані для шифрування, і який провайдер використовується. Переконайтеся, що вподобаний провайдер для цього типу ресурсу **не** є `identity`; ви встановлюєте лише `identity` (_без шифрування_) як типовий, коли хочете вимкнути шифрування у спокої. Перевірте, чи перший провайдер, зазначений для ресурсу, щось **інше**, ніж `identity`, що означає, що будь-яка нова інформація, записана до ресурсів цього типу, буде зашифрована, як налаштовано. Якщо ви бачите, що `identity` — перший провайдер для якого-небудь ресурсу, це означає, що ці ресурси записуються в etcd без шифрування.
 
@@ -51,7 +51,7 @@ weight: 215
 
 ### Визначте файл конфігурації шифрування {#locate-the-encryption-configuration-file}
 
-Спочатку знайдіть файли конфігурації API server. На кожному вузлі панелі управління маніфест статичного Pod для kube-apiserver вказує аргумент командного рядка `--encryption-provider-config`. Ймовірно, цей файл монтується у статичний Pod за допомогою тому[`hostPath`](/uk/docs/concepts/storage/volumes/#hostpath). Після того, як ви знайдете том, ви можете знайти файл у файловій системі вузла і перевірити його.
+Спочатку знайдіть файли конфігурації API server. На кожному вузлі панелі управління маніфест статичного Pod для kube-apiserver вказує аргумент командного рядка `--encryption-provider-config`. Ймовірно, цей файл монтується у статичний Pod за допомогою тому[`hostPath`](/docs/concepts/storage/volumes/#hostpath). Після того, як ви знайдете том, ви можете знайти файл у файловій системі вузла і перевірити його.
 
 ### Налаштуйте API server для розшифрування обʼєктів {#configure-the-api-server-to-decrypt-objects}
 
@@ -125,4 +125,4 @@ kubectl get secrets --all-namespaces -o json | kubectl replace -f -
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/uk/docs/reference/config-api/apiserver-config.v1/).
+- Дізнайтеся більше про [API конфігурацію EncryptionConfiguration (v1)](/docs/reference/config-api/apiserver-config.v1/).
