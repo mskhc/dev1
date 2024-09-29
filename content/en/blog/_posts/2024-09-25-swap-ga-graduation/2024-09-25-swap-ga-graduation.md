@@ -110,9 +110,14 @@ I'll demonstrate creating 4GiB of swap, both in the encrypted and unencrypted ca
 An unencrypted swap file can be set up as follows.
 
 ```bash
-dd if=/dev/zero of=/swapfile bs=128M count=32
+# Allocate storage and restrict access
+fallocate --length 4GiB /swapfile
 chmod 600 /swapfile
+
+# Format the swap space
 mkswap /swapfile
+
+# Activate the swap space for paging
 swapon /swapfile
 ```
 
@@ -123,10 +128,17 @@ Bear in mind that this example uses the `cryptsetup` binary (which is available
 on most Linux distributions).
 
 ```bash
-dd if=/dev/zero of=/swapfile bs=128M count=32
+# Allocate storage and restrict access
+fallocate --length 4GiB /swapfile
 chmod 600 /swapfile
+
+# Create an encrypted device backed by the allocated storage
 cryptsetup --type plain --cipher aes-xts-plain64 --key-size 256 -d /dev/urandom open /swapfile cryptswap
+
+# Format the swap space
 mkswap /dev/mapper/cryptswap
+
+# Activate the swap space for paging
 swapon /dev/mapper/cryptswap
 ```
 
@@ -134,13 +146,13 @@ swapon /dev/mapper/cryptswap
 
 Swap can be verified to be enabled with both `swapon -s` command or the `free` command
 
-```shell
+```
 > swapon -s
 Filename				Type		Size		Used		Priority
 /dev/dm-0                               partition	4194300		0		-2
 ```
 
-```shell
+```
 > free -h
                total        used        free      shared  buff/cache   available
 Mem:           3.8Gi       1.3Gi       249Mi        25Mi       2.5Gi       2.5Gi
@@ -150,7 +162,8 @@ Swap:          4.0Gi          0B       4.0Gi
 #### Enable swap on boot
 
 After setting up swap, to start the swap file at boot time,
-add a line similar to `/swapfile swap swap defaults 0 0` to `/etc/fstab` file.
+you either set up a systemd unit to activate (encrypted) swap, or you
+add a line similar to `/swapfile swap swap defaults 0 0` into `/etc/fstab`.
 
 ### Set up a Kubernetes cluster that uses swap-enabled nodes
 
@@ -247,12 +260,20 @@ the total physical swap capacity of the machine.
 is a Kubernetes addon for detecting hardware features and configuration.
 It can be utilized to discover which nodes are provisioned with swap.
 
-As an example, to figure out if a certain node is provisioned with swap,
-the following command can be executed while replacing `<NODE-NAME>` with the node's name:
+As an example, to figure out which nodes are provisioned with swap,
+use the following command:
 ```shell
-> k get node <NODE-NAME> -o yaml | grep "feature.node.kubernetes.io/memory-swap"
-      feature.node.kubernetes.io/memory-swap: "true"
+kubectl get nodes -o jsonpath='{range .items[?(@.metadata.labels.feature\.node\.kubernetes\.io/memory-swap)]}{.metadata.name}{"\t"}{.metadata.labels.feature\.node\.kubernetes\.io/memory-swap}{"\n"}{end}'
 ```
+
+This will result in an output similar to:
+```
+k8s-worker1: true
+k8s-worker2: true
+k8s-worker3: false
+```
+
+In this example, swap is provisioned on nodes `k8s-worker1` and `k8s-worker2`, but not on `k8s-worker3`.
 
 ## Caveats
 
@@ -307,8 +328,8 @@ It is the administrator's responsibility to provision encrypted swap to mitigate
 
 ### Evictions
 
-Since the NodeSwap feature introduces basic swap support and leaves more advanced topics to
-follow-up features, swap-based evictions are out-of-scope for this feature.
+At the moment Kubernetes only has basic swap support for Linux nodes.
+For Kubernetes v1.32, the kubelet doesn't ever use pressure on swap space as a signal for eviction.
 
 With swap being disabled, the memory eviction threshold should be set in a way that will let kubelet's
 eviction manager identify memory spikes in time so it can execute custom logic and take care of reclaiming
@@ -323,7 +344,7 @@ will result in the node using some of the swap memory.
 
 #### Current eviction limitations
 
-Because evictions are out-of-scope for this feature, the eviction manager would remain swap-unaware.
+For both Linux and Windows nodes, the eviction manager is not aware of how much of the swap storage is used.
 
 Let X be the memory threshold below which the kernel initiates swapping.
 This means that most probably either one of the two behaviors will take place:
@@ -336,20 +357,20 @@ This means that most probably either one of the two behaviors will take place:
    for extreme cases where the memory spike is faster than the kernel's ability to swap memory). 
 
 The cluster admin can choose which of the above is the desired behavior.
-An advanced cluster admins can use the approach outlined [below](#advanced-best-practices-for-manually-setting-memory-evictions).
+An advanced cluster admin can use the approach outlined [below](#advanced-best-practices-for-manually-setting-memory-evictions).
 
 #### Advanced good practice for manually setting memory evictions
 
-Simplistically, the kernel uses three "watermarks" (i.e. thresholds),
-which are called "high", "min", and "low", such that high > min > low.
-When the "min" threshold is met, the kernel enters an "indirect reclaim" state, which basically means that the `kswapd`
+Simplistically, the kernel uses three thresholds (known as _watermarks_),
+which are called _high_, _min_, and _low_, such that _high_ > _min_ > _low_.
+When the _min_ threshold is met, the kernel enters an "indirect reclaim" state, which basically means that the `kswapd`
 daemon becomes active and asynchronously starts to reclaim memory.
-If the "low" threshold is being met, the kernel enters a "direct reclaim" state, in which `kswapd` would aggressively
+If the _low_ threshold is being met, the kernel enters a "direct reclaim" state, in which `kswapd` would aggressively
 reclaim memory and memory would be throttled for most of the processes.
-Later, when the "min" threshold is reached, the kernel goes back to "indirect reclaim", then when the "high" threshold
+Later, when the _min_ threshold is reached, the kernel goes back to "indirect reclaim", then when the _high_ threshold
 is met the node is not considered under pressure anymore.
 
-![swap_watermarks](swap-watermarks.png)
+![Linux kernel swap memory flow](swap-watermarks.png)
 
 To figure out what's the value of the different watermarks, one can do the following (the output is trimmed
 for simplicity. values are in memory pages):
