@@ -305,6 +305,81 @@ However, handling encrypted swap is not within the scope of kubelet;
 rather, it is a general OS configuration concern and should be addressed at that level.
 It is the administrator's responsibility to provision encrypted swap to mitigate this risk.
 
+### Evictions
+
+Since the NodeSwap feature introduces basic swap support and leaves more advanced topics to
+follow-up features, swap-based evictions are out-of-scope for this feature.
+
+With swap being disabled, the memory eviction threshold should be set in a way that will let kubelet's
+eviction manager identify memory spikes in time so it can execute custom logic and take care of reclaiming
+memory and evicting pods before the kernel's OOM killer is invoked.
+
+However, with swap enabled, the situation is fundamentally different.
+Since swapping is a heavy operation in terms of performance, the kernel will try avoiding
+it as long as it can, and will usually start swapping only when it lacks physical memory.
+
+Therefore, when swap is enabled, it is acceptable to use all the available RAM which
+will result in the node using some of the swap memory.
+
+#### Current eviction limitations
+
+Because evictions are out-of-scope for this feature, the eviction manager would remain swap-unaware.
+
+Let X be the memory threshold below which the kernel initiates swapping.
+This means that most probably either one of the two behaviors will take place:
+1. Memory evictions threshold > X: In this scenario, kubelet's eviction manager would kick in before the kernel has
+   a chance to swap memory.
+   This means that the kernel would generally not be able to swap memory (unless the memory spike
+   is fast enough for the eviction manager to handle).
+2. Memory evictions threshold <= X: In this scenario, the kernel would start swapping memory before the memory threshold 
+   would be met. This practically means that the eviction manager would never kick in, hence it is practically turned off (unless
+   for extreme cases where the memory spike is faster than the kernel's ability to swap memory). 
+
+The cluster admin can choose which of the above is the desired behavior.
+An advanced cluster admins can use the approach outlined [below](#advanced-best-practices-for-manually-setting-memory-evictions).
+
+#### Advanced good practice for manually setting memory evictions
+
+Simplistically, the kernel uses three "watermarks" (i.e. thresholds),
+which are called "high", "min", and "low", such that high > min > low.
+When the "min" threshold is met, the kernel enters an "indirect reclaim" state, which basically means that the `kswapd`
+daemon becomes active and asynchronously starts to reclaim memory.
+If the "low" threshold is being met, the kernel enters a "direct reclaim" state, in which `kswapd` would aggressively
+reclaim memory and memory would be throttled for most of the processes.
+Later, when the "min" threshold is reached, the kernel goes back to "indirect reclaim", then when the "high" threshold
+is met the node is not considered under pressure anymore.
+
+![swap_watermarks](swap-watermarks.png)
+
+To figure out what's the value of the different watermarks, one can do the following (the output is trimmed
+for simplicity. values are in memory pages):
+```shell
+> cat /proc/zoneinfo
+--
+Node 0, zone    DMA32
+        min      569
+        low      1120
+        high     1671
+--
+Node 0, zone   Normal
+        min      16322
+        low      32138
+        high     47954
+--
+...
+```
+
+This is a real example from a 64GB RAM machine with the default kernel configurations. On such a machine:
+* The `high` watermark is at `187.32Mi`.
+* The `low` watermark is at `125.54Mi`.
+* The `min` watermark is at `63.76Mi`.
+
+An advanced cluster-admin can choose to set kubelet's memory eviction threshold according to these values on nodes
+with swap enabled.
+For example, the threshold can be set to a value between the low and min watermarks.
+Bear in mind that the default memory eviction threshold of `100Mi` is between the low and min watermarks as well,
+which means that by default evictions are expected to work decently.
+
 ## Good practice for using swap in a Kubernetes cluster
 
 ### Disable swap for system-critical daemons
