@@ -1,12 +1,11 @@
-
 ---
 layout: blog
 title: "Kubernetes 1.32: GA support for using swap on Linux"
 date: 2024-09-25T10:00:00-08:00
 slug: swap-linux-ga
+author: >
+  Itamar Holder (Red Hat)
 ---
-
-**Author:** Itamar Holder (Red Hat)
 
 Swap is a fundamental and an invaluable Linux feature.
 It offers numerous benefits, such as effectively increasing a node’s memory by
@@ -17,7 +16,7 @@ and [much more](https://github.com/kubernetes/enhancements/blob/master/keps/sig-
 As a result, the node special interest group within the Kubernetes project
 has invested significant effort into supporting swap on Linux nodes as a GA feature.
 
-The 1.22 release [introduced Alpha support](/blog/2021/08/09/run-nodes-with-swap-alpha/)
+The 1.22 release [introduced](/blog/2021/08/09/run-nodes-with-swap-alpha/) Alpha support
 for configuring swap memory usage for Kubernetes workloads running on Linux on a per-node basis.
 Later, in release 1.28, support for swap on Linux nodes has graduated to Beta, along with many
 new improvements.
@@ -39,9 +38,9 @@ Not only did it fix a large amount of bugs and made swap work in a stable way,
 but it also brought cgroup v2 support, introduced a wide variety of tests
 which include complex scenarios such as node-level pressure, and more.
 It also brought many exciting new capabilities such as the `LimitedSwap` behavior
-which sets an auto-calculated swap limit to containers, metrics support for tools
-like Prometheus (through the `/metrics/resource` endpoint) and Summary API for
-Vertical Pod Autoscalers (through the `/stats/summary` endpoint), and more.
+which sets an auto-calculated swap limit to containers, OpenMetrics instrumentation
+support (through the `/metrics/resource` endpoint) and Summary API for
+VerticalPodAutoscalers (through the `/stats/summary` endpoint), and more.
 
 In version 1.32, swap on Linux nodes has graduated to GA.
 As suiting to a GA graduation, the focus was especially towards addressing user
@@ -83,14 +82,14 @@ The currently available configuration options for `swapBehavior` are:
 - `LimitedSwap`: Kubernetes workloads can utilize swap memory, but with certain limitations.
   The amount of swap available to a Pod is determined automatically,
   based on the proportion of the memory requested relative to the node's total memory.
-  Only non-high-priority Pods under the [Burstable](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#burstable)
+  Only non-high-priority Pods under the [Burstable](/docs/concepts/workloads/pods/pod-qos/#burstable)
   Quality of Service (QoS) tier are permitted to use swap.
   For more details, see the [section below](#how-is-the-swap-limit-being-determined-with-limitedswap).
 
 If configuration for `memorySwap` is not specified,
 by default the kubelet will apply the same behaviour as the `NoSwap` setting.
 
-Note that `NodeSwap` is supported for **cgroup v2** only.
+On Linux nodes, Kubernetes only supports running with swap enabled for hosts that use cgroup v2.
 On cgroup v1 systems, all Kubernetes workloads are not allowed to use swap memory.
 
 ## Install a swap-enabled cluster with kubeadm
@@ -223,11 +222,11 @@ Swap configuration on a node is exposed to a cluster admin via the
 As a cluster administrator, you can specify the node's behaviour in the
 presence of swap memory by setting `memorySwap.swapBehavior`.
 
-The kubelet [employs the CRI](https://kubernetes.io/docs/concepts/architecture/cri/)
-(container runtime interface) API to direct the CRI to
+The kubelet employs the [CRI](https://kubernetes.io/docs/concepts/architecture/cri/)
+(container runtime interface) API, and directs the container runtime to
 configure specific cgroup v2 parameters (such as `memory.swap.max`) in a manner that will
-enable the desired swap configuration for a container. The CRI is then responsible to
-write these settings to the container-level cgroup.
+enable the desired swap configuration for a container. For runtimes that use control groups,
+the container runtime is then responsible for writing these settings to the container-level cgroup.
 
 ## How can I monitor swap?
 
@@ -273,28 +272,29 @@ I/O throttling, when compared to faster storage mediums like solid-state drives
 or NVMe.
 As swap might cause IO pressure, it is recommended to give a higher IO latency
 priority to system critical daemons. See the relevant section in the
-[best-practices](#best-practices) section below.
+[recommended practices](#good-practice-for-using-swap-in-a-kubernetes-cluster) section below.
 
 ### Memory-backed volumes
 
-On Linux nodes, memory-backed volumes (like [Secrets](/docs/concepts/configuration/secret/)
-and [emptyDirs](/docs/concepts/storage/volumes/#emptydir) with `medium: Memory`)
-are implemented with as `tmpfs` mount.
+On Linux nodes, memory-backed volumes (such as [`secret`](/docs/concepts/configuration/secret/)
+volume mounts, or [`emptyDir`](/docs/concepts/storage/volumes/#emptydir) with `medium: Memory`)
+are implemented with a `tmpfs` filesystem.
 The contents of such volumes should remain in memory at all times, hence should
 not be swapped to disk.
 To ensure the contents of such volumes remain in memory, the `noswap` tmpfs option
 is being used.
 
 The Linux kernel officially supports the `noswap` option from version 6.3 (more info
-can be found [here](/docs/reference/node/kernel-version-requirements/#requirements-other)).
-However, the different distributions often choose to backport this option to older
+can be found in [Linux Kernel Version Requirements](/docs/reference/node/kernel-version-requirements/#requirements-other)).
+However, the different distributions often choose to backport this mount option to older
 Linux versions as well.
 
-In order to understand if the node supports the `noswap` option, Kubelet will do the following:
+In order to verify whether the node supports the `noswap` option, the kubelet will do the following:
 * If the kernel's version is above 6.3 then the `noswap` option will be assumed to be supported.
 * Otherwise, kubelet would try to mount a dummy tmpfs with the `noswap` option at startup.
   If kubelet fails with an error indicating of an unknown option, `noswap` will be assumed
   to not be supported, hence will not be used.
+  A kubelet log entry will be emitted to warn the user about memory-backed volumes might swap to disk.
   If kubelet succeeds, the dummy tmpfs will be deleted and the `noswap` option will be used.
   * If the `noswap` option is not supported, kubelet will emit a warning log entry,
     then continue its execution.
@@ -305,7 +305,7 @@ However, handling encrypted swap is not within the scope of kubelet;
 rather, it is a general OS configuration concern and should be addressed at that level.
 It is the administrator's responsibility to provision encrypted swap to mitigate this risk.
 
-## Best practices
+## Good practice for using swap in a Kubernetes cluster
 
 ### Disable swap for system-critical daemons
 
@@ -315,7 +315,7 @@ This implies that system daemons, including the kubelet, could operate slower th
 If this issue is encountered, it is advisable to configure the cgroup of the system slice
 to prevent swapping (i.e., set `memory.swap.max=0`).
 
-### Protect system-critical daemons for io-latency
+### Protect system-critical daemons for I/O latency
 
 Swap can increase the I/O load on a node.
 When memory pressure causes the kernel to rapidly swap pages in and out,
@@ -326,9 +326,9 @@ To mitigate this, it is recommended to prioritize the system slice in terms of I
 This can be achieved by setting `io.latency` for the system slice,
 thereby granting it higher I/O priority.
 
-### Control Plane Swap
+### Swap and control plane nodes
 
-It is recommended to enable swap only for the worker nodes.
+The Kubernetes project recommends running control plane nodes without any swap space configured.
 The control plane primarily hosts Guaranteed QoS Pods, so swap can generally be disabled.
 The main concern is that swapping critical services on the control plane could negatively impact performance.
 
@@ -343,8 +343,9 @@ Since swap space is located on a disk, it is crucial to ensure the disk is fast 
 
 ## Looking ahead
 
-As mentioned above, the NodeSwap feature introduces basic swap support,
-marking the beginning of enhanced swap functionality.
+As mentioned above, this stable release provides basic but generally available support
+for swap on Linux nodes.
+It's a foundational implementation marking the beginning of enhanced swap functionality.
 In the near future, additional features are planned to further improve swap capabilities,
 including better eviction mechanisms, extended API support, increased customizability, and more!
 
