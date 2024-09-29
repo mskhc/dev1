@@ -370,7 +370,16 @@ reclaim memory and memory would be throttled for most of the processes.
 Later, when the _min_ threshold is reached, the kernel goes back to "indirect reclaim", then when the _high_ threshold
 is met the node is not considered under pressure anymore.
 
-![Linux kernel swap memory flow](swap-watermarks.png)
+{{< mermaid >}}
+sequenceDiagram
+    Below High->>+High: No memory pressure.
+    High->>+Min: Node isn’t under pressure.
+    Min->>+Low: Indirect reclaim: kswapd starts to asynchronously reclaim memory.
+    Low->>+Above Low: Direct reclaim: kswapd aggressively reclaims memory. Memory is throttled.
+    Above Low-->>+Low: Direct reclaim continues with memory throttle.
+    Low-->>+Min: Back to indirect reclaim, with no memory throttle.
+    Min-->>+High: Back to normal.
+{{< /mermaid >}}
 
 To figure out what's the value of the different watermarks, one can do the following (the output is trimmed
 for simplicity. values are in memory pages):
