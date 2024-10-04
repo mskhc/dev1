@@ -1,5 +1,8 @@
 ---
 title: Класи сховищ
+api_metadata:
+- apiVersion: "storage.k8s.io/v1"
+  kind: "StorageClass"
 content_type: concept
 weight: 40
 ---
@@ -7,7 +10,7 @@ weight: 40
 <!-- overview -->
 
 Цей документ описує концепцію StorageClass в Kubernetes. Рекомендується мати знайомство
-з [томами](/uk/docs/concepts/storage/volumes/) та [постійними томами](/uk/docs/concepts/storage/persistent-volumes).
+з [томами](/docs/concepts/storage/volumes/) та [постійними томами](/docs/concepts/storage/persistent-volumes).
 
 StorageClass надає можливість адміністраторам описати _класи_ сховищ, які вони надають. Різні класи можуть відповідати рівням обслуговування, політикам резервного копіювання або будь-яким політикам, визначеним адміністраторами кластера. Kubernetes сам не визначає, що являють собою класи.
 
@@ -21,7 +24,7 @@ StorageClass надає можливість адміністраторам оп
 
 Імʼя обʼєкта StorageClass має значення, і саме воно дозволяє користувачам запитувати певний клас. Адміністратори встановлюють імʼя та інші параметри класу під час першого створення обʼєктів StorageClass.
 
-Як адміністратор, ви можете вказати типовий StorageClass, який застосовується до будь-яких PVC, які не вимагають конкретного класу. Докладніше див. концепцію [PersistentVolumeClaim](/uk/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).
+Як адміністратор, ви можете вказати типовий StorageClass, який застосовується до будь-яких PVC, які не вимагають конкретного класу. Докладніше див. концепцію [PersistentVolumeClaim](/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).
 
 Тут наведено приклад StorageClass:
 
@@ -29,11 +32,11 @@ StorageClass надає можливість адміністраторам оп
 
 ## Типовий StorageClass {#default-storageclass}
 
-Ви можете визначити StorageClass як типовий для вашого кластера. Щоб дізнатися, як встановити типовий StorageClass, див. [Зміна типового StorageClass](/uk/docs/tasks/administer-cluster/change-default-storage-class/).
+Ви можете визначити StorageClass як типовий для вашого кластера. Щоб дізнатися, як встановити типовий StorageClass, див. [Зміна типового StorageClass](/docs/tasks/administer-cluster/change-default-storage-class/).
 
 Якщо PVC не вказує `storageClassName`, буде використовуватися типовий StorageClass.
 
-Якщо ви встановите анотацію [`storageclass.kubernetes.io/is-default-class`](/uk/docs/reference/labels-annotations-taints/#storageclass-kubernetes-io-is-default-class) у значення true для більше ніж одного StorageClass у вашому кластері, і потім створите PersistentVolumeClaim без вказання `storageClassName`, Kubernetes використовуватиме найновіший типовий StorageClass.
+Якщо ви встановите анотацію [`storageclass.kubernetes.io/is-default-class`](/docs/reference/labels-annotations-taints/#storageclass-kubernetes-io-is-default-class) у значення true для більше ніж одного StorageClass у вашому кластері, і потім створите PersistentVolumeClaim без вказання `storageClassName`, Kubernetes використовуватиме найновіший типовий StorageClass.
 
 {{< note >}}
 Спробуйте мати лише один типовий StorageClass у вашому кластері. Причина, чому Kubernetes дозволяє вам мати кілька типових StorageClass, — це можливість безшовної міграції.
@@ -71,7 +74,7 @@ StorageClass надає можливість адміністраторам оп
 
 ## Політика повторного використання {#reclaim-policy}
 
-PersistentVolumes, які динамічно створюються за допомогою StorageClass, матимуть [політику повторного використання](/uk/docs/concepts/storage/persistent-volumes/#reclaiming) вказану в полі `reclaimPolicy` класу, яке може бути або `Delete`, або `Retain`. Якщо поле `reclaimPolicy` не вказано при створенні обʼєкта StorageClass, то типово воно буде `Delete`.
+PersistentVolumes, які динамічно створюються за допомогою StorageClass, матимуть [політику повторного використання](/docs/concepts/storage/persistent-volumes/#reclaiming) вказану в полі `reclaimPolicy` класу, яке може бути або `Delete`, або `Retain`. Якщо поле `reclaimPolicy` не вказано при створенні обʼєкта StorageClass, то типово воно буде `Delete`.
 
 PersistentVolumes, які створені вручну та управляються за допомогою StorageClass, матимуть таку політику повторного використання, яку їм було призначено при створенні.
 
@@ -105,11 +108,11 @@ PersistentVolumes, які динамічно створюються за доп�
 
 ## Режим привʼязки тому {#volume-binding-mode}
 
-Поле `volumeBindingMode` керує тим, коли [привʼязка тому та динамічне створення](/uk/docs/concepts/storage/persistent-volumes/#provisioning) повинно відбуватися. Коли воно не встановлене, типово використовується режим `Immediate`.
+Поле `volumeBindingMode` керує тим, коли [привʼязка тому та динамічне створення](/docs/concepts/storage/persistent-volumes/#provisioning) повинно відбуватися. Коли воно не встановлене, типово використовується режим `Immediate`.
 
 Режим `Immediate` вказує, що привʼязка тому та динамічне створення відбувається після створення PersistentVolumeClaim. Для сховищ, які обмежені топологією і не доступні з усіх вузлів в кластері, PersistentVolumes буде привʼязаний або створений без знання про планування Podʼа. Це може призвести до неможливості планування Podʼів.
 
-Адміністратор кластера може розвʼязати цю проблему, вказавши режим `WaitForFirstConsumer`, який затримає привʼязку та створення PersistentVolume до створення Podʼа з PersistentVolumeClaim. PersistentVolumes будуть обрані або створені відповідно до топології, яку визначають обмеження планування Podʼа. Сюди входять, але не обмежуються [вимоги до ресурсів](/uk/docs/concepts/configuration/manage-resources-containers/), [селектори вузлів](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector), [affinity та anti-affinity Podʼа](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity), і [taint та toleration](/uk/docs/concepts/scheduling-eviction/taint-and-toleration).
+Адміністратор кластера може розвʼязати цю проблему, вказавши режим `WaitForFirstConsumer`, який затримає привʼязку та створення PersistentVolume до створення Podʼа з PersistentVolumeClaim. PersistentVolumes будуть обрані або створені відповідно до топології, яку визначають обмеження планування Podʼа. Сюди входять, але не обмежуються [вимоги до ресурсів](/docs/concepts/configuration/manage-resources-containers/), [селектори вузлів](/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector), [affinity та anti-affinity Podʼа](/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity), і [taint та toleration](/docs/concepts/scheduling-eviction/taint-and-toleration).
 
 Наступні втулки підтримують `WaitForFirstConsumer` разом із динамічним створенням:
 
@@ -126,28 +129,7 @@ PersistentVolumes, які динамічно створюються за доп�
 Замість цього ви можете використовувати селектор вузла для `kubernetes.io/hostname`:
 {{< /note >}}
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: task-pv-pod
-spec:
-  nodeSelector:
-    kubernetes.io/hostname: kube-01
-  volumes:
-    - name: task-pv-storage
-      persistentVolumeClaim:
-        claimName: task-pv-claim
-  containers:
-    - name: task-pv-container
-      image: nginx
-      ports:
-        - containerPort: 80
-          name: "http-server"
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
-```
+{{% code_sample language="yaml" file="storage/storageclass/pod-volume-binding.yaml" %}}
 
 ## Дозволені топології {#allowed-topologies}
 
@@ -155,22 +137,7 @@ spec:
 
 У цьому прикладі показано, як обмежити топологію запроваджених томів конкретними зонами та використовувати як заміну параметрам `zone` та `zones` для підтримуваних втулків.
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: standard
-provisioner: kubernetes.io/example
-parameters:
-  type: pd-standard
-volumeBindingMode: WaitForFirstConsumer
-allowedTopologies:
-- matchLabelExpressions:
-  - key: topology.kubernetes.io/zone
-    values:
-    - us-central-1a
-    - us-central-1b
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-topology.yaml" %}}
 
 ## Параметри {#parameters}
 
@@ -191,40 +158,13 @@ Kubernetes has gone out of support -->
 
 Нижче подано приклад StorageClass для драйвера CSI AWS EBS:
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-provisioner: ebs.csi.aws.com
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  csi.storage.k8s.io/fstype: xfs
-  type: io1
-  iopsPerGB: "50"
-  encrypted: "true"
-allowedTopologies:
-- matchLabelExpressions:
-  - key: topology.ebs.csi.aws.com/zone
-    values:
-    - us-east-2c
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-aws-ebs.yaml" %}}
 
 ### AWS EFS
 
 Щоб налаштувати сховище AWS EFS, можна використовувати сторонній драйвер [AWS_EFS_CSI_DRIVER](https://github.com/kubernetes-sigs/aws-efs-csi-driver).
 
-```yaml
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: efs-sc
-provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: fs-92107410
-  directoryPerms: "700"
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-aws-efs.yaml" %}}
 
 - `provisioningMode`: Тип тому, що створюється за допомогою Amazon EFS. Наразі підтримується лише створення на основі точки доступу (`efs-ap`).
 - `fileSystemId`: Файлова система, під якою створюється точка доступу.
@@ -237,17 +177,7 @@ parameters:
 Для налаштування NFS-сховища можна використовувати вбудований драйвер або [драйвер CSI для NFS в Kubernetes](https://github.com/kubernetes-csi/csi-driver-nfs#readme)
 (рекомендовано).
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: example-nfs
-provisioner: example.com/external-nfs
-parameters:
-  server: nfs-server.example.com
-  path: /share
-  readOnly: "false"
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-nfs.yaml" %}}
 
 - `server`: Server — це імʼя хосту або IP-адреса сервера NFS.
 - `path`: Шлях, який експортується сервером NFS.
@@ -265,7 +195,7 @@ Kubernetes не включає внутрішній NFS-провайдер. Ва
 - [CSI провайдер](#vsphere-provisioner-csi): `csi.vsphere.vmware.com`
 - [vCP провайдер](#vcp-provisioner): `kubernetes.io/vsphere-volume`
 
-Вбудовані провайдери [застарілі](/blog/2019/12/09/kubernetes-1-17-feature-csi-migration-beta/#why-are-we-migrating-in-tree-plugins-to-csi). Для отримання додаткової інформації про провайдера CSI, див. [Kubernetes vSphere CSI Driver](https://vsphere-csi-driver.sigs.k8s.io/) та [міграцію vSphereVolume CSI](/uk/docs/concepts/storage/volumes/#vsphere-csi-migration).
+Вбудовані провайдери [застарілі](/blog/2019/12/09/kubernetes-1-17-feature-csi-migration-beta/#why-are-we-migrating-in-tree-plugins-to-csi). Для отримання додаткової інформації про провайдера CSI, див. [Kubernetes vSphere CSI Driver](https://vsphere-csi-driver.sigs.k8s.io/) та [міграцію vSphereVolume CSI](/docs/concepts/storage/volumes/#vsphere-csi-migration).
 
 #### CSI провайдер {#vsphere-provisioner-csi}
 
@@ -328,25 +258,7 @@ Kubernetes не включає внутрішній NFS-провайдер. Ва
 Цей внутрішній провайдер Ceph RBD застарів. Будь ласка, використовуйте [CephFS RBD CSI driver](https://github.com/ceph/ceph-csi).
 {{< /note >}}
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: fast
-provisioner: kubernetes.io/rbd
-parameters:
-  monitors: 10.16.153.105:6789
-  adminId: kube
-  adminSecretName: ceph-secret
-  adminSecretNamespace: kube-system
-  pool: kube
-  userId: kube
-  userSecretName: ceph-secret-user
-  userSecretNamespace: default
-  fsType: ext4
-  imageFormat: "2"
-  imageFeatures: "layering"
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-ceph-rbd.yaml" %}}
 
 - `monitors`: Монітори Ceph, розділені комою. Цей параметр є обовʼязковим.
 - `adminId`: Ідентифікатор клієнта Ceph, який може створювати образи в пулі. Типово — "admin".
@@ -381,17 +293,7 @@ Kubernetes has gone out of support -->
 
 ### Azure File (застаріло) {#azure-file}
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: azurefile
-provisioner: kubernetes.io/azure-file
-parameters:
-  skuName: Standard_LRS
-  location: eastus
-  storageAccount: azure_storage_account_name
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-azure-file.yaml" %}}
 
 - `skuName`: Рівень SKU облікового запису Azure Storage. Типово відсутній.
 - `location`: Місце розташування облікового запису Azure Storage. Типово відсутнє.
@@ -400,24 +302,14 @@ parameters:
 - `secretName`: імʼя секрету, що містить імʼя та ключ облікового запису Azure Storage. Типово `azure-storage-account-<accountName>-secret`.
 - `readOnly`: прапорець, що вказує, чи буде ресурс зберігання монтуватися лише для читання. Типово `false`, що означає монтування для читання/запису. Це значення впливає також на налаштування `ReadOnly` в `VolumeMounts`.
 
-Під час надання ресурсів зберігання, для монтованих облікових даних створюється секрет з імʼям `secretName`. Якщо кластер активував як [RBAC](/uk/docs/reference/access-authn-authz/rbac/), так і [Ролі контролера](/uk/docs/reference/access-authn-authz/rbac/#controller-roles), додайте дозвіл `create` ресурсу `secret` для clusterrole контролера
+Під час надання ресурсів зберігання, для монтованих облікових даних створюється секрет з імʼям `secretName`. Якщо кластер активував як [RBAC](/docs/reference/access-authn-authz/rbac/), так і [Ролі контролера](/docs/reference/access-authn-authz/rbac/#controller-roles), додайте дозвіл `create` ресурсу `secret` для clusterrole контролера
 `system:controller:persistent-volume-binder`.
 
 У контексті multi-tenancy настійно рекомендується явно встановлювати значення для `secretNamespace`, інакше дані облікового запису для зберігання можуть бути прочитані іншими користувачами.
 
 ### Portworx volume (застаріло) {#portworx-volume}
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: portworx-io-priority-high
-provisioner: kubernetes.io/portworx-volume
-parameters:
-  repl: "1"
-  snap_interval: "70"
-  priority_io: "high"
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-portworx-volume.yaml" %}}
 
 - `fs`: файлова система для створення: `none/xfs/ext4` (типово: `ext4`).
 - `block_size`: розмір блоку у кілобайтах (типово: `32`).
@@ -429,14 +321,7 @@ parameters:
 
 ### Локальне сховище {#local}
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: local-storage
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
-```
+{{% code_sample language="yaml" file="storage/storageclass/storageclass-local.yaml" %}}
 
 Локальні томи не підтримують динамічне впровадження в Kubernetes {{< skew currentVersion >}}; однак все одно слід створити StorageClass, щоб відкласти звʼязування тому до моменту фактичного планування Podʼа на відповідний вузол. Це вказано параметром звʼязування тому `WaitForFirstConsumer`.
 

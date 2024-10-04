@@ -6,9 +6,9 @@ weight: 20
 
 <!-- overview -->
 
-SIG Docs [затверджувачі](/uk/docs/contribute/participate/roles-and-responsibilities/#approvers) беруть участь у тижневих чергуваннях стосовно [управління pull request'ами](https://github.com/kubernetes/website/wiki/PR-Wranglers) для репозиторію.
+SIG Docs [затверджувачі](/docs/contribute/participate/roles-and-responsibilities/#approvers) беруть участь у тижневих чергуваннях стосовно [управління pull request'ами](https://github.com/kubernetes/website/wiki/PR-Wranglers) для репозиторію.
 
-Цей розділ охоплює обовʼязки відповідальних за PR. Для отримання додаткової інформації щодо якісного рецензування, дивіться [Рецензування змін](/uk/docs/contribute/review/).
+Цей розділ охоплює обовʼязки відповідальних за PR. Для отримання додаткової інформації щодо якісного рецензування, дивіться [Рецензування змін](/docs/contribute/review/).
 
 <!-- body -->
 
@@ -16,7 +16,7 @@ SIG Docs [затверджувачі](/uk/docs/contribute/participate/roles-and-
 
 Кожного дня під час тижневого чергування відповідальний за PR:
 
-- Робить огляд [відкритих pull request'ів](https://github.com/kubernetes/website/pulls) на відповідність [стилю](/uk/docs/contribute/style/style-guide/) та [змісту](/uk/docs/contribute/style/content-guide/).
+- Робить огляд [відкритих pull request'ів](https://github.com/kubernetes/website/pulls) на відповідність [стилю](/docs/contribute/style/style-guide/) та [змісту](/docs/contribute/style/content-guide/).
   - Почніть з найменших PRʼів (`size/XS`), і закінчіть найбільшими (`size/XXL`). Огляньте стільки PRʼів, скільки зможете.
 - Переконайтеся, що учасники PR підписали [CLA](https://github.com/kubernetes/community/blob/master/CLA.md).
   - Використовуйте [цей](https://github.com/zparnold/k8s-docs-pr-botherer) скрипт, щоб нагадати учасникам, які не підписали CLA, зробити це.
@@ -28,10 +28,10 @@ SIG Docs [затверджувачі](/uk/docs/contribute/participate/roles-and-
   - Ви також можете позначити [SIG](https://github.com/kubernetes/community/blob/master/sig-list.md) для огляду, коментуючи `@kubernetes/<sig>-pr-reviews` у PR.
 - Використовуйте коментар `/approve` для затвердження PR для злиття. Зливайте PR, коли він готовий.
   - PRʼи повинні мати коментар `/lgtm` від іншого члена перед злиттям.
-  - Розгляньте можливість прийняття технічно правильного змісту, який не відповідає [настановам зі стилю](/uk/docs/contribute/style/style-guide/). Під час затвердження змін відкрийте новий тікет для розвʼязання питання стилю. Зазвичай такі питання стилю можна описати як [гарні перші завдання](https://kubernetes.dev/docs/guide/help-wanted/#good-first-issue).
+  - Розгляньте можливість прийняття технічно правильного змісту, який не відповідає [настановам зі стилю](/docs/contribute/style/style-guide/). Під час затвердження змін відкрийте новий тікет для розвʼязання питання стилю. Зазвичай такі питання стилю можна описати як [гарні перші завдання](https://kubernetes.dev/docs/guide/help-wanted/#good-first-issue).
   - Використання виправлень стилю як гарних перших завдань — це хороший спосіб забезпечити наявність легших завдань для допомоги в адаптації нових учасників.
 - Також перевіряйте pull requestʼи до коду [генератора довідкової документації](https://github.com/kubernetes-sigs/reference-docs) та оглядайте їх (або залучайте допомогу).
-- Підтримуйте [відповідального за тікети](/uk/docs/contribute/participate/issue-wrangler/) у розгляді та теґуванні нових тікетів щодня. Дивіться [Розгляд та категоризація тікетів](/uk/docs/contribute/review/for-approvers/#triage-and-categorize-issues) для керівництва з використання метаданих SIG Docs.
+- Підтримуйте [відповідального за тікети](/docs/contribute/participate/issue-wrangler/) у розгляді та теґуванні нових тікетів щодня. Дивіться [Розгляд та категоризація тікетів](/docs/contribute/review/for-approvers/#triage-and-categorize-issues) для керівництва з використання метаданих SIG Docs.
 
 {{< note >}}
 Обовʼязки відповідального за PR не застосовуються до PRʼів локалізації (неангломовних PRʼів). Команди локалізації мають свої власні процеси та команди для огляду своїх PRʼів. Однак часто корисно переконатися, що PRʼи локалізації правильно позначені, переглянути невеликі PRʼи, що не залежать від мови (наприклад, оновлення посилань), або позначити рецензентів чи учасників у довготривалих PRʼах (тих, що відкриті понад 6 місяців і не оновлювалися більше як місяць).

@@ -23,7 +23,7 @@ Kubernetes використовує втулки пристроїв, щоб до
 
 Як адміністратору, вам потрібно встановити драйвери GPU від відповідного виробника обладнання на вузлах і запустити відповідний втулок пристрою від виробника GPU. Ось кілька посилань на інструкції від виробників:
 
-* [AMD](https://github.com/RadeonOpenCompute/k8s-device-plugin#deployment)
+* [AMD](https://github.com/ROCm/k8s-device-plugin#deployment)
 * [Intel](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/gpu_plugin/README.html)
 * [NVIDIA](https://github.com/NVIDIA/k8s-device-plugin#quick-start)
 
@@ -57,7 +57,7 @@ spec:
 
 ## Керуйте кластерами з різними типами GPU {#managing-clusters-with-different-types-of-gpus}
 
-Якщо в різних вузлах вашого кластера є різні типи GPU, то ви можете використовувати [мітки вузлів і селектори вузлів](/uk/docs/tasks/configure-pod-container/assign-pods-nodes/) для планування Podʼів на відповідних вузлах.
+Якщо в різних вузлах вашого кластера є різні типи GPU, то ви можете використовувати [мітки вузлів і селектори вузлів](/docs/tasks/configure-pod-container/assign-pods-nodes/) для планування Podʼів на відповідних вузлах.
 
 Наприклад:
 
@@ -71,7 +71,7 @@ kubectl label nodes node2 accelerator=other-gpu-k915
 
 ## Автоматичне позначення вузлів {#node-labelling}
 
-Як адміністратор, ви можете автоматично виявляти та мітити всі ваши вузли з підтримкою GPU, розгорнувши [Виявлення функцій вузлів Kubernetes](https://github.com/kubernetes-sigs/node-feature-discovery) (NFD). NFD виявляє апаратні функції, які доступні на кожному вузлі в кластері Kubernetes. Зазвичай NFD налаштовується таким чином, щоб оголошувати ці функції як мітки вузла, але NFD також може додавати розширені ресурси, анотації та заплямування вузла (node taints). NFD сумісний з усіма [підтримуваними версіями](/uk/releases/version-skew-policy/#supported-versions) Kubernetes. Типово NFD створює [мітки функцій](https://kubernetes-sigs.github.io/node-feature-discovery/master/usage/features.html) для виявлених функцій. Адміністратори можуть використовувати NFD, щоб також мітити вузли конкретними функціями, щоб на них можна було планувати лише Podʼи, які запитують ці функції.
+Як адміністратор, ви можете автоматично виявляти та мітити всі ваши вузли з підтримкою GPU, розгорнувши [Виявлення функцій вузлів Kubernetes](https://github.com/kubernetes-sigs/node-feature-discovery) (NFD). NFD виявляє апаратні функції, які доступні на кожному вузлі в кластері Kubernetes. Зазвичай NFD налаштовується таким чином, щоб оголошувати ці функції як мітки вузла, але NFD також може додавати розширені ресурси, анотації та заплямування вузла (node taints). NFD сумісний з усіма [підтримуваними версіями](/releases/version-skew-policy/#supported-versions) Kubernetes. Типово NFD створює [мітки функцій](https://kubernetes-sigs.github.io/node-feature-discovery/master/usage/features.html) для виявлених функцій. Адміністратори можуть використовувати NFD, щоб також мітити вузли конкретними функціями, щоб на них можна було планувати лише Podʼи, які запитують ці функції.
 
 Вам також потрібен втулок для NFD, який додає відповідні мітки до ваших вузлів; це можуть бути загальні мітки або вони можуть бути вендор-специфічними. Ваш вендор GPU може надати втулок від третіх сторін для NFD; перевірте їх документацію для отримання додаткової інформації.
 

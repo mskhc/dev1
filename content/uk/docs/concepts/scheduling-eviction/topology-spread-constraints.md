@@ -20,7 +20,7 @@ weight: 42
 
 При масштабуванні та запуску більшої кількості Podʼів важливим стає інша проблема. Припустімо, що у вас є три вузли, на яких працюють по пʼять Podʼів кожен. У вузлах достатньо потужності для запуску такої кількості реплік; проте клієнти, які взаємодіють з цим навантаженням, розподілені по трьох різних центрах обробки даних (або зонах інфраструктури). Тепер ви менше хвилюєтеся про відмову одного вузла, але ви помічаєте, що затримка вища, ніж ви хотіли б, і ви платите за мережеві витрати, повʼязані з передачею мережевого трафіку між різними зонами.
 
-Ви вирішуєте, що при нормальній роботі ви б хотіли, щоб у кожній інфраструктурній зоні була приблизно [однакова кількість реплік](/uk/docs/concepts/scheduling-eviction/), і ви хотіли б, щоб кластер самостійно відновлювався у разі виникнення проблеми.
+Ви вирішуєте, що при нормальній роботі ви б хотіли, щоб у кожній інфраструктурній зоні була приблизно [однакова кількість реплік](/docs/concepts/scheduling-eviction/), і ви хотіли б, щоб кластер самостійно відновлювався у разі виникнення проблеми.
 
 Обмеження поширення топології Podʼів пропонують вам декларативний спосіб налаштування цього.
 
@@ -48,7 +48,7 @@ spec:
   ### інші поля Pod тут
 ```
 
-Додаткову інформацію про це поле можна отримати, запустивши команду `kubectl explain Pod.spec.topologySpreadConstraints` або звернувшись до розділу [планування](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) довідки API для Pod.
+Додаткову інформацію про це поле можна отримати, запустивши команду `kubectl explain Pod.spec.topologySpreadConstraints` або звернувшись до розділу [планування](/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) довідки API для Pod.
 
 ### Визначення обмежень поширення топології {#spread-constraints-definition}
 
@@ -63,7 +63,7 @@ spec:
 
   <!-- OK to remove this note once v1.29 Kubernetes is out of support -->
   {{< note >}}
-  До Kubernetes v1.30 поле `minDomains` було доступним, якщо [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MinDomainsInPodTopologySpread` було увімкнено (типово увімкнено починаючи з v1.28). В старіших кластерах Kubernetes воно може бути явно відключеним або поле може бути недоступним.
+  До Kubernetes v1.30 поле `minDomains` було доступним, якщо [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `MinDomainsInPodTopologySpread` було увімкнено (типово увімкнено починаючи з v1.28). В старіших кластерах Kubernetes воно може бути явно відключеним або поле може бути недоступним.
   {{< /note >}}
 
   - Значення `minDomains` повинно бути більше ніж 0, коли вказано. Ви можете вказати `minDomains` лише разом з `whenUnsatisfiable: DoNotSchedule`.
@@ -79,11 +79,11 @@ spec:
   - `DoNotSchedule` (типово) вказує планувальнику не планувати його.
   - `ScheduleAnyway` вказує планувальнику все одно його планувати, проте з пріоритетом вибору вузлів, що мінімізують розрив.
 
-- **labelSelector** використовується для знаходження відповідних Podʼів. Podʼи, які відповідають цьому селектору міток, враховуються для визначення кількості Podʼів у відповідному домені топології. Дивіться [селектори міток](/uk/docs/concepts/overview/working-with-objects/labels/#label-selectors) для отримання додаткових відомостей.
+- **labelSelector** використовується для знаходження відповідних Podʼів. Podʼи, які відповідають цьому селектору міток, враховуються для визначення кількості Podʼів у відповідному домені топології. Дивіться [селектори міток](/docs/concepts/overview/working-with-objects/labels/#label-selectors) для отримання додаткових відомостей.
 
 - **matchLabelKeys** — це список ключів міток Podʼа для вибору Podʼів, відносно яких буде розраховано поширення. Ключі використовуються для вибору значень з міток Podʼів, ці ключі-значення міток AND `labelSelector` вибирають групу наявних Podʼів, відносно яких буде розраховано поширення для вхідного Podʼа. Існування однакового ключа заборонене як у `matchLabelKeys`, так і в `labelSelector`. `matchLabelKeys` не може бути встановлено, коли `labelSelector` не встановлено. Ключі, яких не існує в мітках Podʼа, будуть проігноровані. Порожній або нульовий список означає, що збіг буде відповідати лише `labelSelector`.
 
-  З `matchLabelKeys` вам не потрібно оновлювати `pod.spec` між різними версіями. Контролер/оператор просто повинен встановити різні значення для того самого ключа мітки для різних версій. Планувальник автоматично припускає значення на основі `matchLabelKeys`. Наприклад, якщо ви налаштовуєте Deployment, ви можете використовувати мітку за ключем [pod-template-hash](/uk/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label), яка додається автоматично контролером Deployment, для розрізнення різних версій в одному Deployment.
+  З `matchLabelKeys` вам не потрібно оновлювати `pod.spec` між різними версіями. Контролер/оператор просто повинен встановити різні значення для того самого ключа мітки для різних версій. Планувальник автоматично припускає значення на основі `matchLabelKeys`. Наприклад, якщо ви налаштовуєте Deployment, ви можете використовувати мітку за ключем [pod-template-hash](/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label), яка додається автоматично контролером Deployment, для розрізнення різних версій в одному Deployment.
 
   ```yaml
       topologySpreadConstraints:
@@ -98,7 +98,7 @@ spec:
   ```
 
   {{< note >}}
-  Поле `matchLabelKeys` є полем на рівні бета-версії та включено стандартно у 1.27. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpread`.
+  Поле `matchLabelKeys` є полем на рівні бета-версії та включено стандартно у 1.27. Ви можете відключити його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `MatchLabelKeysInPodTopologySpread`.
   {{< /note >}}
 
 - **nodeAffinityPolicy** вказує, як ми будемо обробляти nodeAffinity/nodeSelector Pod, коли розраховуємо розрив поширення топології Podʼів. Опції:
@@ -108,7 +108,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Honor.
 
   {{< note >}}
-  Поле `nodeAffinityPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeAffinityPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
   {{< /note >}}
 
 - **nodeTaintsPolicy** вказує, як ми будемо обробляти заплямованість вузлів при розрахунку
@@ -119,7 +119,7 @@ spec:
   Якщо це значення є null, поведінка еквівалентна політиці Ignore.
 
   {{< note >}}
-  Поле `nodeTaintsPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
+  Поле `nodeTaintsPolicy` є полем на рівні бета-версії та включено стандартно у 1.26. Ви можете відключити його, вимкнувши [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `NodeInclusionPolicyInPodTopologySpread`.
   {{< /note >}}
 
 Коли Pod визначає більше одного `topologySpreadConstraint`, ці обмеження комбінуються за допомогою операції AND: kube-scheduler шукає вузол для вхідного Podʼа, який задовольняє всі налаштовані обмеження.
@@ -134,7 +134,7 @@ spec:
 ```
 
 {{< note >}}
-У цьому прикладі не використовуються [відомі](/uk/docs/reference/labels-annotations-taints/) ключі міток `topology.kubernetes.io/zone` та `topology.kubernetes.io/region`. Однак, рекомендується використовувати саме ці зареєстровані ключі міток, а не приватні (непідтверджені) ключі міток `region` та `zone`, які використовуються тут.
+У цьому прикладі не використовуються [відомі](/docs/reference/labels-annotations-taints/) ключі міток `topology.kubernetes.io/zone` та `topology.kubernetes.io/region`. Однак, рекомендується використовувати саме ці зареєстровані ключі міток, а не приватні (непідтверджені) ключі міток `region` та `zone`, які використовуються тут.
 
 Не можна надійно припускати про наявність значення приватного ключа мітки в різних контекстах.
 {{< /note >}}
@@ -229,7 +229,7 @@ graph BT
     class zoneA,zoneB cluster;
 {{< /mermaid >}}
 
-OR
+або
 
 {{<mermaid>}}
 graph BT
@@ -361,9 +361,9 @@ class zoneC cluster;
 
 Тут є кілька неявних домовленостей, на які варто звернути увагу:
 
-- Тільки Podʼи, що належать тому же простору імен, що і вхідний Pod, можуть бути кандидатами на відповідність.
+- Відповідними кандидатами можуть бути лише ті Podʼи, що мають той самий простір імен, що й вхідний Pod.
 
-- Планувальник обходить будь-які вузли, які не мають жодного присутнього `topologySpreadConstraints[*].topologyKey`. Це означає, що:
+- Планувальник розглядає лише ті вузли, у яких одночасно присутні всі `topologySpreadConstraints[*].topologyKey`. Вузли, у яких відсутній будь-який з цих `topologyKey`, обминаються. Це означає, що:
 
   1. будь-які Podʼи, що розташовані на цих обхідних вузлах, не впливають на обчислення `maxSkew` — в прикладі вище, припустимо, що вузол `node1` не має мітки "zone", тоді 2 Podʼи будуть проігноровані, тому вхідний Pod буде заплановано в зону `A`.
   2. вхідний Pod не має шансів бути запланованим на такі вузли — у вищенаведеному прикладі, припустимо, що вузол `node5` має **невірно введену** мітку `zone-typo: zoneC` (і не має жодної встановленої мітки `zone`). Після приєднання вузла `node5` до кластера, він буде обходитися, і Podʼи для цього робочого навантаження не будуть плануватися туди.
@@ -377,7 +377,7 @@ class zoneC cluster;
 - Він не визначає жодних обмежень у своєму `.spec.topologySpreadConstraints`.
 - Він належить до Service, ReplicaSet, StatefulSet або ReplicationController.
 
-Типові обмеження можна встановити як частину аргументів втулка `PodTopologySpread` в [профілі планувальника](/uk/docs/reference/scheduling/config/#profiles). Обмеження вказуються з тими ж [API вище](#topologyspreadconstraints-field), за винятком того, що `labelSelector` повинен бути пустим. Селектори обчислюються з Service, ReplicaSet, StatefulSet або ReplicationControllers, до яких належить Pod.
+Типові обмеження можна встановити як частину аргументів втулка `PodTopologySpread` в [профілі планувальника](/docs/reference/scheduling/config/#profiles). Обмеження вказуються з тими ж [API вище](#topologyspreadconstraints-field), за винятком того, що `labelSelector` повинен бути пустим. Селектори обчислюються з Service, ReplicaSet, StatefulSet або ReplicationControllers, до яких належить Pod.
 
 Приклад конфігурації може виглядати наступним чином:
 
@@ -438,7 +438,7 @@ profiles:
 
 ## Порівняння з podAffinity та podAntiAffinity {#comparison-with-podaffinity-podantiaffinity}
 
-У Kubernetes, [між-Podʼова (анти)спорідненість](/uk/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) контролює те, як Podʼи розміщуються відносно один одного — чи ущільнені, чи розріджені.
+У Kubernetes, [між-Podʼова (анти)спорідненість](/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity) контролює те, як Podʼи розміщуються відносно один одного — чи ущільнені, чи розріджені.
 
 `podAffinity`
 : притягує Podʼи; ви можете намагатися упакувати будь-яку кількість Podʼів в кваліфікуючі топологічні домени.
@@ -464,4 +464,4 @@ profiles:
 ## {{% heading "whatsnext" %}}
 
 - У статті блогу [Introducing PodTopologySpread](/blog/2020/05/introducing-podtopologyspread/) докладно пояснюється `maxSkew`, а також розглядаються деякі приклади використання.
-- Прочитайте розділ [scheduling](/uk/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) з довідки API для Pod.
+- Прочитайте розділ [scheduling](/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) з довідки API для Pod.

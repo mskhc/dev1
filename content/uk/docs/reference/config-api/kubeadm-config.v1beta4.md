@@ -65,7 +65,7 @@ apiVersion: kubeadm.k8s.io/v1beta4
 kind: UpgradeConfiguration
 ```
 
-Для виведення стандартних значень для дій "init" та "join" скористайтеся наступними командами:
+Для виведення стандартних значень для дій `init` та `join` скористайтеся наступними командами:
 
 ```shell
 kubeadm config print init-defaults
@@ -140,7 +140,7 @@ kind: KubeProxyConfiguration
 
 Тип KubeProxyConfiguration слід використовувати для зміни конфігурації, що передається екземплярам kube-proxy, розгорнутим у кластері. Якщо цей обʼєкт не надано або надано лише частково, kubeadm застосовує стандартні значення.
 
-Офіційну документацію про kube-proxy можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/](/uk/docs/reference/command-line-tools-reference/kube-proxy/) або https://pkg.go.dev/k8s.io/kube-proxy/config/v1alpha1#KubeProxyConfiguration.
+Офіційну документацію про kube-proxy можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/](/docs/reference/command-line-tools-reference/kube-proxy/) або https://pkg.go.dev/k8s.io/kube-proxy/config/v1alpha1#KubeProxyConfiguration.
 
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -152,7 +152,7 @@ kind: KubeletConfiguration
 
 Тип KubeletConfiguration слід використовувати для зміни конфігурацій, які буде передано всім екземплярам kubelet, розгорнутим у кластері. Якщо цей обʼєкт не надано або надано лише частково, kubeadm застосовує стандартні налаштування.
 
-Офіційну документацію про kubelet можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/](/uk/docs/reference/command-line-tools-reference/kubelet/) або https://pkg.go.dev/k8s.io/kubelet/config/v1beta1#KubeletConfiguration.
+Офіційну документацію про kubelet можна знайти на [https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/](/docs/reference/command-line-tools-reference/kubelet/) або https://pkg.go.dev/k8s.io/kubelet/config/v1beta1#KubeletConfiguration.
 
 Ось повністю заповнений приклад одного YAML-файлу, що містить декілька типів конфігурації для використання під час запуску `kubeadm init`.
 

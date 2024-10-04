@@ -21,7 +21,7 @@ HTTP-запити до HTTPS-точки доступу kubelet надають д
 
 * запустіть kubelet з прапорцем `--client-ca-file`, надаючи набір кореневих сертифікатів для перевірки клієнтських сертифікатів
 * запустіть apiserver з прапорцями `--kubelet-client-certificate` та `--kubelet-client-key`
-* див. [документацію з автентифікації apiserver](/uk/docs/reference/access-authn-authz/authentication/#x509-client-certificates) для отримання додаткових відомостей
+* див. [документацію з автентифікації apiserver](/docs/reference/access-authn-authz/authentication/#x509-client-certificates) для отримання додаткових відомостей
 
 Щоб увімкнути використання API-токенів на предʼявника (включаючи токени службових облікових записів) для автентифікації до HTTPS-точки доступу kubelet:
 
@@ -45,7 +45,7 @@ HTTP-запити до HTTPS-точки доступу kubelet надають д
 * запустіть kubelet з прапорцями `--authorization-mode=Webhook` та `--kubeconfig`
 * kubelet викликає API `SubjectAccessReview` на налаштованому apiserver, щоб визначити, чи авторизований кожний запит
 
-Kubelet авторизує запити до API, використовуючи той самий підхід до [атрибутів запиту](/uk/docs/reference/access-authn-authz/authorization/#review-your-request-attributes), що й apiserver.
+Kubelet авторизує запити до API, використовуючи той самий підхід до [атрибутів запиту](/docs/reference/access-authn-authz/authorization/#review-your-request-attributes), що й apiserver.
 
 Дієслово визначається з HTTP-дії вхідного запиту:
 
@@ -59,13 +59,14 @@ DELETE    | delete
 
 Ресурс та субресурс визначаються з шляху вхідного запиту:
 
-Kubelet API  | Ресурс  | Субресурс
--------------|---------|------------
-/stats/\*    | nodes   | stats
-/metrics/\*  | nodes   | metrics
-/logs/\*     | nodes   | log
-/spec/\*     | nodes   | spec
-*всі інші*   | nodes   | proxy
+Kubelet API    | Ресурс  | Субресурс
+---------------|---------|------------
+/stats/\*      | nodes   | stats
+/metrics/\*    | nodes   | metrics
+/logs/\*       | nodes   | log
+/spec/\*       | nodes   | spec
+/checkpoint/\* | nodes   | checkpoint
+*всі інші*     | nodes   | proxy
 
 Атрибути простору імен та групи API завжди є порожніми рядками, а імʼя ресурсу завжди є імʼям обʼєкта `Node` kubelet.
 
