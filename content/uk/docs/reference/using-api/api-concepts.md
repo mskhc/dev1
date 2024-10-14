@@ -10,8 +10,8 @@ API Kubernetes — це програмний інтерфейс на основ
 
 Для деяких ресурсів API включає додаткові субресурси, що дозволяють детальніше налаштовувати авторизацію (наприклад, окремі представлення для деталей Pod та отримання логів), і може приймати та надавати ці ресурси в різних форматах для зручності або ефективності.
 
-Kubernetes підтримує ефективні сповіщення про зміни ресурсів за допомогою *watches*. 
-{{< glossary_definition prepend="В API Kubernetes, watch це" term_id="watch" length="short" >}} 
+Kubernetes підтримує ефективні сповіщення про зміни ресурсів за допомогою *watches*.
+{{< glossary_definition prepend="В API Kubernetes, watch це" term_id="watch" length="short" >}}
 Kubernetes також забезпечує послідовні операції зі списками, щоб клієнти API могли ефективно кешувати, відстежувати та синхронізувати стан ресурсів.
 
 Ви можете переглянути [Довідник API](/uk/docs/reference/kubernetes-api/) онлайн або прочитати далі, щоб дізнатися про API загалом.
@@ -73,12 +73,150 @@ Kubernetes використовує термін **list** для опису от
   * `GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE` — повертає колекцію всіх екземплярів вказаного типу ресурсу в просторі імен NAMESPACE
   * `GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME` — повертає екземпляр вказаного типу ресурсу з імʼям NAME в просторі імен NAMESPACE
 
-Оскільки простір імен є ресурсом кластерного рівня, ви можете отримати перелік (“колекцію”) всіх просторів імен за допомогою `GET /api/v1/namespaces` та деталі про конкретний простір імен за допомогою `GET /api/v1/namespaces/NAME`.
+Оскільки простір імен є ресурсом кластерного рівня, ви можете отримати перелік ("колекцію") всіх просторів імен за допомогою `GET /api/v1/namespaces` та деталі про конкретний простір імен за допомогою `GET /api/v1/namespaces/NAME`.
 
 * Субресурс кластерного рівня: `GET /apis/GROUP/VERSION/RESOURCETYPE/NAME/SUBRESOURCE`
 * Субресурс рівня простору імен: `GET /apis/GROUP/VERSION/namespaces/NAMESPACE/RESOURCETYPE/NAME/SUBRESOURCE`
 
 Підтримувані дієслова для кожного субресурсу будуть відрізнятися залежно від обʼєкта — див. [Довідник API](/uk/docs/reference/kubernetes-api/) для отримання додаткової інформації. Немає можливості отримати доступ до субресурсів через декілька ресурсів — зазвичай використовується новий віртуальний тип ресурсу, якщо це стає необхідним.
+
+## HTTP медіа-типи {#alternate-representations-of-resources}
+
+Kubernetes підтримує кодування JSON та Protobuf для передачі даних по HTTP.
+
+{{% note %}}
+Хоча YAML широко використовується для локального визначення маніфестів Kubernetes, Kubernetes не підтримує медіа-тип [`application/yaml`](https://www.rfc-editor.org/rfc/rfc9512.html) для API-операцій.
+
+Усі документи у форматі JSON є коректними YAML, тому ви також можете використовувати відповідь API у форматі JSON у будь-якому місці, де очікується YAML-формат.
+{{% /note %}}
+
+Стандартно, Kubernetes повертає [серіалізовані об’єкти JSON](#json-encoding), використовуючи медіа-тип `application/json`. Хоча JSON є стандартним типом, клієнти можуть запитувати більш ефективне двійкове подання у вигляді [Protobuf](#protobuf-encoding) для кращої продуктивності.
+
+Kubernetes API реалізує стандартне узгодження типів вмісту HTTP: передача заголовка `Accept` у запиті `GET` вказує серверу спробувати повернути відповідь у бажаному медіа-типі. Якщо ви хочете надіслати об’єкт у форматі Protobuf на сервер для запиту `PUT` або `POST`, вам необхідно відповідно встановити заголовок запиту `Content-Type`.
+
+Якщо ви запитуєте доступні медіа-типи, API-сервер повертає відповідь з відповідним заголовком `Content-Type`; якщо жоден із запитаних медіа-типів не підтримується, API-сервер поверне повідомлення про помилку `406 Not acceptable`. Усі вбудовані типи ресурсів підтримують медіа-тип `application/json`.
+
+### Кодування ресурсів у форматі JSON {#json-encoding}
+
+API Kubernetes стандартно використовує [JSON](https://www.json.org/json-uk.html) для кодування тіла HTTP повідомлень.
+
+Наприклад:
+
+1. Вивести список усіх Podʼів в кластері без вказування бажаного формату
+
+   ```none
+   GET /api/v1/pods
+   ---
+   200 OK
+   Content-Type: application/json
+
+   … Колекція Pod, закодована у форматі JSON (обʼєкт PodList)
+   ```
+
+2. Створити Pod, відправивши JSON на сервер та запросивши відповідь у форматі JSON.
+
+   ```none
+   POST /api/v1/namespaces/test/pods
+   Content-Type: application/json
+   Accept: application/json
+   … Обʼєкт Pod, закодований у форматі JSON
+   ---
+   200 OK
+   Content-Type: application/json
+
+   {
+     "kind": "Pod",
+     "apiVersion": "v1",
+     …
+   }
+   ```
+
+### Кодування Kubernetes Protobuf {#protobuf-encoding}
+
+Kubernetes використовує обгортку-конверт для кодування відповідей у форматі Protobuf. Ця обгортка починається з 4 байтів магічного числа, щоб допомогти ідентифікувати вміст на диску або в etcd як Protobuf (на відміну від JSON). Дані з магічним числом (4 байти) слідують за повідомленням, закодованим у форматі Protobuf, яке описує кодування та тип основного об’єкта. Усередині повідомлення Protobuf дані внутрішнього об’єкта записуються за допомогою поля `raw` Unknown (дивіться IDL для докладної інформації).
+
+Наприклад:
+
+1. Вивести список усіх Pod в кластері у форматі Protobuf.
+
+   ```none
+   GET /api/v1/pods
+   Accept: application/vnd.kubernetes.protobuf
+   ---
+   200 OK
+   Content-Type: application/vnd.kubernetes.protobuf
+
+   … Колекція Pod, закодована у форматі JSON (об'єкт PodList)
+   ```
+
+2. Створити Pod, відправивши дані, закодовані у форматі Protobuf на сервер, але запросити відповідь у форматі JSON.
+
+   ```none
+   POST /api/v1/namespaces/test/pods
+   Content-Type: application/vnd.kubernetes.protobuf
+   Accept: application/json
+   … двійково закодований обʼєкт Pod
+   ---
+   200 OK
+   Content-Type: application/json
+
+   {
+     "kind": "Pod",
+     "apiVersion": "v1",
+     ...
+   }
+   ```
+
+Ви можете використовувати обидві техніки разом і взаємодіяти з API Kubernetes, яке підтримує кодування Protobuf, для читання та запису даних. Лише деякі типи ресурсів API є сумісними з Protobuf.
+
+<a id="protobuf-encoding-idl" />
+
+Формат обгортки:
+
+```none
+Чотирибайтовий префікс магічного числа:
+  Байти 0-3: "k8s\x00" [0x6b, 0x38, 0x73, 0x00]
+
+Закодоване повідомлення Protobuf з наступним IDL:
+  message Unknown {
+    // typeMeta повинне містити значення рядків для "kind" та "apiVersion", як встановлено в обʼєкті
+    JSON optional TypeMeta typeMeta = 1;
+
+    // raw містить повний серіалізований обʼєкт у форматі protobuf.
+    // Дивіться визначення protobuf у клієнтських бібліотеках для конкретного виду.
+    optional bytes raw = 2;
+
+    // contentEncoding — це кодування, яке використовується для raw даних.
+    // Якщо не вказано, кодування відсутнє.
+    optional string contentEncoding = 3;
+
+    // contentType — це метод серіалізації, який використовується для серіалізації 'raw'.
+    // Якщо не вказано, використовується application/vnd.kubernetes.protobuf, і зазвичай
+    // цей параметр не вказується.
+    optional string contentType = 4;
+  }
+
+  message TypeMeta {
+    // apiVersion — це група/версія для цього типу
+    optional string apiVersion = 1;
+    // kind — це назва схеми обʼєкта. Має існувати визначення protobuf для цього обʼєкта.
+    optional string kind = 2;
+  }
+```
+
+{{< note >}}
+Клієнти, які отримують відповідь у форматі `application/vnd.kubernetes.protobuf`, що не відповідає очікуваному префіксу, повинні відхилити відповідь, оскільки майбутні версії можуть змінити формат серіалізації на несумісний спосіб, і це буде зроблено шляхом зміни префіксу.
+{{< /note >}}
+
+#### Сумісність із Kubernetes Protobuf {#protobuf-encoding-compatibility}
+
+Не всі типи ресурсів API підтримують кодування Kubernetes у форматі Protobuf; зокрема, Protobuf не доступний для ресурсів, які визначені як {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}} або надаються через {{< glossary_tooltip text="шар агрегації" term_id="aggregation-layer" >}}.
+
+Як клієнт, якщо вам може знадобитися працювати з розширеними типами, слід вказати кілька типів контенту в заголовку `Accept` запиту для підтримки резервного переходу на JSON. Наприклад:
+
+```none
+Accept: application/vnd.kubernetes.protobuf, application/json
+```
 
 ## Ефективне виявлення змін {#efficient-detection-of-changes}
 
@@ -432,90 +570,6 @@ Content-Type: application/json
 Accept: application/json;as=Table;g=meta.k8s.io;v=v1, application/json
 ```
 
-## Альтернативні представлення ресурсів {#alternate-representations-of-resources}
-
-Типово Kubernetes повертає обʼєкти, серіалізовані у форматі JSON з типом контенту `application/json`. Це станадртний формат серіалізації для API. Однак клієнти можуть запросити більш ефективне [представлення у форматі Protobuf](#protobuf-encoding) цих обʼєктів для покращення продуктивності в масштабі. API Kubernetes реалізує стандартні HTTP-узгодження щодо типу контенту: передача заголовка `Accept` з викликом `GET` запросить сервер повернути відповідь у вашому бажаному медіа-типі, тоді як надсилання обʼєкта у форматі Protobuf на сервер для виклику `PUT` або `POST` означає, що ви повинні відповідним чином встановити заголовок `Content-Type`.
-
-Сервер поверне відповідь з заголовком `Content-Type`, якщо запитаний формат підтримується, або помилку `406 Not acceptable`, якщо жоден з медіа-типів, які ви запросили, не підтримується. Усі вбудовані типи ресурсів підтримують медіа-тип `application/json`.
-
-Дивіться [довідник API Kubernetes](/uk/docs/reference/kubernetes-api/) для списку підтримуваних типів контенту для кожного API.
-
-Наприклад:
-
-1. Список всіх Podʼів у кластері у форматі Protobuf.
-
-   ```none
-   GET /api/v1/pods
-   Accept: application/vnd.kubernetes.protobuf
-   ---
-   200 OK
-   Content-Type: application/vnd.kubernetes.protobuf
-
-   ... binary encoded PodList object
-   ```
-
-2. Створення Podʼа, надсиланням даних у форматі Protobuf на сервер, але із запитом відповідіу форматі JSON.
-
-   ```none
-   POST /api/v1/namespaces/test/pods
-   Content-Type: application/vnd.kubernetes.protobuf
-   Accept: application/json
-   ... binary encoded Pod object
-   ---
-   200 OK
-   Content-Type: application/json
-
-   {
-     "kind": "Pod",
-     "apiVersion": "v1",
-     ...
-   }
-   ```
-
-Не всі типи ресурсів API підтримують Protobuf; зокрема, Protobuf недоступний для ресурсів, визначених як {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinitions" >}} або обслуговуються через {{< glossary_tooltip text="шар агрегації" term_id="aggregation-layer" >}}. Як клієнт, який може працювати з розширеними типами, ви повинні вказати кілька типів контенту у заголовку запиту `Accept` для підтримки відкату до JSON. Наприклад:
-
-```none
-Accept: application/vnd.kubernetes.protobuf, application/json
-```
-
-### Кодування Protobuf у Kubernetes {#protobuf-encoding}
-
-Kubernetes використовує обгортку для кодування відповідей Protobuf. Ця обгортка починається з 4-байтового магічного числа для ідентифікації контенту на диску або в etcd як Protobuf (на відміну від JSON), а потім слідує Protobuf-кодована обгортка повідомлення, яка описує кодування і тип основного обʼєкта, а потім містить сам обʼєкт.
-
-Формат обгортки виглядає так:
-
-```none
-Чотирибайтовий префікс магічного числа:
-  Байти 0-3: "k8s\x00" [0x6b, 0x38, 0x73, 0x00]
-
-Кодоване повідомлення Protobuf з наступним IDL:
-  message Unknown {
-    // typeMeta повинен мати рядкові значення для "kind" та "apiVersion", встановлені на обʼєкті JSON
-    optional TypeMeta typeMeta = 1;
-
-    // raw буде містити повністю серіалізований обʼєкт у форматі Protobuf. Дивіться визначення Protobuf у клієнтських бібліотеках для певного kind.
-    optional bytes raw = 2;
-
-    // contentEncoding — це кодування, що використовується для raw даних. Відсутність означає відсутність кодування.
-    optional string contentEncoding = 3;
-
-    // contentType — це метод серіалізації, використаний для серіалізації 'raw'. Відсутність означає application/vnd.kubernetes.protobuf
-    // і зазвичай опускається.
-    optional string contentType = 4;
-  }
-
-  message TypeMeta {
-    // apiVersion — це група/версія для цього типу
-    optional string apiVersion = 1;
-    // kind — це назва схеми обʼєкта. Визначення Protobuf повинно існувати для цього обʼєкта.
-    optional string kind = 2;
-  }
-```
-
-{{< note >}}
-Клієнти, які отримують відповідь у форматі `application/vnd.kubernetes.protobuf`, яка не відповідає очікуваному префіксу, повинні відхилити відповідь, оскільки майбутні версії можуть потребувати зміни формату серіалізації у несумісний спосіб і зроблять це, змінивши префікс.
-{{< /note >}}
-
 ## Видалення ресурсів {#resource-deletion}
 
 Коли ви **видаляєте** ресурс, цей процес проходить у два етапи:
@@ -683,7 +737,7 @@ API Kubernetes підтримує чотири різні операції PATCH
 : JSON Merge Patch, як визначено в [RFC7386](https://tools.ietf.org/html/rfc7386). JSON Merge Patch фактично є частковим представленням ресурсу. Поданий JSON комбінується з поточним ресурсом для створення нового, а потім новий зберігається.  Для Kubernetes це операція накладання **патчу**.
 
 `application/strategic-merge-patch+json`
-: Strategic Merge Patch (специфічне розширення Kubernetes на основі JSON). Strategic Merge Patch — це власна реалізація JSON Merge Patch. Ви можете використовувати Strategic Merge Patch лише з вбудованими API або з агрегованими серверами API, які мають спеціальну підтримку для цього. Ви не можете використовувати `application/strategic-merge-patch+json` з будь-яким API, визначеним за допомогою {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}}.  
+: Strategic Merge Patch (специфічне розширення Kubernetes на основі JSON). Strategic Merge Patch — це власна реалізація JSON Merge Patch. Ви можете використовувати Strategic Merge Patch лише з вбудованими API або з агрегованими серверами API, які мають спеціальну підтримку для цього. Ви не можете використовувати `application/strategic-merge-patch+json` з будь-яким API, визначеним за допомогою {{< glossary_tooltip term_id="CustomResourceDefinition" text="CustomResourceDefinition" >}}.
   {{< note >}} Механізм *серверного застосування* Kubernetes замінив Strategic Merge Patch. {{< /note >}}
 
 Функція [Серверного застосування](/uk/docs/reference/using-api/server-side-apply/) Kubernetes дозволяє панелі управління відстежувати керовані поля для новостворених обʼєктів. SСерверне застосування забезпечує чітку схему для управління конфліктами полів, пропонує серверні операції **apply** і **update**, та замінює функціональність на стороні клієнта `kubectl apply`.

@@ -20,7 +20,7 @@ weight: 90
 
 HorizontalPodAutoscaler реалізований як ресурс API Kubernetes та {{< glossary_tooltip text="контролер" term_id="controller" >}}. Ресурс визначає поведінку контролера. Контролер горизонтального автоматичного масштабування Podʼів, який працює в {{< glossary_tooltip text="панелі управління" term_id="control-plane" >}} Kubernetes, періодично коригує бажану шкалу своєї цілі (наприклад, Deployment), щоб відповідати спостережуваним метрикам, таким як середнє використання CPU, середня використання памʼяті або будь-яка інша метрика, яку ви вказуєте.
 
-Ось [приклад](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) використання горизонтального автоматичного масштабування Podʼів.
+Ось [приклад](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) використання горизонтального автоматичного масштабування Podʼів.
 
 ## Як працює HorizontalPodAutoscaler? {#how-does-the-horizontalpodautoscaler-work}
 
@@ -49,11 +49,11 @@ class pod1,pod2,pod3 pod
 
 Схема 1. HorizontalPodAutoscaler керує масштабуванням Deployment та його ReplicaSet
 
-У Kubernetes горизонтальне автоматичне масштабування Podʼів реалізовано як цикл керування, що працює інтервально (це не постійний процес). Інтервал встановлюється параметром `--horizontal-pod-autoscaler-sync-period` для [`kube-controller-manager`](/uk/docs/reference/command-line-tools-reference/kube-controller-manager/) (а стандартне значення — 15 секунд).
+У Kubernetes горизонтальне автоматичне масштабування Podʼів реалізовано як цикл керування, що працює інтервально (це не постійний процес). Інтервал встановлюється параметром `--horizontal-pod-autoscaler-sync-period` для [`kube-controller-manager`](/docs/reference/command-line-tools-reference/kube-controller-manager/) (а стандартне значення — 15 секунд).
 
 Один раз протягом кожного періоду менеджер контролера запитує використання ресурсів відповідно до метрик, вказаних у визначенні кожного HorizontalPodAutoscaler. Менеджер контролера знаходить цільовий ресурс, визначений за допомогою `scaleTargetRef`, потім вибирає Podʼи на основі міток `.spec.selector` цільового ресурсу та отримує метрики зі специфічних метрик ресурсів API (для метрик ресурсів на кожен Pod) або API власних метрик (для всіх інших метрик).
 
-- Для метрик ресурсів на кожен Pod (наприклад, CPU) контролер отримує метрики з API метрик ресурсів для кожного Pod, на який впливає HorizontalPodAutoscaler. Потім, якщо встановлено значення цільового використання, контролер обчислює значення використання як відсоток еквівалентного [ресурсного запиту](/uk/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) на контейнери в кожному Pod. Якщо встановлено сирцеве цільове значення, використовуються сирі (необроблені) значення метрик. Потім контролер бере середнє значення використання або сире значення (залежно від типу вказаної цілі) для всіх цільових Podʼів і створює співвідношення, яке використовується для масштабування кількості бажаних реплік.
+- Для метрик ресурсів на кожен Pod (наприклад, CPU) контролер отримує метрики з API метрик ресурсів для кожного Pod, на який впливає HorizontalPodAutoscaler. Потім, якщо встановлено значення цільового використання, контролер обчислює значення використання як відсоток еквівалентного [ресурсного запиту](/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) на контейнери в кожному Pod. Якщо встановлено сирцеве цільове значення, використовуються сирі (необроблені) значення метрик. Потім контролер бере середнє значення використання або сире значення (залежно від типу вказаної цілі) для всіх цільових Podʼів і створює співвідношення, яке використовується для масштабування кількості бажаних реплік.
 
   Зверніть увагу, що якщо деякі контейнери Podʼів не мають відповідного ресурсного запиту, використання CPU для Pod не буде визначене, і автоматичний масштабувальник не буде виконувати жодних дій для цієї метрики. Дивіться розділ [подробиці алгоритму](#algorithm-details) нижче для отримання додаткової інформації про те, як працює алгоритм автомасштабування.
 
@@ -61,11 +61,11 @@ class pod1,pod2,pod3 pod
 
 - Для метрик обʼєктів та зовнішніх метрик витягується одна метрика, яка описує обʼєкт. Цю метрику порівнюють з цільовим значенням, щоб отримати співвідношення, як вище. У версії API `autoscaling/v2` це значення можна за необхідності розділити на кількість Podʼів до порівняння.
 
-Звичайне використання HorizontalPodAutoscaler — налаштувати його на витягування метрик з [агрегованих API](/uk/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server) (`metrics.k8s.io`, `custom.metrics.k8s.io` або `external.metrics.k8s.io`). API `metrics.k8s.io` зазвичай надається Metrics Server, який потрібно запустити окремо. Для отримання додаткової інформації про метрики ресурсів див. [Metrics Server](/uk/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server).
+Звичайне використання HorizontalPodAutoscaler — налаштувати його на витягування метрик з [агрегованих API](/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server) (`metrics.k8s.io`, `custom.metrics.k8s.io` або `external.metrics.k8s.io`). API `metrics.k8s.io` зазвичай надається Metrics Server, який потрібно запустити окремо. Для отримання додаткової інформації про метрики ресурсів див. [Metrics Server](/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/#metrics-server).
 
 [Підтримка API метрик](#support-for-metrics-apis) пояснює гарантії стабільності та статус підтримки цих різних API.
 
-Контролер HorizontalPodAutoscaler має доступ до відповідних ресурсів робочого навантаження, які підтримують масштабування (такі як Deployment та StatefulSet). Ці ресурси мають субресурс з назвою `scale`, інтерфейс, який дозволяє динамічно встановлювати кількість реплік і переглядати поточний стан кожного з них. Для загальної інформації про субресурси в API Kubernetes див. [Поняття API Kubernetes](/uk/docs/reference/using-api/api-concepts/).
+Контролер HorizontalPodAutoscaler має доступ до відповідних ресурсів робочого навантаження, які підтримують масштабування (такі як Deployment та StatefulSet). Ці ресурси мають субресурс з назвою `scale`, інтерфейс, який дозволяє динамічно встановлювати кількість реплік і переглядати поточний стан кожного з них. Для загальної інформації про субресурси в API Kubernetes див. [Поняття API Kubernetes](/docs/reference/using-api/api-concepts/).
 
 ### Алгоритм {#algorithm-details}
 
@@ -79,7 +79,7 @@ class pod1,pod2,pod3 pod
 
 Якщо вказано `targetAverageValue` або `targetAverageUtilization`, поточне значення метрики обчислюється шляхом визначення середнього значення вказаної метрики для всіх Podʼів у цільовому масштабі HorizontalPodAutoscaler.
 
-Перед перевіркою допустимості та визначенням кінцевих значень панель управління також розглядає, чи є відсутні будь-які метрики, і скільки Podʼів є [`Ready`](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions). Всі Podʼи зі встановленим відбитками часу видалення (обʼєкти з відбитками часу видалення перебувають у процесі завершення роботи/видалення) ігноруються, а всі збійні Podʼи не враховуються.
+Перед перевіркою допустимості та визначенням кінцевих значень панель управління також розглядає, чи є відсутні будь-які метрики, і скільки Podʼів є [`Ready`](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions). Всі Podʼи зі встановленим відбитками часу видалення (обʼєкти з відбитками часу видалення перебувають у процесі завершення роботи/видалення) ігноруються, а всі збійні Podʼи не враховуються.
 
 Якщо конкретний Pod не маж метрики, його відкладено на потім; Podʼи з відсутніми метриками будуть використані для коригування кінцевої кількості масштабування.
 
@@ -106,7 +106,7 @@ class pod1,pod2,pod3 pod
 
 Horizontal Pod Autoscaler є ресурсом API в групі API Kubernetes `autoscaling`. Поточна стабільна версія знаходиться в версії API `autoscaling/v2`, яка включає підтримку масштабування за памʼяттю та власними метриками. Нові поля, введені в `autoscaling/v2`, зберігаються як анотації при роботі з `autoscaling/v1`.
 
-При створенні обʼєкта API HorizontalPodAutoscaler переконайтеся, що вказане імʼя є дійсним [піддоменом DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names). Більше деталей про обʼєкт API можна знайти на сторінці [Обʼєкт HorizontalPodAutoscaler](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#horizontalpodautoscaler-v2-autoscaling).
+При створенні обʼєкта API HorizontalPodAutoscaler переконайтеся, що вказане імʼя є дійсним [піддоменом DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names). Більше деталей про обʼєкт API можна знайти на сторінці [Обʼєкт HorizontalPodAutoscaler](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#horizontalpodautoscaler-v2-autoscaling).
 
 ## Стабільність масштабування робочого навантаження {#flapping}
 
@@ -185,19 +185,19 @@ containerResource:
 
 Стандартно контролер HorizontalPodAutoscaler отримує метрики з низки API. Для того щоб мати доступ до цих API, адміністратори кластера повинні забезпечити:
 
-- Увімкнути [шар агрегації API](/uk/docs/tasks/extend-kubernetes/configure-aggregation-layer/).
+- Увімкнути [шар агрегації API](/docs/tasks/extend-kubernetes/configure-aggregation-layer/).
 
 - Відповідні API мають бути зареєстровані:
 
-  - Для метрик ресурсі це `metrics.k8s.io` [API](/uk/docs/reference/external-api/metrics.v1beta1/), яке зазвичай надає [metrics-server](https://github.com/kubernetes-sigs/metrics-server). Це може бути запущено як надбудова кластера.
+  - Для метрик ресурсі це `metrics.k8s.io` [API](/docs/reference/external-api/metrics.v1beta1/), яке зазвичай надає [metrics-server](https://github.com/kubernetes-sigs/metrics-server). Це може бути запущено як надбудова кластера.
 
-  - Для власних метрик це `custom.metrics.k8s.io` [API](/uk/docs/reference/external-api/custom-metrics.v1beta2/). Його надають сервери API "адаптера", які надають постачальники рішень метрик. Перевірте у своєї системи метрик, чи доступний адаптер метрик Kubernetes.
+  - Для власних метрик це `custom.metrics.k8s.io` [API](/docs/reference/external-api/custom-metrics.v1beta2/). Його надають сервери API "адаптера", які надають постачальники рішень метрик. Перевірте у своєї системи метрик, чи доступний адаптер метрик Kubernetes.
 
-  - Для зовнішніх метрик це `external.metrics.k8s.io` [API](/uk/docs/reference/external-api/external-metrics.v1beta1/). Він може бути наданий адаптерами власних метрик, які наведено вище.
+  - Для зовнішніх метрик це `external.metrics.k8s.io` [API](/docs/reference/external-api/external-metrics.v1beta1/). Він може бути наданий адаптерами власних метрик, які наведено вище.
 
 Для отримання додаткової інформації про ці різні шляхи метрик та їх відмінності дивіться відповідні пропозиції дизайну для [HPA V2](https://git.k8s.io/design-proposals-archive/autoscaling/hpa-v2.md), [custom.metrics.k8s.io](https://git.k8s.io/design-proposals-archive/instrumentation/custom-metrics-api.md) та [external.metrics.k8s.io](https://git.k8s.io/design-proposals-archive/instrumentation/external-metrics-api.md).
 
-Для прикладів використання дивіться [посібник з використання власних метрик](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics) та [посібник з використання зовнішніх метрик](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-metrics-not-related-to-kubernetes-objects).
+Для прикладів використання дивіться [посібник з використання власних метрик](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-multiple-metrics-and-custom-metrics) та [посібник з використання зовнішніх метрик](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#autoscaling-on-metrics-not-related-to-kubernetes-objects).
 
 ## Налаштований механізм масштабування {#configurable-scaling-behavior}
 
@@ -205,7 +205,7 @@ containerResource:
 
 (версія API `autoscaling/v2beta2` раніше надавала цю можливість як бета-функцію)
 
-Якщо ви використовуєте API HorizontalPodAutoscaler `v2`, ви можете використовувати поле `behavior` (див. [довідку API](/uk/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/#HorizontalPodAutoscalerSpec)) для налаштування окремих поведінок масштабування вгору та вниз. Ви вказуєте ці поведінки, встановлюючи `scaleUp` та/або `scaleDown`
+Якщо ви використовуєте API HorizontalPodAutoscaler `v2`, ви можете використовувати поле `behavior` (див. [довідку API](/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/#HorizontalPodAutoscalerSpec)) для налаштування окремих поведінок масштабування вгору та вниз. Ви вказуєте ці поведінки, встановлюючи `scaleUp` та/або `scaleDown`
 у полі `behavior`.
 
 Ви можете вказати _вікно стабілізації_, яке запобігає [коливанню](#flapping) кількості реплік для цільового масштабування. Політики масштабування також дозволяють контролювати швидкість зміни реплік під час масштабування.
@@ -336,7 +336,7 @@ HorizontalPodAutoscaler, як і кожний ресурс API, підтриму
 
 При увімкненні HPA рекомендується видалити значення `spec.replicas` з Deployment та/або StatefulSet в їхніх {{< glossary_tooltip text="маніфестах" term_id="manifest" >}}. Якщо цього не зроблено, будь-яка зміна в цьому обʼєкті, наприклад за допомогою `kubectl apply -f deployment.yaml`, буде інструкцією Kubernetes масштабувати поточну кількість Podʼів до значення ключа `spec.replicas`. Це може бути небажаним і призводити до проблем, коли HPA активно працює.
 
-Майте на увазі, що видалення `spec.replicas` може спричинити одноразове зниження кількості Podʼів, оскільки стандартне значення цього ключа — 1 (див. [Репліки Deployment](/uk/docs/concepts/workloads/controllers/deployment#replicas)). Після оновлення всі Podʼи, крім одного, розпочнуть процедури їхнього завершення. Після цього будь-яке подальше розгортання застосунку буде працювати як звичайно і буде дотримуватися конфігурації плавного оновлення за бажанням. Ви можете уникнути цього зниження, обравши один із двох наступних методів в залежності від того, як ви модифікуєте свої розгортання:
+Майте на увазі, що видалення `spec.replicas` може спричинити одноразове зниження кількості Podʼів, оскільки стандартне значення цього ключа — 1 (див. [Репліки Deployment](/docs/concepts/workloads/controllers/deployment#replicas)). Після оновлення всі Podʼи, крім одного, розпочнуть процедури їхнього завершення. Після цього будь-яке подальше розгортання застосунку буде працювати як звичайно і буде дотримуватися конфігурації плавного оновлення за бажанням. Ви можете уникнути цього зниження, обравши один із двох наступних методів в залежності від того, як ви модифікуєте свої розгортання:
 
 {{< tabs name="fix_replicas_instructions" >}}
 {{% tab name="Застосування на боці клієнта (стандартно)" %}}
@@ -349,19 +349,19 @@ HorizontalPodAutoscaler, як і кожний ресурс API, підтриму
 {{% /tab %}}
 {{% tab name="Застосування на боці сервера" %}}
 
-При використанні [Server-Side Apply](/uk/docs/reference/using-api/server-side-apply/)
-ви можете дотримуватися [вказівок щодо передачі власності](/uk/docs/reference/using-api/server-side-apply/#transferring-ownership), які охоплюють цей саме випадок використання.
+При використанні [Server-Side Apply](/docs/reference/using-api/server-side-apply/)
+ви можете дотримуватися [вказівок щодо передачі власності](/docs/reference/using-api/server-side-apply/#transferring-ownership), які охоплюють цей саме випадок використання.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## {{% heading "whatsnext" %}}
 
-Якщо ви налаштовуєте автомасштабування у вашому кластері, вам також може бути корисно розглянути використання [автомасштабування кластера](/uk/docs/concepts/cluster-administration/cluster-autoscaling/) для забезпечення того, що ви запускаєте правильну кількість вузлів.
+Якщо ви налаштовуєте автомасштабування у вашому кластері, вам також може бути корисно розглянути використання [автомасштабування кластера](/docs/concepts/cluster-administration/cluster-autoscaling/) для забезпечення того, що ви запускаєте правильну кількість вузлів.
 
 Для отримання додаткової інформації про HorizontalPodAutoscaler:
 
-- Прочитайте [приклад](/uk/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) для автоматичного горизонтального масштабування Podʼів.
-- Прочитайте документацію для [`kubectl autoscale`](/uk/docs/reference/generated/kubectl/kubectl-commands/#autoscale).
+- Прочитайте [приклад](/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) для автоматичного горизонтального масштабування Podʼів.
+- Прочитайте документацію для [`kubectl autoscale`](/docs/reference/generated/kubectl/kubectl-commands/#autoscale).
 - Якщо ви бажаєте написати власний адаптер для власних метрик, перегляньте [початковий код](https://github.com/kubernetes-sigs/custom-metrics-apiserver), щоб почати.
-- Ознайомтесь з [Довідкою API](/uk/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/) для HorizontalPodAutoscaler.
+- Ознайомтесь з [Довідкою API](/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/) для HorizontalPodAutoscaler.

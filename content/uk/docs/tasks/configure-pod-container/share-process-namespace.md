@@ -31,7 +31,7 @@ weight: 200
 2. Приєднайтеся до контейнера `shell` та запустіть команду `ps`:
 
    ```shell
-   kubectl attach -it nginx -c shell
+   kubectl exec -it nginx -c shell -- /bin/sh
    ```
 
    Якщо ви не бачите символу командного рядка, спробуйте натиснути клавішу Enter. У оболонці контейнера:

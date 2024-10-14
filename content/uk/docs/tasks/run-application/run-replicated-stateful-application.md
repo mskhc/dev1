@@ -9,16 +9,17 @@ weight: 30
 Ця сторінка показує, як запустити реплікований застосунок зі збереженням стану ({{< glossary_tooltip term_id="statefulset" >}}). Цей застосунок — реплікована база даних MySQL. У топології цього прикладу є один головний сервер і кілька реплік, що використовують асинхронну реплікацію на основі рядків.
 
 {{< note >}}
-**Ця конфігурація не для операційної експлуатації**. Налаштування MySQL залишаються на небезпечних станадартний значеннях, щоб зосередитися на загальних патернах запуску застосунків зі збереженням стану в Kubernetes.
+**Ця конфігурація не для операційної експлуатації**. Налаштування MySQL залишаються на небезпечних стандартних значеннях, щоб зосередитися на загальних патернах запуску застосунків зі збереженням стану в Kubernetes.
 {{< /note >}}
 
 ## {{% heading "prerequisites" %}} {#before-you-begin}
 
 - {{< include "task-tutorial-prereqs.md" >}}
 - {{< include "default-storage-class-prereqs.md" >}}
-- Це завдання передбачає, що ви знаєте про [Постійні томи](/uk/docs/concepts/storage/persistent-volumes/) та [StatefulSets](/uk/docs/concepts/workloads/controllers/statefulset/),а також інші основні поняття, такі як [Pod](/uk/docs/concepts/workloads/pods/), [Service](/uk/docs/concepts/services-networking/service/) та [ConfigMap](/uk/docs/tasks/configure-pod-container/configure-pod-configmap/).
+- Це завдання передбачає, що ви знаєте про [Постійні томи](/docs/concepts/storage/persistent-volumes/) та [StatefulSets](/docs/concepts/workloads/controllers/statefulset/), а також інші основні поняття, такі як [Pod](/docs/concepts/workloads/pods/), [Service](/docs/concepts/services-networking/service/) та [ConfigMap](/docs/tasks/configure-pod-container/configure-pod-configmap/).
 - Трохи знань MySQL корисні, але цей посібник має на меті представити загальні патерни, які можуть бути корисними для інших систем.
 - Ви використовуєте простір імен default або інший простір імен, в якому відсутні обʼєкти, що конфліктують.
+- У вас має бути AMD64-сумісний процесор.
 
 ## {{% heading "objectives" %}}
 
@@ -107,13 +108,13 @@ mysql-2   2/2       Running   0          1m
 ### Створення конфігурації {#generating-configuration}
 
 Перед запуском будь-яких контейнерів у специфікації Podʼа, спочатку Pod запускає будь-які
-[контейнери ініціалізації](/uk/docs/concepts/workloads/pods/init-containers/) у визначеному порядку.
+[контейнери ініціалізації](/docs/concepts/workloads/pods/init-containers/) у визначеному порядку.
 
 Перший контейнер ініціалізації, `init-mysql`, генерує спеціальні конфігураційні файли MySQL на основі порядкового індексу.
 
 Скрипт визначає свій власний порядковий індекс, витягуючи його з кінця імені Podʼа, яке повертається командою `hostname`. Потім він зберігає порядковий індекс (з числовим зміщенням для уникнення зарезервованих значень) у файлі з назвою `server-id.cnf` в теці `conf.d` MySQL. Це перетворює унікальний, стабільний ідентифікатор, наданий StatefulSet, у домен ідентифікаторів серверів MySQL, які вимагають таких же властивостей.
 
-Скрипт у контейнері `init-mysql` також застосовує або `primary.cnf`, або `replica.cnf` з ConfigMap, копіюючи вміст у `conf.d`. Оскільки у топології цього прикладу є лише один головний сервер MySQL та будь-яка кількість реплік, скрипт призначає порядковий індекс `0` головному серверу, а всі інші — репліками. Разом з гарантією контролера StatefulSet щодо [порядку розгортання](/uk/docs/concepts/workloads/controllers/statefulset/#deployment-and-scaling-guarantees), це забезпечує готовність головного сервера MySQL перед створенням реплік, щоб вони могли почати реплікацію.
+Скрипт у контейнері `init-mysql` також застосовує або `primary.cnf`, або `replica.cnf` з ConfigMap, копіюючи вміст у `conf.d`. Оскільки у топології цього прикладу є лише один головний сервер MySQL та будь-яка кількість реплік, скрипт призначає порядковий індекс `0` головному серверу, а всі інші — репліками. Разом з гарантією контролера StatefulSet щодо [порядку розгортання](/docs/concepts/workloads/controllers/statefulset/#deployment-and-scaling-guarantees), це забезпечує готовність головного сервера MySQL перед створенням реплік, щоб вони могли почати реплікацію.
 
 ### Клонування наявних даних {#cloning-existing-data}
 
@@ -201,7 +202,7 @@ kubectl run mysql-client-loop --image=mysql:5.7 -i -t --rm --restart=Never --\
 
 ### Збій проби готовності {#break-readiness-probe}
 
-[Проба готовності](/uk/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) для контейнера `mysql` виконує команду `mysql -h 127.0.0.1 -e 'SELECT 1'`, щоб переконатися, що сервер запущений і може виконувати запити.
+[Проба готовності](/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) для контейнера `mysql` виконує команду `mysql -h 127.0.0.1 -e 'SELECT 1'`, щоб переконатися, що сервер запущений і може виконувати запити.
 
 Одним зі способів змусити цю пробу готовності збоїти — це пошкодити цю команду:
 
@@ -242,7 +243,7 @@ kubectl delete pod mysql-2
 
 ### Виведення вузла з експлуатації {#drain-node}
 
-Якщо у вашому кластері Kubernetes є кілька вузлів, ви можете симулювати відмову вузла(наприклад, під час оновлення вузлів) за допомогою команди [drain](/uk/docs/reference/generated/kubectl/kubectl-commands/#drain).
+Якщо у вашому кластері Kubernetes є кілька вузлів, ви можете симулювати відмову вузла(наприклад, під час оновлення вузлів) за допомогою команди [drain](/docs/reference/generated/kubectl/kubectl-commands/#drain).
 
 Спочатку визначте, на якому вузлі знаходиться один із Podʼів MySQL:
 
@@ -401,8 +402,8 @@ kubectl delete pvc data-mysql-4
 
 ## {{% heading "whatsnext" %}}
 
-- Дізнайтеся більше про [масштабування StatefulSet](/uk/docs/tasks/run-application/scale-stateful-set/).
-- Дізнайтеся більше про [налагодження StatefulSet](/uk/docs/tasks/debug/debug-application/debug-statefulset/).
-- Дізнайтеся більше про [видалення StatefulSet](/uk/docs/tasks/run-application/delete-stateful-set/).
-- Дізнайтеся більше про [примусове видалення Podʼів StatefulSet](/uk/docs/tasks/run-application/force-delete-stateful-set-pod/).
+- Дізнайтеся більше про [масштабування StatefulSet](/docs/tasks/run-application/scale-stateful-set/).
+- Дізнайтеся більше про [налагодження StatefulSet](/docs/tasks/debug/debug-application/debug-statefulset/).
+- Дізнайтеся більше про [видалення StatefulSet](/docs/tasks/run-application/delete-stateful-set/).
+- Дізнайтеся більше про [примусове видалення Podʼів StatefulSet](/docs/tasks/run-application/force-delete-stateful-set-pod/).
 - Подивіться в [сховищі Helm чартів](https://artifacthub.io/) інші приклади застосунків зі збереженням стану.

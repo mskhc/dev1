@@ -35,11 +35,11 @@ card:
 kubectl create configmap <map-name> <data-source>
 ```
 
-де, \<map-name> — це імʼя ConfigMap, а \<data-source> — це тека, файл чи літерал з даними, які ви хочете включити в ConfigMap. Імʼя обʼєкта ConfigMap повинно бути вірним [імʼям субдомену DNS](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+де, \<map-name> — це імʼя ConfigMap, а \<data-source> — це тека, файл чи літерал з даними, які ви хочете включити в ConfigMap. Імʼя обʼєкта ConfigMap повинно бути вірним [імʼям субдомену DNS](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 Коли ви створюєте ConfigMap на основі файлу, ключ в \<data-source> визначається імʼям файлу, а значення — вмістом файлу.
 
-Ви можете використовувати [`kubectl describe`](/uk/docs/reference/generated/kubectl/kubectl-commands#describe) або [`kubectl get`](/uk/docs/reference/generated/kubectl/kubectl-commands#get) для отримання інформації про ConfigMap.
+Ви можете використовувати [`kubectl describe`](/docs/reference/generated/kubectl/kubectl-commands#describe) або [`kubectl get`](/docs/reference/generated/kubectl/kubectl-commands#get) для отримання інформації про ConfigMap.
 
 #### Створення ConfigMap з тек {#create-a-configmap-from-directories}
 
@@ -551,10 +551,12 @@ kubectl delete configmap -l 'game-config in (config-4,config-5)'
 
   Тепер виведення Pod містить змінні середовища `SPECIAL_LEVEL_KEY=very` та `LOG_LEVEL=INFO`.
 
-  Як тільки ви готові перейти далі, видаліть цей Pod:
+  Як тільки ви готові перейти далі, видаліть цей Pod та ConfigMaps:
 
   ```shell
   kubectl delete pod dapi-test-pod --now
+  kubectl delete configmap special-config
+  kubectl delete configmap env-config
   ```
 
 ## Налаштування всіх пар ключ-значення в ConfigMap як змінних середовища контейнера {#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables}
@@ -651,7 +653,7 @@ SPECIAL_LEVEL
 SPECIAL_TYPE
 ```
 
-Текстові дані показуються у вигляді файлів з використанням кодування символів UTF-8. Щоб використовувати інше кодування символів, скористайтеся `binaryData` (див. [обʼєкт ConfigMap](/uk/docs/concepts/configuration/configmap/#configmap-object) для докладніших відомостей).
+Текстові дані показуються у вигляді файлів з використанням кодування символів UTF-8. Щоб використовувати інше кодування символів, скористайтеся `binaryData` (див. [обʼєкт ConfigMap](/docs/concepts/configuration/configmap/#configmap-object) для докладніших відомостей).
 
 {{< note >}}
 Якщо в теці `/etc/config` образу контейнера є будь-які файли, то змонтований том робить ці файли образу недоступними.
@@ -665,7 +667,7 @@ kubectl delete pod dapi-test-pod --now
 
 ### Додавання конфігурації ConfigMap до певного шляху у томі {#add-configmap-data-to-a-specific-path-in-the-volume}
 
-Використовуйте поле `path`, щоб вказати бажаний шлях до файлів для конкретних елементів ConfigMap. У цьому випадку елемент `SPECIAL_LEVEL` буде змонтовано у томі `config-volume` за адресою `/etc/config/keys`. 
+Використовуйте поле `path`, щоб вказати бажаний шлях до файлів для конкретних елементів ConfigMap. У цьому випадку елемент `SPECIAL_LEVEL` буде змонтовано у томі `config-volume` за адресою `/etc/config/keys`.
 
 {{% code_sample file="pods/pod-configmap-volume-specific-key.yaml" %}}
 
@@ -693,7 +695,7 @@ kubectl delete pod dapi-test-pod --now
 
 ### Спроєцюйте ключі на конкретні шляхи та встановлюйте права доступу до файлів {#project-keys-to-specific-paths-and-file-permissions}
 
-Ви можете спроєцювати ключі на конкретні шляхи. Зверніться до відповідного розділу в [Посібнику Secret](/uk/docs/tasks/inject-data-application/distribute-credentials-secure/#project-secret-keys-to-specific-file-paths) для ознайомлення з синтаксисом. Ви можете встановлювати права доступу POSIX для ключів. Зверніться до відповідного розділу в [Посібнику Secret](/uk/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) ознайомлення з синтаксисом.
+Ви можете спроєцювати ключі на конкретні шляхи. Зверніться до відповідного розділу в [Посібнику Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#project-secret-keys-to-specific-file-paths) для ознайомлення з синтаксисом. Ви можете встановлювати права доступу POSIX для ключів. Зверніться до відповідного розділу в [Посібнику Secret](/docs/tasks/inject-data-application/distribute-credentials-secure/#set-posix-permissions-for-secret-keys) ознайомлення з синтаксисом.
 
 ### Необовʼязкові посилання {#optional-references}
 
@@ -706,15 +708,15 @@ kubectl delete pod dapi-test-pod --now
 Kubelet перевіряє, чи змонтований ConfigMap є актуальним під час кожної періодичної синхронізації. Однак він використовує свій локальний кеш на основі TTL для отримання поточного значення ConfigMap. В результаті загальна затримка від моменту оновлення ConfigMap до моменту, коли нові ключі проєцюються у Pod може бути таким, як період синхронізації kubelet (стандартно — 1 хвилина) + TTL кешу ConfigMaps (стандартно — 1 хвилина) в kubelet. Ви можете викликати негайне оновлення, оновивши одну з анотацій Podʼа.
 
 {{< note >}}
-Контейнери, які використовують ConfigMap як том [subPath](/uk/docs/concepts/storage/volumes/#using-subpath) не отримуватимуть оновлення ConfigMap.
+Контейнери, які використовують ConfigMap як том [subPath](/docs/concepts/storage/volumes/#using-subpath) не отримуватимуть оновлення ConfigMap.
 {{< /note >}}
 
 ## Розуміння ConfigMap та Podʼів {#understanding-configmaps-and-pods}
 
-Ресурс ConfigMap API зберігає конфігураційні дані у вигляді пар ключ-значення. Дані можуть бути використані в Podʼах або надавати конфігураційні дані для системних компонентів, таких як контролери. ConfigMap схожий на [Secret](/uk/docs/concepts/configuration/secret), але надає засоби для роботи з рядками, що не містять конфіденційної інформації. Користувачі та системні компоненти можуть зберігати конфігураційні дані в ConfigMap.
+Ресурс ConfigMap API зберігає конфігураційні дані у вигляді пар ключ-значення. Дані можуть бути використані в Podʼах або надавати конфігураційні дані для системних компонентів, таких як контролери. ConfigMap схожий на [Secret](/docs/concepts/configuration/secret), але надає засоби для роботи з рядками, що не містять конфіденційної інформації. Користувачі та системні компоненти можуть зберігати конфігураційні дані в ConfigMap.
 
 {{< note >}}
-ConfigMaps повинні посилатися на файли властивостей, а не заміняти їх. Подумайте про ConfigMap як щось подібне до теки `/etc` в Linux та її вмісту. Наприклад, якщо ви створюєте [Том Kubernetes](/uk/docs/concepts/storage/volumes/) з ConfigMap, кожен елемент даних у ConfigMap представлений окремим файлом у томі.
+ConfigMaps повинні посилатися на файли властивостей, а не заміняти їх. Подумайте про ConfigMap як щось подібне до теки `/etc` в Linux та її вмісту. Наприклад, якщо ви створюєте [Том Kubernetes](/docs/concepts/storage/volumes/) з ConfigMap, кожен елемент даних у ConfigMap представлений окремим файлом у томі.
 {{< /note >}}
 
 Поле `data` у ConfigMap містить дані конфігурації. Як показано у прикладі нижче, це може бути простим (наприклад, окремі властивості, визначені за допомогою `--from-literal`) або складним (наприклад, файли конфігурації або JSON-фрагменти, визначені за допомогою `--from-file`).
@@ -811,7 +813,7 @@ spec:
   0s       0s        1     dapi-test-pod Pod              Warning   InvalidEnvironmentVariableNames   {kubelet, 127.0.0.1}  Keys [1badkey, 2alsobad] from the EnvFrom configMap default/myconfig were skipped since they are considered invalid environment variable names.
   ```
 
-* ConfigMaps знаходяться в конкретному {{< glossary_tooltip term_id="namespace" >}}. Podʼи можуть посилатися лише на ConfigMaps, які знаходяться в тому ж контексті, що і сам Под.
+* ConfigMaps знаходяться в конкретному {{< glossary_tooltip term_id="namespace" >}}. Podʼи можуть посилатися лише на ConfigMaps, які знаходяться в тому ж контексті, що і сам Pod.
 
 * Ви не можете використовувати ConfigMaps для {{< glossary_tooltip text="статичних Podʼів" term_id="static-pod" >}}, оскільки kubelet їх не підтримує.
 
@@ -829,9 +831,19 @@ kubectl delete configmaps/special-config configmaps/env-config
 kubectl delete configmap -l 'game-config in (config-4,config-5)'
 ```
 
+Видаліть файл `kustomization.yaml`, який ви створили для генерації ConfigMap:
+
+```bash
+rm kustomization.yaml
+```
+
 Якщо ви створили ntre `configure-pod-container` і вже не потребуєте її, вам слід також її видалити або перемістити в кошик або місце для видалених файлів.
+
+```bash
+rm -rf configure-pod-container
+```
 
 ## {{% heading "whatsnext" %}}
 
-* Ознайомтесь з прикладом [налаштування Redis за допомогою ConfigMap](/uk/docs/tutorials/configuration/configure-redis-using-configmap/).
-* Ознайомтесь з прикладом [оновлення конфігурації через ConfigMap](/uk/docs/tutorials/configuration/updating-configuration-via-a-configmap/).
+* Ознайомтесь з прикладом [налаштування Redis за допомогою ConfigMap](/docs/tutorials/configuration/configure-redis-using-configmap/).
+* Ознайомтесь з прикладом [оновлення конфігурації через ConfigMap](/docs/tutorials/configuration/updating-configuration-via-a-configmap/).
