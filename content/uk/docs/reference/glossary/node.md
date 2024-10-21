@@ -9,6 +9,7 @@ aka:
 - Node
 tags:
 - fundamental
+- core-object
 ---
 
 Вузол — це робоча машина в Kubernetes.

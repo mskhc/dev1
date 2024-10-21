@@ -3,6 +3,8 @@ title: Постійні томи
 api_metadata:
 - apiVersion: "v1"
   kind: "PersistentVolume"
+- apiVersion: "v1"
+  kind: "PersistentVolumeClaim"
 feature:
   title: Оркестрування зберігання
   description: >
@@ -13,7 +15,7 @@ weight: 20
 
 <!-- overview -->
 
-Цей документ описує _постійні томи (persistent volumes)_ в Kubernetes. Рекомендується вже мати уявлення про [томи](/uk/docs/concepts/storage/volumes/), [StorageClasses](/uk/docs/concepts/storage/storage-classes/) та [VolumeAttributesClasses](/uk/docs/concepts/storage/volume-attributes-classes/).
+Цей документ описує _постійні томи (persistent volumes)_ в Kubernetes. Рекомендується вже мати уявлення про [томи](/docs/concepts/storage/volumes/), [StorageClasses](/docs/concepts/storage/storage-classes/) та [VolumeAttributesClasses](/docs/concepts/storage/volume-attributes-classes/).
 
 <!-- body -->
 
@@ -21,13 +23,13 @@ weight: 20
 
 Управління зберіганням — це задача, що є відокремленою від управління обчислювальними ресурсами. Підсистема PersistentVolume надає API для користувачів та адміністраторів, яке абстрагує деталі того, як забезпечується зберігання від того, як воно використовується. Для цього ми вводимо два нових ресурси API: PersistentVolume та PersistentVolumeClaim.
 
-**PersistentVolume** (PV) — це частина системи зберігання в кластері, яка була надана адміністратором або динамічно надана за допомогою [Storage Classes](/uk/docs/concepts/storage/storage-classes/). Це ресурс в кластері, так само як вузол — це ресурс кластера. PV — це втулки томів, так само як Volumes, але вони мають життєвий цикл, незалежний від будь-якого окремого Podʼа, який використовує PV. Цей обʼєкт API охоплює деталі реалізації зберігання, такі як NFS, iSCSI або система зберігання, специфічна для постачальника хмарних послуг.
+**PersistentVolume** (PV) — це частина системи зберігання в кластері, яка була надана адміністратором або динамічно надана за допомогою [Storage Classes](/docs/concepts/storage/storage-classes/). Це ресурс в кластері, так само як вузол — це ресурс кластера. PV — це втулки томів, так само як Volumes, але вони мають життєвий цикл, незалежний від будь-якого окремого Podʼа, який використовує PV. Цей обʼєкт API охоплює деталі реалізації зберігання, такі як NFS, iSCSI або система зберігання, специфічна для постачальника хмарних послуг.
 
 **PersistentVolumeClaim** (PVC) — це запит на зберігання від користувача. Він схожий на Pod. Podʼи використовують ресурси вузла, а PVC використовують ресурси PV. Podʼи можуть запитувати конкретні рівні ресурсів (CPU та памʼять). Claims можуть запитувати конкретний розмір та режими доступу (наприклад, їх можна монтувати в режимі ReadWriteOnce, ReadOnlyMany, ReadWriteMany або ReadWriteOncePod, див. [AccessModes](#access-modes)).
 
 Хоча PersistentVolumeClaims дозволяють користувачам споживати абстрактні ресурси зберігання, часто користувачам потрібні PersistentVolumes з різними властивостями, такими як продуктивність для різних завдань. Адміністратори кластера повинні мати можливість надавати різноманітні PersistentVolumes, які відрізняються не тільки розміром і режимами доступу, але й іншими характеристиками, не розголошуючи користувачам деталей того, як реалізовані ці томи. Для цих потреб існує ресурс **StorageClass**.
 
-Дивіться [докладний огляд із робочими прикладами](/uk/docs/tasks/configure-pod-container/configure-persistent-volume-storage/).
+Дивіться [докладний огляд із робочими прикладами](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/).
 
 ## Життєвий цикл тому та запиту {#lifecycle-of-a-volume-and-claim}
 
@@ -43,9 +45,9 @@ PV (PersistentVolume) — це ресурс в кластері. PVC (Persisten
 
 #### Динамічне {#dynamic}
 
-Коли жоден зі статичних PV, які створив адміністратор, не відповідає PersistentVolumeClaim користувача, кластер може спробувати динамічно надати том спеціально для PVC. Це надання ґрунтується на StorageClasses: PVC повинен запитати [клас зберігання](/uk/docs/concepts/storage/storage-classes/), а адміністратор повинен створити та налаштувати цей клас для динамічного надання. Заявки, які запитують клас `""`, ефективно вимикають динамічне надання для себе.
+Коли жоден зі статичних PV, які створив адміністратор, не відповідає PersistentVolumeClaim користувача, кластер може спробувати динамічно надати том спеціально для PVC. Це надання ґрунтується на StorageClasses: PVC повинен запитати [клас зберігання](/docs/concepts/storage/storage-classes/), а адміністратор повинен створити та налаштувати цей клас для динамічного надання. Заявки, які запитують клас `""`, ефективно вимикають динамічне надання для себе.
 
-Для активації динамічного надання сховища на основі класу зберігання адміністратор кластера повинен увімкнути [контролер допуску](/uk/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass) `DefaultStorageClass` на API-сервері. Це можна зробити, наприклад, забезпечивши, що `DefaultStorageClass` знаходиться серед значень, розділених комами, у впорядкованому списку для прапорця `--enable-admission-plugins` компонента API-сервера. Для отримання додаткової інформації щодо прапорців командного рядка API-сервера перевірте документацію [kube-apiserver](/uk/docs/reference/command-line-tools-reference/kube-apiserver/).
+Для активації динамічного надання сховища на основі класу зберігання адміністратор кластера повинен увімкнути [контролер допуску](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass) `DefaultStorageClass` на API-сервері. Це можна зробити, наприклад, забезпечивши, що `DefaultStorageClass` знаходиться серед значень, розділених комами, у впорядкованому списку для прапорця `--enable-admission-plugins` компонента API-сервера. Для отримання додаткової інформації щодо прапорців командного рядка API-сервера перевірте документацію [kube-apiserver](/docs/reference/command-line-tools-reference/kube-apiserver/).
 
 ### Звʼязування {#binding}
 
@@ -124,7 +126,7 @@ Events:            <none>
 #### Delete
 
 Для втулків томів, які підтримують політику відновлення `Delete`, видалення видаляє як обʼєкт PersistentVolume з Kubernetes, так і повʼязаний актив зовнішньої інфраструктури. Томи, які були динамічно виділені, успадковують [політику пвоторного використання їх StorageClass](#reclaim-policy), яка типово встановлена в `Delete`. Адміністратор повинен налаштувати StorageClass відповідно до очікувань користувачів; в іншому випадку PV повинен бути відредагований або виправлений після створення. Див.
-[Змінення політики повторного використання PersistentVolume](/uk/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
+[Змінення політики повторного використання PersistentVolume](/docs/tasks/administer-cluster/change-pv-reclaim-policy/).
 
 #### Recycle
 
@@ -134,7 +136,7 @@ Events:            <none>
 
 Якщо підтримується відповідний втулок томів, політика повторного використання `Recycle` виконує базове очищення (`rm -rf /thevolume/*`) тому та знову робить його доступним для нової заявки.
 
-Однак адміністратор може налаштувати власний шаблон Podʼа для повторного використання тому за допомогою аргументів командного рядка контролера Kubernetes, як описано в [довідці](/uk/docs/reference/command-line-tools-reference/kube-controller-manager/). Власний шаблон Podʼа повторного використання тому повинен містити специфікацію `volumes`, як показано у прикладі нижче:
+Однак адміністратор може налаштувати власний шаблон Podʼа для повторного використання тому за допомогою аргументів командного рядка контролера Kubernetes, як описано в [довідці](/docs/reference/command-line-tools-reference/kube-controller-manager/). Власний шаблон Podʼа повторного використання тому повинен містити специфікацію `volumes`, як показано у прикладі нижче:
 
 ```yaml
 apiVersion: v1
@@ -233,7 +235,7 @@ Events:                <none>
 
 Вказавши PersistentVolume в PersistentVolumeClaim, ви оголошуєте привʼязку між цим конкретним PV та PVC. Якщо PersistentVolume існує і не зарезервував PersistentVolumeClaim через своє поле `claimRef`, тоді PersistentVolume і PersistentVolumeClaim будуть привʼязані.
 
-Привʼязка відбувається попри деякі критерії відповідності, включаючи спорідненість вузла. Панель управління все ще перевіряє, що [клас сховища](/uk/docs/concepts/storage/storage-classes/), режими доступу та розмір запитаного сховища є дійсними.
+Привʼязка відбувається попри деякі критерії відповідності, включаючи спорідненість вузла. Панель управління все ще перевіряє, що [клас сховища](/docs/concepts/storage/storage-classes/), режими доступу та розмір запитаного сховища є дійсними.
 
 ```yaml
 apiVersion: v1
@@ -344,7 +346,7 @@ FlexVolumes (застарілий починаючи з Kubernetes v1.23) доз
 {{% feature-state for_k8s_version="v1.23" state="alpha" %}}
 
 {{< note >}}
-Можливість відновлення після невдачі розширення PVC користувачами доступна як альфа-функція з Kubernetes 1.23. Функцію `RecoverVolumeExpansionFailure` слід увімкнути для коректної роботи цієї функції. Докладніше дивіться в [документації feature gate](/uk/docs/reference/command-line-tools-reference/feature-gates/).
+Можливість відновлення після невдачі розширення PVC користувачами доступна як альфа-функція з Kubernetes 1.23. Функцію `RecoverVolumeExpansionFailure` слід увімкнути для коректної роботи цієї функції. Докладніше дивіться в [документації feature gate](/docs/reference/command-line-tools-reference/feature-gates/).
 {{< /note >}}
 
 Якщо в вашому кластері увімкнено feature gate `RecoverVolumeExpansionFailure`, і розширення не вдалося для PVC, ви можете повторити спробу розширення з меншим розміром, ніж раніше запитаний. Щоб запросити нову спробу розширення з новим запропонованим розміром, відредагуйте `.spec.resources` для цього PVC і виберіть значення, яке менше за попереднє значення. Це корисно, якщо розширення до більшого значення не вдалося через обмеження місткості. Якщо це трапилося або ви підозрюєте, що це може трапитися, ви можете повторити спробу розширення, вказавши розмір, який знаходиться в межах обмежень місткості базового постачальника сховища. Ви можете слідкувати за станом операції зміни розміру, спостерігаючи за `.status.allocatedResourceStatuses` та подіями на PVC.
@@ -357,37 +359,37 @@ FlexVolumes (застарілий починаючи з Kubernetes v1.23) доз
 
 Типи PersistentVolume реалізовані у вигляді втулків. Kubernetes наразі підтримує наступні втулки:
 
-* [`csi`](/uk/docs/concepts/storage/volumes/#csi) — Інтерфейс зберігання контейнерів (Container Storage Interface, CSI)
-* [`fc`](/uk/docs/concepts/storage/volumes/#fc) — Сховище Fibre Channel (FC)
-* [`hostPath`](/uk/docs/concepts/storage/volumes/#hostpath) — Том HostPath (для тестування на одному вузлі лише; НЕ ПРАЦЮВАТИМЕ в кластері з декількома вузлами; розгляньте використання тому `local` замість цього)
-* [`iscsi`](/uk/docs/concepts/storage/volumes/#iscsi) — Сховище iSCSI (SCSI через IP)
-* [`local`](/uk/docs/concepts/storage/volumes/#local) — Локальні пристрої зберігання, підключені до вузлів.
-* [`nfs`](/uk/docs/concepts/storage/volumes/#nfs) — Сховище в мережевій файловій системі (NFS)
+* [`csi`](/docs/concepts/storage/volumes/#csi) — Інтерфейс зберігання контейнерів (Container Storage Interface, CSI)
+* [`fc`](/docs/concepts/storage/volumes/#fc) — Сховище Fibre Channel (FC)
+* [`hostPath`](/docs/concepts/storage/volumes/#hostpath) — Том HostPath (для тестування на одному вузлі лише; НЕ ПРАЦЮВАТИМЕ в кластері з декількома вузлами; розгляньте використання тому `local` замість цього)
+* [`iscsi`](/docs/concepts/storage/volumes/#iscsi) — Сховище iSCSI (SCSI через IP)
+* [`local`](/docs/concepts/storage/volumes/#local) — Локальні пристрої зберігання, підключені до вузлів.
+* [`nfs`](/docs/concepts/storage/volumes/#nfs) — Сховище в мережевій файловій системі (NFS)
 
 Наступні типи PersistentVolume застарілі, але все ще доступні. Якщо ви використовуєте ці типи томів, окрім `flexVolume`, `cephfs` та `rbd`, будь ласка, встановіть відповідні драйвери CSI.
 
-* [`awsElasticBlockStore`](/uk/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**міграція типово увімкнена** починаючи з v1.23)
-* [`azureDisk`](/uk/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**міграція типово увімкнена** починаючи з v1.23)
-* [`azureFile`](/uk/docs/concepts/storage/volumes/#azurefile) — Azure File (**міграція типово увімкнена** починаючи з v1.24)
-* [`cinder`](/uk/docs/concepts/storage/volumes/#cinder) — Cinder (блочне сховище OpenStack) (**міграція типово увімкнена** починаючи з v1.21)
-* [`flexVolume`](/uk/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** починаючи з версії v1.23, план міграції відсутній, планів припинення підтримки немає)
-* [`gcePersistentDisk`](/uk/docs/concepts/storage/volumes/#gcePersistentDisk) — GCE Persistent Disk (**застаріло** починаючи з v1.23, план міграції відсутній, планів припинення підтримки немає)
-* [`portworxVolume`](/uk/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**міграція типово увімкнена** починаючи з v1.31)
-* [`vsphereVolume`](/uk/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**міграція типово увімкнена** починаючи з v1.25)
+* [`awsElasticBlockStore`](/docs/concepts/storage/volumes/#awselasticblockstore) — AWS Elastic Block Store (EBS) (**міграція типово увімкнена** починаючи з v1.23)
+* [`azureDisk`](/docs/concepts/storage/volumes/#azuredisk) — Azure Disk (**міграція типово увімкнена** починаючи з v1.23)
+* [`azureFile`](/docs/concepts/storage/volumes/#azurefile) — Azure File (**міграція типово увімкнена** починаючи з v1.24)
+* [`cinder`](/docs/concepts/storage/volumes/#cinder) — Cinder (блочне сховище OpenStack) (**міграція типово увімкнена** починаючи з v1.21)
+* [`flexVolume`](/docs/concepts/storage/volumes/#flexvolume) — FlexVolume (**застаріло** починаючи з версії v1.23, план міграції відсутній, планів припинення підтримки немає)
+* [`gcePersistentDisk`](/docs/concepts/storage/volumes/#gcePersistentDisk) — GCE Persistent Disk (**застаріло** починаючи з v1.23, план міграції відсутній, планів припинення підтримки немає)
+* [`portworxVolume`](/docs/concepts/storage/volumes/#portworxvolume) — Том Portworx (**міграція типово увімкнена** починаючи з v1.31)
+* [`vsphereVolume`](/docs/concepts/storage/volumes/#vspherevolume) - vSphere VMDK volume (**міграція типово увімкнена** починаючи з v1.25)
 
 Старші версії Kubernetes також підтримували наступні типи вбудованих PersistentVolume:
 
-* [`cephfs`](/uk/docs/concepts/storage/volumes/#cephfs) (**недоступно** починаючи з версії v1.31)
+* [`cephfs`](/docs/concepts/storage/volumes/#cephfs) (**недоступно** починаючи з версії v1.31)
 * `flocker` — Flocker storage. (**недоступно** починаючи з версії v1.25)
 * `photonPersistentDisk` — Photon controller persistent disk. (**недоступно** починаючи з версії v1.15)
 * `quobyte` — Том Quobyte. (**недоступно** починаючи з версії v1.25)
-* [`rbd`](/uk/docs/concepts/storage/volumes/#rbd) — Rados Block Device (RBD) volume  (**недоступно** починаючи з версії v1.31)
+* [`rbd`](/docs/concepts/storage/volumes/#rbd) — Rados Block Device (RBD) volume  (**недоступно** починаючи з версії v1.31)
 * `scaleIO` — Том ScaleIO. (**недоступно** починаючи з версії v1.21)
 * `storageos` — Том StorageOS. (**недоступно** починаючи з версії v1.25)
 
 ## Persistent Volumes
 
-Кожен PersistentVolume (PV) містить специфікацію та статус, які являють собою характеристики та стан тому. Імʼя обʼєкта PersistentVolume повинно бути дійсним [DNS імʼям субдомену](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Кожен PersistentVolume (PV) містить специфікацію та статус, які являють собою характеристики та стан тому. Імʼя обʼєкта PersistentVolume повинно бути дійсним [DNS імʼям субдомену](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ```yaml
 apiVersion: v1
@@ -471,7 +473,7 @@ Kubernetes використовує режими доступу до тому д
 вказані як ReadWriteOncePod, том обмежений і може бути підключений лише до одного пода.
 {{< /note >}}
 
-> **Важливо!** Том може бути підключений лише одним режимом доступу одночасно, навіть якщо він підтримує багато.  
+> **Важливо!** Том може бути підключений лише одним режимом доступу одночасно, навіть якщо він підтримує багато.
 
 | Тип тому             | ReadWriteOnce          | ReadOnlyMany          | ReadWriteMany | ReadWriteOncePod       |
 | :---                 | :---:                  | :---:                 | :---:         | -                      |
@@ -489,7 +491,7 @@ Kubernetes використовує режими доступу до тому д
 
 ### Class
 
-PV може мати клас, який вказується, встановленням атрибуту `storageClassName` на імʼя [StorageClass](/uk/docs/concepts/storage/storage-classes/). PV певного класу може бути призначений лише до PVC, що запитує цей клас. PV без `storageClassName` не має класу і може бути призначений тільки до PVC, які не запитують жодного конкретного класу.
+PV може мати клас, який вказується, встановленням атрибуту `storageClassName` на імʼя [StorageClass](/docs/concepts/storage/storage-classes/). PV певного класу може бути призначений лише до PVC, що запитує цей клас. PV без `storageClassName` не має класу і може бути призначений тільки до PVC, які не запитують жодного конкретного класу.
 
 У минулому для цього використовувався атрибут `volume.beta.kubernetes.io/storage-class` замість `storageClassName`. Ця анотація все ще працює; однак вона повністю застаріє в майбутньому релізі Kubernetes.
 
@@ -528,10 +530,10 @@ PV може мати клас, який вказується, встановле
 ### Node Affinity
 
 {{< note >}}
-Для більшості типів томів вам не потрібно встановлювати це поле. Вам слід явно встановити його для [локальних](/uk/docs/concepts/storage/volumes/#local) томів.
+Для більшості типів томів вам не потрібно встановлювати це поле. Вам слід явно встановити його для [локальних](/docs/concepts/storage/volumes/#local) томів.
 {{< /note >}}
 
-Постійний том може вказувати властивості спорідненості вузла для визначення обмежень, які обмежують доступ до цього тому з визначених вузлів. Podʼи, які використовують PV, будуть заплановані тільки на ті вузли, які вибрані за допомогою спорідненості вузла. Щоб вказати спорідненість вузла, встановіть `nodeAffinity` в `.spec` PV. Деталі поля можна знайти у референсі API [PersistentVolume](/uk/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec).
+Постійний том може вказувати властивості спорідненості вузла для визначення обмежень, які обмежують доступ до цього тому з визначених вузлів. Podʼи, які використовують PV, будуть заплановані тільки на ті вузли, які вибрані за допомогою спорідненості вузла. Щоб вказати спорідненість вузла, встановіть `nodeAffinity` в `.spec` PV. Деталі поля можна знайти у референсі API [PersistentVolume](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/#PersistentVolumeSpec).
 
 ### Фаза {#phase}
 
@@ -559,7 +561,7 @@ PersistentVolume може перебувати в одній з наступни
 
 ## PersistentVolumeClaims
 
-Кожен PVC містить специфікацію та статус, які визначають вимоги та стан заявок. Імʼя обʼєкта PersistentVolumeClaim повинно бути дійсним [DNS-піддоменом](/uk/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
+Кожен PVC містить специфікацію та статус, які визначають вимоги та стан заявок. Імʼя обʼєкта PersistentVolumeClaim повинно бути дійсним [DNS-піддоменом](/docs/concepts/overview/working-with-objects/names#dns-subdomain-names).
 
 ```yaml
 apiVersion: v1
@@ -595,7 +597,7 @@ spec:
 
 ### Селектор {#selector}
 
-Заявки можуть вказати [селектор міток](/uk/docs/concepts/overview/working-with-objects/labels/#label-selectors), щоб додатково фільтрувати набір томів. До заявки може бути привʼязано лише ті томи, мітки яких відповідають селектору. Селектор може складатися з двох полів:
+Заявки можуть вказати [селектор міток](/docs/concepts/overview/working-with-objects/labels/#label-selectors), щоб додатково фільтрувати набір томів. До заявки може бути привʼязано лише ті томи, мітки яких відповідають селектору. Селектор може складатися з двох полів:
 
 * `matchLabels` — том повинен містити мітку з таким значенням
 * `matchExpressions` — список вимог, які визначаються за допомогою ключа, списку значень та оператора, який повʼязує ключ і значення. Допустимі оператори включають In, NotIn, Exists та DoesNotExist.
@@ -604,9 +606,9 @@ spec:
 
 ### Class
 
-Заявка може вимагати певний клас, вказавши імʼя [StorageClass](/uk/docs/concepts/storage/storage-classes/) за допомогою атрибута `storageClassName`. Тільки Томи з запитаним класом, тобто ті, у яких `storageClassName` збігається з PVC, можуть бути привʼязані до PVC.
+Заявка може вимагати певний клас, вказавши імʼя [StorageClass](/docs/concepts/storage/storage-classes/) за допомогою атрибута `storageClassName`. Тільки Томи з запитаним класом, тобто ті, у яких `storageClassName` збігається з PVC, можуть бути привʼязані до PVC.
 
-PVC не обоʼязково повинен вимагати клас. PVC зі своїм `storageClassName`, встановленим рівним `""`, завжди інтерпретується як PVC, який вимагає PV без класу, тобто він може бути привʼязаний лише до PV без класу (без анотації або з анотацією, встановленою рівною `""`). PVC без `storageClassName` не зовсім те ж саме і відзначається по-іншому кластером, залежно від того, чи включений [втулок доступу `DefaultStorageClass`](/uk/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass).
+PVC не обоʼязково повинен вимагати клас. PVC зі своїм `storageClassName`, встановленим рівним `""`, завжди інтерпретується як PVC, який вимагає PV без класу, тобто він може бути привʼязаний лише до PV без класу (без анотації або з анотацією, встановленою рівною `""`). PVC без `storageClassName` не зовсім те ж саме і відзначається по-іншому кластером, залежно від того, чи включений [втулок доступу `DefaultStorageClass`](/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass).
 
 * Якщо втулок доступу увімкнено, адміністратор може вказати типовий StorageClass. Усі PVC, у яких немає `storageClassName`, можуть бути привʼязані лише до PV з цим типовим StorageClass. Вказання типового StorageClass виконується, встановивши анотацію `storageclass.kubernetes.io/is-default-class` рівною `true` в обʼєкті StorageClass. Якщо адміністратор не вказав типовий StorageClass, кластер відповідає на створення PVC так, ніби втулок доступу був вимкнений. Якщо вказано більше одного типового StorageClass, для привʼязки PVC використовується остання версія типового StorageClass, коли PVC динамічно виділяється.
 * Якщо втулок доступу вимкнено, немає поняття типового StorageClass. Усі PVC, у яких `storageClassName` встановлено рівно `""`, можуть бути привʼязані лише до PV, у яких `storageClassName` також встановлено рівно `""`. Однак PVC з відсутнім `storageClassName` можна буде оновити пізніше, коли стане доступним типовий StorageClass. Якщо PVC оновлюється, він більше не буде привʼязуватися до PV з `storageClassName`, також встановленим рівно `""`.
@@ -663,7 +665,7 @@ spec:
 
 ### PersistentVolumes типу `hostPath` {#persistentvolumes-typed-hostpath}
 
-PersistentVolume типу `hostPath` використовує файл або каталог на вузлі для емуляції мережевого сховища. Див. [приклад тому типу `hostPath`](/uk/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
+PersistentVolume типу `hostPath` використовує файл або каталог на вузлі для емуляції мережевого сховища. Див. [приклад тому типу `hostPath`](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
 
 ## Підтримка блокового тому {#raw-block-volume-support}
 
@@ -766,7 +768,7 @@ spec:
 
 {{< feature-state for_k8s_version="v1.20" state="stable" >}}
 
-Знімки томів підтримують лише зовнішні втулки томів CSI. Докладні відомості див. у [Знімках томів](/uk/docs/concepts/storage/volume-snapshots/). Втулки томів, які входять до складу Kubernetes, є застарілими. Про застарілі
+Знімки томів підтримують лише зовнішні втулки томів CSI. Докладні відомості див. у [Знімках томів](/docs/concepts/storage/volume-snapshots/). Втулки томів, які входять до складу Kubernetes, є застарілими. Про застарілі
 втулки томів можна прочитати в [ЧаПи втулків томів](https://github.com/kubernetes/community/blob/master/sig-storage/volume-plugin-faq.md).
 
 ### Створення PersistentVolumeClaim із знімка тому {#create-persistent-volume-claim-from-volume-snapshot}
@@ -791,7 +793,7 @@ spec:
 
 ## Клонування томів {#volume-cloning}
 
-[Клонування томів](/uk/docs/concepts/storage/volume-pvc-datasource/) доступне лише для втулків томів CSI.
+[Клонування томів](/docs/concepts/storage/volume-pvc-datasource/) доступне лише для втулків томів CSI.
 
 ### Створення PersistentVolumeClaim із існуючого PVC {#create-persistent-volume-claim-from-an-existing-pvc}
 
@@ -816,7 +818,7 @@ spec:
 
 {{< feature-state for_k8s_version="v1.24" state="beta" >}}
 
-Kubernetes підтримує користувацькі заповнювачі томів. Для використання користувацьких заповнювачів томів слід увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` для kube-apiserver та kube-controller-manager.
+Kubernetes підтримує користувацькі заповнювачі томів. Для використання користувацьких заповнювачів томів слід увімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` для kube-apiserver та kube-controller-manager.
 
 Наповнювачі томів використовують поле специфікації PVC, що називається `dataSourceRef`. На відміну від поля `dataSource`, яке може містити тільки посилання на інший PersistentVolumeClaim або на VolumeSnapshot, поле `dataSourceRef` може містити посилання на будь-який обʼєкт у тому ж просторі імен, за винятком основних обʼєктів, окрім PVC. Для кластерів, які мають увімкнутий feature gate, використання `dataSourceRef` бажано перед `dataSource`.
 
@@ -824,7 +826,7 @@ Kubernetes підтримує користувацькі заповнювачі 
 
 {{< feature-state for_k8s_version="v1.26" state="alpha" >}}
 
-Kubernetes підтримує джерела даних томів зі змішаними просторами імен. Для використання джерел даних томів із змішаними просторами імен слід увімкнути [функціональну можливість](/uk/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` та `CrossNamespaceVolumeDataSource` для kube-apiserver та kube-controller-manager. Також вам слід увімкнути `CrossNamespaceVolumeDataSource` для csi-provisioner.
+Kubernetes підтримує джерела даних томів зі змішаними просторами імен. Для використання джерел даних томів із змішаними просторами імен слід увімкнути [функціональну можливість](/docs/reference/command-line-tools-reference/feature-gates/) `AnyVolumeDataSource` та `CrossNamespaceVolumeDataSource` для kube-apiserver та kube-controller-manager. Також вам слід увімкнути `CrossNamespaceVolumeDataSource` для csi-provisioner.
 
 Увімкнення `CrossNamespaceVolumeDataSource` дозволяє вам вказати простір імен у полі `dataSourceRef`.
 
@@ -931,13 +933,13 @@ spec:
 
 ## {{% heading "whatsnext" %}}
 
-* Дізнайтеся більше про [створення PersistentVolume](/uk/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
-* Дізнайтеся більше про [створення PersistentVolumeClaim](/uk/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim).
+* Дізнайтеся більше про [створення PersistentVolume](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume).
+* Дізнайтеся більше про [створення PersistentVolumeClaim](/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolumeclaim).
 * Прочитайте [документ з дизайну постійного сховища](https://git.k8s.io/design-proposals-archive/storage/persistent-storage.md).
 
 ### API references {#reference}
 
 Дізнайтеся більше про описані на цій сторінці API:
 
-* [`PersistentVolume`](/uk/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/)
-* [`PersistentVolumeClaim`](/uk/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/)
+* [`PersistentVolume`](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-v1/)
+* [`PersistentVolumeClaim`](/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/)

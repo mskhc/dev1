@@ -2,13 +2,12 @@
 title: Volume Plugin
 id: volumeplugin
 date: 2018-04-12
-full_link: 
+full_link:
 short_description: >
   Втулок томів дозволяє інтеграцію сховища усередині Podʼа.
 
-aka: 
+aka:
 tags:
-- core-object
 - storage
 ---
 

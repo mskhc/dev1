@@ -6,11 +6,11 @@ full_link:
 short_description: >
   Представлення цілих чисел малих або великих чисел за допомогою суфіксів [SI](https://en.wikipedia.org/wiki/International_System_of_Units).
 
-aka: 
+aka:
 - Quantity
 - Обсяг
 tags:
-- core-object
+- fundamental
 ---
 
 Представлення цілих чисел малих або великих чисел за допомогою суфіксів [SI](https://en.wikipedia.org/wiki/International_System_of_Units).

@@ -9,7 +9,6 @@ short_description: >
 aka:
 - Volume
 tags:
-- core-object
 - fundamental
 ---
 

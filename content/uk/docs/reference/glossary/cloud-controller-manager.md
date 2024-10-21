@@ -5,9 +5,8 @@ date: 2018-04-12
 full_link: /uk/docs/concepts/architecture/cloud-controller/
 short_description: >
   Компонент панелі управління, що інтегрує Kubernetes з хмарними провайдерами.
-aka: 
+aka:
 tags:
-- core-object
 - architecture
 - operation
 ---

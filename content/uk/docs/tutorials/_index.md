@@ -51,6 +51,10 @@ weight: 60
 * [Обмеження доступу контейнера до ресурсів за допомогою AppArmor](/docs/tutorials/security/apparmor/)
 * [Seccomp](/docs/tutorials/security/seccomp/)
 
+## Керування кластером {#cluster-management}
+
+* [Запуск автономного Kublet](/docs/tutorials/cluster-management/kubelet-standalone/)
+
 ## {{% heading "whatsnext" %}}
 
 Якщо ви хочете написати посібник, див. [Типи сторінок](/docs/contribute/style/page-content-types/) для отримання інформації про типи сторінок посібника.

@@ -22,11 +22,11 @@ card:
 
 Зазвичай автори документації не пишуть контент з нуля для випуску. Замість цього вони працюють з SIG, що створює нову функцію, щоб вдосконалити чернетку документації та підготувати її до випуску.
 
-Після того як ви вибрали функцію для документування або допомоги, запитайте про це в каналі Slack `#sig-docs`, на щотижневій зустрічі SIG Docs або безпосередньо в PR, поданому для функції SIG. Якщо вам дозволено, ви можете редагувати PR, використовуючи один з методів, описаних у [внесення змін в PR іншої особи](/uk/docs/contribute/review/for-approvers/#commit-into-another-person-s-pr).
+Після того як ви вибрали функцію для документування або допомоги, запитайте про це в каналі Slack `#sig-docs`, на щотижневій зустрічі SIG Docs або безпосередньо в PR, поданому для функції SIG. Якщо вам дозволено, ви можете редагувати PR, використовуючи один з методів, описаних у [внесення змін в PR іншої особи](/docs/contribute/review/for-approvers/#commit-into-another-person-s-pr).
 
 ### Дізнайтеся про майбутні функції {#find-out-about-upcoming-features}
 
-Щоб дізнатися про майбутні функції, відвідуйте щотижневу зустріч SIG Release (див. сторінку [Спільнота](/uk/community/) для отримання інформації про майбутні зустрічі) і слідкуйте за документацією, що стосується випуску, в репозиторії [kubernetes/sig-release](https://github.com/kubernetes/sig-release/). Кожен випуск має вкладену теку в теці [releases](https://github.com/kubernetes/sig-release/tree/master/releases). У теці міститься розклад випуску, чернетка приміток до випуску та документ, в якому перераховані всі учасники команди випуску.
+Щоб дізнатися про майбутні функції, відвідуйте щотижневу зустріч SIG Release (див. сторінку [Спільнота](/community/) для отримання інформації про майбутні зустрічі) і слідкуйте за документацією, що стосується випуску, в репозиторії [kubernetes/sig-release](https://github.com/kubernetes/sig-release/). Кожен випуск має вкладену теку в теці [releases](https://github.com/kubernetes/sig-release/tree/master/releases). У теці міститься розклад випуску, чернетка приміток до випуску та документ, в якому перераховані всі учасники команди випуску.
 
 Розклад випуску містить посилання на всі інші документи, зустрічі, протоколи зустрічей та етапи, що стосуються випуску. Він також містить інформацію про цілі та графік випуску та будь-які спеціальні процеси для цього випуску. Внизу документа визначено кілька термінів, що стосуються випуску.
 
@@ -55,8 +55,8 @@ card:
 ### Створіть попередній PR {#create-a-placeholder-pr}
 
 1. Створіть pull request **чернетку** на основі гілки `dev-{{< skew nextMinorVersion >}}` в репозиторії `kubernetes/website`, з невеликим комітом, який ви пізніше виправите. Щоб створити pull request чернетку, скористайтеся спадним меню Create Pull Request та виберіть **Create Draft Pull Request**, потім натисніть **Draft Pull Request**.
-2. Відредагуйте опис pull request, щоб включити посилання на [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) PR(и) та тікет(и) [kubernetes/enhancements](https://github.com/kubernetes/enhancements).
-3. Залиште коментар у відповідному [kubernetes/enhancements](https://github.com/kubernetes/enhancements) тікеті з посиланням на PR, щоб сповістити особу з документації, яка управляє цим випуском, що документація функції готується і повинна бути відстежена для випуску.
+1. Відредагуйте опис pull request, щоб включити посилання на [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) PR(и) та тікет(и) [kubernetes/enhancements](https://github.com/kubernetes/enhancements).
+1. Залиште коментар у відповідному [kubernetes/enhancements](https://github.com/kubernetes/enhancements) тікеті з посиланням на PR, щоб сповістити особу з документації, яка управляє цим випуском, що документація функції готується і повинна бути відстежена для випуску.
 
 Якщо ваша функція не потребує жодних змін документації, переконайтеся, що команда sig-release знає про це, зазначивши це в каналі Slack `#sig-release`. Якщо функція потребує документації, але PR не створений, функція може бути видалена з віхи (milestone).
 
@@ -74,7 +74,7 @@ card:
 
 Якщо ваша функція є Alpha або Beta функцією і залежить від (уві)вимкнення функціональних можливостей, вам потрібен файл функціональних можливостей для неї в `content/en/docs/reference/command-line-tools-reference/feature-gates/`. Назва файлу має бути назвою функціональних можливостей, перетвореним з `UpperCamelCase` в `kebab-case`, с розширенням `.md`. Ви можете подивитися інші файли, що вже знаходяться в цій теці, щоб отримати підказку про те, як повинен виглядати ваш файл. Зазвичай одного абзацу достатньо; для довших пояснень додайте документацію в інше місце і посилайтеся на неї.
 
-Також, щоб забезпечити, що ваші функціональні можливості зʼявляться в таблиці [Функціональні можливості Alpha/Beta](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features), включіть наступні деталі у [front matter](https://gohugo.io/content-management/front-matter/) вашого файлу Markdown:
+Також, щоб забезпечити, що ваші функціональні можливості зʼявляться в таблиці [Функціональні можливості Alpha/Beta](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features), включіть наступні деталі у [front matter](https://gohugo.io/content-management/front-matter/) вашого файлу Markdown:
 
 ```yaml
 stages:
@@ -84,13 +84,13 @@ stages:
     toVersion: <Version>              # (Необов'язково) Версія до якої функціональна можливість доступна
 ```
 
-З новими функціональними можливостями також необхідний окремий опис функціональної можливості; створіть новий Markdown файл в `content/en/docs/reference/command-line-tools-reference/feature-gates/` (використовуйте інші файли як шаблон).
+Для нових функціональних можливостей також необхідний їх окремий опис; створіть новий Markdown файл в `content/en/docs/reference/command-line-tools-reference/feature-gates/` (використовуйте інші файли як шаблон).
 
 Коли ви змінюєте функціональну можливість зі стану стандартно вимкнено на стандартно увімкнено, вам також може знадобитися змінити іншу документацію (не лише список функціональних можливостей). Звертайте увагу на такі формулювання, як "Поле `exampleSetting` є полем beta і є стандартно вимкненим. Ви можете увімкнути його, увімкнувши функціональну можливість `ProcessExampleThings`."
 
-Якщо ваша функція GA'ed або знята з підтримки (deprecated), додайте додатковий запис `stage` у блок `stages` в файлі опису. Переконайтеся, що етапи Alpha та Beta залишаються незмінними. Цей крок переводить функціональну можливість з [Функціональних можливостей для Alpha/Feature](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) таблиці до таблиці [Функціональних можливостей для стабільних або застарілих функцій](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features). Наприклад:
+Якщо ваша функція GA'ed або знята з підтримки (deprecated), додайте додатковий запис `stage` у блок `stages` в файлі опису. Переконайтеся, що етапи Alpha та Beta залишаються незмінними. Цей крок переводить функціональну можливість з [Функціональних можливостей для Alpha/Beta](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-alpha-or-beta-features) таблиці до таблиці [Функціональних можливостей для стабільних або застарілих функцій](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features). Наприклад:
 
-{{< highlight yaml "linenos=false,hl_lines=10-15" >}}
+{{< highlight yaml "linenos=false,hl_lines=10-17" >}}
 stages:
   - stage: alpha
     defaultValue: false
@@ -99,6 +99,7 @@ stages:
   - stage: beta
     defaultValue: true
     fromVersion: "1.13"
+  # Додано `toVersion` до попереднього стану.
     toVersion: "1.18"
   # Додано блок 'stable' для поточного стану.
   - stage: stable
@@ -107,7 +108,7 @@ stages:
     toVersion: "1.27"
 {{< / highlight >}}
 
-Зрештою, Kubernetes взагалі перестане включати функціональну можливість. Щоб вказати на видалення функціональної можливості, включіть `removed: true` у front matter відповідного файлу опису. Ця дія викликає перехід функціональної можливості з розділу [Функціональні можливості для стабільних або застарілих функцій](/uk/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features) до окремої сторінки з назвою [Функціональні можливості (вилучені)](/uk/docs/reference/command-line-tools-reference/feature-gates-removed/), включаючи його опис.
+Зрештою, Kubernetes взагалі перестане включати функціональну можливість. Щоб вказати на видалення функціональної можливості, включіть `removed: true` у front matter відповідного файлу опису. Ця дія викликає перехід функціональної можливості з розділу [Функціональні можливості для стабільних або застарілих функцій](/docs/reference/command-line-tools-reference/feature-gates/#feature-gates-for-graduated-or-deprecated-features) до окремої сторінки з назвою [Функціональні можливості (вилучені)](/docs/reference/command-line-tools-reference/feature-gates-removed/), включаючи його опис.
 
 ### Усі PR рецензовані та готові до злиття {#all-prs-reviewed-and-ready-to-merge}
 

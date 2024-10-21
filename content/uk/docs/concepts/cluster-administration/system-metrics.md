@@ -118,7 +118,7 @@ cloudprovider_gce_api_request_duration_seconds { request = "list_disk"}
 
 Планувальник надає опціональні метрики, які повідомляють про запитані ресурси та бажані обмеження всіх запущених Podʼів. Ці метрики можна використовувати для побудови панелей управління ресурсами, оцінки поточних або історичних обмежень планування, швидкого виявлення навантажень, які не можуть бути розміщені через відсутність ресурсів, і порівняння фактичного використання з запитом Podʼа.
 
-kube-scheduler ідентифікує ресурсні [запити та обмеження](/uk/docs/concepts/configuration/manage-resources-containers/) для кожного Podʼа; коли запит або обмеження не дорівнює нулю, kube-scheduler повідомляє про метричні часові ряди. Часові ряди мають мітки:
+kube-scheduler ідентифікує ресурсні [запити та обмеження](/docs/concepts/configuration/manage-resources-containers/) для кожного Podʼа; коли запит або обмеження не дорівнює нулю, kube-scheduler повідомляє про метричні часові ряди. Часові ряди мають мітки:
 
 * простір імен
 * імʼя Podʼа
@@ -138,28 +138,27 @@ kube-scheduler ідентифікує ресурсні [запити та обм
 
 ## Забезпечення послідовності метрик {#metric-cardinality-enforcement}
 
-Метрики з нескінченними розмірами можуть викликати проблеми з памʼяттю в компонентах, які їх інструментують. Щоб обмежити використання ресурсів, ви можете використовувати опцію командного рядка `--allow-label-value`, щоб динамічно налаштувати список дозволених значень міток для метрики.
+Метрики з нескінченними розмірами можуть викликати проблеми з памʼяттю в компонентах, які їх інструментують. Щоб обмежити використання ресурсів, ви можете використовувати опцію командного рядка `--allow-metric-labels`, щоб динамічно налаштувати список дозволених значень міток для метрики.
 
 На стадії альфа, цей прапорець може приймати лише серію зіставлень як список дозволених міток метрики. Кожне зіставлення має формат `<metric_name>,<label_name>=<allowed_labels>`, де `<allowed_labels>` — це розділені комами допустимі назви міток.
 
 Загальний формат виглядає так:
 
 ```none
---allow-label-value <metric_name>,<label_name>='<allow_value1>, <allow_value2>...', <metric_name2>,<label_name>='<allow_value1>, <allow_value2>...', ...
+--allow-metric-labels <metric_name>,<label_name>='<allow_value1>, <allow_value2>...', <metric_name2>,<label_name>='<allow_value1>, <allow_value2>...', ...
 ```
 
 Ось приклад:
 
 ```none
---allow-label-value number_count_metric,odd_number='1,3,5', number_count_metric,even_number='2,4,6', date_gauge_metric,weekend='Saturday,Sunday'
+--allow-metric-labels number_count_metric,odd_number='1,3,5', number_count_metric,even_number='2,4,6', date_gauge_metric,weekend='Saturday,Sunday'
 ```
 
 Крім того, що це можна вказати з командного рядка, теж саме можна зробити за допомогою конфігураційного файлу. Ви можете вказати шлях до цього файлу конфігурації, використовуючи аргумент командного рядка `--allow-metric-labels-manifest` для компонента. Ось приклад вмісту цього конфігураційного файлу:
 
 ```yaml
-allow-list:
-- "metric1,label2": "v1,v2,v3"
-- "metric2,label1": "v1,v2,v3"
+"metric1,label2": "v1,v2,v3"
+"metric2,label1": "v1,v2,v3"
 ```
 
 Додатково, метрика `cardinality_enforcement_unexpected_categorizations_total` записує кількість неочікуваних категоризацій під час вказання послідовності, тобто кожного разу, коли значення мітки зустрічається, що не дозволяється з урахуванням обмежень списку дозволених значень.
@@ -168,4 +167,4 @@ allow-list:
 
 * Дізнайтеся про [текстовий формат Prometheus](https://github.com/prometheus/docs/blob/master/content/docs/instrumenting/exposition_formats.md#text-based-format) для метрик
 * Перегляньте список [стабільних метрик Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/test/instrumentation/testdata/stable-metrics-list.yaml)
-* Прочитайте про [політику застаріння Kubernetes](/uk/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)
+* Прочитайте про [політику застаріння Kubernetes](/docs/reference/using-api/deprecation-policy/#deprecating-a-feature-or-behavior)

@@ -1,7 +1,7 @@
 ---
 title: Запуск кількох екземплярів вашого застосунку
 weight: 10
-description: |- 
+description: |-
     Масштабування застосунку вручну за допомогою kubectl.
 ---
 
@@ -12,11 +12,11 @@ description: |-
 <body>
 
     <div class="layout" id="top">
-    
+
         <main class="content">
-    
+
             <div class="row">
-    
+
          <div class="col-md-8">
               <h3>Мета</h3>
                     <ul>
@@ -24,10 +24,10 @@ description: |-
                     </ul>
 
            <h3>Масштабування Застосунку</h3>
-    
+
                 <p>Раніше ми створили <a href="/uk/docs/concepts/workloads/controllers/deployment/">Deployment</a>, а потім робили його загальнодоступним за допомогою <a href="/uk/docs/concepts/services-networking/service/">Service</a>. Deployment створив лише один Pod для запуску нашого pfcnjceyre. Зі збільшенням трафіку, нам потрібно масштабувати застосунок, щоб відповідати зростаючим вимогам користувачів.</p>
                 <p>Якщо ви ще не працювали над попередніми розділами, почніть з <a href="/uk/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/">Використання minikube для створення кластера</a>.</p>
-    
+
                 <p><em>Масштабування</em> досягається зміною кількості реплік в Deployment.</p>
                 </br>
                 </div>
@@ -53,13 +53,13 @@ description: |-
                 {{< /note >}}
               </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-md-8">
                     <h2 style="color: #3771e3;">Огляд масштабування</h2>
                 </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-8">
@@ -72,32 +72,32 @@ description: |-
                             <div class="item carousel-item active">
                               <img src="/docs/tutorials/kubernetes-basics/public/images/module_05_scaling1.svg">
                             </div>
-    
+
                             <div class="item carousel-item">
                               <img src="/docs/tutorials/kubernetes-basics/public/images/module_05_scaling2.svg">
                             </div>
                           </div>
-    
+
                           <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                             <span class="sr-only ">Попередня</span>
                           </a>
                           <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
                             <span class="sr-only">Наступна</span>
                           </a>
-    
+
                         </div>
                 </div>
             </div>
-    
+
             <br>
-    
+
             <div class="row">
                 <div class="col-md-8">
-    
+
                     <p>Масштабування Deployment гарантує створення нових Podʼів і їх призначення на Вузли з вільними ресурсами. Масштабування збільшить кількість Podʼів до нового бажаного стану. Kubernetes також підтримує <a href="/uk/docs/tasks/run-application/horizontal-pod-autoscale/">автоматичне масштабування</a> Podʼів, але це виходить за рамки цього посібника. Також можливе масштабування до нуля, і це призведе до завершення всіх Podʼів вказаного Deployment.</p>
-    
+
                     <p>Запуск кількох екземплярів застосунку вимагає засобів для розподілу трафіку між ними. У Service є вбудований балансер навантаження, який розподілить мережевий трафік на всі Podʼи, що виставлені Deployment. Service будуть постійно відстежувати робочі Podʼи, використовуючи точки доступу, щоб гарантувати, що трафік направляється лише на доступні Podʼи.</p>
-    
+
                 </div>
                 <div class="col-md-4">
                     <div class="content__box content__box_fill">
@@ -105,15 +105,15 @@ description: |-
                     </div>
                 </div>
             </div>
-    
+
             <br>
-    
+
             <div class="row">
                 <div class="col-md-8">
                     <p> Якщо у вас є кілька екземплярів застосунку, ви зможете робити оновлення без перерв. Ми розглянемо це в наступному розділі посібника. Тепер перейдемо до термінала та масштабуємо наш застосунок.</p>
                 </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-md-12">
                    <h3>Масштабування Deployment</h3>
@@ -151,7 +151,7 @@ description: |-
                    <p>Ви також можете побачити, що у виводі цієї команди тепер є 4 репліки.</p>
                 </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-md-12">
                    <h3>Балансування навантаження</h3>
@@ -163,6 +163,14 @@ description: |-
                    <p>Далі ми запустимо <code>curl</code> з зовнішньою IP-адресою та портом. Виконайте команду кілька разів:</p>
                    <p><code><b>curl http://"$(minikube ip):$NODE_PORT"</b></b></b></code></p>
                    <p>Ми потрапляємо на різні Podʼи при кожному запиті. Це демонструє, що балансування навантаження працює.</p>
+                   <p>Вивід має бути схожим на:</p>
+                     <pre>
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-wp67j | v=1
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-hs9dj | v=1
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-4hjvf | v=1
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-wp67j | v=1
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-4hjvf | v=1
+                     </pre>
                    {{< note >}}<p>Якщо ви використовуєте minikube з Docker Desktop як драйвер контейнера, потрібен тунель minikube. Це через те, що контейнери всередині Docker Desktop ізольовані від вашого компʼютера-хосту.<br>
                     <p>В окремому вікні термінала виконайте:<br>
                       <code><b>minikube service kubernetes-bootcamp --url</b></code></p>
@@ -173,7 +181,7 @@ description: |-
                    {{< /note >}}
                 </div>
             </div>
-    
+
             <div class="row">
                 <div class="col-md-12">
                    <h3>Зменшення розгортання</h3>
@@ -186,17 +194,17 @@ description: |-
                    <p>Це підтверджує, що роботу двох Podʼів було завершено.</p>
                 </div>
             </div>
-    
+
           <div class="row">
               <p>
                 Якщо ви готові, переходьте до <a href="/uk/docs/tutorials/kubernetes-basics/update/update-intro/" title="Виконання поступового оновлення">Виконання поступового оновлення</a>.
               </p>
           </div>
-    
+
         </main>
-    
+
     </div>
-    
+
 </body>
-    
+
 </html>

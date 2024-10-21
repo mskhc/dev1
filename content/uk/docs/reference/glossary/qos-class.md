@@ -6,10 +6,9 @@ full_link: /uk/docs/concepts/workloads/pods/pod-qos/
 short_description: >
   Клас обслуговування QoS (Quality of Service Class) надає можливість Kubernetes класифікувати Podʼи в кластері в декілька класів і приймати рішення щодо їх планування та видалення.
 
-aka: 
+aka:
 - QoS Class
 tags:
-- core-object
 - fundamental
 - architecture
 related:

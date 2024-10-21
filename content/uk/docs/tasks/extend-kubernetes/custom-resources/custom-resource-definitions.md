@@ -5,7 +5,7 @@ min-kubernetes-server-version: 1.16
 weight: 20
 ---
 
-<!-- огляд -->
+<!-- overview -->
 Ця сторінка показує, як встановити [власний ресурс](/docs/concepts/extend-kubernetes/api-extension/custom-resources/) у API Kubernetes, створивши [CustomResourceDefinition](/docs/reference/generated/kubernetes-api/{{< param "version" >}}/#customresourcedefinition-v1-apiextensions-k8s-io).
 
 ## {{% heading "prerequisites" %}}
@@ -512,7 +512,7 @@ metadata:
 
 ### Валідація {#validation}
 
-Власні ресурси перевіряються за допомогою [схем OpenAPI v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject), за допомогою x-kubernetes-validations, коли функція [Правил валідації](#validation-rules) ввімкнена, і ви можете додати додаткову валідацію за допомогою [вебхуків допуску](/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook).
+Власні ресурси перевіряються за допомогою [схем OpenAPI v3.0](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/3.0.0.md#schema-object), за допомогою x-kubernetes-validations, коли функція [Правил валідації](#validation-rules) ввімкнена, і ви можете додати додаткову валідацію за допомогою [вебхуків допуску](/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook).
 
 Крім того, до схеми застосовуються такі обмеження:
 
@@ -665,7 +665,7 @@ crontab "my-new-cron-object" created
   Перехідні правила ніколи не обмежуються: лише помилки, які виникають через правила, які не використовують `oldSelf`, автоматично обмежуються, якщо їх значення не змінені.
 
   Щоб написати власну логіку обмеження для виразів CEL, перегляньте [optionalOldSelf](#field-optional-oldself).
-* `x-kubernetes-list-type` Помилки, що виникають через зміну типу списку у підсхемі, не будуть 
+* `x-kubernetes-list-type` Помилки, що виникають через зміну типу списку у підсхемі, не будуть
   обмежені. Наприклад, додавання `set` до списку з дублікатів завжди призведе до помилки.
 * `x-kubernetes-map-keys` Помилки, що виникають через зміну ключів карти у схемі списку, не будуть  обмежені.
 * `required` Помилки, що виникають через зміну списку обовʼязкових полів, не будуть обмежені.
