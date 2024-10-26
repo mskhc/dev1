@@ -6,16 +6,19 @@ _build:
   render: false
 
 stages:
-  - stage: alpha 
+  - stage: alpha
     defaultValue: false
     fromVersion: "1.23"
     toVersion: "1.23"
   - stage: beta
     defaultValue: true
-    fromVersion: "1.24"  
-    toVersion: "1.28" 
+    fromVersion: "1.24"
+    toVersion: "1.28"
   - stage: stable
     defaultValue: true
-    fromVersion: "1.29"  
+    fromVersion: "1.29"
+    toVersion: "1.30"
+
+removed: true
 ---
-Дозволяє відстежувати кількість Podʼів, які мають [стан](/uk/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) `Ready`. Кількість `Ready` Podʼів записується у [status](/uk/docs/reference/kubernetes-api/workload-resources/job-v1/#JobStatus) [Job](/uk/docs/concepts/workloads/controllers/job).
+Дозволяє відстежувати кількість Podʼів, які мають [стан](/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions) `Ready`. Кількість `Ready` Podʼів записується у [status](/docs/reference/kubernetes-api/workload-resources/job-v1/#JobStatus) [Job](/docs/concepts/workloads/controllers/job).

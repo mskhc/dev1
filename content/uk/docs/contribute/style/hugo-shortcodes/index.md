@@ -333,6 +333,29 @@ It can even contain shortcodes.
 
 перед елементом або відразу після заголовка для конкретного елемента.
 
+## Деталі {#details}
+
+Ви можете відобразити HTML елемент `<details>` за допомогою шорткоду:
+
+```markdown
+{{</* details summary="Детальніше про віджети" */>}}
+API розширення frobnicator реалізує _віджети_ із використанням тексту прикладу.
+
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+{{</* /details */>}}
+```
+
+Це буде показано так:
+{{< details summary="Детальніше про віджети" >}}
+API розширення frobnicator реалізує _віджети_ із використанням тексту прикладу.
+
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+{{< /details >}}
+
+{{< note >}}
+Використовуйте цей шорткод помірно; зазвичай краще, коли весь текст показується читачам безпосередньо.
+{{< /note >}}
+
 ## Рядки версій {#version-strings}
 
 Щоб створити рядок версії для включення в документацію, ви можете вибрати з кількох shortcode для версії. Кожен код версії відображає рядок версії, отриманий зі значення параметра версії, знайденого у файлі конфігурації сайту, `hugo.toml`. Два найбільш часто використовуваних параметри версії — це `latest` і `version`.

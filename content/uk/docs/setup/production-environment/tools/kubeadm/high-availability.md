@@ -11,11 +11,11 @@ weight: 60
 - Зі стековими вузлами панелі управління. Цей підхід вимагає менше інфраструктури. Члени etcd та вузли панелі управління розташовані разом.
 - Зовнішній кластер etcd. Цей підхід вимагає більше інфраструктури. Вузли панелі управління та члени etcd розділені.
 
-Перед тим як продовжити, вам слід ретельно розглянути, який підхід найкраще відповідає потребам ваших застосунків та оточенню. [Варіанти топології високої доступності](/uk/docs/setup/production-environment/tools/kubeadm/ha-topology/) наводять переваги та недоліки кожного з них.
+Перед тим як продовжити, вам слід ретельно розглянути, який підхід найкраще відповідає потребам ваших застосунків та оточенню. [Варіанти топології високої доступності](/docs/setup/production-environment/tools/kubeadm/ha-topology/) наводять переваги та недоліки кожного з них.
 
 У випадку виникнення проблем з налаштуванням HA-кластера, будь ласка, повідомте про це в системі [відстеження проблем kubeadm](https://github.com/kubernetes/kubeadm/issues/new).
 
-Також дивіться [документацію з оновлення](/uk/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
+Також дивіться [документацію з оновлення](/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/).
 
 {{< caution >}}
 Ця сторінка не стосується запуску вашого кластера на платформі хмарного провайдера. У хмарному середовищі жоден із документованих тут підходів не працює з обʼєктами служб типу LoadBalancer або з динамічними PersistentVolumes.
@@ -34,9 +34,9 @@ weight: 60
 
 Вам потрібно:
 
-- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для вузлів панелі управління. Наявність непарної кількості вузлів панелі управління може бути корисною при виборі лідера в разі відмови машини чи зони,
+- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для вузлів панелі управління. Наявність непарної кількості вузлів панелі управління може бути корисною при виборі лідера в разі відмови машини чи зони,
   - включаючи {{< glossary_tooltip text="середовище виконання контейнерів" term_id="container-runtime" >}}, яке вже налаштоване та працює.
-- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для робочих вузлів,
+- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для робочих вузлів,
   - включаючи середовище виконання контейнерів, яке вже налаштоване та працює.
 - Повноцінне мережеве зʼєднання між усіма машинами в кластері (публічна чи
   приватна мережа).
@@ -45,7 +45,7 @@ weight: 60
 - SSH-доступ з одного пристрою до всіх вузлів системи.
 - `kubeadm` та `kubelet` вже встановлені на всіх машинах.
 
-_Дивіться [Топологія стекового etcd](/uk/docs/setup/production-environment/tools/kubeadm/ha-topology/#stacked-etcd-topology) для контексту._
+_Дивіться [Топологія стекового etcd](/docs/setup/production-environment/tools/kubeadm/ha-topology/#stacked-etcd-topology) для контексту._
 
 {{% /tab %}}
 {{% tab name="Зовнішній etcd" %}}
@@ -55,9 +55,9 @@ _Дивіться [Топологія стекового etcd](/uk/docs/setup/pr
 -->
 Вам потрібно:
 
-- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для вузлів панелі управління. Наявність непарної кількості вузлів панелі управління може бути корисною при виборі лідера в разі відмови машини чи зони,
+- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для вузлів панелі управління. Наявність непарної кількості вузлів панелі управління може бути корисною при виборі лідера в разі відмови машини чи зони,
   - включаючи робоче {{< glossary_tooltip text="середовище виконання контейнерів" term_id="container-runtime" >}}, яке вже налаштоване та працює
-- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/uk/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для робочих вузлів,
+- Три або більше машин, які відповідають [мінімальним вимогам kubeadm](/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#before-you-begin) для робочих вузлів,
   - включаючи середовище виконання контейнерів контейнера, яке вже налаштоване та працює.
 - Повноцінне мережеве зʼєднання між усіма машинами в кластері (публічна чи
   приватна мережа).
@@ -74,7 +74,7 @@ _Дивіться [Топологія стекового etcd](/uk/docs/setup/pr
   - Ці машини також повинні мати встановлені `kubeadm` та `kubelet`.
   - На цих машинах також потрібно мати середовище виконання контейнерів, яке вже налаштоване та працює.
 
-_Дивіться [Топологія зовнішнього etcd](/uk/docs/setup/production-environment/tools/kubeadm/ha-topology/#external-etcd-topology) для контексту._
+_Дивіться [Топологія зовнішнього etcd](/docs/setup/production-environment/tools/kubeadm/ha-topology/#external-etcd-topology) для контексту._
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -85,7 +85,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
 ### Інтерфейс командного рядка {#kubectl}
 
 Для управління Kubernetes після налаштування кластера, вам слід
-[встановити kubectl](/uk/docs/tasks/tools/#kubectl) на вашому компʼютері. Також корисно
+[встановити kubectl](/docs/tasks/tools/#kubectl) на вашому компʼютері. Також корисно
 встановити інструмент `kubectl` на кожному вузлі панелі управління, оскільки це може бути корисним для усунення несправностей.
 
 <!-- steps -->
@@ -137,11 +137,11 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
    - Прапорець `--upload-certs` використовується для завантаження сертифікатів, які слід використовувати на всіх екземплярах панелі управління. Якщо натомість ви віддаєте перевагу копіюванню сертифікатів між вузлами панелі управління вручну або за допомогою засобів автоматизації, видаліть цей прапорець та зверніться до розділу [Розподіл сертифікатів вручну](#manual-certs) нижче.
 
    {{< note >}}
-   Прапорці `kubeadm init` `--config` та `--certificate-key` не можна змішувати, тому якщо ви хочете використовувати [конфігурацію kubeadm](/uk/docs/reference/config-api/kubeadm-config.v1beta4/) вам слід додати поле `certificateKey` у відповідні місця конфігурації (під `InitConfiguration` та `JoinConfiguration: controlPlane`).
+   Прапорці `kubeadm init` `--config` та `--certificate-key` не можна змішувати, тому якщо ви хочете використовувати [конфігурацію kubeadm](/docs/reference/config-api/kubeadm-config.v1beta4/) вам слід додати поле `certificateKey` у відповідні місця конфігурації (під `InitConfiguration` та `JoinConfiguration: controlPlane`).
    {{< /note >}}
 
    {{< note >}}
-   Деякі мережеві втулки CNI вимагають додаткової конфігурації, наприклад вказівки IP для Podʼа в форматі CIDR, тоді як інші — ні. Див. [документацію мережі CNI](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network). Щоб додати CIDR Podʼу, скористайтесь прапорцем `--pod-network-cidr`, або якщо ви використовуєте файл конфігурації kubeadm встановіть поле `podSubnet` в обʼєкті `networking` конфігурації `ClusterConfiguration`.
+   Деякі мережеві втулки CNI вимагають додаткової конфігурації, наприклад вказівки IP для Podʼа в форматі CIDR, тоді як інші — ні. Див. [документацію мережі CNI](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network). Щоб додати CIDR Podʼу, скористайтесь прапорцем `--pod-network-cidr`, або якщо ви використовуєте файл конфігурації kubeadm встановіть поле `podSubnet` в обʼєкті `networking` конфігурації `ClusterConfiguration`.
    {{< /note >}}
 
    Вивід виглядатиме десь так:
@@ -182,7 +182,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
    Як зазначено у виводі команди, ключ сертифіката надає доступ до чутливих даних кластера, тримайте його в таємниці!
    {{< /caution >}}
 
-2. Застосуйте обраний вами мережеву втулок CNI: [Дотримуйтеся цих інструкцій](/uk/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network) для встановлення постачальника CNI. Переконайтеся, що конфігурація відповідає CIDR IP для Podʼа, вказаному в файлі конфігурації kubeadm (якщо застосовується).
+2. Застосуйте обраний вами мережеву втулок CNI: [Дотримуйтеся цих інструкцій](/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network) для встановлення постачальника CNI. Переконайтеся, що конфігурація відповідає CIDR IP для Podʼа, вказаному в файлі конфігурації kubeadm (якщо застосовується).
 
    {{< note >}}
    Вам слід вибрати мережевий втулок, який відповідає вашому випадку використання та встановити його, перш ніж перейти до наступного кроку. Якщо ви цього не зробите, вам не вдасться належним чином запустити свій кластер.
@@ -215,7 +215,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
 
 ### Налаштуйте кластер etcd {#setup-the-etcd-cluster}
 
-1. Слідуйте цим [інструкціям](/uk/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/) для налаштування кластера etcd.
+1. Слідуйте цим [інструкціям](/docs/setup/production-environment/tools/kubeadm/setup-ha-etcd-with-kubeadm/) для налаштування кластера etcd.
 
 1. Налаштуйте SSH, як описано [тут](#manual-certs).
 
@@ -230,7 +230,7 @@ _Дивіться [Топологія зовнішнього etcd](/uk/docs/setu
 
    - Замініть значення `CONTROL_PLANE` на `user@host` першого вузла панелі управління.
 
-### Налаштуйте перший вузол панелі управління {#setup-the-first-control-plane-node} 
+### Налаштуйте перший вузол панелі управління {#setup-the-first-control-plane-node}
 
 1. Створіть файл із назвою `kubeadm-config.yaml` із наступним змістом:
 

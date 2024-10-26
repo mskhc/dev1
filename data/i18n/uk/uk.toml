@@ -173,6 +173,9 @@ other = "Подивіться:"
 [examples_heading]
 other = "Приклади"
 
+[feature_gate_enabled]
+other = "(стандартно увімкнено: {{ .enabled }})"
+
 [feature_gate_stage_alpha]
 other = "Alpha"
 
@@ -537,10 +540,13 @@ other = ")"
 other = "(випущено: "
 
 # See https://gohugo.io/functions/format/#gos-layout-string
-# Use a suitable format for your locale
+# Use a suitable format for your locale. Avoid using :date_short
 [release_date_format]
+# example: other = ":date_medium"
 other = "2006-01-02"
 
+# See https://gohugo.io/functions/format/#gos-layout-string
+# Use a suitable format for your locale.
 [release_date_format_month]
 other = "January 2006"
 
@@ -549,6 +555,18 @@ other = "Строк Cherry Pick"
 
 [release_end_of_life_date]
 other = "Завершення життєвого циклу"
+
+# Also see release_maintenance_and_end_of_life_details_past
+[release_maintenance_and_end_of_life_details_current]
+other = "Kubernetes {{ .minor_version }} переходить у режим підтримки з {{ .maintenance_mode_start_date }}; дата закінчення життєвого циклу Kubernetes {{ .minor_version }} — {{ .release_eol_date }}."
+
+# Used if the maintenance mode date is in the past, otherwise
+# see release_maintenance_and_end_of_life_details_current
+[release_maintenance_and_end_of_life_details_past]
+other = """ℹ️ **Kubernetes {{ .minor_version }} переходить у режим підтримки з {{ .maintenance_mode_start_date }}**.
+
+Дата закінчення життєвого циклу Kubernetes {{ .minor_version }} — {{ .release_eol_date }}."""
+
 
 [release_full_details_initial_text]
 other = "Повний"
@@ -562,16 +580,12 @@ other = "Мінорна версія"
 [release_info_next_patch]
 other = "Наступний патч **%s**."
 
-# Localization note: You can use Markdown here.
-# The three placeholders (in order) are:
-#   Kubernetes minor version
-#   maintenance mode date
-#   end of life date
-#
-# Keep this order. It is OK to use more than one sentence, and it's also OK to change the
-# tense of the text so long as the meaning is clear.
+# Deprecated. Set release_maintenance_and_end_of_life_details_current
+# and release_maintenance_and_end_of_life_details_past instead.
+# OK to remove once all localizations have switched to the new strings.
 [release_info_eol]
-other = "**%s** переходить в режим технічного обслуговування **%s**, кінець життєвого циклу — **%s**."
+# Set this to "" if your localization implements the new strings.
+other = ""
 
 [release_note]
 other = "Примітка"
