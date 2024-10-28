@@ -6,7 +6,7 @@ noedit: true
 cid: docsHome
 layout: docsportal_home
 class: gridPage gridPageHome
-linkTitle: "Документація"
+linkTitle: Документація
 main_menu: true
 weight: 10
 hide_feedback: true
@@ -55,6 +55,10 @@ cards:
   button: "Навчання"
   button_path: "/training"
 - name: download
+  title: Отримання Kubernetes
+  description: Встановіть чи оновіть Kubernetes до останньої версії.
+  button: Завантажити
+  button_path: /releases/download
   title: Отримання Kubernetes
   description: Встановіть чи оновіть Kubernetes до останньої версії.
   button: Завантажити
