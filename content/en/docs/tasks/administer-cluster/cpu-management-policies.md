@@ -320,7 +320,7 @@ can help in reducing inter-core communication overhead, potentially providing
 better performance under high load conditions.
 
 If the `prefer-align-cpus-by-uncorecache` policy is specified, the static policy
-that groups CPU resources by uncore cache where possible. The feature changes the cpu
+will group CPU resources by uncore cache where possible. The feature changes the CPU
 assignment algorithm to add sorting by uncore cache and then taking cpus aligned to the
 same uncore cache, where possible. In cases where numbers of cpu requested exceeds 
 number of cpus grouped in the same uncore cache, the algorithm attempts best-effort
