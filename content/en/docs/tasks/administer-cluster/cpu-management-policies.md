@@ -268,6 +268,7 @@ The following policy options exist for the static `CPUManager` policy:
 * `distribute-cpus-across-numa` (alpha, hidden by default) (1.23 or higher)
 * `align-by-socket` (alpha, hidden by default) (1.25 or higher)
 * `distribute-cpus-across-cores` (alpha, hidden by default) (1.31 or higher)
+* `prefer-align-cpus-by-uncorecache` (alpha, hidden by default) (1.32 or higher)
 
 If the `full-pcpus-only` policy option is specified, the static policy will always allocate full physical cores.
 By default, without this option, the static policy allocates CPUs using a topology-aware best-fit allocation.
@@ -334,3 +335,7 @@ The `distribute-cpus-across-cores` option can be enabled by adding
 `distribute-cpus-across-cores=true` to the `CPUManager` policy options.
 It cannot be used with `full-pcpus-only` or `distribute-cpus-across-numa` policy
 options together at this moment.
+
+The `prefer-align-cpus-by-uncorecache` option can be enabled by adding the
+ `prefer-align-cpus-by-uncorecache` to the `CPUManager` policy options. It cannot
+ be used with `distribute-cpus-across-numa` or `distribute-cpus-across-cores`
