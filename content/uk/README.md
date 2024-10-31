@@ -27,7 +27,7 @@ git clone https://github.com/kubernetes/website.git
 cd website
 ```
 
-Сайт Kubernetes використовує [темоу Docsy для Hugo](https://github.com/google/docsy#readme). Навіть якщо ви плануєте запускати вебсайт в контейнері, ми настійливо рекомендуємо встановити субмодулі та інші залежності зробивши наступне:
+Сайт Kubernetes використовує [тему Docsy для Hugo](https://github.com/google/docsy#readme). Навіть якщо ви плануєте запускати вебсайт в контейнері, ми настійливо рекомендуємо встановити субмодулі та інші залежності зробивши наступне:
 
 ### Windows
 
@@ -82,7 +82,7 @@ make container-serve
 
 Довідкові сторінки API, розташовані в `content/en/docs/reference/kubernetes-api`, створюються на основі специфікації Swagger, також відомої як специфікація OpenAPI, за допомогою <https://github.com/kubernetes-sigs/reference-docs/tree/master/gen-resourcesdocs>.
 
-Для оновлення сторінок довідкових для нового випуску Kubernetes виконайте наступні кроки:
+Для оновлення сторінок довідки для нового випуску Kubernetes виконайте наступні кроки:
 
 1. Отримайте субмодуль `api-ref-generator`:
 
