@@ -1242,13 +1242,15 @@ scheduling pods:
 * A webhook running inside the cluster might cause deadlocks for its own deployment if it is configured
   to intercept resources required to start its own pods.
 
-  For example, a mutating admission webhook is configured to admit `CREATE` pod requests only if a certain label is set in the
-  pod (such as `"env": "prod"`). The webhook server runs in a deployment which doesn't set the `"env"` label.
+  For example, a mutating admission webhook is configured to admit **create** Pod requests only if a certain label is set in the
+  pod (such as `env: "prod"`). However, the webhook server runs as a Deployment that doesn't set the `env` label.
   When a node that runs the webhook server pods
   becomes unhealthy, the webhook deployment will try to reschedule the pods to another node. However the requests will
-  get rejected by the existing webhook server since the `"env"` label is unset, and the migration cannot happen.
+  get rejected by the existing webhook server since the `env` label is unset, and the replacement Pod
+  cannot be created. Eventually, the entire Deployment for the webhook server may become unhealthy.
 
-  It is recommended to exclude the namespace where your webhook is running with a
+If you use admission webhooks to check Pods, consider excluding the namespace where your webhook
+listener is running, by specifying a
   [namespaceSelector](#matching-requests-namespaceselector).
 
 * If the cluster has multiple webhooks configured (possibly from independent applications deployed on
@@ -1261,18 +1263,22 @@ scheduling pods:
   webhooks' resources from being inspected by later webhooks.  This ensures that the "earliest"
   webhook can start, which in turn allows the next.
 
-  Where protection for the webhook and/or its namespace is desired, [Validating Admission Policies](/docs/reference/access-authn-authz/validating-admission-policy/)
+  If you want to ensure protection for an admission webhook and / or its namespace, [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
+  can
   provide many protection capabilities without introducing dependency cycles.
 
-* Webhooks can intercept rsesources used by critical cluster infrastructure, such as coredns,
-  the active CNI and, storage plugins.  These resources may be required to schedule the webhook pods
+* Admission webhooks can intercept resources used by critical cluster add-ons, such as CoreDNS,
+  network plugins, or storage plugins. These add-ons may be required to schedule or successfully run the
+  pods for a particular admission webhook
   on the cluster, creating a deadlock if the webhook is configured to intercept them.
 
   It is recommended to exclude cluster infrastructure namespaces from webhooks, including kube-system,
   any namespaces used by CNI plugins, etc.
 
-  Where protection for the infrastructure components is desired, [Validating Admission Policies](/docs/reference/access-authn-authz/validating-admission-policy/)
-  provide many protection capabilities without introducing dependency cycles.
+  If you want to ensure protection for an core add-on / or its namespace,
+  [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
+  can
+  provide many protection capabilities without any dependency on worker nodes and Pods.
 
 ### Side effects
 
