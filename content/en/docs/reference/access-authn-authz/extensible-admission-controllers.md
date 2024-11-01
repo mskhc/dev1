@@ -1259,9 +1259,11 @@ scheduling pods:
   example, due to a cluster-wide outage or a node failure where both pods run on the same node)
   deadlock occurs because neither webhook pod can be recreated without the other already running.
 
-  One way to prevent this is to establish a desired order for webhooks to start, then to exclude 
-  "earlier" webhooks' resources from being inspected by "later" webhooks.  This ensures that the 
-  "earliest" webhook can start, which in turn allows the next.
+  One way to prevent this is to exclude webhook A's pods from being acted on be webhook B. This
+  allows webhook A's pods to start, which in turn allows webhook B's pods to start. If you had a 
+  third webhook, webhook C, you'd need to exclude both webhook A and webhook B's pods from 
+  webhook C. This ensures that webhook A can _always_ start, which then allows webhook B's pods 
+  to start, which in turn allows webhook C's pods to start.
 
   If you want to ensure protection for an admission webhook and / or its namespace, [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
   can
