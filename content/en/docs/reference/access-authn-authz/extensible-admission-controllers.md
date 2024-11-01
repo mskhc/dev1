@@ -1278,7 +1278,7 @@ scheduling pods:
   the webhook does not depend on the particular add-on that it acts on.  For exmaple, running
   a webhook as a host-networked pod ensures that it does not depend on a networking plugin.
 
-  If you want to ensure protection for an core add-on / or its namespace,
+  If you want to ensure protection for a core add-on / or its namespace,
   [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
   can
   provide many protection capabilities without any dependency on worker nodes and Pods.
