@@ -1249,19 +1249,19 @@ scheduling pods:
   get rejected by the existing webhook server since the `env` label is unset, and the replacement Pod
   cannot be created. Eventually, the entire Deployment for the webhook server may become unhealthy.
 
-If you use admission webhooks to check Pods, consider excluding the namespace where your webhook
-listener is running, by specifying a
+  If you use admission webhooks to check Pods, consider excluding the namespace where your webhook
+  listener is running, by specifying a
   [namespaceSelector](#matching-requests-namespaceselector).
 
 * If the cluster has multiple webhooks configured (possibly from independent applications deployed on
   the cluster), they can form a cycle.  Webhook A must be called to process startup of webhook B's
-  pods and vice versa.  If both webhook A and webhook B ever become inactive at the same time (for
+  pods and vice versa. If both webhook A and webhook B ever become unavailable at the same time (for
   example, due to a cluster-wide outage or a node failure where both pods run on the same node)
   deadlock occurs because neither webhook pod can be recreated without the other already running.
 
-  It is recommended to establish a desired order for webhooks to start, then to exclude "earlier"
-  webhooks' resources from being inspected by later webhooks.  This ensures that the "earliest"
-  webhook can start, which in turn allows the next.
+  One way to prevent this is to establish a desired order for webhooks to start, then to exclude 
+  "earlier" webhooks' resources from being inspected by "later" webhooks.  This ensures that the 
+  "earliest" webhook can start, which in turn allows the next.
 
   If you want to ensure protection for an admission webhook and / or its namespace, [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
   can
@@ -1269,11 +1269,12 @@ listener is running, by specifying a
 
 * Admission webhooks can intercept resources used by critical cluster add-ons, such as CoreDNS,
   network plugins, or storage plugins. These add-ons may be required to schedule or successfully run the
-  pods for a particular admission webhook
-  on the cluster, creating a deadlock if the webhook is configured to intercept them.
+  pods for a particular admission webhook on the cluster. This can cause a deadlock if both the 
+  webhook and critical add-on is unavailable at the same time.
 
-  It is recommended to exclude cluster infrastructure namespaces from webhooks, including kube-system,
-  any namespaces used by CNI plugins, etc.
+  You may wish to exclude cluster infrastructure namespaces from webhooks, or make sure that
+  the webhook does not depend on the particular add-on that it acts on.  For exmaple, running
+  a webhook as a host-networked pod ensures that it does not depend on a networking plugin.
 
   If you want to ensure protection for an core add-on / or its namespace,
   [ValidatingAdmissionPolicies](/docs/reference/access-authn-authz/validating-admission-policy/)
