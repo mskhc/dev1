@@ -42,7 +42,7 @@ Makes a Service accessible from outside the cluster using `NodeIP:NodePort`. Sup
 * _LoadBalancer_ - Creates an external load balancer in the current cloud (if supported)
 and assigns a fixed, external IP to the Service. Superset of NodePort.
 
-* _ExternalName_ - Maps the Service to the contents of the `externalName` field 
+* _ExternalName_ - Maps the Service to the contents of the `externalName` field
 (e.g. `foo.bar.example.com`), by returning a `CNAME` record with its value.
 No proxying of any kind is set up. This type requires v1.7 or higher of `kube-dns`,
 or CoreDNS version 0.0.8 or higher.
@@ -151,7 +151,7 @@ curl 127.0.0.1:51082
 
 And we get a response from the server. The Service is exposed.
 
-### Step 2: Using labels 
+### Step 2: Using labels
 
 The Deployment created automatically a label for our Pod. With the `describe deployment`
 subcommand you can see the name (the _key_) of that label:
@@ -229,11 +229,13 @@ You can confirm that the app is still running with a `curl` from inside the pod:
 ```shell
 kubectl exec -ti $POD_NAME -- curl http://localhost:8080
 ```
+
 We see here that the application is up. This is because the Deployment is managing
 the application. To shut down the application, you would need to delete the Deployment
 as well.
 
 ## {{% heading "whatsnext" %}}
 
-Once you're ready, move on to
+* Tutorial
 [Running Multiple Instances of Your App](/docs/tutorials/kubernetes-basics/scale/scale-intro/).
+* Learn more about [Service](/docs/concepts/services-networking/service/).

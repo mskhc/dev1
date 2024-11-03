@@ -60,5 +60,5 @@ working with your cluster, including start, stop, status, and delete.
 
 ## {{% heading "whatsnext" %}}
 
-Now that you know more about what Kubernetes is, visit [Hello Minikube](/docs/tutorials/hello-minikube/)
-to try this out on your computer.
+* Tutorial [Hello Minikube](/docs/tutorials/hello-minikube/).
+* Learn more about [Cluster Architecture](/docs/concepts/architecture/).

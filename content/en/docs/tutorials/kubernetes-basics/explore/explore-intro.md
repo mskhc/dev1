@@ -160,7 +160,7 @@ kubectl exec -ti $POD_NAME -- bash
 ```
 
 We have now an open console on the container where we run our NodeJS application.
-The source code of the app is in the i`server.js` file:
+The source code of the app is in the `server.js` file:
 
 ```shell
 cat server.js
@@ -182,6 +182,7 @@ To close your container connection, type `exit`.
 
 ## {{% heading "whatsnext" %}}
 
-Once you're ready, move on to
+* Tutorial
 [Using A Service To Expose Your App](/docs/tutorials/kubernetes-basics/expose/expose-intro/).
-
+* Learn more about [Pods](/docs/concepts/workloads/pods/).
+* Learn more about [Nodes](/docs/concepts/architecture/nodes/).

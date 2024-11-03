@@ -9,7 +9,7 @@ weight: 10
 
 ## Scaling an application
 
-Previously we created a [Deployment](/docs/concepts/workloads/controllers/deployment),
+Previously we created a [Deployment](/docs/concepts/workloads/controllers/deployment/),
 and then exposed it publicly via a [Service](/docs/concepts/services-networking/service/).
 The Deployment created only one Pod for running our application. When traffic increases,
 we will need to scale the application to keep up with user demand.
@@ -34,6 +34,7 @@ with its `type` set to `LoadBalancer`:
 ```shell
 kubectl expose deployment/kubernetes-bootcamp --type="LoadBalancer" --port 8080
 ```
+
 {{< /note >}}
 
 ## Scaling overview
@@ -65,6 +66,7 @@ To list your Deployments, use the `get deployments` subcommand:
 ```shell
 kubectl get deployments
 ```
+
 The output should be similar to:
 
 ```
@@ -158,7 +160,6 @@ Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-wp67j | 
 Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-644c5687f4-4hjvf | v=1
 ```
 
-
 {{< note >}}
 If you're running minikube with Docker Desktop as the container driver, a minikube
 tunnel is needed. This is because containers inside Docker Desktop are isolated
@@ -208,6 +209,7 @@ This confirms that 2 Pods were terminated.
 
 ## {{% heading "whatsnext" %}}
 
-Once you're ready, move on to
+* Tutorial
 [Performing a Rolling Update](/docs/tutorials/kubernetes-basics/update/update-intro/).
-
+* Learn more about [ReplicaSet](/docs/concepts/workloads/controllers/replicaset/).
+* Learn more about [Autoscaling](/docs/concepts/workloads/autoscaling/).
