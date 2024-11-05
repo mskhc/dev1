@@ -976,6 +976,7 @@ listed below.
 <!--
 * [Capsule](https://github.com/clastix/capsule)
 -->
+* [Multi Tenant Operator](https://docs.stakater.com/mto/)
 * [Capsule](https://github.com/clastix/capsule)
 
 <!--

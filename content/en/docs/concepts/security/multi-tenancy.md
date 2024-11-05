@@ -462,6 +462,7 @@ listed below.
 
 #### Multi-team tenancy
 
+* [Multi Tenant Operator](https://docs.stakater.com/mto/)
 * [Capsule](https://github.com/clastix/capsule)
 
 #### Multi-customer tenancy
