@@ -7,25 +7,23 @@ author: >
   [Jing Zhang](https://github.com/jingczhang) (Nokia)
 ---
 
-In Kubernetes v1.32, after years of community discussion, we are excited to introduce the capability of strict CPU reservation in `CPUManager` via `strict-cpu-reservation` option for the [CPUManager static policy](/docs/tasks/administer-cluster/cpu-management-policies/#static-policy-options). This feature is currently in alpha and hidden by default hence needs be enabled explicitly.
+In Kubernetes v1.32, after years of community discussion, we are excited to introduce strict system CPU reservation in `CPUManager` via `strict-cpu-reservation` option for the [CPUManager static policy](/docs/tasks/administer-cluster/cpu-management-policies/#static-policy-options). This feature is currently in alpha and hidden by default hence needs be enabled explicitly.
 
 
 ## Understanding the feature
 
-The `CPUManager` static policy is used to reduce latency or improve performance. If you want to move system daemons or interrupt processing to dedicated cores, the obvious way is use the `reservedSystemCPUs` option.
+The `CPUManager` static policy is used to reduce latency or improve performance. The `reservedSystemCPUs` defines an explicit CPU set for OS system daemons and kubernetes system daemons. This option is specifically designed for Telco/NFV use cases where uncontrolled interrupts/timers may impact the workload performance. you can use this option to define the explicit cpuset for the system/kubernetes daemons as well as the interrupts/timers, so the rest CPUs on the system can be used exclusively for workloads, with less impact from uncontrolled interrupts/timers. More details of this parameter can be found on the [Explicitly Reserved CPU List](/docs/tasks/administer-cluster/reserve-compute-resources/#explicitly-reserved-cpu-list) page.
 
-The `reservedSystemCPUs` defines an explicit CPU set for OS system daemons and kubernetes system daemons. More details of this parameter can be found on the [Explicitly Reserved CPU List](/docs/tasks/administer-cluster/reserve-compute-resources/#explicitly-reserved-cpu-list) page.
+If you want to protect your system daemons and interrupt processing, the obvious way is to use the `reservedSystemCPUs` option.
 
-But until now this isolation is implemented only for guaranteed pods with integer CPU requests not for burstable and best-effort pods (and guaranteed pods with fractional CPU requests). Admission is only comparing the cpu requests against the allocatable cpus. Since the cpu limit are higher than the request, it allows burstable and best-effort pods to use up the capacity of `reservedSystemCPUs` and cause host OS services to starve in real life deployments. This behaviour also makes benchmarking infrastructure and workloads both inaccurate.
+However, until now this isolation is only implemented for guaranteed pods with integer CPU requests. Admission only compares the CPU requests against the allocatable CPUs. Since the CPU limits are higher than the CPU requests, current implementation allows burstable and best-effort pods to use up the capacity of `reservedSystemCPUs` and causes host OS services to starve in real life deployments. This behavior also makes benchmarking infrastructure and workloads both inaccurate.
 
-When this new `strict-cpu-reservation` option is enabled, the `CPUManager` static policy will not allow any workload to use the reserved CPU cores.
+When this new `strict-cpu-reservation` policy option is enabled, the `CPUManager` static policy will not allow any workload to use the reserved system CPU cores.
 
 
 ## Enabling the feature
 
-To enable this feature, you need to turn on the `CPUManagerPolicyAlphaOptions` feature gate and the `strict-cpu-reservation` policy option. Then you remove the `/var/lib/kubelet/cpu_manager_state` file and restart kubelet.
-
-Feature impact can be illustrated as follows:
+To enable this feature, you need to turn on both the `CPUManagerPolicyAlphaOptions` feature gate and the `strict-cpu-reservation` policy option. And you need to remove the `/var/lib/kubelet/cpu_manager_state` file if it exists and restart kubelet.
 
 With the following Kubelet configuration:
 
@@ -43,13 +41,13 @@ reservedSystemCPUs: "0,32,1,33,16,48"
 ...
 ```
 
-When `strict-cpu-reservation` is disabled:
+When `strict-cpu-reservation` is not set or set to false:
 ```console
 # cat /var/lib/kubelet/cpu_manager_state
 {"policyName":"static","defaultCpuSet":"0-63","checksum":1058907510}
 ```
 
-When `strict-cpu-reservation` is enabled:
+When `strict-cpu-reservation` is set to true:
 ```console
 # cat /var/lib/kubelet/cpu_manager_state
 {"policyName":"static","defaultCpuSet":"2-15,17-31,34-47,49-63","checksum":4141502832}
@@ -63,13 +61,14 @@ You can monitor the feature impact by checking the following `CPUManager` counte
 - `cpu_manager_exclusive_cpu_allocation_count`: report exclusively allocated cores, counting full cores (e.g. 16)
 
 Your best-effort workloads may starve if the `cpu_manager_shared_pool_size_millicores` count is zero for prolonged time.
-We believe any system critical daemon like a log forwardor should not run as best-effort but you can review and adjust the amount of CPU cores reserved as needed.
+
+We believe any system critical daemon like a log forwarder should not run as best-effort, but you can review and adjust the amount of CPU cores reserved as needed.
 
 ## Conclusion
 
-The capability of strict CPU reservation is critical for Telco/NFV use cases. It also finally enables the all-in-one deployments where workloads are placed on combined master+worker+storage nodes.
+Strict CPU reservation is critical for Telco/NFV use cases. It is also a prerequisite for enabling the all-in-one type of deployments where workloads are placed on nodes having combined master+worker+storage roles.
 
-We want you to start using the feature and looking forward to your feedbacks.
+We want you to start using the feature and looking forward to your feedback.
 
 
 ## Further reading
