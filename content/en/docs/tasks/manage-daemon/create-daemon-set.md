@@ -34,25 +34,25 @@ spec:
         app: example
     spec:
       containers:
-name: pause
+      - name: pause
         image: gcr.io/google_containers/pause:3.1
         # This is the main container, which doesn't do much but keeps the Pod alive.
       initContainers:
-name: log-machine-id
+      - name: log-machine-id
         image: busybox
         command: ['sh', '-c', 'cat /etc/machine-id > /var/log/machine-id.log']
         volumeMounts:
-name: machine-id
+        - name: machine-id
           mountPath: /etc/machine-id
           readOnly: true
-name: log-dir
+        - name: log-dir
           mountPath: /var/log
       volumes:
-name: machine-id
+      - name: machine-id
         hostPath:
           path: /etc/machine-id
           type: File
-name: log-dir
+      - name: log-dir
         hostPath:
           path: /var/log
 ```
