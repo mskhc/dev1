@@ -5,7 +5,9 @@ weight: 5
 ---
 <!-- overview -->
 
-This page demonstrates how to build a basic DaemonSet that runs a Pod on every node in a Kubernetes cluster. It covers a simple use case of mounting a file from the host, logging its contents using an init container, and utilizing a pause container.
+This page demonstrates how to build a basic DaemonSet that runs a Pod on every node in a Kubernetes cluster.
+It covers a simple use case of mounting a file from the host, logging its contents using
+an [init container](/docs/concepts/workloads/pods/init-containers/), and utilizing a pause container.
 
 ## {{% heading "prerequisites" %}}
 
@@ -13,11 +15,14 @@ This page demonstrates how to build a basic DaemonSet that runs a Pod on every n
 
 ## Building a DaemonSet
 
-In this task, you'll create a basic DaemonSet that mounts the `/etc/machine-id` file from each node, logs its contents using an init container, and runs a pause container.
+In this task, you'll create a basic DaemonSet that mounts the `/etc/machine-id` file from each node,
+logs its contents using an init container, and runs a pause container.
 
 ### Step 1: Create the DaemonSet Manifest
 
-Let's create a DaemonSet manifest that ensures one Pod is scheduled on every node. The Pod will use an init container to read and log the contents of `/etc/machine-id` from the host, while the main container will be a `pause` container, which keeps the Pod running.
+Create a DaemonSet manifest that ensures the copy of a Pod is scheduled on every node.
+The Pod will use an init container to read and log the contents of `/etc/machine-id` from the host,
+while the main container will be a `pause` container, which keeps the Pod running.
 
 ```yaml
 apiVersion: apps/v1
@@ -88,16 +93,25 @@ You can inspect the contents of the logged `/etc/machine-id` file by checking th
 ```bash
 kubectl exec <pod-name> -- cat /var/log/machine-id.log
 ```
+Replace <pod-name> with actual name of the pod running.
 
 ### Key Features of DaemonSets
 
 DaemonSets provide several features for managing Pods on a per-node basis:
 
-**Host Path Volume Mounts**: DaemonSets can mount host directories (like `/etc/machine-id`) into Pods to access system-level files or logs.
-**Init Containers**: Init containers can perform setup tasks before the main container starts, such as logging or preparing the environment.
-**Pause Containers**: You can use a pause container as the main container when the Pod's primary function is handled by an init container, but you still want the Pod to remain running.
+**Host Path Volume Mounts**:
+DaemonSets can mount host directories (like `/etc/machine-id`) into Pods to access system-level files or logs.
 
-This simple DaemonSet example introduces key components like init containers and host path volumes, which can be expanded upon for more advanced use cases.
+**Init Containers**:
+Init containers can perform setup tasks before the main container starts, such as logging or preparing the environment.
+
+**Pause Containers**:
+You can use a pause container as the main container when the Pod's primary function is
+handled by an init container, but you still want the Pod to remain running.
+
+This simple DaemonSet example introduces key components like init containers and host path volumes,
+which can be expanded upon for more advanced use cases. For more details refer
+[DaemonSet](/docs/concepts/workloads/controllers/daemonset/).
 
 
 
