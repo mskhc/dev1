@@ -11,8 +11,8 @@ weight: 30
 
 Для запуску тесту відповідності вузла вузол повинен відповідати тим же передумовам, що й стандартний вузол Kubernetes. Принаймні, на вузлі повинні бути встановлені наступні служби:
 
-* Сумісні з CRI середовища виконання контейнерів, такі як Docker, Containerd та CRI-O
-* Kubelet
+* Сумісні з CRI середовища виконання контейнерів, такі як Docker, containerd та CRI-O
+* kubelet
 
 ## Запуск тесту відповідності вузла {#running-node-conformance-test}
 
@@ -23,23 +23,23 @@ weight: 30
 
 2. Запустіть тест відповідності вузла за допомогою команди:
 
-```shell
-# $CONFIG_DIR — це шлях до файлу маніфеста под вашого Kubelet.
-# $LOG_DIR — це шлях для виведення результатів тесту.
-sudo docker run -it --rm --privileged --net=host \
-  -v /:/rootfs -v $CONFIG_DIR:$CONFIG_DIR -v $LOG_DIR:/var/result \
-  registry.k8s.io/node-test:0.2
-```
+   ```shell
+   # $CONFIG_DIR — це шлях до файлу маніфеста под вашого Kubelet.
+   # $LOG_DIR — це шлях для виведення результатів тесту.
+   sudo docker run -it --rm --privileged --net=host \
+     -v /:/rootfs -v $CONFIG_DIR:$CONFIG_DIR -v $LOG_DIR:/var/result \
+     registry.k8s.io/node-test:0.2
+   ```
 
 ## Запуск тесту відповідності вузла для інших архітектур {#running-node-conformance-test-for-other-architectures}
 
 Kubernetes також надає образи Docker для тестування відповідності вузлів для інших архітектур:
 
-  Архітектура  |        Образи            |
----------------|:------------------------:|
- amd64         |  node-test-amd64         |
- arm           |  node-test-arm           |
- arm64         |  node-test-arm64         |
+| Архітектура  |        Образи            |
+|--------------|:------------------------:|
+|  amd64       |  node-test-amd64         |
+|  arm         |   node-test-arm          |
+| arm64        |  node-test-arm64         |
 
 ## Запуск конкретних тестів {#running-selected-test}
 

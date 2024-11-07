@@ -8,7 +8,7 @@ weight: 110
 
 <!-- overview -->
 
-Цей список перевірки спрямований на надання основних рекомендацій з безпеки застосунків, що працюють у Kubernetes, з погляду розробника. Цей список не є вичерпним і призначений для еволюції з часом.
+Цей список перевірки спрямований на надання основних рекомендацій з безпеки застосунків, що працюють у Kubernetes, з погляду розробника. Цей список не є вичерпним і має на меті з часом змінюватись.
 
 <!-- Наступне взято з існуючого чекліста для адміністраторів Kubernetes. https://kubernetes.io/docs/concepts/security/security-checklist/ -->
 
@@ -74,7 +74,7 @@ weight: 110
 
 - [ ] Налаштуйте [NetworkPolicies](/docs/concepts/services-networking/network-policies/), щоб дозволити лише очікуваний вхідний та вихідний трафік з Podʼів.
 
-Переконайтеся, що ваш кластер надає та вимагає виконання NetworkPolicy. Якщо ви пишете застосунок, який люди будуть розгортати в різних кластерах, розгляньте, чи можете ви припустити, що NetworkPolicy доступний і виконується.
+Переконайтеся, що ваш кластер надає та вимагає виконання NetworkPolicy. Якщо ви пишете застосунок, який користувачі будуть розгортати в різних кластерах, розгляньте, чи можете ви припустити, що NetworkPolicy доступний і виконується.
 
 ## Розширене посилення безпеки {#advanced}
 
@@ -84,8 +84,8 @@ weight: 110
 
 Налаштуйте {{< glossary_tooltip text="Security Context" term_id="Security-Context" >}} для pod-container.
 
-- [ ] [Встановіть відповідні профілі Seccomp](/docs/tasks/configure-pod-container/security-context/#set-the-seccomp-profile-for-a-container).
-- [ ] [Налаштуйте відповідні політики AppArmor](/docs/tutorials/security/apparmor/).
+- [ ] [Встановіть профілі Seccomp для контейнерів](/docs/tasks/configure-pod-container/security-context/#set-the-seccomp-profile-for-a-container).
+- [ ] [Обмежте доступ контейнера до ресурсів за допомогою AppArmor](/docs/tutorials/security/apparmor/).
 - [ ] [Призначте відповідні мітки SELinux контейнерам](/docs/tasks/configure-pod-container/security-context/#assign-selinux-labels-to-a-container).
 
 ### Класи виконання {#runtime-classes}

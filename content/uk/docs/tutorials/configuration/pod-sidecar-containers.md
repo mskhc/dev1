@@ -44,6 +44,8 @@ Sidecar-контейнери — це додаткові контейнери, 
 3. Для Jobs, коли `restartPolicy: OnFailure` або `restartPolicy: Never`, нативні sidecar-контейнери не блокують завершення Pod. Для старих sidecar-контейнерів потрібно було приділяти особливу увагу вирішенню цієї ситуації.
 4. Також для Jobs, вбудовані sidecar-контейнери будуть продовжувати перезапускатися після завершення, навіть якщо звичайні контейнери не будуть цього робити при `restartPolicy: Never` у Pod.
 
+Дивіться [відмінності від контейнерів ініціалізації](/docs/concepts/workloads/pods/sidecar-containers/#differences-from-application-containers) для додаткових відомостей.
+
 ## Впровадження вбудованих sidecar-контейнерів {#adopting-built-in-sidecar-containers}
 
 [Функціональна можливість](/docs/reference/command-line-tools-reference/feature-gates/) `SidecarContainers` перебуває у стані бета-версії, починаючи з версії Kubernetes 1.29, і є стандартно увімкненою. Деякі кластери можуть мати цю функцію вимкненою або мати встановлене програмне забезпечення, яке не сумісне з цією функцією.

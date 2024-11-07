@@ -10,4 +10,5 @@ stages:
     defaultValue: false
     fromVersion: "1.31"
 ---
-Дозволяє увімкнути [налаштовувані точки доступу для анонімної автентифікації](/uk/docs/reference/access-authn-authz/authentication/#anonymous-authenticator-onfiguration) для сервера API.
+
+Дозволяє увімкнути [налаштовувані точки доступу для анонімної автентифікації](/docs/reference/access-authn-authz/authentication/#anonymous-authenticator-configuration) для сервера API.

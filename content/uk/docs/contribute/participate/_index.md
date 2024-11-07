@@ -13,7 +13,7 @@ SIG Docs є однією з [робочих груп](https://github.com/kuberne
 
 SIG Docs вітає контент та рецензування від усіх учасників. Будь-хто може відкрити pull request (PR), і будь-хто може подавати питання щодо контенту або коментувати pull request'и, що знаходяться в процесі.
 
-Ви також можете стати [членом](/uk/docs/contribute/participate/roles-and-responsibilities/#members), [рецензентом](/uk/docs/contribute/participate/roles-and-responsibilities/#reviewers) або [затверджувачем](/uk/docs/contribute/participate/roles-and-responsibilities/#approvers). Ці ролі вимагають більшого доступу і несуть певні обов’язки щодо затвердження та прийняття змін. Дивіться [community-membership](https://github.com/kubernetes/community/blob/master/community-membership.md) для отримання додаткової інформації про те, як працює членство в спільноті Kubernetes.
+Ви також можете стати [членом](/docs/contribute/participate/roles-and-responsibilities/#members), [рецензентом](/docs/contribute/participate/roles-and-responsibilities/#reviewers) або [затверджувачем](/docs/contribute/participate/roles-and-responsibilities/#approvers). Ці ролі вимагають більшого доступу і несуть певні обов’язки щодо затвердження та прийняття змін. Дивіться [community-membership](https://github.com/kubernetes/community/blob/master/community-membership.md) для отримання додаткової інформації про те, як працює членство в спільноті Kubernetes.
 
 Решта цього документа описує деякі унікальні способи функціонування цих ролей у SIG Docs, яка відповідає за підтримку одного з найбільш публічно орієнтованих аспектів Kubernetes — вебсайту та документації Kubernetes.
 
@@ -55,17 +55,17 @@ SIG Docs вітає контент та рецензування від усіх
 
 ## Як працює злиття {#how-merging-works}
 
-Коли pull request зливається з гілкою, що використовується для публікації контенту, цей контент публікується на http://kubernetes.io. Щоб забезпечити високу якість нашого опублікованого контенту, ми обмежуємо злиття pull requestʼів до затверджувачів SIG Docs. Ось як це працює.
+Коли pull request зливається з гілкою, що використовується для публікації контенту, цей контент публікується на https://kubernetes.io. Щоб забезпечити високу якість нашого опублікованого контенту, ми обмежуємо злиття pull requestʼів до затверджувачів SIG Docs. Ось як це працює.
 
 - Коли pull request має обидві мітки `lgtm` та `approve`, не має міток `hold` та всі тести проходять успішно, pull request зливається автоматично.
 - Члени організації Kubernetes та затверджувачі SIG Docs можуть додавати коментарі для запобігання автоматичного злиття конкретного pull request (додавши коментар `/hold` або утримуючись від додавання коментаря `/lgtm`).
 - Будь-який член Kubernetes може додати мітку `lgtm`, додавши коментар `/lgtm`.
-- Тільки затверджувачі SIG Docs можуть зливати pull request, додаючи коментар `/approve`. Деякі затверджувачі також виконують додаткові ролі, такі як [PR Wrangler](/uk/docs/contribute/participate/pr-wranglers/) або [голова SIG Docs](#sig-docs-chairperson).
+- Тільки затверджувачі SIG Docs можуть зливати pull request, додаючи коментар `/approve`. Деякі затверджувачі також виконують додаткові ролі, такі як [PR Wrangler](/docs/contribute/participate/pr-wranglers/) або [голова SIG Docs](#sig-docs-chairperson).
 
 ## {{% heading "whatsnext" %}}
 
 Для отримання додаткової інформації про внесок до документації Kubernetes дивіться:
 
-- [Внесення нового контенту](/uk/docs/contribute/new-content/)
-- [Огляд контенту](/uk/docs/contribute/review/reviewing-prs)
-- [Настанови зі стилю](/uk/docs/contribute/style/)
+- [Внесення нового контенту](/docs/contribute/new-content/)
+- [Огляд контенту](/docs/contribute/review/reviewing-prs)
+- [Настанови зі стилю](/docs/contribute/style/)

@@ -1,5 +1,5 @@
 ---
-title: Сертифікати PKI та вимоги 
+title: Сертифікати PKI та вимоги
 content_type: concept
 weight: 50
 ---
@@ -21,7 +21,7 @@ Kubernetes вимагає PKI для виконання таких операц�
 * [Сертифікати сервера](/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/#client-and-serving-certificates) для кожного kubelet (кожен {{< glossary_tooltip text="вузол" term_id="node" >}} запускає kubelet)
 * Опціональний сертифікат сервера для [front-proxy](/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
 
-### Сертифікати клієнта
+### Сертифікати клієнта {#client-certificates}
 
 * Сертифікати клієнта для кожного kubelet, які використовуються для автентифікації в API сервері як клієнта Kubernetes API
 * Сертифікат клієнта для кожного API сервера, який використовується для автентифікації в etcd
@@ -31,11 +31,11 @@ Kubernetes вимагає PKI для виконання таких операц�
 * Опціональні сертифікати клієнтів для адміністраторів кластера для автентифікації в API сервері
 * Опціональний сертифікат клієнта для [front-proxy](/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
 
-### Серверні та клієнтські сертифікати Kubelet
+### Серверні та клієнтські сертифікати Kubelet {#kubelet-s-server-and-client-certificates}
 
 Для встановлення безпечного зʼєднання та автентифікації у kubelet, API сервер вимагає сертифікат клієнта та пару ключів.
 
-У цій ситуації є два підходи до використання сертифікатів: використання спільних сертифікатів або окремих сертифікатів:
+У цій ситуації є два підходи до використання сертифікатів:
 
 * Спільні сертифікати: kube-apiserver може використовувати ту ж саму пару сертифікатів та ключів, яку використовує для автентифікації своїх клієнтів. Це означає, що наявні сертифікати, такі як `apiserver.crt` та `apiserver.key`, можуть використовуватися для звʼязку з серверами kubelet.
 
@@ -61,7 +61,7 @@ etcd також реалізує взаємну аутентифікацію TLS
 
 Необхідні ЦС:
 
-| шлях                   | Типовий CN                  | опис                          |
+| Шлях                   | Типовий CN                  | Опис                          |
 |------------------------|-----------------------------|-------------------------------|
 | ca.crt,key             | kubernetes-ca             | Загальний ЦС Kubernetes       |
 | etcd/ca.crt,key        | etcd-ca                   | Для всіх функцій, повʼязаних з etcd  |
@@ -90,7 +90,7 @@ etcd також реалізує взаємну аутентифікацію TLS
 | kube-etcd-peer                         | etcd-ca                   |               | server, client   | `<hostname>`, `<Host_IP>`, `localhost`, `127.0.0.1`  |
 | kube-etcd-healthcheck-client           | etcd-ca                   |               | client           |                                                      |
 | kube-apiserver-etcd-client             | etcd-ca                   |               | client           |                                                      |
-| kube-apiserver                         | kubernetes-ca             |               | server           | `<hostname>`, `<Host_IP>`, `<advertise_IP>`, `[1]`   |
+| kube-apiserver                         | kubernetes-ca             |               | server           | `<hostname>`, `<Host_IP>`, `<advertise_IP>`, `[^1]`   |
 | kube-apiserver-kubelet-client          | kubernetes-ca             | system:masters | client           |                                                      |
 | front-proxy-client                     | kubernetes-front-proxy-ca |               | client           |                                                      |
 
@@ -98,7 +98,7 @@ etcd також реалізує взаємну аутентифікацію TLS
 Замість використання групи суперкористувача `system:masters` для `kube-apiserver-kubelet-client`, може бути використана менш привілейована група. kubeadm використовує групу `kubeadm:cluster-admins` для цієї мети.
 {{< /note >}}
 
-[1]: будь-яка інша IP-адреса чи DNS-імʼя, за яким ви звертаєтеся до свого кластера (що використовується [kubeadm](/docs/reference/setup-tools/kubeadm/) для стабільної IP-адреси або DNS-імені балансування навантаження, `kubernetes`, `kubernetes.default`, `kubernetes.default.svc`, `kubernetes.default.svc.cluster`, `kubernetes.default.svc.cluster.local`)
+[^1]: будь-яка інша IP-адреса чи DNS-імʼя, за яким ви звертаєтеся до свого кластера (що використовується [kubeadm](/docs/reference/setup-tools/kubeadm/) для стабільної IP-адреси або DNS-імені балансування навантаження, `kubernetes`, `kubernetes.default`, `kubernetes.default.svc`, `kubernetes.default.svc.cluster`, `kubernetes.default.svc.cluster.local`)
 
 де `kind` посилається на один або кілька ключів x509, які також документовані в `.spec.usages` типу [CertificateSigningRequest](/docs/reference/kubernetes-api/authentication-resources/certificate-signing-request-v1#CertificateSigningRequest):
 
@@ -122,22 +122,22 @@ Hosts/SAN, наведені вище, є рекомендованими для �
 
 Сертифікати повинні бути розміщені в рекомендованому шляху (який використовує [kubeadm](/docs/reference/setup-tools/kubeadm/)). Шляхи повинні бути вказані за вказаним аргументом незалежно від місця розташування.
 
-| Типовий CN                   | рекомендований шлях до ключа      | рекомендований шлях до сертифіката | команда                  | аргумент ключа                  | аргумент сертифіката                            |
-|----------------------------------------|------------------------------------|------------------------------------|-------------------------|---------------------------------|--------------------------------------------------|
-| etcd-ca                              | etcd/ca.key                         | etcd/ca.crt                         | kube-apiserver          |                                 | --etcd-cafile                                   |
-| kube-apiserver-etcd-client            | apiserver-etcd-client.key           | apiserver-etcd-client.crt           | kube-apiserver          | --etcd-keyfile                  | --etcd-certfile                                 |
-| kubernetes-ca                        | ca.key                              | ca.crt                              | kube-apiserver          |                                 | --client-ca-file                                |
-| kubernetes-ca                        | ca.key                              | ca.crt                              | kube-controller-manager | --cluster-signing-key-file      | --client-ca-file, --root-ca-file, --cluster-signing-cert-file |
-| kube-apiserver                       | apiserver.key                       | apiserver.crt                       | kube-apiserver          | --tls-private-key-file          | --tls-cert-file                                |
-| kube-apiserver-kubelet-client        | apiserver-kubelet-client.key        | apiserver-kubelet-client.crt        | kube-apiserver          | --kubelet-client-key            | --kubelet-client-certificate                     |
-| front-proxy-ca                       | front-proxy-ca.key                  | front-proxy-ca.crt                  | kube-apiserver          |                                 | --requestheader-client-ca-file                   |
-| front-proxy-ca                       | front-proxy-ca.key                  | front-proxy-ca.crt                  | kube-controller-manager |                                 | --requestheader-client-ca-file                   |
-| front-proxy-client                   | front-proxy-client.key              | front-proxy-client.crt              | kube-apiserver          | --proxy-client-key-file         | --proxy-client-cert-file                         |
-| etcd-ca                              | etcd/ca.key                         | etcd/ca.crt                         | etcd                    |                                 | --trusted-ca-file, --peer-trusted-ca-file        |
-| kube-etcd                            | etcd/server.key                     | etcd/server.crt                     | etcd                    | --key-file                      | --cert-file                                      |
-| kube-etcd-peer                       | etcd/peer.key                       | etcd/peer.crt                       | etcd                    | --peer-key-file                 | --peer-cert-file                                 |
-| etcd-ca                              |                                    | etcd/ca.crt                         | etcdctl                 |                                 | --cacert                                         |
-| kube-etcd-healthcheck-client         | etcd/healthcheck-client.key         | etcd/healthcheck-client.crt         | etcdctl                 | --key                           | --cert                                           |
+| Типовий CN | рекомендований шлях до ключа | рекомендований шлях до сертифіката | команда | аргумент ключа | аргумент сертифіката |
+|------------|------------------------------|------------------------------------|---------|----------------|----------------------|
+| etcd-ca | etcd/ca.key | etcd/ca.crt | kube-apiserver | | --etcd-cafile |
+| kube-apiserver-etcd-client | apiserver-etcd-client.key | apiserver-etcd-client.crt | kube-apiserver | --etcd-keyfile | --etcd-certfile |
+| kubernetes-ca | ca.key | ca.crt | kube-apiserver | | --client-ca-file |
+| kubernetes-ca | ca.key | ca.crt | kube-controller-manager | --cluster-signing-key-file | --client-ca-file, --root-ca-file, --cluster-signing-cert-file |
+| kube-apiserver | apiserver.key | apiserver.crt | kube-apiserver | --tls-private-key-file | --tls-cert-file |
+| kube-apiserver-kubelet-client | apiserver-kubelet-client.key | apiserver-kubelet-client.crt | kube-apiserver | --kubelet-client-key | --kubelet-client-certificate |
+| front-proxy-ca | front-proxy-ca.key | front-proxy-ca.crt | kube-apiserver | | --requestheader-client-ca-file |
+| front-proxy-ca | front-proxy-ca.key | front-proxy-ca.crt | kube-controller-manager | | --requestheader-client-ca-file |
+| front-proxy-client | front-proxy-client.key | front-proxy-client.crt | kube-apiserver | --proxy-client-key-file | --proxy-client-cert-file |
+| etcd-ca | etcd/ca.key | etcd/ca.crt | etcd | | --trusted-ca-file, --peer-trusted-ca-file |
+| kube-etcd | etcd/server.key | etcd/server.crt | etcd | --key-file | --cert-file |
+| kube-etcd-peer | etcd/peer.key | etcd/peer.crt | etcd | --peer-key-file | --peer-cert-file |
+| etcd-ca | | etcd/ca.crt | etcdctl | | --cacert |
+| kube-etcd-healthcheck-client | etcd/healthcheck-client.key | etcd/healthcheck-client.crt | etcdctl | --key | --cert |
 
 Ті ж самі вимоги стосуються пари ключів облікових записів служби:
 
@@ -148,7 +148,7 @@ Hosts/SAN, наведені вище, є рекомендованими для �
 
 Наведений нижче приклад ілюструє повні шляхи до файлів, перерахованих в попередній таблиці:
 
-```
+```none
 /etc/kubernetes/pki/etcd/ca.key
 /etc/kubernetes/pki/etcd/ca.crt
 /etc/kubernetes/pki/apiserver-etcd-client.key
@@ -177,7 +177,7 @@ Hosts/SAN, наведені вище, є рекомендованими для �
 
 Ви повинні вручну налаштувати ці облікові записи адміністратора та службові облікові записи:
 
-| імʼя файлу               | імʼя облікового запису      | Типовий CN              | O (в обʼєкті)         |
+| Імʼя файлу               | Імʼя облікового запису      | Типовий CN              | O (в обʼєкті)         |
 |-------------------------|-----------------------------|-----------------------------------|------------------------|
 | admin.conf              | default-admin              | kubernetes-admin                  | `<admin-group>`        |
 | super-admin.conf        | default-super-admin        | kubernetes-super-admin            | system:masters         |
@@ -197,7 +197,7 @@ kubeadm генерує два окремих сертифікати адміні
 Інший у файлі `super-admin.conf` із `Subject: O = system:masters, CN = kubernetes-super-admin`. Цей файл генерується лише на вузлі, де було викликано `kubeadm init`.
 {{< /note >}}
 
-1. Для кожної конфігурації створіть пару ключ/сертифікат x509 із зазначеними CN та O.
+1. Для кожної конфігурації створіть пару ключ/сертифікат x509 із зазначеними Common Name (CN) та Organization (O).
 
 2. Виконайте команду `kubectl` для кожної конфігурації наступним чином:
 
