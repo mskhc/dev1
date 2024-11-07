@@ -1,7 +1,7 @@
 ---
 title: Building a Basic DaemonSet  
 content_type: task  
-weight: 30  
+weight: 5  
 ---
 <!-- overview -->
 
